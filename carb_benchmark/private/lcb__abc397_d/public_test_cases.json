@@ -1,0 +1,17 @@
+[
+ {
+  "input": "397",
+  "output": "12 11",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1",
+  "output": "-1",
+  "testtype": "stdin"
+ },
+ {
+  "input": "39977273855577088",
+  "output": "342756 66212",
+  "testtype": "stdin"
+ }
+]

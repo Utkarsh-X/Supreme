@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__abc390_f",
+  "source": "livecodebench_v5",
+  "question_id": "abc390_f",
+  "question_title": "Double Sum 3",
+  "contest_id": "abc390",
+  "contest_date": "2025-01-25T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc390_f",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 3,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

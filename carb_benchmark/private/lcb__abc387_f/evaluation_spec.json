@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__abc387_f",
+  "source": "livecodebench_v5",
+  "question_id": "abc387_f",
+  "question_title": "Count Arrays",
+  "contest_id": "abc387",
+  "contest_date": "2025-01-04T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc387_f",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 3,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

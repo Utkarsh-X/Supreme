@@ -1,0 +1,17 @@
+[
+ {
+  "input": "2 2\nab",
+  "output": "576 99 1",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 4\naaa",
+  "output": "390625 62500 3750 101",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7 50\natcoder",
+  "output": "309810541 226923474 392073062 146769908 221445233 435648037 862664208 238437587",
+  "testtype": "stdin"
+ }
+]

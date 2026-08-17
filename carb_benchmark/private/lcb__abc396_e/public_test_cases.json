@@ -1,0 +1,17 @@
+[
+ {
+  "input": "3 2\n1 3 4\n1 2 3",
+  "output": "0 3 4",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 3\n1 3 4\n1 2 3\n2 3 5",
+  "output": "-1",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5 8\n4 2 4\n2 3 11\n3 4 15\n4 5 6\n3 2 11\n3 3 0\n3 1 9\n3 4 15",
+  "output": "0 2 9 6 0",
+  "testtype": "stdin"
+ }
+]

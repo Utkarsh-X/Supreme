@@ -1,0 +1,17 @@
+[
+ {
+  "input": "3 3\n2 1 0",
+  "output": "3\n1\n1",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5 6\n5 3 5 0 1",
+  "output": "7\n3\n3\n1\n1\n5",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7 7\n0 1 2 3 4 5 6",
+  "output": "0\n6\n10\n12\n12\n10\n6",
+  "testtype": "stdin"
+ }
+]

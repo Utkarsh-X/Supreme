@@ -108,6 +108,12 @@ def main():
     parser.add_argument("--questions", default="",
                         help="comma-separated question ids (e.g. arc196_a,abc401_e); "
                              "default = the built-in PREFERRED list (v2 set)")
+    parser.add_argument("--allow-same-contest", action="store_true",
+                        help="relax the one-per-contest rule (v3 expansion: multiple "
+                             "fresh problems from one contest are independent tasks "
+                             "— no contamination, all are post-cutoff 2025)")
+    parser.add_argument("--max-count", type=int, default=0,
+                        help="cap the number of tasks materialized (0 = no cap)")
     args = parser.parse_args()
 
     rows = load_rows()
@@ -124,12 +130,12 @@ def main():
             continue
         r = by_id[qid]
         contest = r["contest_id"]
-        if contest in seen_contests:
+        if contest in seen_contests and not args.allow_same_contest:
             print(f"  skip {qid}: duplicate contest {contest}")
             continue
         seen_contests.add(contest)
         selected.append(r)
-        if len(selected) == TARGET_COUNT:
+        if args.max_count and len(selected) >= args.max_count:
             break
 
     print(f"selected {len(selected)} tasks:")
