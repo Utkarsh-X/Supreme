@@ -1,0 +1,44 @@
+version: '2.0'
+configuration_id: supreme-v2.0
+description: >
+  Default Antigravity/Gemini behavior PLUS the FULL Supreme Agent system
+  instructions (constitution.md + operating-protocol.md + sub-agent-profiles.md
+  + environment-profile.md + persistent-state.md) embedded as the system block
+  of the prompt. Runs in an isolated temp profile (auth only, no global
+  ~/.gemini/config rules, no memory), identical environment to baseline-v2.0.
+  The only difference between baseline-v2.0 and supreme-v2.0 is the prompt
+  content. (Renamed from full-v2.0 on 2026-08-17; full-v2.0 is a legacy alias.)
+
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high  # LOCKED (user decision 2026-08-15)
+  temperature: 0.0
+
+system_prompt:
+  enabled: true
+  type: full_supreme
+  source_files:
+    - SupremeAgent/constitution.md
+    - SupremeAgent/operating-protocol.md
+    - SupremeAgent/sub-agent-profiles.md
+    - SupremeAgent/environment-profile.md
+    - SupremeAgent/persistent-state.md
+  injection_method: prompt_embedded_system_block
+
+operating_protocol:
+  enabled: true
+  surgical_editing_enforced: true
+
+skills:
+  enabled: true
+
+sub_agents:
+  enabled: true
+
+persistent_state:
+  enabled: true
+
+isolation:
+  mode: isolated_temp_profile
+  copies_only: auth_files
+  excludes: [global_config, brain, conversations, rules, constitution]

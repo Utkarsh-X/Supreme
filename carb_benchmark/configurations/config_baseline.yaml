@@ -1,0 +1,35 @@
+version: '2.0'
+configuration_id: baseline-v2.0
+description: >
+  Default Antigravity/Gemini behavior. NO custom system instructions anywhere.
+  Runs in an isolated temp profile (auth only, no global ~/.gemini/config rules,
+  no memory), identical environment to supreme-v2.0 and superpowers-v2.0. The
+  only difference between the three configurations is the prompt content.
+
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high  # LOCKED (user decision 2026-08-15)
+  temperature: 0.0
+
+system_prompt:
+  enabled: false
+  type: default_ide
+  source_file: null
+
+operating_protocol:
+  enabled: false
+  surgical_editing_enforced: false
+
+skills:
+  enabled: false
+
+sub_agents:
+  enabled: false
+
+persistent_state:
+  enabled: false
+
+isolation:
+  mode: isolated_temp_profile
+  copies_only: auth_files
+  excludes: [global_config, brain, conversations, rules, constitution]

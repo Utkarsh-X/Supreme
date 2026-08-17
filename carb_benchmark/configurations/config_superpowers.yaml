@@ -1,0 +1,41 @@
+version: '2.0'
+configuration_id: superpowers-v2.0
+description: >
+  Default Antigravity/Gemini behavior PLUS the Superpowers by OB skill system
+  (every skill's SKILL.md definition + the antigravity-tools.md platform
+  reference) embedded as the system block of the prompt. Runs in an isolated
+  temp profile (auth only, no global ~/.gemini/config rules, no memory),
+  identical environment to baseline-v2.0 and supreme-v2.0. The ONLY difference
+  between the three configurations is the prompt content. Introduced 2026-08-17
+  as the third CARB-v2 arm testing the Superpowers skill architecture.
+
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high  # LOCKED (user decision 2026-08-15)
+  temperature: 0.0
+
+system_prompt:
+  enabled: true
+  type: superpowers_skill_system
+  source_files:
+    - SuperpowersObra/**/SKILL.md
+    - SuperpowersObra/using-superpowers/references/antigravity-tools.md
+  injection_method: prompt_embedded_system_block
+
+operating_protocol:
+  enabled: true
+  surgical_editing_enforced: true
+
+skills:
+  enabled: true
+
+sub_agents:
+  enabled: true
+
+persistent_state:
+  enabled: false
+
+isolation:
+  mode: isolated_temp_profile
+  copies_only: auth_files
+  excludes: [global_config, brain, conversations, rules, constitution]
