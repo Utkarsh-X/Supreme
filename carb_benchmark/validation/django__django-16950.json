@@ -1,0 +1,7 @@
+{
+  "instance_id": "django__django-16950",
+  "verdict": "REJECTED",
+  "detail": "F2P entries not mappable to test labels: [\"__UNRESOLVABLE__:If form data is provided, a parent's auto-generated alternate key is\"]",
+  "phases": {},
+  "timestamp": "2026-08-18 01:47:32"
+}

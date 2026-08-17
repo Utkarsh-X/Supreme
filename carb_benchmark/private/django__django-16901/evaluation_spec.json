@@ -1,0 +1,11 @@
+{
+  "instance_id": "django__django-16901",
+  "repo": "django/django",
+  "base_commit": "ee36e101e8f8c0acde4bb148b738ab7034e902a0",
+  "environment_setup_commit": "4a72da71001f154ea60906a2f74898d32b7322a7",
+  "FAIL_TO_PASS": "[\"test_filter_multiple (xor_lookups.tests.XorLookupsTests.test_filter_multiple)\"]",
+  "PASS_TO_PASS": "[\"test_empty_in (xor_lookups.tests.XorLookupsTests.test_empty_in)\", \"test_exclude (xor_lookups.tests.XorLookupsTests.test_exclude)\", \"test_filter (xor_lookups.tests.XorLookupsTests.test_filter)\", \"test_filter_negated (xor_lookups.tests.XorLookupsTests.test_filter_negated)\", \"test_pk_q (xor_lookups.tests.XorLookupsTests.test_pk_q)\", \"test_stages (xor_lookups.tests.XorLookupsTests.test_stages)\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-16901",
+  "test_timeout_seconds": 600
+}

@@ -1,0 +1,11 @@
+{
+  "instance_id": "django__django-16950",
+  "repo": "django/django",
+  "base_commit": "f64fd47a7627ed6ffe2df2a32ded6ee528a784eb",
+  "environment_setup_commit": "4a72da71001f154ea60906a2f74898d32b7322a7",
+  "FAIL_TO_PASS": "[\"If form data is provided, a parent's auto-generated alternate key is\"]",
+  "PASS_TO_PASS": "[\"#24377 - Inlines with a model field default should ignore that default\", \"#24377 - If we're adding a new object, a parent's auto-generated pk\", \"#24958 - Variant of test_inlineformset_factory_nulls_default_pks for\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-16950",
+  "test_timeout_seconds": 600
+}

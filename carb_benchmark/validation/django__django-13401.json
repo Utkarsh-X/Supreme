@@ -1,0 +1,7 @@
+{
+  "instance_id": "django__django-13401",
+  "verdict": "REJECTED",
+  "detail": "F2P entries not mappable to test labels: ['__UNRESOLVABLE__:Field instances from abstract models are not equal.']",
+  "phases": {},
+  "timestamp": "2026-08-18 01:44:58"
+}

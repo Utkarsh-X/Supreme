@@ -1,0 +1,11 @@
+{
+  "instance_id": "sympy__sympy-24213",
+  "repo": "sympy/sympy",
+  "base_commit": "e8c22f6eac7314be8d92590bfff92ced79ee03e2",
+  "environment_setup_commit": "c6cb7c5602fa48034ab1bd43c2347a7e8488f12e",
+  "FAIL_TO_PASS": "[\"test_issue_24211\"]",
+  "PASS_TO_PASS": "[\"test_str_repr\", \"test_eq\", \"test_convert_to\", \"test_Quantity_definition\", \"test_abbrev\", \"test_print\", \"test_Quantity_eq\", \"test_add_sub\", \"test_quantity_abs\", \"test_check_unit_consistency\", \"test_mul_div\", \"test_units\", \"test_issue_quart\", \"test_issue_5565\", \"test_find_unit\", \"test_Quantity_derivative\", \"test_quantity_postprocessing\", \"test_factor_and_dimension\", \"test_dimensional_expr_of_derivative\", \"test_get_dimensional_expr_with_function\", \"test_binary_information\", \"test_conversion_with_2_nonstandard_dimensions\", \"test_eval_subs\", \"test_issue_14932\", \"test_issue_14547\", \"test_deprecated_quantity_methods\", \"test_issue_22164\", \"test_issue_22819\", \"test_issue_20288\", \"test_issue_24062\", \"test_prefixed_property\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-24213",
+  "test_timeout_seconds": 600
+}

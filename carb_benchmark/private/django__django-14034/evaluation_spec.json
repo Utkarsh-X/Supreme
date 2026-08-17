@@ -1,0 +1,11 @@
+{
+  "instance_id": "django__django-14034",
+  "repo": "django/django",
+  "base_commit": "db1fc5cd3c5d36cdb5d0fe4404efd6623dd3e8fb",
+  "environment_setup_commit": "475cffd1d64c690cdad16ede4d5e81985738ceb4",
+  "FAIL_TO_PASS": "[\"test_render_required_attributes (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\"]",
+  "PASS_TO_PASS": "[\"test_bad_choice (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"test_clean (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"test_clean_disabled_multivalue (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"test_disabled_has_changed (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"test_form_as_table (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"test_form_as_table_data (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"test_form_cleaned_data (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"Test when the first widget's data has changed.\", \"Test when the last widget's data has changed. This ensures that it is\", \"test_has_changed_no_initial (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"test_has_changed_same (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\", \"If insufficient data is provided, None is substituted.\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-14034",
+  "test_timeout_seconds": 600
+}

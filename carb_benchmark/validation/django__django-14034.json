@@ -1,0 +1,20 @@
+{
+  "instance_id": "django__django-14034",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (4s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-14034\\django'\nImporting application forms_tests\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_render_required_attributes (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... FAIL\n\n======================================================================\nFAIL: test_render_required_attributes (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-14034\\tests\\forms_tests\\field_tests\\test_multivaluefield.py\", line 194, in test_render_required_attributes\n    self.assertInHTML('<input type=\"text\" name=\"f_1\" id=\"id_f_1\">', form.as_p())\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-14034\\django\\test\\testcases.py\", line 834, in assertInHTML\n    self.assertTrue(real_count != 0, msg_prefix + \"Couldn't find '%s' in response\" % needle)\nAssertionError: False is not true : Couldn't find '<input id=\"id_f_1\" name=\"f_1\" type=\"text\">' in response\n\n----------------------------------------------------------------------\nRan 1 test in 0.070s\n\nFAILED (failures=1)\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-14034\\django'\nImporting application forms_tests\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_render_required_attributes (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.010s\n\nOK\n"
+    },
+    "gold_p2p": {
+      "rc": 0,
+      "output": "# GOLD-P2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-14034\\django'\nImporting application forms_tests\nFound 9 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_bad_choice (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_clean (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_clean_disabled_multivalue (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_disabled_has_changed (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_form_as_table (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_form_as_table_data (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_form_cleaned_data (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_has_changed_no_initial (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\ntest_has_changed_same (forms_tests.field_tests.test_multivaluefield.MultiValueFieldTest) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.036s\n\nOK\n"
+    }
+  },
+  "timestamp": "2026-08-18 01:46:07"
+}

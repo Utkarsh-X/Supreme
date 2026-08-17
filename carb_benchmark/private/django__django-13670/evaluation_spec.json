@@ -1,0 +1,11 @@
+{
+  "instance_id": "django__django-13670",
+  "repo": "django/django",
+  "base_commit": "c448e614c60cc97c6194c62052363f4f501e0953",
+  "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+  "FAIL_TO_PASS": "[\"test_year_before_1000 (utils_tests.test_dateformat.DateFormatTests)\"]",
+  "PASS_TO_PASS": "[\"test_am_pm (utils_tests.test_dateformat.DateFormatTests)\", \"test_date (utils_tests.test_dateformat.DateFormatTests)\", \"test_date_formats (utils_tests.test_dateformat.DateFormatTests)\", \"test_dateformat (utils_tests.test_dateformat.DateFormatTests)\", \"test_datetime_with_local_tzinfo (utils_tests.test_dateformat.DateFormatTests)\", \"test_datetime_with_tzinfo (utils_tests.test_dateformat.DateFormatTests)\", \"test_day_of_year_leap (utils_tests.test_dateformat.DateFormatTests)\", \"test_empty_format (utils_tests.test_dateformat.DateFormatTests)\", \"test_epoch (utils_tests.test_dateformat.DateFormatTests)\", \"test_futuredates (utils_tests.test_dateformat.DateFormatTests)\", \"test_invalid_time_format_specifiers (utils_tests.test_dateformat.DateFormatTests)\", \"test_microsecond (utils_tests.test_dateformat.DateFormatTests)\", \"test_naive_ambiguous_datetime (utils_tests.test_dateformat.DateFormatTests)\", \"test_naive_datetime (utils_tests.test_dateformat.DateFormatTests)\", \"test_r_format_with_non_en_locale (utils_tests.test_dateformat.DateFormatTests)\", \"test_time_formats (utils_tests.test_dateformat.DateFormatTests)\", \"test_timezones (utils_tests.test_dateformat.DateFormatTests)\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-13670",
+  "test_timeout_seconds": 600
+}

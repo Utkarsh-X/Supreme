@@ -1,0 +1,20 @@
+{
+  "instance_id": "matplotlib__matplotlib-23412",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0) | P2P rc=4 (note)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (5s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23412\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_patches.py F                                   [100%]\n\n================================== FAILURES ===================================\n______________________ test_dash_offset_patch_draw[png] _______________________\nlib\\matplotlib\\testing\\decorators.py:478: in wrapper\n    _raise_on_image_difference(\nE   matplotlib.testing.exceptions.ImageComparisonFailure: images not close (RMS 24.315):\nE   \tresult_images\\test_patches\\test_dash_offset_patch_draw[png].png\nE   \tresult_images\\test_patches\\test_dash_offset_patch_draw[png]-expected.png\nE   \tresult_images\\test_patches\\test_dash_offset_patch_draw[png]-failed-diff.png\n=========================== short test summary info ===========================\nFAILED lib/matplotlib/tests/test_patches.py::test_dash_offset_patch_draw[png]\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 3.23s ==============================\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23412\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_patches.py .                                   [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED lib/matplotlib/tests/test_patches.py::test_dash_offset_patch_draw[png]\n============================== 1 passed in 0.95s ==============================\n"
+    },
+    "gold_p2p": {
+      "rc": 4,
+      "output": "# GOLD-P2P rc=4 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23412\nconfigfile: pytest.ini\ncollected 44 items\n\n============================ no tests ran in 0.56s ============================\nERROR: not found: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23412\\lib\\matplotlib\\tests\\test_patches.py::test_boxstyle_errors[foo-Unknown\n(no name 'E:\\\\RofU\\\\Supreme\\\\carb_workspaces\\\\matplotlib__matplotlib-23412\\\\lib\\\\matplotlib\\\\tests\\\\test_patches.py::test_boxstyle_errors[foo-Unknown' in any of [<Module test_patches.py>])\n\nERROR: not found: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23412\\lib\\matplotlib\\tests\\test_patches.py::test_boxstyle_errors[Round,foo-Incorrect\n(no name 'E:\\\\RofU\\\\Supreme\\\\carb_workspaces\\\\matplotlib__matplotlib-23412\\\\lib\\\\matplotlib\\\\tests\\\\test_patches.py::test_boxstyle_errors[Round,foo-Incorrect' in any of [<Module test_patches.py>])\n\n"
+    }
+  },
+  "timestamp": "2026-08-18 01:47:45"
+}
