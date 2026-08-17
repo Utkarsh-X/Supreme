@@ -1,0 +1,20 @@
+Task task-32 is running in the background. I will wait for it to complete.
+Task task-194 is running in the background. I will wait for it to complete.
+Task task-198 is running in the background. I will wait for it to complete.
+I have resolved the issue where `cla()` and `clf()` (i.e. `Axes.clear()` and `Figure.clear()`) did not unset `.axes` and `.figure` attributes of deparented artists.
+
+### Summary of Changes
+1. **[artist.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/artist.py)**:
+   - Fixed `Artist.set_figure()` to allow unsetting `self.figure = None`.
+   - Updated `Artist.axes` setter to clear `stale_callback` when `axes` is set to `None`.
+   - Fixed a bug in `Artist.remove()` where `self.figure = True` was incorrectly assigned instead of marking `self.figure.stale = True` prior to unsetting `self.figure`.
+
+2. **[axes/_base.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/axes/_base.py)**:
+   - Updated `_AxesBase.__clear()` to set `.axes = None` and `.set_figure(None)` on all children (`_children`), child axes (`child_axes`), legends (`legend_`), and titles being cleared.
+   - Updated `_AxesBase.set_figure()` to propagate figure changes (including `None`) to child elements.
+
+3. **[figure.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/figure.py)**:
+   - Updated `Figure.clear()` / `clf()` to set `.axes = None` and `.set_figure(None)` on subfigures, axes, artists, lines, patches, text elements, images, legends, and suptitles removed during clearing.
+
+4. **[test_artist.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/tests/test_artist.py)**:
+   - Added unit test `test_cla_clf_clears_axes_figure()` covering `cla()` and `clf()` unsetting `.axes` and `.figure` for lines, patches, texts, legends, and axes, as well as re-adding deparented artists to a new `Axes`.

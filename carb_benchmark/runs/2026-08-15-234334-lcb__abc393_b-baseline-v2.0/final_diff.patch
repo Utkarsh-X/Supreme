@@ -1,0 +1,27 @@
+diff --git a/main.py b/main.py
+index c86f6c8..321032a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,21 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    s = sys.stdin.read().strip()
++    if not s:
++        return
++    n = len(s)
++    ans = 0
++    for i in range(n):
++        if s[i] != 'A':
++            continue
++        for j in range(i + 1, n):
++            if s[j] != 'B':
++                continue
++            k = 2 * j - i
++            if k < n and s[k] == 'C':
++                ans += 1
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

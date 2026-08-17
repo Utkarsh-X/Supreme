@@ -1,0 +1,11 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc387_b/main.py).
+
+### Solution Overview
+The program reads an integer $X$ from standard input and computes the sum of all elements in the $9 \times 9$ multiplication table except those equal to $X$:
+$$\text{Sum} = \sum_{i=1}^{9} \sum_{j=1}^{9} (i \times j \quad \text{if } i \times j \neq X \text{ else } 0)$$
+
+### Verification
+The solution was tested against all sample inputs:
+- Input `1` $\rightarrow$ Output `2024`
+- Input `11` $\rightarrow$ Output `2025`
+- Input `24` $\rightarrow$ Output `1929`

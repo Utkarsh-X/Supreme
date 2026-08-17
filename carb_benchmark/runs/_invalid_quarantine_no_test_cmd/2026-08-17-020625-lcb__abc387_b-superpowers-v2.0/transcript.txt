@@ -1,0 +1,13 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc387_b/main.py).
+
+### Implementation Overview
+- Iterate over all cell coordinates \((i, j)\) where \(1 \le i, j \le 9\).
+- Compute the cell product \(i \times j\).
+- Sum up all cell products that are not equal to \(X\).
+- Print the total sum to standard output.
+
+### Verification
+Tested against all sample test cases:
+- Input `1` $\rightarrow$ Output `2024`
+- Input `11` $\rightarrow$ Output `2025`
+- Input `24` $\rightarrow$ Output `1929`

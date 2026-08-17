@@ -1,0 +1,62 @@
+diff --git a/main.py b/main.py
+index c86f6c8..da121ec 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,56 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    W = int(next(iterator))
++    
++    # Store initial position for each block: (X_i, Y_i)
++    # Group blocks by column X
++    cols = [[] for _ in range(W + 1)]
++    block_col_k = [0] * (N + 1) # block_id -> k_th_index_1based
++    
++    for i in range(1, N + 1):
++        x = int(next(iterator))
++        y = int(next(iterator))
++        cols[x].append((y, i))
++        
++    c_min = min(len(cols[x]) for x in range(1, W + 1))
++    
++    # Sort blocks in each column by initial Y ascending
++    for x in range(1, W + 1):
++        cols[x].sort()
++        for k_idx, (y, idx) in enumerate(cols[x]):
++            block_col_k[idx] = k_idx + 1 # 1-based k
++            
++    # Calculate T[k] = max_{1 <= x <= W} (Y_{x, k}) for 1 <= k <= c_min
++    T = [0] * (c_min + 1)
++    for k in range(1, c_min + 1):
++        T[k] = max(cols[x][k - 1][0] for x in range(1, W + 1))
++        
++    # Process queries
++    Q = int(next(iterator))
++    out = []
++    
++    for _ in range(Q):
++        t_j = int(next(iterator))
++        a_j = int(next(iterator))
++        
++        k = block_col_k[a_j]
++        if k <= c_min:
++            rem_time = T[k]
++            if t_j < rem_time:
++                out.append("Yes")
++            else:
++                out.append("No")
++        else:
++            out.append("Yes")
++            
++    sys.stdout.write("\n".join(out) + "\n")
++
++if __name__ == '__main__':
++    main()

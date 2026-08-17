@@ -1,0 +1,33 @@
+diff --git a/main.py b/main.py
+index c86f6c8..13228d7 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,27 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    R = int(input_data[0])
++    
++    target = 4 * R * R
++    ans = 0
++    
++    for i in range(R + 1):
++        X = (2 * i + 1) ** 2
++        if X > target:
++            break
++        Y = target - X
++        M = math.isqrt(Y)
++        v_max = (M - 1) // 2
++        if v_max >= 0:
++            count_j = 1 + 2 * v_max
++            ans += count_j if i == 0 else 2 * count_j
++
++    print(ans)
++
++if __name__ == '__main__':
++    main()

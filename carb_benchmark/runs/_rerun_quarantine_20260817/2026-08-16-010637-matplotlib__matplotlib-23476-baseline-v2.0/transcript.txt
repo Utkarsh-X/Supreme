@@ -1,0 +1,37 @@
+### Root Cause
+When a figure is displayed on a Retina / High-DPI screen (such as macOS M1 / `MacOSX` backend or Qt with `device_pixel_ratio` > 1), `_set_device_pixel_ratio(ratio)` scales the figure's `dpi` attribute by `ratio` (`dpi = ratio * figure._original_dpi`).
+
+When the figure is pickled and subsequently unpickled, `Figure.__setstate__` restores `figure.__dict__` (including `dpi` and `_original_dpi`). However, during canvas re-initialization (`FigureCanvasBase.__init__`), Matplotlib unconditionally ran:
+```python
+figure._original_dpi = figure.dpi
+```
+Because `figure.dpi` was already scaled up (e.g. 200 instead of the original 100), overwriting `_original_dpi` set `_original_dpi` to the already scaled-up DPI. When the GUI canvas subsequently initialized and called `_set_device_pixel_ratio(2)`, it calculated `dpi = 2 * figure._original_dpi` (2 * 200 = 400), doubling the figure's DPI every time the figure was unpickled.
+
+### Fix
+Updated [`FigureCanvasBase.__init__`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1653-L1658) in [`lib/matplotlib/backend_bases.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py) to check if `_original_dpi` is already set on the figure before assigning it:
+```python
+if not hasattr(figure, '_original_dpi'):
+    figure._original_dpi = figure.dpi
+```
+
+A unit test `test_unpickle_dpi` has been added to [`lib/matplotlib/tests/test_pickle.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_pickle.py#L220-L231) to prevent regression.
+### Summary
+
+The background test task completed, and `test_unpickle_dpi` passed cleanly (`1 passed`).
+
+#### Root Cause
+When displaying figures on High-DPI screens (e.g. Retina displays on macOS or HiDPI Qt/GTK screens), `FigureCanvasBase._set_device_pixel_ratio(ratio)` scales `figure.dpi` by `ratio` (`dpi = ratio * figure._original_dpi`).
+
+During unpickling, `Figure.__setstate__` restores `figure.__dict__` (including `dpi` and `_original_dpi`). However, when attaching/initializing a canvas (`FigureCanvasBase.__init__`), Matplotlib previously overwrote `figure._original_dpi` with `figure.dpi`:
+```python
+figure._original_dpi = figure.dpi
+```
+Because `figure.dpi` was already scaled up (e.g. 200 instead of 100), overwriting `_original_dpi` set it to the scaled physical value. When the canvas subsequently initialized and detected a HiDPI screen (`_set_device_pixel_ratio(2)`), it calculated `dpi = 2 * figure._original_dpi` (2 * 200 = 400), doubling the figure's DPI on every unpickle cycle.
+
+#### Fix
+1. Updated [`FigureCanvasBase.__init__`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1653-L1658) in [`lib/matplotlib/backend_bases.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py) to preserve `_original_dpi` if it already exists on the figure:
+```python
+if not hasattr(figure, '_original_dpi'):
+    figure._original_dpi = figure.dpi
+```
+2. Added unit test [`test_unpickle_dpi`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_pickle.py#L220-L231) to [`lib/matplotlib/tests/test_pickle.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_pickle.py).

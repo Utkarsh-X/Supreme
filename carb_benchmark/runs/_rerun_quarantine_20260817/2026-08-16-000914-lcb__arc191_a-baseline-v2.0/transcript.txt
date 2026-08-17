@@ -1,0 +1,13 @@
+I have solved the problem and implemented the optimal $O(N + M)$ solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc191_a/main.py).
+
+### Method Explanation
+1. **Mathematical Structure**:
+   - The sequence of $M$ replacement operations allows any subsequence of $T[1 \dots M-1]$ (up to length $N-1$) to be chosen as surviving digits, concatenated with the mandatory final digit $T_M$.
+   - Any chosen set of surviving digits can be assigned to distinct positions in $S$ in any order without spatial restrictions.
+2. **Optimal Placement Strategy**:
+   - We separate $T$ into $T' = T[1 \dots M-1]$ and $T_M = T[M]$.
+   - Scanning $S$ from left to right, at each position $i$:
+     - We evaluate the best available digit $g_i \in T'$ that strictly improves $S[i]$ ($g_i > S[i]$).
+     - If $g_i \le T_M$, putting $T_M$ at index $i$ gives a value $\ge g_i$ without consuming any digits from $T'$. This strictly dominates or equals any subsequent placement choice, so $T_M$ is placed at position $i$.
+     - If $g_i > T_M$, placing $T_M$ at position $i$ would yield a smaller digit than $g_i$ at this position. Thus, position $i$ takes $g_i$ (consuming one copy of $g_i$ from $T'$ if $g_i > S[i]$).
+   - If $T_M$ is not placed after scanning the entire string $S$, placing $T_M$ at the last position $N-1$ maximizes the resulting integer.

@@ -1,0 +1,26 @@
+run_id: 2026-08-17-021155-django__django-11880-supreme-v2.0
+task_id: django__django-11880
+configuration_id: supreme-v2.0
+status: SUCCESS
+started_at: '2026-08-17T02:11:55.260910'
+finished_at: '2026-08-17T02:13:41.893638'
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high
+  temperature: 0.0
+environment:
+  os: Windows-10-10.0.26200-SP0
+  python_version: 3.11.9
+  ide: Antigravity IDE Agent
+  isolation_mode: non_adversarial_cooperative
+provenance_hashes:
+  configuration_hash: a86f476e1361e6564165b58592dfe6039064fdf5c239d397659854f067e49021
+  prompt_hash: null
+  snapshot_hash: null
+artifacts:
+  transcript_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-17-021155-django__django-11880-supreme-v2.0\transcript.txt
+  diff_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-17-021155-django__django-11880-supreme-v2.0\final_diff.patch
+  evaluator_output: null
+resource_metrics:
+  tool_iterations: 0
+  wall_clock_seconds: 106.63

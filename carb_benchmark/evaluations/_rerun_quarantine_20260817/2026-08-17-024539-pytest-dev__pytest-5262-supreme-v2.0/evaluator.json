@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-17-024539-pytest-dev__pytest-5262-supreme-v2.0",
+  "task_id": "pytest-dev__pytest-5262",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 124.59,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-5262",
+  "test_output_tail": "# EVAL rc=4 (1s)\nERROR: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-5262\\tox.ini:140: requires pytest-2.0, actual pytest-0.1.dev1+g45d22064e'\n\n\nFAIL: pytest-dev__pytest-5262 \ufffd FAIL_TO_PASS rc=4\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "src/_pytest/capture.py",
+      "testing/test_capture.py"
+    ],
+    "lines_added": 38,
+    "lines_deleted": 0,
+    "total_lines_changed": 38,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

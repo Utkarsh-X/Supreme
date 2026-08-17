@@ -1,0 +1,13 @@
+I have fixed the issue where additional parameters passed to `dbshell` were appended after the database name when invoking `psql`.
+
+### Summary of Changes
+1. **[django/db/backends/postgresql/client.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/django/db/backends/postgresql/client.py#L35)**:
+   - Moved `args.extend(parameters)` before `if dbname: args += [dbname]` in `DatabaseClient.settings_to_cmd_args_env()` so that any extra options/parameters passed via `manage.py dbshell -- ...` precede the database name argument as expected by `psql`.
+
+2. **[tests/dbshell/test_postgresql.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/tests/dbshell/test_postgresql.py#L154)**:
+   - Updated `test_parameters` to assert that command-line parameters precede `dbname` in the generated command argument list for PostgreSQL.
+
+### Verification
+Ran the `dbshell` test suite:
+- `python tests/runtests.py dbshell` (26 tests passed)
+- `python tests/runtests.py dbshell.test_postgresql` (10 tests passed)

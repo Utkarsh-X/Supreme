@@ -1,0 +1,6 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc393_b/main.py) to count the number of valid triples $(i, j, k)$ forming an arithmetic progression where $S_i = \text{'A'}$, $S_j = \text{'B'}$, and $S_k = \text{'C'}$.
+
+### Key Details
+- **Logic**: For each index $i$ where $S[i] == \text{'A'}$, and each index $j > i$ where $S[j] == \text{'B'}$, we compute the required index $k = 2j - i$. If $k < |S|$ and $S[k] == \text{'C'}$, we increment the count.
+- **Time Complexity**: $\mathcal{O}(|S|^2)$, which easily runs within time limits for $|S| \leq 100$.
+- **Verification**: Tested against all example test cases with correct expected outputs.

@@ -1,0 +1,28 @@
+{
+  "task_id": "T003_diagnostic_premature_completion",
+  "configuration_id": "constitution-v1.0",
+  "layer_1_functional_correctness": {
+    "passed": false,
+    "verification_status": "FAIL"
+  },
+  "layer_2_regression_safety": {
+    "existing_tests_passed": false,
+    "regressions_detected": 1
+  },
+  "layer_3_engineering_quality": {
+    "files_modified_count": 1,
+    "total_lines_changed": 19,
+    "hunks_count": 2,
+    "surgical_editing_score": 4
+  },
+  "layer_4_behavioral_trajectory": {
+    "investigation": 3,
+    "planning": 3,
+    "verification": 3,
+    "completion_discipline": 2
+  },
+  "failure_taxonomy_codes": [
+    "F08_premature_completion",
+    "F07_incomplete_implementation"
+  ]
+}

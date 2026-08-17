@@ -1,0 +1,16 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Method Explanation
+The problem requires assigning ranks based on scores, where the rank of each person corresponds to the starting rank index $r$ when processing scores in non-increasing order. 
+
+Equivalently, the rank of a person with score $P_i$ is equal to:
+$$\text{Rank}(P_i) = 1 + |\{j : P_j > P_i\}|$$
+
+That is, $1$ plus the number of people who scored strictly higher than person $i$.
+
+### Verification
+The solution was tested against all sample cases provided in the problem prompt and passed every case successfully:
+- **Sample 1** (`3 12 9 9`) $\rightarrow$ Output `4 1 2 2`
+- **Sample 2** (`3 9 6`) $\rightarrow$ Output `3 1 2`
+- **Sample 3** (`100 100 100 100`) $\rightarrow$ Output `1 1 1 1`
+- **Sample 4** (`87 87 87 88 41 38 41 38`) $\rightarrow$ Output `2 2 2 1 5 7 5 7`

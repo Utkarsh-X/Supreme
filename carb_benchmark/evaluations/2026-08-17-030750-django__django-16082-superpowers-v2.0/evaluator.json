@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-17-030750-django__django-16082-superpowers-v2.0",
+  "task_id": "django__django-16082",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 79.49,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-16082",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-16082\\django'\nImporting application expressions\nFound 2 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_resolve_output_field_number (expressions.tests.CombinedExpressionTests) ... ok\ntest_resolve_output_field_with_null (expressions.tests.CombinedExpressionTests) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n\nPASS: django__django-16082 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/db/models/expressions.py",
+      "tests/expressions/tests.py"
+    ],
+    "lines_added": 8,
+    "lines_deleted": 1,
+    "total_lines_changed": 9,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

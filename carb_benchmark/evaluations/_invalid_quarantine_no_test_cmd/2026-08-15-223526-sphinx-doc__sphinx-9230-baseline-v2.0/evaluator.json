@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-15-223526-sphinx-doc__sphinx-9230-baseline-v2.0",
+  "task_id": "sphinx-doc__sphinx-9230",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 243.77,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": null,
+  "test_output_tail": "",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "sphinx/util/docfields.py",
+      "sphinx/util/typing.py",
+      "tests/test_domain_py.py"
+    ],
+    "lines_added": 32,
+    "lines_deleted": 4,
+    "total_lines_changed": 36,
+    "hunks_count": 5
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

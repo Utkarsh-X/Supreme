@@ -1,0 +1,33 @@
+diff --git a/django/contrib/staticfiles/storage.py b/django/contrib/staticfiles/storage.py
+index f957a66..720767a 100644
+--- a/django/contrib/staticfiles/storage.py
++++ b/django/contrib/staticfiles/storage.py
+@@ -261,6 +261,7 @@ class HashedFilesMixin:
+ 
+         paths = {path: paths[path] for path in adjustable_paths}
+ 
++        substitutions = False
+         for i in range(self.max_post_process_passes):
+             substitutions = False
+             for name, hashed_name, processed, subst in self._post_process(paths, adjustable_paths, hashed_files):
+diff --git a/tests/staticfiles_tests/test_storage.py b/tests/staticfiles_tests/test_storage.py
+index db655f2..a1751ce 100644
+--- a/tests/staticfiles_tests/test_storage.py
++++ b/tests/staticfiles_tests/test_storage.py
+@@ -217,6 +217,16 @@ class TestHashedFiles:
+         self.assertEqual("Post-processing 'All' failed!\n\n", err.getvalue())
+         self.assertPostCondition()
+ 
++    @override_settings(
++        STATICFILES_DIRS=[os.path.join(TEST_ROOT, 'project', 'loop')],
++        STATICFILES_FINDERS=['django.contrib.staticfiles.finders.FileSystemFinder'],
++    )
++    def test_post_process_zero_passes(self):
++        finders.get_finder.cache_clear()
++        with mock.patch.object(storage.staticfiles_storage, 'max_post_process_passes', 0):
++            call_command('collectstatic', interactive=False, verbosity=0)
++        self.assertPostCondition()
++
+     def test_post_processing(self):
+         """
+         post_processing behaves correctly.

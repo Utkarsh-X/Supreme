@@ -1,0 +1,9 @@
+I have investigated and fixed the issue where `capfd.readouterr()` converted carriage return characters (`\r`) to newlines (`\n`).
+
+### Root Cause
+When `FDCapture` is initialized in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L392), it wraps the temporary capture file in `EncodedFile` (which inherits from `io.TextIOWrapper`).
+Because `newline=""` was not explicitly passed to `EncodedFile` (unlike `CaptureIO` used by `capsys`), `io.TextIOWrapper` defaulted to `newline=None`. Under universal newlines mode (`newline=None`), reading from the text wrapper automatically translated input carriage returns (`\r`) into line feeds (`\n`).
+
+### Fix
+1. Updated `FDCaptureBinary` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L392) to pass `newline=""` to `EncodedFile`. This enables universal newlines mode while returning line endings untranslated, preserving `\r`.
+2. Added `test_capture_includes_carriage_return` in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L973-L981) to verify both `capfd` and `capsys` retain `\r`.

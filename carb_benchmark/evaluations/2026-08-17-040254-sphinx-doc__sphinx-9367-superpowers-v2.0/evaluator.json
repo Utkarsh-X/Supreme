@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-17-040254-sphinx-doc__sphinx-9367-superpowers-v2.0",
+  "task_id": "sphinx-doc__sphinx-9367",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 150.44,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-9367",
+  "test_output_tail": "# EVAL rc=0 (0s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sphinx-doc__sphinx-9367\nconfigfile: setup.cfg\ncollected 1 item\n\ntests\\test_pycode_ast.py .                                               [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED tests/test_pycode_ast.py::test_unparse[(1,)-(1,)]\n============================== 1 passed in 0.04s ==============================\n\nPASS: sphinx-doc__sphinx-9367 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "sphinx/pycode/ast.py",
+      "tests/test_pycode_ast.py"
+    ],
+    "lines_added": 14,
+    "lines_deleted": 4,
+    "total_lines_changed": 18,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

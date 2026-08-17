@@ -1,0 +1,40 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..6a4859e 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,22 @@
+-import json
+-
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
+-
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
+-
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++diff
++--- a/sphinx/ext/autodoc.py
+++++ b/sphinx/ext/autodoc.py
++@@ -300,11 +300,18 @@
++         obj_dict = safe_getattr(obj, '__dict__', {})
++         if isinstance(obj, type):
++             # for classes, get all members including inherited ones
++             for name in dir(obj):
++-                if name not in obj_dict:
+++                # For __init__ method, it is not in __dict__ of the class
+++                # when __slots__ is defined. In that case, we can get
+++                # the method from the class itself.
+++                if name == '__init__':
++                     try:
++                         obj_dict[name] = safe_getattr(obj, name)
++                     except AttributeError:
++                         pass
+++                elif name not in obj_dict:
+++                    try:
+++                        obj_dict[name] = safe_getattr(obj, name)
+++                    except AttributeError:
+++                        pass
+\ No newline at end of file

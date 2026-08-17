@@ -1,0 +1,64 @@
+diff --git a/main.py b/main.py
+index c86f6c8..060d051 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,58 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:]]
++
++    if 0 not in A:
++        print("Yes")
++        return
++    if N % 4 == 0:
++        print("Yes")
++        return
++
++    A1 = [0] + A
++
++    def run_dp(start_x1):
++        dp = {(start_x1, True)}
++        for i in range(2, N + 1):
++            next_dp = set()
++            a_i = A1[i]
++            expected = (1 if (i % 2 == 1) else 0) if start_x1 == 1 else (0 if (i % 2 == 1) else 1)
++
++            for prev_val, prev_match in dp:
++                for curr_val in (0, 1):
++                    if prev_val == 1 and curr_val == 1:
++                        continue
++                    if prev_val == 0 and a_i == 0 and curr_val == 0:
++                        continue
++
++                    curr_match = prev_match and (curr_val == expected)
++                    next_dp.add((curr_val, curr_match))
++            dp = next_dp
++
++        if start_x1 == 1:
++            valid_val_N = (0,)
++        else:
++            if A1[1] == 0:
++                valid_val_N = (1,)
++            else:
++                valid_val_N = (0, 1)
++
++        for val_N, match_N in dp:
++            if val_N in valid_val_N:
++                if N % 4 == 2 and match_N:
++                    continue
++                return True
++        return False
++
++    if run_dp(1) or run_dp(0):
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    main()

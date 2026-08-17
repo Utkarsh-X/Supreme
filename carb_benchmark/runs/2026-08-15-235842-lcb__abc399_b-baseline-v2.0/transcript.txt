@@ -1,0 +1,5 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Summary of Implementation
+- **Logic**: For each person $i$ with score $P_i$, their rank according to the specified contest rules equals $1 + (\text{number of people with score } > P_i)$.
+- **Testing**: Verified against all sample test cases provided in the problem description.

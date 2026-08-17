@@ -1,0 +1,141 @@
+Wait for task task-74 to finish execution...
+ atmospheric update: background task task-74 finished.
+Task log output:
+Obtaining file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476
+  Preparing metadata (setup.py) ... done
+Building wheels for collected packages: matplotlib
+  Building editable for matplotlib (setup.py) ... done
+  Created wheel for matplotlib: filename=matplotlib-3.6.0.dev2404+g32b4fcd51d-0.editable-py3-none-any.whl size=10103 sha256=17df20b0bd32b1a1ea9e51c888d3e9118df069a341ac82c6aaecb72bfdeebcbf
+  Stored in directory: C:\Users\Utkarsh\AppData\Local\Temp\pip-ephem-wheel-cache-a2w4i6d0\wheels\bd\f5\44\f5e1f98bc4bf7dc6fb134ff8c3c7e096fc75791c13bc58b2dd
+Successfully built matplotlib
+Installing collected packages: matplotlib
+  Attempting uninstall: matplotlib
+    Found existing installation: matplotlib 3.6.0.dev2404+g32b4fcd51d
+    Uninstalling matplotlib-3.6.0.dev2404+g32b4fcd51d:
+      Successfully uninstalled matplotlib-3.6.0.dev2404+g32b4fcd51d
+Successfully installed matplotlib-3.6.0.dev2404+g32b4fcd51d
+
+
+Wait for task task-80 to finish execution...
+ atmospheric update: background task task-80 finished.
+Task log output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces\matplotlib__matplotlib-23476
+configfile: pytest.ini
+plugins: anyio-4.13.0, hypothesis-6.165.7
+collected 97 items
+
+lib\matplotlib\tests\test_figure.py ................................... [ 36%]
+..........................................................s.             [100%]
+
+======================== 96 passed, 1 skipped in 8.35s ========================
+
+An async task task-80 has completed!
+Task ID: task-80
+Task summary: python -m pytest -W ignore lib/matplotlib/tests/test_figure.py
+Task log file: file:///C:/Users/Utkarsh/AppData/Local/Temp/carb_v2_clean_run_mf_1ighe/.gemini/antigravity-cli/brain/a09c8f96-acc8-437f-a601-eebd43e80ad7/.system_generated/tasks/task-80.log
+Task exit code: 0
+
+Now that the async task has finished, proceed with your next step!
+Wait for task task-126 to finish execution...
+ atmospheric update: background task task-126 finished.
+Task log output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces\matplotlib__matplotlib-23476
+configfile: pytest.ini
+plugins: anyio-4.13.0, hypothesis-6.165.7
+collected 111 items
+
+lib\matplotlib\tests\test_figure.py ................................... [ 31%]
+........................................................................ [ 96%]
+....                                                                     [100%]
+
+====================== 110 passed, 1 skipped in 18.06s =======================
+
+An async task task-126 has completed!
+Task ID: task-126
+Task summary: python -m pytest -W ignore lib/matplotlib/tests/test_figure.py
+Task log file: file:///C:/Users/Utkarsh/AppData/Local/Temp/carb_v2_clean_run_mf_1ighe/.gemini/antigravity-cli/brain/a09c8f96-acc8-437f-a601-eebd43e80ad7/.system_generated/tasks/task-126.log
+Task exit code: 0
+
+Now that the async task has finished, proceed with your next step!
+Wait for task task-143 to finish execution...
+ atmospheric update: background task task-143 finished.
+Task log output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces/matplotlib__matplotlib-23476
+configfile: pytest.ini
+plugins: anyio-4.13.0, hypothesis-6.165.7
+collected 112 items
+
+lib\matplotlib\tests\test_figure.py ................................... [ 31%]
+........................................................................ [ 95%]
+......                                                                   [100%]
+
+====================== 111 passed, 1 skipped in 18.24s =======================
+
+An async task task-143 has completed!
+Task ID: task-143
+Task summary: python -m pytest -W ignore lib/matplotlib/tests/test_figure.py
+Task log file: file:///C:/Users/Utkarsh/AppData/Local/Temp/carb_v2_clean_run_mf_1ighe/.gemini/antigravity-cli/brain/a09c8f96-acc8-437f-a601-eebd43e80ad7/.system_generated/tasks/task-143.log
+Task exit code: 0
+
+Now that the async task has finished, proceed with your next step!
+### Root Cause
+When a figure is displayed on HiDPI/Retina screens (e.g., MacOSX backend on M1 Mac, or Qt/GTK backends with HiDPI), `_set_device_pixel_ratio` scales the physical figure resolution `figure.dpi` by multiplying `figure._original_dpi` by `device_pixel_ratio` (e.g., $100 \times 2 = 200$).
+
+When unpickling a figure, `figure._original_dpi` ($100$) and `figure.dpi` ($200$) were restored from the pickled state. However, `FigureCanvasBase.__init__` unconditionally ran `figure._original_dpi = figure.dpi`, overwriting `_original_dpi` with the already-scaled DPI ($200$). When the backend canvas manager re-initialized and called `_set_device_pixel_ratio(2)`, it recalculated `dpi = ratio * figure._original_dpi = 2 \times 200 = 400`. Unpickling repeatedly doubled the figure's DPI ($200 \to 400 \to 800 \to \dots$) until an `OverflowError` occurred.
+
+### Fix
+1. Updated [`FigureCanvasBase.__init__`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1653-L1660) to check if `figure._original_dpi` is already defined on the figure before assigning it. If `_original_dpi` is present, `figure.dpi` is reset to `_original_dpi` for the newly initialized canvas (where `_device_pixel_ratio = 1`).
+2. Updated [`_set_device_pixel_ratio`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L2102-L2110) to update `self._device_pixel_ratio` before calling `_set_dpi`.
+3. Updated [`Figure._set_dpi`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/figure.py#L2590-L2595) to keep `_original_dpi` synchronized based on `canvas.device_pixel_ratio` when `_set_dpi` is invoked.
+4. Added unit test `test_unpickle_with_device_pixel_ratio` in [`test_figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_figure.py#L1384-L1395) to ensure unpickling with HiDPI pixel ratios preserves constant figure DPI across multiple unpickling iterations.
+Wait for task task-157 to finish execution...
+ atmospheric update: background task task-157 finished.
+Task log output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces/matplotlib__matplotlib-23476
+configfile: pytest.ini
+plugins: anyio-4.13.0, hypothesis-6.165.7
+collected 112 items
+
+lib\matplotlib\tests\test_figure.py ................................... [ 31%]
+........................................................................ [ 95%]
+......                                                                   [100%]
+
+====================== 111 passed, 1 skipped in 18.29s =======================
+
+An async task task-157 has completed!
+Task ID: task-157
+Task summary: python -m pytest -W ignore lib/matplotlib/tests/test_figure.py
+Task log file: file:///C:/Users/Utkarsh/AppData/Local/Temp/carb_v2_clean_run_mf_1ighe/.gemini/antigravity-cli/brain/a09c8f96-acc8-437f-a601-eebd43e80ad7/.system_generated/tasks/task-157.log
+Task exit code: 0
+
+Now that the async task has finished, proceed with your next step!
+### Summary of Bug & Resolution
+
+#### Bug Cause
+When a figure is rendered on HiDPI / Retina displays (such as MacOSX backend on M1 Mac or Qt/GTK with `device_pixel_ratio > 1`), Matplotlib scales `figure.dpi` by multiplying `figure._original_dpi` by `device_pixel_ratio` (e.g. $100 \times 2 = 200$).
+
+When unpickling a figure:
+1. Both `_original_dpi` ($100$) and `dpi` ($200$) are restored onto the figure object.
+2. `FigureCanvasBase.__init__` was unconditionally running `figure._original_dpi = figure.dpi`, overwriting `_original_dpi` with the scaled DPI ($200$).
+3. When the backend canvas manager attached to the window and called `_set_device_pixel_ratio(2)`, it computed `dpi = ratio * figure._original_dpi = 2 \times 200 = 400`.
+4. Repeating this in a loop doubled the DPI exponentially ($200 \to 400 \to 800 \to 1600 \dots$) until an `OverflowError` occurred in the backend.
+
+#### Solution
+- Modified [`FigureCanvasBase.__init__`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1653-L1660) to check if `figure._original_dpi` already exists. If it does, `_original_dpi` is preserved and `figure.dpi` is reset to `_original_dpi` for the default canvas ratio ($1$).
+- Modified [`_set_device_pixel_ratio`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L2102-L2110) to update `self._device_pixel_ratio` before triggering `_set_dpi`.
+- Updated [`Figure._set_dpi`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/figure.py#L2590-L2595) to ensure `_original_dpi` stays synced when `_set_dpi` is called.
+- Added unit test `test_unpickle_with_device_pixel_ratio` in [`test_figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_figure.py#L1384-L1395) to verify unpickling across multiple iterations under HiDPI pixel ratios.
+I have resolved the issue where unpickling a figure under HiDPI / Retina displays resulted in DPI doubling exponentially.
+
+### Summary of Changes
+1. **[`lib/matplotlib/backend_bases.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1653-L1660)**: Updated `FigureCanvasBase.__init__` to check whether `figure` already has `_original_dpi` set. If it exists, `_original_dpi` is preserved and `figure.dpi` is reset to `_original_dpi` for the initialized canvas (`_device_pixel_ratio = 1`). Also ensured `_device_pixel_ratio` is assigned prior to updating `_set_dpi`.
+2. **[`lib/matplotlib/figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/figure.py#L2590-L2595)**: Updated `Figure._set_dpi` to recalculate `_original_dpi` relative to `canvas.device_pixel_ratio`.
+3. **[`lib/matplotlib/tests/test_figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_figure.py#L1384-L1395)**: Added `test_unpickle_with_device_pixel_ratio` to test that unpickling figures when `device_pixel_ratio > 1` keeps DPI constant across multiple pickling/unpickling cycles.

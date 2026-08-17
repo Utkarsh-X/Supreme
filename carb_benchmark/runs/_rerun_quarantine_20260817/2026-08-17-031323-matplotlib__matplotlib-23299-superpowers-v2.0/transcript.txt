@@ -1,0 +1,11 @@
+I have resolved the issue where calling `matplotlib.get_backend()` cleared figures from `Gcf.figs` if they were created inside an `rc_context`.
+
+### Root Cause
+When entering `matplotlib.rc_context()`, a snapshot `orig = rcParams.copy()` is saved. Prior to figure creation or backend resolution, `dict.__getitem__(rcParams, 'backend')` holds `rcsetup._auto_backend_sentinel`.
+When a figure is created inside `rc_context()`, the backend is lazily resolved and updated in `rcParams` (e.g., `'tkagg'` or `'qtagg'`).
+Upon exiting `rc_context()`, `dict.update(rcParams, orig)` directly updated the underlying dictionary bypassing `RcParams.__setitem__`, forcing `rcParams['backend']` back to `_auto_backend_sentinel`.
+Subsequent calls to `get_backend()` read `_auto_backend_sentinel` and invoked `plt.switch_backend(_auto_backend_sentinel)`, which called `close('all')` and destroyed all active figures in `Gcf.figs`.
+
+### Solution
+- Updated `rc_context` in [`lib/matplotlib/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py) and `_xkcd` in [`lib/matplotlib/pyplot.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/pyplot.py) so that `_auto_backend_sentinel` is popped from the `orig` dictionary prior to `dict.update(rcParams, orig)`. This prevents restoring `_auto_backend_sentinel` over a resolved backend.
+- Added test [`test_rc_context_backend`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/tests/test_rcparams.py#L588) to verify that calling `get_backend()` after figure creation under `rc_context` does not clear figures.

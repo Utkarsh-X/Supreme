@@ -1,0 +1,12 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_b/main.py).
+
+### Summary of Implementation
+- Read all tokens from `sys.stdin`.
+- Parsed $N$ and the subsequent $N$ strings.
+- Sorted the list of strings in ascending order using Python's `sort(key=len)`.
+- Concatenated the sorted strings and printed the result to stdout.
+
+### Verification
+Verified against all sample test cases provided:
+- Sample 1 input yields `atcoder`
+- Sample 2 input yields `concatenate`

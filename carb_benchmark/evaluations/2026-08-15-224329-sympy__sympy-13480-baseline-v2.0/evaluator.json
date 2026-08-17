@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-08-15-224329-sympy__sympy-13480-baseline-v2.0",
+  "task_id": "sympy__sympy-13480",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 221.37,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-13480",
+  "test_output_tail": "# EVAL rc=0 (4s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\narchitecture: 64-bit\ncache:        yes\nground types: python \n\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-13480\ncollected 1 item\n\nsympy\\functions\\elementary\\tests\\test_hyperbolic.py .                    [100%]\n\n============================== warnings summary ===============================\nsympy\\core\\compatibility.py:13\n  E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-13480\\sympy\\core\\compatibility.py:13: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    if not hasattr(collections, _attr) and hasattr(_collections_abc, _attr):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sympy/functions/elementary/tests/test_hyperbolic.py::test_coth\n======================== 1 passed, 1 warning in 0.97s =========================\n\nPASS: sympy__sympy-13480 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 4,
+    "files_modified_list": [
+      "sympy/core/basic.py",
+      "sympy/core/compatibility.py",
+      "sympy/functions/elementary/hyperbolic.py",
+      "sympy/functions/elementary/tests/test_hyperbolic.py"
+    ],
+    "lines_added": 20,
+    "lines_deleted": 3,
+    "total_lines_changed": 23,
+    "hunks_count": 4
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

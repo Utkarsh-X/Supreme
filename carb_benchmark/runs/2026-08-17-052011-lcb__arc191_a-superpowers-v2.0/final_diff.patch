@@ -1,0 +1,82 @@
+diff --git a/main.py b/main.py
+index c86f6c8..a955dff 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,76 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++    T = input_data[3]
++
++    v = T[M - 1]
++    
++    # Digit counts for A = T[0 ... M-2]
++    counts_A = [0] * 10
++    for k in range(M - 1):
++        counts_A[ord(T[k]) - 48] += 1
++
++    # Pass 1: Compute S_full_greedy
++    counts = list(counts_A)
++    S_fg = []
++    for i in range(N):
++        s_val = ord(S[i]) - 48
++        placed = False
++        for d in range(9, s_val, -1):
++            if counts[d] > 0:
++                S_fg.append(chr(48 + d))
++                counts[d] -= 1
++                placed = True
++                break
++        if not placed:
++            S_fg.append(S[i])
++
++    # Determine j_opt
++    v_char = v
++    j_opt = -1
++
++    # Rule 1: first index where v > S_fg[i]
++    for i in range(N):
++        if v_char > S_fg[i]:
++            j_opt = i
++            break
++
++    if j_opt == -1:
++        # Rule 2: first index where v == S_fg[i]
++        for i in range(N):
++            if v_char == S_fg[i]:
++                j_opt = i
++                break
++
++    if j_opt == -1:
++        # Rule 3: last index
++        j_opt = N - 1
++
++    # Pass 2: Construct S_final
++    counts = list(counts_A)
++    S_final = []
++    for i in range(N):
++        if i == j_opt:
++            S_final.append(v_char)
++        else:
++            s_val = ord(S[i]) - 48
++            placed = False
++            for d in range(9, s_val, -1):
++                if counts[d] > 0:
++                    S_final.append(chr(48 + d))
++                    counts[d] -= 1
++                    placed = True
++                    break
++            if not placed:
++                S_final.append(S[i])
++
++    print("".join(S_final))
++
++if __name__ == "__main__":
++    main()

@@ -1,0 +1,14 @@
+I launched task-63 in the background to run the test suite for all domain modules. I will wait for it to complete.
+### Summary of Bug & Fix
+
+#### Cause
+When a docfield specified both type and parameter name together (e.g. `:param dict(str, str) opc_meta:`), [`DocFieldTransformer.transform`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L299-L307) split `fieldarg` (`"dict(str, str) opc_meta"`) using `split(None, 1)`.
+Because `split(None, 1)` splits at the first whitespace:
+- `argtype` became `"dict(str,"`
+- `argname` became `"str) opc_meta"`
+
+This caused the parameter name to be wrongly rendered as `str) opc_meta` and the type as `dict(str,)`.
+
+#### Fix
+1. In [`sphinx/util/docfields.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301), changed `fieldarg.split(None, 1)` to `fieldarg.rsplit(None, 1)`. Because the parameter name is always the final token in `:param <type> <name>:`, `rsplit(None, 1)` correctly isolates the parameter name (`opc_meta`) from complex, multi-word/generic type specifications (`dict(str, str)`).
+2. Added unit test coverage in [`tests/test_domain_py.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L984) for `:param dict(str, str) opc_meta: (optional)`.

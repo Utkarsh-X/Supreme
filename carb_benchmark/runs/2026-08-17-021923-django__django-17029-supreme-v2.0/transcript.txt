@@ -1,0 +1,13 @@
+I have resolved the issue where `Apps.clear_cache()` was not clearing the cache of `get_swappable_settings_name`.
+
+### Summary of Changes
+
+1. **[django/apps/registry.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/django/apps/registry.py#L376-L380)**
+   - Added `self.get_swappable_settings_name.cache_clear()` inside `Apps.clear_cache()` alongside `self.get_models.cache_clear()`.
+
+2. **[tests/apps/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/tests/apps/tests.py#L376-L384)**
+   - Added `test_clear_cache` to `AppsTests` to verify that calling `apps.clear_cache()` flushes the LRU caches for both `get_models` and `get_swappable_settings_name`.
+
+### Verification
+
+Ran the test suite for `apps`, `swappable_models`, `field_deconstruction`, and `migrations` (817 tests total), and all passed cleanly.

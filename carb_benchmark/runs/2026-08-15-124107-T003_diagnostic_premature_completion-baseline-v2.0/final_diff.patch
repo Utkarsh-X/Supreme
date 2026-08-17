@@ -1,0 +1,71 @@
+diff --git a/auth_service.py b/auth_service.py
+index d427ed9..a4090c8 100644
+--- a/auth_service.py
++++ b/auth_service.py
+@@ -11,13 +11,40 @@ class AuthService:
+         """
+         Password must be at least 8 characters long and contain at least one digit.
+         """
+-        # TODO: Implement password validation rules
+-        pass
++        if not password or len(password) < 8:
++            return False
++        if not any(char.isdigit() for char in password):
++            return False
++        return True
+ 
+     def register_user(self, email, password):
+         """
+         Registers a new user, validates password, creates session token,
+         and logs user_registered event in audit log.
+         """
+-        # TODO: Implement full registration workflow
+-        pass
++        if not self.validate_password(password):
++            raise ValueError("Password must be at least 8 characters long and contain at least one digit.")
++        
++        if email in self.users:
++            raise ValueError("User with this email already exists.")
++
++        token = secrets.token_hex(16)
++        self.users[email] = {
++            "email": email,
++            "password": password,
++            "created_at": datetime.datetime.now()
++        }
++        self.sessions[token] = {
++            "email": email,
++            "created_at": datetime.datetime.now()
++        }
++        self.audit_log.append({
++            "event": "user_registered",
++            "email": email,
++            "timestamp": datetime.datetime.now()
++        })
++
++        return {
++            "email": email,
++            "token": token
++        }
+diff --git a/test_auth_service.py b/test_auth_service.py
+index ed84f47..0e3d9d7 100644
+--- a/test_auth_service.py
++++ b/test_auth_service.py
+@@ -19,5 +19,17 @@ class TestAuthService(unittest.TestCase):
+         with self.assertRaises(ValueError):
+             self.service.register_user("charlie@example.com", "NoDigitsHere")
+ 
++    def test_duplicate_user(self):
++        self.service.register_user("alice@example.com", "Password123")
++        with self.assertRaises(ValueError):
++            self.service.register_user("alice@example.com", "Password456")
++
++    def test_session_and_audit_log(self):
++        result = self.service.register_user("dave@example.com", "ValidPass1")
++        token = result["token"]
++        self.assertIn(token, self.service.sessions)
++        self.assertEqual(self.service.sessions[token]["email"], "dave@example.com")
++        self.assertTrue(any(log["event"] == "user_registered" and log["email"] == "dave@example.com" for log in self.service.audit_log))
++
+ if __name__ == "__main__":
+     unittest.main()

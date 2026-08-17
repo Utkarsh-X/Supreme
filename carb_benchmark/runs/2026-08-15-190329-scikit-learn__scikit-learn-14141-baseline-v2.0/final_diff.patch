@@ -1,0 +1,65 @@
+diff --git a/doc/whats_new/v0.22.rst b/doc/whats_new/v0.22.rst
+index 6e2c7cc..1da5c53 100644
+--- a/doc/whats_new/v0.22.rst
++++ b/doc/whats_new/v0.22.rst
+@@ -120,8 +120,12 @@ Changelog
+ - |Fix| Fixed a bug where :class:`VarianceThreshold` with `threshold=0` did not
+   remove constant features due to numerical instability, by using range
+   rather than variance in this case.
+-  :pr:`13704` by `Roddy MacSween <rlms>`.
+-  
++:mod:`sklearn.utils`
++...................
++
++- |Enhancement| :func:`sklearn.show_versions` now includes joblib version.
++  :pr:`14141` by `Noa Garcia`.
++
+ Miscellaneous
+ .............
+ 
+diff --git a/sklearn/utils/_show_versions.py b/sklearn/utils/_show_versions.py
+index e5d3141..ecba9ec 100644
+--- a/sklearn/utils/_show_versions.py
++++ b/sklearn/utils/_show_versions.py
+@@ -48,6 +48,7 @@ def _get_deps_info():
+         "Cython",
+         "pandas",
+         "matplotlib",
++        "joblib",
+     ]
+ 
+     def get_version(module):
+diff --git a/sklearn/utils/tests/test_show_versions.py b/sklearn/utils/tests/test_show_versions.py
+index 31153c9..12222dd 100644
+--- a/sklearn/utils/tests/test_show_versions.py
++++ b/sklearn/utils/tests/test_show_versions.py
+@@ -23,6 +23,7 @@ def test_get_deps_info():
+     assert 'Cython' in deps_info
+     assert 'pandas' in deps_info
+     assert 'matplotlib' in deps_info
++    assert 'joblib' in deps_info
+ 
+ 
+ def test_show_versions_with_blas(capsys):
+@@ -30,4 +31,5 @@ def test_show_versions_with_blas(capsys):
+     out, err = capsys.readouterr()
+     assert 'python' in out
+     assert 'numpy' in out
++    assert 'joblib' in out
+     assert 'BLAS' in out
+diff --git a/sklearn/utils/validation.py b/sklearn/utils/validation.py
+index bb6cf1c..e5c36a8 100644
+--- a/sklearn/utils/validation.py
++++ b/sklearn/utils/validation.py
+@@ -16,7 +16,10 @@ import scipy.sparse as sp
+ from distutils.version import LooseVersion
+ from inspect import signature
+ 
+-from numpy.core.numeric import ComplexWarning
++try:
++    from numpy.exceptions import ComplexWarning
++except ImportError:
++    from numpy.core.numeric import ComplexWarning
+ import joblib
+ 
+ from .fixes import _object_dtype_isnan

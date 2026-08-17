@@ -1,0 +1,41 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..07d5231 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,23 @@
+-import json
+-
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
+-
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
+-
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++diff --git a/sklearn/decomposition/pca.py b/sklearn/decomposition/pca.py
++--- a/sklearn/decomposition/pca.py
+++++ b/sklearn/decomposition/pca.py
++@@ -165,6 +165,8 @@ class PCA(BaseEstimator, TransformerMixin):
++         """
++         if self.mean_ is not None:
+++            if self.whiten:
+++                X = X * np.sqrt(self.explained_variance_)
++             return np.dot(X, self.components_) + self.mean_
++         else:
+++            if self.whiten:
+++                X = X * np.sqrt(self.explained_variance_)
++             return np.dot(X, self.components_)
++@@ -407,6 +409,8 @@ class RandomizedPCA(BaseEstimator, TransformerMixin):
++         """
++         if self.mean_ is not None:
+++            if self.whiten:
+++                X = X * np.sqrt(self.explained_variance_)
++             return np.dot(X, self.components_) + self.mean_
++         else:
+++            if self.whiten:
+++                X = X * np.sqrt(self.explained_variance_)
++             return np.dot(X, self.components_)
+\ No newline at end of file

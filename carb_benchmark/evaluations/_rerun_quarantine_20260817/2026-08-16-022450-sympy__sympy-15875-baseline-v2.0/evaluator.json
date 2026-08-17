@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-08-16-022450-sympy__sympy-15875-baseline-v2.0",
+  "task_id": "sympy__sympy-15875",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 222.16,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-15875",
+  "test_output_tail": "# EVAL rc=1 (3s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\narchitecture: 64-bit\ncache:        yes\nground types: python \n\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-15875, configfile: pytest.ini\ncollected 1 item\n\nsympy\\core\\tests\\test_arit.py F                                          [100%]\n\n================================== FAILURES ===================================\n______________________________ test_Add_is_zero _______________________________\nsympy\\core\\tests\\test_arit.py:1991: in test_Add_is_zero\n    assert e.is_zero is None\nE   assert True is None\nE    +  where True = -2*I + (1 + I)**2.is_zero\n============================== warnings summary ===============================\n..\\..\\carb_benchmark\\venvs\\sympy_py3.8\\lib\\site-packages\\_pytest\\config\\__init__.py:1233\n  E:\\RofU\\Supreme\\carb_benchmark\\venvs\\sympy_py3.8\\lib\\site-packages\\_pytest\\config\\__init__.py:1233: PytestConfigWarning: Unknown config option: doctestplus\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n                               DO *NOT* COMMIT!                               \n=========================== short test summary info ===========================\nFAILED sympy/core/tests/test_arit.py::test_Add_is_zero - assert True is None\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n======================== 1 failed, 1 warning in 0.90s =========================\n\nFAIL: sympy__sympy-15875 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "sympy/core/add.py",
+      "sympy/core/tests/test_assumptions.py"
+    ],
+    "lines_added": 14,
+    "lines_deleted": 11,
+    "total_lines_changed": 25,
+    "hunks_count": 4
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

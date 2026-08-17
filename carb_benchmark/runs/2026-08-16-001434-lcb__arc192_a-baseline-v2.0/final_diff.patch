@@ -1,0 +1,75 @@
+diff --git a/main.py b/main.py
+index c86f6c8..b0f807f 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,69 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++    
++    # If N % 4 == 0: always Yes
++    if N % 4 == 0:
++        print("Yes")
++        return
++    
++    # Try all valid initial boundary pairs (x[N-1], x[0])
++    # x[N-1] + x[0] <= 1 (non-adjacency)
++    boundary_pairs = [(0, 0), (0, 1), (1, 0)]
++    
++    is_odd = (N % 2 != 0)
++    
++    possible = False
++    for init_last, init_first in boundary_pairs:
++        # Check coverage for A[0]
++        # A[0] is covered by x[N-1] or x[0]
++        if A[0] == 0 and (init_last + init_first < 1):
++            continue
++        
++        # Initial state at idx 0: (x[0], flag)
++        init_flag = (init_last == 0 and init_first == 0)
++        dp = {(init_first, init_flag)}
++        
++        for i in range(1, N):
++            next_dp = set()
++            a_i = A[i]
++            for prev_x, flag in dp:
++                for cur_x in (0, 1):
++                    # Non-adjacency
++                    if prev_x + cur_x > 1:
++                        continue
++                    # Coverage for A[i]
++                    if a_i == 0 and (prev_x + cur_x < 1):
++                        continue
++                    # At the last element i = N-1, cur_x must match init_last
++                    if i == N - 1 and cur_x != init_last:
++                        continue
++                    
++                    new_flag = flag or (prev_x == 0 and cur_x == 0)
++                    next_dp.add((cur_x, new_flag))
++            dp = next_dp
++            if not dp:
++                break
++        
++        if dp:
++            if is_odd:
++                possible = True
++                break
++            else: # N % 4 == 2
++                # Must have at least one state with flag == True
++                if any(flag for val, flag in dp):
++                    possible = True
++                    break
++
++    if possible:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    solve()

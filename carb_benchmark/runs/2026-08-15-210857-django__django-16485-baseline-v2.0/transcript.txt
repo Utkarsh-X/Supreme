@@ -1,0 +1,9 @@
+### Cause of Bug
+When `floatformat` processes zero values with decimal places (e.g. `'0.00'` or `Decimal('0.00')`), `m = int(d) - d` evaluates to `Decimal('0.00')`. In Python, `bool(Decimal('0.00'))` evaluates to `False`.
+
+Because `m` was falsy, the precision units calculation (`units += -tupl[2] if m else tupl[2]`) evaluated the `else` branch, adding `tupl[2]` (which is `-2` for `'0.00'`) to `len(tupl[1])` (which is `1`). This resulted in `units = -1`, making `prec = abs(p) + units + 1 = 0`. Passing `prec = 0` to `decimal.Context(prec=prec)` raised `ValueError: valid range for prec is [1, MAX_PREC]`.
+
+### Solution
+Updated the precision calculation in [defaultfilters.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16485/django/template/defaultfilters.py#L181-L186) to use `units = len(tupl[1]) + abs(tupl[2])`. This ensures `units` is non-negative for all input values (including zero decimals like `'0.00'`) and provides sufficient precision context for `d.quantize()`.
+
+Added corresponding unit tests in [test_floatformat.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16485/tests/template_tests/filter_tests/test_floatformat.py#L111-L116).

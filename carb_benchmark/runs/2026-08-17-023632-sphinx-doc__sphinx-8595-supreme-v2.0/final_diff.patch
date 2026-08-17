@@ -1,0 +1,101 @@
+diff --git a/sphinx/ext/autodoc/__init__.py b/sphinx/ext/autodoc/__init__.py
+index d85d796..c9f90ac 100644
+--- a/sphinx/ext/autodoc/__init__.py
++++ b/sphinx/ext/autodoc/__init__.py
+@@ -1074,7 +1074,7 @@ class ModuleDocumenter(Documenter):
+     def get_object_members(self, want_all: bool) -> Tuple[bool, ObjectMembers]:
+         members = self.get_module_members()
+         if want_all:
+-            if not self.__all__:
++            if self.__all__ is None:
+                 # for implicit module members, check __module__ to avoid
+                 # documenting imported objects
+                 return True, list(members.values())
+diff --git a/sphinx/jinja2glue.py b/sphinx/jinja2glue.py
+index 0a26fc9..0aabcfc 100644
+--- a/sphinx/jinja2glue.py
++++ b/sphinx/jinja2glue.py
+@@ -12,7 +12,12 @@ from os import path
+ from pprint import pformat
+ from typing import Any, Callable, Dict, Iterator, List, Tuple, Union
+ 
+-from jinja2 import BaseLoader, FileSystemLoader, TemplateNotFound, contextfunction
++from jinja2 import BaseLoader, FileSystemLoader, TemplateNotFound
++try:
++    from jinja2 import pass_context as contextfunction
++except ImportError:
++    from jinja2 import contextfunction  # type: ignore
++
+ from jinja2.environment import Environment
+ from jinja2.sandbox import SandboxedEnvironment
+ from jinja2.utils import open_if_exists
+diff --git a/sphinx/util/rst.py b/sphinx/util/rst.py
+index b67b68c..a413b69 100644
+--- a/sphinx/util/rst.py
++++ b/sphinx/util/rst.py
+@@ -18,7 +18,12 @@ from docutils.parsers.rst import roles
+ from docutils.parsers.rst.languages import en as english
+ from docutils.statemachine import StringList
+ from docutils.utils import Reporter
+-from jinja2 import Environment, environmentfilter
++from jinja2 import Environment
++try:
++    from jinja2 import pass_environment as environmentfilter
++except ImportError:
++    from jinja2 import environmentfilter  # type: ignore
++
+ 
+ from sphinx.locale import __
+ from sphinx.util import docutils, logging
+diff --git a/tests/test_ext_autodoc.py b/tests/test_ext_autodoc.py
+index 39897eb..81f0e4c 100644
+--- a/tests/test_ext_autodoc.py
++++ b/tests/test_ext_autodoc.py
+@@ -738,6 +738,47 @@ def test_autodoc_ignore_module_all(app):
+     ]
+ 
+ 
++@pytest.mark.sphinx('html', testroot='ext-autodoc')
++def test_autodoc_empty_all(app):
++    # default (empty __all__ is respected and hides foo, bar, baz)
++    options = {"members": None}
++    actual = do_autodoc(app, 'module', 'target.empty_all', options)
++    assert list(actual) == [
++        '',
++        '.. py:module:: target.empty_all',
++        '',
++    ]
++
++    # ignore-module-all (empty __all__ is ignored, shows foo, bar, baz)
++    options = {"members": None,
++               "ignore-module-all": None}
++    actual = do_autodoc(app, 'module', 'target.empty_all', options)
++    assert list(actual) == [
++        '',
++        '.. py:module:: target.empty_all',
++        '',
++        '',
++        '.. py:function:: bar()',
++        '   :module: target.empty_all',
++        '',
++        '   docstring',
++        '',
++        '',
++        '.. py:function:: baz()',
++        '   :module: target.empty_all',
++        '',
++        '   docstring',
++        '',
++        '',
++        '.. py:function:: foo()',
++        '   :module: target.empty_all',
++        '',
++        '   docstring',
++        '',
++    ]
++
++
++
+ @pytest.mark.sphinx('html', testroot='ext-autodoc')
+ def test_autodoc_noindex(app):
+     options = {"noindex": True}

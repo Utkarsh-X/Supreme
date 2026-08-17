@@ -1,0 +1,13 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_b/main.py) to find all integers between $1$ and $N$ that do not appear in the given sequence $A$.
+
+### Implementation Overview
+- Parsed $N$, $M$, and elements of $A$ from standard input.
+- Stored $A$ in a hash set for $O(1)$ lookup time.
+- Checked each integer from $1$ to $N$ to compile the missing list in ascending order.
+- Outputted the count $C$ on the first line, followed by the space-separated missing integers on the second line.
+
+### Verification
+Ran the program against all provided sample cases:
+- **Sample 1 ($N=10, M=3, A=\{3, 9, 2\}$):** Outputs `7` and `1 4 5 6 7 8 10`.
+- **Sample 2 ($N=6, M=6, A=\{1, 3, 5, 2, 4, 6\}$):** Outputs `0` and an empty line.
+- **Sample 3 ($N=9, M=1, A=\{9\}$):** Outputs `8` and `1 2 3 4 5 6 7 8`.

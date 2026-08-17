@@ -1,0 +1,18 @@
+The solution to the problem has been written to [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc400_c/main.py).
+
+### Method Explanation
+1. **Mathematical Reduction**:
+   Any positive integer $b$ can be factored into $b = 2^k \cdot c$, where $c \ge 1$ is odd and $k \ge 0$.
+   Thus, $X = 2^a \cdot b^2 = 2^a \cdot (2^k \cdot c)^2 = 2^{a+2k} \cdot c^2$.
+   Setting $E = a + 2k$, since $a \ge 1$ and $k \ge 0$, $E$ can be any integer $E \ge 1$.
+   Hence, $X$ is a good integer if and only if $X = 2^E \cdot c^2$ for some $E \ge 1$ and odd $c \ge 1$.
+
+2. **Counting**:
+   For a fixed $E \ge 1$, we need $2^E \cdot c^2 \le N \implies c^2 \le \lfloor N / 2^E \rfloor$.
+   Let $M = \lfloor N / 2^E \rfloor$. The maximum odd integer $c$ is $c_{\text{max}} = \lfloor \sqrt{M} \rfloor$.
+   The number of positive odd integers in $[1, c_{\text{max}}]$ is $\lfloor (c_{\text{max}} + 1) / 2 \rfloor$.
+   Summing this over all $1 \le E \le \log_2(N)$ gives the total count of good integers in $O(\log N)$ time.
+
+### Verification
+- Tested against all sample inputs (`20`, `400`, `1234567890`) and verified exact outputs.
+- Cross-verified against an exhaustive brute-force search for all $N \in [1, 2000]$.

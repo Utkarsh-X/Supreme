@@ -1,0 +1,53 @@
+diff --git a/main.py b/main.py
+index c86f6c8..44a9836 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,47 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    W = int(next(iterator))
++    
++    col_blocks = [[] for _ in range(W + 1)]
++    rank = [0] * (N + 1)
++    
++    for i in range(1, N + 1):
++        x = int(next(iterator))
++        y = int(next(iterator))
++        col_blocks[x].append((y, i))
++    
++    for c in range(1, W + 1):
++        col_blocks[c].sort()
++        for r, (y, idx) in enumerate(col_blocks[c]):
++            rank[idx] = r + 1
++            
++    K = min(len(col_blocks[c]) for c in range(1, W + 1))
++    
++    T_clear = [0] * (K + 1)
++    for m in range(1, K + 1):
++        max_y = max(col_blocks[c][m - 1][0] for c in range(1, W + 1))
++        T_clear[m] = max(T_clear[m - 1] + 1, max_y)
++        
++    Q = int(next(iterator))
++    ans = []
++    for _ in range(Q):
++        t = int(next(iterator))
++        a = int(next(iterator))
++        
++        m = rank[a]
++        if m > K or t < T_clear[m]:
++            ans.append("Yes")
++        else:
++            ans.append("No")
++            
++    print('\n'.join(ans))
++
++if __name__ == '__main__':
++    solve()

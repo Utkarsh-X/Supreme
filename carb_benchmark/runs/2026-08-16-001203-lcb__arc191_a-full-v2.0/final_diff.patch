@@ -1,0 +1,86 @@
+diff --git a/main.py b/main.py
+index c86f6c8..14717c3 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,80 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++    T = input_data[3]
++
++    S_vals = [ord(c) - 48 for c in S]
++    T_vals = [ord(c) - 48 for c in T]
++
++    d_mand = T_vals[M - 1]
++    cnt_ge = [0] * 10
++    cnt_lt = [0] * 10
++
++    for i in range(M - 1):
++        v = T_vals[i]
++        if v >= d_mand:
++            cnt_ge[v] += 1
++        else:
++            cnt_lt[v] += 1
++
++    cur_ge = list(cnt_ge)
++    j_first_less = -1
++    S_before = [0] * N
++
++    for i in range(N):
++        s_val = S_vals[i]
++        best_v = -1
++        for v in range(9, d_mand - 1, -1):
++            if cur_ge[v] > 0:
++                best_v = v
++                break
++
++        if best_v > s_val:
++            S_before[i] = best_v
++            cur_ge[best_v] -= 1
++        else:
++            S_before[i] = s_val
++
++        if S_before[i] < d_mand:
++            j_first_less = i
++            break
++
++    limit = j_first_less if j_first_less != -1 else N - 1
++
++    idx = -1
++    for i in range(limit, -1, -1):
++        if S_before[i] <= d_mand:
++            idx = i
++            break
++
++    if idx == -1:
++        idx = N - 1
++
++    res = [str(x) for x in S_before[:idx]]
++    res.append(str(d_mand))
++
++    cur_lt = cnt_lt
++    for i in range(idx + 1, N):
++        s_val = S_vals[i]
++        best_u = -1
++        for u in range(d_mand - 1, 0, -1):
++            if cur_lt[u] > 0:
++                best_u = u
++                break
++
++        if best_u > s_val:
++            res.append(str(best_u))
++            cur_lt[best_u] -= 1
++        else:
++            res.append(str(s_val))
++
++    sys.stdout.write("".join(res) + "\n")
++
++if __name__ == '__main__':
++    solve()

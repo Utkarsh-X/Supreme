@@ -1,0 +1,185 @@
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-14">
+Task "pytest tests/test_ext_autodoc.py" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.9.20, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 79 items
+
+tests\test_ext_autodoc.py ............................................. [ 56%]
+................................--                                       [100%]
+
+============================= 77 passed, 2 waived =============================
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-27">
+Task "& "C:\Program Files\Python311\python.exe" -m pytest tests/test_ext_autodoc.py" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 79 items
+
+tests\test_ext_autodoc.py ............................................. [ 56%]
+................................--                                       [100%]
+
+============================= 77 passed, 2 waived =============================
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-34">
+Task "Get-Command python* | Select-Object Name, Source" finished with exit code 0.
+Log excerpt:
+Name       Source                                
+----       ------                                
+python.exe C:\Program Files\Python311\python.exe 
+python.exe C:\Program Files\Python310\python.exe 
+python.exe C:\Program Files\Python39\python.exe  
+python.exe C:\Program Files\Python38\python.exe  
+python.exe C:\Program Files\Python37\python.exe  
+python.exe C:\Program Files\Python36\python.exe
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-43">
+Task "pytest tests/test_ext_autodoc.py -k "test_automodule"" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.9.20, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 79 items / 76 deselected / 3 selected
+
+tests\test_ext_autodoc.py ...                                           [100%]
+
+====================== 3 passed, 76 deselected in 1.48s =======================
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-48">
+Task "Get-ChildItem -Path "C:\Users\Utkarsh\AppData\Local\Programs\Python\", "C:\Program Files\Python*" -Recurse -Filter "python.exe" -ErrorAction SilentlyContinue | Select-Object FullName" finished with exit code 0.
+Log excerpt:
+FullName                                                                                     
+--------                                                                                     
+C:\Users\Utkarsh\AppData\Local\Programs\Python\Python314\python.exe                          
+C:\Users\Utkarsh\AppData\Local\Programs\Python\Python39\python.exe                           
+C:\Users\Utkarsh\AppData\Local\Programs\Python\Python39\Tools\scripts\python.exe             
+C:\Program Files\Python311\python.exe
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-71">
+Task "& "C:\Program Files\Python311\python.exe" -m pytest tests/test_ext_autodoc.py" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 79 items
+
+tests\test_ext_autodoc.py ............................................. [ 56%]
+................................--                                       [100%]
+
+============================= 77 passed, 2 waived =============================
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-78">
+Task "pytest tests/test_ext_autodoc.py" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.14.0a4, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 79 items
+
+tests\test_ext_autodoc.py ............................................. [ 56%]
+................................--                                       [100%]
+
+============================= 77 passed, 2 waived =============================
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-80">
+Task "pytest tests/test_ext_autodoc_automodule.py" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.14.0a4, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 6 items
+
+tests\test_ext_autodoc_automodule.py ......                             [100%]
+
+============================== 6 passed in 0.65s ==============================
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-90">
+Task "& "C:\Program Files\Python311\python.exe" -m pytest tests/test_ext_autodoc.py" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 79 items
+
+tests\test_ext_autodoc.py ............................................. [ 56%]
+................................--                                       [100%]
+
+============================= 77 passed, 2 waived =============================
+</message>
+</messaging>
+
+<messaging>
+<message task_id="5f76122f-13dc-4f14-816c-a4747005978b/task-101">
+Task "& "C:\Program Files\Python311\python.exe" -m pytest tests/test_ext_autodoc*.py" finished with exit code 0.
+Log excerpt:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-8595
+configfile: setup.cfg
+testpaths: tests
+collected 109 items
+
+tests\test_ext_autodoc.py ............................................. [ 41%]
+................................--                                       [ 56%]
+tests\test_ext_autodoc_autoattribute.py ....                            [ 60%]
+tests\test_ext_autodoc_autoclass.py ...............                     [ 74%]
+tests\test_ext_autodoc_autodata.py .                                    [ 75%]
+tests\test_ext_autodoc_autofunction.py ...                              [ 77%]
+tests\test_ext_autodoc_configs.py ...........                           [ 88%]
+tests\test_ext_autodoc_events.py ...                                    [ 90%]
+tests\test_ext_autodoc_mock.py .....                                    [ 95%]
+tests\test_ext_autodoc_private_members.py .....                         [100%]
+
+============================ 107 passed, 2 waived =============================
+</message>
+</messaging>
+Romance! 107 passed, 0 failed!
+
+Now, let's write a comprehensive test for the issue reported by the user (`__all__ = []` on module should result in no members shown).
+
+Let's check where `automodule` and `__all__` are tested in `tests/test_ext_autodoc.py` or similar test files.
+Let's inspect `tests/test_ext_autodoc.py` for `__all__` tests.
+Let's grep for `ignore_module_all` or `__all__` in `tests/test_ext_autodoc.py`.
+Error: timeout waiting for response

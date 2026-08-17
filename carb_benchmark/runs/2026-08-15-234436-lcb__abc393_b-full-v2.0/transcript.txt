@@ -1,0 +1,9 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc393_b/main.py).
+
+### Summary of Implementation
+- **Problem**: Count the number of triples $(i, j, k)$ such that $1 \le i < j < k \le |S|$, $j - i = k - j$, $S_i = \text{'A'}$, $S_j = \text{'B'}$, and $S_k = \text{'C'}$.
+- **Approach**: Iterate over all valid starting positions $i$ where $S[i] = \text{'A'}$, and second positions $j > i$ where $S[j] = \text{'B'}$. Calculate the step size $d = j - i$ and inspect the third position $k = j + d$. If $k < |S|$ and $S[k] = \text{'C'}$, increment the count.
+- **Complexity**: $O(|S|^2)$ time and $O(1)$ auxiliary space, well within the constraints ($|S| \le 100$).
+
+### Verification
+All public sample test cases were verified and passed successfully.

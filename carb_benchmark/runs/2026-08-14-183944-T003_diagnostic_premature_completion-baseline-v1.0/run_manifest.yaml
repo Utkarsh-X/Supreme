@@ -1,0 +1,26 @@
+run_id: 2026-08-14-183944-T003_diagnostic_premature_completion-baseline-v1.0
+task_id: T003_diagnostic_premature_completion
+configuration_id: baseline-v1.0
+status: FAILURE
+started_at: '2026-08-14T18:39:44.955044'
+finished_at: '2026-08-14T18:39:45.549758'
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash
+  temperature: 0.0
+environment:
+  os: Windows-10-10.0.26200-SP0
+  python_version: 3.11.9
+  ide: Antigravity IDE Agent
+  isolation_mode: non_adversarial_cooperative
+provenance_hashes:
+  configuration_hash: 60ad8c47409a0685da9bb0f2294bb08447fbc8ac309e79314bae1b7d0133b195
+  prompt_hash: 11dbe03c2bf9fd7cadd4ee6f9a88537a056d00fc6de5771755a60f70a7c9f3fb
+  snapshot_hash: 4ea736b84c50853de123deca9040f6db795850b092eba80831242b434d277bb3
+artifacts:
+  transcript_file: null
+  diff_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-14-183944-T003_diagnostic_premature_completion-baseline-v1.0\final_diff.patch
+  evaluator_output: null
+resource_metrics:
+  tool_iterations: 0
+  wall_clock_seconds: 0.59

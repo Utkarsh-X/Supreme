@@ -1,0 +1,8 @@
+I have resolved the issue where form fields did not deepcopy their `error_messages` dictionary when `__deepcopy__` was called.
+
+### Cause
+`Field.__deepcopy__` performed a shallow copy of `self` via `copy.copy(self)`. While `widget` was explicitly deep-copied and `validators` was sliced, `error_messages` remained a reference to the original dictionary. As a result, all form instances instantiated from the same form class shared the exact same `error_messages` dictionary, causing mutations on one instance's field error messages to affect all other instances.
+
+### Solution
+1. Updated [`django/forms/fields.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/django/forms/fields.py#L198-L204) so that `Field.__deepcopy__` explicitly deepcopies `self.error_messages` into `result.error_messages`.
+2. Added unit test `test_field_deepcopy_error_messages` in [`tests/forms_tests/field_tests/test_base.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/tests/forms_tests/field_tests/test_base.py#L40-L44).

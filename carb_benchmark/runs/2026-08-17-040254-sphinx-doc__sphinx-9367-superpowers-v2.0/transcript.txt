@@ -1,0 +1,8 @@
+I have fixed the issue where single-element tuples (such as `(1,)`) were incorrectly unparsed without a trailing comma by `sphinx.pycode.ast.unparse`.
+
+### Summary of Changes
+1. **[sphinx/pycode/ast.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py#L201-L225)**:
+   - Updated `visit_Tuple` to append a trailing comma `,` when `len(node.elts) == 1`, returning `("(" + self.visit(node.elts[0]) + ",)")`.
+   - Updated `visit_Subscript` to append a trailing comma `,` when unparsing a 1-element tuple slice (e.g. `Tuple[int,]`).
+2. **[tests/test_pycode_ast.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/tests/test_pycode_ast.py#L56-L58)**:
+   - Added test case `("(1,)", "(1,)")` to verify single-element tuple rendering.

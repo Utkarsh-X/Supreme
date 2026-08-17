@@ -1,0 +1,12 @@
+I have fixed the issue where `_pytest.capture.EncodedFile` advertised a binary mode string (containing `'b'`) from its underlying buffer object.
+
+### Summary of Changes
+- Added a `@property` for `mode` on `_pytest.capture.EncodedFile` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L450-L457) that strips `'b'` from the underlying buffer's mode string.
+- Added unit tests `test_encodedfile_mode` and `test_safe_text_dupfile_mode` in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L1464-L1490) to verify `EncodedFile.mode` correctly removes `'b'` from binary mode strings (e.g., `'rb+'` -> `'r+'`, `'wb+'` -> `'w+'`, `'wb'` -> `'w'`) while maintaining proper error handling when no `mode` attribute exists.
+
+### Verification
+Ran tests using pytest:
+```
+testing\test_capture.py ... [100%]
+3 passed
+```

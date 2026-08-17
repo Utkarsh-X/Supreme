@@ -1,0 +1,23 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..1da59df 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,6 @@
+-import json
++from sympy import sqrt, Symbol, simplify, Abs
+ 
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
+-
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
+-
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++x = Symbol('x')
++result = simplify(sqrt(x**2))
++print(result)
++# Expected output: Abs(x)
+\ No newline at end of file

@@ -1,0 +1,64 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..b081659 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,46 @@
+-import json
+-
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
+-
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
+-
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++diff --git a/astropy/units/quantity.py b/astropy/units/quantity.py
++--- a/astropy/units/quantity.py
+++++ b/astropy/units/quantity.py
++@@ -382,6 +382,12 @@ class Quantity(np.ndarray):
++         if context is not None:
++             ufunc, args, i = context
++ 
+++            if ufunc in (np.equal, np.not_equal, np.less, np.less_equal,
+++                         np.greater, np.greater_equal, np.logical_and,
+++                         np.logical_or, np.logical_xor, np.logical_not,
+++                         np.isnan, np.isinf, np.isfinite, np.signbit):
+++                return out_arr.view(np.ndarray)
+++
++             if ufunc in (np.multiply, np.divide, np.true_divide, np.power):
++                 # Handle multi-unit operations
++                 pass
++@@ -424,10 +430,30 @@ class Quantity(np.ndarray):
++         return super(Quantity, self).__array_wrap__(out_arr, context)
++ 
++     def __eq__(self, other):
++-        return np.asanyarray(self.value == self._to_own_unit(other).value)
+++        try:
+++            other_val = self._to_own_unit(other).value
+++            return np.asanyarray(self.value == other_val)
+++        except (UnitsError, TypeError, ValueError):
+++            if np.isscalar(self.value) and np.isscalar(getattr(other, 'value', other)):
+++                return False
+++            try:
+++                shape = np.broadcast(self.value, getattr(other, 'value', other)).shape
+++                return np.zeros(shape, dtype=bool)
+++            except Exception:
+++                return False
++ 
++     def __ne__(self, other):
++-        return np.asanyarray(self.value != self._to_own_unit(other).value)
+++        try:
+++            other_val = self._to_own_unit(other).value
+++            return np.asanyarray(self.value != other_val)
+++        except (UnitsError, TypeError, ValueError):
+++            if np.isscalar(self.value) and np.isscalar(getattr(other, 'value', other)):
+++                return True
+++            try:
+++                shape = np.broadcast(self.value, getattr(other, 'value', other)).shape
+++                return np.ones(shape, dtype=bool)
+++            except Exception:
+++                return True
+\ No newline at end of file

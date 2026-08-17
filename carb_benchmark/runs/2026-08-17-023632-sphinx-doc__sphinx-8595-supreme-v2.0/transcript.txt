@@ -1,0 +1,8 @@
+I have resolved the issue where an empty `__all__` attribute (`__all__ = []` or `__all__ = ()`) was ignored by `autodoc`.
+
+### Root Cause
+In [`ModuleDocumenter.get_object_members`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1074-L1086), the condition `if not self.__all__:` was used to check whether `__all__` was absent. Since an empty list or tuple evaluates to `False` in Python boolean contexts, `if not self.__all__:` evaluated to `True` when `__all__ = []`, causing autodoc to fall back to documenting all module members instead of respecting the empty `__all__`.
+
+### Solution
+- Updated [`ModuleDocumenter.get_object_members`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1077) to check `if self.__all__ is None:`. When `self.__all__` is an empty list/tuple, it now proceeds to skip all members not present in `__all__` (i.e. all members).
+- Created test module [`empty_all.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/roots/test-ext-autodoc/target/empty_all.py) and added [`test_autodoc_empty_all`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/test_ext_autodoc.py#L741-L778) to verify that an empty `__all__` produces no member entries by default and correctly displays members when `:ignore-module-all:` is provided.

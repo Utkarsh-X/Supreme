@@ -1,0 +1,436 @@
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-30">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.9.19, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 41 items
+
+tests\test_domain_py.py ........................................X      [100%]
+
+========================= 40 passed, 1 xpassed in 2.92s =========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-41">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces/sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 45 items
+
+tests\test_domain_py.py ............................................X   [100%]
+
+========================= 44 passed, 1 xpassed in 1.48s =========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-45">
+Status: exit 0
+Stdout:
+Obtaining file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698
+  Preparing metadata (setup.py) ... done
+Requirement already satisfied: sphinxcontrib-applehelp in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.0.0)
+Requirement already satisfied: sphinxcontrib-devhelp in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.0.0)
+Requirement already satisfied: sphinxcontrib-jsmath in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (1.0.1)
+Requirement already satisfied: sphinxcontrib-htmlhelp>=2.0.0 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.0.6)
+Requirement already satisfied: sphinxcontrib-serializinghtml>=1.1.5 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.0.0)
+Requirement already satisfied: sphinxcontrib-qthelp in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.0.0)
+Requirement already satisfied: Jinja2>=2.11.3 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (3.1.4)
+Requirement already satisfied: Pygments>=2.0 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.18.0)
+Requirement already satisfied: docutils<0.18,>=0.14 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (0.17.1)
+Requirement already satisfied: snowballstemmer>=1.1 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.2.0)
+Requirement already satisfied: babel>=1.3 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.16.0)
+Requirement already satisfied: alabaster<0.8,>=0.7 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (0.7.16)
+Requirement already satisfied: imagesize in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (1.4.1)
+Requirement already satisfied: requests>=2.5.0 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.32.3)
+Requirement already satisfied: setuptools in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (73.0.0)
+Requirement already satisfied: packaging in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from sphinx==4.3.0.dev20260816) (24.1)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from Jinja2>=2.11.3->sphinx==4.3.0.dev20260816) (2.1.5)
+Requirement already satisfied: charset-normalizer<4,>=2 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (3.8)
+Requirement already satisfied: urllib3<3,>=1.21.1 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (2.2.2)
+Requirement already satisfied: certifi>=2017.4.17 in c:\users\utkarsh\appdata\local\programs\python\python311\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (2024.7.4)
+Installing collected packages: sphinx
+  Attempting uninstall: sphinx
+    Found existing installation: Sphinx 4.3.0.dev20260816
+    Uninstalling Sphinx-4.3.0.dev20260816:
+      Successfully uninstalled Sphinx-4.3.0.dev20260816
+  Running setup.py develop for sphinx
+Successfully installed sphinx-4.3.0.dev20260816
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-49">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 45 items
+
+tests\test_domain_py.py ............................................X   [100%]
+
+========================= 44 passed, 1 xpassed in 1.48s =========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-55">
+Status: exit 0
+Stdout:
+Collecting sphinxcontrib-applehelp<2.0
+  Using cached sphinxcontrib_applehelp-1.0.8-py3-none-any.whl.metadata (1.5 kB)
+Collecting sphinxcontrib-devhelp<2.0
+  Using cached sphinxcontrib_devhelp-1.0.6-py3-none-any.whl.metadata (1.5 kB)
+Requirement already satisfied: sphinxcontrib-htmlhelp<2.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (1.0.3)
+Collecting sphinxcontrib-qthelp<2.0
+  Using cached sphinxcontrib_qthelp-1.0.7-py3-none-any.whl.metadata (1.5 kB)
+Requirement already satisfied: sphinxcontrib-serializinghtml<2.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (1.1.5)
+Using cached sphinxcontrib_applehelp-1.0.8-py3-none-any.whl (120 kB)
+Using cached sphinxcontrib_devhelp-1.0.6-py3-none-any.whl (83 kB)
+Using cached sphinxcontrib_qthelp-1.0.7-py3-none-any.whl (90 kB)
+Installing collected packages: sphinxcontrib-qthelp, sphinxcontrib-devhelp, sphinxcontrib-applehelp
+  Attempting uninstall: sphinxcontrib-qthelp
+    Found existing installation: sphinxcontrib-qthelp 2.0.0
+    Uninstalling sphinxcontrib-qthelp-2.0.0:
+      Successfully uninstalled sphinxcontrib-qthelp-2.0.0
+  Attempting uninstall: sphinxcontrib-devhelp
+    Found existing installation: sphinxcontrib-devhelp 2.0.0
+    Uninstalling sphinxcontrib-devhelp-2.0.0:
+      Successfully uninstalled sphinxcontrib-devhelp-2.0.0
+  Attempting uninstall: sphinxcontrib-applehelp
+    Found existing installation: sphinxcontrib-applehelp 2.0.0
+    Uninstalling sphinxcontrib-applehelp-2.0.0:
+      Successfully uninstalled sphinxcontrib-applehelp-2.0.0
+Successfully installed sphinxcontrib-applehelp-1.0.8 sphinxcontrib-devhelp-1.0.6 sphinxcontrib-qthelp-1.0.7
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-59">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-8.3.2, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 45 items
+
+tests\test_domain_py.py ............................................X   [100%]
+
+========================= 44 passed, 1 xpassed in 1.44s =========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-63">
+Status: exit 0
+Stdout:
+
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-67">
+Status: exit 0
+Stdout:
+Obtaining file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698
+  Preparing metadata (setup.py) ... done
+Collecting pytest
+  Using cached pytest-8.3.5-py3-none-any.whl.metadata (7.5 kB)
+Collecting pytest-cov
+  Using cached pytest_cov-6.0.0-py3-none-any.whl.metadata (13 kB)
+Collecting html5lib
+  Using cached html5lib-1.1-py2.py3-none-any.whl.metadata (16 kB)
+Collecting sphinxcontrib-applehelp (from sphinx==4.3.0.dev20260816)
+  Using cached sphinxcontrib_applehelp-2.0.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting sphinxcontrib-devhelp (from sphinx==4.3.0.dev20260816)
+  Using cached sphinxcontrib_devhelp-2.0.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting sphinxcontrib-jsmath (from sphinx==4.3.0.dev20260816)
+  Using cached sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting sphinxcontrib-htmlhelp>=2.0.0 (from sphinx==4.3.0.dev20260816)
+  Using cached sphinxcontrib_htmlhelp-2.1.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting sphinxcontrib-serializinghtml>=1.1.5 (from sphinx==4.3.0.dev20260816)
+  Using cached sphinxcontrib_serializinghtml-2.0.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting sphinxcontrib-qthelp (from sphinx==4.3.0.dev20260816)
+  Using cached sphinxcontrib_qthelp-2.0.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting Jinja2>=2.11.3 (from sphinx==4.3.0.dev20260816)
+  Using cached jinja2-3.1.6-py3-none-any.whl.metadata (2.8 kB)
+Collecting Pygments>=2.0 (from sphinx==4.3.0.dev20260816)
+  Using cached pygments-2.19.1-py3-none-any.whl.metadata (4.2 kB)
+Collecting docutils<0.18,>=0.14 (from sphinx==4.3.0.dev20260816)
+  Using cached docutils-0.17.1-py2.py3-none-any.whl.metadata (2.7 kB)
+Collecting snowballstemmer>=1.1 (from sphinx==4.3.0.dev20260816)
+  Using cached snowballstemmer-2.2.0-py2.py3-none-any.whl.metadata (6.5 kB)
+Collecting babel>=1.3 (from sphinx==4.3.0.dev20260816)
+  Using cached babel-2.17.0-py3-none-any.whl.metadata (8.6 kB)
+Collecting alabaster<0.8,>=0.7 (from sphinx==4.3.0.dev20260816)
+  Using cached alabaster-0.7.16-py3-none-any.whl.metadata (2.9 kB)
+Collecting imagesize (from sphinx==4.3.0.dev20260816)
+  Using cached imagesize-1.4.1-py2.py3-none-any.whl.metadata (1.5 kB)
+Collecting requests>=2.5.0 (from sphinx==4.3.0.dev20260816)
+  Using cached requests-2.32.3-py3-none-any.whl.metadata (4.6 kB)
+Collecting setuptools (from sphinx==4.3.0.dev20260816)
+  Using cached setuptools-76.0.0-py3-none-any.whl.metadata (6.7 kB)
+Collecting packaging (from sphinx==4.3.0.dev20260816)
+  Using cached packaging-24.2-py3-none-any.whl.metadata (3.2 kB)
+Collecting iniconfig (from pytest)
+  Using cached iniconfig-2.0.0-py3-none-any.whl.metadata (2.4 kB)
+Collecting pluggy<2.0,>=1.5 (from pytest)
+  Using cached pluggy-1.5.0-py3-none-any.whl.metadata (4.8 kB)
+Collecting coverage>=7.5 (from coverage[toml]>=7.5->pytest-cov)
+  Using cached coverage-7.6.12-cp311-cp311-win_amd64.whl.metadata (8.5 kB)
+Collecting six>=1.9 (from html5lib)
+  Using cached six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting webencodings (from html5lib)
+  Using cached webencodings-0.5.1-py2.py3-none-any.whl.metadata (2.1 kB)
+Collecting MarkupSafe>=2.0 (from Jinja2>=2.11.3->sphinx==4.3.0.dev20260816)
+  Using cached MarkupSafe-3.0.2-cp311-cp311-win_amd64.whl.metadata (4.0 kB)
+Collecting charset-normalizer<4,>=2 (from requests>=2.5.0->sphinx==4.3.0.dev20260816)
+  Using cached charset_normalizer-3.4.1-cp311-cp311-win_amd64.whl.metadata (35 kB)
+Collecting idna<4,>=2.5 (from requests>=2.5.0->sphinx==4.3.0.dev20260816)
+  Using cached idna-3.10-py3-none-any.whl.metadata (10 kB)
+Collecting urllib3<3,>=1.21.1 (from requests>=2.5.0->sphinx==4.3.0.dev20260816)
+  Using cached urllib3-2.3.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting certifi>=2017.4.17 (from requests>=2.5.0->sphinx==4.3.0.dev20260816)
+  Using cached certifi-2025.1.31-py3-none-any.whl.metadata (2.5 kB)
+Using cached pytest-8.3.5-py3-none-any.whl (343 kB)
+Using cached pytest_cov-6.0.0-py3-none-any.whl (22 kB)
+Using cached html5lib-1.1-py2.py3-none-any.whl (112 kB)
+Using cached alabaster-0.7.16-py3-none-any.whl (13 kB)
+Using cached babel-2.17.0-py3-none-any.whl (10.2 MB)
+Using cached docutils-0.17.1-py2.py3-none-any.whl (575 kB)
+Using cached imagesize-1.4.1-py2.py3-none-any.whl (8.8 kB)
+Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Using cached packaging-24.2-py3-none-any.whl (65 kB)
+Using cached pygments-2.19.1-py3-none-any.whl (1.2 MB)
+Using cached requests-2.32.3-py3-none-any.whl (64 kB)
+Using cached setuptools-76.0.0-py3-none-any.whl (1.2 MB)
+Using cached snowballstemmer-2.2.0-py2.py3-none-any.whl (93 kB)
+Using cached sphinxcontrib_applehelp-2.0.0-py3-none-any.whl (121 kB)
+Using cached sphinxcontrib_devhelp-2.0.0-py3-none-any.whl (82 kB)
+Using cached sphinxcontrib_htmlhelp-2.1.0-py3-none-any.whl (98 kB)
+Using cached sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl (5.1 kB)
+Using cached sphinxcontrib_qthelp-2.0.0-py3-none-any.whl (89 kB)
+Using cached sphinxcontrib_serializinghtml-2.0.0-py3-none-any.whl (92 kB)
+Using cached coverage-7.6.12-cp311-cp311-win_amd64.whl (207 kB)
+Using cached iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+Using cached pluggy-1.5.0-py3-none-any.whl (20 kB)
+Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Using cached webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+Using cached certifi-2025.1.31-py3-none-any.whl (166 kB)
+Using cached charset_normalizer-3.4.1-cp311-cp311-win_amd64.whl (102 kB)
+Using cached idna-3.10-py3-none-any.whl (70 kB)
+Using cached MarkupSafe-3.0.2-cp311-cp311-win_amd64.whl (25 kB)
+Using cached urllib3-2.3.0-py3-none-any.whl (128 kB)
+Installing collected packages: webencodings, unpackaged, urllib3, sphinxcontrib-serializinghtml, sphinxcontrib-qthelp, sphinxcontrib-jsmath, sphinxcontrib-htmlhelp, sphinxcontrib-devhelp, sphinxcontrib-applehelp, snowballstemmer, six, setuptools, Pygments, pluggy, packaging, MarkupSafe, iniconfig, imagesize, idna, docutils, coverage, charset-normalizer, certifi, babel, alabaster, requests, pytest, Jinja2, html5lib, pytest-cov, sphinx
+  Running setup.py develop for sphinx
+Successfully installed Jinja2-3.1.6 MarkupSafe-3.0.2 Pygments-2.19.1 alabaster-0.7.16 babel-2.17.0 certifi-2025.1.31 charset-normalizer-3.4.1 coverage-7.6.12 docutils-0.17.1 html5lib-1.1 idna-3.10 imagesize-1.4.1 iniconfig-2.0.0 packaging-24.2 pluggy-1.5.0 pytest-8.3.5 pytest-cov-6.0.0 requests-2.32.3 setuptools-76.0.0 six-1.17.0 snowballstemmer-2.2.0 sphinx-4.3.0.dev20260816 sphinxcontrib-applehelp-2.0.0 sphinxcontrib-devhelp-2.0.0 sphinxcontrib-htmlhelp-2.1.0 sphinxcontrib-jsmath-1.0.1 sphinxcontrib-qthelp-2.0.0 sphinxcontrib-serializinghtml-2.0.0 unpackaged-0.0.0 urllib3-2.3.0 webencodings-0.5.1
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-73">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 45 items
+
+tests\test_domain_py.py ............................................X   [100%]
+
+========================= 44 passed, 1 xpassed in 1.40s =========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-89">
+Status: exit 0
+Stdout:
+Collecting sphinxcontrib-applehelp<1.0.5
+  Downloading sphinxcontrib_applehelp-1.0.4-py3-none-any.whl.metadata (1.5 kB)
+Collecting sphinxcontrib-devhelp<1.0.5
+  Downloading sphinxcontrib_devhelp-1.0.2-py2.py3-none-any.whl.metadata (1.5 kB)
+Collecting sphinxcontrib-htmlhelp<1.0.5
+  Downloading sphinxcontrib_htmlhelp-1.0.3-py2.py3-none-any.whl.metadata (1.5 kB)
+Collecting sphinxcontrib-qthelp<1.0.5
+  Downloading sphinxcontrib_qthelp-1.0.3-py2.py3-none-any.whl.metadata (1.5 kB)
+Collecting sphinxcontrib-serializinghtml<1.1.6
+  Using cached sphinxcontrib_serializinghtml-1.1.5-py2.py3-none-any.whl.metadata (1.5 kB)
+Downloading sphinxcontrib_applehelp-1.0.4-py3-none-any.whl (120 kB)
+Downloading sphinxcontrib_devhelp-1.0.2-py2.py3-none-any.whl (84 kB)
+Downloading sphinxcontrib_qthelp-1.0.3-py2.py3-none-any.whl (89 kB)
+Installing collected packages: sphinxcontrib-qthelp, sphinxcontrib-htmlhelp, sphinxcontrib-devhelp, sphinxcontrib-applehelp
+  Attempting uninstall: sphinxcontrib-qthelp
+    Found existing installation: sphinxcontrib-qthelp 1.0.7
+    Uninstalling sphinxcontrib-qthelp-1.0.7:
+      Successfully uninstalled sphinxcontrib-qthelp-1.0.7
+  Attempting uninstall: sphinxcontrib-htmlhelp
+    Found existing installation: sphinxcontrib-htmlhelp 2.0.0
+    Uninstalling sphinxcontrib-htmlhelp-2.0.0:
+      Successfully uninstalled sphinxcontrib-htmlhelp-2.0.0
+  Attempting uninstall: sphinxcontrib-devhelp
+    Found existing installation: sphinxcontrib-devhelp 1.0.6
+    Uninstalling sphinxcontrib-devhelp-1.0.6:
+      Successfully uninstalled sphinxcontrib-devhelp-1.0.6
+  Attempting uninstall: sphinxcontrib-applehelp
+    Found existing installation: sphinxcontrib-applehelp 1.0.8
+    Uninstalling sphinxcontrib-applehelp-1.0.8:
+      Successfully uninstalled sphinxcontrib-applehelp-1.0.8
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+sphinx 4.3.0.dev20260816 requires sphinxcontrib-htmlhelp>=2.0.0, but you have sphinxcontrib-htmlhelp 1.0.3 which is incompatible.
+Successfully installed sphinxcontrib-applehelp-1.0.4 sphinxcontrib-devhelp-1.0.2 sphinxcontrib-htmlhelp-1.0.3 sphinxcontrib-qthelp-1.0.3
+
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-93">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 45 items
+
+tests\test_domain_py.py ............................................X   [100%]
+
+========================= 44 passed, 1 xpassed in 1.48s =========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-97">
+Status: exit 0
+Stdout:
+Collecting sphinxcontrib-applehelp==1.0.7
+  Downloading sphinxcontrib_applehelp-1.0.7-py3-none-any.whl.metadata (2.2 kB)
+Requirement already satisfied: sphinxcontrib-devhelp==1.0.6 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (1.0.6)
+Collecting sphinxcontrib-htmlhelp==2.0.0
+  Using cached sphinxcontrib_htmlhelp-2.0.0-py2.py3-none-any.whl.metadata (1.6 kB)
+Requirement already satisfied: sphinxcontrib-qthelp==1.0.7 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (1.0.7)
+Requirement already satisfied: sphinxcontrib-serializinghtml==1.1.5 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (1.1.5)
+Downloading sphinxcontrib_applehelp-1.0.7-py3-none-any.whl (120 kB)
+Using cached sphinxcontrib_htmlhelp-2.0.0-py2.py3-none-any.whl (100 kB)
+Installing collected packages: sphinxcontrib-htmlhelp, sphinxcontrib-applehelp
+  Attempting uninstall: sphinxcontrib-htmlhelp
+    Found existing installation: sphinxcontrib-htmlhelp 1.0.3
+    Uninstalling sphinxcontrib-htmlhelp-1.0.3:
+      Successfully uninstalled sphinxcontrib-htmlhelp-1.0.3
+  Attempting uninstall: sphinxcontrib-applehelp
+    Found existing installation: sphinxcontrib-applehelp 1.0.4
+    Uninstalling sphinxcontrib-applehelp-1.0.4:
+      Successfully uninstalled sphinxcontrib-applehelp-1.0.4
+Successfully installed sphinxcontrib-applehelp-1.0.7 sphinxcontrib-htmlhelp-2.0.0
+
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-101">
+Status: exit 0
+Stdout:
+Obtaining file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698
+  Preparing metadata (setup.py) ... done
+Collecting docutils<0.18,>=0.14
+  Using cached docutils-0.17.1-py2.py3-none-any.whl.metadata (2.7 kB)
+Requirement already satisfied: sphinxcontrib-applehelp in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (1.0.7)
+Requirement already satisfied: sphinxcontrib-devhelp in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (1.0.6)
+Requirement already satisfied: sphinxcontrib-jsmath in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (1.0.1)
+Requirement already satisfied: sphinxcontrib-htmlhelp>=2.0.0 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.0.0)
+Requirement already satisfied: sphinxcontrib-serializinghtml>=1.1.5 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (1.1.5)
+Requirement already satisfied: sphinxcontrib-qthelp in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (1.0.7)
+Requirement already satisfied: Jinja2>=2.11.3 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (3.1.6)
+Requirement already satisfied: Pygments>=2.0 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.20.0)
+Requirement already satisfied: snowballstemmer>=1.1 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (3.1.1)
+Requirement already satisfied: babel>=1.3 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.18.0)
+Requirement already satisfied: alabaster<0.8,>=0.7 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (0.7.16)
+Requirement already satisfied: imagesize in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.0.0)
+Requirement already satisfied: requests>=2.5.0 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (2.34.2)
+Requirement already satisfied: setuptools in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (65.5.0)
+Requirement already satisfied: packaging in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from sphinx==4.3.0.dev20260816) (26.3)
+Requirement already satisfied: MarkupSafe>=2.0 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from Jinja2>=2.11.3->sphinx==4.3.0.dev20260816) (3.0.3)
+Requirement already satisfied: charset_normalizer<4,>=2 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (3.5.1)
+Requirement already satisfied: idna<4,>=2.5 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (3.18)
+Requirement already satisfied: urllib3<3,>=1.26 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (2.7.0)
+Requirement already satisfied: certifi>=2023.5.7 in e:\rofu\supreme\carb_workspaces\sphinx-doc__sphinx-9698\.venv\lib\site-packages (from requests>=2.5.0->sphinx==4.3.0.dev20260816) (2026.7.22)
+Using cached docutils-0.17.1-py2.py3-none-any.whl (575 kB)
+Building wheels for collected packages: sphinx
+  Building editable for sphinx (pyproject.toml) ... done
+  Created wheel for sphinx: filename=sphinx-4.3.0.dev20260816-0.editable-py3-none-any.whl size=8439 sha256=4be695ddbd0fc20cb3ee4beccff98fc66a5e1ac74d75ea9c6a1cfb3eb6c3aaed
+  Stored in directory: C:\Users\Utkarsh\AppData\Local\Temp\pip-ephem-wheel-cache-80o6l70h\wheels\ec\81\cb\06034b59861f19327ed58ecadb5c49b23aacdc77dbef2458e5
+Successfully built sphinx
+Installing collected packages: docutils, sphinx
+  Attempting uninstall: docutils
+    Found existing installation: docutils 0.20.1
+    Uninstalling docutils-0.20.1:
+      Successfully uninstalled docutils-0.20.1
+  Attempting uninstall: sphinx
+    Found existing installation: Sphinx 7.2.2
+    Uninstalling Sphinx-7.2.2:
+      Successfully uninstalled Sphinx-7.2.2
+Successfully installed docutils-0.17.1 sphinx-4.3.0.dev20260816
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-107">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 45 items
+
+tests\test_domain_py.py ............................................X   [100%]
+
+========================= 44 passed, 1 xpassed in 1.41s =========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-125">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 46 items
+
+tests\test_domain_py.py ..............................................   [100%]
+
+============================== warnings summary ===============================
+sphinx\util\docutils.py:44
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\util\docutils.py:44: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    __version_info__ = tuple(LooseVersion(docutils.__version__).version)
+
+sphinx\highlighting.py:67
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\highlighting.py:67: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    if tuple(LooseVersion(pygmentsversion).version) <= (2, 7, 4):
+
+tests/test_domain_py.py::test_domain_py_xrefs
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\util\images.py:12: DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+    import imghdr
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 46 passed, 3 warnings in 6.13s ========================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-129">
+Status: exit 0
+Stdout:
+........................................................................ [ 86%]
+................................................                        [ 88%]
+........................................................................ [ 90%]
+........................................................................ [ 93%]
+........................................................................ [ 95%]
+........................................................................ [ 98%]
+................................................                        [100%]
+
+================ 1546 passed, 7 xfailed, 107 warnings in 43.14s ================
+}
+<task_notification task_id="2b009441-30d7-4cd1-9c0a-d495fcb9c698/task-135">
+Status: exit 0
+Stdout:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698
+configfile: setup.cfg
+collected 46 items
+
+tests\test_domain_py.py ..............................................   [100%]
+
+============================== warnings summary ===============================
+sphinx\util\docutils.py:44
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\util\docutils.py:44: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    __version_info__ = tuple(LooseVersion(docutils.__version__).version)
+
+sphinx\highlighting.py:67
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\highlighting.py:67: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    if tuple(LooseVersion(pygmentsversion).version) <= (2, 7, 4):
+
+tests/test_domain_py.py::test_domain_py_xrefs
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\util\images.py:12: DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+    import imghdr
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 46 passed, 3 warnings in 6.07s ========================
+}
+I have resolved the issue where index entries for `py:method` directives with the `:property:` option incorrectly included parentheses `()`.
+
+### Root Cause
+In [sphinx/domains/python.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/sphinx/domains/python.py#L784-L804), `PyMethod.get_index_text` included parentheses `()` for method entries even when the `:property:` option was set (e.g. `_('%s() (%s property)')`). Since properties are accessed as attributes rather than invoked like functions/methods, they should not have parentheses `()` in their index entries.
+
+### Solution
+1. Updated `PyMethod.get_index_text` in [sphinx/domains/python.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/sphinx/domains/python.py#L784-L804) so that when `'property'` is in `self.options`, the index entry string is rendered without `()` (matching the behavior of `PyProperty.get_index_text`).
+2. Updated unit test assertions in [tests/test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/tests/test_domain_py.py#L756-L764) to verify property index entries registered via `py:method` do not contain parentheses.

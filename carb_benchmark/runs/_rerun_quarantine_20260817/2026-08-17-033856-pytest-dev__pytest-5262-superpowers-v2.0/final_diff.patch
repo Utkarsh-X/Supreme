@@ -1,0 +1,37 @@
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 25eab7f..0a3915f 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -447,6 +447,13 @@ class EncodedFile(object):
+         """Ensure that file.name is a string."""
+         return repr(self.buffer)
+ 
++    @property
++    def mode(self):
++        buffer_mode = self.buffer.mode
++        if isinstance(buffer_mode, six.string_types):
++            return buffer_mode.replace("b", "")
++        return buffer_mode
++
+     def __getattr__(self, name):
+         return getattr(object.__getattribute__(self, "buffer"), name)
+ 
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index 5d80eb6..977d4c0 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1461,6 +1461,14 @@ def test_pickling_and_unpickling_encoded_file():
+     pickle.loads(ef_as_str)
+ 
+ 
++def test_encoded_file_mode():
++    class Buffer(object):
++        mode = "rb+"
++
++    ef = capture.EncodedFile(Buffer(), "utf-8")
++    assert ef.mode == "r+"
++
++
+ def test_global_capture_with_live_logging(testdir):
+     # Issue 3819
+     # capture should work with live cli logging

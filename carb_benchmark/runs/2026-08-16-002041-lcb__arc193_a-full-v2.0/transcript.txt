@@ -1,0 +1,24 @@
+I have solved the problem by implementing an optimal $O(N + Q)$ solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc193_a/main.py).
+
+### Theoretical & Algorithmic Summary
+
+1. **Graph Structure (Co-Interval Graph)**:
+   Vertices $i$ and $j$ have an edge iff $[L_i, R_i] \cap [L_j, R_j] = \emptyset$, meaning either $R_i < L_j$ ($i$ is strictly to the left of $j$) or $R_j < L_i$ ($j$ is strictly to the left of $i$).
+
+2. **Maximum Path Length**:
+   Because all vertex weights $W_i \ge 1$ are positive, any simple path of length $\ge 4$ can be mathematically shortcut to a path of length $\le 3$ with strictly smaller weight. Thus, every minimum-weight path between connected vertices $s$ and $t$ has length at most 3 (1 edge, 2 edges, or 3 edges).
+
+3. **Path Configurations**:
+   - **1-step path ($s \to t$)**: Valid if $R_s < L_t$ or $R_t < L_s$. Total weight: $W_s + W_t$. If valid, this is guaranteed to be optimal.
+   - **2-step path ($s \to m \to t$)**: $m$ must be strictly to the left of both $s, t$ ($R_m < \min(L_s, L_t)$) or strictly to the right of both $s, t$ ($L_m > \max(R_s, R_t)$).
+   - **3-step path ($s \to u \to v \to t$)**: One intermediate vertex must go to the right and the other to the left. When direct edge $s \to t$ does not exist ($R_s \ge L_t$ and $R_t \ge L_s$), the edge between $u$ and $v$ is automatically guaranteed to exist, so $u$ and $v$ can be chosen independently:
+     - Combo 1: $u$ right of $s$ ($L_u > R_s$) and $v$ left of t ($R_v < L_t$).
+     - Combo 2: $u$ left of $s$ ($R_u < L_s$) and $v$ right of t ($L_v > R_t$).
+
+4. **Efficient Queries**:
+   By precomputing prefix minimums for $R_m < X$ and suffix minimums for $L_m > Y$ (keeping the top 4 smallest-weight vertices at each position), each query $(s, t)$ can be answered in $O(1)$ time.
+
+### Verification
+- Tested against public Sample 1 and Sample 2 (producing identical outputs).
+- Verified against Dijkstra shortest-path reference implementations across tens of thousands of randomly generated test cases with zero mismatches.
+- Verified execution performance on maximum constraint sizes ($N=200,000, Q=200,000$).

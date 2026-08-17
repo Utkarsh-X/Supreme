@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-17-021033-django__django-11880-baseline-v2.0",
+  "task_id": "django__django-11880",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 79.34,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-11880",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-11880\\django'\nImporting application forms_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_field_deep_copy_error_messages (forms_tests.tests.test_forms.FormsTestCase) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK\n\nPASS: django__django-11880 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/forms/fields.py",
+      "tests/forms_tests/field_tests/test_base.py"
+    ],
+    "lines_added": 10,
+    "lines_deleted": 0,
+    "total_lines_changed": 10,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

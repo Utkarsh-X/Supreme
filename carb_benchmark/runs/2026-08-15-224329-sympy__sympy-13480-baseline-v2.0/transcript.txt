@@ -1,0 +1,8 @@
+I have resolved the issue where calling `.subs()` on `coth(log(tan(x)))` threw a `NameError: name 'cotm' is not defined`.
+
+### Root Cause
+In [`coth.eval`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L586-L593), when `_peeloff_ipi` separated an imaginary multiple of \(\pi\) (such as the \(i\pi\) term resulting from \(\log(\tan(2))\) when \(\tan(2) < 0\)), line 590 checked `if cotm is S.ComplexInfinity:` instead of `if cothm is S.ComplexInfinity:`. `cotm` was an undefined variable name left over from copying logic from `cot`.
+
+### Solution
+1. Updated `cotm` to `cothm` in [`sympy/functions/elementary/hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L590).
+2. Added test cases in [`sympy/functions/elementary/tests/test_hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/tests/test_hyperbolic.py#L271-L273) to verify `coth(x + I*pi)`, `coth(x + I*pi/2)`, and `coth(log(tan(x))).subs(x, 2)`.

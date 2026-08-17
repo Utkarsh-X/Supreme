@@ -1,0 +1,11 @@
+I have resolved the issue by adding `joblib` to the dependencies returned by `sklearn.show_versions()`.
+
+### Summary of Changes
+1. **[sklearn/utils/_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/_show_versions.py)**:
+   - Added `"joblib"` to the list of Python dependencies inspected by `_get_deps_info()`.
+2. **[sklearn/utils/tests/test_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/tests/test_show_versions.py)**:
+   - Added assertions to check that `joblib` is present in `deps_info` and in the printed output of `show_versions()`.
+3. **[doc/whats_new/v0.22.rst](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/doc/whats_new/v0.22.rst)**:
+   - Added changelog entry under `:mod:\`sklearn.utils\``.
+4. **[sklearn/utils/validation.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/validation.py)**:
+   - Added fallback handling when importing `ComplexWarning` for compatibility with newer NumPy versions.

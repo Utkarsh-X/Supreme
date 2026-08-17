@@ -1,0 +1,12 @@
+I have resolved the issue where single-element tuples (such as `(1,)`) were incorrectly rendered as `(1)` without the trailing comma.
+
+### Root Cause
+In [`sphinx/pycode/ast.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py#L215-L222), `_UnparseVisitor.visit_Tuple` formatted any non-empty tuple using `", ".join(...)` without checking if the tuple had only a single element. In Python, single-element tuples require a trailing comma `(elt,)` to distinguish them from parenthesized expressions. A similar case occurred in `visit_Subscript` when formatting single-element tuple slices.
+
+### Solution
+1. Updated [`visit_Tuple`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py#L215) in [`sphinx/pycode/ast.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py) to explicitly check `if len(node.elts) == 1:` and append a trailing comma: `("(" + self.visit(node.elts[0]) + ",)")`.
+2. Updated [`visit_Subscript`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py#L201) to handle single-element tuple slices appropriately.
+3. Added test case `("(1,)", "(1,)")` to [`tests/test_pycode_ast.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/tests/test_pycode_ast.py#L57).
+
+### Verification
+Ran `pytest tests/test_pycode_ast.py` and confirmed all 42 tests pass cleanly.

@@ -1,0 +1,12 @@
+### Root Cause
+In [sympy/core/add.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L566), `Add._eval_is_zero` incorrectly assumed that if there were imaginary terms (`im = True`) without `im_or_z` terms and the real part `b` was zero (`b.is_zero`), the sum of imaginary terms could not evaluate to `0`, causing it to return `False`. However, when multiple imaginary terms are present (e.g. `-2*I` and `(1 + I)**2`), their sum can cancel out to 0.
+
+### Fix
+- Updated [Add._eval_is_zero](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L561) to collect imaginary terms into `im_I` (scaled by `S.ImaginaryUnit` so that they form real expressions).
+- Evaluated `b = self.func(*nz)` (real part) and `c = self.func(*im_I)` (imaginary part scaled by $I$), returning `fuzzy_and([b.is_zero, c.is_zero])`. This ensures an expression is zero if and only if both its real and imaginary parts evaluate to zero.
+- Added tests in [sympy/core/tests/test_arit.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/tests/test_arit.py#L1985-L1989) and [sympy/matrices/tests/test_matrices.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/matrices/tests/test_matrices.py#L2792-L2800).
+
+### Verification
+- Verified `(-2*I + (1 + I)**2).is_zero` evaluates to `True`.
+- Verified `Matrix([-2*I + (1 + I)**2]).rank()` evaluates to `0`.
+- All tests in `test_arit.py` and `test_matrices.py` pass cleanly.

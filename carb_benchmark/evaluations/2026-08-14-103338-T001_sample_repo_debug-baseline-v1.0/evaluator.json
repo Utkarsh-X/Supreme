@@ -1,0 +1,29 @@
+{
+  "run_id": "2026-08-14-103338-T001_sample_repo_debug-baseline-v1.0",
+  "task_id": "C_SWE_053",
+  "configuration_id": "baseline-v1.0",
+  "model": "gemini-3.7-flash",
+  "layer_1_functional_correctness": {
+    "passed": false,
+    "verification_status": "FAIL"
+  },
+  "layer_2_regression_safety": {
+    "existing_tests_passed": false,
+    "regressions_detected": 1
+  },
+  "layer_3_engineering_quality": {
+    "files_modified_count": 0,
+    "total_lines_changed": 0,
+    "hunks_count": 0,
+    "surgical_editing_score": 4
+  },
+  "layer_4_behavioral_trajectory": {
+    "investigation": 1,
+    "planning": 1,
+    "verification": 1,
+    "completion_discipline": 1
+  },
+  "failure_taxonomy_codes": [
+    "F03_wrong_diagnosis"
+  ]
+}

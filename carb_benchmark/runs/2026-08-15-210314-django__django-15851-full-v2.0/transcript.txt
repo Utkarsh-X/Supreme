@@ -1,0 +1,11 @@
+I have updated PostgreSQL's `DatabaseClient.settings_to_cmd_args_env` to place additional command-line parameters before the database name parameter when constructing `psql` command arguments.
+
+### Changes Made
+1. **[django/db/backends/postgresql/client.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/django/db/backends/postgresql/client.py#L32-L36)**:
+   - Moved `args.extend(parameters)` before `if dbname: args += [dbname]` so options (e.g. `-c "select..."`) are placed prior to the positional `dbname` argument as required by `psql`.
+
+2. **[tests/dbshell/test_postgresql.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/tests/dbshell/test_postgresql.py#L154-L167)**:
+   - Updated `test_parameters` to verify that extra arguments are positioned before `dbname`.
+
+### Verification
+Ran `python tests/runtests.py dbshell` and `python tests/runtests.py backends --parallel=1`. All unit tests passed cleanly.

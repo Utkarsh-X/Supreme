@@ -1,0 +1,10 @@
+{
+  "run_id": "2026-08-14-190528-T001_sample_repo_debug-full-v1.0",
+  "task_id": "C_SWE_079",
+  "configuration_id": "full-v1.0",
+  "model": "gemini-3.7-flash",
+  "tokens_used": 0,
+  "wall_clock_seconds": 0.59,
+  "passed": false,
+  "lines_changed": 0
+}

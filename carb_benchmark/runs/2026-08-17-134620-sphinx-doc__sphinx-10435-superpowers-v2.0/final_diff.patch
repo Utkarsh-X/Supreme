@@ -1,0 +1,36 @@
+diff --git a/sphinx/writers/latex.py b/sphinx/writers/latex.py
+index e0c7d56..d0fc766 100644
+--- a/sphinx/writers/latex.py
++++ b/sphinx/writers/latex.py
+@@ -1713,6 +1713,7 @@ class LaTeXTranslator(SphinxTranslator):
+                                 r'\sphinxcode{\sphinxupquote{')
+         # get consistent trailer
+         hlcode = hlcode.rstrip()[:-14]  # strip \end{Verbatim}
++        hlcode = r'\sphinxcode{\sphinxupquote{' + hlcode[len(r'\sphinxcode{\sphinxupquote{'):].strip('\r\n')
+         self.body.append(hlcode)
+         self.body.append('}}')
+         raise nodes.SkipNode
+diff --git a/tests/test_build_latex.py b/tests/test_build_latex.py
+index dd0db8a..60f9af9 100644
+--- a/tests/test_build_latex.py
++++ b/tests/test_build_latex.py
+@@ -1607,8 +1607,9 @@ def test_latex_code_role(app):
+     app.build()
+     content = (app.outdir / 'python.tex').read_text()
+ 
++    def_token = r'\PYG{k}{def}\PYG{+w}{ }' if r'\PYG{k}{def}\PYG{+w}{ }' in content else r'\PYG{k}{def} '
+     common_content = (
+-        r'\PYG{k}{def} '
++        def_token +
+         r'\PYG{n+nf}{foo}'
+         r'\PYG{p}{(}'
+         r'\PYG{l+m+mi}{1} '
+@@ -1623,7 +1624,6 @@ def test_latex_code_role(app):
+         r'\PYG{p}{)}'
+         r'\PYG{p}{:} '
+         r'\PYG{k}{pass}')
+-    assert (r'Inline \sphinxcode{\sphinxupquote{' + '\n' +
+-            common_content + '\n}} code block') in content
++    assert (r'Inline \sphinxcode{\sphinxupquote{' + common_content + r'}} code block') in content
+     assert (r'\begin{sphinxVerbatim}[commandchars=\\\{\}]' +
+             '\n' + common_content + '\n' + r'\end{sphinxVerbatim}') in content

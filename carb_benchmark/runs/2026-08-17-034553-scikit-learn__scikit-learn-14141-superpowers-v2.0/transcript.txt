@@ -1,0 +1,10 @@
+### Summary of Changes
+
+1. **Added `joblib` dependency to `show_versions`**:
+   - Added `"joblib"` to the list of dependencies in `_get_deps_info()` inside [`sklearn/utils/_show_versions.py`](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/_show_versions.py#L42-L53).
+
+2. **Updated Unit Tests**:
+   - Added `assert 'joblib' in deps_info` to `test_get_deps_info()` in [`sklearn/utils/tests/test_show_versions.py`](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/tests/test_show_versions.py#L15-L27).
+
+3. **Documentation**:
+   - Documented the enhancement in release notes [`doc/whats_new/v0.22.rst`](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/doc/whats_new/v0.22.rst#L125-L130).

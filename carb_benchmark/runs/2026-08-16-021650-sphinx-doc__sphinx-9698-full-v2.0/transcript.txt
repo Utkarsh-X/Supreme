@@ -1,0 +1,10 @@
+I have resolved the issue where index entries for `py:method` directives with the `:property:` option included parentheses `()`.
+
+### Cause
+In [sphinx/domains/python.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/sphinx/domains/python.py#L798-L799), `PyMethod.get_index_text` was generating index entries with `_('%s() (%s property)') % (methname, clsname)`. Unlike standard methods, properties are accessed as attributes without argument lists and should not include `()` in their index entries.
+
+### Solution
+1. Updated `PyMethod.get_index_text` in [sphinx/domains/python.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/sphinx/domains/python.py#L784-L804) so that when `'property'` is in `self.options`, the generated index entry text omits parentheses `()`, matching the behavior of `PyProperty`.
+2. Updated index entry assertions in [tests/test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/tests/test_domain_py.py#L759) to verify that `py:method` with `:property:` registers `meth5 (Class property)` without parens.
+All domain tests (`test_domain_py.py`, `test_domain_c.py`, `test_domain_cpp.py`, `test_domain_js.py`, `test_domain_rst.py`) have finished running and passed cleanly (122 passed).
+All tests relevant to the Python domain and directive index entry generation (`tests/test_domain_py.py`) are passing. The task is complete.

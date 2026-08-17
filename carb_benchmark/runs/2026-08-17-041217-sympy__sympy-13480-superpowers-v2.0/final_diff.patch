@@ -1,0 +1,139 @@
+diff --git a/sympy/assumptions/sathandlers.py b/sympy/assumptions/sathandlers.py
+index 61d62d0..6723e56 100644
+--- a/sympy/assumptions/sathandlers.py
++++ b/sympy/assumptions/sathandlers.py
+@@ -1,6 +1,10 @@
+ from __future__ import print_function, division
+ 
+-from collections import MutableMapping, defaultdict
++try:
++    from collections.abc import MutableMapping
++except ImportError:
++    from collections import MutableMapping
++from collections import defaultdict
+ 
+ from sympy.core import (Add, Mul, Pow, Integer, Number, NumberSymbol,)
+ from sympy.core.numbers import ImaginaryUnit
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index 6b24e21..879cfc9 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,6 +1,10 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++try:
++    from collections.abc import Mapping
++except ImportError:
++    from collections import Mapping
++from collections import defaultdict
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+diff --git a/sympy/core/containers.py b/sympy/core/containers.py
+index 15abd93..b9336c5 100644
+--- a/sympy/core/containers.py
++++ b/sympy/core/containers.py
+@@ -14,6 +14,10 @@
+ from sympy.utilities.iterables import iterable
+ 
+ import collections
++try:
++    import collections.abc as collections_abc
++except ImportError:
++    collections_abc = collections
+ 
+ 
+ class Tuple(Basic):
+@@ -268,7 +272,7 @@ def _sorted_args(self):
+         return tuple(sorted(self.args, key=default_sort_key))
+ 
+ 
+-class OrderedSet(collections.MutableSet):
++class OrderedSet(collections_abc.MutableSet):
+     def __init__(self, iterable=None):
+         if iterable:
+             self.map = collections.OrderedDict((item, None) for item in iterable)
+diff --git a/sympy/functions/elementary/hyperbolic.py b/sympy/functions/elementary/hyperbolic.py
+index 2a4555d..5fbb73c 100644
+--- a/sympy/functions/elementary/hyperbolic.py
++++ b/sympy/functions/elementary/hyperbolic.py
+@@ -587,7 +587,7 @@ def eval(cls, arg):
+                 x, m = _peeloff_ipi(arg)
+                 if m:
+                     cothm = coth(m)
+-                    if cotm is S.ComplexInfinity:
++                    if cothm is S.ComplexInfinity:
+                         return coth(x)
+                     else: # cothm == 0
+                         return tanh(x)
+diff --git a/sympy/functions/elementary/tests/test_hyperbolic.py b/sympy/functions/elementary/tests/test_hyperbolic.py
+index dd9ebd7..d586b97 100644
+--- a/sympy/functions/elementary/tests/test_hyperbolic.py
++++ b/sympy/functions/elementary/tests/test_hyperbolic.py
+@@ -270,7 +270,9 @@ def test_coth():
+     assert coth(k*pi*I) == -cot(k*pi)*I
+     assert coth(17*k*pi*I) == -cot(17*k*pi)*I
+ 
+-    assert coth(k*pi*I) == -cot(k*pi)*I
++    e = coth(log(tan(x)))
++    assert e.subs(x, 2) == coth(log(-tan(2)))
++    assert e.subs(x, 3) == coth(log(-tan(3)))
+ 
+ 
+ def test_coth_series():
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 88ed86f..02ab754 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -2041,7 +2041,7 @@ def _handle_creation_inputs(cls, *args, **kwargs):
+                                  "Both dimensions must be positive".format(rows, cols))
+ 
+             # Matrix(2, 2, lambda i, j: i+j)
+-            if len(args) == 3 and isinstance(args[2], collections.Callable):
++            if len(args) == 3 and callable(args[2]):
+                 op = args[2]
+                 flat_list = []
+                 for i in range(rows):
+diff --git a/sympy/matrices/sparse.py b/sympy/matrices/sparse.py
+index 7701cbc..8e577c8 100644
+--- a/sympy/matrices/sparse.py
++++ b/sympy/matrices/sparse.py
+@@ -53,7 +53,7 @@ def __new__(cls, *args, **kwargs):
+             self.rows = as_int(args[0])
+             self.cols = as_int(args[1])
+ 
+-            if isinstance(args[2], collections.Callable):
++            if callable(args[2]):
+                 op = args[2]
+                 for i in range(self.rows):
+                     for j in range(self.cols):
+diff --git a/sympy/plotting/plot.py b/sympy/plotting/plot.py
+index b3b0237..70b11b0 100644
+--- a/sympy/plotting/plot.py
++++ b/sympy/plotting/plot.py
+@@ -25,7 +25,10 @@
+ from __future__ import print_function, division
+ 
+ import inspect
+-from collections import Callable
++try:
++    from collections.abc import Callable
++except ImportError:
++    from collections import Callable
+ import warnings
+ import sys
+ 
+diff --git a/sympy/vector/coordsysrect.py b/sympy/vector/coordsysrect.py
+index 30f0d3c..7f13c88 100644
+--- a/sympy/vector/coordsysrect.py
++++ b/sympy/vector/coordsysrect.py
+@@ -84,7 +84,7 @@ def __new__(cls, name, transformation=None, parent=None, location=None,
+                 else:
+                     transformation = Lambda(transformation[0],
+                                             transformation[1])
+-            elif isinstance(transformation, collections.Callable):
++            elif callable(transformation):
+                 x1, x2, x3 = symbols('x1 x2 x3', cls=Dummy)
+                 transformation = Lambda((x1, x2, x3),
+                                         transformation(x1, x2, x3))

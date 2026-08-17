@@ -1,0 +1,5 @@
+The solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc387_b/main.py).
+
+### Summary of Work
+- **Implementation**: Written a Python 3 solution in `main.py` that reads the integer `X` from standard input, iterates over all 81 pairs \((i, j)\) where \(1 \le i, j \le 9\), and sums the values \(i \times j\) that do not equal `X`.
+- **Verification**: Tested against all provided sample inputs (1, 11, and 24) and verified that outputs match `2024`, `2025`, and `1929` respectively.

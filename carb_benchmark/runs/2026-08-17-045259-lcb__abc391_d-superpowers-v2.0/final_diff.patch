@@ -1,0 +1,52 @@
+diff --git a/main.py b/main.py
+index c86f6c8..53af78d 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,46 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    W = int(next(iterator))
++    
++    cols = [[] for _ in range(W + 1)]
++    block_rank = [0] * N
++    
++    for i in range(N):
++        x = int(next(iterator))
++        y = int(next(iterator))
++        cols[x].append((y, i))
++        
++    for x in range(1, W + 1):
++        cols[x].sort()
++        for r, (y, idx) in enumerate(cols[x]):
++            block_rank[idx] = r + 1
++            
++    K_max = min(len(cols[x]) for x in range(1, W + 1))
++    
++    E = [0] * (K_max + 1)
++    for k in range(1, K_max + 1):
++        max_y = max(cols[x][k - 1][0] for x in range(1, W + 1))
++        E[k] = max(max_y, E[k - 1] + 1)
++        
++    Q = int(next(iterator))
++    out = []
++    for _ in range(Q):
++        T = int(next(iterator))
++        A = int(next(iterator)) - 1
++        rk = block_rank[A]
++        if rk > K_max or T < E[rk]:
++            out.append("Yes")
++        else:
++            out.append("No")
++            
++    print('\n'.join(out))
++
++if __name__ == '__main__':
++    main()

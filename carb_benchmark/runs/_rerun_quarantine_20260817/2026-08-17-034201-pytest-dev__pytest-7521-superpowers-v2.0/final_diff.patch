@@ -1,0 +1,43 @@
+diff --git a/src/_pytest/assertion/rewrite.py b/src/_pytest/assertion/rewrite.py
+index e77b1b0..5a16c47 100644
+--- a/src/_pytest/assertion/rewrite.py
++++ b/src/_pytest/assertion/rewrite.py
+@@ -357,6 +357,7 @@ def _rewrite_test(fn: Path, config: Config) -> Tuple[os.stat_result, types.CodeT
+         source = f.read()
+     tree = ast.parse(source, filename=fn_)
+     rewrite_asserts(tree, source, fn_, config)
++    ast.fix_missing_locations(tree)
+     co = compile(tree, fn_, "exec", dont_inherit=True)
+     return stat, co
+ 
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 3f9c60f..f538b67 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -388,6 +388,7 @@ class FDCaptureBinary:
+                 TemporaryFile(buffering=0),  # type: ignore[arg-type]
+                 encoding="utf-8",
+                 errors="replace",
++                newline="",
+                 write_through=True,
+             )
+             if targetfd in patchsysdict:
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index a3bd4b6..9332937 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1034,6 +1034,14 @@ class TestStdCapture:
+             out, err = cap.readouterr()
+         assert out == "hxÄ…Ä‡\n"
+ 
++    def test_capturing_carriage_return(self):
++        with self.getcapture() as cap:
++            sys.stdout.write("hello\rworld\r\n")
++            sys.stderr.write("error\r")
++            out, err = cap.readouterr()
++        assert out == "hello\rworld\r\n"
++        assert err == "error\r"
++
+     def test_reset_twice_error(self):
+         with self.getcapture() as cap:
+             print("hello")

@@ -1,0 +1,20 @@
+An $O(N)$ dynamic programming solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_a/main.py).
+
+### Method Explanation
+1. **Operation Structure Analysis**:
+   - Each operation at index $i \in [1, N]$ is either a `Push` (appends $A_i$ to $S$) or a `Pop` (deletes top element of $S$).
+   - Any `Pop` at step $j$ pops the top of stack, which was pushed at some $i < j$. Because a stack is LIFO, matched push-pop pairs form valid balanced parenthesis subsegments of even length $2m \ge 2$, contributing a net sum of 0 to $S$.
+   - Any `Push` not popped by a later `Pop` remains in $S$ at the end and contributes $+A_k$ to the final sum.
+   - Therefore, the problem reduces to partitioning $A[1 \dots N]$ into:
+     - Single elements $A_k$ (which stay in $S$, contributing $A_k$).
+     - Contiguous even-length blocks (which are popped, contributing 0).
+
+2. **Dynamic Programming**:
+   - Let $dp[i]$ be the maximum possible sum on prefix $A[1 \dots i]$.
+   - For step $i$:
+     - **Option 1** (Single element): $dp[i] = dp[i-1] + A_i$.
+     - **Option 2** (End of even-length block): $dp[i] = \max_{k \le i-2, (i-k) \text{ is even}} dp[k]$.
+   - By maintaining running maximums `max_even` and `max_odd` for even/odd prefixes, each step $i$ is computed in $O(1)$ time and $O(N)$ space.
+
+### Verification
+The implementation was verified against all sample test cases and 1000 randomized test cases against a brute-force recursive solver.

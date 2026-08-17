@@ -1,0 +1,15 @@
+### Root Cause Analysis
+When executing `Model.objects.all().delete()`, `SQLDeleteCompiler.single_alias` is checked to determine whether a simple `DELETE FROM table` query can be generated or if a subquery is required (`DELETE FROM table WHERE id IN (SELECT id FROM table)`).
+
+In `SQLDeleteCompiler.single_alias`:
+```python
+sum(self.query.alias_refcount[t] > 0 for t in self.query.alias_map) == 1
+```
+For a newly cloned deletion query without prior filtering or joins, `self.query.alias_map` and `self.query.alias_refcount` are empty (`{}`). When `single_alias` evaluated, `sum(...)` returned `0`, evaluating to `False`, which got cached by `@cached_property`. As a result, `SQLDeleteCompiler.as_sql()` fell back to generating a subquery `DELETE FROM ... WHERE id IN (SELECT id FROM ...)`.
+
+### Solution
+In `django/db/models/sql/compiler.py`, updated `SQLDeleteCompiler.single_alias` to invoke `self.query.get_initial_alias()` before checking table counts, ensuring `self.query.alias_map` is properly initialized with the base table alias (matching the pattern used in `SQLUpdateCompiler`).
+
+### Summary of Changes
+- Updated `SQLDeleteCompiler.single_alias` in [`django/db/models/sql/compiler.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/django/db/models/sql/compiler.py#L1407-L1412) to call `self.query.get_initial_alias()`.
+- Added test case `test_fast_delete_all` in [`tests/delete/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/tests/delete/tests.py#L707-L713).

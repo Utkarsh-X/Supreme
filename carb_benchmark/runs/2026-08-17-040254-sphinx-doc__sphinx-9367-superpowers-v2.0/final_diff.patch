@@ -1,0 +1,49 @@
+diff --git a/sphinx/pycode/ast.py b/sphinx/pycode/ast.py
+index f541ec0..960da27 100644
+--- a/sphinx/pycode/ast.py
++++ b/sphinx/pycode/ast.py
+@@ -201,10 +201,16 @@ class _UnparseVisitor(ast.NodeVisitor):
+             )
+ 
+         if is_simple_tuple(node.slice):
+-            elts = ", ".join(self.visit(e) for e in node.slice.elts)  # type: ignore
++            if len(node.slice.elts) == 1:
++                elts = self.visit(node.slice.elts[0]) + ","
++            else:
++                elts = ", ".join(self.visit(e) for e in node.slice.elts)  # type: ignore
+             return "%s[%s]" % (self.visit(node.value), elts)
+         elif isinstance(node.slice, ast.Index) and is_simple_tuple(node.slice.value):
+-            elts = ", ".join(self.visit(e) for e in node.slice.value.elts)  # type: ignore
++            if len(node.slice.value.elts) == 1:
++                elts = self.visit(node.slice.value.elts[0]) + ","
++            else:
++                elts = ", ".join(self.visit(e) for e in node.slice.value.elts)  # type: ignore
+             return "%s[%s]" % (self.visit(node.value), elts)
+         else:
+             return "%s[%s]" % (self.visit(node.value), self.visit(node.slice))
+@@ -214,7 +220,10 @@ class _UnparseVisitor(ast.NodeVisitor):
+ 
+     def visit_Tuple(self, node: ast.Tuple) -> str:
+         if node.elts:
+-            return "(" + ", ".join(self.visit(e) for e in node.elts) + ")"
++            if len(node.elts) == 1:
++                return "(" + self.visit(node.elts[0]) + ",)"
++            else:
++                return "(" + ", ".join(self.visit(e) for e in node.elts) + ")"
+         else:
+             return "()"
+ 
+diff --git a/tests/test_pycode_ast.py b/tests/test_pycode_ast.py
+index e800623..6d5d0b1 100644
+--- a/tests/test_pycode_ast.py
++++ b/tests/test_pycode_ast.py
+@@ -53,7 +53,8 @@ from sphinx.pycode import ast
+     ("+ a", "+ a"),                             # UAdd
+     ("- 1", "- 1"),                             # UnaryOp
+     ("- a", "- a"),                             # USub
+-    ("(1, 2, 3)", "(1, 2, 3)"),                   # Tuple
++    ("(1, 2, 3)", "(1, 2, 3)"),                 # Tuple
++    ("(1,)", "(1,)"),                           # Tuple (single element)
+     ("()", "()"),                               # Tuple (empty)
+ ])
+ def test_unparse(source, expected):

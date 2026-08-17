@@ -1,0 +1,13 @@
+Wait for test execution to complete.
+Wait for pytest to finish.
+Wait for pytest to finish.
+Wait for tests to complete.
+I have resolved the issue where an empty `__all__ = []` attribute was ignored in `autodoc`.
+
+### Root Cause
+In [`sphinx/ext/autodoc/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1077), `ModuleDocumenter.get_object_members` evaluated `self.__all__` using truthiness (`if not self.__all__:`). When a module defined an empty `__all__ = []`, `not self.__all__` evaluated to `True`, causing Sphinx autodoc to treat the empty list as if `__all__` were `None` (undocumented/absent), thereby documenting all module members instead of skipping them.
+
+### Fix
+- Updated [`sphinx/ext/autodoc/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1077) to explicitly check `if self.__all__ is None:` in `ModuleDocumenter.get_object_members`. If `self.__all__` is an empty list (`[]`), it proceeds to the member filtering step where non-listed module members are skipped.
+- Updated `ModuleDocumenter.sort_members` to check `if order == 'bysource' and self.__all__ is not None:` so empty `__all__` lists are handled consistently.
+- Added a unit test [`test_autodoc_empty_all`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/test_ext_autodoc.py#L742) in [`tests/test_ext_autodoc.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/test_ext_autodoc.py) along with target module [`tests/roots/test-ext-autodoc/target/empty_all.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/roots/test-ext-autodoc/target/empty_all.py).

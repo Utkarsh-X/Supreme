@@ -1,0 +1,86 @@
+diff --git a/src/_pytest/assertion/rewrite.py b/src/_pytest/assertion/rewrite.py
+index 2903b89..a9d3b9f 100644
+--- a/src/_pytest/assertion/rewrite.py
++++ b/src/_pytest/assertion/rewrite.py
+@@ -669,10 +669,16 @@ class AssertionRewriter(ast.NodeVisitor):
+             return
+         # Insert some special imports at the top of the module but after any
+         # docstrings and __future__ imports.
+-        aliases = [
+-            ast.alias(six.moves.builtins.__name__, "@py_builtins"),
+-            ast.alias("_pytest.assertion.rewrite", "@pytest_ar"),
+-        ]
++        if sys.version_info >= (3, 10):
++            aliases = [
++                ast.alias(six.moves.builtins.__name__, "@py_builtins", lineno=1, col_offset=0),
++                ast.alias("_pytest.assertion.rewrite", "@pytest_ar", lineno=1, col_offset=0),
++            ]
++        else:
++            aliases = [
++                ast.alias(six.moves.builtins.__name__, "@py_builtins"),
++                ast.alias("_pytest.assertion.rewrite", "@pytest_ar"),
++            ]
+         doc = getattr(mod, "docstring", None)
+         expect_docstring = doc is None
+         if doc is not None and self.is_rewrite_disabled(doc):
+@@ -699,9 +705,13 @@ class AssertionRewriter(ast.NodeVisitor):
+             pos += 1
+         else:
+             lineno = item.lineno
+-        imports = [
+-            ast.Import([alias], lineno=lineno, col_offset=0) for alias in aliases
+-        ]
++        imports = []
++        for alias in aliases:
++            imp = ast.Import([alias], lineno=lineno, col_offset=0)
++            if hasattr(alias, "lineno"):
++                alias.lineno = lineno
++                alias.col_offset = 0
++            imports.append(imp)
+         mod.body[pos:pos] = imports
+         # Collect asserts.
+         nodes = [mod]
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 25eab7f..8ba752c 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -447,6 +447,14 @@ class EncodedFile(object):
+         """Ensure that file.name is a string."""
+         return repr(self.buffer)
+ 
++    @property
++    def mode(self):
++        """Ensure that file.mode does not contain 'b'."""
++        mode = getattr(self.buffer, "mode", None)
++        if mode is not None:
++            return mode.replace("b", "")
++        return mode
++
+     def __getattr__(self, name):
+         return getattr(object.__getattribute__(self, "buffer"), name)
+ 
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index 5d80eb6..46026e3 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1461,6 +1461,20 @@ def test_pickling_and_unpickling_encoded_file():
+     pickle.loads(ef_as_str)
+ 
+ 
++def test_encodedfile_mode():
++    class DummyBuffer(object):
++        def __init__(self, mode):
++            self.mode = mode
++
++    assert capture.EncodedFile(DummyBuffer("rb+"), "utf-8").mode == "r+"
++    assert capture.EncodedFile(DummyBuffer("wb+"), "utf-8").mode == "w+"
++    assert capture.EncodedFile(DummyBuffer("w+b"), "utf-8").mode == "w+"
++    assert capture.EncodedFile(DummyBuffer("rb"), "utf-8").mode == "r"
++    assert capture.EncodedFile(DummyBuffer("wb"), "utf-8").mode == "w"
++    assert capture.EncodedFile(DummyBuffer("r"), "utf-8").mode == "r"
++    assert capture.EncodedFile(None, "utf-8").mode is None
++
++
+ def test_global_capture_with_live_logging(testdir):
+     # Issue 3819
+     # capture should work with live cli logging

@@ -1,0 +1,60 @@
+diff --git a/sympy/core/add.py b/sympy/core/add.py
+index 83a5f2a..f539f6f 100644
+--- a/sympy/core/add.py
++++ b/sympy/core/add.py
+@@ -536,8 +536,7 @@ def _eval_is_zero(self):
+             return
+         nz = []
+         z = 0
+-        im_or_z = False
+-        im = False
++        im_I = []
+         for a in self.args:
+             if a.is_real:
+                 if a.is_zero:
+@@ -546,10 +545,8 @@ def _eval_is_zero(self):
+                     nz.append(a)
+                 else:
+                     return
+-            elif a.is_imaginary:
+-                im = True
+-            elif (S.ImaginaryUnit*a).is_real:
+-                im_or_z = True
++            elif a.is_imaginary or (S.ImaginaryUnit*a).is_real:
++                im_I.append(a*S.ImaginaryUnit)
+             else:
+                 return
+         if z == len(self.args):
+@@ -557,13 +554,13 @@ def _eval_is_zero(self):
+         if len(nz) == len(self.args):
+             return None
+         b = self.func(*nz)
+-        if b.is_zero:
+-            if not im_or_z and not im:
+-                return True
+-            if im and not im_or_z:
+-                return False
+         if b.is_zero is False:
+             return False
++        c = self.func(*im_I)
++        if c.is_zero is False:
++            return False
++        if b.is_zero and c.is_zero:
++            return True
+ 
+     def _eval_is_odd(self):
+         l = [f for f in self.args if not (f.is_even is True)]
+diff --git a/sympy/core/tests/test_assumptions.py b/sympy/core/tests/test_assumptions.py
+index 4d174ad..48c3550 100644
+--- a/sympy/core/tests/test_assumptions.py
++++ b/sympy/core/tests/test_assumptions.py
+@@ -1026,3 +1026,9 @@ def test_issue_10302():
+ 
+ def test_complex_reciprocal_imaginary():
+     assert (1 / (4 + 3*I)).is_imaginary is False
++
++
++def test_issue_15873():
++    e = -2*I + (1 + I)**2
++    assert e.is_zero is True
++

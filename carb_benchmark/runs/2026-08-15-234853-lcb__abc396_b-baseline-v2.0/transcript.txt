@@ -1,0 +1,8 @@
+I have implemented the Python solution for the card stack queries problem in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_b/main.py).
+
+### Summary of Implementation
+- **Initial State**: Created a list `stack = [0] * 100` representing 100 cards labeled `0` stacked from bottom to top.
+- **Query Processing**:
+  - **Type 1 (`1 x`)**: Pushes `x` onto the stack using `stack.append(x)`.
+  - **Type 2 (`2`)**: Removes and outputs the top element using `stack.pop()`.
+- **Input/Output Handling**: Fast I/O using `sys.stdin.read()` to process all input tokens sequentially and print results line-by-line.

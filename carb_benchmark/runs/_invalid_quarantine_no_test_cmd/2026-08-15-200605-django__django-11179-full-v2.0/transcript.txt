@@ -1,0 +1,12 @@
+I have identified and resolved the issue where calling `.delete()` on instances of models without any dependencies (fast delete path) failed to set the model instance's primary key (`pk`) to `None`.
+
+### Cause
+In `django/db/models/deletion.py`, `Collector.delete()` optimizes for single objects with no dependencies via `can_fast_delete(instance)`. While standard deletions cleared primary key attributes on instances via `setattr(instance, model._meta.pk.attname, None)` at the end of the collection processing, the fast-delete optimization returned early without performing this update.
+
+### Solution
+1. In [django/db/models/deletion.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/django/db/models/deletion.py#L277-L282), added `setattr(instance, model._meta.pk.attname, None)` immediately after executing `DeleteQuery` in the fast-delete path before returning.
+2. In [tests/delete/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/tests/delete/tests.py#L526-L530), added unit test `test_fast_delete_instance_set_pk_none` verifying that deleting a standalone model instance sets its primary key to `None`.
+
+### Verification
+- Verified that `test_fast_delete_instance_set_pk_none` failed prior to the fix (`AssertionError: 1 is not None`).
+- Verified that after the fix, `test_fast_delete_instance_set_pk_none`, all 42 tests in `delete.tests`, and `delete_regress.tests` passed cleanly.

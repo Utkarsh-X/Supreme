@@ -1,0 +1,26 @@
+run_id: 2026-08-14-012803-T001_sample_repo_debug-full-v1.0
+task_id: T001_sample_repo_debug
+configuration_id: full-v1.0
+status: SUCCESS
+started_at: '2026-08-14T01:28:03.246257'
+finished_at: '2026-08-14T01:28:03.448923'
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash
+  temperature: 0.0
+environment:
+  os: Windows-10-10.0.26200-SP0
+  python_version: 3.11.9
+  ide: Antigravity IDE Agent
+  isolation_mode: non_adversarial_cooperative
+provenance_hashes:
+  configuration_hash: 8ef25fbfc184ee2c1fc6e78be2cef2f26abd46f40a934a37dd2786b97fd6c88c
+  prompt_hash: 13a8872addcfdc20ea42408faf1b408b91712dc8cda04e4f288068769df6f0c0
+  snapshot_hash: cafc60c3142dd5374fd3011650fac99acd6a3f1413427b06e937077ea80fad50
+artifacts:
+  transcript_file: null
+  diff_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-14-012803-T001_sample_repo_debug-full-v1.0\final_diff.patch
+  evaluator_output: null
+resource_metrics:
+  tool_iterations: 0
+  wall_clock_seconds: 0.2

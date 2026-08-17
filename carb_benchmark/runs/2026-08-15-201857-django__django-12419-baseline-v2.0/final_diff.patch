@@ -1,0 +1,103 @@
+diff --git a/django/conf/global_settings.py b/django/conf/global_settings.py
+index 09c9b95..8bb59a4 100644
+--- a/django/conf/global_settings.py
++++ b/django/conf/global_settings.py
+@@ -637,6 +637,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+ SECURE_HSTS_PRELOAD = False
+ SECURE_HSTS_SECONDS = 0
+ SECURE_REDIRECT_EXEMPT = []
+-SECURE_REFERRER_POLICY = None
++SECURE_REFERRER_POLICY = 'same-origin'
+ SECURE_SSL_HOST = None
+ SECURE_SSL_REDIRECT = False
+diff --git a/docs/ref/settings.txt b/docs/ref/settings.txt
+index b4a5bdc..4c5eb3f 100644
+--- a/docs/ref/settings.txt
++++ b/docs/ref/settings.txt
+@@ -2395,12 +2395,16 @@ from URL paths, so patterns shouldn't include them, e.g.
+ 
+ .. versionadded:: 3.0
+ 
+-Default: ``None``
++Default: ``'same-origin'``
+ 
+ If configured, the :class:`~django.middleware.security.SecurityMiddleware` sets
+ the :ref:`referrer-policy` header on all responses that do not already have it
+ to the value provided.
+ 
++.. versionchanged:: 3.1
++
++    In older versions, the default value was ``None``.
++
+ .. setting:: SECURE_SSL_HOST
+ 
+ ``SECURE_SSL_HOST``
+diff --git a/docs/releases/3.1.txt b/docs/releases/3.1.txt
+index 4a16515..32efc3a 100644
+--- a/docs/releases/3.1.txt
++++ b/docs/releases/3.1.txt
+@@ -285,6 +285,12 @@ Requests and Responses
+ * The new :meth:`.HttpRequest.accepts` method returns whether the request
+   accepts the given MIME type according to the ``Accept`` HTTP header.
+ 
++Security
++~~~~~~~~
++
++* The :setting:`SECURE_REFERRER_POLICY` setting now defaults to
++  ``'same-origin'``. See :ref:`backwards-incompatible-3.1` for details.
++
+ Serialization
+ ~~~~~~~~~~~~~
+ 
+@@ -373,6 +379,18 @@ backends.
+   on databases that support time zones. Previously, it was ``None`` on
+   databases that support time zones.
+ 
++Security
++--------
++
++* :setting:`SECURE_REFERRER_POLICY` now defaults to ``'same-origin'``. With
++  this enabled, :class:`~django.middleware.security.SecurityMiddleware` sets
++  the :ref:`Referrer-Policy <referrer-policy>` header to ``same-origin`` on all
++  responses that do not already have it.
++
++  If your application requires a different value for the ``Referrer-Policy``
++  header, or if you wish to disable sending this header altogether, set
++  :setting:`SECURE_REFERRER_POLICY` to the desired value or ``None``.
++
+ Dropped support for MariaDB 10.1
+ --------------------------------
+ 
+diff --git a/tests/check_framework/test_security.py b/tests/check_framework/test_security.py
+index 4c1869d..0554de9 100644
+--- a/tests/check_framework/test_security.py
++++ b/tests/check_framework/test_security.py
+@@ -526,6 +526,10 @@ class CheckReferrerPolicyTest(SimpleTestCase):
+         """
+         self.assertEqual(self.func(None), [])
+ 
++    @override_settings(MIDDLEWARE=['django.middleware.security.SecurityMiddleware'])
++    def test_referrer_policy_default(self):
++        self.assertEqual(self.func(None), [])
++
+     @override_settings(MIDDLEWARE=['django.middleware.security.SecurityMiddleware'])
+     def test_with_referrer_policy(self):
+         tests = (
+diff --git a/tests/middleware/test_security.py b/tests/middleware/test_security.py
+index 07b72fc..2b07b4b 100644
+--- a/tests/middleware/test_security.py
++++ b/tests/middleware/test_security.py
+@@ -223,6 +223,13 @@ class SecurityMiddlewareTest(SimpleTestCase):
+         ret = self.process_request("get", "/some/url")
+         self.assertIsNone(ret)
+ 
++    def test_referrer_policy_default(self):
++        """
++        By default, the middleware adds "Referrer-Policy: same-origin" header
++        to the response.
++        """
++        self.assertEqual(self.process_response()['Referrer-Policy'], 'same-origin')
++
+     @override_settings(SECURE_REFERRER_POLICY=None)
+     def test_referrer_policy_off(self):
+         """

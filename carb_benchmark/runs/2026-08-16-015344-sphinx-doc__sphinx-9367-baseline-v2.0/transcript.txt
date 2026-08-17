@@ -1,0 +1,9 @@
+I have resolved the issue where 1-element tuples were rendered without trailing commas (e.g. `(1,)` rendered as `(1)`).
+
+### Root Cause
+In [`sphinx/pycode/ast.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py#L215), `_UnparseVisitor.visit_Tuple` used `", ".join(...)` for any tuple with elements. For single-element tuples (`len(node.elts) == 1`), this produced `"(1)"` rather than preserving the trailing comma required by Python tuple syntax `"(1,)"`. Additionally, subscript tuple indexing with 1-element tuples in `visit_Subscript` was omitting trailing commas.
+
+### Fix
+1. Updated `visit_Tuple` in [`sphinx/pycode/ast.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py#L215-L224) to format single-element tuples as `"(" + self.visit(node.elts[0]) + ",)"`.
+2. Updated `visit_Subscript` in [`sphinx/pycode/ast.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/sphinx/pycode/ast.py#L203-L215) to format single-element tuple slices with a trailing comma (e.g., `a[1,]`).
+3. Added the requested unit test case `("(1,)", "(1,)")` in [`tests/test_pycode_ast.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9367/tests/test_pycode_ast.py#L57).

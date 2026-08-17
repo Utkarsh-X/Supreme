@@ -1,0 +1,15 @@
+I have implemented the solution for the problem in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc389_d/main.py).
+
+### Method Explanation
+1. A $1 \times 1$ square centered at $(i, j)$ has four corners: $(i \pm 0.5, j \pm 0.5)$. The maximum distance from the origin to any point inside this square is achieved at $(|i| + 0.5, |j| + 0.5)$.
+2. All four corners lie within distance $R$ from the origin if and only if:
+   $$(|i| + 0.5)^2 + (|j| + 0.5)^2 \le R^2 \iff (2|i| + 1)^2 + (2|j| + 1)^2 \le 4R^2$$
+3. Let $x = 2|i| + 1$ and $y = 2|j| + 1$, where $x, y$ are positive odd integers.
+4. Iterating over non-negative integers $i \ge 0$ ($x = 2i + 1$), we calculate the maximum odd positive integer $Y$ such that $Y^2 \le 4R^2 - x^2$.
+5. For a given $x$, the number of choices for $j$ turns out to be exactly $Y$. Accounting for symmetry ($i=0$ contributes $Y$, while $i > 0$ contributes $2Y$), we sum over all valid $i$.
+6. The algorithm runs in $O(R)$ time using `math.isqrt`, executing in $\approx 0.3$ seconds for the maximum constraint $R = 10^6$.
+
+### Verification
+- Sample 1 ($R=2$): Output `5` (Matches expected output)
+- Sample 2 ($R=4$): Output `37` (Matches expected output)
+- Sample 3 ($R=26$): Output `2025` (Matches expected output)

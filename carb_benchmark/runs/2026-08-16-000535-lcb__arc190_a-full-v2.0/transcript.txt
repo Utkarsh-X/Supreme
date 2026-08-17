@@ -1,0 +1,26 @@
+I have implemented the complete solution to the problem in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc190_a/main.py).
+
+### Method Explanation
+The problem asks for the minimum cost to make all $x_1, \ldots, x_N$ equal to $1$. 
+Each operation $i$ gives an interval $[L_i, R_i]$ with three choices:
+- Op 0: do nothing (cost 0)
+- Op 1: set $x_j = 1$ for all $j \in [L_i, R_i]$ (cost 1)
+- Op 2: set $x_j = 1$ for all $j \notin [L_i, R_i]$ (cost 1)
+
+Key mathematical insights:
+1. **At most two Op 2 operations are ever needed**: Any set $S_2$ of Op 2 operations leaves uncovered the intersection of their intervals $I(S_2) = \bigcap_{m \in S_2} [L_m, R_m]$. By interval properties, this intersection is determined entirely by the interval $u$ with the maximum $L_u$ and the interval $v$ with the minimum $R_v$. Thus, at most two Op 2 operations ($u$ and $v$) achieve the exact same coverage as any larger set of Op 2 operations.
+2. **Cost bounds**:
+   - **Cost 1**: Possible if there exists an interval $[L_i, R_i] = [1, N]$ used with Op 1.
+   - **Cost 2**: Possible if:
+     - Two Op 1 operations cover $[1, N]$ (i.e. $L_u = 1, R_v = N, R_u \ge L_v - 1$),
+     - One Op 2 and one Op 1 operation (where $[L_u, R_u] \subseteq [L_v, R_v]$),
+     - Two Op 2 operations on disjoint intervals ($R_u < L_v$).
+   - **Cost 3**: If $M \ge 3$ and Cost 1 or 2 are not achievable, picking $u = \arg\max L_i$, $v = \arg\min R_i$ for Op 2 and any third distinct interval $w$ for Op 1 guarantees complete coverage in 3 operations.
+   - **Cost -1**: Returned when $M < 3$ and neither Cost 1 nor Cost 2 is achievable.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(M \log M)$ due to interval sorting for containment check.
+- **Space Complexity**: $\mathcal{O}(M)$ to store the intervals.
+
+### Verification
+The implementation was verified against all provided sample test cases as well as extensive randomized stress tests against a brute-force solver.

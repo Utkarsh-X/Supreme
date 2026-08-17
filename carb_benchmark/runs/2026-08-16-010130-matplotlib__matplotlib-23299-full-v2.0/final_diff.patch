@@ -1,0 +1,38 @@
+diff --git a/lib/matplotlib/__init__.py b/lib/matplotlib/__init__.py
+index c268a56..e348a11 100644
+--- a/lib/matplotlib/__init__.py
++++ b/lib/matplotlib/__init__.py
+@@ -1088,6 +1088,7 @@ def rc_context(rc=None, fname=None):
+ 
+     """
+     orig = rcParams.copy()
++    dict.pop(orig, 'backend', None)
+     try:
+         if fname:
+             rc_file(fname)
+diff --git a/lib/matplotlib/tests/test_rcparams.py b/lib/matplotlib/tests/test_rcparams.py
+index 99856b3..33d490b 100644
+--- a/lib/matplotlib/tests/test_rcparams.py
++++ b/lib/matplotlib/tests/test_rcparams.py
+@@ -584,3 +584,21 @@ def test_deprecation(monkeypatch):
+     # Note that the warning suppression actually arises from the
+     # iteration over the updater rcParams being protected by
+     # suppress_matplotlib_deprecation_warning, rather than any explicit check.
++
++
++def test_rc_context_backend():
++    # Test that get_backend() after creating a figure in rc_context does not clear figures.
++    subprocess.check_call(
++        [sys.executable, "-c",
++         "import matplotlib.pyplot as plt\n"
++         "from matplotlib import get_backend, rc_context\n"
++         "with rc_context():\n"
++         "    fig = plt.figure()\n"
++         "before = len(plt._pylab_helpers.Gcf.figs)\n"
++         "get_backend()\n"
++         "after = len(plt._pylab_helpers.Gcf.figs)\n"
++         "assert before == after == 1\n"
++         ],
++        env={**os.environ, "PYTHONPATH": str(Path(mpl.__file__).parents[1])}
++    )
++

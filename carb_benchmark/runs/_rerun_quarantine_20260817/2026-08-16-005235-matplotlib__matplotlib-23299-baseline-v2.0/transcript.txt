@@ -1,0 +1,12 @@
+### Cause of the Bug
+When figures are created prior to explicit backend resolution, `rcParams['backend']` holds `rcsetup._auto_backend_sentinel`. When entering `rc_context()` (or `plt.xkcd()`), `orig = rcParams.copy()` captures `_auto_backend_sentinel` as the original value for `'backend'`.
+
+When a figure is created inside the context block (e.g. `fig2 = plt.figure()`), backend resolution occurs and updates `rcParams['backend']` to the actual resolved backend string (such as `'qtagg'` or `'tkagg'`).
+
+Upon exiting `rc_context()`, `dict.update(rcParams, orig)` runs in the `finally` block. Because `dict.update` directly writes into `dict` storage without calling `RcParams.__setitem__`, `orig['backend']` (`_auto_backend_sentinel`) overwrote `rcParams['backend']`.
+
+Later, calling `get_backend()` (or accessing `rcParams['backend']`) triggered `RcParams.__getitem__('backend')`, which detected `_auto_backend_sentinel` and invoked `plt.switch_backend(_auto_backend_sentinel)`. Because `switch_backend` starts by closing all existing figures (`close("all")`), `Gcf.figs` was cleared and all open figures were destroyed.
+
+### Fix
+- Updated `rc_context` in [`lib/matplotlib/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py#L1095-L1100) and `_xkcd` in [`lib/matplotlib/pyplot.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/pyplot.py#L688-L693) so that when restoring original `rcParams`, `_auto_backend_sentinel` is not written back over a resolved backend.
+- Added test [`test_rc_context_auto_backend`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/tests/test_rcparams.py#L588-L596) to verify figures remain in `Gcf.figs` after `get_backend()`.

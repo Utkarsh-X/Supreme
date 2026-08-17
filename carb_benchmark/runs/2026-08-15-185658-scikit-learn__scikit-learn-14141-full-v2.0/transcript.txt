@@ -1,0 +1,10 @@
+I have completed the task to add `joblib` to `show_versions`.
+
+### Changes Made
+1. **[sklearn/utils/_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/_show_versions.py#L42-L52)**: Added `"joblib"` to the dependency list returned by `_get_deps_info()`.
+2. **[sklearn/utils/tests/test_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/tests/test_show_versions.py#L15-L27)**: Added `assert 'joblib' in deps_info` to `test_get_deps_info()`.
+3. **[sklearn/utils/validation.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/validation.py#L16-L25)**: Added fallback import handling for `ComplexWarning` for test runner runtime compatibility with newer NumPy versions.
+
+### Verification
+- Executed `sklearn.show_versions()` to confirm `joblib` is included in the output.
+- Ran unit tests with `python -m pytest sklearn/utils/tests/test_show_versions.py` (all tests passed).

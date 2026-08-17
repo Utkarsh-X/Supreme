@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-16-013255-pytest-dev__pytest-5262-baseline-v2.0",
+  "task_id": "pytest-dev__pytest-5262",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 168.08,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-5262",
+  "test_output_tail": "# EVAL rc=1 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-4.5.0, py-1.11.0, pluggy-0.13.1\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-5262, inifile: tox.ini\ncollected 1 item\n\ntesting\\test_capture.py F                                                [100%]\n\n================================== FAILURES ===================================\n__________________ TestFDCapture.test_capfd_sys_stdout_mode ___________________\ntesting\\test_capture.py:1055: in test_capfd_sys_stdout_mode\n    assert \"b\" not in sys.stdout.mode\nE   AssertionError: assert 'b' not in 'rb+'\nE     'b' is contained here:\nE       rb+\nE     ?  +\n=========================== short test summary info ===========================\nFAILED testing/test_capture.py::TestFDCapture::test_capfd_sys_stdout_mode - A...\n========================== 1 failed in 0.35 seconds ===========================\n\nFAIL: pytest-dev__pytest-5262 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "src/_pytest/assertion/rewrite.py",
+      "src/_pytest/capture.py",
+      "testing/test_capture.py"
+    ],
+    "lines_added": 39,
+    "lines_deleted": 7,
+    "total_lines_changed": 46,
+    "hunks_count": 4
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

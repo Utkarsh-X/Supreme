@@ -1,0 +1,31 @@
+### Root Cause Analysis
+
+When executing `Model.objects.all().delete()`, Django's `SQLDeleteCompiler.single_alias` property checks whether the deletion query references only a single table (without joins):
+
+```python
+@cached_property
+def single_alias(self):
+    return sum(self.query.alias_refcount[t] > 0 for t in self.query.alias_map) == 1
+```
+
+For un-filtered querysets like `Model.objects.all()`, `self.query.get_initial_alias()` has not yet been invoked on the query instance. Consequently, `self.query.alias_map` and `self.query.alias_refcount` are empty (`{}`), causing `sum(...)` to evaluate to `0`. 
+
+Because `0 == 1` is `False`, `single_alias` evaluated to `False` for `Model.objects.all().delete()`, incorrectly treating it as a multi-table query and compiling it into a subquery construct:
+`DELETE FROM table WHERE table.id IN (SELECT table.id FROM table)`
+
+### Solution
+
+In [`django/db/models/sql/compiler.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/django/db/models/sql/compiler.py#L1407-L1411), updated `SQLDeleteCompiler.single_alias` to call `self.query.get_initial_alias()` before evaluating active alias refcounts (following the pattern used in `SQLUpdateCompiler`). This ensures the base table alias is registered in `alias_map` when evaluating `single_alias`.
+
+### Changes Made
+
+1. **[`django/db/models/sql/compiler.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/django/db/models/sql/compiler.py#L1407-L1411)**:
+   Added `self.query.get_initial_alias()` inside `single_alias` property of `SQLDeleteCompiler`.
+2. **[`tests/delete/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/tests/delete/tests.py#L707-L711)**:
+   Added `test_fast_delete_all` test in `FastDeleteTests` to verify `Model.objects.all().delete()` generates `DELETE FROM table` without `SELECT` subqueries.
+
+### Verification
+
+Ran test suites:
+- `python tests/runtests.py delete delete_regress` (73 tests passed)
+- 1,265 tests across standard ORM test suites (`queries`, `model_fields`, `expressions`, `lookup`, `many_to_many`, `many_to_one`, `one_to_one`, `select_related`, `prefetch_related`), all passing.

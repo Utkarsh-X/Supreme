@@ -1,0 +1,29 @@
+diff --git a/main.py b/main.py
+index c86f6c8..e165217 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,23 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    
++    grid = [[""] * N for _ in range(N)]
++    
++    for i in range(1, N + 1):
++        j = N + 1 - i
++        if i <= j:
++            color = "#" if i % 2 == 1 else "."
++            for r in range(i - 1, j):
++                for c in range(i - 1, j):
++                    grid[r][c] = color
++                    
++    for row in grid:
++        print("".join(row))
++
++if __name__ == "__main__":
++    solve()

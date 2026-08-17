@@ -1,0 +1,10 @@
+I have fixed the issue where `is_zero` returned `False` for expressions containing `Add` with complex/imaginary terms (e.g. `e = -2*I + (1 + I)**2`).
+
+### Root Cause
+In [sympy/core/add.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L567), `Add._eval_is_zero` previously returned `False` whenever there were imaginary terms (`im = True`) and the sum of real terms was zero (`b.is_zero == True`). This logic incorrectly assumed that any presence of imaginary terms would make the sum non-zero, overlooking the fact that multiple imaginary terms can sum to zero (such as `-2*I` and `(1 + I)**2 = 2*I`).
+
+### Fix
+Updated [Add._eval_is_zero](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L565) to:
+1. Collect imaginary terms and multiply them by `I` (`im_I = [a * S.ImaginaryUnit ...]`) to convert them to real expressions.
+2. Evaluate the zero-status of both the real part sum (`b = self.func(*nz)`) and the imaginary part sum (`c = self.func(*im_I)`).
+3. Return `False` if either part is non-zero (`is_zero is False`), and `True` if both real and imaginary parts evaluate to zero (`b.is_zero and c.is_zero`).

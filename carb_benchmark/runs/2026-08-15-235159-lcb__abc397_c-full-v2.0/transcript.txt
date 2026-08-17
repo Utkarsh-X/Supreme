@@ -1,0 +1,6 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_c/main.py).
+
+### Solution Summary
+- **Approach**: Compute the number of distinct elements in each prefix $A[0 \dots i]$ and suffix $A[i+1 \dots N-1]$ of the array $A$ in $O(N)$ time. Then iterate through all possible split positions $i \in [0, N-2]$ to maximize `pref_distinct[i] + suff_distinct[i+1]`.
+- **Complexity**: $O(N)$ time and $O(N)$ auxiliary space.
+- **Verification**: Verified using standard input/output against provided sample cases and edge cases (minimum length arrays, all identical elements, all distinct elements).

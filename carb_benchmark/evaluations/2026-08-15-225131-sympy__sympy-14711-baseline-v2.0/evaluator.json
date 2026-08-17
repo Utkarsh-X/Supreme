@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-08-15-225131-sympy__sympy-14711-baseline-v2.0",
+  "task_id": "sympy__sympy-14711",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 313.76,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-14711",
+  "test_output_tail": "# EVAL rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\narchitecture: 64-bit\ncache:        yes\nground types: python \n\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-14711\ncollected 1 item\n\nsympy\\physics\\vector\\tests\\test_vector.py .                              [100%]\n\n============================== warnings summary ===============================\nsympy\\core\\compatibility.py:14\n  E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-14711\\sympy\\core\\compatibility.py:14: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    if hasattr(collections_abc, name) and not hasattr(collections, name):\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sympy/physics/vector/tests/test_vector.py::test_Vector\n======================== 1 passed, 1 warning in 0.48s =========================\n\nPASS: sympy__sympy-14711 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 7,
+    "files_modified_list": [
+      "sympy/assumptions/sathandlers.py",
+      "sympy/core/basic.py",
+      "sympy/core/compatibility.py",
+      "sympy/core/expr.py",
+      "sympy/physics/vector/dyadic.py",
+      "sympy/physics/vector/vector.py",
+      "sympy/plotting/plot.py"
+    ],
+    "lines_added": 20,
+    "lines_deleted": 5,
+    "total_lines_changed": 25,
+    "hunks_count": 7
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

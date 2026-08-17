@@ -1,0 +1,12 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc389_d/main.py).
+
+### Method Explanation
+For a $1 \times 1$ square centered at integer coordinates $(i, j)$, its four corners are located at $(i \pm 0.5, j \pm 0.5)$. The maximum distance of any corner from the origin $(0, 0)$ is attained at the corner with maximum absolute coordinates, i.e., $(|i| + 0.5, |j| + 0.5)$.
+
+The square is completely contained in a circle of radius $R$ centered at $(0, 0)$ if and only if all four corners lie within or on the circle:
+$$\left(|i| + 0.5\right)^2 + \left(|j| + 0.5\right)^2 \le R^2$$
+
+Multiplying by 4 to work purely with integers:
+$$(2|i| + 1)^2 + (2|j| + 1)^2 \le 4R^2$$
+
+For each $i \in [0, R]$, we calculate $X = (2i + 1)^2$. If $X \le 4R^2$, we compute $Y = 4R^2 - X$ and find the maximum non-negative integer $v_{max} = \lfloor (\lfloor\sqrt{Y}\rfloor - 1) / 2 \rfloor$. The number of valid $j$'s for a fixed $|i|$ is $1 + 2 v_{max}$. Counting symmetry for $i > 0$, we sum these counts across all valid $i$. This $O(R)$ algorithm runs in under 0.3 seconds for $R = 10^6$.

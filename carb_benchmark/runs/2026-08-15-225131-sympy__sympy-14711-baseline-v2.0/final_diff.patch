@@ -1,0 +1,107 @@
+diff --git a/sympy/assumptions/sathandlers.py b/sympy/assumptions/sathandlers.py
+index 61d62d0..6bf1519 100644
+--- a/sympy/assumptions/sathandlers.py
++++ b/sympy/assumptions/sathandlers.py
+@@ -1,6 +1,7 @@
+ from __future__ import print_function, division
+ 
+-from collections import MutableMapping, defaultdict
++from collections import defaultdict
++from sympy.core.compatibility import MutableMapping
+ 
+ from sympy.core import (Add, Mul, Pow, Integer, Number, NumberSymbol,)
+ from sympy.core.numbers import ImaginaryUnit
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index bdfebf2..f9f2305 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,13 +1,13 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++from collections import defaultdict
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+ from .cache import cacheit
+ from .sympify import _sympify, sympify, SympifyError
+ from .compatibility import (iterable, Iterator, ordered,
+-    string_types, with_metaclass, zip_longest, range)
++    string_types, with_metaclass, zip_longest, range, Mapping)
+ from .singleton import S
+ 
+ from inspect import getmro
+diff --git a/sympy/core/compatibility.py b/sympy/core/compatibility.py
+index fdbf4fa..5f455a7 100644
+--- a/sympy/core/compatibility.py
++++ b/sympy/core/compatibility.py
+@@ -6,7 +6,16 @@
+ from __future__ import print_function, division
+ 
+ import operator
++import collections
+ from collections import defaultdict
++try:
++    import collections.abc as collections_abc
++    for name in ['Iterable', 'Mapping', 'MutableMapping', 'MutableSet', 'Callable', 'Sequence', 'Set', 'Container']:
++        if hasattr(collections_abc, name) and not hasattr(collections, name):
++            setattr(collections, name, getattr(collections_abc, name))
++    from collections.abc import Iterable, Mapping, MutableMapping, MutableSet, Callable, Sequence, Set, Container
++except ImportError:
++    from collections import Iterable, Mapping, MutableMapping, MutableSet, Callable, Sequence, Set, Container
+ from sympy.external import import_module
+ 
+ """
+diff --git a/sympy/core/expr.py b/sympy/core/expr.py
+index 2894db3..c4fbd03 100644
+--- a/sympy/core/expr.py
++++ b/sympy/core/expr.py
+@@ -9,7 +9,8 @@
+ from .compatibility import reduce, as_int, default_sort_key, range
+ from mpmath.libmp import mpf_log, prec_to_dps
+ 
+-from collections import defaultdict, Iterable
++from collections import defaultdict
++from sympy.core.compatibility import Iterable
+ 
+ class Expr(Basic, EvalfMixin):
+     """
+diff --git a/sympy/physics/vector/dyadic.py b/sympy/physics/vector/dyadic.py
+index dc68527..fd95df3 100644
+--- a/sympy/physics/vector/dyadic.py
++++ b/sympy/physics/vector/dyadic.py
+@@ -59,6 +59,8 @@ def __init__(self, inlist):
+ 
+     def __add__(self, other):
+         """The add operator for Dyadic. """
++        if other == 0:
++            return self
+         other = _check_dyadic(other)
+         return Dyadic(self.args + other.args)
+ 
+diff --git a/sympy/physics/vector/vector.py b/sympy/physics/vector/vector.py
+index a048ee5..8849119 100644
+--- a/sympy/physics/vector/vector.py
++++ b/sympy/physics/vector/vector.py
+@@ -57,6 +57,8 @@ def __hash__(self):
+ 
+     def __add__(self, other):
+         """The add operator for Vector. """
++        if other == 0:
++            return self
+         other = _check_vector(other)
+         return Vector(self.args + other.args)
+ 
+diff --git a/sympy/plotting/plot.py b/sympy/plotting/plot.py
+index 18c6f7a..765b5c9 100644
+--- a/sympy/plotting/plot.py
++++ b/sympy/plotting/plot.py
+@@ -25,7 +25,7 @@
+ from __future__ import print_function, division
+ 
+ import inspect
+-from collections import Callable
++from sympy.core.compatibility import Callable
+ import warnings
+ import sys
+ 

@@ -1,0 +1,18 @@
+I have investigated and resolved the issue where `_pytest.capture.EncodedFile` incorrectly advertised a binary mode (`"b"`) inherited from its underlying buffer stream.
+
+### Root Cause
+`EncodedFile` wraps a binary buffer (which has a mode containing `'b'`, e.g., `'rb+'` or `'wb+'`) and provides text encoding on top of it. Because `EncodedFile` delegates attribute access to `self.buffer` via `__getattr__`, accessing `EncodedFile.mode` returned the buffer's mode (e.g. `'rb+'`). External libraries like `youtube-dl` inspect `stream.mode` to check if a stream is binary (containing `'b'`), causing them to pass `bytes` to `EncodedFile.write()`, which raises a `TypeError` since `EncodedFile` expects text.
+
+### Fix
+Added a `@property` for `mode` on [`EncodedFile`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L450-L455) that strips `"b"` from `self.buffer.mode` when it is a string:
+```python
+    @property
+    def mode(self):
+        buffer_mode = self.buffer.mode
+        if isinstance(buffer_mode, six.string_types):
+            return buffer_mode.replace("b", "")
+        return buffer_mode
+```
+
+### Verification
+Added [`test_encoded_file_mode`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L1464-L1469) to `testing/test_capture.py` to ensure `EncodedFile.mode` returns text mode (`"r+"` instead of `"rb+"`), and ran pytest to verify all `EncodedFile` tests pass.

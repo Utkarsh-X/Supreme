@@ -1,0 +1,15 @@
+### Resolution Summary
+
+#### Cause
+In `django.db.models.expressions._connector_combinations`, the entry for numeric operations with operands of different types (`IntegerField`, `DecimalField`, `FloatField`) included `Combinable.ADD`, `Combinable.SUB`, `Combinable.MUL`, and `Combinable.DIV`, but omitted `Combinable.MOD`. Consequently, combining expressions with the `MOD` operator across different numeric types (e.g. `DecimalField` and `IntegerField`) failed to resolve the `output_field` automatically.
+
+#### Solution
+1. Added `Combinable.MOD` to the list of connectors for mixed-type numeric operations in [_connector_combinations](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/django/db/models/expressions.py#L523-L538) in [`django/db/models/expressions.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/django/db/models/expressions.py).
+2. Expanded unit tests in [`tests/expressions/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/tests/expressions/tests.py):
+   - Added `Combinable.MOD` to `CombinedExpressionTests.test_resolve_output_field_number`.
+   - Added `ExpressionOperatorTests.test_modulo_mixed_types` to test `output_field` resolution and database evaluation for modulo operations on mixed numeric types.
+
+#### Verification
+Executed Django test suite for `expressions`:
+`python tests/runtests.py expressions --parallel 1`
+Result: All 182 unit tests passed.

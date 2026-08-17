@@ -1,0 +1,27 @@
+{
+  "run_id": "2026-08-14-103347-T002_environment_tooling-baseline-v1.0",
+  "task_id": "C_TB_002",
+  "configuration_id": "baseline-v1.0",
+  "model": "gemini-3.7-flash",
+  "layer_1_functional_correctness": {
+    "passed": true,
+    "verification_status": "PASS"
+  },
+  "layer_2_regression_safety": {
+    "existing_tests_passed": true,
+    "regressions_detected": 0
+  },
+  "layer_3_engineering_quality": {
+    "files_modified_count": 0,
+    "total_lines_changed": 0,
+    "hunks_count": 0,
+    "surgical_editing_score": 4
+  },
+  "layer_4_behavioral_trajectory": {
+    "investigation": 2,
+    "planning": 1,
+    "verification": 2,
+    "completion_discipline": 3
+  },
+  "failure_taxonomy_codes": []
+}

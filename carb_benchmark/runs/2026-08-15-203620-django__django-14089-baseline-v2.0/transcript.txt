@@ -1,0 +1,5 @@
+I have implemented support for calling Python's built-in `reversed()` on [`OrderedSet`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L5).
+
+### Changes Made:
+1. **[`django/utils/datastructures.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L28-L29)**: Added `__reversed__(self)` method to [`OrderedSet`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L5) returning `reversed(self.dict)`.
+2. **[`tests/utils_tests/test_datastructures.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/tests/utils_tests/test_datastructures.py#L58-L60)**: Added `test_reversed` test case to verify `reversed()` behavior on non-empty and empty [`OrderedSet`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L5) instances.

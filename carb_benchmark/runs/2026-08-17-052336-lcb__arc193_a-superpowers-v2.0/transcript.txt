@@ -1,0 +1,19 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc193_a/main.py).
+
+### Summary of Solution
+
+1. **Graph Properties & Path Bounds**:
+   - An undirected edge exists between $i$ and $j$ if and only if their interval ranges $[L_i, R_i]$ and $[L_j, R_j]$ are disjoint ($R_i < L_j$ or $R_j < L_i$).
+   - Since all vertex weights $W_i > 0$, any valid path will contain at most 3 edges (4 vertices):
+     - **1-hop (Direct edge)**: $s \to t$ if $R_s < L_t$ or $R_t < L_s$.
+     - **2-hop**: $s \to k \to t$, where $R_k < \min(L_s, L_t)$ or $L_k > \max(R_s, R_t)$.
+     - **3-hop**: $s \to u \to v \to t$, where $R_u < L_s$ and $L_v > R_t$ (or $L_u > R_s$ and $R_v < L_t$).
+   - Any path of length $\ge 4$ can be strictly dominated in weight by a path of length $\le 3$.
+
+2. **$O(1)$ Query Processing**:
+   - We precompute prefix minimums of weights ordered by $R_k$ (`pref_min_R`) and suffix minimums of weights ordered by $L_k$ (`suff_min_L`).
+   - For each query $(s, t)$, we evaluate the candidates for 1-hop, 2-hop, and 3-hop paths in $O(1)$ time and take the minimum weight.
+
+3. **Verification**:
+   - Passed both provided sample test cases.
+   - Stress-tested with 1,000 randomized test cases against a Dijkstra shortest-path implementation with 0 mismatches.

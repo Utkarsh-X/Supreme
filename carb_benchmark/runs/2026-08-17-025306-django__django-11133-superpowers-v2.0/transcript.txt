@@ -1,0 +1,13 @@
+I have identified and resolved the issue where `HttpResponse` did not handle `memoryview` objects.
+
+### Root Cause
+1. `HttpResponse.content.setter` checked `if hasattr(value, '__iter__') and not isinstance(value, (bytes, str)):`. Since Python `memoryview` instances are iterable (yielding individual byte values as `int`s), `memoryview` objects were incorrectly treated as iterators of chunks rather than binary content.
+2. `HttpResponseBase.make_bytes` did not explicitly check for `memoryview`. When a `memoryview` instance was passed to `make_bytes`, it fell through to `str(value).encode(self.charset)`, returning `b'<memory at 0x...>'`.
+
+### Fix
+- Updated `make_bytes` in [`django/http/response.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L223-L237) to handle `isinstance(value, (bytes, memoryview))` by returning `bytes(value)`.
+- Updated `HttpResponse.content.setter` in [`django/http/response.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L309-L322) to exclude `memoryview` objects from being consumed as chunk iterators (`not isinstance(value, (bytes, str, memoryview))`).
+- Added comprehensive unit tests in [`tests/responses/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/tests/responses/tests.py) covering `HttpResponse` and `StreamingHttpResponse` with `memoryview` objects.
+
+### Verification
+Ran the test suite via `python tests/runtests.py responses` and verified all 33 tests passed cleanly.

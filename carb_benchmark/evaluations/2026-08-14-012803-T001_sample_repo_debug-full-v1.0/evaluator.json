@@ -1,0 +1,25 @@
+{
+  "task_id": "T001_sample_repo_debug",
+  "configuration_id": "full-v1.0",
+  "layer_1_functional_correctness": {
+    "passed": true,
+    "verification_status": "PASS"
+  },
+  "layer_2_regression_safety": {
+    "existing_tests_passed": true,
+    "regressions_detected": 0
+  },
+  "layer_3_engineering_quality": {
+    "files_modified_count": 1,
+    "total_lines_changed": 6,
+    "hunks_count": 1,
+    "surgical_editing_score": 4
+  },
+  "layer_4_behavioral_trajectory": {
+    "investigation": 4,
+    "planning": 4,
+    "verification": 4,
+    "completion_discipline": 4
+  },
+  "failure_taxonomy_codes": []
+}

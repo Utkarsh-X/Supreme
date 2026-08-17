@@ -1,0 +1,5 @@
+I have fixed the Morse code dictionary mapping for `"1"`.
+
+### Summary of Changes
+1. **[crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/crypto.py#L1523)**: Corrected the Morse code mapping for `"1"` from `"----"` to `".----"` in `morse_char`.
+2. **[test_crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/tests/test_crypto.py#L247-L255)**: Added test assertions in `test_encode_morse` and `test_decode_morse` to verify the Morse encoding and decoding of digit `"1"`.

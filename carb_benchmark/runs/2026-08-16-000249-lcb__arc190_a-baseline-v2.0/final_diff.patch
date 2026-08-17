@@ -1,0 +1,160 @@
+diff --git a/main.py b/main.py
+index c86f6c8..fe3212d 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,154 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++
++    N = int(input_data[0])
++    M = int(input_data[1])
++
++    L = [0] * M
++    R = [0] * M
++
++    idx_1N = -1
++    idx_Lmax = 0
++    idx_Rmin = 0
++
++    idx_L1 = -1
++    idx_RN = -1
++
++    ptr = 2
++    for i in range(M):
++        l = int(input_data[ptr])
++        r = int(input_data[ptr + 1])
++        ptr += 2
++        L[i] = l
++        R[i] = r
++
++        if l == 1 and r == N:
++            if idx_1N == -1:
++                idx_1N = i
++        if l == 1 and idx_L1 == -1:
++            idx_L1 = i
++        if r == N and idx_RN == -1:
++            idx_RN = i
++
++        if l > L[idx_Lmax]:
++            idx_Lmax = i
++        if r < R[idx_Rmin]:
++            idx_Rmin = i
++
++    # Cost 1 check
++    if idx_1N != -1:
++        ans = [0] * M
++        ans[idx_1N] = 1
++        print(1)
++        print(*ans)
++        return
++
++    L_max = L[idx_Lmax]
++    R_min = R[idx_Rmin]
++
++    # Master Case 1: Disjoint intervals exist
++    if R_min < L_max:
++        ans = [0] * M
++        ans[idx_Rmin] = 2
++        ans[idx_Lmax] = 2
++        print(2)
++        print(*ans)
++        return
++
++    # Master Case 2: All intervals overlap
++
++    # Check Cost 2: Condition 2.1 (L=1 and R=N intervals)
++    if idx_L1 != -1 and idx_RN != -1 and idx_L1 != idx_RN:
++        ans = [0] * M
++        ans[idx_L1] = 1
++        ans[idx_RN] = 1
++        print(2)
++        print(*ans)
++        return
++
++    # Check Cost 2: Condition 2.2 (one interval contained in another)
++    indices = list(range(M))
++    indices.sort(key=lambda i: (L[i], -R[i]))
++
++    best1_R, best1_idx = -1, -1
++    best2_R, best2_idx = -1, -1
++
++    found_k, found_j = -1, -1
++    for idx in indices:
++        if best1_idx != -1 and best1_idx != idx and best1_R >= R[idx]:
++            found_k = idx
++            found_j = best1_idx
++            break
++        elif best2_idx != -1 and best2_idx != idx and best2_R >= R[idx]:
++            found_k = idx
++            found_j = best2_idx
++            break
++
++        r_val = R[idx]
++        if r_val > best1_R:
++            best2_R, best2_idx = best1_R, best1_idx
++            best1_R, best1_idx = r_val, idx
++        elif r_val > best2_R:
++            best2_R, best2_idx = r_val, idx
++
++    if found_k != -1:
++        ans = [0] * M
++        ans[found_k] = 2
++        ans[found_j] = 1
++        print(2)
++        print(*ans)
++        return
++
++    # Check Cost 3: Condition 3.1 (1 Op 2 + 2 Op 1s)
++    sorted_by_L = sorted(range(M), key=lambda i: L[i])
++    min_L_1 = sorted_by_L[0]
++    min_L_2 = sorted_by_L[1] if M > 1 else -1
++
++    sorted_by_R = sorted(range(M), key=lambda i: -R[i])
++    max_R_1 = sorted_by_R[0]
++    max_R_2 = sorted_by_R[1] if M > 1 else -1
++
++    found_31 = False
++    for k in range(M):
++        j1 = min_L_2 if k == min_L_1 else min_L_1
++        j2 = max_R_2 if k == max_R_1 else max_R_1
++
++        if j1 != -1 and j2 != -1 and L[j1] <= L[k] and R[j2] >= R[k]:
++            ans = [0] * M
++            ans[k] = 2
++            ans[j1] = 1
++            ans[j2] = 1
++            print(3)
++            print(*ans)
++            found_31 = True
++            break
++
++    if found_31:
++        return
++
++    # Check Cost 3: Condition 3.2 (2 Op 2s + 1 Op 1)
++    if M >= 3:
++        a = idx_Lmax
++        b = idx_Rmin
++        c = -1
++        for i in range(M):
++            if i != a and i != b:
++                c = i
++                break
++
++        ans = [0] * M
++        ans[a] = 2
++        ans[b] = 2
++        ans[c] = 1
++        print(3)
++        print(*ans)
++        return
++
++    print(-1)
++
++if __name__ == '__main__':
++    solve()

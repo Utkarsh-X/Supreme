@@ -1,0 +1,9 @@
+The Morse code mapping for the character `"1"` in `sympy.crypto.crypto` has been corrected.
+
+### Summary of Changes
+
+1. **[crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/crypto.py#L1523)**: Corrected the Morse code mapping for `"1"` from `"----"` to `".----"` in the `morse_char` dictionary.
+2. **[test_crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/tests/test_crypto.py#L250-L257)**: Added unit test cases for `encode_morse` and `decode_morse` covering digit `'1'` as well as digits `0-9`.
+
+### Verification
+Ran the test suite via `python bin/test sympy/crypto`. All 44 tests passed successfully.

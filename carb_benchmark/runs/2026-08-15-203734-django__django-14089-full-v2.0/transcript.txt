@@ -1,0 +1,12 @@
+Implemented `__reversed__()` support for `OrderedSet`.
+
+### Changes
+1. **[`django/utils/datastructures.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L28-L29)**: Added `__reversed__(self)` method to `OrderedSet` which delegates to `reversed(self.dict)`.
+2. **[`tests/utils_tests/test_datastructures.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/tests/utils_tests/test_datastructures.py#L58-L63)**: Added `test_reversed()` test case verifying `reversed()` on populated and empty `OrderedSet` instances.
+
+### Verification
+Ran the `utils_tests.test_datastructures` test suite:
+```
+Ran 44 tests in 0.003s
+OK
+```

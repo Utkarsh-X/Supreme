@@ -1,0 +1,9 @@
+### Root Cause
+When plotting step histograms (e.g. `ax.hist(..., histtype='step', bins=100)`), the patch created is a [`Polygon`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/patches.py) containing more than 128 vertices. By default, paths with many vertices have `should_simplify = True`.
+
+During axis limit computation in [`_update_patch_limits`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2437), calling `p.iter_bezier()` without `simplify=False` invoked path simplification in untransformed data coordinates. Because `path.simplify_threshold` (default `1/9` or ~0.111 data units) is large relative to normalized density values (e.g., peak ~0.33), Ramer–Douglas–Peucker path simplification shaved off or flattened peak vertices of the step polygon, leading to underestimated y-axis limits during autoscaling.
+
+### Solution
+1. Updated [`_update_patch_limits`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2437) in `lib/matplotlib/axes/_base.py` to call `p.iter_bezier(simplify=False)`.
+2. Updated [`Path.get_extents`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/path.py#L634) in `lib/matplotlib/path.py` to default `simplify=False` when computing extents.
+3. Added unit test `test_hist_step_autoscale` in [`lib/matplotlib/tests/test_axes.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/tests/test_axes.py#L8212-L8219).

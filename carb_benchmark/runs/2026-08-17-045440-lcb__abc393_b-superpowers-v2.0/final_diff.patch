@@ -1,0 +1,26 @@
+diff --git a/main.py b/main.py
+index c86f6c8..e407bb4 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,20 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    S = sys.stdin.read().strip()
++    n = len(S)
++    ans = 0
++    for i in range(n):
++        if S[i] != 'A':
++            continue
++        for d in range(1, n):
++            j = i + d
++            k = i + 2 * d
++            if k >= n:
++                break
++            if S[j] == 'B' and S[k] == 'C':
++                ans += 1
++    print(ans)
++
++if __name__ == '__main__':
++    main()

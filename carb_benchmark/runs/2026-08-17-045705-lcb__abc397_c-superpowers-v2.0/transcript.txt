@@ -1,0 +1,13 @@
+I have implemented the solution for finding the maximum sum of distinct integers in two contiguous non-empty subarrays when splitting array $A$ of size $N$.
+
+### Implementation Details
+- **Prefix & Suffix Arrays**:
+  - `pref[i]` stores the count of distinct elements in $A[0 \dots i]$.
+  - `suff[i]` stores the count of distinct elements in $A[i \dots N-1]$.
+- **Max Sum Calculation**:
+  - We iterate through all valid split points $0 \le i < N - 1$ and compute $\text{pref}[i] + \text{suff}[i + 1]$.
+  - The maximum value over all splits is computed and printed.
+- **Time Complexity**: $O(N)$
+- **Space Complexity**: $O(N)$
+
+The solution has been written to [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_c/main.py) and verified against the sample test cases.

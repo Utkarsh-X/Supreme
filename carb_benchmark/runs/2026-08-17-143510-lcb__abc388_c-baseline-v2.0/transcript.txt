@@ -1,0 +1,16 @@
+I have implemented the solution for finding the number of different valid kagamimochi pairs in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_c/main.py).
+
+### Method Explanation
+
+1. **Problem Analysis**:
+   Given an array of mochi sizes $A_1 \le A_2 \le \dots \le A_N$, a top mochi with size $A_i$ can be placed on top of a bottom mochi with size $A_j$ if and only if $2 \cdot A_i \le A_j$. Because all $A_k \ge 1$, $2 \cdot A_i \le A_j$ implies $A_i < A_j$, and since $A$ is sorted in non-decreasing order, $i < j$.
+   
+2. **Two-Pointer Approach**:
+   - We iterate over each bottom mochi $j$ from $0$ to $N-1$.
+   - We maintain a pointer $i$ indicating the number of valid top mochi index candidates. Since $A$ is non-decreasing, as $j$ increases, $A_j$ non-decreases, so $i$ never needs to reset or decrease.
+   - For each $j$, we advance $i$ while $2 \cdot A_i \le A_j$.
+   - The value of $i$ at that point represents the number of valid top mochi for bottom mochi $j$. We add $i$ to our cumulative count.
+
+3. **Complexity**:
+   - **Time Complexity**: $\mathcal{O}(N)$ since pointer $i$ moves at most $N$ times across the entire loop.
+   - **Space Complexity**: $\mathcal{O}(N)$ for storing input elements.

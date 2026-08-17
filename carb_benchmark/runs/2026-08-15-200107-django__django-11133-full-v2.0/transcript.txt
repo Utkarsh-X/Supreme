@@ -1,0 +1,14 @@
+### Summary of Changes
+
+#### Issue
+When `HttpResponse` was initialized with a `memoryview` object (or when `memoryview` was written via `response.write()`), Python's `memoryview` defined `__iter__` which caused `HttpResponse` to treat it as an iterator of chunks (yielding integer byte values). Furthermore, `HttpResponseBase.make_bytes` did not recognize `memoryview` objects directly, converting non-string/non-bytes objects via `str()`.
+
+#### Solution
+1. **[response.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L229-L235)**: Updated `HttpResponseBase.make_bytes` to check `isinstance(value, (bytes, memoryview))` and convert `memoryview` objects to bytes via `bytes(value)`.
+2. **[response.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L309-L315)**: Updated `HttpResponse.content` setter to exclude `memoryview` objects from being treated as chunk iterators (`not isinstance(value, (bytes, str, memoryview))`).
+3. **[tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/tests/responses/tests.py#L157-L166)**: Added unit tests (`test_memoryview_content` and `test_memoryview_write`) to ensure `HttpResponse` handles `memoryview` instances as expected.
+
+#### Verification
+Ran the Django response test suite (`responses`, `httpwrappers`, `middleware`, `handlers`, `view_tests`, `requests`, `file_uploads`), with 0 failures:
+- `HttpResponse(memoryview(b"My Content")).content` evaluates to `b"My Content"`.
+- All 98 HTTP response tests and 366 related test cases passed cleanly.

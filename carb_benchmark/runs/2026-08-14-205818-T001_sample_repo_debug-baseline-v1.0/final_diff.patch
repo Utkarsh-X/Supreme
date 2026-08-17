@@ -1,0 +1,55 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..a285c40 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,7 +1,13 @@
+ import json
++import datetime
++import uuid
+ 
+ class CustomJSONEncoder(json.JSONEncoder):
+     def default(self, obj):
++        if isinstance(obj, (datetime.datetime, datetime.date)):
++            return obj.isoformat()
++        if isinstance(obj, uuid.UUID):
++            return str(obj)
+         return super().default(obj)
+ 
+ class SessionSerializer:
+@@ -10,3 +16,4 @@ class SessionSerializer:
+ 
+     def deserialize(self, raw_str):
+         return json.loads(raw_str)
++
+diff --git a/test_session_serializer.py b/test_session_serializer.py
+index 05aac48..555e884 100644
+--- a/test_session_serializer.py
++++ b/test_session_serializer.py
+@@ -25,5 +25,27 @@ class TestSessionSerializer(unittest.TestCase):
+         serialized = self.serializer.serialize(data)
+         self.assertIn(str(session_id), serialized)
+ 
++    def test_date_serialization(self):
++        today = datetime.date(2026, 8, 14)
++        data = {"created_date": today}
++        serialized = self.serializer.serialize(data)
++        self.assertIn("2026-08-14", serialized)
++
++    def test_combined_serialization(self):
++        session_id = uuid.uuid4()
++        now = datetime.datetime(2026, 8, 14, 20, 0, 0)
++        data = {
++            "session_id": session_id,
++            "created_at": now,
++            "user": "bob"
++        }
++        serialized = self.serializer.serialize(data)
++        self.assertIn(str(session_id), serialized)
++        self.assertIn("2026-08-14T20:00:00", serialized)
++        deserialized = self.serializer.deserialize(serialized)
++        self.assertEqual(deserialized["session_id"], str(session_id))
++        self.assertEqual(deserialized["created_at"], "2026-08-14T20:00:00")
++        self.assertEqual(deserialized["user"], "bob")
++
+ if __name__ == "__main__":
+     unittest.main()

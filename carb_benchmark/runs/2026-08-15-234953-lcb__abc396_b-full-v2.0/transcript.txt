@@ -1,0 +1,8 @@
+The solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_b/main.py).
+
+### Summary of Implementation:
+- **Stack Initialization**: The stack is initialized with 100 cards, each labeled `0`.
+- **Query Processing**:
+  - **Type 1 (`1 x`)**: Pushes `x` onto the top of the stack (`stack.append(x)`).
+  - **Type 2 (`2`)**: Pops the top card from the stack (`stack.pop()`) and appends the result to the output list.
+- **Verification**: Tested against all provided sample cases with expected standard output results.

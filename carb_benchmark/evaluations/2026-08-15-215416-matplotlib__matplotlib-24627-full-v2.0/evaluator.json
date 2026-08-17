@@ -1,0 +1,29 @@
+{
+  "run_id": "2026-08-15-215416-matplotlib__matplotlib-24627-full-v2.0",
+  "task_id": "matplotlib__matplotlib-24627",
+  "configuration_id": "full-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 312.14,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-24627",
+  "test_output_tail": "  [setup] overlay: copied 9 compiled files from matplotlib==3.6.3\nFAIL: no changes made by agent in matplotlib__matplotlib-24627\n",
+  "diff_metrics": {
+    "files_modified_count": 0,
+    "files_modified_list": [],
+    "lines_added": 0,
+    "lines_deleted": 0,
+    "total_lines_changed": 0,
+    "hunks_count": 0
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

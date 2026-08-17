@@ -1,0 +1,8 @@
+I have resolved the issue where combining numeric expressions of different types using the `%` (`MOD`) operator did not resolve `output_field` to `DecimalField` (or `FloatField`).
+
+### Cause
+In [django/db/models/expressions.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/django/db/models/expressions.py#L523-L537), `Combinable.MOD` was omitted from the list of connectors for numeric operations with mixed operand types (such as `IntegerField` with `DecimalField` or `IntegerField` with `FloatField`).
+
+### Fix
+1. Added `Combinable.MOD` to the mixed-operand numeric operations mapping in `_connector_combinations` in [django/db/models/expressions.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/django/db/models/expressions.py#L536).
+2. Added `Combinable.MOD` to `connectors` in `CombinedExpressionTests.test_resolve_output_field_number` in [tests/expressions/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/tests/expressions/tests.py#L2422).

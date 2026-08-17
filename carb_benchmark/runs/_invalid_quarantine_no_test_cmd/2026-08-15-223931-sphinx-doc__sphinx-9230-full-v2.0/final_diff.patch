@@ -1,0 +1,22 @@
+diff --git a/sphinx/util/typing.py b/sphinx/util/typing.py
+index af6edca..ae44912 100644
+--- a/sphinx/util/typing.py
++++ b/sphinx/util/typing.py
+@@ -33,10 +33,13 @@ else:
+             ref = _ForwardRef(self.arg)
+             return ref._eval_type(globalns, localns)
+ 
+-if sys.version_info > (3, 10):
+-    from types import Union as types_Union
+-else:
+-    types_Union = None
++try:
++    from types import UnionType as types_Union  # type: ignore
++except ImportError:
++    try:
++        from types import Union as types_Union  # type: ignore
++    except ImportError:
++        types_Union = None
+ 
+ if False:
+     # For type annotation

@@ -1,0 +1,127 @@
+diff --git a/main.py b/main.py
+index c86f6c8..360169e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,121 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    intervals = []
++    idx = 2
++    for i in range(M):
++        L = int(input_data[idx])
++        R = int(input_data[idx + 1])
++        intervals.append((L, R))
++        idx += 2
++
++    # Check Cost 1: single Op 1 covering [1, N]
++    for i in range(M):
++        L, R = intervals[i]
++        if L == 1 and R == N:
++            ops = [0] * M
++            ops[i] = 1
++            print(1)
++            print(*(ops))
++            return
++
++    # Check Cost 2
++    # Way 2.1: Op 1 + Op 1 covering [1, N]
++    max_R_val = -1
++    best_u = -1
++    for i in range(M):
++        L, R = intervals[i]
++        if L == 1:
++            if R > max_R_val:
++                max_R_val = R
++                best_u = i
++
++    min_L_val = N + 2
++    best_v = -1
++    for i in range(M):
++        L, R = intervals[i]
++        if R == N:
++            if L < min_L_val:
++                min_L_val = L
++                best_v = i
++
++    if best_u != -1 and best_v != -1 and best_u != best_v:
++        if max_R_val >= min_L_val - 1:
++            ops = [0] * M
++            ops[best_u] = 1
++            ops[best_v] = 1
++            print(2)
++            print(*(ops))
++            return
++
++    # Way 2.2: Op 2 + Op 1 (interval containment: [L_u, R_u] <= [L_v, R_v])
++    sorted_inter = sorted([(intervals[i][0], intervals[i][1], i) for i in range(M)], key=lambda x: (x[0], -x[1]))
++    max_R_so_far = -1
++    max_R_idx = -1
++    for L, R, i in sorted_inter:
++        if R <= max_R_so_far:
++            ops = [0] * M
++            ops[i] = 2
++            ops[max_R_idx] = 1
++            print(2)
++            print(*(ops))
++            return
++        if R > max_R_so_far:
++            max_R_so_far = R
++            max_R_idx = i
++
++    # Way 2.3: Op 2 + Op 2 (disjoint intervals: R_u < L_v)
++    min_R_val = N + 2
++    u_disjoint = -1
++    for i in range(M):
++        L, R = intervals[i]
++        if R < min_R_val:
++            min_R_val = R
++            u_disjoint = i
++
++    max_L_val = -1
++    v_disjoint = -1
++    for i in range(M):
++        L, R = intervals[i]
++        if L > max_L_val:
++            max_L_val = L
++            v_disjoint = i
++
++    if u_disjoint != -1 and v_disjoint != -1 and u_disjoint != v_disjoint:
++        if min_R_val < max_L_val:
++            ops = [0] * M
++            ops[u_disjoint] = 2
++            ops[v_disjoint] = 2
++            print(2)
++            print(*(ops))
++            return
++
++    # Check Cost 3
++    if M >= 3:
++        u = v_disjoint # index with max L
++        v = u_disjoint # index with min R
++        w = -1
++        for i in range(M):
++            if i != u and i != v:
++                w = i
++                break
++        ops = [0] * M
++        ops[u] = 2
++        ops[v] = 2
++        ops[w] = 1
++        print(3)
++        print(*(ops))
++        return
++
++    # Impossible
++    print(-1)
++
++if __name__ == '__main__':
++    main()

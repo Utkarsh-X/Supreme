@@ -1,0 +1,10 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_c/main.py).
+
+### Summary of Approach
+1. **Identify Existing Bounding Box:** Find the minimum and maximum row and column indices (`min_r`, `max_r`, `min_c`, `max_c`) of all cells currently containing `#`. Any valid rectangle of black cells must cover at least this bounding box.
+2. **Validation:** Check if any cell within `[min_r, max_r] x [min_c, max_c]` is painted white (`.`).
+   - If there is any `.`, it is impossible to form a valid rectangle (since any rectangle covering all existing `#` cells must cover this bounding box and thus would cover a `.`), so output `No`.
+   - If there are no `.` cells within the bounding box, we can paint all `?` cells inside the box black (`#`) and all `?` cells outside white (`.`), forming a valid black rectangle, so output `Yes`.
+
+### Verification
+The solution was tested and verified against all sample test cases with clean output.

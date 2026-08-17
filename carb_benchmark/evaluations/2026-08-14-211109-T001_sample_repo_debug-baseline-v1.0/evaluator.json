@@ -1,0 +1,10 @@
+{
+  "run_id": "2026-08-14-211109-T001_sample_repo_debug-baseline-v1.0",
+  "task_id": "C_SWE_071",
+  "configuration_id": "baseline-v1.0",
+  "model": "Gemini 3.6 Flash (High)",
+  "engine": "agy.exe (Antigravity Native Router)",
+  "wall_clock_seconds": 33.96,
+  "passed": true,
+  "lines_changed": 7
+}

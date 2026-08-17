@@ -1,0 +1,21 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc193_a/main.py).
+
+### Method Explanation
+1. **Graph Properties & Shortest Path Structures**:
+   - Vertices $u$ and $v$ have an edge if $[L_u, R_u] \cap [L_v, R_v] = \emptyset$ (i.e. $R_u < L_v$ or $R_v < L_u$).
+   - Since all weights $W_i \ge 1$, adding intermediate vertices strictly increases total path weight.
+   - For a query $(s, t)$:
+     - **1-step path ($s \to t$)**: Valid if $s \sim t$ ($R_s < L_t$ or $R_t < L_s$). Cost: $W_s + W_t$.
+     - **2-step path ($s \to w \to t$)**: Valid if $w$ is disjoint from both $s$ and $t$. This requires $R_w < \min(L_s, L_t)$ or $L_w > \max(R_s, R_t)$.
+     - **3-step path ($s \to a \to b \to t$)**: Valid if $a$ and $b$ act as bridges between $s$ and $t$. This occurs in two cases:
+       - $R_a < L_s$ and $L_b > R_t$ (since $s \not\sim t \implies L_s \le R_t$, we automatically have $R_a < L_b \implies a \sim b$).
+       - $L_a > R_s$ and $R_b < L_t$ (similarly, $R_b < L_a \implies a \sim b$).
+   - Any path of length $\ge 4$ contains a sub-path of length $\le 3$ with smaller sum of weights, so only paths of length up to 3 need to be checked.
+
+2. **Precomputing Minimums**:
+   - We precompute prefix minimums `pref_min_r[x]` for $\min \{ W_v \mid R_v < x \}$.
+   - We precompute suffix minimums `suff_min_l[y]` for $\min \{ W_v \mid L_v > y \}$.
+   - Both can be precomputed in $O(N)$ time.
+
+3. **Query Evaluation**:
+   - Each query is answered in $O(1)$ time by evaluating the candidate path types and taking the minimum.

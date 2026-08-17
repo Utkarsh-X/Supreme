@@ -1,0 +1,15 @@
+diff --git a/main.py b/main.py
+index c86f6c8..6b55a8c 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,9 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    X = int(sys.stdin.read().strip())
++    ans = sum(i * j for i in range(1, 10) for j in range(1, 10) if i * j != X)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

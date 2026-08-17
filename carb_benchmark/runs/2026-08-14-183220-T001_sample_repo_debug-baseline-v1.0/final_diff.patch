@@ -1,0 +1,24 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..b12b101 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,7 @@
+-import json
++# In the appropriate module where the evaluation / handling occurs:
+ 
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
+-
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
+-
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++def _eval_fix(self):
++    """Ensure consistent handling of edge cases and relational/expression evaluation."""
++    if self.is_zero:
++        return self
++    return None
+\ No newline at end of file

@@ -1,0 +1,38 @@
+diff --git a/main.py b/main.py
+index c86f6c8..16f6563 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,32 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    n = int(input_data[0])
++    a = [int(x) for x in input_data[1:n+1]]
++    
++    pref_distinct = [0] * n
++    seen = set()
++    for i in range(n):
++        seen.add(a[i])
++        pref_distinct[i] = len(seen)
++        
++    suff_distinct = [0] * n
++    seen = set()
++    for i in range(n - 1, -1, -1):
++        seen.add(a[i])
++        suff_distinct[i] = len(seen)
++        
++    max_sum = 0
++    for i in range(n - 1):
++        total = pref_distinct[i] + suff_distinct[i + 1]
++        if total > max_sum:
++            max_sum = total
++            
++    print(max_sum)
++
++if __name__ == '__main__':
++    solve()

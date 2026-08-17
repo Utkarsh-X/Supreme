@@ -1,0 +1,51 @@
+diff --git a/django/db/models/expressions.py b/django/db/models/expressions.py
+index 5e3c7ca..cbf4fd8 100644
+--- a/django/db/models/expressions.py
++++ b/django/db/models/expressions.py
+@@ -533,6 +533,7 @@ _connector_combinations = [
+             Combinable.SUB,
+             Combinable.MUL,
+             Combinable.DIV,
++            Combinable.MOD,
+         )
+     },
+     # Bitwise operators.
+diff --git a/tests/expressions/tests.py b/tests/expressions/tests.py
+index 39e6c18..bbabad7 100644
+--- a/tests/expressions/tests.py
++++ b/tests/expressions/tests.py
+@@ -1412,6 +1412,19 @@ class ExpressionOperatorTests(TestCase):
+         qs = Employee.objects.annotate(modsalary=F("salary") % 20)
+         self.assertIsNone(qs.get().salary)
+ 
++    def test_modulo_mixed_types(self):
++        n = Number.objects.create(integer=4, decimal_value=Decimal("15"))
++        qs = Number.objects.filter(pk=n.pk).annotate(
++            mod1=F("decimal_value") % F("integer"),
++            mod2=F("integer") % F("decimal_value"),
++        )
++        self.assertIsInstance(qs.query.annotations["mod1"].output_field, DecimalField)
++        self.assertIsInstance(qs.query.annotations["mod2"].output_field, DecimalField)
++        self.assertEqual(
++            qs.values_list("mod1", "mod2").get(),
++            (Decimal("3"), Decimal("4")),
++        )
++
+     def test_lefthand_bitwise_and(self):
+         # LH Bitwise ands on integers
+         Number.objects.filter(pk=self.n.pk).update(integer=F("integer").bitand(56))
+@@ -2416,7 +2429,13 @@ class CombinedExpressionTests(SimpleTestCase):
+             (IntegerField, FloatField, FloatField),
+             (FloatField, IntegerField, FloatField),
+         ]
+-        connectors = [Combinable.ADD, Combinable.SUB, Combinable.MUL, Combinable.DIV]
++        connectors = [
++            Combinable.ADD,
++            Combinable.SUB,
++            Combinable.MUL,
++            Combinable.DIV,
++            Combinable.MOD,
++        ]
+         for lhs, rhs, combined in tests:
+             for connector in connectors:
+                 with self.subTest(

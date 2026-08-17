@@ -1,0 +1,66 @@
+diff --git a/main.py b/main.py
+index c86f6c8..2fcbe84 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,60 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++
++    if all(x == 1 for x in A):
++        print("Yes")
++        return
++
++    is_mod2 = (N % 4 == 2)
++
++    for start_val in (0, 1):
++        dp = [[False, False], [False, False]]
++        dp[start_val][0] = True
++
++        for i in range(N):
++            a_val = A[i]
++            next_dp = [[False, False], [False, False]]
++
++            for v in (0, 1):
++                for u in (0, 1):
++                    if not dp[v][u]:
++                        continue
++
++                    # Try next value nv in (0, 1)
++                    for nv in (0, 1):
++                        if v == 1 and nv == 1:
++                            # Cannot have adjacent 1s
++                            continue
++                        if v == 0 and nv == 0:
++                            if a_val == 0:
++                                # Cannot have adjacent 0s when A_i == 0
++                                continue
++                            next_u = u | 1
++                        else:
++                            next_u = u
++
++                        next_dp[nv][next_u] = True
++
++            dp = next_dp
++
++        # At step N, m_{N+1} must equal start_val
++        if is_mod2:
++            if dp[start_val][1]:
++                print("Yes")
++                return
++        else:
++            if dp[start_val][0] or dp[start_val][1]:
++                print("Yes")
++                return
++
++    print("No")
++
++if __name__ == "__main__":
++    solve()

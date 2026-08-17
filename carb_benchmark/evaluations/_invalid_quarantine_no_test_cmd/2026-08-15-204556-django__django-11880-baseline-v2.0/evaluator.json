@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-08-15-204556-django__django-11880-baseline-v2.0",
+  "task_id": "django__django-11880",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 100.1,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": null,
+  "test_output_tail": "",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/forms/fields.py",
+      "tests/forms_tests/field_tests/test_base.py"
+    ],
+    "lines_added": 9,
+    "lines_deleted": 0,
+    "total_lines_changed": 9,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

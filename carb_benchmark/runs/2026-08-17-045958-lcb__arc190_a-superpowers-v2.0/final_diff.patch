@@ -1,0 +1,231 @@
+diff --git a/main.py b/main.py
+index c86f6c8..b308fad 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,225 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    L = [0] * (M + 1)
++    R = [0] * (M + 1)
++    
++    idx = 2
++    for i in range(1, M + 1):
++        L[i] = int(input_data[idx])
++        R[i] = int(input_data[idx+1])
++        idx += 2
++
++    # Check Cost 1
++    for i in range(1, M + 1):
++        if L[i] == 1 and R[i] == N:
++            ops = [0] * (M + 1)
++            ops[i] = 1
++            sys.stdout.write(f"1\n" + " ".join(map(str, ops[1:])) + "\n")
++            return
++
++    # Check Cost 2
++    # Way A: Two Choice 1 ops covering [1, N]
++    best_L1_R = -1
++    best_L1_idx = -1
++    best_RN_L = N + 1
++    best_RN_idx = -1
++    
++    for i in range(1, M + 1):
++        if L[i] == 1:
++            if R[i] > best_L1_R:
++                best_L1_R = R[i]
++                best_L1_idx = i
++        if R[i] == N:
++            if L[i] < best_RN_L:
++                best_RN_L = L[i]
++                best_RN_idx = i
++
++    if best_L1_idx != -1 and best_RN_idx != -1 and best_L1_idx != best_RN_idx:
++        if best_L1_R >= best_RN_L - 1:
++            ops = [0] * (M + 1)
++            ops[best_L1_idx] = 1
++            ops[best_RN_idx] = 1
++            sys.stdout.write(f"2\n" + " ".join(map(str, ops[1:])) + "\n")
++            return
++
++    # Way B: Two Choice 2 ops disjoint
++    i_max_L = 1
++    i_min_R = 1
++    for i in range(1, M + 1):
++        if L[i] > L[i_max_L]:
++            i_max_L = i
++        if R[i] < R[i_min_R]:
++            i_min_R = i
++            
++    if i_max_L != i_min_R and R[i_min_R] < L[i_max_L]:
++        ops = [0] * (M + 1)
++        ops[i_max_L] = 2
++        ops[i_min_R] = 2
++        sys.stdout.write(f"2\n" + " ".join(map(str, ops[1:])) + "\n")
++        return
++
++    # Way C: One Choice 2 (k), One Choice 1 (m) such that [L_k, R_k] <= [L_m, R_m]
++    order = list(range(1, M + 1))
++    order.sort(key=lambda i: (L[i], -R[i]))
++    
++    found_way_c = False
++    way_c_k = -1
++    way_c_m = -1
++    
++    max_R_so_far = -1
++    max_R_idx = -1
++    
++    for i in order:
++        if R[i] <= max_R_so_far and max_R_idx != i:
++            found_way_c = True
++            way_c_k = i
++            way_c_m = max_R_idx
++            break
++        if R[i] > max_R_so_far:
++            max_R_so_far = R[i]
++            max_R_idx = i
++            
++    if found_way_c:
++        ops = [0] * (M + 1)
++        ops[way_c_k] = 2
++        ops[way_c_m] = 1
++        sys.stdout.write(f"2\n" + " ".join(map(str, ops[1:])) + "\n")
++        return
++
++    # Top 3 arrays for general solver
++    b1_R = [-1] * (N + 2)
++    b1_idx = [-1] * (N + 2)
++    b2_R = [-1] * (N + 2)
++    b2_idx = [-1] * (N + 2)
++    b3_R = [-1] * (N + 2)
++    b3_idx = [-1] * (N + 2)
++
++    def update_top3(p, r, i):
++        if i == b1_idx[p] or i == b2_idx[p] or i == b3_idx[p]:
++            return
++        if r > b1_R[p]:
++            b3_R[p], b3_idx[p] = b2_R[p], b2_idx[p]
++            b2_R[p], b2_idx[p] = b1_R[p], b1_idx[p]
++            b1_R[p], b1_idx[p] = r, i
++        elif r > b2_R[p]:
++            b3_R[p], b3_idx[p] = b2_R[p], b2_idx[p]
++            b2_R[p], b2_idx[p] = r, i
++        elif r > b3_R[p]:
++            b3_R[p], b3_idx[p] = r, i
++
++    for i in range(1, M + 1):
++        update_top3(L[i], R[i], i)
++
++    for p in range(1, N + 1):
++        for r, i in [(b1_R[p-1], b1_idx[p-1]), (b2_R[p-1], b2_idx[p-1]), (b3_R[p-1], b3_idx[p-1])]:
++            if i != -1:
++                update_top3(p, r, i)
++
++    go = [None] * 19
++    go[0] = [b1_R[p] + 1 if b1_R[p] != -1 else p for p in range(N + 2)]
++    for p in range(N + 2):
++        if go[0][p] > N + 1:
++            go[0][p] = N + 1
++
++    for d in range(1, 19):
++        prev = go[d - 1]
++        go[d] = [prev[prev[p]] for p in range(N + 2)]
++
++    def get_jump(p, ex1, ex2=-1):
++        if b1_idx[p] != -1 and b1_idx[p] != ex1 and b1_idx[p] != ex2:
++            return b1_R[p] + 1, b1_idx[p]
++        if b2_idx[p] != -1 and b2_idx[p] != ex1 and b2_idx[p] != ex2:
++            return b2_R[p] + 1, b2_idx[p]
++        if b3_idx[p] != -1 and b3_idx[p] != ex1 and b3_idx[p] != ex2:
++            return b3_R[p] + 1, b3_idx[p]
++        return p, -1
++
++    def solve_cover_cost(target_L, target_R, ex1, ex2=-1):
++        curr = target_L
++        steps = 0
++        while curr <= target_R:
++            next_pos, idx = get_jump(curr, ex1, ex2)
++            if next_pos <= curr:
++                return 10**9
++            if next_pos > target_R:
++                return steps + 1
++            if b1_idx[curr] != ex1 and b1_idx[curr] != ex2:
++                for d in range(18, -1, -1):
++                    if go[d][curr] <= target_R:
++                        steps += (1 << d)
++                        curr = go[d][curr]
++            else:
++                steps += 1
++                curr = next_pos
++        return steps
++
++    def reconstruct_cover(target_L, target_R, ex1, ex2=-1):
++        curr = target_L
++        used_ops = []
++        while curr <= target_R:
++            next_pos, idx = get_jump(curr, ex1, ex2)
++            if next_pos <= curr:
++                return None
++            used_ops.append(idx)
++            curr = next_pos
++        return used_ops
++
++    best_cost = 10**9
++    best_strat = None
++
++    # Strategy 0
++    c0 = solve_cover_cost(1, N, -1)
++    if c0 < best_cost:
++        best_cost = c0
++        best_strat = ("S0",)
++
++    # Strategy 2
++    if i_max_L != i_min_R:
++        tL = L[i_max_L]
++        tR = R[i_min_R]
++        if tL <= tR:
++            c2 = 2 + solve_cover_cost(tL, tR, i_max_L, i_min_R)
++            if c2 < best_cost:
++                best_cost = c2
++                best_strat = ("S2", i_max_L, i_min_R, tL, tR)
++
++    # Strategy 1 (only check if best_cost > 3)
++    if best_cost > 3:
++        for k in range(1, M + 1):
++            c1 = 1 + solve_cover_cost(L[k], R[k], k)
++            if c1 < best_cost:
++                best_cost = c1
++                best_strat = ("S1", k)
++
++    if best_cost >= 10**8:
++        sys.stdout.write("-1\n")
++        return
++
++    ops = [0] * (M + 1)
++    if best_strat[0] == "S0":
++        c_ops = reconstruct_cover(1, N, -1)
++        for i in c_ops: ops[i] = 1
++    elif best_strat[0] == "S2":
++        u, v, tL, tR = best_strat[1], best_strat[2], best_strat[3], best_strat[4]
++        ops[u] = 2
++        ops[v] = 2
++        c_ops = reconstruct_cover(tL, tR, u, v)
++        for i in c_ops: ops[i] = 1
++    elif best_strat[0] == "S1":
++        k = best_strat[1]
++        ops[k] = 2
++        c_ops = reconstruct_cover(L[k], R[k], k)
++        for i in c_ops: ops[i] = 1
++
++    sys.stdout.write(f"{best_cost}\n" + " ".join(map(str, ops[1:])) + "\n")
++
++if __name__ == '__main__':
++    main()

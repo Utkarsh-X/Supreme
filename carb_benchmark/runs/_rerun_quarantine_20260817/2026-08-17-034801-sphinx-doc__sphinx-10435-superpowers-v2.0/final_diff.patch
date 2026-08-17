@@ -1,0 +1,58 @@
+diff --git a/sphinx/writers/latex.py b/sphinx/writers/latex.py
+index e0c7d56..a7dae15 100644
+--- a/sphinx/writers/latex.py
++++ b/sphinx/writers/latex.py
+@@ -1709,10 +1709,12 @@ class LaTeXTranslator(SphinxTranslator):
+             node.astext(), lang, opts=opts, location=node)
+         # TODO: Use nowrap option once LaTeX formatter supports it
+         # https://github.com/pygments/pygments/pull/1343
++        hlcode = hlcode.replace(r'\begin{Verbatim}[commandchars=\\\{\}]' + '\n',
++                                r'\sphinxcode{\sphinxupquote{')
+         hlcode = hlcode.replace(r'\begin{Verbatim}[commandchars=\\\{\}]',
+                                 r'\sphinxcode{\sphinxupquote{')
+         # get consistent trailer
+-        hlcode = hlcode.rstrip()[:-14]  # strip \end{Verbatim}
++        hlcode = hlcode.rstrip()[:-14].rstrip('\n')  # strip \end{Verbatim}
+         self.body.append(hlcode)
+         self.body.append('}}')
+         raise nodes.SkipNode
+diff --git a/tests/test_build_latex.py b/tests/test_build_latex.py
+index dd0db8a..32e13e3 100644
+--- a/tests/test_build_latex.py
++++ b/tests/test_build_latex.py
+@@ -8,6 +8,10 @@ from shutil import copyfile
+ from subprocess import PIPE, CalledProcessError
+ 
+ import pytest
++import pygments
++from packaging import version
++
++PYGMENTS_VERSION = version.parse(pygments.__version__).release
+ 
+ from sphinx.builders.latex import default_latex_documents
+ from sphinx.config import Config
+@@ -1607,8 +1611,13 @@ def test_latex_code_role(app):
+     app.build()
+     content = (app.outdir / 'python.tex').read_text()
+ 
++    if PYGMENTS_VERSION >= (2, 14):
++        kw_sep = r'\PYG{+w}{ }'
++    else:
++        kw_sep = ' '
++
+     common_content = (
+-        r'\PYG{k}{def} '
++        r'\PYG{k}{def}' + kw_sep +
+         r'\PYG{n+nf}{foo}'
+         r'\PYG{p}{(}'
+         r'\PYG{l+m+mi}{1} '
+@@ -1623,7 +1632,7 @@ def test_latex_code_role(app):
+         r'\PYG{p}{)}'
+         r'\PYG{p}{:} '
+         r'\PYG{k}{pass}')
+-    assert (r'Inline \sphinxcode{\sphinxupquote{' + '\n' +
+-            common_content + '\n}} code block') in content
++    assert (r'Inline \sphinxcode{\sphinxupquote{' +
++            common_content + r'}} code block') in content
+     assert (r'\begin{sphinxVerbatim}[commandchars=\\\{\}]' +
+             '\n' + common_content + '\n' + r'\end{sphinxVerbatim}') in content

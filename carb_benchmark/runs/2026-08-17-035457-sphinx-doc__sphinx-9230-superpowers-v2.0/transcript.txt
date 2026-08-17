@@ -1,0 +1,21 @@
+### Summary of Fix
+
+#### Root Cause
+In `sphinx.util.docfields.DocFieldTransformer.transform`, parameter docfields with combined inline types (such as `:param dict(str, str) opc_meta: (optional)`) were parsed using `fieldarg.split(None, 1)`. When the datatype contained spaces (e.g. `dict(str, str)`), `split(None, 1)` incorrectly split on the *first* space (after `dict(str,`). This resulted in `argtype` being parsed as `'dict(str,'` and `argname` being parsed as `'str) opc_meta'`, producing corrupted doc rendering like `str) opc_meta (dict(str,))`.
+
+#### Fix
+1. **[sphinx/util/docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301)**: Replaced `fieldarg.split(None, 1)` with `fieldarg.rsplit(None, 1)`. Because parameter names in programming languages cannot contain spaces, splitting from the right isolates the parameter name (`argname`) at the end of the argument string and leaves the full complex data type (`argtype`) intact.
+2. **[sphinx/util/typing.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/typing.py#L37)**: Updated Python 3.10+ compatibility import for `types.UnionType`.
+3. **[tests/test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L987)**: Added unit test `test_info_field_list_datatype_with_spaces` to verify that docfields containing data types with spaces (such as `:param dict(str, str) opc_meta:`) render correctly as `opc_meta (dict(str, str)) – (optional)`.
+### Solution Summary
+
+#### Bug Description
+When docstrings contain parameter specifications with complex datatypes containing whitespace (e.g., `:param dict(str, str) opc_meta: (optional)`), Sphinx incorrectly rendered the parameter name and type as `str) opc_meta (dict(str,) –(optional)`.
+
+#### Root Cause
+In `sphinx.util.docfields.DocFieldTransformer.transform()`, parameter docfields specified as `:param type name:` were split using `fieldarg.split(None, 1)`. Because `split(None, 1)` splits at the first whitespace from the left, any space inside a complex type string (e.g. between `str,` and `str`) caused the type to be prematurely cut off as `dict(str,` and the remaining part `str) opc_meta` to be mistakenly parsed as the parameter's name.
+
+#### Resolution
+1. **[sphinx/util/docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301)**: Updated `fieldarg.split(None, 1)` to `fieldarg.rsplit(None, 1)`. Since Python parameter names cannot contain whitespace, splitting from the right correctly separates the parameter name at the end, preserving complex type strings containing whitespace.
+2. **[sphinx/util/typing.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/typing.py#L37)**: Updated Python 3.10+ compatibility import from `types.Union` to `types.UnionType`.
+3. **[tests/test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L987)**: Added unit test `test_info_field_list_datatype_with_spaces` to confirm proper parsing and rendering for parameters with types containing spaces such as `dict(str, str)`.

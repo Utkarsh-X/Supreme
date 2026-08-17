@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-08-17-031812-matplotlib__matplotlib-23476-superpowers-v2.0",
+  "task_id": "matplotlib__matplotlib-23476",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 209.65,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-23476",
+  "test_output_tail": "  [setup] overlay: copied 10 compiled files from matplotlib==3.5.3\n# EVAL rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_figure.py .                                    [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED lib/matplotlib/tests/test_figure.py::test_unpickle_with_device_pixel_ratio\n============================== 1 passed in 0.94s ==============================\n\nPASS: matplotlib__matplotlib-23476 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "lib/matplotlib/backend_bases.py",
+      "lib/matplotlib/figure.py",
+      "lib/matplotlib/tests/test_pickle.py"
+    ],
+    "lines_added": 17,
+    "lines_deleted": 1,
+    "total_lines_changed": 18,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

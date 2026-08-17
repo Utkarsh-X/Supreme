@@ -1,0 +1,9 @@
+I have identified and resolved the issue where highlighted inline code rendered in LaTeX contained leading and trailing whitespace/newlines in PDF output.
+
+### Root Cause
+When Pygments' `LaTeXFormatter` formats code, it wraps the output in a block `\begin{Verbatim}[commandchars=\\\{\}]` environment containing a leading newline (`\n`) after `\begin{Verbatim}` and a trailing newline before `\end{Verbatim}`.
+In [`sphinx/writers/latex.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1709-L1720), `visit_literal` replaced `\begin{Verbatim}[commandchars=\\\{\}]` with `\sphinxcode{\sphinxupquote{` and stripped `\end{Verbatim}`, but left those Pygments-introduced leading and trailing newlines (`\n`) inside `\sphinxcode{\sphinxupquote{...}}`. In TeX, newlines outside verbatim blocks are parsed as spaces, causing PDF output to render extra whitespace at the start and end of highlighted inline code blocks.
+
+### Fix
+- Updated [`visit_literal`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1712-L1718) in `sphinx/writers/latex.py` to strip the leading `\n` following `\begin{Verbatim}` and trailing `\n` preceding `\end{Verbatim}`.
+- Updated [`test_latex_code_role`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1610-L1635) in `tests/test_build_latex.py` to verify that inline LaTeX code blocks no longer contain extra newlines.

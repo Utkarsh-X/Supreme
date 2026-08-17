@@ -1,0 +1,11 @@
+### Summary of Fix
+
+#### Root Cause
+In [`django/contrib/staticfiles/storage.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264), the local variable `substitutions` was defined only inside the `for i in range(self.max_post_process_passes):` loop. When `max_post_process_passes` was set to `0`, `range(0)` was empty and the loop body did not execute. Consequently, evaluating `if substitutions:` after the loop raised an `UnboundLocalError: local variable 'substitutions' referenced before assignment`.
+
+#### Resolution
+1. **[django/contrib/staticfiles/storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264)**: Initialized `substitutions = False` before the `for i in range(self.max_post_process_passes):` loop.
+2. **[tests/staticfiles_tests/test_storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/tests/staticfiles_tests/test_storage.py#L456)**: Added unit test `test_post_process_zero_passes` to verify that `collectstatic` succeeds when `max_post_process_passes = 0`.
+
+#### Verification
+Executed test suite via `python tests/runtests.py staticfiles_tests` — all 158 tests passed successfully.

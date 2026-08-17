@@ -1,0 +1,14 @@
+An optimal solution has been written to [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_a/main.py).
+
+### Method Explanation
+By analyzing the stack operations backwards from index $N-1$ down to $0$, we can model the relative stack height transitions.
+Let $V_k$ be the maximum value obtained when considering the suffix of operations from index $N-1-k$ to $N-1$.
+The DP recurrence simplifies to:
+$$V_k = \max(V_{k-1} + A_{N-1-k}, V_{k-2})$$
+with base values $V_{-1} = 0$ and $V_0 = A_{N-1}$.
+
+This allows us to compute the maximum possible sum in $O(N)$ time and $O(1)$ space.
+
+### Verification
+- Tested against all 3 public sample cases (Output matches: 8, -1, 369).
+- Verified against 10,000 randomized test cases comparing the $O(N)$ state machine against the exact full DP table.

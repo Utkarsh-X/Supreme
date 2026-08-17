@@ -1,0 +1,61 @@
+diff --git a/sympy/core/add.py b/sympy/core/add.py
+index 83a5f2a..a0bd33f 100644
+--- a/sympy/core/add.py
++++ b/sympy/core/add.py
+@@ -536,8 +536,7 @@ def _eval_is_zero(self):
+             return
+         nz = []
+         z = 0
+-        im_or_z = False
+-        im = False
++        im_I = []
+         for a in self.args:
+             if a.is_real:
+                 if a.is_zero:
+@@ -547,9 +546,9 @@ def _eval_is_zero(self):
+                 else:
+                     return
+             elif a.is_imaginary:
+-                im = True
++                im_I.append(a*S.ImaginaryUnit)
+             elif (S.ImaginaryUnit*a).is_real:
+-                im_or_z = True
++                im_I.append(a*S.ImaginaryUnit)
+             else:
+                 return
+         if z == len(self.args):
+@@ -558,11 +557,13 @@ def _eval_is_zero(self):
+             return None
+         b = self.func(*nz)
+         if b.is_zero:
+-            if not im_or_z and not im:
++            if not im_I:
+                 return True
+-            if im and not im_or_z:
+-                return False
+-        if b.is_zero is False:
++            b_im = self.func(*im_I)
++            if b_im is self:
++                return None
++            return b_im.is_zero
++        elif b.is_zero is False:
+             return False
+ 
+     def _eval_is_odd(self):
+diff --git a/sympy/core/tests/test_arit.py b/sympy/core/tests/test_arit.py
+index e2398a4..3065ab7 100644
+--- a/sympy/core/tests/test_arit.py
++++ b/sympy/core/tests/test_arit.py
+@@ -1983,8 +1983,12 @@ def test_issue_8247_8354():
+ 
+ 
+ def test_Add_is_zero():
++    from sympy import simplify
+     x, y = symbols('x y', zero=True)
+     assert (x + y).is_zero
++    e = -2*I + (1 + I)**2
++    assert e.is_zero is not False
++    assert simplify(e).is_zero is True
+ 
+ 
+ def test_issue_14392():

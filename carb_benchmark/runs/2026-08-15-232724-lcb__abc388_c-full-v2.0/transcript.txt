@@ -1,0 +1,13 @@
+The solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_c/main.py).
+
+### Method Explanation
+The problem requires finding the number of distinct ordered pairs of mochi $(i, j)$ such that mochi $i$ can be placed on top of mochi $j$, which is valid if and only if $2 \times A_i \le A_j$.
+
+Since the array $A$ is given already sorted in non-decreasing order:
+- As $i$ increases, $2 \times A_i$ is non-decreasing.
+- We can use a two-pointer approach ($O(N)$ time complexity). For each mochi $i$, we advance a pointer $j$ until $A_j \ge 2 \times A_i$.
+- Because $A$ is sorted, all elements from index $j$ through $N-1$ satisfy $A_k \ge 2 \times A_i$. Thus, there are $(N - j)$ valid choices of bottom mochi for top mochi $i$.
+- We accumulate $(N - j)$ across all $i$ from $0$ to $N-1$.
+
+### Verification
+The solution was tested and verified against all public sample test cases.

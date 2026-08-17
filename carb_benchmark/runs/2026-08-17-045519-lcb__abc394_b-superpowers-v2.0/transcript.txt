@@ -1,0 +1,10 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_b/main.py).
+
+### Summary of Implementation
+- Read input from standard input.
+- Extracted the list of $N$ strings.
+- Sorted the strings in ascending order of their length using `key=len`.
+- Concatenated the sorted strings and printed the result to standard output.
+
+### Verification
+The solution was tested against all sample test cases and passed cleanly.

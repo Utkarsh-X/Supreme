@@ -1,0 +1,5 @@
+I have resolved the issue where `Field.__deepcopy__` did not deepcopy the `error_messages` dictionary.
+
+### Summary of Changes
+1. **[fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/django/forms/fields.py#L198-L204)**: Updated `Field.__deepcopy__` to perform a deepcopy on `self.error_messages` via `copy.deepcopy(self.error_messages, memo)`. This ensures that field copies do not share the same `error_messages` dictionary instance, preventing modifications to error messages on one field instance from affecting others.
+2. **[test_base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/tests/forms_tests/field_tests/test_base.py#L23-L28)**: Added `test_field_deepcopy` to verify that modifying `error_messages` on a deepcopied field does not mutate the original field's `error_messages`.

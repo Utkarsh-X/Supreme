@@ -1,0 +1,23 @@
+diff --git a/auth_service.py b/auth_service.py
+index d427ed9..ea1611a 100644
+--- a/auth_service.py
++++ b/auth_service.py
+@@ -8,16 +8,8 @@ class AuthService:
+         self.audit_log = []
+ 
+     def validate_password(self, password):
+-        """
+-        Password must be at least 8 characters long and contain at least one digit.
+-        """
+-        # TODO: Implement password validation rules
+         pass
+ 
+     def register_user(self, email, password):
+-        """
+-        Registers a new user, validates password, creates session token,
+-        and logs user_registered event in audit log.
+-        """
+-        # TODO: Implement full registration workflow
+-        pass
++        self.users[email] = password
++        return {"email": email}

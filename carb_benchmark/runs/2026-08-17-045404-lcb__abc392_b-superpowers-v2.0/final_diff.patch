@@ -1,0 +1,23 @@
+diff --git a/main.py b/main.py
+index c86f6c8..8d00008 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,17 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    A = set(map(int, input_data[2:2+M]))
++
++    missing = [i for i in range(1, N + 1) if i not in A]
++
++    print(len(missing))
++    print(*missing)
++
++if __name__ == '__main__':
++    main()

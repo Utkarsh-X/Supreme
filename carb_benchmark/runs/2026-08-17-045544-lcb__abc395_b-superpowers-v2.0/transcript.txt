@@ -1,0 +1,12 @@
+I have implemented the solution for the $N \times N$ pattern problem in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_b/main.py).
+
+### Method Explanation
+For a cell at row $r$ and column $c$ ($1$-indexed), the operations that cover cell $(r, c)$ are precisely steps $1, 2, \dots, d$, where:
+$$d = \min(r, c, N + 1 - r, N + 1 - c)$$
+
+Since operations overwrite existing colors, the final color of cell $(r, c)$ is determined by step $d$:
+- If $d$ is **odd**, the cell is colored black (`#`).
+- If $d$ is **even**, the cell is colored white (`.`).
+
+### Verification
+The implementation was tested against all example test cases ($N = 11$, $N = 5$, $N = 8$, $N = 2$, and boundary case $N = 1$), and all test cases passed with expected outputs.

@@ -1,0 +1,179 @@
+diff --git a/lib/matplotlib/artist.py b/lib/matplotlib/artist.py
+index 99577ec..aa273f6 100644
+--- a/lib/matplotlib/artist.py
++++ b/lib/matplotlib/artist.py
+@@ -221,9 +221,9 @@ class Artist:
+                 _ax_flag = True
+ 
+             if self.figure:
+-                self.figure = None
+                 if not _ax_flag:
+-                    self.figure = True
++                    self.figure.stale = True
++                self.figure = None
+ 
+         else:
+             raise NotImplementedError('cannot remove artist')
+@@ -277,6 +277,8 @@ class Artist:
+         self._axes = new_axes
+         if new_axes is not None and new_axes is not self:
+             self.stale_callback = _stale_axes_callback
++        else:
++            self.stale_callback = None
+ 
+     @property
+     def stale(self):
+@@ -720,7 +722,7 @@ class Artist:
+         # trying to change the figure an artist is associated with which
+         # is not allowed for the same reason as adding the same instance
+         # to more than one Axes
+-        if self.figure is not None:
++        if self.figure is not None and fig is not None:
+             raise RuntimeError("Can not put single artist in "
+                                "more than one figure")
+         self.figure = fig
+diff --git a/lib/matplotlib/axes/_base.py b/lib/matplotlib/axes/_base.py
+index 90b0bf1..be61d4d 100644
+--- a/lib/matplotlib/axes/_base.py
++++ b/lib/matplotlib/axes/_base.py
+@@ -829,16 +829,16 @@ class _AxesBase(martist.Artist):
+     def set_figure(self, fig):
+         # docstring inherited
+         super().set_figure(fig)
++        if fig is not None:
++            self.bbox = mtransforms.TransformedBbox(self._position,
++                                                    fig.transSubfigure)
++            # these will be updated later as data is added
++            self.dataLim = mtransforms.Bbox.null()
++            self._viewLim = mtransforms.Bbox.unit()
++            self.transScale = mtransforms.TransformWrapper(
++                mtransforms.IdentityTransform())
+ 
+-        self.bbox = mtransforms.TransformedBbox(self._position,
+-                                                fig.transSubfigure)
+-        # these will be updated later as data is added
+-        self.dataLim = mtransforms.Bbox.null()
+-        self._viewLim = mtransforms.Bbox.unit()
+-        self.transScale = mtransforms.TransformWrapper(
+-            mtransforms.IdentityTransform())
+-
+-        self._set_lim_and_transforms()
++            self._set_lim_and_transforms()
+ 
+     def _unstale_viewLim(self):
+         # We should arrange to store this information once per share-group
+@@ -1308,6 +1308,34 @@ class _AxesBase(martist.Artist):
+         self._get_patches_for_fill = _process_plot_var_args(self, 'fill')
+ 
+         self._gridOn = mpl.rcParams['axes.grid']
++        if hasattr(self, '_children'):
++            for artist in self._children:
++                artist.axes = None
++                artist.set_figure(None)
++
++        if hasattr(self, 'child_axes'):
++            for child_ax in self.child_axes:
++                child_ax.axes = None
++                child_ax.set_figure(None)
++
++        if getattr(self, 'legend_', None) is not None:
++            self.legend_.axes = None
++            self.legend_.set_figure(None)
++
++        for title in (getattr(self, 'title', None),
++                      getattr(self, '_left_title', None),
++                      getattr(self, '_right_title', None),
++                      getattr(self, 'patch', None)):
++            if title is not None:
++                title.axes = None
++                title.set_figure(None)
++
++        if hasattr(self, 'containers'):
++            for container in self.containers:
++                for child in container.get_children():
++                    child.axes = None
++                    child.set_figure(None)
++
+         self._children = []
+         self._mouseover_set = _OrderedSet()
+         self.child_axes = []
+diff --git a/lib/matplotlib/figure.py b/lib/matplotlib/figure.py
+index 6c18ba1..9045ff2 100644
+--- a/lib/matplotlib/figure.py
++++ b/lib/matplotlib/figure.py
+@@ -918,6 +918,8 @@ default: %(va)s
+         self._axobservers.process("_axes_change_event", self)
+         self.stale = True
+         self._localaxes.remove(ax)
++        ax.axes = None
++        ax.set_figure(None)
+ 
+         # Break link between any shared axes
+         for name in ax._axis_names:
+@@ -943,12 +945,18 @@ default: %(va)s
+         # first clear the axes in any subfigures
+         for subfig in self.subfigs:
+             subfig.clear(keep_observers=keep_observers)
++            subfig.axes = None
++            subfig.set_figure(None)
+         self.subfigs = []
+ 
+         for ax in tuple(self.axes):  # Iterate over the copy.
+             ax.clear()
+             self.delaxes(ax)  # Remove ax from self._axstack.
+ 
++        for art in (*self.artists, *self.lines, *self.patches, *self.texts, *self.images, *self.legends):
++            art.axes = None
++            art.set_figure(None)
++
+         self.artists = []
+         self.lines = []
+         self.patches = []
+@@ -957,6 +965,12 @@ default: %(va)s
+         self.legends = []
+         if not keep_observers:
+             self._axobservers = cbook.CallbackRegistry()
++
++        for title in (self._suptitle, self._supxlabel, self._supylabel):
++            if title is not None:
++                title.axes = None
++                title.set_figure(None)
++
+         self._suptitle = None
+         self._supxlabel = None
+         self._supylabel = None
+diff --git a/lib/matplotlib/tests/test_axes.py b/lib/matplotlib/tests/test_axes.py
+index e70bfc7..2275e36 100644
+--- a/lib/matplotlib/tests/test_axes.py
++++ b/lib/matplotlib/tests/test_axes.py
+@@ -8382,3 +8382,30 @@ def test_scatter_color_repr_error():
+         c = 'red\n'
+         mpl.axes.Axes._parse_scatter_color_args(
+             c, None, kwargs={}, xsize=2, get_next_color_func=get_next_color)
++
++
++def test_cla_clf_clears_axes_and_figure():
++    fig, ax = plt.subplots()
++    l, = ax.plot([1, 2], label='line')
++    c = ax.scatter([1], [2])
++    p, = ax.fill([0, 1, 1, 0], [0, 0, 1, 1])
++    t = ax.text(0, 0, 'hi')
++    leg = ax.legend()
++    tbl = ax.table([[1]])
++
++    ax.clear()
++    for art in [l, c, p, t, leg, tbl]:
++        assert art.axes is None
++        assert art.figure is None
++
++    fig, ax = plt.subplots()
++    l, = ax.plot([1, 2])
++    st = fig.suptitle('Title')
++    fig.clear()
++    assert l.axes is None
++    assert l.figure is None
++    assert ax.axes is None
++    assert ax.figure is None
++    assert st.axes is None
++    assert st.figure is None
++

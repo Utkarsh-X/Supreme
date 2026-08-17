@@ -1,0 +1,33 @@
+diff --git a/main.py b/main.py
+index c86f6c8..0a41c47 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,27 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import Counter
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    cards = [int(x) for x in input_data]
++    
++    counts = Counter(cards)
++    possible = False
++    for x in counts:
++        if counts[x] >= 3:
++            for y in counts:
++                if x != y and counts[y] >= 2:
++                    possible = True
++                    break
++        if possible:
++            break
++            
++    if possible:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == "__main__":
++    solve()

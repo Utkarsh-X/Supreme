@@ -1,0 +1,113 @@
+diff --git a/sympy/__init__.py b/sympy/__init__.py
+index 21936f6..2bad938 100644
+--- a/sympy/__init__.py
++++ b/sympy/__init__.py
+@@ -23,6 +23,16 @@
+ 
+ del mpmath
+ 
++import collections
++try:
++    import collections.abc
++    for name in ['Mapping', 'MutableMapping', 'Iterable', 'MutableSet', 'Callable', 'Sequence', 'MappingView']:
++        if not hasattr(collections, name) and hasattr(collections.abc, name):
++            setattr(collections, name, getattr(collections.abc, name))
++except ImportError:
++    pass
++
++
+ from sympy.release import __version__
+ 
+ if 'dev' in __version__:
+diff --git a/sympy/physics/vector/dyadic.py b/sympy/physics/vector/dyadic.py
+index dc68527..953aad3 100644
+--- a/sympy/physics/vector/dyadic.py
++++ b/sympy/physics/vector/dyadic.py
+@@ -59,6 +59,8 @@ def __init__(self, inlist):
+ 
+     def __add__(self, other):
+         """The add operator for Dyadic. """
++        if other == 0 and not isinstance(other, bool):
++            return self
+         other = _check_dyadic(other)
+         return Dyadic(self.args + other.args)
+ 
+diff --git a/sympy/physics/vector/tests/test_dyadic.py b/sympy/physics/vector/tests/test_dyadic.py
+index 0ec5ba8..5195326 100644
+--- a/sympy/physics/vector/tests/test_dyadic.py
++++ b/sympy/physics/vector/tests/test_dyadic.py
+@@ -81,3 +81,29 @@ def test_dyadic_simplify():
+     test4 = ((-4 * x * y**2 - 2 * y**3 - 2 * x**2 * y) / (x + y)**2) * dy
+     test4 = test4.simplify()
+     assert (N.x & test4 & N.x) == -2 * y
++
++
++def test_dyadic_add_0():
++    from sympy import S
++    from sympy.physics.vector import Dyadic
++    from sympy.utilities.pytest import raises
++    N = ReferenceFrame('N')
++    d = N.x | N.x
++    assert sum([d, 0 * d]) == d
++    assert sum([d, 0]) == d
++    assert sum([0, d]) == d
++    assert d + 0 == d
++    assert 0 + d == d
++    assert d - 0 == d
++    assert 0 - d == -d
++    assert d + 0.0 == d
++    assert 0.0 + d == d
++    assert d + S(0) == d
++    assert S(0) + d == d
++    assert d + Dyadic(0) == d
++    assert Dyadic(0) + d == d
++    raises(TypeError, lambda: d + 1)
++    raises(TypeError, lambda: 1 + d)
++    raises(TypeError, lambda: d + False)
++    raises(TypeError, lambda: False + d)
++
+diff --git a/sympy/physics/vector/tests/test_vector.py b/sympy/physics/vector/tests/test_vector.py
+index 828a25f..878a64a 100644
+--- a/sympy/physics/vector/tests/test_vector.py
++++ b/sympy/physics/vector/tests/test_vector.py
+@@ -165,3 +165,27 @@ def test_vector_simplify():
+     test4 = ((-4 * x * y**2 - 2 * y**3 - 2 * x**2 * y) / (x + y)**2) * N.x
+     test4 = test4.simplify()
+     assert (test4 & N.x) == -2 * y
++
++
++def test_vector_add_0():
++    from sympy import S
++    N = ReferenceFrame('N')
++    assert sum([N.x, 0 * N.x]) == N.x
++    assert sum([N.x, N.y]) == N.x + N.y
++    assert sum([N.x, 0]) == N.x
++    assert sum([0, N.x]) == N.x
++    assert N.x + 0 == N.x
++    assert 0 + N.x == N.x
++    assert N.x - 0 == N.x
++    assert 0 - N.x == -N.x
++    assert N.x + 0.0 == N.x
++    assert 0.0 + N.x == N.x
++    assert N.x + S(0) == N.x
++    assert S(0) + N.x == N.x
++    assert N.x + Vector(0) == N.x
++    assert Vector(0) + N.x == N.x
++    raises(TypeError, lambda: N.x + 1)
++    raises(TypeError, lambda: 1 + N.x)
++    raises(TypeError, lambda: N.x + False)
++    raises(TypeError, lambda: False + N.x)
++
+diff --git a/sympy/physics/vector/vector.py b/sympy/physics/vector/vector.py
+index a048ee5..fdf6c78 100644
+--- a/sympy/physics/vector/vector.py
++++ b/sympy/physics/vector/vector.py
+@@ -57,6 +57,8 @@ def __hash__(self):
+ 
+     def __add__(self, other):
+         """The add operator for Vector. """
++        if other == 0 and not isinstance(other, bool):
++            return self
+         other = _check_vector(other)
+         return Vector(self.args + other.args)
+ 

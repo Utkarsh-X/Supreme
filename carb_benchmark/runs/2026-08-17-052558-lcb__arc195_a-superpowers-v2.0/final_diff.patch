@@ -1,0 +1,50 @@
+diff --git a/main.py b/main.py
+index c86f6c8..76dc735 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,44 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    A = input_data[2:2+N]
++    B = input_data[2+N:2+N+M]
++    
++    # Greedy left-to-right matching
++    L = [-1] * M
++    idx_a = 0
++    idx_b = 0
++    while idx_a < N and idx_b < M:
++        if A[idx_a] == B[idx_b]:
++            L[idx_b] = idx_a
++            idx_b += 1
++        idx_a += 1
++        
++    if idx_b < M:
++        print("No")
++        return
++        
++    # Greedy right-to-left matching
++    R = [-1] * M
++    idx_a = N - 1
++    idx_b = M - 1
++    while idx_a >= 0 and idx_b >= 0:
++        if A[idx_a] == B[idx_b]:
++            R[idx_b] = idx_a
++            idx_b -= 1
++        idx_a -= 1
++        
++    if L == R:
++        print("No")
++    else:
++        print("Yes")
++
++if __name__ == '__main__':
++    main()

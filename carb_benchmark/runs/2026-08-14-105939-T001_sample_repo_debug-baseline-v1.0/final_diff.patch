@@ -1,0 +1,22 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..350533a 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,7 @@
+-import json
++# conf.py
+ 
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
++# ... other configurations ...
+ 
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
++autodoc_default_flags = ['members', 'inherited-members']
+ 
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++# ... rest of your configurations ...
+\ No newline at end of file

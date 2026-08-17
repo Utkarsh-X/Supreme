@@ -1,0 +1,9 @@
+### Root Cause
+In [`sympy/core/sympify.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L516), `hit = kern in s` was evaluated outside the `if ' ' in s:` block inside `kernS`. When the input string contained parentheses (e.g. `"(2*x)/(x-1)"`) but had no spaces remaining after pre-processing, the `if ' ' in s:` block was skipped. Consequently, `kern` was never defined, raising an `UnboundLocalError: local variable 'kern' referenced before assignment`.
+
+### Fix
+Moved `hit = True` inside the `if ' ' in s:` block so `hit` is set to `True` only when a temporary `kern` variable is created and substituted into `s`. When no spaces are present, `hit` remains `False` (as initialized at the start of `kernS`), skipping substitution logic cleanly.
+
+### Verification
+- Executed `kernS("(2*x)/(x-1)")` via Python, confirming it evaluates to `2*x/(x - 1)` without error.
+- Added a regression test case to [`test_kernS`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/tests/test_sympify.py#L515) in `sympy/core/tests/test_sympify.py` and ran `pytest`, which passed cleanly.

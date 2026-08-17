@@ -1,0 +1,10 @@
+{
+  "run_id": "2026-08-14-183944-T003_diagnostic_premature_completion-baseline-v1.0",
+  "task_id": "C_DIAG_002",
+  "configuration_id": "baseline-v1.0",
+  "model": "gemini-2.5-flash",
+  "tokens_used": 0,
+  "wall_clock_seconds": 0.54,
+  "passed": false,
+  "lines_changed": 0
+}

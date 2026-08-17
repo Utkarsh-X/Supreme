@@ -1,0 +1,8 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_b/main.py).
+
+### Summary of Changes
+- Read $N$, $M$, and the array $A$ from standard input.
+- Converted $A$ into a set for $O(1)$ lookups.
+- Collected all integers in range $[1, N]$ that are absent in $A$ in ascending order.
+- Outputted the count $C$ followed by space-separated missing integers (or an empty second line if $C = 0$).
+- Verified implementation against sample test cases.

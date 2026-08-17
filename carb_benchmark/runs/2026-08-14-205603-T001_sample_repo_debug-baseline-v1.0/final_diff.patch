@@ -1,0 +1,36 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..09b204e 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,7 +1,13 @@
++import datetime
+ import json
++import uuid
+ 
+ class CustomJSONEncoder(json.JSONEncoder):
+     def default(self, obj):
++        if isinstance(obj, (datetime.datetime, datetime.date, datetime.time)):
++            return obj.isoformat()
++        if isinstance(obj, uuid.UUID):
++            return str(obj)
+         return super().default(obj)
+ 
+ class SessionSerializer:
+diff --git a/test_session_serializer.py b/test_session_serializer.py
+index 05aac48..094f056 100644
+--- a/test_session_serializer.py
++++ b/test_session_serializer.py
+@@ -25,5 +25,13 @@ class TestSessionSerializer(unittest.TestCase):
+         serialized = self.serializer.serialize(data)
+         self.assertIn(str(session_id), serialized)
+ 
++    def test_date_and_time_serialization(self):
++        d = datetime.date(2026, 8, 13)
++        t = datetime.time(12, 30, 45)
++        data = {"date": d, "time": t}
++        serialized = self.serializer.serialize(data)
++        self.assertIn("2026-08-13", serialized)
++        self.assertIn("12:30:45", serialized)
++
+ if __name__ == "__main__":
+     unittest.main()

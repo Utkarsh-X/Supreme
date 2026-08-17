@@ -1,0 +1,21 @@
+This looks bounded, so I'll present a short design here rather than write a spec.
+
+### Design Overview
+
+**Goal:** Ensure `Engine.render_to_string()` passes `autoescape=self.autoescape` when constructing a `Context` object so that engine-level autoescape settings are respected.
+
+#### Proposed Changes
+
+1. **`django/template/engine.py`**:
+   - In `Engine.render_to_string(self, template_name, context=None)`:
+     Change `Context(context)` to `Context(context, autoescape=self.autoescape)`.
+
+2. **`tests/template_tests/test_engine.py`**:
+   - Add test cases in `RenderToStringTest` to verify:
+     - `Engine(autoescape=False).render_to_string(...)` does not auto-escape HTML contents.
+     - `Engine(autoescape=True).render_to_string(...)` auto-escapes HTML contents (default behavior).
+
+#### Testing Plan
+- Run `tests/template_tests/test_engine.py` using `run_command`.
+
+Does this design look good to proceed?

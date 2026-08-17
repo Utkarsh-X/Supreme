@@ -1,0 +1,8 @@
+I have updated `Apps.clear_cache()` to clear the LRU cache of `get_swappable_settings_name`.
+
+### Changes Made
+1. **[`django/apps/registry.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/django/apps/registry.py#L370-L386)**:
+   Added `self.get_swappable_settings_name.cache_clear()` inside `Apps.clear_cache()`.
+
+2. **[`tests/apps/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/tests/apps/tests.py#L240-L248)**:
+   Added unit test `test_clear_cache` to verify that `apps.clear_cache()` resets both `get_models` and `get_swappable_settings_name` internal caches.

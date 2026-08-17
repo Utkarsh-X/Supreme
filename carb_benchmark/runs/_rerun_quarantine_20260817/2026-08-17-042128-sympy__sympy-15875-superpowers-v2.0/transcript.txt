@@ -1,0 +1,8 @@
+I have resolved the issue where `is_zero` gave incorrect results (`False`) on complex numbers involving `Add` terms (such as `e = -2*I + (1 + I)**2`).
+
+### Cause of the Issue
+In `Add._eval_is_zero()`, when the real part of an `Add` expression was zero (`b.is_zero` is `True`), the code previously returned `False` if any argument had `is_imaginary == True` without an `im_or_z` flag set. However, multiple non-zero imaginary terms (or unexpanded powers of complex numbers like `(1 + I)**2`) can sum to zero (e.g. `2*I + (-2*I) = 0`), so concluding that the sum is non-zero (`False`) was incorrect.
+
+### Solution
+- Updated `Add._eval_is_zero()` in [`sympy/core/add.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L562) to collect imaginary terms into `im_I` (multiplying each imaginary argument by `S.ImaginaryUnit` to make them real), and evaluate `self.func(*im_I).is_zero` when the real part is zero (`b.is_zero` is `True`).
+- Added tests in [`sympy/core/tests/test_arit.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/tests/test_arit.py#L1985-L1995) to verify `is_zero` behavior on complex expressions and imaginary symbols.

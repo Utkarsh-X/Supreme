@@ -1,0 +1,50 @@
+diff --git a/main.py b/main.py
+index c86f6c8..14b2a58 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,44 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    H = int(input_data[0])
++    W = int(input_data[1])
++    grid = input_data[2:]
++    
++    min_r = H
++    max_r = -1
++    min_c = W
++    max_c = -1
++    
++    for r in range(H):
++        for c in range(W):
++            if grid[r][c] == '#':
++                if r < min_r:
++                    min_r = r
++                if r > max_r:
++                    max_r = r
++                if c < min_c:
++                    min_c = c
++                if c > max_c:
++                    max_c = c
++                    
++    possible = True
++    for r in range(min_r, max_r + 1):
++        for c in range(min_c, max_c + 1):
++            if grid[r][c] == '.':
++                possible = False
++                break
++        if not possible:
++            break
++            
++    if possible:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,12 @@
+I have resolved the issue where an empty `__all__ = []` module attribute was ignored by autodoc.
+
+### Cause of the Bug
+In `ModuleDocumenter.get_object_members` (`sphinx/ext/autodoc/__init__.py`), the code evaluated `if not self.__all__:` to determine if module `__all__` should be bypassed. Because an empty list `[]` evaluates to `Falsy` in Python, `not self.__all__` evaluated to `True`, causing Sphinx to treat `__all__ = []` as if `__all__` were `None` (not defined), thus documenting all module members.
+
+### Summary of Changes
+1. **[sphinx/ext/autodoc/\_\_init\_\_.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1074-L1105)**:
+   - Changed `if not self.__all__:` to `if self.__all__ is None:` in `ModuleDocumenter.get_object_members` so an explicit empty list `__all__ = []` is respected.
+   - Updated `sort_members` to check `if self.__all__ is not None:`.
+
+2. **[tests/test_ext_autodoc.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/test_ext_autodoc.py#L740-L770)** & **[tests/roots/test-ext-autodoc/target/empty_all.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/roots/test-ext-autodoc/target/empty_all.py)**:
+   - Added unit test `test_autodoc_empty_all` verifying that an empty `__all__ = []` results in no member output by default, and documents module members when `:ignore-module-all:` is supplied.

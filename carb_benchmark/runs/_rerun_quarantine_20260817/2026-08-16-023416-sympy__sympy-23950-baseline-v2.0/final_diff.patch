@@ -1,0 +1,26 @@
+diff --git a/sympy/sets/contains.py b/sympy/sets/contains.py
+index b2d4268..4d8b448 100644
+--- a/sympy/sets/contains.py
++++ b/sympy/sets/contains.py
+@@ -44,5 +44,19 @@ def binary_symbols(self):
+             if i.is_Boolean or i.is_Symbol or
+             isinstance(i, (Eq, Ne))])
+ 
+-    def as_set(self):
+-        raise NotImplementedError()
++    def _eval_as_set(self):
++        from sympy.sets.conditionset import ConditionSet
++        expr, s = self.args
++        if expr.is_Symbol and expr not in s.free_symbols:
++            return s
++        try:
++            r = s.as_relational(expr)
++            if not r.has(Contains):
++                return r.as_set()
++        except (NotImplementedError, AttributeError, ValueError):
++            pass
++        gs = self.free_symbols
++        if len(gs) == 1:
++            return ConditionSet(gs.pop(), self, S.UniversalSet)
++        raise NotImplementedError("multivariate Contains.as_set is not implemented")
++

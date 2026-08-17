@@ -1,0 +1,10 @@
+{
+  "run_id": "2026-08-14-104246-T001_sample_repo_debug-baseline-v1.0",
+  "task_id": "C_SWE_006",
+  "configuration_id": "baseline-v1.0",
+  "model": "gemini-2.5-flash",
+  "tokens_used": 984,
+  "wall_clock_seconds": 243.72,
+  "passed": false,
+  "lines_changed": 0
+}

@@ -1,0 +1,26 @@
+diff --git a/lib/matplotlib/tests/test_pickle.py b/lib/matplotlib/tests/test_pickle.py
+index 0d0a5e5..2602e0b 100644
+--- a/lib/matplotlib/tests/test_pickle.py
++++ b/lib/matplotlib/tests/test_pickle.py
+@@ -217,6 +217,21 @@ def test_unpickle_canvas():
+     assert fig2.canvas is not None
+ 
+ 
++def test_unpickle_dpi():
++    fig = mfigure.Figure(dpi=100)
++    fig.canvas._set_device_pixel_ratio(2)
++    assert fig.dpi == 200
++
++    blob = pickle.dumps(fig)
++    fig2 = pickle.loads(blob)
++    assert fig2.dpi == 200
++
++    blob2 = pickle.dumps(fig2)
++    fig3 = pickle.loads(blob2)
++    assert fig3.dpi == 200
++
++
++
+ def test_mpl_toolkits():
+     ax = parasite_axes.host_axes([0, 0, 1, 1])
+     assert type(pickle.loads(pickle.dumps(ax))) == parasite_axes.HostAxes

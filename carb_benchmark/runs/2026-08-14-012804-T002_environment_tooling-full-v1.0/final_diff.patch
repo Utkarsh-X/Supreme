@@ -1,0 +1,11 @@
+diff --git a/build.py b/build.py
+index 4e26fea..a4fe6f2 100644
+--- a/build.py
++++ b/build.py
+@@ -1,5 +1,6 @@
+ import sys
+ import os
++sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+ from cli_runner.helpers import build_target
+ 
+ if __name__ == '__main__':

@@ -1,0 +1,9 @@
+I have fixed the issue where `ManifestStaticFilesStorage` (and `HashedFilesMixin`) crashed with `UnboundLocalError` when `max_post_process_passes = 0`.
+
+### Root Cause
+In [`django/contrib/staticfiles/storage.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264), `substitutions` was initialized inside the `for i in range(self.max_post_process_passes):` loop. When `max_post_process_passes` was set to `0`, `range(0)` did not execute any loop iterations. Consequently, when execution reached `if substitutions:`, `substitutions` had never been assigned, raising `UnboundLocalError`.
+
+### Fix
+1. Initialized `substitutions = False` before the `for i in range(self.max_post_process_passes):` loop in `HashedFilesMixin.post_process()`.
+2. Added test storage class `MaxPostProcessPassesZeroStorage` and test case `TestCollectionMaxPostProcessPassesZero` in [`tests/staticfiles_tests/test_storage.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/tests/staticfiles_tests/test_storage.py#L466) to verify post-processing with `max_post_process_passes = 0`.
+All test runs have completed successfully with exit code 0 (158 tests passed). The fix is verified and complete.

@@ -1,0 +1,34 @@
+[1mTask status update (id: e4a95b67-26a4-4ee5-b7b7-8cebe8150211/task-22) finished with status 'completed' and exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_0xem3q3y\.gemini\antigravity-cli\brain\e4a95b67-26a4-4ee5-b7b7-8cebe8150211\.system_generated\tasks\task-22.log[0m
+[1mTask log snippet:[0m
+============================== 35 passed in 1.48s ==============================
+
+ [1mTask status update (id: e4a95b67-26a4-4ee5-b7b7-8cebe8150211/task-53) finished with status 'completed' and exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_0xem3q3y\.gemini\antigravity-cli\brain\e4a95b67-26a4-4ee5-b7b7-8cebe8150211\.system_generated/tasks/task-53.log [0m
+ [1mTask log snippet: [0m
+................................................                        [ 96%]
+...................................................                      [ 98%]
+...............................                                          [100%]
+=============================== warnings summary ===============================
+sphinx/util/docutils.py:44
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\util\docutils.py:44: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    __version_info__ = tuple(LooseVersion(docutils.__version__).version)
+
+sphinx/highlighting.py:67
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\highlighting.py:67: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    if tuple(LooseVersion(pygmentsversion).version) <= (2, 7, 4):
+
+tests/test_domain_py.py::test_domain_py_xrefs
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-9698\sphinx\util\images.py:12: DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+    import imghdr
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======== 1477 passed, 115 skipped, 2 xfailed, 3 warnings in 83.17s ============
+}
+I have resolved the issue where index entries generated for `py:method` directives with the `:property:` option incorrectly included parentheses `()`.
+
+### Summary of Changes
+1. **[sphinx/domains/python.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/sphinx/domains/python.py#L784-L804)**: Updated `PyMethod.get_index_text()` to check if `'property' in self.options` and return index entry strings without `()` (e.g. `'%s (%s property)'` instead of `'%s() (%s property)'`).
+2. **[tests/test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/tests/test_domain_py.py#L756-L764)**: Updated test expectations to verify that `py:method` with `:property:` registers an index entry without `()`.
+
+### Verification
+Ran the test suite via pytest. All 1,477 tests passed.
+All tests in `tests/test_domain_py.py` pass cleanly. The task is complete!

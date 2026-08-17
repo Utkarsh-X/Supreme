@@ -1,0 +1,28 @@
+An optimal algorithm in Python has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc190_a/main.py).
+
+### Method Explanation
+
+The problem asks for the minimum total cost (number of operations of type 1 or 2 used) to make all elements of an array $x_1, \dots, x_N$ equal to 1.
+- **Op 1 on $[L_i, R_i]$**: sets elements in $[L_i, R_i]$ to 1 (cost 1).
+- **Op 2 on $[L_i, R_i]$**: sets elements outside $[L_i, R_i]$ to 1 (cost 1).
+- **Op 0**: does nothing (cost 0).
+
+Key structural properties of the problem:
+1. **At most 2 Op 2s are ever needed**: By Helly's theorem for 1D intervals, any set $S_2$ of $\ge 3$ Op 2s leaves an uncovered region $\bigcap_{j \in S_2} [L_j, R_j] = [\max_{j \in S_2} L_j, \min_{j \in S_2} R_j]$. The two intervals $u = \arg\max_{j \in S_2} L_j$ and $v = \arg\min_{j \in S_2} R_j$ ALREADY have $[L_u, R_u] \cap [L_v, R_v] = [\max_{j \in S_2} L_j, \min_{j \in S_2} R_j]$. Thus, replacing $S_2$ with $\{u, v\}$ leaves the exact same uncovered set with cost at most 2.
+
+2. **Master Case 1 (Disjoint intervals exist, i.e., $\min R_i < \max L_i$)**:
+   - If an interval $[1, N]$ exists, cost is **1** (Op 1 on that interval).
+   - Otherwise, cost is **2** (Op 2 on the interval with $\min R_i$ and Op 2 on the interval with $\max L_i$). Since they are disjoint, their union of covered elements is $[1, N]$.
+
+3. **Master Case 2 (All intervals pairwise overlap, i.e., $\min R_i \ge \max L_i$)**:
+   - All intervals contain the non-empty block $[L_{max}, R_{min}]$. Thus, no Op 2 can cover any element in $[L_{max}, R_{min}]$, so at least one Op 1 is required ($|S_1| \ge 1$).
+   - Any set of Op 1s $S_1$ has union $[\min_{i \in S_1} L_i, \max_{i \in S_1} R_i]$, which depends on at most 2 intervals in $S_1$.
+   - Therefore, the minimum cost is always at most 3 (when $M \ge 3$) or at most 2, tested in order of costs $K \in \{1, 2, 3\}$:
+     - **Cost 1**: An interval $[1, N]$ exists (Op 1).
+     - **Cost 2**: An interval with $L=1$ and an interval with $R=N$ (two Op 1s), OR an interval $k$ contained in another interval $j$ (Op 2 on $k$, Op 1 on $j$).
+     - **Cost 3**: 1 Op 2 ($k$) and 2 Op 1s ($j_1, j_2$), OR 2 Op 2s ($a = idx_{Lmax}, b = idx_{Rmin}$) and 1 Op 1 ($c \notin \{a, b\}$).
+     - Otherwise (if $M < 3$ and none of the above hold), output `-1`.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(M \log M)$ to sort intervals and run linear checks.
+- **Space Complexity**: $\mathcal{O}(M)$ auxiliary space.

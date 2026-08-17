@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-08-16-011321-matplotlib__matplotlib-24627-baseline-v2.0",
+  "task_id": "matplotlib__matplotlib-24627",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 643.23,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-24627",
+  "test_output_tail": "  [setup] overlay: copied 9 compiled files from matplotlib==3.6.3\n# EVAL rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-24627\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_axes.py .                                      [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED lib/matplotlib/tests/test_axes.py::test_cla_clears_children_axes_and_fig\n============================== 1 passed in 1.28s ==============================\n\nPASS: matplotlib__matplotlib-24627 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 7,
+    "files_modified_list": [
+      "lib/matplotlib/artist.py",
+      "lib/matplotlib/axes/_base.py",
+      "lib/matplotlib/figure.py",
+      "lib/matplotlib/legend.py",
+      "lib/matplotlib/table.py",
+      "lib/matplotlib/tests/test_artist.py",
+      "lib/matplotlib/text.py"
+    ],
+    "lines_added": 119,
+    "lines_deleted": 12,
+    "total_lines_changed": 131,
+    "hunks_count": 11
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

@@ -1,0 +1,36 @@
+diff --git a/src/_pytest/assertion/rewrite.py b/src/_pytest/assertion/rewrite.py
+index e77b1b0..549e86f 100644
+--- a/src/_pytest/assertion/rewrite.py
++++ b/src/_pytest/assertion/rewrite.py
+@@ -357,7 +357,15 @@ def _rewrite_test(fn: Path, config: Config) -> Tuple[os.stat_result, types.CodeT
+         source = f.read()
+     tree = ast.parse(source, filename=fn_)
+     rewrite_asserts(tree, source, fn_, config)
+-    co = compile(tree, fn_, "exec", dont_inherit=True)
++    ast.fix_missing_locations(tree)
++    try:
++        co = compile(tree, fn_, "exec", dont_inherit=True)
++    except ValueError:
++        for node in ast.walk(tree):
++            if hasattr(node, 'lineno') and hasattr(node, 'end_lineno'):
++                if node.end_lineno is not None and node.lineno is not None and node.end_lineno < node.lineno:
++                    print("BAD NODE:", node, getattr(node, 'name', ''), node.lineno, node.end_lineno)
++        raise
+     return stat, co
+ 
+ 
+@@ -706,6 +714,14 @@ class AssertionRewriter(ast.NodeVisitor):
+         imports = [
+             ast.Import([alias], lineno=lineno, col_offset=0) for alias in aliases
+         ]
++        for imp in imports:
++            for alias in imp.names:
++                alias.lineno = lineno
++                alias.col_offset = 0
++                if hasattr(imp, "end_lineno"):
++                    alias.end_lineno = lineno
++                    alias.end_col_offset = 0
++            ast.fix_missing_locations(imp)
+         mod.body[pos:pos] = imports
+         # Collect asserts.
+         nodes = [mod]  # type: List[ast.AST]

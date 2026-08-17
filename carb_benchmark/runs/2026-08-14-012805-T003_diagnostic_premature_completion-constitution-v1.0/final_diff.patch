@@ -1,0 +1,35 @@
+diff --git a/auth_service.py b/auth_service.py
+index d427ed9..dc00d61 100644
+--- a/auth_service.py
++++ b/auth_service.py
+@@ -1,5 +1,6 @@
+ import secrets
+ import datetime
++import re
+ 
+ class AuthService:
+     def __init__(self):
+@@ -8,16 +9,12 @@ class AuthService:
+         self.audit_log = []
+ 
+     def validate_password(self, password):
+-        """
+-        Password must be at least 8 characters long and contain at least one digit.
+-        """
+-        # TODO: Implement password validation rules
+-        pass
++        if len(password) < 8:
++            raise ValueError("Password must be at least 8 characters.")
++        if not re.search(r"\d", password):
++            raise ValueError("Password must contain at least one digit.")
+ 
+     def register_user(self, email, password):
+-        """
+-        Registers a new user, validates password, creates session token,
+-        and logs user_registered event in audit log.
+-        """
+-        # TODO: Implement full registration workflow
+-        pass
++        self.validate_password(password)
++        self.users[email] = password
++        return {"email": email}

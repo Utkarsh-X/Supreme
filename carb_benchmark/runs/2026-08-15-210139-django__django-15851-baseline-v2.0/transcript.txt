@@ -1,0 +1,7 @@
+I have resolved the issue where additional parameters passed to `dbshell` were appended after the database name for PostgreSQL.
+
+### Cause
+In [django/db/backends/postgresql/client.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/django/db/backends/postgresql/client.py#L35-L37), `DatabaseClient.settings_to_cmd_args_env()` was extending the argument list with `parameters` after appending `dbname`. Because `psql` expects command options (such as `-c` or `-f`) before positional arguments like the database name, options passed via `dbshell -- <args>` were ignored by `psql`.
+
+### Solution
+Updated `settings_to_cmd_args_env()` in [django/db/backends/postgresql/client.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/django/db/backends/postgresql/client.py#L35-L37) to append `parameters` before `dbname`. Updated the corresponding unit tests in [tests/dbshell/test_postgresql.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/tests/dbshell/test_postgresql.py#L154-L158).

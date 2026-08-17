@@ -1,0 +1,101 @@
+diff --git a/main.py b/main.py
+index c86f6c8..23e6bf6 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,95 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input = sys.stdin.read
++    data = input().split()
++    if not data:
++        return
++    
++    N = int(data[0])
++    idx = 1
++    
++    W = [0] * (N + 1)
++    for i in range(1, N + 1):
++        W[i] = int(data[idx])
++        idx += 1
++        
++    L = [0] * (N + 1)
++    R = [0] * (N + 1)
++    for i in range(1, N + 1):
++        L[i] = int(data[idx])
++        R[i] = int(data[idx + 1])
++        idx += 2
++        
++    max_val = 2 * N + 2
++    INF = float('inf')
++    
++    min_r = [INF] * (max_val + 2)
++    min_l = [INF] * (max_val + 2)
++    
++    for i in range(1, N + 1):
++        r = R[i]
++        if W[i] < min_r[r]:
++            min_r[r] = W[i]
++        l = L[i]
++        if W[i] < min_l[l]:
++            min_l[l] = W[i]
++            
++    pref_min_r = [INF] * (max_val + 2)
++    cur = INF
++    for x in range(1, max_val + 1):
++        cur = min(cur, min_r[x - 1])
++        pref_min_r[x] = cur
++        
++    suff_min_l = [INF] * (max_val + 2)
++    cur = INF
++    for y in range(max_val, 0, -1):
++        cur = min(cur, min_l[y + 1])
++        suff_min_l[y] = cur
++        
++    Q = int(data[idx])
++    idx += 1
++    
++    out = []
++    for _ in range(Q):
++        s = int(data[idx])
++        t = int(data[idx + 1])
++        idx += 2
++        
++        # Candidate 0: 1-step (direct edge)
++        if R[s] < L[t] or R[t] < L[s]:
++            out.append(str(W[s] + W[t]))
++            continue
++            
++        ans = INF
++        L_min = min(L[s], L[t])
++        R_max = max(R[s], R[t])
++        
++        # Candidate 1: 2-step left (R_w < L_min)
++        c1 = pref_min_r[L_min]
++        if c1 < INF:
++            ans = min(ans, W[s] + W[t] + c1)
++            
++        # Candidate 2: 2-step right (L_w > R_max)
++        c2 = suff_min_l[R_max]
++        if c2 < INF:
++            ans = min(ans, W[s] + W[t] + c2)
++            
++        # Candidate 3: 3-step (R_a < L_s and L_b > R_t)
++        ca = pref_min_r[L[s]]
++        cb = suff_min_l[R[t]]
++        if ca < INF and cb < INF:
++            ans = min(ans, W[s] + W[t] + ca + cb)
++            
++        # Candidate 4: 3-step (L_a > R_s and R_b < L_t)
++        ca2 = suff_min_l[R[s]]
++        cb2 = pref_min_r[L[t]]
++        if ca2 < INF and cb2 < INF:
++            ans = min(ans, W[s] + W[t] + ca2 + cb2)
++            
++        out.append(str(ans if ans < INF else -1))
++        
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    main()

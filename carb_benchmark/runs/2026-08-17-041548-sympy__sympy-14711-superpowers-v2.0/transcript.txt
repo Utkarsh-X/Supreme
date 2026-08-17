@@ -1,0 +1,8 @@
+I have resolved the issue where adding `0` or `0 * Vector` (or using `sum()` on an iterable of `Vector`s / `Dyadic`s) raised a `TypeError: A Vector must be supplied`.
+
+### Cause
+Python's built-in `sum()` initializes its accumulator to integer `0` (`start=0`). Adding a `Vector` or `Dyadic` to `0` delegates to `__radd__` (which aliases `__add__`). `Vector.__add__` and `Dyadic.__add__` previously called `_check_vector(other)` / `_check_dyadic(other)` unconditionally, which raised a `TypeError` when `other == 0`.
+
+### Solution
+1. Updated `Vector.__add__` ([`vector.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/vector.py#L58-L62)) and `Dyadic.__add__` ([`dyadic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/dyadic.py#L60-L64)) to return `self` when `other == 0`.
+2. Added unit tests in [`test_vector.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/tests/test_vector.py#L61-L67) and [`test_dyadic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/tests/test_dyadic.py#L15-L20) to verify `sum([N.x, 0 * N.x])`, `0 + N.x`, `N.x + 0`, `0 - N.x`, `N.x - 0`, and the corresponding `Dyadic` operations.

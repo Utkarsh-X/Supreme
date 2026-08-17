@@ -1,0 +1,10 @@
+{
+  "run_id": "2026-08-14-190552-T002_environment_tooling-full-v1.0",
+  "task_id": "C_TB_002",
+  "configuration_id": "full-v1.0",
+  "model": "gemini-3.7-flash",
+  "tokens_used": 0,
+  "wall_clock_seconds": 0.49,
+  "passed": true,
+  "lines_changed": 0
+}

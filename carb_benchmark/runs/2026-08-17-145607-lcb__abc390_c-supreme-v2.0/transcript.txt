@@ -1,0 +1,11 @@
+I have implemented the solution for **AtCoder ABC 390 C - Paint to make a rectangle** in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_c/main.py).
+
+### Method Explanation
+1. **Bounding Box Calculation**: Since there is at least one cell painted black (`#`), any valid rectangle containing all existing `#` cells must cover at least the minimal bounding box defined by `[min_r, max_r] x [min_c, max_c]` across all existing `#` cells.
+2. **Validity Check**: 
+   - If any cell inside `[min_r, max_r] x [min_c, max_c]` is painted white (`.`), it is impossible to form a valid rectangle because any rectangle covering all `#` cells would forcibly include this white cell.
+   - If there are no `.` cells within the bounding box, we can paint all `?` cells inside the bounding box black (`#`) and all `?` cells outside white (`.`), forming a valid rectangle of black cells.
+3. Thus, the solution simply checks if there exists any `.` cell inside the bounding box of existing `#` cells.
+
+### Verification
+The solution was tested against all sample test cases and passed cleanly.

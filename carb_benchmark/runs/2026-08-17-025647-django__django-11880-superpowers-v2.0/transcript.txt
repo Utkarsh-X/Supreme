@@ -1,0 +1,9 @@
+I have fixed the issue where `Field.__deepcopy__()` performed a shallow copy without copying the `error_messages` dictionary.
+
+### Summary of Changes
+1. **[`django/forms/fields.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/django/forms/fields.py#L198-L204)**: Updated `Field.__deepcopy__()` to include `result.error_messages = copy.deepcopy(self.error_messages, memo)` so that field copies do not share the same `error_messages` dictionary instance.
+2. **[`tests/forms_tests/field_tests/test_base.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/tests/forms_tests/field_tests/test_base.py#L37-L57)**: Added unit test `test_field_deepcopies_error_messages` verifying that modifying `error_messages` on a field instance or form field copy does not mutate other copies or `base_fields`.
+
+### Verification
+Ran the `forms_tests` test suite:
+- 647 tests ran and passed successfully.

@@ -1,0 +1,26 @@
+diff --git a/main.py b/main.py
+index c86f6c8..98bd966 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,20 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    
++    # Set A: X = m^2 where m is an even positive integer (m >= 2)
++    count_a = math.isqrt(N) // 2
++    
++    # Set B: X = 2 * n^2 where n is a positive integer (n >= 1)
++    count_b = math.isqrt(N // 2)
++    
++    ans = count_a + count_b
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

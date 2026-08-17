@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-08-15-222448-sphinx-doc__sphinx-8595-baseline-v2.0",
+  "task_id": "sphinx-doc__sphinx-8595",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 318.29,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "passed": true,
+  "test_command": null,
+  "test_output_tail": "",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "sphinx/ext/autodoc/__init__.py",
+      "sphinx/jinja2glue.py",
+      "sphinx/util/rst.py"
+    ],
+    "lines_added": 14,
+    "lines_deleted": 3,
+    "total_lines_changed": 17,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [
+    "Supreme"
+  ],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

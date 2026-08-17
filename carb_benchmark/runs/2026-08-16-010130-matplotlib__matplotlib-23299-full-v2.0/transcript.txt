@@ -1,0 +1,30 @@
+### Summary of Root Cause and Fix
+
+#### Root Cause
+When Matplotlib starts up before a figure or backend switch has occurred, `dict.__getitem__(rcParams, 'backend')` is initialized to `matplotlib.rcsetup._auto_backend_sentinel`. 
+
+1. Entering `rc_context()` saves a copy of `rcParams` into `orig`, which contained `orig['backend'] = _auto_backend_sentinel`.
+2. Inside `rc_context()`, creating the first figure (`plt.figure()`) resolves the auto backend sentinel to a concrete backend (e.g. `'TkAgg'` or `'QtAgg'`), updating `rcParams['backend']` to that backend name.
+3. Upon exiting `rc_context()`, `dict.update(rcParams, orig)` previously restored `rcParams['backend']` back to `_auto_backend_sentinel`.
+4. Subsequent calls to `get_backend()` outside `rc_context()` accessed `rcParams['backend']`, which saw `_auto_backend_sentinel` and called `plt.switch_backend(_auto_backend_sentinel)`.
+5. `plt.switch_backend(...)` invokes `close("all")`, which closed all existing active figures in `Gcf.figs` and cleared them.
+
+#### Fix
+Modified `rc_context()` in [`lib/matplotlib/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py#L1090-L1092) to exclude `'backend'` from the saved dictionary (`dict.pop(orig, 'backend', None)`), ensuring that `backend` selection is preserved when exiting `rc_context()`.
+
+#### Verification
+1. Verified the reproduction snippet:
+   ```python
+   import matplotlib.pyplot as plt
+   from matplotlib import get_backend, rc_context
+
+   with rc_context():
+       fig2 = plt.figure()
+
+   before = f'{id(plt._pylab_helpers.Gcf)} {plt._pylab_helpers.Gcf.figs!r}'
+   get_backend()
+   after = f'{id(plt._pylab_helpers.Gcf)} {plt._pylab_helpers.Gcf.figs!r}'
+
+   assert before == after
+   ```
+2. Added unit test `test_rc_context_backend` to [`lib/matplotlib/tests/test_rcparams.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/tests/test_rcparams.py#L588-L603) and verified with pytest.

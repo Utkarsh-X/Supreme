@@ -1,0 +1,11 @@
+I have addressed the issue where `Engine.render_to_string()` failed to pass the engine's `autoescape` attribute when creating a `Context`.
+
+### Cause
+In [django/template/engine.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11119/django/template/engine.py#L163), `Engine.render_to_string` was instantiating `Context(context)` without passing `autoescape=self.autoescape`. This caused `Context` to fall back to its default value of `autoescape=True`, ignoring the `autoescape` option configured on the `Engine`.
+
+### Solution
+- Updated [django/template/engine.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11119/django/template/engine.py#L163) to pass `autoescape=self.autoescape` when creating the `Context` instance.
+- Added unit test coverage in [tests/template_tests/test_engine.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11119/tests/template_tests/test_engine.py#L24-L36) to verify that `Engine.render_to_string()` honors `autoescape=False` as well as `autoescape=True`.
+
+### Verification
+Ran the `template_tests` test suite: all 1,371 tests passed cleanly.

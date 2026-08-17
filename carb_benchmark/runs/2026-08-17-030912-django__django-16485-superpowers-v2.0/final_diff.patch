@@ -1,0 +1,25 @@
+diff --git a/django/template/defaultfilters.py b/django/template/defaultfilters.py
+index 23c3a08..dc0b597 100644
+--- a/django/template/defaultfilters.py
++++ b/django/template/defaultfilters.py
+@@ -183,6 +183,7 @@ def floatformat(text, arg=-1):
+     tupl = d.as_tuple()
+     units = len(tupl[1])
+     units += -tupl[2] if m else tupl[2]
++    units = max(1, units)
+     prec = abs(p) + units + 1
+ 
+     # Avoid conversion to scientific notation by accessing `sign`, `digits`,
+diff --git a/tests/template_tests/filter_tests/test_floatformat.py b/tests/template_tests/filter_tests/test_floatformat.py
+index 361a888..66cf33b 100644
+--- a/tests/template_tests/filter_tests/test_floatformat.py
++++ b/tests/template_tests/filter_tests/test_floatformat.py
+@@ -105,6 +105,8 @@ class FunctionTests(SimpleTestCase):
+             self.assertEqual(floatformat(66666.666, "u2"), "66666.666")
+ 
+     def test_zero_values(self):
++        self.assertEqual(floatformat("0.00", 0), "0")
++        self.assertEqual(floatformat(Decimal("0.00"), 0), "0")
+         self.assertEqual(floatformat(0, 6), "0.000000")
+         self.assertEqual(floatformat(0, 7), "0.0000000")
+         self.assertEqual(floatformat(0, 10), "0.0000000000")

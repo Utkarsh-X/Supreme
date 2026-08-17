@@ -1,0 +1,26 @@
+run_id: 2026-08-15-224329-sympy__sympy-13480-baseline-v2.0
+task_id: sympy__sympy-13480
+configuration_id: baseline-v2.0
+status: SUCCESS
+started_at: '2026-08-15T22:43:29.479398'
+finished_at: '2026-08-15T22:47:18.730019'
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high
+  temperature: 0.0
+environment:
+  os: Windows-10-10.0.26200-SP0
+  python_version: 3.11.9
+  ide: Antigravity IDE Agent
+  isolation_mode: non_adversarial_cooperative
+provenance_hashes:
+  configuration_hash: 53415ebf458558492273c6566f0319bec908d19425fa8c89d21f3082fde9e6e7
+  prompt_hash: null
+  snapshot_hash: null
+artifacts:
+  transcript_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-15-224329-sympy__sympy-13480-baseline-v2.0\transcript.txt
+  diff_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-15-224329-sympy__sympy-13480-baseline-v2.0\final_diff.patch
+  evaluator_output: null
+resource_metrics:
+  tool_iterations: 0
+  wall_clock_seconds: 229.25

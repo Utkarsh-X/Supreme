@@ -1,0 +1,11 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_b/main.py).
+
+### Summary of Implementation
+- Initialized a stack containing 100 zeros (`stack = [0] * 100`).
+- Processed each query sequentially:
+  - For query type `1 x`, pushed `x` to the top of the stack (`stack.append(x)`).
+  - For query type `2`, popped the top element from the stack (`stack.pop()`) and recorded the output.
+- Printed all output values for type `2` queries.
+
+### Verification
+Verified against all sample test cases and confirmed that standard output matches expected outputs.

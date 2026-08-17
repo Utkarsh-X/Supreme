@@ -1,0 +1,51 @@
+diff --git a/sympy/sets/conditionset.py b/sympy/sets/conditionset.py
+index 97c80f0..9bf3e7d 100644
+--- a/sympy/sets/conditionset.py
++++ b/sympy/sets/conditionset.py
+@@ -167,7 +167,7 @@ def sig(s):
+                 base_set = b
+ 
+         # flatten ConditionSet(Contains(ConditionSet())) expressions
+-        if isinstance(condition, Contains) and (sym == condition.args[0]):
++        if isinstance(condition, Contains) and (sym == condition.args[0]) and (sym not in condition.args[1].free_symbols):
+             if isinstance(condition.args[1], Set):
+                 return condition.args[1].intersect(base_set)
+ 
+diff --git a/sympy/sets/contains.py b/sympy/sets/contains.py
+index b2d4268..aca7b20 100644
+--- a/sympy/sets/contains.py
++++ b/sympy/sets/contains.py
+@@ -44,5 +44,10 @@ def binary_symbols(self):
+             if i.is_Boolean or i.is_Symbol or
+             isinstance(i, (Eq, Ne))])
+ 
+-    def as_set(self):
+-        raise NotImplementedError()
++    def _eval_as_set(self):
++        from sympy.sets.conditionset import ConditionSet
++        syms = self.free_symbols
++        if len(syms) == 1:
++            x = syms.pop()
++            return ConditionSet(x, self, S.UniversalSet)
++        raise NotImplementedError("multivariate address not implemented")
+diff --git a/sympy/sets/tests/test_contains.py b/sympy/sets/tests/test_contains.py
+index 1973fed..4f21e00 100644
+--- a/sympy/sets/tests/test_contains.py
++++ b/sympy/sets/tests/test_contains.py
+@@ -39,10 +39,14 @@ def test_binary_symbols():
+ 
+ 
+ def test_as_set():
++    from sympy.sets.conditionset import ConditionSet
++    from sympy.functions.elementary.piecewise import Piecewise
+     x = Symbol('x')
+     y = Symbol('y')
+-    # Contains is a BooleanFunction whose value depends on an arg's
+-    # containment in a Set -- rewriting as a Set is not yet implemented
++    assert Contains(x, S.Reals).as_set() == S.Reals
++    assert Contains(x, S.Integers).as_set() == S.Integers
++    assert Contains(x + 1, S.Integers).as_set() == ConditionSet(x, Contains(x + 1, S.Integers))
++    assert Piecewise((6, Contains(x, S.Reals)), (7, True)) == Piecewise((6, Contains(x, S.Reals)), (7, True))
+     raises(NotImplementedError, lambda:
+            Contains(x, FiniteSet(y)).as_set())
+ 

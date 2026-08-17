@@ -1,0 +1,24 @@
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_d/main.py).
+
+### Method Explanation
+
+1. **Gravity and Column Structure**:
+   - Blocks in each column $x$ maintain their relative vertical order throughout the process.
+   - Sorting the initial blocks in each column $x$ by height $Y$ assigns each block $i$ its 1-based order $k$ within column $x$ (i.e. block $i$ is the $k$-th lowest block in its column).
+
+2. **Row Removal Times**:
+   - Let $C_{\min} = \min_{1 \le x \le W} (\text{number of blocks in column } x)$.
+   - If $k > C_{\min}$, row removal #$k$ can never occur because at least one column has fewer than $k$ blocks. Thus, any block that is the $k$-th block in its column for $k > C_{\min}$ is never removed.
+   - For $1 \le k \le C_{\min}$, the $k$-th row removal occurs at time:
+     $$T^{(k)} = \max_{1 \le x \le W} Y_{x, k}$$
+     where $Y_{x, k}$ is the initial height of the $k$-th block in column $x$.
+   - The $k$-th block of every column is removed during row removal #$k$ at integer time $T^{(k)}$.
+
+3. **Query Answering**:
+   - For each query $(T_j, A_j)$, let $k$ be the rank of block $A_j$ in its column.
+   - If $k \le C_{\min}$ and $T_j \ge T^{(k)}$, the block has been removed before time $T_j + 0.5$, so the answer is `No`.
+   - Otherwise, the block still exists at time $T_j + 0.5$, so the answer is `Yes`.
+
+### Complexity
+- **Time Complexity**: $O(N \log N + Q)$, well within the time limit.
+- **Space Complexity**: $O(N + Q)$, well within the memory limit.

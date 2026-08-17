@@ -1,0 +1,11 @@
+### Root Cause
+When passing values like `"0.00"` or `Decimal('0.00')` to `floatformat(text, arg)`, `m = int(d) - d` evaluates to `Decimal('0.00')`, which is falsy in Python (`bool(Decimal('0.00')) == False`). Because `m` was falsy, the precision logic executed `units += tupl[2]` (where `tupl[2]` is the exponent `-2` and `len(tupl[1])` is `1`), causing `units` to evaluate to `-1`.
+
+With `arg = 0` (or for decimals with more trailing zero places than `arg`), `prec = abs(p) + units + 1` evaluated to `0` (or negative). When `d.quantize(...)` was called with `Context(prec=prec)`, Python's `decimal` module raised `ValueError: valid range for prec is [1, MAX_PREC]`.
+
+### Solution
+Enforced `max(1, units)` when calculating `prec = abs(p) + max(1, units) + 1` in [`django/template/defaultfilters.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16485/django/template/defaultfilters.py#L186) so `prec` is always at least 2, preventing invalid non-positive context precision while maintaining precision for large numbers and existing float formats.
+
+### Verification
+- Added test cases for string and `Decimal` zero inputs (e.g. `"0.00"`, `Decimal("0.00")`, `"0.0000"`) in [`test_floatformat.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16485/tests/template_tests/filter_tests/test_floatformat.py#L114-L118).
+- Executed `template_tests.filter_tests` and `i18n.tests` suites (541 tests passed successfully).

@@ -1,0 +1,8 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_b/main.py).
+
+### Summary of Solution
+- The problem asks if we can choose 5 cards out of 7 such that they form a full house (3 cards of one value $x$ and 2 cards of a different value $y$).
+- The program reads the 7 card values from standard input and iterates over all 5-card combinations ($\binom{7}{5} = 21$ possible subsets).
+- For each 5-card combination, it computes the frequencies of card values using `collections.Counter`. If the sorted frequency distribution is `[2, 3]`, a full house is formed and `Yes` is output.
+- If no 5-card combination forms a full house, `No` is output.
+- All sample test cases were verified and passed successfully.

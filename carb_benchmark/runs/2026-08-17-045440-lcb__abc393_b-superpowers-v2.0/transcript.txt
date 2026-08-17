@@ -1,0 +1,12 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc393_b/main.py).
+
+### Implementation Details
+- Iterates over all starting indices $i$ where $S_i = \text{'A'}$.
+- For each step size $d \ge 1$, computes $j = i + d$ and $k = i + 2d$.
+- Checks if $S_j = \text{'B'}$ and $S_k = \text{'C'}$, incrementing the count for each valid triple $(i, j, k)$.
+
+### Verification
+All public test cases have been tested and verified:
+- Sample 1 (`AABCC`): Output `2`
+- Sample 2 (`ARC`): Output `0`
+- Sample 3 (`AABAAABBAEDCCCD`): Output `4`

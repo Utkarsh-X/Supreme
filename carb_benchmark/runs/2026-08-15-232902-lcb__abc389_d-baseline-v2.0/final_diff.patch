@@ -1,0 +1,36 @@
+diff --git a/main.py b/main.py
+index c86f6c8..128a9d9 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,30 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    R = int(input_data[0])
++    
++    limit = 4 * R * R
++    ans = 0
++    v = R
++    v_sq = (2 * v + 1) * (2 * v + 1)
++    u_term = 1
++    
++    for u in range(R):
++        while v_sq > limit - u_term:
++            v_sq -= 8 * v
++            v -= 1
++        
++        if u == 0:
++            ans += 1 + 2 * v
++        else:
++            ans += 2 + 4 * v
++        
++        u_term += 8 * u + 8
++        
++    print(ans)
++
++if __name__ == '__main__':
++    main()

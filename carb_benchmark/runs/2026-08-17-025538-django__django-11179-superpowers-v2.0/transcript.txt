@@ -1,0 +1,7 @@
+I have fixed the issue where calling `.delete()` on instances of models without dependencies did not clear the model instance's primary key (`pk`).
+
+### Summary of Changes
+1. **`django/db/models/deletion.py`**:
+   - In `Collector.delete()`, updated the fast-delete optimization path for single objects without dependencies to call `setattr(instance, model._meta.pk.attname, None)` before returning.
+2. **`tests/delete/tests.py`**:
+   - Added `test_fast_delete_instance_set_pk_none` in `FastDeleteTests` to verify that `instance.pk` is set to `None` when fast-deleting an instance of a model with no dependencies.

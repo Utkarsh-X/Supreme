@@ -1,0 +1,85 @@
+...watching background task 'task-20'...
+...task 'task-20' completed. Output:
+============================= test session starts =============================
+platform win32 -- Python 3.9.20, pytest-8.3.4, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435
+configfile: setup.cfg
+adapters: pytest-verbosity-warnings-0.4.0
+collected 38 items / 37 deselected / 1 selected
+
+tests/test_build_latex.py .                                             [100%]
+
+===================== 37 deselected, 1 passed in 2.37s =====================
+
+
+...watching background task 'task-33'...
+...task 'task-33' completed. Output:
+FullName
+--------
+C:\Users\Utkarsh\AppData\Local\Programs\Python\Python314\Scripts\pytest.exe
+
+
+...watching background task 'task-41'...
+...task 'task-41' completed. Output:
+Collecting pytest
+  Downloading pytest-9.0.2-py3-none-any.whl.metadata (7.8 kB)
+Requirement already satisfied: iniconfig in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest) (2.3.0)
+Requirement already satisfied: packaging in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest) (26.3)
+Collecting pluggy<2,>=1.5 (from pytest)
+  Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+Downloading pytest-9.0.2-py3-none-any.whl (370 kB)
+   ---------------------------------------- 370.2/370.2 kB 7.7 MB/s eta 0:00:00
+Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+Installing collected packages: pluggy, pytest
+  Attempting uninstall: pluggy
+    Found existing installation: pluggy 0.13.1
+    Uninstalling pluggy-0.13.1:
+      Successfully uninstalled pluggy-0.13.1
+  Attempting uninstall: pytest
+    Found existing installation: pytest 6.0.0
+    Uninstalling pytest-6.0.0:
+      Successfully uninstalled pytest-6.0.0
+  WARNING: The scripts pytest.exe and py.test.exe are installed in 'C:\Users\Utkarsh\AppData\Roaming\Python\Python311\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed pluggy-1.6.0 pytest-9.0.2
+
+
+...watching background task 'task-101'...
+...task 'task-101' completed. Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+libraries: Sphinx-5.0.0+/ff8b790, docutils-0.17.1
+base tempdir: C:\Users\Utkarsh\AppData\Local\Temp\pytest-of-Utkarsh\pytest-290
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435
+configfile: setup.cfg
+plugins: anyio-4.13.0, hypothesis-6.165.7
+collected 83 items
+
+tests\test_build_latex.py ............................................. [ 54%]
+......................................                                   [100%]
+
+============================== warnings summary ===============================
+sphinx\util\images.py:4
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435\sphinx\util\images.py:4: DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+    import imghdr
+
+C:\Users\Utkarsh\AppData\Roaming\Python\Python311\site-packages\_pytest\python.py:124
+  C:\Users\Utkarsh\AppData\Roaming\Python\Python311\site-packages\_pytest\python.py:124: PytestRemovedIn10Warning: Passing a non-Collection iterable to parametrize is deprecated.
+  Test: tests/test_build_latex.py::test_build_latex_doc, argvalues type: product
+  Please convert to a list or tuple.
+  See https://docs.pytest.org/en/stable/deprecations.html#parametrize-iterators
+    metafunc.parametrize(*marker.args, **marker.kwargs, _param_mark=marker)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 83 passed, 2 warnings in 5.82s ========================
+
+
+I have fixed the issue where extra leading and trailing whitespace was inserted into inline code highlighting in LaTeX PDF output.
+
+### Root Cause
+When Pygments highlights code using `LatexFormatter`, it wraps the highlighted tokens in a `Verbatim` block (`\begin{Verbatim}[commandchars=\\\{\}]\n...\n\end{Verbatim}\n`). When translating inline code (`literal` node with `:code:` or a language role), `LaTeXTranslator.visit_literal` replaced `\begin{Verbatim}...` with `\sphinxcode{\sphinxupquote{` and stripped `\end{Verbatim}`. However, the leading newline after `\begin{Verbatim}` and the trailing newline before `\end{Verbatim}` remained inside `\sphinxcode{\sphinxupquote{...}}`. In LaTeX, newlines inside macro arguments are rendered as space characters, producing unwanted leading and trailing spaces around the inline code in PDF output.
+
+### Fix
+1. Modified `visit_literal` in [sphinx/writers/latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1707-L1717) to strip the `Verbatim` environment wrapper and any leading/trailing newlines (`\r\n`) around the highlighted content before emitting `\sphinxcode{\sphinxupquote{<content>}}`.
+2. Updated test assertion in [tests/test_build_latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1647) to verify that inline code in LaTeX output does not contain leading or trailing newlines inside `\sphinxcode{\sphinxupquote{...}}`.
+All background verification tasks have completed successfully with all tests passing.

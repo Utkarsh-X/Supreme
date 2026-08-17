@@ -1,0 +1,11 @@
+I have identified and resolved the issue where figure DPI doubled upon unpickling (particularly noticeable on macOS / HiDPI screens).
+
+### Root Cause
+When a `Figure` is created and associated with a HiDPI canvas (where `device_pixel_ratio` > 1, such as Retina screens), the figure's logical unscaled DPI is stored in `_original_dpi` (e.g. 100), while `_dpi` is scaled by the device pixel ratio (e.g. 200). 
+
+When unpickled, `figure.__setstate__` re-instantiates `FigureCanvasBase(self)`. Previously, `FigureCanvasBase.__init__` unconditionally overwrote `figure._original_dpi` with `figure.dpi` (which was already 200). When the GUI canvas subsequently initialized and received a `_set_device_pixel_ratio(2)` event, it multiplied `_original_dpi` (now 200) by the device pixel ratio (2), doubling `fig.dpi` to 400. Repeated unpickling exponentially doubled the DPI.
+
+### Key Changes
+1. **[`lib/matplotlib/backend_bases.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1653-L1660)**: Updated `FigureCanvasBase.__init__` to check if `figure` already has `_original_dpi`. If present, it preserves `_original_dpi` and resets `figure._dpi` to match the newly initialized canvas's default `_device_pixel_ratio = 1`.
+2. **[`lib/matplotlib/figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/figure.py#L2592-L2596)**: Updated `Figure._set_dpi` to update `_original_dpi` when `forward=True` (direct setting of figure DPI) taking into account `canvas.device_pixel_ratio`.
+3. **[`lib/matplotlib/tests/test_pickle.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_pickle.py#L220-L228)**: Added `test_unpickle_dpi` unit test to verify DPI stability across repeated unpickling loops with HiDPI canvas scaling.

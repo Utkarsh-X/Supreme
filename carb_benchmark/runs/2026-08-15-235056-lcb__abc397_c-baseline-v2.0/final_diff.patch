@@ -1,0 +1,52 @@
+diff --git a/main.py b/main.py
+index c86f6c8..710a808 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,46 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++    
++    max_val = N
++    for x in A:
++        if x > max_val:
++            max_val = x
++            
++    right_freq = [0] * (max_val + 1)
++    right_distinct = 0
++    for x in A:
++        if right_freq[x] == 0:
++            right_distinct += 1
++        right_freq[x] += 1
++        
++    left_seen = [False] * (max_val + 1)
++    left_distinct = 0
++    
++    max_sum = 0
++    
++    for i in range(N - 1):
++        x = A[i]
++        
++        right_freq[x] -= 1
++        if right_freq[x] == 0:
++            right_distinct -= 1
++            
++        if not left_seen[x]:
++            left_seen[x] = True
++            left_distinct += 1
++            
++        current_sum = left_distinct + right_distinct
++        if current_sum > max_sum:
++            max_sum = current_sum
++            
++    print(max_sum)
++
++if __name__ == '__main__':
++    main()

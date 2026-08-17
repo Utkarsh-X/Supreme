@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-17-020730-django__django-11179-baseline-v2.0",
+  "task_id": "django__django-11179",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 68.47,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-11179",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-11179\\django'\nImporting application delete\nSkipping setup of unused database(s): other.\nOperations to perform:\n  Synchronize unmigrated apps: auth, contenttypes, delete, messages, sessions, staticfiles\n  Apply all migrations: admin, sites\nSynchronizing apps without migrations:\n  Creating tables...\n    Creating table django_content_type\n    Creating table auth_permission\n    Creating table auth_group\n    Creating table auth_user\n    Creating table django_session\n    Creating table delete_r\n    Creating table delete_s\n    Creating table delete_t\n    Creating table delete_u\n    Creating table delete_rchild\n    Creating table delete_a\n    Creating table delete_m\n    Creating table delete_mr\n    Creating table delete_mrnull\n    Creating table delete_avatar\n    Creating table delete_user\n    Creating table delete_hiddenuser\n    Creating table delete_hiddenuserprofile\n    Creating table delete_m2mto\n    Creating table delete_m2mfrom\n    Creating table delete_parent\n    Creating table delete_child\n    Creating table delete_base\n    Creating table delete_reltobase\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\ntest_fast_delete_instance_set_pk_none (delete.tests.FastDeleteTests) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nPASS: django__django-11179 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/db/models/deletion.py",
+      "tests/delete/tests.py"
+    ],
+    "lines_added": 6,
+    "lines_deleted": 0,
+    "total_lines_changed": 6,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

@@ -1,0 +1,30 @@
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 3f9c60f..f538b67 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -388,6 +388,7 @@ class FDCaptureBinary:
+                 TemporaryFile(buffering=0),  # type: ignore[arg-type]
+                 encoding="utf-8",
+                 errors="replace",
++                newline="",
+                 write_through=True,
+             )
+             if targetfd in patchsysdict:
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index a3bd4b6..4165829 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1580,3 +1580,13 @@ def test_logging_while_collecting(testdir):
+     )
+     result.stdout.no_fnmatch_line("*Captured stderr call*")
+     result.stdout.no_fnmatch_line("*during collection*")
++
++
++@pytest.mark.parametrize("fixture", ["capfd", "capsys"])
++def test_capture_includes_carriage_return(request, fixture):
++    cap = request.getfixturevalue(fixture)
++    print("Greetings from DOS", end="\r")
++    out, err = cap.readouterr()
++    assert out == "Greetings from DOS\r"
++
++

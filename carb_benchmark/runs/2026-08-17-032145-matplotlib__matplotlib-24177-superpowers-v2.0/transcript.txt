@@ -1,0 +1,11 @@
+I have investigated and resolved the bug where `ax.hist` density limits were not auto-scaled properly when using `histtype='step'`.
+
+### Root Cause
+When calculating data limits for a patch during autoscaling in `_update_patch_limits` ([`lib/matplotlib/axes/_base.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2437)), `p.iter_bezier()` was invoked without explicitly specifying `simplify=False`. As a result:
+- When a patch path had 128 or more vertices (e.g. `bins=100` resulting in 202 path vertices), `path.should_simplify` evaluated to `True`.
+- `iter_bezier()` performed path simplification in data units using `path.simplify_threshold` (which is specified in pixels).
+- At small density values (e.g., density $\approx 0.33$), path simplification removed extrema and peak vertices of the step histogram before calculating data limits. This truncated the calculated y-max bound for the patch (e.g. from 0.336 down to 0.266), causing autoscaling to cut off the top of the histogram.
+
+### Fix
+- Updated `_update_patch_limits` in [`lib/matplotlib/axes/_base.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2437) to invoke `p.iter_bezier(simplify=False)` so path simplification is disabled when computing patch bounds for autoscaling.
+- Added a regression test `test_hist_step_autoscale_density` in [`lib/matplotlib/tests/test_axes.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/tests/test_axes.py#L7452) to verify that `histtype='step'` with `density=True` matches `histtype='bar'` y-axis autoscaling limits.

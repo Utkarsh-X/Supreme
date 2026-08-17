@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-15-220447-pytest-dev__pytest-7521-baseline-v2.0",
+  "task_id": "pytest-dev__pytest-7521",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 312.44,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-7521",
+  "test_output_tail": "# EVAL rc=1 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-6.0.0, py-1.11.0, pluggy-0.13.1\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-7521, configfile: pyproject.toml\ncollected 2 items\n\ntesting\\test_capture.py F\n\n================================== FAILURES ===================================\n____________ TestCaptureFixture.test_cafd_preserves_newlines[\\r\\n] ____________\ntesting\\test_capture.py:521: in test_cafd_preserves_newlines\n    assert out.endswith(nl)\nE   AssertionError: assert False\nE    +  where False = <built-in method endswith of str object at 0x000002131C83E070>('\\r\\n')\nE    +    where <built-in method endswith of str object at 0x000002131C83E070> = 'test\\n\\n'.endswith\n=========================== short test summary info ===========================\nFAILED testing/test_capture.py::TestCaptureFixture::test_cafd_preserves_newlines[\\r\\n]\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 0.51s ==============================\n\nFAIL: pytest-dev__pytest-7521 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "src/_pytest/assertion/rewrite.py"
+    ],
+    "lines_added": 17,
+    "lines_deleted": 1,
+    "total_lines_changed": 18,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [
+    "Supreme"
+  ],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

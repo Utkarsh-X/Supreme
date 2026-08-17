@@ -1,0 +1,8 @@
+I have resolved the issue where calling `.delete()` on instances of models without any dependencies (the fast-delete path) did not clear their primary keys.
+
+### Cause
+In [`django/db/models/deletion.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/django/db/models/deletion.py#L274-L281), when deleting a single object fast-path eligible for direct deletion (`Collector.can_fast_delete(instance)`), `Collector.delete()` executed the delete query and returned early without calling `setattr(instance, model._meta.pk.attname, None)`. In contrast, non-fast-path deletion updated all collected instances by clearing their primary key attributes.
+
+### Changes Made
+1. **[`Collector.delete()`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/django/db/models/deletion.py#L274-L281)**: Added `setattr(instance, model._meta.pk.attname, None)` before returning early in the single-instance fast delete branch.
+2. **[`tests/delete/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/tests/delete/tests.py#L474-L478)**: Added `test_fast_delete_instance_set_pk_none` to verify that `.delete()` sets `.pk` to `None` when fast deleting an instance without dependencies.

@@ -1,0 +1,10 @@
+{
+  "run_id": "2026-08-14-221947-T003_diagnostic_premature_completion-baseline-v1.0",
+  "task_id": "C_DIAG_001",
+  "configuration_id": "baseline-v1.0",
+  "model": "Gemini 3.6 Flash (High)",
+  "engine": "agy.exe (Antigravity Native Router)",
+  "wall_clock_seconds": 61.13,
+  "passed": false,
+  "lines_changed": 0
+}

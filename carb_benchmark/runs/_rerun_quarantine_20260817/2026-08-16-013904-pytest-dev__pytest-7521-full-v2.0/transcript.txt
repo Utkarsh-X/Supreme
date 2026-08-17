@@ -1,0 +1,8 @@
+I have identified and resolved the issue where `capfd.readouterr()` converted carriage return characters (`\r`) to newline characters (`\n`).
+
+### Cause
+In pytest 6.0, `FDCaptureBinary` was updated to use `EncodedFile` (a subclass of `io.TextIOWrapper`) wrapping a temporary binary file. However, `EncodedFile` was instantiated without specifying the `newline` parameter. By default, `io.TextIOWrapper` defaults `newline=None`, which enables Python's universal newlines translation mode on reading — causing `\r` and `\r\n` characters in captured standard streams to be translated into `\n`.
+
+### Solution
+1. Specified `newline=""` when instantiating `EncodedFile` inside [`FDCaptureBinary`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L394) in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py). Passing `newline=""` ensures `io.TextIOWrapper` decodes captured stream bytes without translating line endings, matching the behavior of `CaptureIO` (`capsys`) and preserving `\r` as written.
+2. Added test coverage in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1584-L1590) to ensure both `capfd` and `capsys` preserve carriage returns.

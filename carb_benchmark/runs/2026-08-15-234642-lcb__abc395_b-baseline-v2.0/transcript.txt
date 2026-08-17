@@ -1,0 +1,7 @@
+I have created the Python 3 solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_b/main.py) to generate the $N \times N$ pattern according to the specifications.
+
+### Summary of Implementation
+- **Simulation**: We maintain an $N \times N$ grid. For each step $i = 1, 2, \dots, N$:
+  - Calculate $j = N + 1 - i$.
+  - If $i \le j$, we update the subgrid with top-left corner $(i, i)$ and bottom-right corner $(j, j)$ to `#` if $i$ is odd, and `.` if $i$ is even (1-indexed).
+- **Output**: After processing all operations, the grid is printed row by row to standard output.

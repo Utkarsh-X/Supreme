@@ -1,0 +1,46 @@
+026-08-17T03:43:47+05:30: Background task task-48 updated its status: COMPLETED. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_5zflb6wc\.gemini\antigravity-cli\brain\e3130b1c-ef9c-4168-b66c-5d8058a2128f\.system_generated\tasks\task-48.log
+Output:
+<truncated 57 lines>
+testing/test_capture.py ............................................... [ 43%]
+........................................................................ [ 99%]
+.                                                                        [100%]
+
+============================ 111 passed in 0.99s ==============================
+
+				
+
+026-08-17T03:44:31+05:30: Background task task-63 updated its status: COMPLETED. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_5zflb6wc\.gemini\antigravity-cli\brain\e3130b1c-ef9c-4168-b66c-5d8058a2128f\.system_generated/tasks/task-63.log
+Output:
+<truncated 57 lines>
+testing/test_capture.py ............................................... [ 43%]
+........................................................................ [ 99%]
+.                                                                        [100%]
+
+============================ 119 passed in 4.90s ==============================
+
+				
+
+026-08-17T03:45:34+05:30: Background task task-86 updated its status: COMPLETED. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_5zflb6wc\.gemini\antigravity-cli\brain\e3130b1c-ef9c-4168-b66c-5d8058a2128f\.system_generated/tasks/task-86.log
+Output:
+<truncated 57 lines>
+testing/test_capture.py ............................................... [ 37%]
+........................................................................ [ 92%]
+..........                                                               [100%]
+
+============================ 120 passed in 4.54s ==============================
+
+				
+
+### Root Cause & Fix
+
+**Root Cause:**
+In `src/_pytest/capture.py`, `FDCaptureBinary` initialized `self.tmpfile` using `EncodedFile` (which inherits from `io.TextIOWrapper`) without explicitly passing `newline=""`.
+Because `newline` defaulted to `None`, Python's `TextIOWrapper` enabled universal newlines mode on input decoding, converting `\r` and `\r\n` characters to `\n` when `capfd.readouterr()` called `self.tmpfile.read()`. By contrast, `sys` capture (`capsys`) used `CaptureIO`, which explicitly specifies `newline=""` to preserve carriage return characters untranslated.
+
+**Solution:**
+1. Updated `FDCaptureBinary.__init__` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L388-L392) to pass `newline=""` to `EncodedFile`.
+2. Added `test_capturing_carriage_return` in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1037-L1043) to verify that both `capfd` and `capsys` preserve `\r` and `\r\n` untranslated.
+
+### Verification
+- Verified `test_capturing_carriage_return` failed (RED) prior to the fix due to `\r` being translated to `\n` by `FDCapture`.
+- Verified `test_capturing_carriage_return` passes (GREEN) after adding `newline=""` to `EncodedFile`.

@@ -1,0 +1,18 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..77ccb1a 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,7 +1,13 @@
++import datetime
+ import json
++import uuid
+ 
+ class CustomJSONEncoder(json.JSONEncoder):
+     def default(self, obj):
++        if isinstance(obj, (datetime.date, datetime.datetime, datetime.time)):
++            return obj.isoformat()
++        if isinstance(obj, uuid.UUID):
++            return str(obj)
+         return super().default(obj)
+ 
+ class SessionSerializer:

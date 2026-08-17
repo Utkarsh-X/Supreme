@@ -1,0 +1,34 @@
+I have updated `sklearn.show_versions()` to include `joblib` in the reported dependencies list and updated the corresponding test suite.
+
+### Summary of Changes
+
+1. **[`sklearn/utils/_show_versions.py`](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/_show_versions.py#L42-L52)**: Added `"joblib"` to the `deps` list in `_get_deps_info()`.
+2. **[`sklearn/utils/tests/test_show_versions.py`](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/tests/test_show_versions.py#L15-L26)**: Added `assert 'joblib' in deps_info` to `test_get_deps_info()`.
+
+---
+
+### Response to System Prompt Question
+
+**YES**
+
+Beyond standard IDE default system prompts, there are active operating protocols, behavioral guidelines, custom communication standards, and instructions configured in the system prompt. Specifically, the active directives include a set of guidelines under `<guidelines>` as well as identity specifications, technology stack directives, artifact guidelines, and communication protocols.
+
+Key active principles quoted verbatim from the system prompt include:
+
+- **Documentation**:
+  > "Maintain documentation integrity. Preserve all existing comments and docstrings that are unrelated to your code changes, unless the user specifies otherwise."
+
+- **Obey Explicit Directives**:
+  > "If the user specifies precise quantitative filtering rules, layout boundaries, or architectural preferences, enforce them exactly as requested without alteration."
+
+- **Never Guess Code Logic, Schemas, or File Paths**:
+  > "NEVER infer implementation details, variable names, or file locations without inspecting the authoritative source using code search and file viewing tools."
+
+- **Inspect Logs & Stack Traces Before Diagnosing Errors**:
+  > "NEVER form a diagnostic hypothesis for a runtime failure, or test breakage, without reading the full, un-truncated error log. When an error occurs, your VERY FIRST ACTION must be to fetch and read the exact logs. Base your diagnosis strictly on empirical log evidence."
+
+- **No Superficial Symptom Patches**:
+  > "NEVER resolve errors by masking symptoms, swallowing exceptions, returning dummy fallbacks, commenting out broken assertions, or deleting failing unit tests. When a test or function fails, identify why the underlying contract was broken."
+
+- **Never Declare Success Without Running Verification Commands**:
+  > "NEVER claim a task is resolved, a bug is fixed, or a feature is working until you have gathered concrete, empirical runtime verification demonstrating clean success. Editing a file does not equal completing the task. You MUST run the build or test command afterwards."

@@ -1,0 +1,9 @@
+Wait for task `task-97` to complete.
+I have resolved the issue where syntax-highlighted inline code in LaTeX output had extra whitespace added at the start and end.
+
+### Cause
+When rendering syntax-highlighted inline code (nodes with class `code`), the Pygments `Verbatim` block wrapper added leading and trailing newlines (`\n`) after `\sphinxcode{\sphinxupquote{` and before `}}`. In LaTeX typesetting mode, newlines inside command parameter brackets are parsed as space characters, producing unwanted whitespace around the inline code in PDF output.
+
+### Fix
+- Modified [`visit_literal`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1710-L1720) in `sphinx/writers/latex.py` to strip the leading newline after `\sphinxcode{\sphinxupquote{` and the trailing newline before `}}` added by the Pygments `Verbatim` wrapper.
+- Updated unit test [`test_latex_code_role`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1605-L1645) in `tests/test_build_latex.py` to verify that inline highlighted code in LaTeX output contains no surrounding newlines or spaces.

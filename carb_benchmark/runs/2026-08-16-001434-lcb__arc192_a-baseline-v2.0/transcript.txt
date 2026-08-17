@@ -1,0 +1,19 @@
+An efficient Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc192_a/main.py).
+
+### Summary of Mathematical Analysis & Algorithm
+
+1. **Operation Properties & Coverage Requirement:**
+   - An operation at index $i$ (either `ARC` or `CRA`) sets $A_i = 1$ and $A_{i+1} = 1$.
+   - Any position $k$ with $A_k = 0$ must be covered by choosing an operation at index $k-1$ or index $k$ (mod $N$).
+   - Due to character constraints in the fixed string $S$, no two operations can be placed at adjacent indices (i.e., if $i \in O$, then $(i+1) \bmod N \notin O$).
+
+2. **Graph Structure of String Constraints:**
+   - Operations at distance 2 force alternating string choices (`ARC` followed by `CRA`, or vice versa).
+   - This forms a constraint graph with edges between $i$ and $(i+2) \bmod N$.
+   - **Case $N \equiv 0 \pmod 4$:** The cycles in the constraint graph have even length $N/2$. The set of all odd indices $O = \{1, 3, 5, \dots, N-1\}$ is always non-adjacent, covers all elements of $A$, and has a valid 2-coloring. Thus, the answer is **always `Yes`**.
+   - **Case $N$ is odd:** Any non-adjacent operation set $O$ forms a collection of paths in the constraint graph (since $O$ cannot contain all $N$ elements), which is always bipartite. Thus, any non-adjacent coverage set $O$ is valid.
+   - **Case $N \equiv 2 \pmod 4$:** $O = \text{Odds}$ and $O = \text{Evens}$ form odd cycles of length $N/2$ in the constraint graph and are invalid. Any other non-adjacent coverage set $O$ contains a pair of consecutive zeros in its indicator sequence $x$, which breaks both full cycles into paths. Thus, a valid type assignment exists if and only if there exists a valid non-adjacent coverage set $x$ containing at least one pair of consecutive zeros (`flag == True`).
+
+3. **Dynamic Programming:**
+   - We fix the boundary conditions at $(x_{N-1}, x_0) \in \{(0,0), (0,1), (1,0)\}$ and run an $O(N)$ DP around the cycle, tracking `(cur_x, has_double_zero_flag)`.
+   - The solution runs in $O(N)$ time and easily passes within the time limits.

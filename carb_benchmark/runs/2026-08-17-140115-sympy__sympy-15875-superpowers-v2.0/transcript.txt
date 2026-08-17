@@ -1,0 +1,29 @@
+I have investigated and resolved the issue with `is_zero` evaluating incorrectly on expressions involving complex numbers in `Add`.
+
+### Cause of the Issue
+In `sympy/core/add.py`, `Add._eval_is_zero()` previously checked if any terms in `Add` were imaginary (`im = True`), and if so, returned `False` whenever the real part summed to zero (`b.is_zero is True`). It assumed that imaginary terms in an `Add` can never sum to zero. However, expressions with multiple imaginary terms (e.g. `e = -2*I + (1 + I)**2`) can have imaginary parts that sum to zero, making `return False` incorrect.
+
+### Fix
+Updated `Add._eval_is_zero` in [`sympy/core/add.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L567) to collect imaginary terms (`im_I`) multiplied by `I` (converting them to real terms) and check `b_im.is_zero` on their sum (`b_im = Add(*im_I)`):
+- If `b.is_zero` is `True` (real part is 0) and `im_I` is non-empty, `_eval_is_zero` now evaluates and returns `b_im.is_zero`.
+- Added test coverage in [`sympy/core/tests/test_arit.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/tests/test_arit.py#L1985-L1992).
+
+Task-301 (`pytest sympy/core/tests/`) is running in the background to verify the changes against the core test suite. I will wait for it to complete before proceeding.
+### Summary of Work
+
+1. **Root Cause Analysis**:
+   - In `Add._eval_is_zero()` ([`sympy/core/add.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L567)), when the real part of an `Add` expression summed to zero (`b.is_zero is True`), the code checked `if im and not im_or_z: return False`.
+   - This assumed that any presence of imaginary terms (`im = True`) meant the imaginary part could never sum to zero.
+   - For expressions like `e = -2*I + (1 + I)**2`, both terms are imaginary and sum to zero ($ -2i + (1+i)^2 = -2i + 2i = 0 $). The previous implementation incorrectly evaluated `e.is_zero` as `False`.
+
+2. **Implementation Fix**:
+   - Modified `Add._eval_is_zero()` in [`sympy/core/add.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L567) to collect imaginary terms (`im_I`) scaled by `S.ImaginaryUnit` (matching the pattern in `_eval_is_imaginary`).
+   - When the real part sums to 0 (`b.is_zero is True`):
+     - If `im_I` is empty, returns `True`.
+     - Otherwise, computes `b_im = self.func(*im_I)` and returns `b_im.is_zero` (returning `None` if unresolvable, or `True`/`False` when determined).
+
+3. **Verification**:
+   - Added unit test assertion in [`sympy/core/tests/test_arit.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/tests/test_arit.py#L1985-L1992) for complex `Add` expressions like `-2*I + (1 + I)**2`.
+   - Verified that `e = -2*I + (1 + I)**2` now returns `is_zero is not False` (and `simplify(e).is_zero is True`).
+   - Verified that non-zero complex expressions (e.g. `1 + I` or `-3*I + (1 + I)**2`) correctly return `is_zero == False`.
+   - Ran `pytest` on `sympy/core/tests/test_arit.py` and `sympy/core/tests/test_assumptions.py`, confirming all non-XFAIL tests pass.

@@ -1,0 +1,165 @@
+... notification received: task 3a29444c-0944-4a32-9c2d-7876d6e32684/task-20 completed with exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_37uxhq2y\.gemini\antigravity-cli\brain\3a29444c-0944-4a32-9c2d-7876d6e32684\.system_generated\tasks\task-20.log
+Task Output:
+============================= test session starts =============================
+platform win32 -- Python 3.9.10, pytest-8.3.4, pluggy-1.5.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435
+configfile: pyproject.toml
+collected 41 items / 40 deselected / 1 selected
+
+tests\test_build_latex.py .                                             [100%]
+
+====================== 1 selected, 40 deselected in 1.48s ======================
+
+... notification received: task 3a29444c-0944-4a32-9c2d-7876d6e32684/task-45 completed with exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_37uxhq2y\.gemini\antigravity-cli\brain\3a29444c-0944-4a32-9c2d-7876d6e32684\.system_generated/tasks/task-45.log
+Task Output:
+Requirement already satisfied: pytest in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (0.1.dev1+gece9ba571)
+Collecting pytest
+  Using cached pytest-9.0.2-py3-none-any.whl.metadata (7.9 kB)
+Requirement already satisfied: iniconfig in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest) (2.3.0)
+Requirement already satisfied: packaging in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest) (26.3)
+Requirement already satisfied: pluggy<2.0,>=1.5 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest) (1.6.0)
+Using cached pytest-9.0.2-py3-none-any.whl (368 kB)
+Installing collected packages: pytest
+  Attempting uninstall: pytest
+    Found existing installation: pytest 0.1.dev1+gece9ba571
+    Uninstalling pytest-0.1.dev1+gece9ba571:
+      Successfully uninstalled pytest-0.1.dev1+gece9ba571
+Successfully installed pytest-9.0.2
+
+... notification received: task 3a29444c-0944-4a32-9c2d-7876d6e32684/task-56 completed with exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_37uxhq2y\.gemini\antigravity-cli\brain\3a29444c-0944-4a32-9c2d-7876d6e32684\.system_generated/tasks/task-56.log
+Task Output:
+Collecting pytest
+  Using cached pytest-8.3.4-py3-none-any.whl.metadata (7.5 kB)
+Collecting iniconfig (from pytest)
+  Using cached iniconfig-2.0.0-py3-none-any.whl.metadata (2.4 kB)
+Collecting packaging (from pytest)
+  Using cached packaging-24.2-py3-none-any.whl.metadata (3.2 kB)
+Collecting pluggy<2,>=1.5 (from pytest)
+  Using cached pluggy-1.5.0-py3-none-any.whl.metadata (4.8 kB)
+Downloading pytest-8.3.4-py3-none-any.whl (343 kB)
+Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+Downloading packaging-24.2-py3-none-any.whl (65 kB)
+Downloading pluggy-1.5.0-py3-none-any.whl (20 kB)
+Installing collected packages: pluggy, packaging, iniconfig, pytest
+  Attempting uninstall: pluggy
+    Found existing installation: pluggy 0.13.1
+    Uninstalling pluggy-0.13.1:
+      Successfully uninstalled pluggy-0.13.1
+  Attempting uninstall: packaging
+    Found existing installation: packaging 26.3
+    Uninstalling packaging-26.3:
+      Successfully uninstalled packaging-26.3
+  Attempting uninstall: iniconfig
+    Found existing installation: iniconfig 2.3.0
+    Uninstalling iniconfig-2.3.0:
+      Successfully uninstalled iniconfig-2.3.0
+  Attempting uninstall: pytest
+    Found existing installation: pytest 0.1.dev1+gece9ba571
+    Uninstalling pytest-0.1.dev1+gece9ba571:
+      Successfully uninstalled pytest-0.1.dev1+gece9ba571
+Successfully installed iniconfig-2.0.0 packaging-24.2 pluggy-1.5.0 pytest-8.3.4
+
+... notification received: task 3a29444c-0944-4a32-9c2d-7876d6e32684/task-71 completed with exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_37uxhq2y\.gemini\antigravity-cli\brain\3a29444c-0944-4a32-9c2d-7876d6e32684\.system_generated/tasks/task-71.log
+Task Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-9.1.1, pluggy-1.6.0
+libraries: Sphinx-5.0.0+/ff8b790, docutils-0.18.1
+base tempdir: C:\Users\Utkarsh\AppData\Local\Temp\pytest-of-Utkarsh\pytest-90
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435
+configfile: setup.cfg
+collected 41 items / 40 deselected / 1 selected
+
+tests\test_build_latex.py .                                             [100%]
+
+====================== 1 selected, 40 deselected in 1.34s ======================
+
+... notification received: task 3a29444c-0944-4a32-9c2d-7876d6e32684/task-101 completed with exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_37uxhq2y\.gemini\antigravity-cli/brain/3a29444c-0944-4a32-9c2d-7876d6e32684\.system_generated/tasks/task-101.log
+Task Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-9.1.1, pluggy-1.6.0
+libraries: Sphinx-5.0.0+/ff8b790, docutils-0.18.1
+base tempdir: C:\Users\Utkarsh\AppData\Local\Temp\pytest-of-Utkarsh\pytest-91
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435
+configfile: setup.cfg
+collected 41 items
+
+tests\test_build_latex.py ssssss........................................ [ 55%]
+.....................................                                    [100%]
+
+====================== 33 passed, 8 skipped in 18.23s ======================
+
+... notification received: task 3a29444c-0944-4a32-9c2d-7876d6e32684/task-105 completed with exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_37uxhq2y\.gemini\antigravity-cli\brain\3a29444c-0944-4a32-9c2d-7876d6e32684\.system_generated/tasks/task-105.log
+Task Output:
+<truncated 5 lines>
+tests\test_extensions.py .                                              [ 99%]
+tests\test_setup_command.py s.                                          [ 99%]
+tests\test_util_typing.py ........                                      [100%]
+
+============================== warnings summary ===============================
+sphinx\util\images.py:4
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435\sphinx\util\images.py:4: DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+    import imghdr
+
+C:\Users\Utkarsh\AppData\Roaming\Python\Python311\site-packages\_pytest\python.py:124
+  C:\Users\Utkarsh\AppData\Roaming\Python\Python311\site-packages\_pytest\python.py:124: PytestRemovedIn10Warning: Passing a non-Collection iterable to parametrize is deprecated.
+  Test: tests/test_build_latex.py::test_build_latex_doc, argvalues type: product
+  Please convert to a list or tuple.
+  See https://docs.pytest.org/en/stable/deprecations.html#parametrize-iterators
+    metafunc.parametrize(*marker.args, **marker.kwargs, _param_mark=marker)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================ 1546 passed, 149 skipped, 2 warnings in 43.19s =================
+
+I have resolved the issue where inline code highlighting added unwanted leading and trailing whitespace/newlines in LaTeX/PDF output.
+
+### Summary of Changes
+
+1. **LaTeX Writer (`sphinx/writers/latex.py`)**:
+   - Updated [`visit_literal`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1706-L1716) to pass `nowrap=True` to `self.highlighter.highlight_block(...)` (matching the HTML writers).
+   - Removed leading/trailing newlines around the highlighted inline content so that `\sphinxcode{\sphinxupquote{...}}` wraps the highlighted tokens cleanly without extra whitespace.
+
+2. **Tests (`tests/test_build_latex.py`)**:
+   - Updated [`test_latex_code_role`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1626-L1627) to verify that LaTeX output formats highlighted inline code directly within `\sphinxcode{\sphinxupquote{...}}` on the same line.
+... notification received: task 3a29444c-0944-4a32-9c2d-7876d6e32684/task-125 completed with exit code 0. Log file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_37uxhq2y\.gemini\antigravity-cli/brain/3a29444c-0944-4a32-9c2d-7876d6e32684\.system_generated/tasks/task-125.log
+Task Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+libraries: Sphinx-5.0.0+/ff8b790, docutils-0.18.1
+base tempdir: C:\Users\Utkarsh\AppData\Local\Temp\pytest-of-Utkarsh\pytest-96
+rootdir: E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435
+configfile: setup.cfg
+plugins: anyio-4.13.0, hypothesis-6.165.7
+collected 83 items
+
+tests\test_build_latex.py ssssss........................................ [ 55%]
+................................................                         [100%]
+
+============================== warnings summary ===============================
+sphinx\util\images.py:4
+  E:\RofU\Supreme\carb_workspaces\sphinx-doc__sphinx-10435\sphinx\util\images.py:4: DeprecationWarning: 'imghdr' is deprecated and slated for removal in Python 3.13
+    import imghdr
+
+C:\Users\Utkarsh\AppData\Roaming\Python\Python311\site-packages\_pytest\python.py:124
+  C:\Users\Utkarsh\AppData\Roaming\Python\Python311\site-packages\_pytest\python.py:124: PytestRemovedIn10Warning: Passing a non-Collection iterable to parametrize is deprecated.
+  Test: tests/test_build_latex.py::test_build_latex_doc, argvalues type: product
+  Please convert to a list or tuple.
+  See https://docs.pytest.org/en/stable/deprecations.html#parametrize-iterators
+    metafunc.parametrize(*marker.args, **marker.kwargs, _param_mark=marker)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============ 75 passed, 8 skipped, 2 warnings in 19.34s =============
+
+I have resolved the issue where inline code highlighting added extra whitespace at the start and end of inline code in LaTeX/PDF output.
+
+### Cause
+When rendering highlighted inline code in LaTeX mode (`visit_literal`), Pygments' block formatter output was previously converted to `\sphinxcode{\sphinxupquote{...}}` with newlines inserted directly after `\sphinxupquote{` and before `}}`. In LaTeX/TeX, a newline after an open brace or before a close brace is interpreted as a space token in horizontal text mode, resulting in leading and trailing space characters around inline code in the PDF.
+
+### Solution
+1. **LaTeX Writer ([`sphinx/writers/latex.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1706-L1716))**:
+   - Passed `nowrap=True` to `self.highlighter.highlight_block(...)` (matching HTML writers).
+   - Removed leading and trailing newlines from the Pygments output before wrapping in `\sphinxcode{\sphinxupquote{...}}`.
+
+2. **Tests ([`tests/test_build_latex.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1607-L1628))**:
+   - Updated `test_latex_code_role` to assert that highlighted inline code is placed directly inside `\sphinxcode{\sphinxupquote{...}}` without extra newlines, eliminating unwanted whitespace in PDF rendering.
+All tests have completed successfully and passed.
+The fixes and tests have been verified. All relevant latex build tests are passing cleanly.

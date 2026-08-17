@@ -1,0 +1,8 @@
+### Summary of Fix
+
+#### Root Cause
+When computing patch data limits in [`_update_patch_limits`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2420-L2458), `p.iter_bezier()` was called on the `Polygon` patch created for `histtype='step'`. `iter_bezier()` delegates to `iter_segments()`, which enabled path simplification (`simplify=True`) by default. Path simplification (intended for screen rendering optimizations) removed collinear and close-by step vertices, including peak density vertices of the step polygon, causing `dataLim` to record a lower maximum y-value than the patch actually spanned. As a result, autoscaling set y-limits lower than peak density for step histograms.
+
+#### Solution
+1. Modified [`_update_patch_limits`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2437) in `lib/matplotlib/axes/_base.py` to call `p.iter_bezier(simplify=False)`. This ensures that all vertices and extrema are evaluated without simplification when determining patch data limits.
+2. Added unit test [`test_hist_step_autoscale_density`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/tests/test_axes.py#L2089-L2097) in `lib/matplotlib/tests/test_axes.py` to verify that `histtype='step'` and `histtype='bar'` produce identical y-limits under density auto-scaling.

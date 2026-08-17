@@ -1,0 +1,29 @@
+{
+  "run_id": "2026-08-15-213831-matplotlib__matplotlib-24177-baseline-v2.0",
+  "task_id": "matplotlib__matplotlib-24177",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 311.79,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "passed": true,
+  "test_command": null,
+  "test_output_tail": "",
+  "diff_metrics": {
+    "files_modified_count": 0,
+    "files_modified_list": [],
+    "lines_added": 0,
+    "lines_deleted": 0,
+    "total_lines_changed": 0,
+    "hunks_count": 0
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "notes": ""
+}

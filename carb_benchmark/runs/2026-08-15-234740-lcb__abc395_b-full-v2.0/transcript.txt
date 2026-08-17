@@ -1,0 +1,10 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_b/main.py).
+
+### Implementation Overview
+- Direct simulation of the operations described in the problem statement for $i = 1, 2, \dots, N$:
+  - Calculate $j = N + 1 - i$.
+  - If $i \le j$, fill the grid subregion from row/col $i-1$ to $j-1$ (0-indexed) with `'#'` if $i$ is odd, or `'.'` if $i$ is even.
+- Finally, print the grid row by row.
+
+### Verification
+Verified against all example cases ($N=11, 5, 8, 2$) as well as boundary case ($N=1$), producing exact matches in expected standard output formatting.

@@ -1,0 +1,22 @@
+An $O(N)$ dynamic programming solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_a/main.py).
+
+### Method Explanation
+1. **Mathematical Structure**:
+   - The sequence of stack operations corresponds to choosing which elements $A_{p_1}, A_{p_2}, \dots, A_{p_H}$ remain in the stack $S$ at the end, while all other elements are paired up and eliminated by matched push-pop pairs.
+   - Any valid matched push-pop sequence of operations between two unmatched stack elements must have an even length.
+   - This leads to the fundamental parity constraint:
+     - $p_1$ must be **odd** (1-indexed).
+     - $p_2$ must be **even**.
+     - $p_3$ must be **odd**, $p_4$ must be **even**, and so on ($p_k \equiv k \pmod 2$).
+     - The total count $H$ of elements remaining in $S$ must satisfy $H \equiv N \pmod 2$.
+
+2. **Dynamic Programming**:
+   - Maintain `dp0` (max sum with an even count of elements chosen so far) and `dp1` (max sum with an odd count of elements chosen so far).
+   - At each index $i = 1, \dots, N$:
+     - If $i$ is odd, $A_i$ can be picked as an odd-numbered element: `dp1 = max(dp1, dp0 + A_i)`.
+     - If $i$ is even, $A_i$ can be picked as an even-numbered element: `dp0 = max(dp0, dp1 + A_i)`.
+   - Output `dp0` if $N$ is even, or `dp1` if $N$ is odd.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$
+- **Space Complexity**: $\mathcal{O}(1)$ auxiliary space beyond input storage.

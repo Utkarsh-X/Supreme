@@ -1,0 +1,12 @@
+### Root Cause
+In `src/_pytest/capture.py`, `FDCaptureBinary` initialized `EncodedFile` (a subclass of `io.TextIOWrapper`) around the temporary capture file without specifying the `newline` parameter. By default, `io.TextIOWrapper` defaults to `newline=None`, which enables universal newlines translation mode on read and converts carriage returns (`\r`) and `\r\n` into standard newlines (`\n`). 
+
+In contrast, `SysCapture` (`capsys`) used `CaptureIO` which explicitly set `newline=""`. With `newline=""`, universal newlines mode is enabled without translating line endings, returning `\r` untranslated.
+
+### Solution
+- Updated `FDCaptureBinary` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L395) to pass `newline=""` to `EncodedFile`.
+- Added a regression test [`test_capture_includes_carriage_return`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1585-L1590) in `testing/test_capture.py` covering both `capfd` and `capsys`.
+
+### Changes Made
+- [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L395): Added `newline=""` to `EncodedFile` creation inside `FDCaptureBinary`.
+- [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1585-L1590): Added `test_capture_includes_carriage_return` parametrized for `capfd` and `capsys`.

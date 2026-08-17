@@ -1,0 +1,66 @@
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index 6b24e21..879cfc9 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,6 +1,10 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++try:
++    from collections.abc import Mapping
++except ImportError:
++    from collections import Mapping
++from collections import defaultdict
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+diff --git a/sympy/core/compatibility.py b/sympy/core/compatibility.py
+index 0d10408..a9e1b22 100644
+--- a/sympy/core/compatibility.py
++++ b/sympy/core/compatibility.py
+@@ -6,6 +6,15 @@
+ from __future__ import print_function, division
+ 
+ import operator
++import collections
++try:
++    import collections.abc as _collections_abc
++    for _attr in ['Mapping', 'MutableMapping', 'Callable', 'Iterable', 'Iterator', 'MutableSet', 'Sequence', 'Set', 'MappingView', 'KeysView', 'ItemsView', 'ValuesView']:
++        if not hasattr(collections, _attr) and hasattr(_collections_abc, _attr):
++            setattr(collections, _attr, getattr(_collections_abc, _attr))
++except ImportError:
++    pass
++
+ from collections import defaultdict
+ from sympy.external import import_module
+ 
+diff --git a/sympy/functions/elementary/hyperbolic.py b/sympy/functions/elementary/hyperbolic.py
+index 2a4555d..5fbb73c 100644
+--- a/sympy/functions/elementary/hyperbolic.py
++++ b/sympy/functions/elementary/hyperbolic.py
+@@ -587,7 +587,7 @@ def eval(cls, arg):
+                 x, m = _peeloff_ipi(arg)
+                 if m:
+                     cothm = coth(m)
+-                    if cotm is S.ComplexInfinity:
++                    if cothm is S.ComplexInfinity:
+                         return coth(x)
+                     else: # cothm == 0
+                         return tanh(x)
+diff --git a/sympy/functions/elementary/tests/test_hyperbolic.py b/sympy/functions/elementary/tests/test_hyperbolic.py
+index dd9ebd7..6bb3669 100644
+--- a/sympy/functions/elementary/tests/test_hyperbolic.py
++++ b/sympy/functions/elementary/tests/test_hyperbolic.py
+@@ -270,7 +270,11 @@ def test_coth():
+     assert coth(k*pi*I) == -cot(k*pi)*I
+     assert coth(17*k*pi*I) == -cot(17*k*pi)*I
+ 
+-    assert coth(k*pi*I) == -cot(k*pi)*I
++    assert coth(x + I*pi) == coth(x)
++    assert coth(x + I*pi/2) == tanh(x)
++    assert coth(log(tan(x))).subs(x, 2) == coth(log(-tan(2)))
++
++
+ 
+ 
+ def test_coth_series():

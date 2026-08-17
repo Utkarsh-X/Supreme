@@ -1,0 +1,13 @@
+### Root Cause
+When syntax highlighting was enabled for inline code roles (`visit_literal` in [sphinx/writers/latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1702-L1722)), Pygments' `highlight_block` returned TeX code wrapped in a `Verbatim` block containing a leading newline right after `\begin{Verbatim}[...]` and a trailing newline right before `\end{Verbatim}`. 
+
+When replacing the Pygments block environment with `\sphinxcode{\sphinxupquote{...}}`, those leading and trailing newlines remained inside the `\sphinxupquote{...}` macro, causing LaTeX in text mode to treat the newlines as space characters at the start and end of inline highlighted code in PDF output.
+
+### Solution
+1. Modified `visit_literal` in [sphinx/writers/latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1716-L1719) to strip the Pygments `Verbatim`-wrapper-induced leading newline (after `\sphinxcode{\sphinxupquote{`) and trailing newline (before `}}`).
+2. Updated `test_latex_code_role` in [tests/test_build_latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1605-L1645) to assert that inline highlighted code produces `\sphinxcode{\sphinxupquote{<code_tokens>}}` without leading/trailing newlines.
+
+### Verification
+Ran test suite:
+- `py -3.11 -m pytest tests/test_build_latex.py` (Passed 75 tests)
+- `py -3.11 -m pytest tests/test_markup.py` (Passed 36 tests)

@@ -1,0 +1,30 @@
+diff --git a/django/apps/registry.py b/django/apps/registry.py
+index 0683f3a..481dd1f 100644
+--- a/django/apps/registry.py
++++ b/django/apps/registry.py
+@@ -376,6 +376,7 @@ class Apps:
+         # Call expire cache on each model. This will purge
+         # the relation tree and the fields cache.
+         self.get_models.cache_clear()
++        self.get_swappable_settings_name.cache_clear()
+         if self.ready:
+             # Circumvent self.get_models() to prevent that the cache is refilled.
+             # This particularly prevents that an empty value is cached while cloning.
+diff --git a/tests/apps/tests.py b/tests/apps/tests.py
+index 9f989c5..8f1132e 100644
+--- a/tests/apps/tests.py
++++ b/tests/apps/tests.py
+@@ -485,6 +485,13 @@ class AppConfigTests(SimpleTestCase):
+         )
+         self.assertIs(apps_config._is_default_auto_field_overridden, False)
+ 
++    def test_clear_cache(self):
++        apps.get_swappable_settings_name("auth.User")
++        self.assertGreater(apps.get_swappable_settings_name.cache_info().currsize, 0)
++        apps.clear_cache()
++        self.assertEqual(apps.get_swappable_settings_name.cache_info().currsize, 0)
++
++
+ 
+ class NamespacePackageAppTests(SimpleTestCase):
+     # We need nsapp to be top-level so our multiple-paths tests can add another

@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-08-17-024145-sphinx-doc__sphinx-9230-supreme-v2.0",
+  "task_id": "sphinx-doc__sphinx-9230",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 232.42,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-9230",
+  "test_output_tail": "mple\" refdomain=\"py\" refexplicit=\"False\" refspecific=\"True\" reftarget=\"str\" reftype=\"class\"><literal_emphasis>str</literal_emphasis></pending_xref><literal_emphasis>, </literal_emphasis><literal_emphasis>...</literal_emphasis><literal_emphasis>]</literal_emphasis>) -- blah blah</paragraph></list_item><list_item><paragraph><literal_strong py:class=\"Class\" py:module=\"example\" refspecific=\"True\">params</literal_strong> (<pending_xref py:class=\"Class\" py:module=\"example\" refdomain=\"py\" refexplicit=\"False\" refspecific=\"True\" reftarget=\"Dict\" reftype=\"class\"><literal_emphasis>Dict</literal_emphasis></pending_xref><literal_emphasis>[</literal_emphasis><pending_xref py:class=\"Class\" py:module=\"example\" refdomain=\"py\" refexplicit=\"False\" refspecific=\"True\" reftarget=\"str\" reftype=\"class\"><literal_emphasis>str</literal_emphasis></pending_xref><literal_emphasis>, </literal_emphasis><pending_xref py:class=\"Class\" py:module=\"example\" refdomain=\"py\" refexplicit=\"False\" refspecific=\"True\" reftarget=\"str\" reftype=\"class\"><literal_emphasis>str</literal_emphasis></pending_xref><literal_emphasis>]</literal_emphasis>) -- blah blah</paragraph></list_item></bullet_list></field_body></field></field_list></desc_content></desc></document>\n-------------------------- Captured stdout teardown ---------------------------\n# testroot: root\n# builder: html\n# srcdir: C:\\Users\\Utkarsh\\AppData\\Local\\Temp\\pytest-of-Utkarsh\\pytest-197\\root\n# outdir: C:\\Users\\Utkarsh\\AppData\\Local\\Temp\\pytest-of-Utkarsh\\pytest-197\\root\\_build\\html\n# status: \n\u001b[01mRunning Sphinx v4.1.0\u001b[39;49;00m\n\n# warning: \n\u001b[91mWARNING: while setting up extension sphinx.addnodes: node class 'meta' is already registered, its visitors will be overridden\u001b[39;49;00m\n\n=========================== short test summary info ===========================\nPASSED tests/test_domain_py.py::test_info_field_list\n======================= 1 passed, 26 warnings in 0.51s ========================\n\nPASS: sphinx-doc__sphinx-9230 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "sphinx/util/docfields.py",
+      "sphinx/util/typing.py",
+      "tests/test_domain_py.py"
+    ],
+    "lines_added": 52,
+    "lines_deleted": 3,
+    "total_lines_changed": 55,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

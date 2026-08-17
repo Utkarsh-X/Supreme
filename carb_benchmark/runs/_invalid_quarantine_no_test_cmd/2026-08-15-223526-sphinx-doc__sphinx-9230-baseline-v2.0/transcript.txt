@@ -1,0 +1,8 @@
+I have resolved the issue where doc rendering was incorrect when `:param` specified composite datatypes containing spaces, such as `dict(str, str)`.
+
+### Root Cause
+When parsing typed parameter docfields in `:param type name:` syntax, [`DocFieldTransformer.transform`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L298-L308) was using `fieldarg.split(None, 1)`. This split `fieldarg` at the first whitespace inside the datatype (e.g., splitting `"dict(str, str) opc_meta"` into `argtype = "dict(str,"` and `argname = "str) opc_meta"`), leading to mangled doc output.
+
+### Solution
+1. Updated [`DocFieldTransformer.transform`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301) to use `fieldarg.rsplit(None, 1)` instead of `split`. Since Python parameter names cannot contain spaces, splitting from the right cleanly isolates the parameter name as the last token and treats everything preceding it as the parameter datatype.
+2. Added test coverage in [`tests/test_domain_py.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L985-L1005) for `:param dict(str, str) opc_meta: (optional)`.

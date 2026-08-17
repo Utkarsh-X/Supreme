@@ -1,0 +1,8 @@
+I have updated the default value for `SECURE_REFERRER_POLICY` to `'same-origin'`.
+
+### Summary of Changes
+1. **[global_settings.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/django/conf/global_settings.py#L640)**: Changed `SECURE_REFERRER_POLICY` default value from `None` to `'same-origin'`.
+2. **[test_security.py (middleware)](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/middleware/test_security.py#L226)**: Added `test_referrer_policy_default` to test that `SecurityMiddleware` adds the `Referrer-Policy: same-origin` header by default.
+3. **[test_security.py (check_framework)](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/check_framework/test_security.py#L529)**: Added `test_referrer_policy_default` to ensure security checks pass with the default setting.
+4. **[settings.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/ref/settings.txt#L2398)**: Updated the documentation for `SECURE_REFERRER_POLICY` default value and added `.. versionchanged:: 3.1`.
+5. **[3.1.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/releases/3.1.txt#L288)**: Added notes under *What's new in Django 3.1* and *Backwards incompatible changes in 3.1* detailing the default policy change.

@@ -1,0 +1,37 @@
+diff --git a/main.py b/main.py
+index c86f6c8..4f15bb7 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,31 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:]]
++    
++    pref = [0] * N
++    seen = set()
++    for i in range(N):
++        seen.add(A[i])
++        pref[i] = len(seen)
++        
++    suff = [0] * N
++    seen.clear()
++    for i in range(N - 1, -1, -1):
++        seen.add(A[i])
++        suff[i] = len(seen)
++        
++    ans = 0
++    for i in range(N - 1):
++        cur = pref[i] + suff[i + 1]
++        if cur > ans:
++            ans = cur
++            
++    print(ans)
++
++if __name__ == '__main__':
++    main()

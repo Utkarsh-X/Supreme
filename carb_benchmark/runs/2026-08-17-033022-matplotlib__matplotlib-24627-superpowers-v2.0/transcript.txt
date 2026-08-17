@@ -1,0 +1,19 @@
+I have fixed the issue where `cla()` and `clf()` (or `clear()`) did not unset the `.axes` and `.figure` attributes of deparented artists.
+
+### Summary of Changes
+
+1. **`lib/matplotlib/artist.py`**:
+   - Updated `Artist.remove()` to set `self.figure = None` (instead of accidentally setting `self.figure = True`) when decoupling an artist.
+   - Updated `Artist.set_figure(fig)` to allow passing `fig=None` so an artist's figure attribute can be reset without raising `RuntimeError`.
+   - Updated `Artist.axes` setter to clear `self.stale_callback` when `axes` is set to `None`.
+
+2. **`lib/matplotlib/axes/_base.py`**:
+   - Updated `Axes.__clear()` (`cla()`/`clear()`) to set `.axes = None` and `.set_figure(None)` on all deparented artists (children, child axes, legend, titles, patch, and container elements) before resetting internal artist lists.
+   - Updated `Axes.set_figure(fig)` to check `if fig is not None` before attempting to construct `TransformedBbox` with `fig.transSubfigure`.
+
+3. **`lib/matplotlib/figure.py`**:
+   - Updated `Figure.delaxes(ax)` to set `ax.axes = None` and `ax.set_figure(None)` on the removed `Axes`.
+   - Updated `Figure.clear()` (`clf()`/`clear()`) to set `.axes = None` and `.set_figure(None)` on subfigures, axes, figure-level artists (artists, lines, patches, texts, images, legends), and figure titles (`suptitle`, `supxlabel`, `supylabel`).
+
+4. **`lib/matplotlib/tests/test_axes.py`**:
+   - Added unit test `test_cla_clf_clears_axes_and_figure` verifying that clearing an `Axes` or `Figure` unsets `.axes` and `.figure` attributes on all deparented artists.

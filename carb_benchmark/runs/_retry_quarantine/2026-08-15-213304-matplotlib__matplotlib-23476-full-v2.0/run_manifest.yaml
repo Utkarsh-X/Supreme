@@ -1,0 +1,26 @@
+run_id: 2026-08-15-213304-matplotlib__matplotlib-23476-full-v2.0
+task_id: matplotlib__matplotlib-23476
+configuration_id: full-v2.0
+status: FAILURE
+started_at: '2026-08-15T21:33:04.942436'
+finished_at: '2026-08-15T21:38:30.811931'
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high
+  temperature: 0.0
+environment:
+  os: Windows-10-10.0.26200-SP0
+  python_version: 3.11.9
+  ide: Antigravity IDE Agent
+  isolation_mode: non_adversarial_cooperative
+provenance_hashes:
+  configuration_hash: eade223e39f4654a18b06309908c5cc4d6efc128e768c740f31b7395853375ae
+  prompt_hash: null
+  snapshot_hash: null
+artifacts:
+  transcript_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-15-213304-matplotlib__matplotlib-23476-full-v2.0\transcript.txt
+  diff_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-15-213304-matplotlib__matplotlib-23476-full-v2.0\final_diff.patch
+  evaluator_output: null
+resource_metrics:
+  tool_iterations: 0
+  wall_clock_seconds: 325.87

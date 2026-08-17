@@ -1,0 +1,25 @@
+diff --git a/sympy/core/sympify.py b/sympy/core/sympify.py
+index a3f1ce2..61480e8 100644
+--- a/sympy/core/sympify.py
++++ b/sympy/core/sympify.py
+@@ -513,7 +513,7 @@ def kernS(s):
+             while kern in s:
+                 kern += choice(string.ascii_letters + string.digits)
+             s = s.replace(' ', kern)
+-        hit = kern in s
++            hit = True
+ 
+     for i in range(2):
+         try:
+diff --git a/sympy/core/tests/test_sympify.py b/sympy/core/tests/test_sympify.py
+index 3413df2..b5a9b93 100644
+--- a/sympy/core/tests/test_sympify.py
++++ b/sympy/core/tests/test_sympify.py
+@@ -512,6 +512,7 @@ def test_kernS():
+     assert kernS('(1-2.*(1-y)*x)') == 1 - 2.*x*(1 - y)
+     one = kernS('x - (x - 1)')
+     assert one != 1 and one.expand() == 1
++    assert kernS('(2*x)/(x-1)') == 2*x/(x - 1)
+ 
+ 
+ def test_issue_6540_6552():

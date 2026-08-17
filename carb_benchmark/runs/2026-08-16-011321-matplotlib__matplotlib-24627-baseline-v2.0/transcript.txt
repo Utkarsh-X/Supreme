@@ -1,0 +1,44 @@
+I have updated `cla()`, `clear()`, `clf()`, and `delaxes()` so that deparented artists have their `.axes` and `.figure` attributes unset (`None`).
+
+### Summary of Changes
+
+1. **[`lib/matplotlib/axes/_base.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/axes/_base.py#L1309-L1335)**:
+   - Updated `Axes.__clear()` so that before resetting `self._children`, `self.child_axes`, `self.legend_`, `self.title`, `self._left_title`, `self._right_title`, and `self.patch`, all of those deparented artists have `.axes` and `.set_figure(None)` invoked.
+   - Updated `Axes.set_figure` to safely handle `None` without raising `AttributeError` on `fig.transSubfigure`.
+
+2. **[`lib/matplotlib/figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/figure.py#L927-L978)**:
+   - Updated `FigureBase.delaxes(ax)` to set `ax.axes = None` and `ax.set_figure(None)`.
+   - Updated `FigureBase.clear()` to unset `.axes` and `.set_figure(None)` for `subfigs`, `artists`, `lines`, `patches`, `texts`, `images`, and `legends`.
+
+3. **[`lib/matplotlib/artist.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/artist.py#L221-L227)**:
+   - Fixed a bug in `Artist.remove()` where `self.figure = True` was assigned instead of unsetting `self.figure`.
+   - Allowed `Artist.set_figure(None)` to be called on artists with existing figures without raising `RuntimeError`.
+
+4. **Containers & Compound Artists**:
+   - **[`lib/matplotlib/legend.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/legend.py#L840-L853)**: Updated `Legend.set_figure` and `Legend.axes` setter to propagate `figure` and `axes` updates down to `self._legend_box` and its children (texts, handles, title box, etc.).
+   - **[`lib/matplotlib/table.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/table.py#L322-L332)**: Added `set_figure` and `axes` setter on `Table` to propagate `figure` and `axes` updates down to cells.
+   - **[`lib/matplotlib/text.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/text.py#L1945-L1952)**: Added `axes` setter on `Annotation` to propagate `axes` updates to `self.arrow_patch`.
+
+5. **Tests**:
+   - Added `test_cla_clf_clear_deparent` in [`lib/matplotlib/tests/test_artist.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/tests/test_artist.py#L218-L245) to verify that `cla()`, `clear()`, `clf()`, and `delaxes()` unset `.axes` and `.figure` across various artist types (lines, texts, annotations, legends, tables, cells, figure texts, and axes).
+I have resolved the issue where clearing an `Axes` or `Figure` did not unset the `.axes` and `.figure` attributes of deparented artists.
+
+### Summary of Solution
+
+1. **Axes clearing (`ax.cla()`, `ax.clear()`)**:
+   - Updated `Axes.__clear()` in [`lib/matplotlib/axes/_base.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/axes/_base.py#L1309-L1335) to deparent (`.axes = None`, `.set_figure(None)`) all existing artists prior to resetting the internal artist lists (`_children`, `child_axes`, `legend_`, `title`, `_left_title`, `_right_title`, `patch`).
+   - Updated `Axes.set_figure` to safely accept `None` without raising an exception when accessing `fig.transSubfigure`.
+
+2. **Figure clearing (`fig.clf()`, `fig.clear()`) and axes removal (`fig.delaxes()`)**:
+   - Updated `FigureBase.delaxes(ax)` in [`lib/matplotlib/figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/figure.py#L927-L931) to set `ax.axes = None` and `ax.set_figure(None)` on the removed Axes.
+   - Updated `FigureBase.clear()` in [`lib/matplotlib/figure.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/figure.py#L942-L975) to deparent artists in `subfigs`, `artists`, `lines`, `patches`, `texts`, `images`, and `legends`.
+
+3. **Artist decoupling**:
+   - Fixed `Artist.remove()` in [`lib/matplotlib/artist.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/artist.py#L221-L227) where `self.figure = True` was incorrectly set when removing an artist.
+   - Updated `Artist.set_figure()` in [`lib/matplotlib/artist.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/artist.py#L720-L728) to allow `set_figure(None)` to decouple an artist from its figure without raising a `RuntimeError`.
+
+4. **Containers & Compound Artists**:
+   - Added `set_figure` and `axes` setters to `Legend` ([`lib/matplotlib/legend.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/legend.py#L840-L853)) and `Table` ([`lib/matplotlib/table.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/table.py#L322-L332)), and an `axes` setter to `Annotation` ([`lib/matplotlib/text.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/text.py#L1945-L1952)) to propagate `axes` and `figure` updates to all child elements (legend items, table cells, arrow patches).
+
+5. **Testing**:
+   - Added unit test `test_cla_clf_clear_deparent` in [`lib/matplotlib/tests/test_artist.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24627/lib/matplotlib/tests/test_artist.py#L218-L245) to ensure `ax.cla()`, `ax.clear()`, `fig.clf()`, `fig.clear()`, and `fig.delaxes()` correctly set `.axes` and `.figure` to `None`.

@@ -1,0 +1,64 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ea93f86 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,58 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++    T = input_data[3]
++    
++    T_prime = T[:-1]
++    T_M = int(T[-1])
++    
++    cnt = [0] * 10
++    for char in T_prime:
++        cnt[int(char)] += 1
++        
++    result = []
++    pos_set = False
++    
++    for char in S:
++        s_val = int(char)
++        if pos_set:
++            best_d = -1
++            for d in range(9, s_val, -1):
++                if cnt[d] > 0:
++                    best_d = d
++                    break
++            if best_d != -1:
++                result.append(str(best_d))
++                cnt[best_d] -= 1
++            else:
++                result.append(char)
++        else:
++            best_d = -1
++            for d in range(9, s_val, -1):
++                if cnt[d] > 0:
++                    best_d = d
++                    break
++            g_i = best_d if best_d != -1 else s_val
++            
++            if g_i <= T_M:
++                result.append(str(T_M))
++                pos_set = True
++            else:
++                result.append(str(g_i))
++                if best_d != -1:
++                    cnt[best_d] -= 1
++                    
++    if not pos_set:
++        result[-1] = str(T_M)
++        
++    print("".join(result))
++
++if __name__ == '__main__':
++    solve()

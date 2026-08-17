@@ -1,0 +1,21 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_d/main.py).
+
+### Method Explanation
+1. **Vertical Order Invariance**: In each column $x$, blocks fall vertically without changing their column or relative vertical ordering. Thus, the $k$-th lowest block initially in column $x$ will always be the $k$-th remaining block in column $x$.
+2. **Row Removal Times**: 
+   - A row removal occurs whenever every column $1 \le x \le W$ has a block at height $y=1$.
+   - Consequently, the $k$-th row removal (if it happens) removes the $k$-th block of *every* column simultaneously.
+   - Let $K_{\max} = \min_{1 \le x \le W} |C_x|$ be the maximum number of row removals possible, where $|C_x|$ is the initial count of blocks in column $x$.
+   - The time $E_k$ of the $k$-th row removal follows the recurrence:
+     $$E_k = \max\left( \max_{1 \le x \le W} Y_{x, k}, E_{k-1} + 1 \right) \quad (E_0 = 0)$$
+     where $Y_{x, k}$ is the initial $y$-coordinate of the $k$-th block in column $x$.
+3. **Query Resolution**:
+   - For a query asking whether block $A$ exists at time $T + 0.5$:
+     - Find the column $X_A$ and rank $k$ of block $A$ in column $X_A$.
+     - If $k > K_{\max}$, the $k$-th row removal never occurs, so block $A$ exists forever $\rightarrow$ **Yes**.
+     - If $k \le K_{\max}$, block $A$ is removed at time $E_k$. Thus, block $A$ exists if and only if $T < E_k$ $\rightarrow$ **Yes** if $T < E_k$, else **No**.
+
+### Verification
+- Tested against all provided sample cases.
+- Validated via 100 randomized stress tests against a brute-force simulator.
+- Performance tested on maximum constraints ($N = 2 \times 10^5, Q = 2 \times 10^5$) executing in $\approx 0.24$ seconds.

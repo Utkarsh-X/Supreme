@@ -1,0 +1,13 @@
+I have resolved the issue where `Contains.as_set()` raised a `NotImplementedError` (or previously failed to convert `Contains` to a set).
+
+### Root Cause
+`Contains` inherited from `BooleanFunction`, but `Contains.as_set()` raised `NotImplementedError()`. Because `Contains` represents a boolean predicate ($x \in S$), calling `as_set()` on it (or on expressions like `Piecewise` containing `Contains`) failed because `Contains` could not be evaluated to its underlying set $S$.
+
+### Summary of Changes
+1. **Implemented `Contains.as_set()` and `Contains._eval_as_set()`** in [`sympy/sets/contains.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-23950/sympy/sets/contains.py):
+   - When the test element `expr` in `Contains(expr, s)` is a `Symbol` (or a `Tuple` of distinct symbols), `as_set()` returns `s` directly.
+   - For expressions like `x + 1`, `as_set()` attempts `s.as_relational(expr).as_set()`.
+   - If relational conversion is unsupported (e.g. `Complexes`), it falls back to returning a `ConditionSet`.
+2. **Added Unit Tests**:
+   - Added test cases in [`sympy/sets/tests/test_contains.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-23950/sympy/sets/tests/test_contains.py) testing `Contains.as_set()`.
+   - Added test assertions in [`sympy/functions/elementary/tests/test_piecewise.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-23950/sympy/functions/elementary/tests/test_piecewise.py) verifying that `Piecewise` with `Contains` converts to set pairs properly (`as_expr_set_pairs()`).

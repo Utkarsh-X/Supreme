@@ -1,0 +1,19 @@
+I have written the solution to `main.py` and verified it against all public test cases.
+
+### Implementation Overview
+1. **Mathematical Representation**: 
+   Any good integer $X$ can be written as $X = 2^a \times b^2$ for $a \ge 1, b \ge 1$.
+   Let $b = 2^k \times m$, where $m \ge 1$ is odd and $k \ge 0$.
+   Then $X = 2^{a + 2k} \times m^2 = 2^E \times m^2$, where $E = a + 2k \ge 1$.
+   Conversely, for any $E \ge 1$ and odd positive integer $m \ge 1$, setting $a = E \ge 1$ and $b = m \ge 1$ gives $X = 2^E \times m^2$.
+   Each pair $(E, m)$ of a positive integer $E \ge 1$ and an odd positive integer $m \ge 1$ corresponds uniquely to a good integer $X$.
+
+2. **Counting**:
+   For each power exponent $E \ge 1$ such that $2^E \le N$:
+   - The maximum allowed value for $m^2$ is $\lfloor N / 2^E \rfloor$.
+   - The maximum value for $m$ is $m_{\text{max}} = \lfloor \sqrt{N / 2^E} \rfloor$.
+   - The number of odd positive integers $m \le m_{\text{max}}$ is $\lfloor \frac{m_{\text{max}} + 1}{2} \rfloor$.
+   - We sum these counts for all $E \ge 1$.
+
+### Verification
+The solution was executed against all sample test cases (including $N = 20$, $N = 400$, and $N = 1234567890$) and produced exact matching outputs.

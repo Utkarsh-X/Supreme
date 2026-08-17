@@ -1,0 +1,30 @@
+diff --git a/main.py b/main.py
+index c86f6c8..24de0c1 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,24 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    
++    ans = 0
++    E = 1
++    while True:
++        p2 = 1 << E
++        if p2 > N:
++            break
++        limit = N // p2
++        m_max = math.isqrt(limit)
++        ans += (m_max + 1) // 2
++        E += 1
++        
++    print(ans)
++
++if __name__ == '__main__':
++    main()

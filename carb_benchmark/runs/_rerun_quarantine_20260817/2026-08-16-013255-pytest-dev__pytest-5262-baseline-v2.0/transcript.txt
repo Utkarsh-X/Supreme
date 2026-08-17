@@ -1,0 +1,8 @@
+I have resolved the issue where `_pytest.capture.EncodedFile.mode` incorrectly advertised binary mode (`"b"`) inherited from the underlying binary stream buffer.
+
+### Root Cause
+`EncodedFile` is a text stream wrapper that accepts text/`str` objects in its `write()` method. However, because it delegated attribute access via `__getattr__` directly to the underlying `self.buffer` stream, accessing `EncodedFile.mode` returned the mode of `self.buffer` (which includes `"b"`, such as `"rb+"` or `"wb+"`). External libraries (such as `youtube-dl`) inspecting `out.mode` would see `"b"` and attempt to write `bytes`, triggering a `TypeError` in `EncodedFile.write()`.
+
+### Solution
+1. Defined a `mode` property on [`EncodedFile`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L450-L456) in `src/_pytest/capture.py` that strips `"b"` from the mode string of the underlying buffer (e.g., converting `"rb+"` -> `"r+"` and `"wb+"` -> `"w+"`).
+2. Added unit tests in [`test_encodedfile_mode`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L1464-L1475) in `testing/test_capture.py` verifying mode stripping for various mode patterns and `None` handling.

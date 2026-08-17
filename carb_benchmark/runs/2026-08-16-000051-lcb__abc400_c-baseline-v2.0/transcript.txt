@@ -1,0 +1,12 @@
+An optimal Python solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc400_c/main.py).
+
+### Method Explanation
+Any good integer $X$ can be written as $X = 2^a \times b^2$ for positive integers $a, b \ge 1$.
+By considering the parity of $a$:
+1. **$a$ is even** ($a = 2k, k \ge 1$): $X = (2^k b)^2 = m^2$, where $m = 2^k b$ is an even positive integer ($m \ge 2$). The number of such $X \le N$ is $\lfloor \sqrt{N} / 2 \rfloor$.
+2. **$a$ is odd** ($a = 2k + 1, k \ge 0$): $X = 2 \times (2^k b)^2 = 2 n^2$, where $n = 2^k b$ is any positive integer ($n \ge 1$). The number of such $X \le N$ is $\lfloor \sqrt{N / 2} \rfloor$.
+
+Because the 2-adic valuation $v_2(X)$ is even for integers in Set 1 and odd for integers in Set 2, the two sets are completely disjoint. Thus, the total count of good integers between $1$ and $N$ is:
+$$\lfloor \sqrt{N} / 2 \rfloor + \lfloor \sqrt{N / 2} \rfloor$$
+
+This $O(1)$ approach using `math.isqrt` efficiently handles inputs up to $N = 10^{18}$.

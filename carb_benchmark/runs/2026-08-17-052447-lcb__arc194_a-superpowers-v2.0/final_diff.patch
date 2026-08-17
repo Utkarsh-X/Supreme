@@ -1,0 +1,31 @@
+diff --git a/main.py b/main.py
+index c86f6c8..3b0ce67 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,25 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    n = int(input_data[0])
++    a = [int(x) for x in input_data[1:n+1]]
++    
++    dp0 = 0
++    dp1 = float('-inf')
++    
++    for i in range(1, n + 1):
++        val = a[i - 1]
++        if i % 2 == 1:
++            dp1 = max(dp1, dp0 + val)
++        else:
++            dp0 = max(dp0, dp1 + val)
++            
++    ans = dp0 if n % 2 == 0 else dp1
++    print(ans)
++
++if __name__ == '__main__':
++    main()

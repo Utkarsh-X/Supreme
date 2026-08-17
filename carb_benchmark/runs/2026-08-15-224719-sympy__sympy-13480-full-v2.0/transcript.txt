@@ -1,0 +1,28 @@
+### Summary of Bug & Fix
+
+#### **Root Cause**
+In [`sympy/functions/elementary/hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L590), inside `coth.eval()`, when evaluating arguments of the form `Add` where a multiple of \(i\pi\) is peeled off (such as \(\log(\tan(x))\) when \(\tan(x) < 0\)), the code referenced an undefined variable `cotm` instead of `cothm`:
+
+```python
+# Before (line 590):
+cothm = coth(m)
+if cotm is S.ComplexInfinity:  # NameError: name 'cotm' is not defined
+    return coth(x)
+```
+
+For integer values of `x` where \(\tan(x) < 0\) (e.g. \(x \in \{2, 3, 5, 6, 8, 9, 11, 12, 15, 18, \dots\}\)), \(\log(\tan(x)) = \log(-\tan(x)) + i\pi\). Upon evaluating `coth(...)`, `_peeloff_ipi` separated `i*pi` into `m`, causing `coth.eval()` to reach line 590 and raise `NameError`.
+
+---
+
+#### **Solution**
+1. Corrected the typo `cotm` to `cothm` in [`sympy/functions/elementary/hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L590).
+2. Added unit test cases to [`sympy/functions/elementary/tests/test_hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/tests/test_hyperbolic.py#L272-L274) covering:
+   - `coth(x + I*pi) == coth(x)`
+   - `coth(x + I*pi/2) == tanh(x)`
+   - `coth(log(tan(x))).subs(x, 2) == coth(log(-tan(2)))`
+
+---
+
+#### **Verification**
+- Evaluated `coth(log(tan(x))).subs(x, n)` across all problematic values (`[2, 3, 5, 6, 8, 9, 11, 12, 13, 15, 18]`); all returned successfully without error.
+- Ran the test suite `python bin/test sympy/functions/elementary/tests/test_hyperbolic.py`: all 45 tests passed.

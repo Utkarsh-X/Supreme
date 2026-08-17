@@ -1,0 +1,27 @@
+diff --git a/django/contrib/staticfiles/storage.py b/django/contrib/staticfiles/storage.py
+index f957a66..720767a 100644
+--- a/django/contrib/staticfiles/storage.py
++++ b/django/contrib/staticfiles/storage.py
+@@ -261,6 +261,7 @@ class HashedFilesMixin:
+ 
+         paths = {path: paths[path] for path in adjustable_paths}
+ 
++        substitutions = False
+         for i in range(self.max_post_process_passes):
+             substitutions = False
+             for name, hashed_name, processed, subst in self._post_process(paths, adjustable_paths, hashed_files):
+diff --git a/tests/staticfiles_tests/test_storage.py b/tests/staticfiles_tests/test_storage.py
+index db655f2..e3ea8c4 100644
+--- a/tests/staticfiles_tests/test_storage.py
++++ b/tests/staticfiles_tests/test_storage.py
+@@ -217,6 +217,10 @@ class TestHashedFiles:
+         self.assertEqual("Post-processing 'All' failed!\n\n", err.getvalue())
+         self.assertPostCondition()
+ 
++    def test_max_post_process_passes_zero(self):
++        with mock.patch.object(storage.staticfiles_storage, 'max_post_process_passes', 0):
++            list(storage.staticfiles_storage.post_process({}))
++
+     def test_post_processing(self):
+         """
+         post_processing behaves correctly.

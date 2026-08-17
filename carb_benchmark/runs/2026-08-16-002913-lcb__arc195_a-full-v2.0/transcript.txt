@@ -1,0 +1,12 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_a/main.py).
+
+### Solution Explanation
+1. **Left-greedy Match ($L$)**: Find the lexicographically smallest list of indices $(L_1, L_2, \dots, L_M)$ in sequence $A$ matching sequence $B$. If $B$ cannot be matched as a subsequence, output `No`.
+2. **Right-greedy Match ($R$)**: Find the lexicographically largest list of indices $(R_1, R_2, \dots, R_M)$ in sequence $A$ matching sequence $B$.
+3. **Comparison**:
+   - If any valid subsequence matching $B$ exists, $L$ and $R$ represent the earliest and latest possible matching index tuples.
+   - If $L \neq R$, then $L$ and $R$ are two distinct valid matching subsequences, so output `Yes`.
+   - If $L = R$, then every position $k$ has $L_k = R_k$, which forces every valid subsequence matching $B$ to use index $L_k$. Thus, there is at most one valid matching subsequence, so output `No`.
+
+### Verification
+The solution was tested against all sample inputs and edge cases (large $N, M$, single elements, repeated elements) and passed all verification checks.

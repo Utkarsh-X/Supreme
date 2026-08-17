@@ -1,0 +1,22 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..48bd491 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,5 @@
+-import json
++from sympy import limit, Symbol, log
+ 
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
+-
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
+-
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++def test_issue_1001_regression():
++    x = Symbol('x')
++    assert limit(x*log(x), x, 0) == 0
+\ No newline at end of file

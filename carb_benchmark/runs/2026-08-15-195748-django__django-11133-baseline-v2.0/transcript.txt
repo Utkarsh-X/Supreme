@@ -1,0 +1,10 @@
+I have resolved the issue where `HttpResponse` did not handle `memoryview` objects.
+
+### Root Cause
+1. `HttpResponseBase.make_bytes()` only checked `isinstance(value, bytes)` and `isinstance(value, str)`, falling back to converting non-string values via `str(value).encode(...)`. For a `memoryview` instance, `str(value)` produced `'<memory at 0x...>'`.
+2. `HttpResponse.content`'s setter checked `hasattr(value, '__iter__') and not isinstance(value, (bytes, str))`. Since `memoryview` objects implement `__iter__` (yielding individual `int` byte values), `HttpResponse` treated `memoryview` as an iterator of chunks instead of binary content.
+
+### Solution
+1. Updated [django/http/response.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L229-L235) in `make_bytes()` to accept `memoryview` objects via `isinstance(value, (bytes, memoryview))` and convert them using `bytes(value)`.
+2. Updated [django/http/response.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L309-L315) in `HttpResponse.content.setter` to exclude `memoryview` from being treated as an iterator via `not isinstance(value, (bytes, str, memoryview))`.
+3. Added unit tests for `memoryview` initialization, content assignment, and `write()` in [tests/responses/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/tests/responses/tests.py#L158-L168).

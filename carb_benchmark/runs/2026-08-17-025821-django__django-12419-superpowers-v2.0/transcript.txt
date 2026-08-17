@@ -1,0 +1,14 @@
+I have updated the default value of the `SECURE_REFERRER_POLICY` setting from `None` to `'same-origin'` to enhance security by preventing information leakage to third-party sites by default.
+
+### Summary of Changes
+
+1. **Setting Default**:
+   - Updated `SECURE_REFERRER_POLICY = 'same-origin'` in [`django/conf/global_settings.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/django/conf/global_settings.py#L640).
+
+2. **Tests**:
+   - Updated security check framework test in [`tests/check_framework/test_security.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/check_framework/test_security.py#L528-L533) to verify that `check_referrer_policy` passes with default settings.
+   - Added `test_referrer_policy_default` in [`tests/middleware/test_security.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/middleware/test_security.py#L226-L231) to test that `SecurityMiddleware` sets `Referrer-Policy: same-origin` by default.
+
+3. **Documentation & Release Notes**:
+   - Updated settings reference in [`docs/ref/settings.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/ref/settings.txt#L2395-L2408) noting the new default `'same-origin'` and `.. versionchanged:: 3.1`.
+   - Added release note entries in [`docs/releases/3.1.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/releases/3.1.txt#L288-L295) under *What's new* and *Backwards incompatible changes*.

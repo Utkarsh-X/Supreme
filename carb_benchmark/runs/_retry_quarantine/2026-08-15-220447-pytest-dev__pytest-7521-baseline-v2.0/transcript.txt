@@ -1,0 +1,117 @@
+... background task task-24 update ...
+Task task-24 finished with exit code 0
+Output:
+Obtaining file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: attrs>=17.4.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (21.4.0)
+Requirement already satisfied: iniconfig in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (1.1.1)
+Requirement already satisfied: more-itertools>=4.0.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (8.12.0)
+Requirement already satisfied: numpy in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (1.24.2)
+Requirement already satisfied: packaging in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (24.2)
+Requirement already satisfied: pluggy<1.0,>=0.13.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (0.13.1)
+Requirement already satisfied: py>=1.8.2 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (1.11.0)
+Requirement already satisfied: toml in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (0.10.2)
+Requirement already satisfied: xmlschema in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0rc2.dev13+gece9ba5d3) (2.2.1)
+Requirement already satisfied: elementpath<4.0.0,>=3.0.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from xmlschema->pytest==6.0.0rc2.dev13+gece9ba5d3) (3.1.0)
+Building wheels for collected packages: pytest
+  Building editable for pytest (pyproject.toml): started
+  Building editable for pytest (pyproject.toml): finished with status 'done'
+  Created wheel for pytest: filename=pytest-6.0.0rc2.dev13+gece9ba5d3-0.editable-py3-none-any.whl size=12028 sha256=17ca06f0e43d1a84f3df9bfa6d99723cf2c99a6fb5dd6b3be37bd1b490fc6a49
+  Stored in directory: C:\Users\Utkarsh\AppData\Local\Temp\pip-ephem-wheel-cache-9ed229k7\wheels\93\d3\a2\0b8686d061ecac30fd36be11d61eeecdd2b6ec3400a402ca93
+Successfully built pytest
+Installing collected packages: pytest
+  Attempting uninstall: pytest
+    Found existing installation: pytest 6.0.0rc2.dev13+gece9ba5d3
+    Uninstalling pytest-6.0.0rc2.dev13+gece9ba5d3:
+      Successfully uninstalled pytest-6.0.0rc2.dev13+gece9ba5d3
+Successfully installed pytest-6.0.0rc2.dev13+gece9ba5d3
+
+... background task task-30 update ...
+Task task-30 finished with exit code 0
+Output:
+Found existing installation: pytest 6.0.0rc2.dev13+gece9ba5d3
+Uninstalling pytest-6.0.0rc2.dev13+gece9ba5d3:
+  Successfully uninstalled pytest-6.0.0rc2.dev13+gece9ba5d3
+
+... background task task-42 update ...
+Task task-42 finished with exit code 0
+Output:
+Defaulting to user installation because normal site-packages is not writeable
+Obtaining file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: attrs>=17.4.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (26.1.0)
+Requirement already satisfied: iniconfig in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (2.3.0)
+Requirement already satisfied: more-itertools>=4.0.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (11.0.2)
+Requirement already satisfied: packaging in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (26.3)
+Requirement already satisfied: pluggy<1.0,>=0.12 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (0.13.1)
+Requirement already satisfied: py>=1.8.2 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (1.11.0)
+Requirement already satisfied: toml in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (0.10.2)
+Requirement already satisfied: atomicwrites>=1.0 in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (1.4.1)
+Requirement already satisfied: colorama in c:\users\utkarsh\appdata\roaming\python\python311\site-packages (from pytest==6.0.0) (0.4.6)
+Building wheels for collected packages: pytest
+  Building editable for pytest (pyproject.toml): started
+  Building editable for pytest (pyproject.toml): finished with status 'done'
+  Created wheel for pytest: filename=pytest-6.0.0-0.editable-py3-none-any.whl size=5167 sha256=2b3e813fca3051410972049e6aa85bb4a1c5beea2ea87cdd48122d64f028882b
+  Stored in directory: C:\Users\Utkarsh\AppData\Local\Temp\pip-ephem-wheel-cache-kwtq7r2k\wheels\f6\15\a1\5a1cb68e530164a1b258c676b31a41c8346baa04de0d4441ed
+Successfully built pytest
+Installing collected packages: pytest
+  Attempting uninstall: pytest
+    Found existing installation: pytest 0.1.dev1+gece9ba571
+    Uninstalling pytest-0.1.dev1+gece9ba571:
+      Successfully uninstalled pytest-0.1.dev1+gece9ba571
+Successfully installed pytest-6.0.0
+
+... background task task-69 update ...
+Task task-69 finished with exit code 0
+Output:
+============================= test session starts ==============================
+platform win32 -- Python 3.11.9, pytest-6.0.0, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU\Supreme\carb_workspaces\pytest-dev__pytest-7521, configfile: pyproject.toml
+collected 67 items
+
+testing\test_capture.py ............................................... [ 70%]
+....................                                                     [100%]
+
+============================= 67 passed in 1.48s ===============================
+
+... background task task-71 update ...
+Task task-71 finished with exit code 0
+Output:
+============================= test session starts ==============================
+platform win32 -- Python 3.11.9, pytest-6.0.0, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU:Supreme\carb_workspaces\pytest-dev__pytest-7521, configfile: pyproject.toml
+collected 67 items
+
+testing\test_capture.py ............................................... [ 70%]
+....................                                                     [100%]
+
+============================= 67 passed in 1.44s ===============================
+
+... background task task-86 update ...
+Task task-86 finished with exit code 0
+Output:
+============================= test session starts ==============================
+platform win32 -- Python 3.11.9, pytest-6.0.0, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU\Supreme\carb_workspaces/pytest-dev__pytest-7521, configfile: pyproject.toml
+collected 67 items
+
+testing\test_capture.py ............................................... [ 70%]
+....................                                                     [100%]
+
+============================= 67 passed in 1.48s ===============================
+
+Error: timeout waiting for response

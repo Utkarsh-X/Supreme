@@ -1,0 +1,31 @@
+diff --git a/sympy/crypto/crypto.py b/sympy/crypto/crypto.py
+index ca55219..0c556b6 100644
+--- a/sympy/crypto/crypto.py
++++ b/sympy/crypto/crypto.py
+@@ -1520,7 +1520,7 @@ def decipher_kid_rsa(msg, key):
+     "..-": "U", "...-": "V",
+     ".--": "W", "-..-": "X",
+     "-.--": "Y", "--..": "Z",
+-    "-----": "0", "----": "1",
++    "-----": "0", ".----": "1",
+     "..---": "2", "...--": "3",
+     "....-": "4", ".....": "5",
+     "-....": "6", "--...": "7",
+diff --git a/sympy/crypto/tests/test_crypto.py b/sympy/crypto/tests/test_crypto.py
+index 6220e7d..f0afc82 100644
+--- a/sympy/crypto/tests/test_crypto.py
++++ b/sympy/crypto/tests/test_crypto.py
+@@ -247,11 +247,13 @@ def test_encode_morse():
+     assert encode_morse(' ', sep='`') == '``'
+     assert encode_morse(' ', sep='``') == '````'
+     assert encode_morse('!@#$%^&*()_+') == '-.-.--|.--.-.|...-..-|-.--.|-.--.-|..--.-|.-.-.'
++    assert encode_morse('135790') == '.----|...--|.....|--...|----.|-----'
+ 
+ 
+ def test_decode_morse():
+     assert decode_morse('-.-|.|-.--') == 'KEY'
+     assert decode_morse('.-.|..-|-.||') == 'RUN'
++    assert decode_morse('.----|...--|.....|--...|----.|-----') == '135790'
+     raises(KeyError, lambda: decode_morse('.....----'))
+ 
+ 

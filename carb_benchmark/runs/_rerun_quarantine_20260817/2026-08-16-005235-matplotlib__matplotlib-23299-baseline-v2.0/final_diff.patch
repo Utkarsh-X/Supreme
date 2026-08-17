@@ -1,0 +1,47 @@
+diff --git a/lib/matplotlib/__init__.py b/lib/matplotlib/__init__.py
+index c268a56..7c33227 100644
+--- a/lib/matplotlib/__init__.py
++++ b/lib/matplotlib/__init__.py
+@@ -1095,6 +1095,9 @@ def rc_context(rc=None, fname=None):
+             rcParams.update(rc)
+         yield
+     finally:
++        if dict.__getitem__(orig, "backend") is rcsetup._auto_backend_sentinel:
++            orig = orig.copy()
++            dict.pop(orig, "backend", None)
+         dict.update(rcParams, orig)  # Revert to the original rcs.
+ 
+ 
+diff --git a/lib/matplotlib/pyplot.py b/lib/matplotlib/pyplot.py
+index e3c66ea..2d6536f 100644
+--- a/lib/matplotlib/pyplot.py
++++ b/lib/matplotlib/pyplot.py
+@@ -688,6 +688,9 @@ class _xkcd:
+         return self
+ 
+     def __exit__(self, *args):
++        if dict.__getitem__(self._orig, "backend") is rcsetup._auto_backend_sentinel:
++            self._orig = self._orig.copy()
++            dict.pop(self._orig, "backend", None)
+         dict.update(rcParams, self._orig)
+ 
+ 
+diff --git a/lib/matplotlib/tests/test_rcparams.py b/lib/matplotlib/tests/test_rcparams.py
+index 99856b3..65fa1ab 100644
+--- a/lib/matplotlib/tests/test_rcparams.py
++++ b/lib/matplotlib/tests/test_rcparams.py
+@@ -584,3 +584,14 @@ def test_deprecation(monkeypatch):
+     # Note that the warning suppression actually arises from the
+     # iteration over the updater rcParams being protected by
+     # suppress_matplotlib_deprecation_warning, rather than any explicit check.
++
++
++def test_rc_context_auto_backend():
++    with mpl.rc_context():
++        fig = plt.figure()
++    before = list(plt._pylab_helpers.Gcf.figs.keys())
++    mpl.get_backend()
++    after = list(plt._pylab_helpers.Gcf.figs.keys())
++    assert before == after == [fig.number]
++    plt.close(fig)
++

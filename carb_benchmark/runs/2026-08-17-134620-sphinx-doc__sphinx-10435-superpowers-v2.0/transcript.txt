@@ -1,0 +1,11 @@
+An async task `py -3.11 -m pytest tests/test_build_latex.py` is running in the background. I will wait for it to complete.
+An async task `py -3.11 -m pytest tests/test_build_latex.py` is running in the background. I will wait for it to complete.
+An async task `py -3.11 -m pytest tests/test_build_latex.py` is running in the background. I will wait for it to complete.
+I have identified and resolved the issue where highlighted inline code in LaTeX output inserted extra whitespace at the start and end of inline code blocks.
+
+### Cause of Bug
+When rendering inline code highlighting via Pygments (`visit_literal` in [sphinx/writers/latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1695-L1722)), Pygments' `Verbatim` block output returned string wrapped with leading and trailing newlines (`\n`). Replacing `\begin{Verbatim}...` with `\sphinxcode{\sphinxupquote{` left `\n` at the start of the inline macro and before `}}`. In TeX/LaTeX text mode, those newlines are parsed as space characters.
+
+### Solution
+- Updated `visit_literal` in [sphinx/writers/latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1716) to strip leading and trailing newlines from inside the highlighted content before appending `}}`.
+- Updated test assertions in [tests/test_build_latex.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1626) to reflect the inline markup without extra newlines.

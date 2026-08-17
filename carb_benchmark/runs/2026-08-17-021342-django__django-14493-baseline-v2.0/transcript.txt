@@ -1,0 +1,9 @@
+Wait, a message will come when task completes. But let's check manage_task status one more time or view log file directly.
+I have fixed the issue where `ManifestStaticFilesStorage` crashed with `UnboundLocalError` when `max_post_process_passes = 0`.
+
+### Cause
+In `django.contrib.staticfiles.storage.HashedFilesMixin.post_process`, `substitutions` was previously defined inside the `for i in range(self.max_post_process_passes):` loop. When `max_post_process_passes` was set to `0`, the loop was never entered, leaving `substitutions` unbound when evaluated by `if substitutions:` following the loop.
+
+### Fix
+- Initialized `substitutions = False` prior to `for i in range(self.max_post_process_passes):` in [`django/contrib/staticfiles/storage.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264).
+- Added test coverage in [`tests/staticfiles_tests/test_storage.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/tests/staticfiles_tests/test_storage.py#L220) to ensure `max_post_process_passes = 0` completes without error.

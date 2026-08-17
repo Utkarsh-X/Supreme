@@ -1,0 +1,2 @@
+I have launched the build of matplotlib's C extension modules in the background. I will wait for it to complete before running tests and verifying the fix.
+Error: timeout waiting for response

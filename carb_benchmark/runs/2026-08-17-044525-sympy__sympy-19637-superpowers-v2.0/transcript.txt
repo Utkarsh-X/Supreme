@@ -1,0 +1,8 @@
+I have fixed the `UnboundLocalError` in [`kernS`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L442-L541).
+
+### Cause
+In `kernS(s)`, when string `s` contained a parenthesis `(` but string replacement steps did not insert any space `' '` into `s`, the `if ' ' in s:` block was skipped. Consequently, `kern` remained unassigned, and `hit = kern in s` (which was indented outside the `if ' ' in s:` block) raised an `UnboundLocalError`.
+
+### Fix
+- Indented `hit = kern in s` inside the `if ' ' in s:` block in [`sympy/core/sympify.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L510-L516).
+- Added a regression test case `assert kernS('(2*x)/(x-1)') == 2*x/(x - 1)` in [`test_kernS`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/tests/test_sympify.py#L486-L515).

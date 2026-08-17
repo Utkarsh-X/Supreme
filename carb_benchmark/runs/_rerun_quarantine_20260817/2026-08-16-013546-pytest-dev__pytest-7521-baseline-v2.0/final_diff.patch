@@ -1,0 +1,58 @@
+diff --git a/src/_pytest/assertion/rewrite.py b/src/_pytest/assertion/rewrite.py
+index e77b1b0..572ccb7 100644
+--- a/src/_pytest/assertion/rewrite.py
++++ b/src/_pytest/assertion/rewrite.py
+@@ -673,10 +673,16 @@ class AssertionRewriter(ast.NodeVisitor):
+             return
+         # Insert some special imports at the top of the module but after any
+         # docstrings and __future__ imports.
+-        aliases = [
+-            ast.alias("builtins", "@py_builtins"),
+-            ast.alias("_pytest.assertion.rewrite", "@pytest_ar"),
+-        ]
++        if sys.version_info >= (3, 10):
++            aliases = [
++                ast.alias("builtins", "@py_builtins", lineno=1, col_offset=0),
++                ast.alias("_pytest.assertion.rewrite", "@pytest_ar", lineno=1, col_offset=0),
++            ]
++        else:
++            aliases = [
++                ast.alias("builtins", "@py_builtins"),
++                ast.alias("_pytest.assertion.rewrite", "@pytest_ar"),
++            ]
+         doc = getattr(mod, "docstring", None)
+         expect_docstring = doc is None
+         if doc is not None and self.is_rewrite_disabled(doc):
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 3f9c60f..f538b67 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -388,6 +388,7 @@ class FDCaptureBinary:
+                 TemporaryFile(buffering=0),  # type: ignore[arg-type]
+                 encoding="utf-8",
+                 errors="replace",
++                newline="",
+                 write_through=True,
+             )
+             if targetfd in patchsysdict:
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index a3bd4b6..2ba3a25 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -970,6 +970,16 @@ class TestFDCapture:
+     def test_capfd_sys_stdout_mode(self, capfd):
+         assert "b" not in sys.stdout.mode
+ 
++    @pytest.mark.parametrize("fixture", ["capfd", "capsys"])
++    def test_capture_includes_carriage_return(self, fixture, request):
++        cap = request.getfixturevalue(fixture)
++        print("Greetings from DOS", end="\r")
++        out, err = cap.readouterr()
++        assert out == "Greetings from DOS\r"
++        sys.stderr.write("0%\r")
++        out, err = cap.readouterr()
++        assert err == "0%\r"
++
+ 
+ @contextlib.contextmanager
+ def saved_fd(fd):

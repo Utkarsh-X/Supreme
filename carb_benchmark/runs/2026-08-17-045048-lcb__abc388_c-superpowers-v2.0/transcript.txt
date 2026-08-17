@@ -1,0 +1,38 @@
+An optimal solution for the problem has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_c/main.py).
+
+### Method Explanation
+The problem asks for the number of pairs $(i, j)$ such that $2 \cdot A_i \le A_j$.
+
+Since the sizes $A$ are given in ascending order ($A_0 \le A_1 \le \dots \le A_{N-1}$):
+1. For each mochi $i$ of size $A_i$, we need to find the smallest index $j$ such that $A_j \ge 2 \cdot A_i$.
+2. Once such $j$ is found, all elements from index $j$ up to $N-1$ satisfy $A_k \ge 2 \cdot A_i$ (since $A$ is sorted). Thus, there are $N - j$ valid choices of bottom mochi for top mochi $i$.
+3. As $i$ increases, $2 \cdot A_i$ is non-decreasing, so the pointer $j$ only moves to the right. A two-pointer approach finds all valid pairs in $O(N)$ time complexity and $O(N)$ space complexity.
+
+### Code Overview
+```python
+import sys
+
+def main():
+    input_data = sys.stdin.read().split()
+    if not input_data:
+        return
+    N = int(input_data[0])
+    A = [int(x) for x in input_data[1:N + 1]]
+    
+    ans = 0
+    j = 0
+    for i in range(N):
+        target = 2 * A[i]
+        while j < N and A[j] < target:
+            j += 1
+        ans += (N - j)
+        
+    print(ans)
+
+if __name__ == '__main__':
+    main()
+```
+
+### Verification
+- Tested against all provided sample cases (Outputs matched: `8`, `0`, `388`).
+- Benchmark test with $N = 500,000$ completed in ~`0.177s`.

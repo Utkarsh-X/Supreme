@@ -1,0 +1,10 @@
+The solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_a/main.py).
+
+### Method Explanation
+To determine if there are at least two distinct subsequences of $A$ matching $B$:
+1. We compute the **leftmost** matching indices $L = (L_1, L_2, \dots, L_M)$ greedily from left to right.
+2. If $B$ cannot be matched as a subsequence (i.e. $L$ cannot be fully constructed), then the answer is `"No"`.
+3. We compute the **rightmost** matching indices $R = (R_1, R_2, \dots, R_M)$ greedily from right to left.
+4. If $L \neq R$, then $L$ and $R$ represent two distinct valid matching index sequences, so the answer is `"Yes"`. If $L = R$, any matching sequence $I$ must satisfy $L_k \le I_k \le R_k = L_k$, making $L$ the unique matching subsequence, so the answer is `"No"`.
+
+This approach runs in $\mathcal{O}(N)$ time and $\mathcal{O}(N)$ space complexity.

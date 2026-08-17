@@ -1,0 +1,133 @@
+diff --git a/main.py b/main.py
+index c86f6c8..9737657 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,127 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++    T = input_data[3]
++
++    d_last = T[-1]
++    
++    # A is sorted T[:-1] descending
++    if M > 1:
++        # Counting sort for efficiency
++        counts = [0] * 10
++        for char in T[:-1]:
++            counts[int(char)] += 1
++        A = []
++        for digit in range(9, 0, -1):
++            if counts[digit] > 0:
++                A.extend([str(digit)] * counts[digit])
++    else:
++        A = []
++
++    # Initial greedy matching of A on S
++    matched = [False] * N
++    matched_digit = [None] * N
++    matched_A_idx = [None] * N
++
++    ptr_A = 0
++    len_A = len(A)
++
++    for j in range(N):
++        if ptr_A < len_A and A[ptr_A] > S[j]:
++            matched[j] = True
++            matched_digit[j] = A[ptr_A]
++            matched_A_idx[j] = ptr_A
++            ptr_A += 1
++
++    # Gather candidate positions for d_last
++    candidates_p = set()
++
++    # Special boundary candidates
++    candidates_p.add(0)
++    candidates_p.add(N - 1)
++
++    # Group 1: Unmatched positions
++    unmatched_p = [j for j in range(N) if not matched[j]]
++    if unmatched_p:
++        candidates_p.add(unmatched_p[0])
++        candidates_p.add(unmatched_p[-1])
++
++        # Leftmost unmatched where d_last > S[p]
++        for p in unmatched_p:
++            if d_last > S[p]:
++                candidates_p.add(p)
++                break
++        # Leftmost unmatched where d_last == S[p]
++        for p in unmatched_p:
++            if d_last == S[p]:
++                candidates_p.add(p)
++                break
++        # Rightmost unmatched where d_last < S[p]
++        for p in reversed(unmatched_p):
++            if d_last < S[p]:
++                candidates_p.add(p)
++                break
++
++    # Group 2: Matched positions
++    matched_p_list = [j for j in range(N) if matched[j]]
++    if matched_p_list:
++        candidates_p.add(matched_p_list[0])
++        candidates_p.add(matched_p_list[-1])
++
++        # Leftmost matched where d_last > matched_digit[p]
++        for p in matched_p_list:
++            if d_last > matched_digit[p]:
++                candidates_p.add(p)
++                break
++        # Leftmost matched where d_last == matched_digit[p]
++        for p in matched_p_list:
++            if d_last == matched_digit[p]:
++                candidates_p.add(p)
++                break
++        # Rightmost matched where d_last < matched_digit[p]
++        for p in reversed(matched_p_list):
++            if d_last < matched_digit[p]:
++                candidates_p.add(p)
++                break
++
++    best_res_list = None
++
++    for p in candidates_p:
++        # Build string S'_p
++        res = list(S)
++
++        if not matched[p]:
++            # Case A: p was unmatched
++            # Copy all matched digits
++            for j in range(N):
++                if matched[j]:
++                    res[j] = matched_digit[j]
++            res[p] = d_last
++        else:
++            # Case B: p was matched
++            # Copy matched digits for j < p
++            for j in range(p):
++                if matched[j]:
++                    res[j] = matched_digit[j]
++            res[p] = d_last
++            
++            # Re-run greedy matching for j > p starting from k1 = matched_A_idx[p]
++            cur_A = matched_A_idx[p]
++            for j in range(p + 1, N):
++                if cur_A < len_A and A[cur_A] > S[j]:
++                    res[j] = A[cur_A]
++                    cur_A += 1
++
++        if best_res_list is None or res > best_res_list:
++            best_res_list = res
++
++    print("".join(best_res_list))
++
++if __name__ == '__main__':
++    solve()

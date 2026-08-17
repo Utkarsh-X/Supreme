@@ -1,0 +1,30 @@
+diff --git a/session_serializer.py b/session_serializer.py
+index a220964..19bba5f 100644
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,12 +1,12 @@
+-import json
+-
+-class CustomJSONEncoder(json.JSONEncoder):
+-    def default(self, obj):
+-        return super().default(obj)
+-
+-class SessionSerializer:
+-    def serialize(self, data):
+-        return json.dumps(data, cls=CustomJSONEncoder)
+-
+-    def deserialize(self, raw_str):
+-        return json.loads(raw_str)
++diff
++--- a/sympy/solvers/solvers.py
+++++ b/sympy/solvers/solvers.py
++@@ -2697,7 +2697,7 @@
++         if flags.get('dict', False):
++             return [{symbol: s} for s in solutions]
++         else:
++-            return solutions
+++            return [(s,) for s in solutions] # Wrap single solutions in tuples
++     else:
++         # system of equations
++         # ... (rest of the function, no change needed here) ...
+\ No newline at end of file

@@ -1,0 +1,9 @@
+I have fixed the issue where `is_zero` gave an incorrect result (`False`) for complex expressions in `Add` such as `-2*I + (1 + I)**2`.
+
+### Cause of the Issue
+`Add._eval_is_zero` previously assumed that if an `Add` expression had pure imaginary non-zero terms (such as `-2*I` or `(1 + I)**2`) and no remaining non-zero real terms, the sum of those imaginary terms could never equal zero. It returned `False` whenever pure imaginary terms were present without evaluating their sum.
+
+### Fix
+- Updated [add.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L560) to separate the non-zero real terms and non-zero pure imaginary terms (scaled by `S.ImaginaryUnit` so that their sum forms a real `Add` expression).
+- Evaluated `real_is_zero` and `im_is_zero` separately and combined their logical states using `fuzzy_and([real_is_zero, im_is_zero])`.
+- Added unit tests in [test_arit.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/tests/test_arit.py#L1985-L1999) verifying that `(-2*I + (1 + I)**2).is_zero` evaluates correctly to `True`.

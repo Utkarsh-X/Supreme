@@ -1,0 +1,12 @@
+The issue occurs because in [`kernS`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L442), `hit = kern in s` was executed outside the `if ' ' in s:` block. When input strings (such as `"(2*x)/(x-1)"`) contain parentheses but produce no spaces during transformation, `if ' ' in s:` is skipped and `kern` remains undefined, triggering an `UnboundLocalError`.
+
+### Fix
+In [`sympy/core/sympify.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L516), `hit = kern in s` has been indented inside the `if ' ' in s:` block so `kern` is only evaluated when it has been assigned.
+
+```python
+from sympy.core.sympify import kernS
+
+text = "(2*x)/(x-1)"
+expr = kernS(text)
+# Output: 2*x/(x - 1)
+```

@@ -1,0 +1,8 @@
+I have solved the problem by implementing `main.py`.
+
+### Explanation
+The problem asks for the rank of each of $N$ people based on their scores $P_1, P_2, \dots, P_N$. In the standard competition ranking (1224 rank scheme described in the problem):
+- The rank of person $i$ is equal to $1 + (\text{the number of people with a score strictly greater than } P_i)$.
+
+### Verification
+The solution was tested against all sample inputs provided in the problem description and passed cleanly.
