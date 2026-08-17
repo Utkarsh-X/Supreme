@@ -13,7 +13,7 @@ Protocol (see protocol/v3_discriminative_set_proposal.md):
 Usage:
   python carb_benchmark/scripts/run_v3_calibration.py \
       --tasks-file task_registry/v3_calibration_tasks.txt \
-      [--config baseline-v2.0] [--notes "v3 calibration"]
+      [--config baseline-v2.0] [--notes "v3 calibration"] [--timeout-minutes 40]
 """
 import glob
 import json
@@ -65,12 +65,15 @@ def main():
     tasks_file = None
     config = "baseline-v2.0"
     notes = "v3 calibration"
+    timeout_minutes = 40
     if "--tasks-file" in args:
         tasks_file = args[args.index("--tasks-file") + 1]
     if "--config" in args:
         config = args[args.index("--config") + 1]
     if "--notes" in args:
         notes = args[args.index("--notes") + 1]
+    if "--timeout-minutes" in args:
+        timeout_minutes = int(args[args.index("--timeout-minutes") + 1])
     if not tasks_file or not os.path.exists(tasks_file):
         print(f"usage: --tasks-file <path> (missing: {tasks_file})")
         return 1
@@ -94,7 +97,7 @@ def main():
         t0 = time.time()
         rc = subprocess.run(
             [sys.executable, RUNNER, "--task", task, "--config", config,
-             "--notes", notes],
+             "--notes", notes, "--timeout-minutes", str(timeout_minutes)],
             cwd=SUPREME_ROOT,
         ).returncode
         wall = round(time.time() - t0, 1)
@@ -103,12 +106,16 @@ def main():
             results[task] = {"run_id": None, "passed": None, "error": f"no eval record (rc={rc})"}
         else:
             d = json.load(open(ev_file, encoding="utf-8"))
+            tele = d.get("telemetry") or {}
             results[task] = {
                 "run_id": d.get("run_id"),
                 "passed": d.get("passed"),
                 "wall_clock_seconds": d.get("wall_clock_seconds"),
                 "diff": (d.get("diff_metrics") or {}).get("total_lines_changed"),
                 "timed_out": d.get("timed_out"),
+                "tool_calls_total": tele.get("tool_calls_total"),
+                "usage_total_tokens": (tele.get("usage") or {}).get("total_tokens"),
+                "time_to_first_edit": tele.get("time_to_first_edit_seconds"),
                 "note": (d.get("notes") or "")[:200],
             }
             print(f"    -> {'PASS' if d.get('passed') else 'FAIL'} "

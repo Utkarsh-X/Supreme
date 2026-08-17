@@ -29,13 +29,22 @@ Design changes vs v1 (run_antigravity_agy.py):
      ("NO TEST COMMAND"), never a pass. No `test_passed = (exit_code == 0)`
      fallback.
 
-  4. Full provenance per run: transcript.txt (full agy output), final_diff.patch,
-     test output, diff metrics, leakage marker scan, SHA-256 of the injected
-     system prompt.
+  4. Full provenance per run: transcript.txt (agent text from stream-json),
+     final_diff.patch, test output, diff metrics, leakage marker scan, SHA-256
+     of the injected system prompt.
+
+  5. v3 telemetry (stream-json since 2026-08-18): agy runs with
+     --output-format stream-json; each run saves telemetry.json with per-step
+     tool calls (tool_name, count), token usage (input/output/thinking/cache
+     read/total), num_turns, agy-reported duration, and time-to-first-edit.
+     These fix the v2 gap where tool_iterations was always 0 and tokens were
+     never captured. Session cap is configurable via --timeout-minutes
+     (default 40, raised from v2's 20 per the v3 protocol).
 
 Usage:
   python carb_benchmark/scripts/run_benchmark_v2.py \
-      --task T001_sample_repo_debug --config baseline-v2.0 [--append-question] [--notes "pilot"]
+      --task T001_sample_repo_debug --config baseline-v2.0 [--append-question] \
+      [--notes "pilot"] [--timeout-minutes 40]
 """
 
 import os
@@ -62,8 +71,23 @@ RUNS_DIR = os.path.join(BASE_DIR, "runs")
 EVALUATIONS_DIR = os.path.join(BASE_DIR, "evaluations")
 
 MODEL_NAME = "gemini-3.6-flash-high"  # LOCKED for the whole benchmark (user decision 2026-08-15); verified to resolve without CCPA fallback
-RUN_TIMEOUT_SECONDS = 1500  # agy turn budget; agy's own --print-timeout is 20m (see below), this kill gives margin
-AGY_PRINT_TIMEOUT = "20m"  # agy's default print-mode wait is 5m0s; Google's response for large-context tasks routinely exceeds 5m, producing 'Error: timeout waiting for response' with zero work (diagnosed 2026-08-16 via --print-timeout 3s probe)
+# Session budget. v2 used 20 minutes (RUN_TIMEOUT_SECONDS=1500, --print-timeout 20m).
+# The v3 protocol (§6) raises the cap to 40 minutes because hard-tier tasks need
+# headroom; override per-run with --timeout-minutes. agy's default print-mode
+# wait is 5m0s; Google's response for large-context tasks routinely exceeds 5m,
+# producing 'Error: timeout waiting for response' with zero work (diagnosed
+# 2026-08-16 via --print-timeout 3s probe).
+DEFAULT_TIMEOUT_MINUTES = 40
+
+# Tool names that modify workspace files. Used to measure time-to-first-edit
+# from the stream-json step events.
+EDIT_TOOLS = {
+    "write_to_file",
+    "replace_file_content",
+    "multi_replace_file_content",
+    "sed_file",
+    "notebook_edit",
+}
 
 SUPREME_FILE_ORDER = [
     "constitution.md",
@@ -249,6 +273,131 @@ def run_test_command(spec, workspace_path):
         return False, f"TEST ERROR: {e}"
 
 
+def run_agy_stream(cmd, cwd, env, timeout_seconds):
+    """Run agy in stream-json mode and collect per-step telemetry.
+
+    stream-json emits one JSON object per line: init, step_update (with
+    step_type user_input/agent_response/tool/checkpoint, tool_name, per-step
+    token usage and duration), and a final result event with total usage.
+
+    Returns (exit_code, transcript_text, telemetry) where telemetry carries:
+      tool_calls          : ordered list of tool names invoked
+      tool_call_counts    : {tool_name: count}
+      time_to_first_edit  : seconds from process start to first file-edit tool
+      num_turns           : from the result event
+      duration_seconds    : agy-reported session duration
+      status              : agy result status (SUCCESS/...)
+      usage               : {input_tokens, output_tokens, thinking_tokens,
+                            cache_read_tokens, total_tokens}
+      error               : set when the session was killed by the harness cap
+    The transcript is the concatenation of agent text deltas + final response
+    (equivalent content to text mode, so marker scans keep working).
+    """
+    import queue as queue_mod
+    import threading
+
+    proc = subprocess.Popen(
+        cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        text=True, encoding="utf-8", errors="replace", env=env,
+    )
+    lines = queue_mod.Queue()
+
+    def _reader():
+        try:
+            assert proc.stdout is not None
+            for line in proc.stdout:
+                lines.put(line)
+        finally:
+            lines.put(None)
+
+    threading.Thread(target=_reader, daemon=True).start()
+
+    telemetry = {
+        "tool_calls": [],
+        "tool_call_counts": {},
+        "time_to_first_edit": None,
+        "num_turns": None,
+        "duration_seconds": None,
+        "status": None,
+        "usage": None,
+        "error": None,
+    }
+    transcript_parts = []
+    t0 = time.time()
+    deadline = t0 + timeout_seconds
+    exit_code = None
+    first_edit_seen = False
+
+    while True:
+        remaining = deadline - time.time()
+        if remaining <= 0:
+            exit_code = -1
+            telemetry["error"] = f"AGY EXECUTION TIMED OUT after {timeout_seconds}s (harness cap)"
+            break
+        try:
+            raw = lines.get(timeout=remaining)
+        except queue_mod.Empty:
+            exit_code = -1
+            telemetry["error"] = f"AGY EXECUTION TIMED OUT after {timeout_seconds}s (harness cap)"
+            break
+        if raw is None:
+            exit_code = proc.wait()
+            break
+        raw = raw.rstrip("\r\n")
+        if not raw.strip():
+            continue
+        try:
+            ev = json.loads(raw)
+        except json.JSONDecodeError:
+            # non-JSON noise (stderr merged into stdout) -> keep as transcript
+            transcript_parts.append(raw)
+            continue
+        etype = ev.get("event")
+        if etype == "step_update":
+            su = ev.get("step_update") or {}
+            if su.get("step_type") == "agent_response":
+                td = su.get("text_delta")
+                if td:
+                    transcript_parts.append(td)
+            elif su.get("step_type") == "tool":
+                # agy emits the tool step twice (ACTIVE then DONE); count each
+                # tool invocation once, on the ACTIVE event (arrives first).
+                if su.get("state") != "ACTIVE":
+                    continue
+                name = su.get("tool_name")
+                if name:
+                    telemetry["tool_calls"].append(name)
+                    telemetry["tool_call_counts"][name] = \
+                        telemetry["tool_call_counts"].get(name, 0) + 1
+                    if not first_edit_seen and name in EDIT_TOOLS:
+                        telemetry["time_to_first_edit"] = round(time.time() - t0, 3)
+                        first_edit_seen = True
+        elif etype == "result":
+            r = ev.get("result") or {}
+            telemetry["status"] = r.get("status")
+            telemetry["num_turns"] = r.get("num_turns")
+            telemetry["duration_seconds"] = r.get("duration_seconds")
+            telemetry["usage"] = r.get("usage")
+            resp = r.get("response")
+            if resp:
+                transcript_parts.append(resp)
+
+    if exit_code == -1:
+        # kill the whole process tree (Windows timeout only kills the direct
+        # child; agy.exe would survive orphaned)
+        try:
+            subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)],
+                           capture_output=True, timeout=30)
+        except Exception:
+            pass
+        try:
+            proc.kill()
+        except Exception:
+            pass
+
+    return exit_code, "".join(transcript_parts), telemetry
+
+
 def scan_markers(transcript):
     """Scan for supreme + superpowers markers, excluding file-path occurrences."""
     import re
@@ -270,7 +419,13 @@ def main():
     parser.add_argument("--append-question", action="store_true",
                         help="Append the neutral Supreme-access disclosure question to the task prompt")
     parser.add_argument("--notes", default="", help="Free-form notes for the evaluator record")
+    parser.add_argument("--timeout-minutes", type=int, default=DEFAULT_TIMEOUT_MINUTES,
+                        help=f"per-session cap in minutes (default {DEFAULT_TIMEOUT_MINUTES}); "
+                             f"also sets agy --print-timeout")
     args = parser.parse_args()
+
+    run_timeout_seconds = args.timeout_minutes * 60
+    agy_print_timeout = f"{args.timeout_minutes}m"
 
     task_id = args.task
     config_id = args.config
@@ -339,34 +494,25 @@ def main():
         "--add-dir", workspace_path,
         "--mode", "accept-edits",
         "--dangerously-skip-permissions",
-        "--print-timeout", AGY_PRINT_TIMEOUT,
+        "--print-timeout", agy_print_timeout,
+        "--output-format", "stream-json",
     ]
     t0 = time.time()
-    proc = subprocess.Popen(
-        cmd, cwd=workspace_path, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-        text=True, encoding="utf-8", errors="replace", env=env,
-    )
-    try:
-        out, err = proc.communicate(timeout=RUN_TIMEOUT_SECONDS)
-        transcript = (out or "") + (err or "")
-        exit_code = proc.returncode
-    except subprocess.TimeoutExpired:
-        # kill the whole process tree (Windows timeout only kills the direct
-        # child; agy.exe would survive orphaned)
-        try:
-            subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)],
-                           capture_output=True, timeout=30)
-        except Exception:
-            pass
-        try:
-            proc.kill()
-        except Exception:
-            pass
-        transcript = "AGY EXECUTION TIMED OUT after 300s"
-        exit_code = -1
-    finally:
-        shutil.rmtree(temp_dir, ignore_errors=True)
+    exit_code, transcript, telemetry = run_agy_stream(
+        cmd, workspace_path, env, run_timeout_seconds)
+    shutil.rmtree(temp_dir, ignore_errors=True)
     duration = round(time.time() - t0, 2)
+
+    # Save the raw telemetry for audit; also useful for the efficiency analysis.
+    telemetry_path = os.path.join(run_dir, "telemetry.json")
+    with open(telemetry_path, "w", encoding="utf-8") as f:
+        json.dump({
+            "run_id": run_id,
+            "task_id": task_id,
+            "configuration_id": config_id,
+            "wall_clock_seconds": duration,
+            **telemetry,
+        }, f, indent=2)
 
     # 6. Save transcript
     transcript_path = os.path.join(run_dir, "transcript.txt")
@@ -403,6 +549,16 @@ def main():
         "wall_clock_seconds": duration,
         "agy_exit_code": exit_code,
         "timed_out": exit_code == -1,
+        "telemetry": {
+            "tool_calls_total": len(telemetry["tool_calls"]),
+            "tool_call_counts": telemetry["tool_call_counts"],
+            "time_to_first_edit_seconds": telemetry["time_to_first_edit"],
+            "num_turns": telemetry["num_turns"],
+            "duration_seconds_reported": telemetry["duration_seconds"],
+            "status": telemetry["status"],
+            "usage": telemetry["usage"],
+            "telemetry_error": telemetry["error"],
+        },
         "passed": test_passed,
         "test_command": spec.get("test_command"),
         "test_output_tail": test_output[-2000:],

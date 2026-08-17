@@ -1,11 +1,33 @@
 # V3 Proposal — A Discriminative Task Set
 
-*Status: proposal (not yet executed). Prepared 2026-08-17 from the v2 corrected
-data and the public task corpora. All numbers below are computed from
-`results/v2_corrected_matrix.json`, `results/v2_session_telemetry.csv`, the
-SWE-bench Verified corpus (`sources/data/swebench_verified/verified.jsonl`,
-500 instances), and LiveCodeBench v5 (`sources/data/lcb_v5.jsonl`, 175
-problems).*
+*Status: Phase A (calibration) in execution. Proposal prepared 2026-08-17;
+Phase A launched 2026-08-18 00:42 (baseline-only, 41 candidates). Candidate
+pool frozen, validation complete, telemetry instrumentation merged.
+All numbers below are computed from `results/v2_corrected_matrix.json`,
+`results/v2_session_telemetry.csv`, the SWE-bench Verified corpus
+(`sources/data/swebench_verified/verified.jsonl`, 500 instances), and
+LiveCodeBench v5 (`sources/data/lcb_v5.jsonl`, 175 problems).*
+
+## 0. Execution status (2026-08-18)
+
+- Candidate pool locked: `task_registry/v3_calibration_tasks.txt` (20
+  VALIDATED hard-tier SWE + 21 fresh LCB), 41 tasks. 5 SWE candidates were
+  REJECTED during validation (unresolvable test labels / env limits) and
+  dropped from the registry; rejection records kept in `validation/`.
+- Phase A running via `scripts/run_v3_calibration.py` ->
+  `results/v3_calibration.json` (resumable, baseline-only). First datapoints:
+  baseline FAILS django-10554 (39-line real fix attempt, hidden test red) and
+  django-12325; passes the rest so far (~71% early pass rate on hard SWE).
+- Telemetry instrumentation merged into `run_benchmark_v2.py` (2026-08-18):
+  agy runs with `--output-format stream-json`; per run saves `telemetry.json`
+  with token usage (input/output/thinking/cache/total), tool-call counts by
+  name, num_turns, agy-reported duration, and time-to-first-edit. Session cap
+  raised 20 -> 40 minutes, configurable via `--timeout-minutes`.
+- Handoff: `scripts/build_v3_final_set.py` locks `final_tasks_v3.json` from
+  baseline-FAILED calibration cells only (dry-run safe).
+- Open risk: if calibration yields < ~40 failing tasks, the protocol's
+  mitigation applies — enlarge the pool (medium SWE/LCB) or multi-seed; the
+  keep rule (baseline-fail only) is never weakened.
 
 ---
 
@@ -132,6 +154,10 @@ recover power and get variance estimates.
   iteration ceiling (v2's 20-min cap was reached only 3 times, all successful,
   but hard tasks plausibly need the headroom). Re-evaluate the cap after the
   first 10 calibration sessions and fix it for the rest of the run.
+  **Status: DONE (2026-08-18).** `run_benchmark_v2.py` now defaults to 40
+  minutes (`--timeout-minutes 40`); the running Phase A launched before this
+  change used the old 20-minute cap, which is acceptable because early hard-SWE
+  cells finish in 1-3 minutes — the cap rarely binds.
 - **Order:** interleave configurations daily and randomize task order; never
   run one config to completion before another starts (this removes the
   day-level latency confound flagged in the v2 telemetry).
