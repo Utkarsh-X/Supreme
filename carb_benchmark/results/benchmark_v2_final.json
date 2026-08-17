@@ -1,0 +1,272 @@
+{
+ "tasks": 50,
+ "counts": {
+  "baseline-v2.0": {
+   "pass": 44,
+   "fail": 5,
+   "missing": 1
+  },
+  "supreme-v2.0": {
+   "pass": 45,
+   "fail": 5,
+   "missing": 0
+  },
+  "superpowers-v2.0": {
+   "pass": 44,
+   "fail": 6,
+   "missing": 0
+  }
+ },
+ "per_task": {
+  "django__django-11119": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-11133": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-11179": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-11880": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-12419": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-12965": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-14089": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-14493": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-15851": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-16082": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-16485": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "django__django-17029": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "matplotlib__matplotlib-23299": {
+   "baseline-v2.0": "FAILURE",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "FAILURE"
+  },
+  "matplotlib__matplotlib-23476": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "matplotlib__matplotlib-24177": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "matplotlib__matplotlib-24627": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "pytest-dev__pytest-5262": {
+   "baseline-v2.0": "FAILURE",
+   "supreme-v2.0": "FAILURE",
+   "superpowers-v2.0": "FAILURE"
+  },
+  "pytest-dev__pytest-7521": {
+   "baseline-v2.0": "FAILURE",
+   "supreme-v2.0": "FAILURE",
+   "superpowers-v2.0": "FAILURE"
+  },
+  "scikit-learn__scikit-learn-14141": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sphinx-doc__sphinx-10435": {
+   "baseline-v2.0": "FAILURE",
+   "supreme-v2.0": "FAILURE",
+   "superpowers-v2.0": "FAILURE"
+  },
+  "sphinx-doc__sphinx-8595": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sphinx-doc__sphinx-9230": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sphinx-doc__sphinx-9367": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sphinx-doc__sphinx-9698": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sympy__sympy-13480": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sympy__sympy-14711": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sympy__sympy-15875": {
+   "baseline-v2.0": "FAILURE",
+   "supreme-v2.0": "FAILURE",
+   "superpowers-v2.0": "FAILURE"
+  },
+  "sympy__sympy-16886": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sympy__sympy-19637": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "sympy__sympy-23950": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "FAILURE",
+   "superpowers-v2.0": "FAILURE"
+  },
+  "lcb__abc387_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc388_c": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc389_d": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc390_c": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc391_d": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc392_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc393_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc394_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc395_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc396_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc397_c": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc398_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc399_b": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__abc400_c": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__arc190_a": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__arc191_a": {
+   "baseline-v2.0": "PENDING",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__arc192_a": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__arc193_a": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__arc194_a": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  },
+  "lcb__arc195_a": {
+   "baseline-v2.0": "SUCCESS",
+   "supreme-v2.0": "SUCCESS",
+   "superpowers-v2.0": "SUCCESS"
+  }
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "infra": [
+  {
+   "dir": "2026-08-15-211721-matplotlib__matplotlib-23299-baseline-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-212235-matplotlib__matplotlib-23299-full-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-212749-matplotlib__matplotlib-23476-baseline-v2.0",
+   "transcript_tail": "I have launched the build of matplotlib's C extension modules in the background. I will wait for it to complete before running tests and verifying the fix.\nError: timeout waiting for response",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-214858-matplotlib__matplotlib-24627-baseline-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-215416-matplotlib__matplotlib-24627-full-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-215932-pytest-dev__pytest-5262-baseline-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-221407-sphinx-doc__sphinx-10435-baseline-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 0
+  }
+ ],
+ "other": [
+  {
+   "dir": "2026-08-15-213304-matplotlib__matplotlib-23476-full-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 787
+  },
+  {
+   "dir": "2026-08-15-220447-pytest-dev__pytest-7521-baseline-v2.0",
+   "transcript_tail": "....................                                                     [100%]\n\n============================= 67 passed in 1.48s ===============================\n\nError: timeout waiting for response",
+   "diff_bytes": 1614
+  },
+  {
+   "dir": "2026-08-15-221002-pytest-dev__pytest-7521-full-v2.0",
+   "transcript_tail": "capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1585-L1590): Added `test_capture_includes_carriage_return` parametrized for `capfd` and `capsys`.",
+   "diff_bytes": 1122
+  },
+  {
+   "dir": "2026-08-15-221920-sphinx-doc__sphinx-10435-full-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 1731
+  },
+  {
+   "dir": "2026-08-15-224246-sphinx-doc__sphinx-9367-baseline-v2.0",
+   "transcript_tail": "ligibility check failed: Post \"https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist\": dial tcp 172.217.112.4:443: connectex: A socket operation was attempted to an unreachable network.",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-224248-sphinx-doc__sphinx-9367-full-v2.0",
+   "transcript_tail": "ligibility check failed: Post \"https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist\": dial tcp 172.217.112.4:443: connectex: A socket operation was attempted to an unreachable network.",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-224249-sphinx-doc__sphinx-9698-baseline-v2.0",
+   "transcript_tail": "ligibility check failed: Post \"https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist\": dial tcp 172.217.112.4:443: connectex: A socket operation was attempted to an unreachable network.",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-224250-sphinx-doc__sphinx-9698-full-v2.0",
+   "transcript_tail": "ligibility check failed: Post \"https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist\": dial tcp 172.217.112.4:443: connectex: A socket operation was attempted to an unreachable network.",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-230205-sympy__sympy-15875-baseline-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 1983
+  },
+  {
+   "dir": "2026-08-15-230721-sympy__sympy-15875-full-v2.0",
+   "transcript_tail": "Error: timeout waiting for response",
+   "diff_bytes": 1983
+  },
+  {
+   "dir": "2026-08-15-232007-sympy__sympy-23950-baseline-v2.0",
+   "transcript_tail": "Error: Agent execution terminated due to error.",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-232403-sympy__sympy-23950-full-v2.0",
+   "transcript_tail": "e=aZHapDqTXwRrrRuC6AiSeQ\n\nWaiting for authentication (timeout 60s)...\nOr, paste the authorization code here and press Enter:\nError: authentication timed out.\nError: authentication failed or timed out",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-232514-lcb__abc387_b-full-v2.0",
+   "transcript_tail": "e=SGWYVykKjOy0p5bUM29J3A\n\nWaiting for authentication (timeout 60s)...\nOr, paste the authorization code here and press Enter:\nError: authentication timed out.\nError: authentication failed or timed out",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-232629-lcb__abc388_c-baseline-v2.0",
+   "transcript_tail": "Error: Eligibility check failed: Post \"https://daily-cloudcode-pa.googleapis.com/v1internal:loadCodeAssist\": dial tcp: lookup daily-cloudcode-pa.googleapis.com: no such host",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-233426-lcb__abc390_c-baseline-v2.0",
+   "transcript_tail": "e=H6oJXjrjxci8ka7HZJSFdA\n\nWaiting for authentication (timeout 60s)...\nOr, paste the authorization code here and press Enter:\nError: authentication timed out.\nError: authentication failed or timed out",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-233548-lcb__abc390_c-full-v2.0",
+   "transcript_tail": "e=g-jMbkNKzGGbCLO7rLgqmg\n\nWaiting for authentication (timeout 60s)...\nOr, paste the authorization code here and press Enter:\nError: authentication timed out.\nError: authentication failed or timed out",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-15-233711-lcb__abc391_d-baseline-v2.0",
+   "transcript_tail": "e=-awdZJMivJ416AuMLEqnkA\n\nWaiting for authentication (timeout 60s)...\nOr, paste the authorization code here and press Enter:\nError: authentication timed out.\nError: authentication failed or timed out",
+   "diff_bytes": 0
+  },
+  {
+   "dir": "2026-08-16-000914-lcb__arc191_a-baseline-v2.0",
+   "transcript_tail": "i$ (consuming one copy of $g_i$ from $T'$ if $g_i > S[i]$).\n   - If $T_M$ is not placed after scanning the entire string $S$, placing $T_M$ at the last position $N-1$ maximizes the resulting integer.",
+   "diff_bytes": 1666
+  }
+ ]
+}

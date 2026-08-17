@@ -1,0 +1,127 @@
+{
+ "matplotlib__matplotlib-23299::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:01:30",
+  "tail": "16-005235-matplotlib__matplotlib-23299-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-005235-matplotlib__matplotlib-23299-baseline-v2.0\nStatus          : FAILURE\nDuration        : 527.9s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-23299)\nDiff            : 3 files, 17 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-005235-matplotlib__matplotlib-23299-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-005235-matplotlib__matplotlib-23299-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-005235-matplotlib__matplotlib-23299-baseline-v2.0\\evaluator.json\n"
+ },
+ "matplotlib__matplotlib-23299::full-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 01:06:37",
+  "tail": "hmark\\runs\\2026-08-16-010130-matplotlib__matplotlib-23299-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-010130-matplotlib__matplotlib-23299-full-v2.0\nStatus          : SUCCESS\nDuration        : 301.34s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-23299)\nDiff            : 2 files, 19 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-010130-matplotlib__matplotlib-23299-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-010130-matplotlib__matplotlib-23299-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-010130-matplotlib__matplotlib-23299-full-v2.0\\evaluator.json\n"
+ },
+ "matplotlib__matplotlib-23476::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:09:47",
+  "tail": "6-010637-matplotlib__matplotlib-23476-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-010637-matplotlib__matplotlib-23476-baseline-v2.0\nStatus          : FAILURE\nDuration        : 185.82s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-23476)\nDiff            : 2 files, 16 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-010637-matplotlib__matplotlib-23476-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-010637-matplotlib__matplotlib-23476-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-010637-matplotlib__matplotlib-23476-baseline-v2.0\\evaluator.json\n"
+ },
+ "matplotlib__matplotlib-23476::full-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 01:13:21",
+  "tail": "hmark\\runs\\2026-08-16-010947-matplotlib__matplotlib-23476-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-010947-matplotlib__matplotlib-23476-full-v2.0\nStatus          : SUCCESS\nDuration        : 209.53s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-23476)\nDiff            : 2 files, 20 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-010947-matplotlib__matplotlib-23476-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-010947-matplotlib__matplotlib-23476-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-010947-matplotlib__matplotlib-23476-full-v2.0\\evaluator.json\n"
+ },
+ "matplotlib__matplotlib-24627::baseline-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 01:24:09",
+  "tail": "-011321-matplotlib__matplotlib-24627-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-011321-matplotlib__matplotlib-24627-baseline-v2.0\nStatus          : SUCCESS\nDuration        : 643.23s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-24627)\nDiff            : 7 files, 131 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-011321-matplotlib__matplotlib-24627-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-011321-matplotlib__matplotlib-24627-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-011321-matplotlib__matplotlib-24627-baseline-v2.0\\evaluator.json\n"
+ },
+ "matplotlib__matplotlib-24627::full-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 01:32:55",
+  "tail": "mark\\runs\\2026-08-16-012410-matplotlib__matplotlib-24627-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-012410-matplotlib__matplotlib-24627-full-v2.0\nStatus          : SUCCESS\nDuration        : 521.93s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-24627)\nDiff            : 4 files, 141 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-012410-matplotlib__matplotlib-24627-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-012410-matplotlib__matplotlib-24627-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-012410-matplotlib__matplotlib-24627-full-v2.0\\evaluator.json\n"
+ },
+ "pytest-dev__pytest-5262::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:35:46",
+  "tail": "\\carb_benchmark\\runs\\2026-08-16-013255-pytest-dev__pytest-5262-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-013255-pytest-dev__pytest-5262-baseline-v2.0\nStatus          : FAILURE\nDuration        : 168.08s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-5262)\nDiff            : 3 files, 46 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-013255-pytest-dev__pytest-5262-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-013255-pytest-dev__pytest-5262-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-013255-pytest-dev__pytest-5262-baseline-v2.0\\evaluator.json\n"
+ },
+ "pytest-dev__pytest-5262::full-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:35:46",
+  "tail": "ev__pytest-5262-full-v2.0\\run_manifest.yaml\nConfig Hash   : eade223e39f4\nPrompt Hash   : N/A\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_benchmark\\scripts\\run_benchmark_v2.py\", line 358, in <module>\n    main()\n  File \"E:\\RofU\\Supreme\\carb_benchmark\\scripts\\run_benchmark_v2.py\", line 264, in main\n    proc = subprocess.Popen(\n           ^^^^^^^^^^^^^^^^^\n  File \"C:\\Program Files\\Python311\\Lib\\subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"C:\\Program Files\\Python311\\Lib\\subprocess.py\", line 1538, in _execute_child\n    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [WinError 206] The filename or extension is too long\n"
+ },
+ "pytest-dev__pytest-7521::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:39:03",
+  "tail": "\\carb_benchmark\\runs\\2026-08-16-013546-pytest-dev__pytest-7521-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-013546-pytest-dev__pytest-7521-baseline-v2.0\nStatus          : FAILURE\nDuration        : 195.29s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-7521)\nDiff            : 3 files, 25 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-013546-pytest-dev__pytest-7521-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-013546-pytest-dev__pytest-7521-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-013546-pytest-dev__pytest-7521-baseline-v2.0\\evaluator.json\n"
+ },
+ "pytest-dev__pytest-7521::full-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:41:26",
+  "tail": "   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-013904-pytest-dev__pytest-7521-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-013904-pytest-dev__pytest-7521-full-v2.0\nStatus          : FAILURE\nDuration        : 140.88s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-7521)\nDiff            : 3 files, 25 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-013904-pytest-dev__pytest-7521-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-013904-pytest-dev__pytest-7521-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-013904-pytest-dev__pytest-7521-full-v2.0\\evaluator.json\n"
+ },
+ "sphinx-doc__sphinx-10435::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:50:54",
+  "tail": "\\runs\\2026-08-16-014126-sphinx-doc__sphinx-10435-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-014126-sphinx-doc__sphinx-10435-baseline-v2.0\nStatus          : FAILURE\nDuration        : 562.87s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-10435)\nDiff            : 2 files, 23 lines\nMarkers (const) : ['Supreme']\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-014126-sphinx-doc__sphinx-10435-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-014126-sphinx-doc__sphinx-10435-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-014126-sphinx-doc__sphinx-10435-baseline-v2.0\\evaluator.json\n"
+ },
+ "sphinx-doc__sphinx-10435::full-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 01:53:44",
+  "tail": ":\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-015054-sphinx-doc__sphinx-10435-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-015054-sphinx-doc__sphinx-10435-full-v2.0\nStatus          : FAILURE\nDuration        : 167.47s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-10435)\nDiff            : 2 files, 60 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-015054-sphinx-doc__sphinx-10435-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-015054-sphinx-doc__sphinx-10435-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-015054-sphinx-doc__sphinx-10435-full-v2.0\\evaluator.json\n"
+ },
+ "sphinx-doc__sphinx-9367::baseline-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 02:01:16",
+  "tail": "\\carb_benchmark\\runs\\2026-08-16-015344-sphinx-doc__sphinx-9367-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-015344-sphinx-doc__sphinx-9367-baseline-v2.0\nStatus          : SUCCESS\nDuration        : 450.98s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-9367)\nDiff            : 2 files, 15 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-015344-sphinx-doc__sphinx-9367-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-015344-sphinx-doc__sphinx-9367-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-015344-sphinx-doc__sphinx-9367-baseline-v2.0\\evaluator.json\n"
+ },
+ "sphinx-doc__sphinx-9367::full-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 02:02:58",
+  "tail": "   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-020116-sphinx-doc__sphinx-9367-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-020116-sphinx-doc__sphinx-9367-full-v2.0\nStatus          : SUCCESS\nDuration        : 101.02s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-9367)\nDiff            : 2 files, 15 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-020116-sphinx-doc__sphinx-9367-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-020116-sphinx-doc__sphinx-9367-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-020116-sphinx-doc__sphinx-9367-full-v2.0\\evaluator.json\n"
+ },
+ "sphinx-doc__sphinx-9698::baseline-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 02:16:49",
+  "tail": "chmark\\runs\\2026-08-16-020259-sphinx-doc__sphinx-9698-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-020259-sphinx-doc__sphinx-9698-baseline-v2.0\nStatus          : SUCCESS\nDuration        : 826.04s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-9698)\nDiff            : 2 files, 20 lines\nMarkers (const) : ['Supreme']\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-020259-sphinx-doc__sphinx-9698-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-020259-sphinx-doc__sphinx-9698-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-020259-sphinx-doc__sphinx-9698-baseline-v2.0\\evaluator.json\n"
+ },
+ "sphinx-doc__sphinx-9698::full-v2.0": {
+  "status": "SUCCESS",
+  "time": "2026-08-16 02:24:49",
+  "tail": "   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-021650-sphinx-doc__sphinx-9698-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-021650-sphinx-doc__sphinx-9698-full-v2.0\nStatus          : SUCCESS\nDuration        : 476.04s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-9698)\nDiff            : 2 files, 16 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-021650-sphinx-doc__sphinx-9698-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-021650-sphinx-doc__sphinx-9698-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-021650-sphinx-doc__sphinx-9698-full-v2.0\\evaluator.json\n"
+ },
+ "sympy__sympy-15875::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:28:36",
+  "tail": "s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-022450-sympy__sympy-15875-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-022450-sympy__sympy-15875-baseline-v2.0\nStatus          : FAILURE\nDuration        : 222.16s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-15875)\nDiff            : 2 files, 25 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-022450-sympy__sympy-15875-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-022450-sympy__sympy-15875-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-022450-sympy__sympy-15875-baseline-v2.0\\evaluator.json\n"
+ },
+ "sympy__sympy-15875::full-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:34:16",
+  "tail": "\nDuration   : 339.73s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-022836-sympy__sympy-15875-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-022836-sympy__sympy-15875-full-v2.0\nStatus          : FAILURE\nDuration        : 337.34s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-15875)\nDiff            : 2 files, 28 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-022836-sympy__sympy-15875-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-022836-sympy__sympy-15875-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-022836-sympy__sympy-15875-full-v2.0\\evaluator.json\n"
+ },
+ "sympy__sympy-23950::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:37:33",
+  "tail": "s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023416-sympy__sympy-23950-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-023416-sympy__sympy-23950-baseline-v2.0\nStatus          : FAILURE\nDuration        : 185.48s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-23950)\nDiff            : 1 files, 18 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023416-sympy__sympy-23950-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023416-sympy__sympy-23950-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-023416-sympy__sympy-23950-baseline-v2.0\\evaluator.json\n"
+ },
+ "sympy__sympy-23950::full-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:37:49",
+  "tail": "URE\nDuration   : 15.72s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023734-sympy__sympy-23950-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-023734-sympy__sympy-23950-full-v2.0\nStatus          : FAILURE\nDuration        : 15.36s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-23950)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023734-sympy__sympy-23950-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023734-sympy__sympy-23950-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-023734-sympy__sympy-23950-full-v2.0\\evaluator.json\n"
+ },
+ "lcb__abc387_b::full-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:38:08",
+  "tail": "_b-full-v2.0\nStatus     : FAILURE\nDuration   : 18.72s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023750-lcb__abc387_b-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-023750-lcb__abc387_b-full-v2.0\nStatus          : FAILURE\nDuration        : 15.25s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc387_b)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023750-lcb__abc387_b-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023750-lcb__abc387_b-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-023750-lcb__abc387_b-full-v2.0\\evaluator.json\n"
+ },
+ "lcb__abc388_c::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:38:27",
+  "tail": "    : FAILURE\nDuration   : 18.26s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023809-lcb__abc388_c-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-023809-lcb__abc388_c-baseline-v2.0\nStatus          : FAILURE\nDuration        : 14.91s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc388_c)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023809-lcb__abc388_c-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023809-lcb__abc388_c-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-023809-lcb__abc388_c-baseline-v2.0\\evaluator.json\n"
+ },
+ "lcb__abc390_c::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:39:00",
+  "tail": "    : FAILURE\nDuration   : 33.17s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023827-lcb__abc390_c-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-023827-lcb__abc390_c-baseline-v2.0\nStatus          : FAILURE\nDuration        : 29.65s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc390_c)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023827-lcb__abc390_c-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023827-lcb__abc390_c-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-023827-lcb__abc390_c-baseline-v2.0\\evaluator.json\n"
+ },
+ "lcb__abc390_c::full-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:39:18",
+  "tail": "0_c-full-v2.0\nStatus     : FAILURE\nDuration   : 17.79s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023900-lcb__abc390_c-full-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-023900-lcb__abc390_c-full-v2.0\nStatus          : FAILURE\nDuration        : 14.4s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc390_c)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023900-lcb__abc390_c-full-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023900-lcb__abc390_c-full-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-023900-lcb__abc390_c-full-v2.0\\evaluator.json\n"
+ },
+ "lcb__abc391_d::baseline-v2.0": {
+  "status": "FAILURE",
+  "time": "2026-08-16 02:39:36",
+  "tail": "     : FAILURE\nDuration   : 17.97s\nManifest   : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023918-lcb__abc391_d-baseline-v2.0\\run_manifest.yaml\n\n----- RESULT -----\nRun ID          : 2026-08-16-023918-lcb__abc391_d-baseline-v2.0\nStatus          : FAILURE\nDuration        : 14.5s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc391_d)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023918-lcb__abc391_d-baseline-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-16-023918-lcb__abc391_d-baseline-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-16-023918-lcb__abc391_d-baseline-v2.0\\evaluator.json\n"
+ }
+}

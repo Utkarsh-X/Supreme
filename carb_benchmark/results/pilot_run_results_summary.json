@@ -1,0 +1,73 @@
+[
+  {
+    "task_id": "T001_sample_repo_debug",
+    "config_id": "baseline-v1.0",
+    "status": "FAILURE",
+    "lines_changed": 0,
+    "failures": [
+      "F03_wrong_diagnosis"
+    ]
+  },
+  {
+    "task_id": "T001_sample_repo_debug",
+    "config_id": "constitution-v1.0",
+    "status": "SUCCESS",
+    "lines_changed": 6,
+    "failures": []
+  },
+  {
+    "task_id": "T001_sample_repo_debug",
+    "config_id": "full-v1.0",
+    "status": "SUCCESS",
+    "lines_changed": 6,
+    "failures": []
+  },
+  {
+    "task_id": "T002_environment_tooling",
+    "config_id": "baseline-v1.0",
+    "status": "SUCCESS",
+    "lines_changed": 0,
+    "failures": []
+  },
+  {
+    "task_id": "T002_environment_tooling",
+    "config_id": "constitution-v1.0",
+    "status": "SUCCESS",
+    "lines_changed": 1,
+    "failures": []
+  },
+  {
+    "task_id": "T002_environment_tooling",
+    "config_id": "full-v1.0",
+    "status": "SUCCESS",
+    "lines_changed": 1,
+    "failures": []
+  },
+  {
+    "task_id": "T003_diagnostic_premature_completion",
+    "config_id": "baseline-v1.0",
+    "status": "FAILURE",
+    "lines_changed": 12,
+    "failures": [
+      "F08_premature_completion",
+      "F07_incomplete_implementation"
+    ]
+  },
+  {
+    "task_id": "T003_diagnostic_premature_completion",
+    "config_id": "constitution-v1.0",
+    "status": "FAILURE",
+    "lines_changed": 19,
+    "failures": [
+      "F08_premature_completion",
+      "F07_incomplete_implementation"
+    ]
+  },
+  {
+    "task_id": "T003_diagnostic_premature_completion",
+    "config_id": "full-v1.0",
+    "status": "SUCCESS",
+    "lines_changed": 26,
+    "failures": []
+  }
+]
