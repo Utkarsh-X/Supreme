@@ -102,12 +102,22 @@ def build_prompt(question, pub_cases):
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--questions", default="",
+                        help="comma-separated question ids (e.g. arc196_a,abc401_e); "
+                             "default = the built-in PREFERRED list (v2 set)")
+    args = parser.parse_args()
+
     rows = load_rows()
     by_id = {r["question_id"]: r for r in rows}
 
     selected = []
     seen_contests = set()
-    for qid in PREFERRED:
+    for qid in (args.questions.split(",") if args.questions.strip() else PREFERRED):
+        qid = qid.strip()
+        if not qid:
+            continue
         if qid not in by_id:
             print(f"  skip {qid}: not in dataset")
             continue

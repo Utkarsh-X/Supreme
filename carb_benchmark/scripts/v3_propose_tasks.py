@@ -46,6 +46,28 @@ SUPPORTED_REPOS = {
 HARD_TIERS = ("1-4 hours", ">4 hours")
 MEDIUM_TIERS = ("15 min - 1 hour",)
 
+# Package-version prefixes for which an era-appropriate venv can be built on
+# this machine (must mirror validate_swe_tasks.PY_MAP; unknown versions => the
+# task cannot be evaluated and must not enter the calibration set).
+SUPPORTED_VERSIONS = {
+    "sympy": ("1.1", "1.4", "1.5", "1.7", "1.12"),
+    "django": ("3.0", "3.1", "3.2", "4.0", "4.2", "5.0"),
+    "pytest": ("4.5", "6.0"),
+    "sphinx": ("3.5", "4.1", "4.3", "5.0"),
+    "matplotlib": ("3.5", "3.6"),
+    "scikit-learn": ("0.22",),
+    "astropy": ("5.1",),
+}
+
+
+def version_supported(repo: str, version: str) -> bool:
+    # LCB/platform entries have no repo path (e.g. "atcoder") — venv support
+    # only applies to SWE-bench repos.
+    if "/" not in repo:
+        return True
+    repo_name = repo.split("/")[1]
+    return any(version.startswith(p) for p in SUPPORTED_VERSIONS.get(repo_name, ()))
+
 
 def load_v2_ids():
     ids = set()
@@ -108,11 +130,14 @@ def other_family_candidates():
 
 def summarize(d):
     """Small metadata record for a candidate (no problem statements)."""
+    version = d.get("version") or ""
+    repo = d.get("repo") or ""
     return {
         "instance_id": d.get("instance_id") or d.get("question_id"),
-        "repo": d.get("repo") or d.get("platform"),
+        "repo": repo,
         "difficulty": d.get("difficulty"),
-        "version": d.get("version") or d.get("contest_id"),
+        "version": version,
+        "venv_supported": version_supported(repo, version),
         "gold_patch_bytes": len(d.get("patch", "") or ""),
         "fail_to_pass_count": len(d.get("FAIL_TO_PASS", []) or []),
         "pass_to_pass_count": len(d.get("PASS_TO_PASS", []) or []),
@@ -127,13 +152,18 @@ def main():
     lcb = lcb_instances()
     other = other_family_candidates()
 
+    swe_hard = [summarize(d) for d in swe["hard"] if d["instance_id"] not in v2_ids]
+    swe_medium = [summarize(d) for d in swe["medium"] if d["instance_id"] not in v2_ids]
+
     shortlist = {
-        "v3_candidate_shortlist_version": "0.1",
+        "v3_candidate_shortlist_version": "0.2",
         "generated_by": os.path.basename(__file__),
         "excludes": {"v2_instances": sorted(v2_ids)},
         "swe_bench_verified": {
-            "hard_tier": [summarize(d) for d in swe["hard"] if d["instance_id"] not in v2_ids],
-            "medium_tier": [summarize(d) for d in swe["medium"] if d["instance_id"] not in v2_ids],
+            "hard_tier": swe_hard,
+            "hard_tier_venv_supported": [c for c in swe_hard if c["venv_supported"]],
+            "medium_tier": swe_medium,
+            "medium_tier_venv_supported": [c for c in swe_medium if c["venv_supported"]],
         },
         "livecodebench_v5_atcoder": {
             "medium": [summarize(d) for d in lcb["medium"] if str(d["question_id"]) not in v2_ids],
@@ -150,8 +180,8 @@ def main():
         json.dump(shortlist, fh, indent=1)
 
     print("\n--- SWE-bench Verified (supported repos, excluding v2) ---")
-    print(f"  hard tier  (1-4h / >4h):     {len(shortlist['swe_bench_verified']['hard_tier'])}")
-    print(f"  medium tier (15min-1h):      {len(shortlist['swe_bench_verified']['medium_tier'])}")
+    print(f"  hard tier  (1-4h / >4h):     {len(shortlist['swe_bench_verified']['hard_tier'])}  (venv-supported: {len(shortlist['swe_bench_verified']['hard_tier_venv_supported'])})")
+    print(f"  medium tier (15min-1h):      {len(shortlist['swe_bench_verified']['medium_tier'])}  (venv-supported: {len(shortlist['swe_bench_verified']['medium_tier_venv_supported'])})")
     print("\n--- LiveCodeBench v5 AtCoder (excluding v2) ---")
     print(f"  medium: {len(shortlist['livecodebench_v5_atcoder']['medium'])}   hard: {len(shortlist['livecodebench_v5_atcoder']['hard'])}")
     print("\n--- Never-used families ---")

@@ -36,6 +36,13 @@ DEFAULT_SELECTION = os.path.join(DATA_DIR, "selected_30.jsonl")
 REGISTRY_PATH = os.path.join(REGISTRY_DIR, "swe_tasks_v2.json")
 
 
+def registry_path(tag: str) -> str:
+    """Registry file for a task-set tag (v2 default; v3 for the hard set)."""
+    if tag and tag != "v2":
+        return os.path.join(REGISTRY_DIR, f"swe_tasks_{tag}.json")
+    return REGISTRY_PATH
+
+
 def fetch_tarball(owner_repo, commit):
     """Download (and cache) the repo tarball at the exact commit."""
     os.makedirs(CACHE_DIR, exist_ok=True)
@@ -88,7 +95,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--selection", default=DEFAULT_SELECTION)
     parser.add_argument("--limit", type=int, default=0, help="0 = all")
+    parser.add_argument("--tag", default="v2",
+                        help="task-set tag; registry written to swe_tasks_<tag>.json (default v2)")
     args = parser.parse_args()
+    REGISTRY_PATH = registry_path(args.tag)
 
     with open(args.selection, encoding="utf-8") as f:
         instances = [json.loads(l) for l in f if l.strip()]
