@@ -115,10 +115,27 @@ Because every task was run under all three configs, the correct test is the **pa
 - **LCB is fully saturated** (20/20 for every config) — algorithmic tasks are uniformly easy for this model; they contribute zero discriminative power.
 - SWE tasks carry all the signal (27/27/26), and even there the difference is within noise (p ≥ 0.5 for every SWE-only pair).
 - **Effort (per-cell, from evaluator records):** median wall-clock 156 s (baseline) / 151 s (supreme) / 102 s (superpowers); median diff size 21 / 21.5 / 21 lines; median 2 files modified in all three. Failed cells took much longer than passed cells (median 323 s vs 117 s), i.e. failures are genuine hard-task attempts, not cut-offs. Sessions that hit the 20-minute cap (≈1212 s) still produced correct solutions and graded PASS in all three configs — no config was disproportionately truncated.
+
+**Speed / latency telemetry (see `v2_session_telemetry.csv` for all 150 cells).** Per-session telemetry in v2 was limited to wall-clock time, transcript length, and diff metrics (no token or tool-call counters — see section 7):
+
+| Metric (median) | Baseline | Supreme | Superpowers |
+|---|---|---|---|
+| Wall-clock, all cells | 156 s | 151 s | 102 s |
+| Wall-clock, passed cells | 138 s | 131 s | 98 s |
+| Wall-clock, passed LCB cells | **66 s** | 65 s | **46 s** |
+| Wall-clock, passed SWE cells | 221 s | 169 s | 150 s |
+| Transcript lines | 9 | 12 | 12 |
+| Diff lines / files | 21 / 2 | 22 / 2 | 21 / 2 |
+
+Mann-Whitney U results: the only **statistically significant** difference is superpowers solving LiveCodeBench tasks faster than baseline (median 46 s vs 66 s, p = 0.018); baseline vs superpowers on all passed cells approaches significance (p = 0.097); SWE latency shows no difference (all p > 0.4); transcript verbosity (baseline 9 vs 12 lines) trends toward significance only for supreme (p = 0.056). These are secondary (behavioral) metrics — they do not affect the correctness verdict — and two caveats apply: (1) multiple comparisons; (2) the superpowers arm ran mostly on 2026-08-17 while baseline LCB ran mostly on 2026-08-15/16, so a day-level latency shift cannot be fully excluded, though the effect is specific to LCB (superpowers SWE latency on the same day was not faster).
 - **Config identity audit:** the 40 legacy `full-v2.0` supreme sessions carry the *identical* `system_prompt_sha256` (`52b18dd5…`) as the 10 `supreme-v2.0` sessions; superpowers is a distinct prompt (`1b082731…`). The three configs differ only in prompt content (identical model, temperature 0, isolated temp profile).
 - **Matrix integrity:** all 150 cells of `v2_corrected_matrix.json` agree with the evaluator records (0 mismatches, 0 invalid runs used, no reused run ids).
 
-## 7. Verdict and what would demonstrate a difference
+## 7. Telemetry gaps and v3 instrumentation
+
+The v2 records did not capture token usage or tool-call counts: `tool_iterations` is always 0 in every run manifest (never populated by `finalize_run.py`), and `tokens_used` existed only in the v1 pilot evaluator schema. Transcripts are agent end-of-run summaries (9–12 lines), not full conversations, so they cannot be re-parsed for step counts. For v3 the finalizer should record, per session: prompt/response token counts, number and type of tool calls, time-to-first-edit, and test-run counts — this is what makes secondary metrics (latency, token efficiency, edit patterns) reportable with confidence intervals rather than proxies.
+
+## 8. Verdict and what would demonstrate a difference
 
 **Honest verdict: on this 50-task set, the three configurations are statistically indistinguishable (p = 1.0 on every pair). The benchmark is saturated — it measures that `gemini-3.6-flash-high` can solve 92% of these tasks, not that the system prompts differ in effect.**
 
@@ -130,7 +147,7 @@ To legitimately demonstrate that supreme or superpowers outperforms baseline, th
 3. **Multi-seed runs.** Single-run-per-cell at temperature 0 gives no variance estimate; 3–5 seeds per (task, config) would let us report confidence intervals instead of point estimates.
 4. **Report secondary metrics alongside accuracy** (time-to-solution, diff size, iterations) — at equal accuracy these show *how* each config works, e.g. superpowers' lower median wall-clock (102 s vs 156 s) is a behavioral difference worth studying even though it is not a correctness difference.
 
-## 8. Notes / limitations
+## 9. Notes / limitations
 
 - The 6 original pytest FAILs and the 2 aborted `matplotlib-23299` runs were artifacts; corrected verdicts supersede them. Raw artifacts preserved for audit.
 - Some run transcripts are short or show network errors at the end; verdicts come from the evaluator records (real diffs + hidden-test runs), not transcripts.
