@@ -1,0 +1,50 @@
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 25eab7f..39107e7 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -447,6 +447,14 @@ class EncodedFile(object):
+         """Ensure that file.name is a string."""
+         return repr(self.buffer)
+ 
++    @property
++    def mode(self):
++        """Ensure that file.mode does not include 'b'."""
++        buffer_mode = getattr(self.buffer, "mode", None)
++        if isinstance(buffer_mode, six.string_types):
++            return buffer_mode.replace("b", "")
++        return buffer_mode
++
+     def __getattr__(self, name):
+         return getattr(object.__getattribute__(self, "buffer"), name)
+ 
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index 5d80eb6..478fdaa 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -952,6 +952,26 @@ def test_dupfile_on_textio():
+     assert not hasattr(f, "name")
+ 
+ 
++def test_encodedfile_mode(tmpfile):
++    f = capture.safe_text_dupfile(tmpfile, "wb")
++    try:
++        assert "b" not in f.mode
++    finally:
++        f.close()
++
++    class DummyBuffer(object):
++        mode = "rb+"
++
++    ef = capture.EncodedFile(DummyBuffer(), "utf-8")
++    assert ef.mode == "r+"
++
++    DummyBuffer.mode = "r+b"
++    assert ef.mode == "r+"
++
++    DummyBuffer.mode = "wb"
++    assert ef.mode == "w"
++
++
+ @contextlib.contextmanager
+ def lsof_check():
+     pid = os.getpid()

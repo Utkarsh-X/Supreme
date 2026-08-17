@@ -1,0 +1,9 @@
+Wait for the pip install task to complete.
+Wait for task-28 to finish.
+Wait for task-136 to complete.
+I have fixed the issue where `_pytest.capture.EncodedFile` incorrectly advertised a binary mode (containing `'b'`) from its underlying stream.
+
+### Summary of Changes
+
+1. **`EncodedFile.mode` Property**: Added a `@property` for `mode` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L450-L457) that strips `"b"` from the underlying `buffer` object's `mode` string. This ensures libraries like `youtube-dl` recognize `EncodedFile` as a text stream rather than a binary stream.
+2. **Unit Test**: Added `test_encodedfile_mode` in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L1464-L1476) to verify that `EncodedFile.mode` strips `"b"` from modes such as `"rb+"`, `"w+b"`, and `"wb"`.

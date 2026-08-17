@@ -1,0 +1,6 @@
+### Root Cause
+In `src/_pytest/capture.py`, `FDCaptureBinary` instantiated `EncodedFile` (a subclass of `io.TextIOWrapper`) around the temporary file without passing `newline=""`. As a result, `newline` defaulted to `None`, which enabled universal newline translation when reading captured text, converting `\r` and `\r\n` characters into `\n`.
+
+### Solution
+1. Added `newline=""` when instantiating `EncodedFile` in `FDCaptureBinary` within [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L388-L394), matching the behavior of `CaptureIO` (`capsys`) to prevent automatic line ending translation.
+2. Added regression test `test_capture_includes_carriage_return` to [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1584-L1590) covering both `capsys` and `capfd`.

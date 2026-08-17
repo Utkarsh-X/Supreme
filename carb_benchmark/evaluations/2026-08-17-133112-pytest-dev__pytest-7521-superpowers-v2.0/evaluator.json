@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-08-17-133112-pytest-dev__pytest-7521-superpowers-v2.0",
+  "task_id": "pytest-dev__pytest-7521",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 349.88,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-7521",
+  "test_output_tail": "# EVAL rc=0 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-6.0.0, py-1.11.0, pluggy-0.13.1\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-7521, configfile: pyproject.toml\ncollected 2 items\n\ntesting\\test_capture.py ..                                               [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED testing/test_capture.py::TestCaptureFixture::test_cafd_preserves_newlines[\\r\\n]\nPASSED testing/test_capture.py::TestCaptureFixture::test_cafd_preserves_newlines[\\r]\n============================== 2 passed in 0.18s ==============================\n\nPASS: pytest-dev__pytest-7521 \u2014 all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "src/_pytest/assertion/rewrite.py",
+      "src/_pytest/capture.py",
+      "testing/test_capture.py"
+    ],
+    "lines_added": 37,
+    "lines_deleted": 3,
+    "total_lines_changed": 40,
+    "hunks_count": 5
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "",
+  "corrected_verdict": true,
+  "correction_note": "CORRECTED 2026-08-17: originally recorded FAIL because eval_swe.py's test-file filter dropped src/_pytest/* source changes ('test' substring in '_pytest'); re-evaluated with fixed filter against the saved agent diff -> PASS",
+  "original_passed": false
+}

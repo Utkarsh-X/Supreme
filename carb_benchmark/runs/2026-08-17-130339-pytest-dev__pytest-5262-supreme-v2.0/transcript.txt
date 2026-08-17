@@ -1,0 +1,8 @@
+I have resolved the issue where `_pytest.capture.EncodedFile` incorrectly included `'b'` (binary mode indicator) in its `mode` attribute.
+
+### Cause
+`EncodedFile` wraps a binary file stream buffer produced by `os.fdopen(..., mode="...b", 0)`. Previously, accessing `EncodedFile.mode` delegated to `self.buffer.mode` via `__getattr__`, returning binary mode strings such as `"rb+"` or `"wb+"`. Libraries like `youtube-dl` inspect `out.mode` to check for `"b"`, assuming a binary stream and passing `bytes` to `out.write()`, which caused `EncodedFile.write()` to raise a `TypeError` (since `EncodedFile` is a text stream interface accepting `str`).
+
+### Solution
+1. Added a `@property` for `mode` on `[EncodedFile](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L450-L456)` in `src/_pytest/capture.py` that strips `"b"` from the underlying buffer's mode attribute if it is a string.
+2. Added unit tests in `[testing/test_capture.py](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L955-L973)` to verify that `EncodedFile.mode` correctly strips `"b"`.

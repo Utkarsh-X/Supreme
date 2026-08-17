@@ -1,0 +1,31 @@
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 3f9c60f..f538b67 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -388,6 +388,7 @@ class FDCaptureBinary:
+                 TemporaryFile(buffering=0),  # type: ignore[arg-type]
+                 encoding="utf-8",
+                 errors="replace",
++                newline="",
+                 write_through=True,
+             )
+             if targetfd in patchsysdict:
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index a3bd4b6..a1f7054 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1034,6 +1034,14 @@ class TestStdCapture:
+             out, err = cap.readouterr()
+         assert out == "hxÄ…Ä‡\n"
+ 
++    def test_capturing_carriage_return(self):
++        with self.getcapture() as cap:
++            sys.stdout.write("hello\r")
++            sys.stderr.write("world\r")
++            out, err = cap.readouterr()
++        assert out == "hello\r"
++        assert err == "world\r"
++
+     def test_reset_twice_error(self):
+         with self.getcapture() as cap:
+             print("hello")

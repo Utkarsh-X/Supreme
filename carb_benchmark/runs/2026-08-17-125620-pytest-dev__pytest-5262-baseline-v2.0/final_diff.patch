@@ -1,0 +1,85 @@
+diff --git a/src/_pytest/assertion/rewrite.py b/src/_pytest/assertion/rewrite.py
+index 2903b89..3033fad 100644
+--- a/src/_pytest/assertion/rewrite.py
++++ b/src/_pytest/assertion/rewrite.py
+@@ -596,8 +596,12 @@ def set_location(node, lineno, col_offset):
+     def _fix(node, lineno, col_offset):
+         if "lineno" in node._attributes:
+             node.lineno = lineno
++        if "end_lineno" in node._attributes:
++            node.end_lineno = lineno
+         if "col_offset" in node._attributes:
+             node.col_offset = col_offset
++        if "end_col_offset" in node._attributes:
++            node.end_col_offset = col_offset
+         for child in ast.iter_child_nodes(node):
+             _fix(child, lineno, col_offset)
+ 
+@@ -697,10 +701,10 @@ class AssertionRewriter(ast.NodeVisitor):
+                 lineno = item.lineno
+                 break
+             pos += 1
+-        else:
+-            lineno = item.lineno
++        if pos > 0:
++            lineno = mod.body[pos - 1].lineno
+         imports = [
+-            ast.Import([alias], lineno=lineno, col_offset=0) for alias in aliases
++            set_location(ast.Import([alias]), lineno, 0) for alias in aliases
+         ]
+         mod.body[pos:pos] = imports
+         # Collect asserts.
+@@ -726,6 +730,7 @@ class AssertionRewriter(ast.NodeVisitor):
+                     and not isinstance(field, ast.expr)
+                 ):
+                     nodes.append(field)
++        ast.fix_missing_locations(mod)
+ 
+     @staticmethod
+     def is_rewrite_disabled(docstring):
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 25eab7f..9c613f2 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -447,6 +447,14 @@ class EncodedFile(object):
+         """Ensure that file.name is a string."""
+         return repr(self.buffer)
+ 
++    @property
++    def mode(self):
++        """Ensure that file.mode does not contain 'b' (binary)."""
++        mode = getattr(self.buffer, "mode")
++        if isinstance(mode, str):
++            return mode.replace("b", "")
++        return mode
++
+     def __getattr__(self, name):
+         return getattr(object.__getattribute__(self, "buffer"), name)
+ 
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index 5d80eb6..869eb79 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1461,6 +1461,22 @@ def test_pickling_and_unpickling_encoded_file():
+     pickle.loads(ef_as_str)
+ 
+ 
++def test_encodedfile_mode():
++    class DummyBuffer(object):
++        def __init__(self, mode):
++            self.mode = mode
++
++    ef = capture.EncodedFile(DummyBuffer("rb+"), "utf-8")
++    assert ef.mode == "r+"
++
++    ef = capture.EncodedFile(DummyBuffer("w+b"), "utf-8")
++    assert ef.mode == "w+"
++
++    ef = capture.EncodedFile(DummyBuffer("wb"), "utf-8")
++    assert ef.mode == "w"
++
++
++
+ def test_global_capture_with_live_logging(testdir):
+     # Issue 3819
+     # capture should work with live cli logging

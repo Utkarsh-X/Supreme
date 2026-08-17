@@ -1,0 +1,26 @@
+run_id: 2026-08-17-130928-pytest-dev__pytest-5262-superpowers-v2.0
+task_id: pytest-dev__pytest-5262
+configuration_id: superpowers-v2.0
+status: SUCCESS
+started_at: '2026-08-17T13:09:28.539633'
+finished_at: '2026-08-17T13:20:12.821619'
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high
+  temperature: 0.0
+environment:
+  os: Windows-10-10.0.26200-SP0
+  python_version: 3.11.9
+  ide: Antigravity IDE Agent
+  isolation_mode: non_adversarial_cooperative
+provenance_hashes:
+  configuration_hash: 1f36960f791108d230cba5c7998070107380523a6addb7374ba323b7e26e30e9
+  prompt_hash: null
+  snapshot_hash: null
+artifacts:
+  transcript_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-17-130928-pytest-dev__pytest-5262-superpowers-v2.0\transcript.txt
+  diff_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-17-130928-pytest-dev__pytest-5262-superpowers-v2.0\final_diff.patch
+  evaluator_output: null
+resource_metrics:
+  tool_iterations: 0
+  wall_clock_seconds: 644.28

@@ -1,0 +1,11 @@
+### Root Cause
+Before a backend is explicitly selected or resolved by Matplotlib, `dict.__getitem__(rcParams, 'backend')` holds an internal sentinel object (`rcsetup._auto_backend_sentinel`). 
+
+When entering an `rc_context` block (or `plt.xkcd()`), `orig = rcParams.copy()` copies the initial dictionary state, including `orig['backend'] = _auto_backend_sentinel`. When a figure is created inside `rc_context`, Matplotlib automatically resolves the backend (e.g., to `'qtagg'` or `'tkagg'`) and updates `dict.__setitem__(rcParams, 'backend', 'tkagg')`.
+
+Upon exiting `rc_context`, `dict.update(rcParams, orig)` ran. Because `dict.update` is standard `dict` dictionary update in C, it bypassed `RcParams.__setitem__` validation and overwrote `rcParams['backend']` back to `_auto_backend_sentinel`.
+
+Subsequent access to `matplotlib.get_backend()` (or `rcParams['backend']`) read `_auto_backend_sentinel` and called `plt.switch_backend(_auto_backend_sentinel)`, which begins by executing `plt.close('all')` — destroying all open figures in `Gcf.figs`.
+
+### Solution
+In both [lib/matplotlib/__init__.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py#L1095-L1101) (`rc_context`) and [lib/matplotlib/pyplot.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/pyplot.py#L688-L694) (`_xkcd`), check whether `orig['backend']` is `_auto_backend_sentinel` while `rcParams['backend']` has already been resolved. If so, pop `'backend'` from `orig` before executing `dict.update(rcParams, orig)` so that the resolved backend is not overwritten by `_auto_backend_sentinel`.

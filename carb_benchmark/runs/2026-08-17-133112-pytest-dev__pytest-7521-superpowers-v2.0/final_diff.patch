@@ -1,0 +1,84 @@
+diff --git a/src/_pytest/assertion/rewrite.py b/src/_pytest/assertion/rewrite.py
+index e77b1b0..7444400 100644
+--- a/src/_pytest/assertion/rewrite.py
++++ b/src/_pytest/assertion/rewrite.py
+@@ -357,6 +357,7 @@ def _rewrite_test(fn: Path, config: Config) -> Tuple[os.stat_result, types.CodeT
+         source = f.read()
+     tree = ast.parse(source, filename=fn_)
+     rewrite_asserts(tree, source, fn_, config)
++    ast.fix_missing_locations(tree)
+     co = compile(tree, fn_, "exec", dont_inherit=True)
+     return stat, co
+ 
+@@ -533,6 +534,10 @@ def set_location(node, lineno, col_offset):
+             node.lineno = lineno
+         if "col_offset" in node._attributes:
+             node.col_offset = col_offset
++        if "end_lineno" in node._attributes:
++            node.end_lineno = lineno
++        if "end_col_offset" in node._attributes:
++            node.end_col_offset = col_offset
+         for child in ast.iter_child_nodes(node):
+             _fix(child, lineno, col_offset)
+ 
+@@ -703,9 +708,14 @@ class AssertionRewriter(ast.NodeVisitor):
+             pos += 1
+         else:
+             lineno = item.lineno
+-        imports = [
+-            ast.Import([alias], lineno=lineno, col_offset=0) for alias in aliases
+-        ]
++        imports = []
++        for alias in aliases:
++            imp = ast.Import([alias], lineno=lineno, col_offset=0)
++            if hasattr(imp, "end_lineno"):
++                imp.end_lineno = lineno
++                imp.end_col_offset = 0
++            ast.fix_missing_locations(imp)
++            imports.append(imp)
+         mod.body[pos:pos] = imports
+         # Collect asserts.
+         nodes = [mod]  # type: List[ast.AST]
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 3f9c60f..f538b67 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -388,6 +388,7 @@ class FDCaptureBinary:
+                 TemporaryFile(buffering=0),  # type: ignore[arg-type]
+                 encoding="utf-8",
+                 errors="replace",
++                newline="",
+                 write_through=True,
+             )
+             if targetfd in patchsysdict:
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index a3bd4b6..21ef1f2 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1580,3 +1580,26 @@ def test_logging_while_collecting(testdir):
+     )
+     result.stdout.no_fnmatch_line("*Captured stderr call*")
+     result.stdout.no_fnmatch_line("*during collection*")
++
++
++@pytest.mark.parametrize("capture_fixture", ["capsys", "capfd"])
++def test_capture_carriage_return(testdir, capture_fixture):
++    testdir.makepyfile(
++        """
++        import sys
++
++        def test_cr({0}):
++            print("Greetings from DOS", end="\\r")
++            captured = {0}.readouterr()
++            assert captured.out == "Greetings from DOS\\r"
++
++            sys.stderr.write("stderr DOS\\r")
++            captured = {0}.readouterr()
++            assert captured.err == "stderr DOS\\r"
++        """.format(
++            capture_fixture
++        )
++    )
++    result = testdir.runpytest()
++    result.stdout.fnmatch_lines(["*1 passed*"])
++

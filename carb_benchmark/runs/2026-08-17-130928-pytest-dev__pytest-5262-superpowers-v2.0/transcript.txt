@@ -1,0 +1,24 @@
+<notification>
+<task-id>da662316-f6d9-43db-98ef-9a6123f1d272/task-30</task-id>
+<status>success</status>
+<summary>Task 'da662316-f6d9-43db-98ef-9a6123f1d272/task-30' completed successfully.</summary>
+<log-path>file:///C:/Users/Utkarsh/AppData/Local/Temp/carb_v2_clean_run_00o8hcfu/.gemini/antigravity-cli/brain/da662316-f6d9-43db-98ef-9a6123f1d272/.system_generated/tasks/task-30.log</log-path>
+</notification>
+
+Let's view the output of task-30 log or view file.
+<notification>
+<task-id>da662316-f6d9-43db-98ef-9a6123f1d272/task-37</task-id>
+<status>success</status>
+<summary>Task 'da662316-f6d9-43db-98ef-9a6123f1d272/task-37' completed successfully.</summary>
+<log-path>file:///C:/Users/Utkarsh/AppData/Local/Temp/carb_v2_clean_run_00o8hcfu/.gemini/antigravity-cli/brain/da662316-f6d9-43db-98ef-9a6123f1d272/.system_generated/tasks/task-37.log</log-path>
+</notification>
+
+Let's view task-37 log.
+I have resolved the issue where `_pytest.capture.EncodedFile.mode` included the `b` (binary) mode modifier from the underlying stream buffer.
+
+### Root Cause
+`EncodedFile` delegates missing attributes to its underlying `buffer` via `__getattr__`. Because the underlying stream buffer was opened in binary mode (e.g. `"rb+"` or `"wb+"`), `EncodedFile.mode` returned a mode string containing `"b"`. External libraries (such as `youtube-dl`) check `.mode` on output streams to decide whether to write `bytes` or `str`. Since `EncodedFile` is a text wrapper that only accepts `str` on Python 3, receiving `bytes` led to a `TypeError`.
+
+### Solution
+1. Added a `@property` for `mode` on [`EncodedFile`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L447-L457) that retrieves the mode of `self.buffer` and strips out `"b"`.
+2. Added unit tests [`test_encodedfile_mode`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L1464-L1475) in `testing/test_capture.py`.

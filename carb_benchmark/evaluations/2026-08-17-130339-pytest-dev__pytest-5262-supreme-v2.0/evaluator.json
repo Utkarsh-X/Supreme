@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-08-17-130339-pytest-dev__pytest-5262-supreme-v2.0",
+  "task_id": "pytest-dev__pytest-5262",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 347.26,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py pytest-dev__pytest-5262",
+  "test_output_tail": "# EVAL rc=0 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-5.0.0, py-1.11.0, pluggy-0.13.1\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-5262, inifile: tox.ini\ncollected 1 item\n\ntesting\\test_capture.py .                                                [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED testing/test_capture.py::TestFDCapture::test_capfd_sys_stdout_mode\n========================== 1 passed in 0.14 seconds ===========================\n\nPASS: pytest-dev__pytest-5262 \u2014 all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "src/_pytest/capture.py",
+      "testing/test_capture.py"
+    ],
+    "lines_added": 28,
+    "lines_deleted": 0,
+    "total_lines_changed": 28,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "",
+  "corrected_verdict": true,
+  "correction_note": "CORRECTED 2026-08-17: originally recorded FAIL because eval_swe.py's test-file filter dropped src/_pytest/* source changes ('test' substring in '_pytest'); re-evaluated with fixed filter against the saved agent diff -> PASS",
+  "original_passed": false
+}

@@ -1,0 +1,8 @@
+I have investigated and fixed the issue where `capfd.readouterr()` was converting `\r` (carriage return) line endings to `\n`.
+
+### Cause of Bug
+When initializing file descriptor capturing in [`FDCaptureBinary`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386), `EncodedFile` (a wrapper around `io.TextIOWrapper`) was instantiated without specifying `newline=""`. As a result, `io.TextIOWrapper` defaulted to `newline=None` (universal newlines mode with translation), which converted all `\r` and `\r\n` line endings into `\n` upon reading captured output.
+
+### Solution
+1. Updated `FDCaptureBinary` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L393) to pass `newline=""` to `EncodedFile`, matching `CaptureIO` so line endings like `\r` are preserved without automatic translation.
+2. Added test `test_capture_carriage_return` in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1584-L1605) to verify carriage return preservation across both `capsys` and `capfd`.

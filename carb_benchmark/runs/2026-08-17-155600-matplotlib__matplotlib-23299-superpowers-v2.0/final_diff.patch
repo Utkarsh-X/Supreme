@@ -1,0 +1,26 @@
+diff --git a/lib/matplotlib/__init__.py b/lib/matplotlib/__init__.py
+index c268a56..ca32c79 100644
+--- a/lib/matplotlib/__init__.py
++++ b/lib/matplotlib/__init__.py
+@@ -1095,6 +1095,8 @@ def rc_context(rc=None, fname=None):
+             rcParams.update(rc)
+         yield
+     finally:
++        if dict.__getitem__(orig, 'backend') is rcsetup._auto_backend_sentinel:
++            dict.pop(orig, 'backend', None)
+         dict.update(rcParams, orig)  # Revert to the original rcs.
+ 
+ 
+diff --git a/lib/matplotlib/pyplot.py b/lib/matplotlib/pyplot.py
+index e3c66ea..87f507d 100644
+--- a/lib/matplotlib/pyplot.py
++++ b/lib/matplotlib/pyplot.py
+@@ -688,6 +688,8 @@ class _xkcd:
+         return self
+ 
+     def __exit__(self, *args):
++        if dict.__getitem__(self._orig, 'backend') is rcsetup._auto_backend_sentinel:
++            dict.pop(self._orig, 'backend', None)
+         dict.update(rcParams, self._orig)
+ 
+ 

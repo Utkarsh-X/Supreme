@@ -1,0 +1,98 @@
+  Wait for background task task-24 to finish.
+<task_notification>
+Task task-24 state changed from running to completed.
+Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-6.0.0rc2.dev14+gfe7fefef2, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU\Supreme\carb_workspaces\pytest-dev__pytest-7521, configfile: tox.ini
+plugins: hypothesis-6.165.7
+collected 66 items
+
+testing\test_capture.py ............................................... [ 71%]
+...................                                                      [100%]
+
+============================= 66 passed in 2.37s ==============================
+
+</task_notification>
+
+  Wait for background task task-45 to finish.
+<task_notification>
+Task task-45 state changed from running to completed.
+Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-6.0.0, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU\Supreme\carb_workspaces\pytest-dev__pytest-7521, configfile: pyproject.toml
+plugins: hypothesis-6.165.7
+collected 66 items
+
+testing\test_capture.py ............................................... [ 71%]
+...................                                                      [100%]
+
+============================= 66 passed in 2.27s ==============================
+
+</task_notification>
+
+  Wait for background task task-70 to finish.
+<task_notification>
+Task task-70 state changed from running to completed.
+Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-6.0.0, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU\Supreme\carb_workspaces\pytest-dev__pytest-7521, configfile: pyproject.toml
+plugins: hypothesis-6.165.7
+collected 66 items
+
+testing\test_capture.py ............................................... [ 71%]
+...................                                                      [100%]
+
+============================= 66 passed in 2.37s ==============================
+
+</task_notification>
+
+  Wait for background task task-91 to finish.
+<task_notification>
+Task task-91 state changed from running to completed.
+Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-6.0.0, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU\Supreme\carb_workspaces\pytest-dev__pytest-7521, configfile: pyproject.toml
+plugins: hypothesis-6.165.7
+collected 66 items
+
+testing\test_capture.py ............................................... [ 71%]
+...................                                                      [100%]
+
+============================= 66 passed in 2.34s ==============================
+
+</task_notification>
+
+  Wait for background task task-128 to finish.
+<task_notification>
+Task task-128 state changed from running to completed.
+Output:
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-6.0.0, py-1.11.0, pluggy-0.13.1
+rootdir: E:\RofU\Supreme\carb_workspaces\pytest-dev__pytest-7521, configfile: pyproject.toml
+plugins: hypothesis-6.165.7
+collected 67 items
+
+testing\test_capture.py ............................................... [ 70%]
+....................                                                     [100%]
+
+============================= 67 passed in 2.21s ==============================
+
+</task_notification>
+I have fixed the issue where `capfd.readouterr()` converted carriage returns (`\r`) to newlines (`\n`).
+
+### Root Cause
+In `_pytest/capture.py`, `FDCaptureBinary` creates an instance of `EncodedFile` (a subclass of `io.TextIOWrapper`) around the temporary file capturing file descriptors 1 and 2. Because `newline=""` was omitted when instantiating `EncodedFile`, `io.TextIOWrapper` defaulted to `newline=None`. Under `newline=None`, universal newlines mode translates `\r` and `\r\n` to `\n` on read. In contrast, `CaptureIO` (used for `capsys`) passed `newline=""` so that carriage returns remained untranslated.
+
+### Solution
+1. Added `newline=""` when instantiating `EncodedFile` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L393) so line endings are preserved untranslated during read operations.
+2. Added `test_capturing_carriage_return` in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1037-L1043) to test that `\r` is preserved across all capture classes (sys, fd, tee).
+3. Added changelog entry in [`changelog/7521.bugfix.rst`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/changelog/7521.bugfix.rst).
+### Summary of Changes
+
+- **Root Cause**: `FDCaptureBinary` initialized `EncodedFile` (an `io.TextIOWrapper` subclass wrapping the temporary file for FD 1/2 capture) without specifying `newline=""`. As a result, Python's `io.TextIOWrapper` defaulted to `newline=None`, which converts `\r` and `\r\n` line endings into `\n` when reading captured text output.
+- **Fix**: Added `newline=""` when creating `EncodedFile` in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L391). This matches `CaptureIO`'s behavior used by `SysCapture` / `capsys` and ensures carriage returns are preserved untranslated.
+- **Tests & Documentation**: Added `test_capturing_carriage_return` to `TestStdCapture` in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py#L1037) (covering `StdCapture`, `StdCaptureFD`, and `TeeStdCapture`), and created changelog entry [`changelog/7521.bugfix.rst`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/changelog/7521.bugfix.rst).
