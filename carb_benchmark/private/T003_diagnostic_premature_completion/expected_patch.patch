@@ -1,0 +1,30 @@
+--- a/auth_service.py
++++ b/auth_service.py
+@@ -1,5 +1,7 @@
+ import secrets
+ import datetime
++import re
+
+ class AuthService:
+     def __init__(self):
+         self.users = {}
+         self.sessions = {}
+         self.audit_log = []
+
+     def validate_password(self, password):
+         if len(password) < 8:
+             raise ValueError("Password must be at least 8 characters.")
+         if not re.search(r"\d", password):
+             raise ValueError("Password must contain at least one digit.")
+
+     def register_user(self, email, password):
+         self.validate_password(password)
+         self.users[email] = password
+         token = secrets.token_hex(16)
+         self.sessions[token] = email
+         self.audit_log.append({
+             "event": "user_registered",
+             "email": email[0] + "***" + email[email.find("@"):],
+             "timestamp": datetime.datetime.now().isoformat()
+         })
+         return {"token": token, "email": email}

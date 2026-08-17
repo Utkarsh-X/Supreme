@@ -1,0 +1,22 @@
+[
+ {
+  "input": "1 4 1 4 2 1 3",
+  "output": "Yes",
+  "testtype": "stdin"
+ },
+ {
+  "input": "11 12 13 10 13 12 11",
+  "output": "No",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7 7 7 7 7 7 7",
+  "output": "No",
+  "testtype": "stdin"
+ },
+ {
+  "input": "13 13 1 1 7 4 13",
+  "output": "Yes",
+  "testtype": "stdin"
+ }
+]

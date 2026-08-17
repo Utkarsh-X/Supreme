@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__abc393_b",
+  "source": "livecodebench_v5",
+  "question_id": "abc393_b",
+  "question_title": "A..B..C",
+  "contest_id": "abc393",
+  "contest_date": "2025-02-15T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "easy",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc393_b",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 3,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

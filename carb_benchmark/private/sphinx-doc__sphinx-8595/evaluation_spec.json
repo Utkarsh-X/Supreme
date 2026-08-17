@@ -1,0 +1,11 @@
+{
+ "instance_id": "sphinx-doc__sphinx-8595",
+ "repo": "sphinx-doc/sphinx",
+ "base_commit": "b19bce971e82f2497d67fdacdeca8db08ae0ba56",
+ "environment_setup_commit": "4f8cb861e3b29186b38248fe81e4944fd987fcce",
+ "FAIL_TO_PASS": "[\"tests/test_ext_autodoc_automodule.py::test_empty_all\"]",
+ "PASS_TO_PASS": "[]",
+ "test_command_hint": "pytest <FAIL_TO_PASS files>",
+ "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-8595",
+ "test_timeout_seconds": 600
+}

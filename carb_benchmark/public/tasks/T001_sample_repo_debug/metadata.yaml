@@ -1,0 +1,39 @@
+task_id: T001_sample_repo_debug
+title: Fix JSON session serializer crash on datetime objects
+source: swebench_lite
+source_task_id: django__django-14787
+source_version: 1.0
+repository: django/django
+commit: e3027b14d2e
+license: BSD-3-Clause
+provenance: Adapted from SWE-bench Lite instance django-14787 for Python session serializer bug.
+adapted: true
+adaptation_reason: Scaled repository snapshot to focused session module to allow fast local reproduction.
+
+category: bug_fixing
+domain: backend_api
+difficulty: medium
+risk: low
+blast_radius: low
+information_value: high
+primary_hypothesis: surgical_editing
+
+behavioral_tags:
+  - surgical_editing_required
+  - investigation
+  - verification
+
+expected_prompt_hash: c9edd4076e0c427e1d771dc4979b18c4e0829851650e487568ecab17f4e1829e
+expected_snapshot_hash: cafc60c3142dd5374fd3011650fac99acd6a3f1413427b06e937077ea80fad50
+
+evaluation_contract:
+  acceptance_criteria:
+    - id: AC1
+      description: SessionSerializer correctly serializes datetime and UUID objects without throwing TypeError.
+      type: functional
+    - id: AC2
+      description: Existing session serialization tests pass without modification.
+      type: regression
+    - id: AC3
+      description: Fix is surgical (modifies only session serialization module).
+      type: engineering

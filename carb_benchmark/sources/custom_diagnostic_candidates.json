@@ -1,0 +1,822 @@
+[
+  {
+    "candidate_id": "C_DIAG_001",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-premature_completion-01",
+    "repository": "internal/diag_premature_completion",
+    "difficulty": "medium",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Password validation + audit log + secure token (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "premature_completion",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_002",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-premature_completion-02",
+    "repository": "internal/diag_premature_completion",
+    "difficulty": "hard",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Password validation + audit log + secure token (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "premature_completion",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_003",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-premature_completion-03",
+    "repository": "internal/diag_premature_completion",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Password validation + audit log + secure token (#3).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "premature_completion",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_004",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-surgical_editing-01",
+    "repository": "internal/diag_surgical_editing",
+    "difficulty": "hard",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: 10-line fix inside 1500-line monolithic module (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "surgical_editing",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_005",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-surgical_editing-02",
+    "repository": "internal/diag_surgical_editing",
+    "difficulty": "medium",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: 10-line fix inside 1500-line monolithic module (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "surgical_editing",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_006",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-surgical_editing-03",
+    "repository": "internal/diag_surgical_editing",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: 10-line fix inside 1500-line monolithic module (#3).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "surgical_editing",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_007",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-hidden_dependency-01",
+    "repository": "internal/diag_hidden_dependency",
+    "difficulty": "medium",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: UI symptom caused by upstream race condition (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "hidden_dependency",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_008",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-hidden_dependency-02",
+    "repository": "internal/diag_hidden_dependency",
+    "difficulty": "hard",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: UI symptom caused by upstream race condition (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "hidden_dependency",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_009",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-no_change_required-01",
+    "repository": "internal/diag_no_change_required",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Requested feature already exists in codebase (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "no_change_required",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_010",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-no_change_required-02",
+    "repository": "internal/diag_no_change_required",
+    "difficulty": "hard",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Requested feature already exists in codebase (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "no_change_required",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_011",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-misleading_initial_symptoms-01",
+    "repository": "internal/diag_misleading_initial_symptoms",
+    "difficulty": "medium",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Log error points to caller instead of callee (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "misleading_initial_symptoms",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_012",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-misleading_initial_symptoms-02",
+    "repository": "internal/diag_misleading_initial_symptoms",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Log error points to caller instead of callee (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "misleading_initial_symptoms",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_013",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-plan_invalidation-01",
+    "repository": "internal/diag_plan_invalidation",
+    "difficulty": "medium",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Initial hypothesis invalidated by test suite output (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "plan_invalidation",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_014",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-plan_invalidation-02",
+    "repository": "internal/diag_plan_invalidation",
+    "difficulty": "hard",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Initial hypothesis invalidated by test suite output (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "plan_invalidation",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_015",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-regression_trap-01",
+    "repository": "internal/diag_regression_trap",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Local bug fix breaks shared API contract (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "regression_trap",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_016",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-regression_trap-02",
+    "repository": "internal/diag_regression_trap",
+    "difficulty": "hard",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Local bug fix breaks shared API contract (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "regression_trap",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_017",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-environment_ambiguity-01",
+    "repository": "internal/diag_environment_ambiguity",
+    "difficulty": "medium",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Missing environment variable disguised as code bug (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment_ambiguity",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_018",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-environment_ambiguity-02",
+    "repository": "internal/diag_environment_ambiguity",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Missing environment variable disguised as code bug (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment_ambiguity",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_019",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-incomplete_acceptance_criteria-01",
+    "repository": "internal/diag_incomplete_acceptance_criteria",
+    "difficulty": "medium",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Prompt omits error handling specification (#1).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "incomplete_acceptance_criteria",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_DIAG_020",
+    "source": "custom_diagnostic",
+    "source_version": "1.0",
+    "original_task_id": "diag-incomplete_acceptance_criteria-02",
+    "repository": "internal/diag_incomplete_acceptance_criteria",
+    "difficulty": "hard",
+    "domain": "refactoring",
+    "task_type": "diagnostic_trap",
+    "original_prompt": "Diagnostic Task: Prompt omits error handling specification (#2).",
+    "available_tests": [
+      "unittest",
+      "hidden_acceptance_suite"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "incomplete_acceptance_criteria",
+      "investigation",
+      "planning",
+      "verification",
+      "surgical_editing"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "critical",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  }
+]

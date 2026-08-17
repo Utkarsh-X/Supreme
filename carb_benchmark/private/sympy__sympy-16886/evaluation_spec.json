@@ -1,0 +1,11 @@
+{
+  "instance_id": "sympy__sympy-16886",
+  "repo": "sympy/sympy",
+  "base_commit": "c50643a49811e9fe2f4851adff4313ad46f7325e",
+  "environment_setup_commit": "70381f282f2d9d039da860e391fe51649df2779d",
+  "FAIL_TO_PASS": "[\"test_encode_morse\"]",
+  "PASS_TO_PASS": "[\"test_cycle_list\", \"test_encipher_shift\", \"test_encipher_rot13\", \"test_encipher_affine\", \"test_encipher_atbash\", \"test_encipher_substitution\", \"test_check_and_join\", \"test_encipher_vigenere\", \"test_decipher_vigenere\", \"test_encipher_hill\", \"test_decipher_hill\", \"test_encipher_bifid5\", \"test_bifid5_square\", \"test_decipher_bifid5\", \"test_encipher_bifid6\", \"test_decipher_bifid6\", \"test_bifid6_square\", \"test_rsa_public_key\", \"test_rsa_private_key\", \"test_rsa_large_key\", \"test_encipher_rsa\", \"test_decipher_rsa\", \"test_kid_rsa_public_key\", \"test_kid_rsa_private_key\", \"test_encipher_kid_rsa\", \"test_decipher_kid_rsa\", \"test_decode_morse\", \"test_lfsr_sequence\", \"test_lfsr_autocorrelation\", \"test_lfsr_connection_polynomial\", \"test_elgamal_private_key\", \"test_elgamal\", \"test_dh_private_key\", \"test_dh_public_key\", \"test_dh_shared_key\", \"test_padded_key\", \"test_bifid\", \"test_encipher_decipher_gm\", \"test_gm_private_key\", \"test_gm_public_key\", \"test_encipher_decipher_bg\", \"test_bg_private_key\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-16886",
+  "test_timeout_seconds": 600
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__arc190_a",
+  "source": "livecodebench_v5",
+  "question_id": "arc190_a",
+  "question_title": "Inside or Outside",
+  "contest_id": "arc190",
+  "contest_date": "2025-01-12T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc190_a",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 4,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

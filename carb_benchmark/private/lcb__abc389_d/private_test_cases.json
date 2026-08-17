@@ -1,0 +1,202 @@
+[
+ {
+  "input": "8",
+  "output": "177\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "777560",
+  "output": "1899402406153\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "90",
+  "output": "25089\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "41",
+  "output": "5121\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "999999",
+  "output": "3141582372037\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2",
+  "output": "5\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "432806",
+  "output": "588484653041\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "193319",
+  "output": "117407568241\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "38",
+  "output": "4397\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "20",
+  "output": "1185\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "32",
+  "output": "3101\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "12",
+  "output": "401\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1000000",
+  "output": "3141588655989\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7472",
+  "output": "175367633\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "100000",
+  "output": "31415526933\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "70",
+  "output": "15101\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "58",
+  "output": "10349\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "45",
+  "output": "6197\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "237",
+  "output": "175541\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2862",
+  "output": "25721577\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "8080",
+  "output": "205071053\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4149",
+  "output": "54063413\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "974845",
+  "output": "2985523148261\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "99999",
+  "output": "31414897965\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "83",
+  "output": "21321\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9857",
+  "output": "305199293\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "14",
+  "output": "561\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1",
+  "output": "1\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "41",
+  "output": "5121\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9",
+  "output": "221\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4",
+  "output": "37\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "26",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "30",
+  "output": "2709\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "61",
+  "output": "11441\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "8777",
+  "output": "241979901\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "37",
+  "output": "4157\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "38",
+  "output": "4397\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5",
+  "output": "61\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2716",
+  "output": "23163573\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "14",
+  "output": "561\n",
+  "testtype": "stdin"
+ }
+]

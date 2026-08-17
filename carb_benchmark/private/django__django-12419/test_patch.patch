@@ -1,0 +1,11 @@
+diff --git a/tests/project_template/test_settings.py b/tests/project_template/test_settings.py
+--- a/tests/project_template/test_settings.py
++++ b/tests/project_template/test_settings.py
+@@ -38,6 +38,7 @@ def test_middleware_headers(self):
+             self.assertEqual(headers, [
+                 b'Content-Length: 0',
+                 b'Content-Type: text/html; charset=utf-8',
++                b'Referrer-Policy: same-origin',
+                 b'X-Content-Type-Options: nosniff',
+                 b'X-Frame-Options: DENY',
+             ])

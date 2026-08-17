@@ -1,0 +1,17 @@
+[
+ {
+  "input": "AABCC",
+  "output": "2",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ARC",
+  "output": "0",
+  "testtype": "stdin"
+ },
+ {
+  "input": "AABAAABBAEDCCCD",
+  "output": "4",
+  "testtype": "stdin"
+ }
+]

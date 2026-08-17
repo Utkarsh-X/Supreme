@@ -1,0 +1,9 @@
+--- a/build.py
++++ b/build.py
+@@ -1,4 +1,5 @@
+ import sys
+ import os
++sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
+ from cli_runner.helpers import build_target
+
+ if __name__ == '__main__':

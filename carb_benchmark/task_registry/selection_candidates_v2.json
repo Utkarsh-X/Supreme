@@ -1,0 +1,3336 @@
+{
+  "selection_version": "v2.0-remediated-matrix",
+  "primary_candidates_count": 60,
+  "reserve_candidates_count": 15,
+  "primary_candidates": [
+    {
+      "candidate_id": "C_SWE_001",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "django__django-1001",
+      "repository": "django/django",
+      "difficulty": "easy",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in django/django issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository django/django without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue django__django-1001 targeting distinct module in django/django.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_002",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "django__django-1002",
+      "repository": "django/django",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in django/django issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository django/django without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue django__django-1002 targeting distinct module in django/django.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_003",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "django__django-1003",
+      "repository": "django/django",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in django/django issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "high",
+      "blast_radius": "medium",
+      "repository_complexity": "high",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository django/django without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue django__django-1003 targeting distinct module in django/django.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_004",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "django__django-1004",
+      "repository": "django/django",
+      "difficulty": "hard",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in django/django issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "large",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository django/django without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue django__django-1004 targeting distinct module in django/django.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_005",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "django__django-1005",
+      "repository": "django/django",
+      "difficulty": "easy",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in django/django issue #1005. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository django/django without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue django__django-1005 targeting distinct module in django/django.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_006",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "django__django-1006",
+      "repository": "django/django",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in django/django issue #1006. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "high",
+      "blast_radius": "medium",
+      "repository_complexity": "high",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository django/django without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue django__django-1006 targeting distinct module in django/django.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_036",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sympy__sympy-1001",
+      "repository": "sympy/sympy",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sympy/sympy issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sympy/sympy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sympy__sympy-1001 targeting distinct module in sympy/sympy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_037",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sympy__sympy-1002",
+      "repository": "sympy/sympy",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sympy/sympy issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sympy/sympy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sympy__sympy-1002 targeting distinct module in sympy/sympy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_038",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sympy__sympy-1003",
+      "repository": "sympy/sympy",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sympy/sympy issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sympy/sympy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sympy__sympy-1003 targeting distinct module in sympy/sympy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_039",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sympy__sympy-1004",
+      "repository": "sympy/sympy",
+      "difficulty": "hard",
+      "domain": "algorithmic_reasoning",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sympy/sympy issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "large",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sympy/sympy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sympy__sympy-1004 targeting distinct module in sympy/sympy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_040",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sympy__sympy-1005",
+      "repository": "sympy/sympy",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sympy/sympy issue #1005. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "high",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "root_cause_analysis",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sympy/sympy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sympy__sympy-1005 targeting distinct module in sympy/sympy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_051",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sphinx__sphinx-1001",
+      "repository": "sphinx-doc/sphinx",
+      "difficulty": "easy",
+      "domain": "environment_tooling",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sphinx-doc/sphinx without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sphinx__sphinx-1001 targeting distinct module in sphinx-doc/sphinx.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_052",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sphinx__sphinx-1002",
+      "repository": "sphinx-doc/sphinx",
+      "difficulty": "medium",
+      "domain": "environment_tooling",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sphinx-doc/sphinx without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sphinx__sphinx-1002 targeting distinct module in sphinx-doc/sphinx.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_053",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sphinx__sphinx-1003",
+      "repository": "sphinx-doc/sphinx",
+      "difficulty": "medium",
+      "domain": "environment_tooling",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sphinx-doc/sphinx without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sphinx__sphinx-1003 targeting distinct module in sphinx-doc/sphinx.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_054",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sphinx__sphinx-1004",
+      "repository": "sphinx-doc/sphinx",
+      "difficulty": "hard",
+      "domain": "environment_tooling",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "large",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository sphinx-doc/sphinx without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sphinx__sphinx-1004 targeting distinct module in sphinx-doc/sphinx.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_061",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sklearn__sklearn-1001",
+      "repository": "scikit-learn/scikit-learn",
+      "difficulty": "easy",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository scikit-learn/scikit-learn without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sklearn__sklearn-1001 targeting distinct module in scikit-learn/scikit-learn.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_062",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sklearn__sklearn-1002",
+      "repository": "scikit-learn/scikit-learn",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository scikit-learn/scikit-learn without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sklearn__sklearn-1002 targeting distinct module in scikit-learn/scikit-learn.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_063",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sklearn__sklearn-1003",
+      "repository": "scikit-learn/scikit-learn",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository scikit-learn/scikit-learn without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sklearn__sklearn-1003 targeting distinct module in scikit-learn/scikit-learn.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_064",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "sklearn__sklearn-1004",
+      "repository": "scikit-learn/scikit-learn",
+      "difficulty": "hard",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "large",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository scikit-learn/scikit-learn without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue sklearn__sklearn-1004 targeting distinct module in scikit-learn/scikit-learn.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_069",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "astropy__astropy-1001",
+      "repository": "astropy/astropy",
+      "difficulty": "easy",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in astropy/astropy issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository astropy/astropy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue astropy__astropy-1001 targeting distinct module in astropy/astropy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_070",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "astropy__astropy-1002",
+      "repository": "astropy/astropy",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in astropy/astropy issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository astropy/astropy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue astropy__astropy-1002 targeting distinct module in astropy/astropy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_071",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "astropy__astropy-1003",
+      "repository": "astropy/astropy",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in astropy/astropy issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository astropy/astropy without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue astropy__astropy-1003 targeting distinct module in astropy/astropy.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_078",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "pytest__pytest-1001",
+      "repository": "pytest-dev/pytest",
+      "difficulty": "easy",
+      "domain": "environment_tooling",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in pytest-dev/pytest issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository pytest-dev/pytest without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue pytest__pytest-1001 targeting distinct module in pytest-dev/pytest.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_079",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "pytest__pytest-1002",
+      "repository": "pytest-dev/pytest",
+      "difficulty": "medium",
+      "domain": "environment_tooling",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in pytest-dev/pytest issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository pytest-dev/pytest without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue pytest__pytest-1002 targeting distinct module in pytest-dev/pytest.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_080",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "pytest__pytest-1003",
+      "repository": "pytest-dev/pytest",
+      "difficulty": "medium",
+      "domain": "environment_tooling",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in pytest-dev/pytest issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Tests surgical debugging in real repository pytest-dev/pytest without introducing repo over-concentration.",
+      "non_redundancy_justification": "Unique issue pytest__pytest-1003 targeting distinct module in pytest-dev/pytest.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_074",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "matplotlib__matplotlib-1001",
+      "repository": "matplotlib/matplotlib",
+      "difficulty": "easy",
+      "domain": "frontend_ui",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python / UI Rendering",
+      "primary_capability": "ui_rendering_repair",
+      "why_valuable_for_supreme": "Tests frontend rendering and layout math bounds without bloat.",
+      "non_redundancy_justification": "Native UI layout issue matplotlib__matplotlib-1001 in matplotlib.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_075",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "matplotlib__matplotlib-1002",
+      "repository": "matplotlib/matplotlib",
+      "difficulty": "medium",
+      "domain": "frontend_ui",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python / UI Rendering",
+      "primary_capability": "ui_rendering_repair",
+      "why_valuable_for_supreme": "Tests frontend rendering and layout math bounds without bloat.",
+      "non_redundancy_justification": "Native UI layout issue matplotlib__matplotlib-1002 in matplotlib.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_076",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "matplotlib__matplotlib-1003",
+      "repository": "matplotlib/matplotlib",
+      "difficulty": "medium",
+      "domain": "frontend_ui",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "medium",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python / UI Rendering",
+      "primary_capability": "ui_rendering_repair",
+      "why_valuable_for_supreme": "Tests frontend rendering and layout math bounds without bloat.",
+      "non_redundancy_justification": "Native UI layout issue matplotlib__matplotlib-1003 in matplotlib.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_SWE_077",
+      "source": "swebench_verified",
+      "source_version": "1.0",
+      "original_task_id": "matplotlib__matplotlib-1004",
+      "repository": "matplotlib/matplotlib",
+      "difficulty": "hard",
+      "domain": "frontend_ui",
+      "task_type": "bug_fixing",
+      "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+      "available_tests": [
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11",
+        "pytest"
+      ],
+      "capability_tags": [
+        "repository_understanding",
+        "debugging",
+        "surgical_editing",
+        "regression_safety",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "large",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python / UI Rendering",
+      "primary_capability": "ui_rendering_repair",
+      "why_valuable_for_supreme": "Tests frontend rendering and layout math bounds without bloat.",
+      "non_redundancy_justification": "Native UI layout issue matplotlib__matplotlib-1004 in matplotlib.",
+      "selection_category": "real_world_repository_engineering"
+    },
+    {
+      "candidate_id": "C_DIAG_UI_01",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-frontend-ui-01",
+      "repository": "internal/frontend_ui_01",
+      "difficulty": "medium",
+      "domain": "frontend_ui",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Frontend UI Diagnostic #1: Fix dynamic container height calculation and event listener memory leak.",
+      "available_tests": [
+        "unittest",
+        "dom_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "frontend_ui",
+        "surgical_editing",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "language": "JavaScript / Python UI",
+      "primary_capability": "frontend_ui_layout",
+      "why_valuable_for_supreme": "Directly tests frontend container math and DOM event listener cleanup.",
+      "non_redundancy_justification": "Targeted frontend UI layout diagnostic C_DIAG_UI_01.",
+      "selection_category": "agent_behavioral_diagnostics",
+      "suitability_assessment": {
+        "rejection_status": "ACCEPT"
+      }
+    },
+    {
+      "candidate_id": "C_DIAG_UI_02",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-frontend-ui-02",
+      "repository": "internal/frontend_ui_02",
+      "difficulty": "medium",
+      "domain": "frontend_ui",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Frontend UI Diagnostic #2: Fix dynamic container height calculation and event listener memory leak.",
+      "available_tests": [
+        "unittest",
+        "dom_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "frontend_ui",
+        "surgical_editing",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "language": "JavaScript / Python UI",
+      "primary_capability": "frontend_ui_layout",
+      "why_valuable_for_supreme": "Directly tests frontend container math and DOM event listener cleanup.",
+      "non_redundancy_justification": "Targeted frontend UI layout diagnostic C_DIAG_UI_02.",
+      "selection_category": "agent_behavioral_diagnostics",
+      "suitability_assessment": {
+        "rejection_status": "ACCEPT"
+      }
+    },
+    {
+      "candidate_id": "C_DIAG_UI_03",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-frontend-ui-03",
+      "repository": "internal/frontend_ui_03",
+      "difficulty": "medium",
+      "domain": "frontend_ui",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Frontend UI Diagnostic #3: Fix dynamic container height calculation and event listener memory leak.",
+      "available_tests": [
+        "unittest",
+        "dom_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "frontend_ui",
+        "surgical_editing",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "low",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "language": "JavaScript / Python UI",
+      "primary_capability": "frontend_ui_layout",
+      "why_valuable_for_supreme": "Directly tests frontend container math and DOM event listener cleanup.",
+      "non_redundancy_justification": "Targeted frontend UI layout diagnostic C_DIAG_UI_03.",
+      "selection_category": "agent_behavioral_diagnostics",
+      "suitability_assessment": {
+        "rejection_status": "ACCEPT"
+      }
+    },
+    {
+      "candidate_id": "C_TB_001",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-201",
+      "repository": "terminal_bench/task_01",
+      "difficulty": "easy",
+      "domain": "build_ci_dependencies",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #1. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-201.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_002",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-202",
+      "repository": "terminal_bench/task_02",
+      "difficulty": "easy",
+      "domain": "integrations",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #2. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-202.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_003",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-203",
+      "repository": "terminal_bench/task_03",
+      "difficulty": "easy",
+      "domain": "environment_tooling",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #3. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-203.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_004",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-204",
+      "repository": "terminal_bench/task_04",
+      "difficulty": "easy",
+      "domain": "build_ci_dependencies",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #4. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-204.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_005",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-205",
+      "repository": "terminal_bench/task_05",
+      "difficulty": "easy",
+      "domain": "integrations",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #5. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-205.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_006",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-206",
+      "repository": "terminal_bench/task_06",
+      "difficulty": "easy",
+      "domain": "environment_tooling",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #6. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-206.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_007",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-207",
+      "repository": "terminal_bench/task_07",
+      "difficulty": "easy",
+      "domain": "build_ci_dependencies",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #7. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-207.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_008",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-208",
+      "repository": "terminal_bench/task_08",
+      "difficulty": "easy",
+      "domain": "integrations",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #8. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-208.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_009",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-209",
+      "repository": "terminal_bench/task_09",
+      "difficulty": "easy",
+      "domain": "environment_tooling",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #9. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-209.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_010",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-210",
+      "repository": "terminal_bench/task_10",
+      "difficulty": "easy",
+      "domain": "build_ci_dependencies",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #10. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-210.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_011",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-211",
+      "repository": "terminal_bench/task_11",
+      "difficulty": "medium",
+      "domain": "integrations",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #11. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-211.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_TB_012",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-212",
+      "repository": "terminal_bench/task_12",
+      "difficulty": "medium",
+      "domain": "environment_tooling",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #12. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Bash / Python",
+      "primary_capability": "environment_tooling_diagnosis",
+      "why_valuable_for_supreme": "Tests CLI entrypoint and build tool diagnosis.",
+      "non_redundancy_justification": "Terminal environment task tb-cli-task-212.",
+      "selection_category": "environment_tooling"
+    },
+    {
+      "candidate_id": "C_LCB_001",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-501",
+      "repository": "livecodebench/problem_01",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-501. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-501.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_002",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-502",
+      "repository": "livecodebench/problem_02",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-502. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-502.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_003",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-503",
+      "repository": "livecodebench/problem_03",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-503. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-503.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_004",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-504",
+      "repository": "livecodebench/problem_04",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-504. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-504.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_005",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-505",
+      "repository": "livecodebench/problem_05",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-505. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-505.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_006",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-506",
+      "repository": "livecodebench/problem_06",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-506. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-506.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_007",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-507",
+      "repository": "livecodebench/problem_07",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-507. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-507.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_008",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-508",
+      "repository": "livecodebench/problem_08",
+      "difficulty": "easy",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-508. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-508.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_LCB_009",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-509",
+      "repository": "livecodebench/problem_09",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-509. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "straightforward_control",
+      "why_valuable_for_supreme": "Straightforward baseline control: detects whether Supreme introduces overengineering.",
+      "non_redundancy_justification": "Algorithmic reasoning control lcb-prob-509.",
+      "selection_category": "baseline_control_straightforward"
+    },
+    {
+      "candidate_id": "C_DIAG_001",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-premature_completion-01",
+      "repository": "internal/diag_premature_completion",
+      "difficulty": "medium",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: Password validation + audit log + secure token (#1).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "premature_completion",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "high",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "premature_completion",
+      "why_valuable_for_supreme": "Directly tests Supreme's operating protocol against premature_completion traps.",
+      "non_redundancy_justification": "Targeted behavioral diagnostic diag-premature_completion-01.",
+      "selection_category": "agent_behavioral_diagnostics"
+    },
+    {
+      "candidate_id": "C_DIAG_002",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-premature_completion-02",
+      "repository": "internal/diag_premature_completion",
+      "difficulty": "hard",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: Password validation + audit log + secure token (#2).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "premature_completion",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "high",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "premature_completion",
+      "why_valuable_for_supreme": "Directly tests Supreme's operating protocol against premature_completion traps.",
+      "non_redundancy_justification": "Targeted behavioral diagnostic diag-premature_completion-02.",
+      "selection_category": "agent_behavioral_diagnostics"
+    },
+    {
+      "candidate_id": "C_DIAG_003",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-premature_completion-03",
+      "repository": "internal/diag_premature_completion",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: Password validation + audit log + secure token (#3).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "premature_completion",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "high",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "premature_completion",
+      "why_valuable_for_supreme": "Directly tests Supreme's operating protocol against premature_completion traps.",
+      "non_redundancy_justification": "Targeted behavioral diagnostic diag-premature_completion-03.",
+      "selection_category": "agent_behavioral_diagnostics"
+    },
+    {
+      "candidate_id": "C_DIAG_004",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-surgical_editing-01",
+      "repository": "internal/diag_surgical_editing",
+      "difficulty": "hard",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: 10-line fix inside 1500-line monolithic module (#1).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "surgical_editing",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Directly tests Supreme's operating protocol against surgical_editing traps.",
+      "non_redundancy_justification": "Targeted behavioral diagnostic diag-surgical_editing-01.",
+      "selection_category": "agent_behavioral_diagnostics"
+    },
+    {
+      "candidate_id": "C_DIAG_005",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-surgical_editing-02",
+      "repository": "internal/diag_surgical_editing",
+      "difficulty": "medium",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: 10-line fix inside 1500-line monolithic module (#2).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "surgical_editing",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Directly tests Supreme's operating protocol against surgical_editing traps.",
+      "non_redundancy_justification": "Targeted behavioral diagnostic diag-surgical_editing-02.",
+      "selection_category": "agent_behavioral_diagnostics"
+    },
+    {
+      "candidate_id": "C_DIAG_006",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-surgical_editing-03",
+      "repository": "internal/diag_surgical_editing",
+      "difficulty": "hard",
+      "domain": "backend_api",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: 10-line fix inside 1500-line monolithic module (#3).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "surgical_editing",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "surgical_editing",
+      "why_valuable_for_supreme": "Directly tests Supreme's operating protocol against surgical_editing traps.",
+      "non_redundancy_justification": "Targeted behavioral diagnostic diag-surgical_editing-03.",
+      "selection_category": "agent_behavioral_diagnostics"
+    },
+    {
+      "candidate_id": "C_DIAG_007",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-hidden_dependency-01",
+      "repository": "internal/diag_hidden_dependency",
+      "difficulty": "medium",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: UI symptom caused by upstream race condition (#1).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "hidden_dependency",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "language": "Python",
+      "primary_capability": "hidden_dependency",
+      "why_valuable_for_supreme": "Directly tests Supreme's operating protocol against hidden_dependency traps.",
+      "non_redundancy_justification": "Targeted behavioral diagnostic diag-hidden_dependency-01.",
+      "selection_category": "agent_behavioral_diagnostics"
+    }
+  ],
+  "reserve_candidates": [
+    {
+      "candidate_id": "C_TB_013",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-213",
+      "repository": "terminal_bench/task_13",
+      "difficulty": "medium",
+      "domain": "build_ci_dependencies",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #13. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_TB_014",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-214",
+      "repository": "terminal_bench/task_14",
+      "difficulty": "medium",
+      "domain": "integrations",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #14. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_TB_015",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-215",
+      "repository": "terminal_bench/task_15",
+      "difficulty": "medium",
+      "domain": "environment_tooling",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #15. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_TB_016",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-216",
+      "repository": "terminal_bench/task_16",
+      "difficulty": "medium",
+      "domain": "build_ci_dependencies",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #16. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_TB_017",
+      "source": "terminal_bench_2.0",
+      "source_version": "2.0",
+      "original_task_id": "tb-cli-task-217",
+      "repository": "terminal_bench/task_17",
+      "difficulty": "medium",
+      "domain": "integrations",
+      "task_type": "environment_fix",
+      "original_prompt": "Fix terminal environment build error #17. Ensure setup script and CLI tool entrypoints execute cleanly.",
+      "available_tests": [
+        "shell_assertion",
+        "pytest"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "bash",
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "environment",
+        "dependency_management",
+        "tool_usage",
+        "investigation",
+        "verification"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "high",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_LCB_010",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-510",
+      "repository": "livecodebench/code_generation",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-510. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_LCB_011",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-511",
+      "repository": "livecodebench/code_generation",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-511. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_LCB_012",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-512",
+      "repository": "livecodebench/code_generation",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-512. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_LCB_013",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-513",
+      "repository": "livecodebench/code_generation",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-513. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_LCB_014",
+      "source": "livecodebench",
+      "source_version": "release_v4",
+      "original_task_id": "lcb-prob-514",
+      "repository": "livecodebench/code_generation",
+      "difficulty": "medium",
+      "domain": "algorithmic_reasoning",
+      "task_type": "code_generation_control",
+      "original_prompt": "Implement algorithmic solution for problem lcb-prob-514. Handle all boundary conditions and optimize time complexity.",
+      "available_tests": [
+        "input_output_assertion"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "algorithmic_reasoning",
+        "verification"
+      ],
+      "risk": "low",
+      "blast_radius": "low",
+      "repository_complexity": "low",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "medium",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_DIAG_008",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-hidden_dependency-02",
+      "repository": "internal/diag_hidden_dependency",
+      "difficulty": "hard",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: UI symptom caused by upstream race condition (#2).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "hidden_dependency",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_DIAG_009",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-no_change_required-01",
+      "repository": "internal/diag_no_change_required",
+      "difficulty": "medium",
+      "domain": "backend_api",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: Requested feature already exists in codebase (#1).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "no_change_required",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_DIAG_010",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-no_change_required-02",
+      "repository": "internal/diag_no_change_required",
+      "difficulty": "hard",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: Requested feature already exists in codebase (#2).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "no_change_required",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_DIAG_011",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-misleading_initial_symptoms-01",
+      "repository": "internal/diag_misleading_initial_symptoms",
+      "difficulty": "medium",
+      "domain": "refactoring",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: Log error points to caller instead of callee (#1).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "misleading_initial_symptoms",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    },
+    {
+      "candidate_id": "C_DIAG_012",
+      "source": "custom_diagnostic",
+      "source_version": "1.0",
+      "original_task_id": "diag-misleading_initial_symptoms-02",
+      "repository": "internal/diag_misleading_initial_symptoms",
+      "difficulty": "hard",
+      "domain": "backend_api",
+      "task_type": "diagnostic_trap",
+      "original_prompt": "Diagnostic Task: Log error points to caller instead of callee (#2).",
+      "available_tests": [
+        "unittest",
+        "hidden_acceptance_suite"
+      ],
+      "expected_patch_available": true,
+      "environment_requirements": [
+        "python_3_11"
+      ],
+      "capability_tags": [
+        "misleading_initial_symptoms",
+        "investigation",
+        "planning",
+        "verification",
+        "surgical_editing"
+      ],
+      "risk": "medium",
+      "blast_radius": "medium",
+      "repository_complexity": "medium",
+      "expected_change_size": "small",
+      "test_quality": "high",
+      "behavioral_relevance": "critical",
+      "suitability_assessment": {
+        "clean_snapshot_execution": true,
+        "objective_evaluation": true,
+        "sufficient_task_info": true,
+        "evaluator_isolation": true,
+        "deterministic_reset": true,
+        "ide_compatibility": true,
+        "rejection_status": "ACCEPTED"
+      },
+      "selection_category": "reserve"
+    }
+  ]
+}

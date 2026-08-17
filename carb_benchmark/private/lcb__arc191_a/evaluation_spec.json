@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__arc191_a",
+  "source": "livecodebench_v5",
+  "question_id": "arc191_a",
+  "question_title": "Replace Digits",
+  "contest_id": "arc191",
+  "contest_date": "2025-01-26T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "medium",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc191_a",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 3,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

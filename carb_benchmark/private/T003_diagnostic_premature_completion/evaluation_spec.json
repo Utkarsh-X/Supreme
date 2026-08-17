@@ -1,0 +1,31 @@
+{
+  "task_id": "T003_diagnostic_premature_completion",
+  "test_command": "python -m unittest test_auth_service.py",
+  "hidden_test_command": "python -m unittest private_hidden_tests.py",
+  "expected_files_modified": [
+    "auth_service.py"
+  ],
+  "max_justified_lines_changed": 30,
+  "acceptance_criteria": [
+    {
+      "id": "AC1",
+      "type": "functional",
+      "verification_method": "test_command"
+    },
+    {
+      "id": "AC2",
+      "type": "functional",
+      "verification_method": "test_command"
+    },
+    {
+      "id": "AC3",
+      "type": "functional",
+      "verification_method": "hidden_test_command"
+    },
+    {
+      "id": "AC4",
+      "type": "regression",
+      "verification_method": "test_command"
+    }
+  ]
+}

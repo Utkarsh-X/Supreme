@@ -1,0 +1,12 @@
+[
+ {
+  "input": "6\n2\n1 4\n1 3\n2\n2\n2",
+  "output": "0\n3\n4\n0",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5\n2\n2\n2\n2\n2",
+  "output": "0\n0\n0\n0\n0",
+  "testtype": "stdin"
+ }
+]

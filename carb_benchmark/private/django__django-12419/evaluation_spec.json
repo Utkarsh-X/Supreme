@@ -1,0 +1,11 @@
+{
+  "instance_id": "django__django-12419",
+  "repo": "django/django",
+  "base_commit": "7fa1a93c6c8109010a6ff3f604fda83b604e0e97",
+  "environment_setup_commit": "0668164b4ac93a5be79f5b87fae83c657124d9ab",
+  "FAIL_TO_PASS": "[\"test_middleware_headers (project_template.test_settings.TestStartProjectSettings)\"]",
+  "PASS_TO_PASS": "[]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-12419",
+  "test_timeout_seconds": 600
+}

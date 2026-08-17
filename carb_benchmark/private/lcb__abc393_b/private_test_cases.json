@@ -1,0 +1,202 @@
+[
+ {
+  "input": "CGDVMHIAJMFEJSIVWGXIHTFC",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "EDEPCRAQFHMZR",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "KABPBTUJ",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "PWEAHTDNMAMTDPTDIIEAPDGBDQPKTBTXDPHJPHPHGXKQBVZYLAYVISBIQYGKVMLYAVTRRBDJUVXXQVAPICOSHIWO",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ZPZUF",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "UUCUB",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "APWSEQWRMCFX",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ARC",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ZOGLCWNWDFI",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "AAABBBCCC",
+  "output": "5\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ODWUHRBJJ",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "HEKAOVBMPWM",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "AAAAAAAAAABBBBBBBBBBCCCCCCCCCC",
+  "output": "50\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "VNPEXDBKLISEAEZNGDLDDEQIKHEEJOLLM",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "MXOVREF",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ZZZZZ",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "YYJACK",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "PKVXFGGHSJHHSTBNQV",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "LDFYRUANDVJMTULUSP",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "MNIZ",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "SGVQKQ",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "SXNZEROKXMV",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "KEKQEDFXBV",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "HFNEMMEVA",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "TZUGCJMRXNDKHDWNJQGYNNSGHXSSNIGIHSAZIPQBJQSPCFGUHYJLRCLYTIQKTQJNJJ",
+  "output": "1\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "FOKNFABFTDLTNKLHJXZJHQUDMQVIILTTGUSBTCOWSIAQZSU",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "PJUHLAOHXLISOLVMCBWMNVNBGLRNESFWWHBDNSZYAWKVIUJZXITKYLAAMWLARSIQVJLBWZMLYQGDYVNUMXBZGLBRKTEHLPSNDOK",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "AZAABZAACZ",
+  "output": "1\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "BUQGNDCLLNUVPNYJQRMIFKBTCX",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "HMNSYIEWGO",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ABC",
+  "output": "1\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "BFMPAKAKIJRFSYHOV",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "AAAAA",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "IIUYUNNKGC",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "ULHUAADLZVDVF",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "MRPXRAPTVZVDOGQCUNQODRWBKAGBAPNSIHZLAEVKYQDCLDAIN",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "AABCC",
+  "output": "2\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "IDRAOIROGLZUUUNHKUBMMODYSXEPMLHEGVREUTXLRAUPCRQDLSIGSACQTWWNCTSPKXQXP",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "EYQIXSDYTOXGTPNXZZOZWQSTFSSSDIOLHDSLMGOZWIXCFHJYCAFHMQMRMRZOTCNIKUJBHDEIQLQKAOVPRRVD",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "REBPIL",
+  "output": "0\n",
+  "testtype": "stdin"
+ }
+]

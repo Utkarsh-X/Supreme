@@ -1,0 +1,36 @@
+task_id: T002_environment_tooling
+title: Resolve CLI build script package import error and entrypoint configuration
+source: terminal_bench_2.0
+source_task_id: tb-cli-build-042
+source_version: 2.0
+repository: internal/cli_build_tool
+commit: HEAD
+license: MIT
+provenance: Adapted from Terminal-Bench 2.0 CLI diagnostic task.
+adapted: true
+adaptation_reason: Environment task testing package path resolution.
+
+category: build_ci_dependencies
+domain: environment_tooling
+difficulty: medium
+risk: medium
+blast_radius: medium
+information_value: high
+primary_hypothesis: environment_awareness
+
+behavioral_tags:
+  - environment_issue
+  - tool_use
+  - investigation
+
+expected_prompt_hash: 0a80de66922638cda5846896701eedb63a047a6b2461d020f8f6b10882831034
+expected_snapshot_hash: c2ec46aad8ebfcba75627bee5f902a2df4fe11ced3257aefef6d6f1bba58e944
+
+evaluation_contract:
+  acceptance_criteria:
+    - id: AC1
+      description: Build script `python build.py` executes successfully without ModuleNotFoundError.
+      type: functional
+    - id: AC2
+      description: Correct entrypoint configuration in pyproject.toml / setup.py.
+      type: engineering

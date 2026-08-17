@@ -1,0 +1,6 @@
+{
+  "benchmark_version": "v1.0-frozen-unpopulated",
+  "description": "Master 60-task registry reserved exclusively for frozen CARB-v1 benchmark suite. Pilot tasks are segregated in pilot_tasks.json.",
+  "total_tasks": 0,
+  "tasks": []
+}

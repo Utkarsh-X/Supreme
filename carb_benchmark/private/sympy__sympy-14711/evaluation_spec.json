@@ -1,0 +1,11 @@
+{
+  "instance_id": "sympy__sympy-14711",
+  "repo": "sympy/sympy",
+  "base_commit": "c6753448b5c34f95e250105d76709fe4d349ca1f",
+  "environment_setup_commit": "ec9e3c0436fbff934fa84e22bf07f1b3ef5bfac3",
+  "FAIL_TO_PASS": "[\"test_Vector\"]",
+  "PASS_TO_PASS": "[\"test_Vector_diffs\", \"test_vector_var_in_dcm\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-14711",
+  "test_timeout_seconds": 600
+}

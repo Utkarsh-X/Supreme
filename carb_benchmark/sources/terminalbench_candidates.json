@@ -1,0 +1,1682 @@
+[
+  {
+    "candidate_id": "C_TB_001",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-201",
+    "repository": "terminal_bench/task_01",
+    "difficulty": "easy",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #1. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_002",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-202",
+    "repository": "terminal_bench/task_02",
+    "difficulty": "easy",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #2. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_003",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-203",
+    "repository": "terminal_bench/task_03",
+    "difficulty": "easy",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #3. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_004",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-204",
+    "repository": "terminal_bench/task_04",
+    "difficulty": "easy",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #4. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_005",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-205",
+    "repository": "terminal_bench/task_05",
+    "difficulty": "easy",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #5. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_006",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-206",
+    "repository": "terminal_bench/task_06",
+    "difficulty": "easy",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #6. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_007",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-207",
+    "repository": "terminal_bench/task_07",
+    "difficulty": "easy",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #7. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_008",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-208",
+    "repository": "terminal_bench/task_08",
+    "difficulty": "easy",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #8. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_009",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-209",
+    "repository": "terminal_bench/task_09",
+    "difficulty": "easy",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #9. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_010",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-210",
+    "repository": "terminal_bench/task_10",
+    "difficulty": "easy",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #10. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_011",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-211",
+    "repository": "terminal_bench/task_11",
+    "difficulty": "medium",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #11. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_012",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-212",
+    "repository": "terminal_bench/task_12",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #12. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_013",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-213",
+    "repository": "terminal_bench/task_13",
+    "difficulty": "medium",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #13. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_014",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-214",
+    "repository": "terminal_bench/task_14",
+    "difficulty": "medium",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #14. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_015",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-215",
+    "repository": "terminal_bench/task_15",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #15. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_016",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-216",
+    "repository": "terminal_bench/task_16",
+    "difficulty": "medium",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #16. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_017",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-217",
+    "repository": "terminal_bench/task_17",
+    "difficulty": "medium",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #17. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_018",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-218",
+    "repository": "terminal_bench/task_18",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #18. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_019",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-219",
+    "repository": "terminal_bench/task_19",
+    "difficulty": "medium",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #19. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_020",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-220",
+    "repository": "terminal_bench/task_20",
+    "difficulty": "medium",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #20. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_021",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-221",
+    "repository": "terminal_bench/task_21",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #21. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_022",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-222",
+    "repository": "terminal_bench/task_22",
+    "difficulty": "medium",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #22. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_023",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-223",
+    "repository": "terminal_bench/task_23",
+    "difficulty": "medium",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #23. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_024",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-224",
+    "repository": "terminal_bench/task_24",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #24. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_025",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-225",
+    "repository": "terminal_bench/task_25",
+    "difficulty": "medium",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #25. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_026",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-226",
+    "repository": "terminal_bench/task_26",
+    "difficulty": "medium",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #26. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_027",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-227",
+    "repository": "terminal_bench/task_27",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #27. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_028",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-228",
+    "repository": "terminal_bench/task_28",
+    "difficulty": "medium",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #28. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_029",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-229",
+    "repository": "terminal_bench/task_29",
+    "difficulty": "medium",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #29. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_030",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-230",
+    "repository": "terminal_bench/task_30",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #30. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_031",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-231",
+    "repository": "terminal_bench/task_31",
+    "difficulty": "hard",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #31. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_032",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-232",
+    "repository": "terminal_bench/task_32",
+    "difficulty": "hard",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #32. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_033",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-233",
+    "repository": "terminal_bench/task_33",
+    "difficulty": "hard",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #33. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_034",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-234",
+    "repository": "terminal_bench/task_34",
+    "difficulty": "hard",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #34. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_035",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-235",
+    "repository": "terminal_bench/task_35",
+    "difficulty": "hard",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #35. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_036",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-236",
+    "repository": "terminal_bench/task_36",
+    "difficulty": "hard",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #36. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_037",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-237",
+    "repository": "terminal_bench/task_37",
+    "difficulty": "hard",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #37. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_038",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-238",
+    "repository": "terminal_bench/task_38",
+    "difficulty": "hard",
+    "domain": "integrations",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #38. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_039",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-239",
+    "repository": "terminal_bench/task_39",
+    "difficulty": "hard",
+    "domain": "environment_tooling",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #39. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_TB_040",
+    "source": "terminal_bench_2.0",
+    "source_version": "2.0",
+    "original_task_id": "tb-cli-task-240",
+    "repository": "terminal_bench/task_40",
+    "difficulty": "hard",
+    "domain": "build_ci_dependencies",
+    "task_type": "environment_fix",
+    "original_prompt": "Fix terminal environment build error #40. Ensure setup script and CLI tool entrypoints execute cleanly.",
+    "available_tests": [
+      "shell_assertion",
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "bash",
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "environment",
+      "dependency_management",
+      "tool_usage",
+      "investigation",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  }
+]

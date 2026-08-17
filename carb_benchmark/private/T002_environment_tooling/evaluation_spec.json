@@ -1,0 +1,21 @@
+{
+  "task_id": "T002_environment_tooling",
+  "test_command": "python build.py",
+  "hidden_test_command": "python -m unittest discover -s tests",
+  "expected_files_modified": [
+    "build.py"
+  ],
+  "max_justified_lines_changed": 10,
+  "acceptance_criteria": [
+    {
+      "id": "AC1",
+      "type": "functional",
+      "verification_method": "test_command"
+    },
+    {
+      "id": "AC2",
+      "type": "engineering",
+      "verification_method": "diff_analysis"
+    }
+  ]
+}

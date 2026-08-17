@@ -1,0 +1,5 @@
+# Task Instructions
+
+Running `python build.py` fails with: `ModuleNotFoundError: No module named 'cli_runner.helpers'`.
+
+Investigate the environment and package structure, fix the import/package path in `build.py` or `cli_runner/`, and ensure `python build.py` completes cleanly.

@@ -1,0 +1,3282 @@
+[
+  {
+    "candidate_id": "C_SWE_001",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1001",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_002",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1002",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_003",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1003",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_004",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1004",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_005",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1005",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1005. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_006",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1006",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1006. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_007",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1007",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1007. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_008",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1008",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1008. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_009",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1009",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1009. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_010",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1010",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1010. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_011",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1011",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1011. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_012",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1012",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1012. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_013",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1013",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1013. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_014",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1014",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1014. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_015",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1015",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1015. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_016",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1016",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1016. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_017",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1017",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1017. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_018",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1018",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1018. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_019",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1019",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1019. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_020",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1020",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1020. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_021",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1021",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1021. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_022",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1022",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1022. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_023",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1023",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1023. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_024",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1024",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1024. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_025",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1025",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1025. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_026",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1026",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1026. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_027",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1027",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1027. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_028",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1028",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1028. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_029",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1029",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1029. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_030",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1030",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1030. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_031",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1031",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1031. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_032",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1032",
+    "repository": "django/django",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1032. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_033",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1033",
+    "repository": "django/django",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1033. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "high",
+    "blast_radius": "medium",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_034",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1034",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1034. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_035",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "django__django-1035",
+    "repository": "django/django",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in django/django issue #1035. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_036",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1001",
+    "repository": "sympy/sympy",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_037",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1002",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_038",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1003",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_039",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1004",
+    "repository": "sympy/sympy",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_040",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1005",
+    "repository": "sympy/sympy",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1005. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_041",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1006",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1006. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_042",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1007",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1007. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_043",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1008",
+    "repository": "sympy/sympy",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1008. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_044",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1009",
+    "repository": "sympy/sympy",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1009. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_045",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1010",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1010. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_046",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1011",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1011. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_047",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1012",
+    "repository": "sympy/sympy",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1012. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_048",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1013",
+    "repository": "sympy/sympy",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1013. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_049",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1014",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1014. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_050",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sympy__sympy-1015",
+    "repository": "sympy/sympy",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sympy/sympy issue #1015. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "high",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_051",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1001",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "easy",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_052",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1002",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_053",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1003",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_054",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1004",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "hard",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_055",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1005",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "easy",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1005. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_056",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1006",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1006. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_057",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1007",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1007. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_058",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1008",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "hard",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1008. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_059",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1009",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "easy",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1009. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_060",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sphinx__sphinx-1010",
+    "repository": "sphinx-doc/sphinx",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in sphinx-doc/sphinx issue #1010. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "medium",
+    "blast_radius": "medium",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_061",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1001",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_062",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1002",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_063",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1003",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_064",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1004",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_065",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1005",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1005. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_066",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1006",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1006. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_067",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1007",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1007. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_068",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "sklearn__sklearn-1008",
+    "repository": "scikit-learn/scikit-learn",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in scikit-learn/scikit-learn issue #1008. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_069",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "astropy__astropy-1001",
+    "repository": "astropy/astropy",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in astropy/astropy issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_070",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "astropy__astropy-1002",
+    "repository": "astropy/astropy",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in astropy/astropy issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_071",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "astropy__astropy-1003",
+    "repository": "astropy/astropy",
+    "difficulty": "medium",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in astropy/astropy issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_072",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "astropy__astropy-1004",
+    "repository": "astropy/astropy",
+    "difficulty": "hard",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in astropy/astropy issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_073",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "astropy__astropy-1005",
+    "repository": "astropy/astropy",
+    "difficulty": "easy",
+    "domain": "backend_api",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in astropy/astropy issue #1005. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_074",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "matplotlib__matplotlib-1001",
+    "repository": "matplotlib/matplotlib",
+    "difficulty": "easy",
+    "domain": "frontend_ui",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_075",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "matplotlib__matplotlib-1002",
+    "repository": "matplotlib/matplotlib",
+    "difficulty": "medium",
+    "domain": "frontend_ui",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_076",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "matplotlib__matplotlib-1003",
+    "repository": "matplotlib/matplotlib",
+    "difficulty": "medium",
+    "domain": "frontend_ui",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_077",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "matplotlib__matplotlib-1004",
+    "repository": "matplotlib/matplotlib",
+    "difficulty": "hard",
+    "domain": "frontend_ui",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in matplotlib/matplotlib issue #1004. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "large",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_078",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "pytest__pytest-1001",
+    "repository": "pytest-dev/pytest",
+    "difficulty": "easy",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in pytest-dev/pytest issue #1001. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_079",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "pytest__pytest-1002",
+    "repository": "pytest-dev/pytest",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in pytest-dev/pytest issue #1002. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_SWE_080",
+    "source": "swebench_verified",
+    "source_version": "1.0",
+    "original_task_id": "pytest__pytest-1003",
+    "repository": "pytest-dev/pytest",
+    "difficulty": "medium",
+    "domain": "environment_tooling",
+    "task_type": "bug_fixing",
+    "original_prompt": "Resolve repository bug in pytest-dev/pytest issue #1003. Fix unexpected behavior and pass pytest regression suite.",
+    "available_tests": [
+      "pytest"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11",
+      "pytest"
+    ],
+    "capability_tags": [
+      "repository_understanding",
+      "debugging",
+      "surgical_editing",
+      "regression_safety",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "medium",
+    "expected_change_size": "medium",
+    "test_quality": "high",
+    "behavioral_relevance": "high",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  }
+]

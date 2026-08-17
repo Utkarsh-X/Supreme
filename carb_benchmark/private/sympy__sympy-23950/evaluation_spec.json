@@ -1,0 +1,11 @@
+{
+  "instance_id": "sympy__sympy-23950",
+  "repo": "sympy/sympy",
+  "base_commit": "88664e6e0b781d0a8b5347896af74b555e92891e",
+  "environment_setup_commit": "c6cb7c5602fa48034ab1bd43c2347a7e8488f12e",
+  "FAIL_TO_PASS": "[\"test_as_set\"]",
+  "PASS_TO_PASS": "[\"test_contains_basic\", \"test_issue_6194\", \"test_issue_10326\", \"test_binary_symbols\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-23950",
+  "test_timeout_seconds": 600
+}

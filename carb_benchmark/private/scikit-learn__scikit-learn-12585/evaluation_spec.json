@@ -1,0 +1,11 @@
+{
+  "instance_id": "scikit-learn__scikit-learn-12585",
+  "repo": "scikit-learn/scikit-learn",
+  "base_commit": "bfc4a566423e036fbdc9fb02765fd893e4860c85",
+  "environment_setup_commit": "7813f7efb5b2012412888b69e73d76f2df2b50b6",
+  "FAIL_TO_PASS": "[\"sklearn/tests/test_base.py::test_clone_estimator_types\"]",
+  "PASS_TO_PASS": "[\"sklearn/tests/test_base.py::test_clone\", \"sklearn/tests/test_base.py::test_clone_2\", \"sklearn/tests/test_base.py::test_clone_buggy\", \"sklearn/tests/test_base.py::test_clone_empty_array\", \"sklearn/tests/test_base.py::test_clone_nan\", \"sklearn/tests/test_base.py::test_clone_sparse_matrices\", \"sklearn/tests/test_base.py::test_repr\", \"sklearn/tests/test_base.py::test_str\", \"sklearn/tests/test_base.py::test_get_params\", \"sklearn/tests/test_base.py::test_is_classifier\", \"sklearn/tests/test_base.py::test_set_params\", \"sklearn/tests/test_base.py::test_set_params_passes_all_parameters\", \"sklearn/tests/test_base.py::test_set_params_updates_valid_params\", \"sklearn/tests/test_base.py::test_score_sample_weight\", \"sklearn/tests/test_base.py::test_clone_pandas_dataframe\", \"sklearn/tests/test_base.py::test_pickle_version_warning_is_not_raised_with_matching_version\", \"sklearn/tests/test_base.py::test_pickle_version_warning_is_issued_upon_different_version\", \"sklearn/tests/test_base.py::test_pickle_version_warning_is_issued_when_no_version_info_in_pickle\", \"sklearn/tests/test_base.py::test_pickle_version_no_warning_is_issued_with_non_sklearn_estimator\", \"sklearn/tests/test_base.py::test_pickling_when_getstate_is_overwritten_by_mixin\", \"sklearn/tests/test_base.py::test_pickling_when_getstate_is_overwritten_by_mixin_outside_of_sklearn\", \"sklearn/tests/test_base.py::test_pickling_works_when_getstate_is_overwritten_in_the_child_class\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py scikit-learn__scikit-learn-12585",
+  "test_timeout_seconds": 600
+}

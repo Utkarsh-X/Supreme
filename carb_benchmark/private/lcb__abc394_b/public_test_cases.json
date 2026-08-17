@@ -1,0 +1,12 @@
+[
+ {
+  "input": "3\ntc\noder\na",
+  "output": "atcoder",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\ncat\nenate\non\nc",
+  "output": "concatenate",
+  "testtype": "stdin"
+ }
+]

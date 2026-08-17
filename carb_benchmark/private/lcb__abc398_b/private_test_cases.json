@@ -1,0 +1,202 @@
+[
+ {
+  "input": "3 2 2 2 2 3 2",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4 2 4 5 4 2 4",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 1 10 3 5 4 7",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 1 2 2 2 2 3",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9 9 8 6 5 7 5",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2 5 3 1 4 2 1",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4 3 5 2 3 3 5",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4 1 1 5 4 3 2",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 7 10 1 11 11 11",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 2 4 3 1 1 1",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 2 9 5 9 12 7",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2 4 3 2 3 5 1",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4 3 2 3 3 5 2",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9 9 9 9 3 3 3",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 2 1 4 2 5 4",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 1 2 2 3 3 3",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 1 1 2 4 4 3",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9 5 10 4 4 7 4",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4 2 2 5 2 5 2",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "6 8 5 8 3 8 5",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 9 2 7 5 6 11",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 1 1 2 2 2 2",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "10 9 7 10 11 4 1",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2 5 2 3 5 1 4",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2 2 1 1 5 1 4",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2 5 3 5 1 2 2",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "6 11 12 5 8 8 10",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "13 13 13 13 13 13 13",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "6 6 10 7 7 10 7",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 4 10 2 5 1 4",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5 2 3 3 3 3 5",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5 5 4 1 2 1 5",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2 4 2 5 5 3 1",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 2 4 4 1 2 1",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "11 10 4 12 1 6 3",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 3 5 1 5 1 5",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 4 4 4 1 2 5",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 10 3 6 10 5 1",
+  "output": "No\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 3 3 3 1 1 5",
+  "output": "Yes\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 3 1 2 3 2 5",
+  "output": "No\n",
+  "testtype": "stdin"
+ }
+]

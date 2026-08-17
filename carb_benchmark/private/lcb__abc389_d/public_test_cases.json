@@ -1,0 +1,17 @@
+[
+ {
+  "input": "2",
+  "output": "5",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4",
+  "output": "37",
+  "testtype": "stdin"
+ },
+ {
+  "input": "26",
+  "output": "2025",
+  "testtype": "stdin"
+ }
+]

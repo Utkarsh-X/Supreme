@@ -1,0 +1,202 @@
+[
+ {
+  "input": "26",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15",
+  "output": "1995\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "8",
+  "output": "1993\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "13",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "35",
+  "output": "1955\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "80",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "22",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "36",
+  "output": "1917\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "13",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5",
+  "output": "2015\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15",
+  "output": "1995\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5",
+  "output": "2015\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7",
+  "output": "2011\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "81",
+  "output": "1944\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "68",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2",
+  "output": "2021\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "8",
+  "output": "1993\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "13",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1",
+  "output": "2024\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3",
+  "output": "2019\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "50",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7",
+  "output": "2011\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15",
+  "output": "1995\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "6",
+  "output": "2001\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "81",
+  "output": "1944\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3",
+  "output": "2019\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "11",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "38",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "78",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15",
+  "output": "1995\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "22",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "71",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9",
+  "output": "1998\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "57",
+  "output": "2025\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "49",
+  "output": "1976\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "10",
+  "output": "2005\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9",
+  "output": "1998\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9",
+  "output": "1998\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "10",
+  "output": "2005\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5",
+  "output": "2015\n",
+  "testtype": "stdin"
+ }
+]

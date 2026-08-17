@@ -1,0 +1,11 @@
+{
+  "instance_id": "sphinx-doc__sphinx-9367",
+  "repo": "sphinx-doc/sphinx",
+  "base_commit": "6918e69600810a4664e53653d6ff0290c3c4a788",
+  "environment_setup_commit": "9a2c3c4a1559e37e95fdee88c128bb116642c897",
+  "FAIL_TO_PASS": "[\"tests/test_pycode_ast.py::test_unparse[(1,)-(1,)]\"]",
+  "PASS_TO_PASS": "[\"tests/test_pycode_ast.py::test_unparse[a\", \"tests/test_pycode_ast.py::test_unparse[os.path-os.path]\", \"tests/test_pycode_ast.py::test_unparse[1\", \"tests/test_pycode_ast.py::test_unparse[b'bytes'-b'bytes']\", \"tests/test_pycode_ast.py::test_unparse[object()-object()]\", \"tests/test_pycode_ast.py::test_unparse[1234-1234_0]\", \"tests/test_pycode_ast.py::test_unparse[{'key1':\", \"tests/test_pycode_ast.py::test_unparse[...-...]\", \"tests/test_pycode_ast.py::test_unparse[Tuple[int,\", \"tests/test_pycode_ast.py::test_unparse[~\", \"tests/test_pycode_ast.py::test_unparse[lambda\", \"tests/test_pycode_ast.py::test_unparse[[1,\", \"tests/test_pycode_ast.py::test_unparse[sys-sys]\", \"tests/test_pycode_ast.py::test_unparse[1234-1234_1]\", \"tests/test_pycode_ast.py::test_unparse[not\", \"tests/test_pycode_ast.py::test_unparse[{1,\", \"tests/test_pycode_ast.py::test_unparse['str'-'str']\", \"tests/test_pycode_ast.py::test_unparse[+\", \"tests/test_pycode_ast.py::test_unparse[-\", \"tests/test_pycode_ast.py::test_unparse[(1,\", \"tests/test_pycode_ast.py::test_unparse[()-()]\", \"tests/test_pycode_ast.py::test_unparse_None\", \"tests/test_pycode_ast.py::test_unparse_py38[lambda\", \"tests/test_pycode_ast.py::test_unparse_py38[0x1234-0x1234]\", \"tests/test_pycode_ast.py::test_unparse_py38[1_000_000-1_000_000]\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-9367",
+  "test_timeout_seconds": 600
+}

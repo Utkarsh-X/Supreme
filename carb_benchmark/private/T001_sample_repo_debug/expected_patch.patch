@@ -1,0 +1,18 @@
+--- a/session_serializer.py
++++ b/session_serializer.py
+@@ -1,4 +1,6 @@
+ import json
++import datetime
++import uuid
+
+ class CustomJSONEncoder(json.JSONEncoder):
+     def default(self, obj):
++        if isinstance(obj, (datetime.datetime, datetime.date)):
++            return obj.isoformat()
++        if isinstance(obj, uuid.UUID):
++            return str(obj)
+         return super().default(obj)
+
+ class SessionSerializer:
+     def serialize(self, data):
+         return json.dumps(data, cls=CustomJSONEncoder)

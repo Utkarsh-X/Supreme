@@ -1,0 +1,17 @@
+[
+ {
+  "input": "3 3\n191\n325",
+  "output": "593",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3 9\n191\n998244353",
+  "output": "993",
+  "testtype": "stdin"
+ },
+ {
+  "input": "11 13\n31415926535\n2718281828459",
+  "output": "98888976555",
+  "testtype": "stdin"
+ }
+]

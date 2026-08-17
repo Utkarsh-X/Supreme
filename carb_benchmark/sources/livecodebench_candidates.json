@@ -1,0 +1,927 @@
+[
+  {
+    "candidate_id": "C_LCB_001",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-501",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-501. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_002",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-502",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-502. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_003",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-503",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-503. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_004",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-504",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-504. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_005",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-505",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-505. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_006",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-506",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-506. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_007",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-507",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-507. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_008",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-508",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "easy",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-508. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_009",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-509",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-509. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_010",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-510",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-510. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_011",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-511",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-511. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_012",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-512",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-512. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_013",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-513",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-513. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_014",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-514",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-514. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_015",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-515",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-515. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_016",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-516",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-516. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_017",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-517",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-517. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_018",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-518",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "medium",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-518. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_019",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-519",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-519. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_020",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-520",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-520. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_021",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-521",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-521. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_022",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-522",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-522. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_023",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-523",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-523. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_024",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-524",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-524. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  },
+  {
+    "candidate_id": "C_LCB_025",
+    "source": "livecodebench",
+    "source_version": "release_v4",
+    "original_task_id": "lcb-prob-525",
+    "repository": "livecodebench/code_generation",
+    "difficulty": "hard",
+    "domain": "algorithmic_reasoning",
+    "task_type": "code_generation_control",
+    "original_prompt": "Implement algorithmic solution for problem lcb-prob-525. Handle all boundary conditions and optimize time complexity.",
+    "available_tests": [
+      "input_output_assertion"
+    ],
+    "expected_patch_available": true,
+    "environment_requirements": [
+      "python_3_11"
+    ],
+    "capability_tags": [
+      "algorithmic_reasoning",
+      "verification"
+    ],
+    "risk": "low",
+    "blast_radius": "low",
+    "repository_complexity": "low",
+    "expected_change_size": "small",
+    "test_quality": "high",
+    "behavioral_relevance": "medium",
+    "suitability_assessment": {
+      "clean_snapshot_execution": true,
+      "objective_evaluation": true,
+      "sufficient_task_info": true,
+      "evaluator_isolation": true,
+      "deterministic_reset": true,
+      "ide_compatibility": true,
+      "rejection_status": "ACCEPTED"
+    }
+  }
+]

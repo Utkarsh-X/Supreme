@@ -1,0 +1,26 @@
+{
+  "task_id": "T001_sample_repo_debug",
+  "test_command": "pytest test_session_serializer.py",
+  "hidden_test_command": "pytest private_hidden_tests.py",
+  "expected_files_modified": [
+    "session_serializer.py"
+  ],
+  "max_justified_lines_changed": 20,
+  "acceptance_criteria": [
+    {
+      "id": "AC1",
+      "type": "functional",
+      "verification_method": "test_command"
+    },
+    {
+      "id": "AC2",
+      "type": "regression",
+      "verification_method": "hidden_test_command"
+    },
+    {
+      "id": "AC3",
+      "type": "engineering",
+      "verification_method": "diff_analysis"
+    }
+  ]
+}

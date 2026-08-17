@@ -1,0 +1,11 @@
+{
+  "instance_id": "astropy__astropy-7671",
+  "repo": "astropy/astropy",
+  "base_commit": "a7141cd90019b62688d507ae056298507678c058",
+  "environment_setup_commit": "848c8fa21332abd66b44efe3cb48b72377fb32cc",
+  "FAIL_TO_PASS": "[\"astropy/utils/tests/test_introspection.py::test_minversion\"]",
+  "PASS_TO_PASS": "[\"astropy/utils/tests/test_introspection.py::test_pkg_finder\", \"astropy/utils/tests/test_introspection.py::test_find_current_mod\", \"astropy/utils/tests/test_introspection.py::test_find_mod_objs\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py astropy__astropy-7671",
+  "test_timeout_seconds": 600
+}

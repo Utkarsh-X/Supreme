@@ -1,0 +1,5 @@
+# Task Instructions
+
+When using `SessionSerializer` with custom session data containing `datetime.datetime` or `uuid.UUID` objects, `json.dumps()` raises a `TypeError: Object of type datetime is not JSON serializable`.
+
+Update `SessionSerializer` in `session_serializer.py` to support `datetime` and `UUID` serialization cleanly while preserving existing serialization functionality and test coverage.

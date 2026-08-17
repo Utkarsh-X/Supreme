@@ -1,0 +1,202 @@
+[
+ {
+  "input": "96\n2\n2\n1 53\n1 98\n2\n1 28\n1 13\n2\n1 73\n2\n2\n1 96\n1 19\n2\n1 34\n1 20\n2\n2\n1 50\n1 66\n1 31\n2\n1 23\n1 51\n1 35\n1 87\n1 76\n2\n1 64\n1 50\n1 47\n2\n2\n1 42\n2\n1 5\n1 98\n1 93\n1 1\n2\n2\n1 99\n2\n2\n1 60\n2\n2\n2\n1 47\n2\n2\n2\n1 87\n1 84\n1 29\n2\n2\n2\n2\n2\n1 2\n1 15\n2\n2\n1 68\n1 78\n1 67\n1 45\n1 18\n1 41\n1 98\n2\n1 39\n1 10\n1 35\n2\n1 93\n2\n1 79\n2\n2\n2\n2\n2\n2\n2\n2\n1 36\n2\n2\n2\n1 52\n1 18\n1 99\n1 51\n2",
+  "output": "0\n0\n98\n13\n73\n28\n19\n20\n34\n31\n76\n47\n50\n42\n1\n93\n99\n98\n60\n5\n64\n47\n87\n35\n29\n84\n87\n51\n23\n15\n2\n98\n35\n93\n79\n10\n39\n41\n18\n45\n67\n78\n36\n68\n66\n51\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "10\n1 70\n2\n2\n1 75\n1 86\n1 29\n1 56\n2\n2\n2",
+  "output": "70\n0\n56\n29\n86\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "11\n1 86\n2\n1 19\n1 29\n2\n2\n2\n1 3\n1 49\n2\n1 91",
+  "output": "86\n29\n19\n0\n49\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "13\n1 83\n1 19\n1 52\n1 76\n2\n2\n1 20\n1 2\n2\n1 75\n1 6\n2\n2",
+  "output": "76\n52\n2\n6\n75\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3\n1 69\n2\n1 90",
+  "output": "69\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "14\n1 70\n1 48\n2\n1 95\n1 91\n1 77\n2\n1 19\n1 97\n2\n2\n1 42\n2\n1 8",
+  "output": "48\n77\n97\n19\n42\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "100\n1 50\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2",
+  "output": "50\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "12\n2\n2\n2\n1 25\n2\n2\n1 10\n2\n1 16\n2\n1 10\n2",
+  "output": "0\n0\n0\n25\n0\n10\n16\n10\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1\n2",
+  "output": "0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5\n2\n2\n2\n2\n2",
+  "output": "0\n0\n0\n0\n0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "91\n2\n1 19\n2\n2\n2\n2\n2\n2\n2\n2\n1 80\n2\n2\n1 15\n2\n1 33\n1 98\n2\n2\n2\n1 19\n2\n1 81\n1 58\n2\n1 16\n1 96\n2\n2\n1 39\n2\n1 15\n2\n1 38\n2\n1 14\n1 82\n2\n2\n1 40\n2\n2\n1 97\n2\n2\n1 25\n1 8\n2\n2\n2\n2\n2\n1 35\n1 73\n2\n1 3\n1 72\n1 87\n1 64\n2\n2\n2\n2\n2\n1 95\n1 71\n1 56\n2\n1 61\n2\n2\n2\n2\n2\n2\n2\n1 23\n1 76\n2\n1 2\n1 83\n2\n1 88\n1 86\n1 68\n2\n1 37\n2\n2\n2\n2",
+  "output": "0\n19\n0\n0\n0\n0\n0\n0\n0\n80\n0\n15\n98\n33\n0\n19\n58\n96\n16\n39\n15\n38\n82\n14\n40\n81\n97\n0\n8\n25\n0\n0\n0\n73\n64\n87\n72\n3\n35\n56\n61\n71\n95\n0\n0\n0\n0\n76\n83\n68\n37\n86\n88\n2\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n1 100\n2",
+  "output": "100\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15\n1 27\n2\n1 18\n1 75\n2\n2\n1 35\n1 23\n1 58\n1 83\n1 87\n1 45\n2\n2\n1 11",
+  "output": "27\n75\n18\n45\n87\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9\n2\n2\n1 88\n1 66\n1 8\n2\n1 98\n1 74\n1 1",
+  "output": "0\n0\n8\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "42\n1 92\n1 75\n2\n1 94\n2\n2\n2\n2\n2\n1 16\n2\n1 43\n2\n2\n1 88\n2\n2\n2\n2\n1 52\n1 51\n1 53\n2\n1 73\n1 8\n1 47\n1 82\n1 32\n1 96\n1 74\n2\n2\n2\n1 31\n2\n2\n2\n1 4\n1 17\n1 85\n2\n2",
+  "output": "75\n94\n92\n0\n0\n0\n16\n43\n0\n88\n0\n0\n0\n53\n74\n96\n32\n31\n82\n47\n85\n17\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7\n2\n2\n2\n2\n1 14\n1 87\n2",
+  "output": "0\n0\n0\n0\n87\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "8\n1 18\n2\n1 30\n2\n1 100\n2\n1 34\n2",
+  "output": "18\n30\n100\n34\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "30\n2\n2\n2\n2\n2\n2\n2\n2\n2\n1 56\n1 87\n2\n2\n2\n1 86\n2\n1 57\n1 42\n1 36\n1 16\n2\n2\n2\n2\n1 19\n1 13\n2\n1 78\n1 56\n2",
+  "output": "0\n0\n0\n0\n0\n0\n0\n0\n0\n87\n56\n0\n86\n16\n36\n42\n57\n13\n56\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15\n2\n1 61\n2\n2\n2\n1 66\n1 63\n1 37\n1 26\n2\n1 79\n1 17\n2\n2\n1 43",
+  "output": "0\n61\n0\n0\n26\n17\n79\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "13\n1 66\n1 1\n1 13\n2\n1 66\n2\n1 85\n1 99\n1 97\n1 17\n1 61\n2\n1 19",
+  "output": "13\n66\n61\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "100\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n1 1\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2",
+  "output": "1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n1\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "92\n1 91\n1 96\n2\n1 55\n1 44\n2\n1 76\n1 11\n1 38\n1 22\n2\n1 25\n2\n1 64\n1 42\n2\n1 74\n1 65\n1 75\n1 90\n1 49\n1 17\n2\n2\n1 35\n1 35\n2\n2\n1 19\n1 2\n2\n2\n1 10\n2\n1 97\n2\n1 77\n2\n2\n1 96\n2\n2\n2\n1 95\n1 13\n1 50\n1 52\n1 17\n2\n2\n1 46\n2\n2\n1 6\n2\n2\n1 13\n2\n1 43\n1 16\n2\n1 32\n2\n1 86\n2\n2\n1 1\n1 4\n1 91\n2\n2\n2\n2\n1 4\n1 61\n1 20\n2\n1 86\n1 1\n2\n2\n2\n1 34\n2\n2\n1 47\n1 68\n2\n2\n2\n2\n2",
+  "output": "96\n44\n22\n25\n42\n17\n49\n35\n35\n2\n19\n10\n97\n77\n90\n96\n75\n65\n17\n52\n46\n50\n6\n13\n13\n16\n32\n86\n43\n91\n4\n1\n95\n20\n1\n86\n61\n34\n4\n68\n47\n74\n64\n38\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\n2\n2\n1 73\n2",
+  "output": "0\n0\n73\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15\n1 93\n2\n1 6\n1 9\n1 43\n2\n1 83\n2\n2\n2\n1 58\n1 67\n2\n1 27\n2",
+  "output": "93\n43\n83\n9\n6\n67\n27\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\n1 100\n1 58\n2\n1 50",
+  "output": "58\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5\n1 52\n2\n2\n1 67\n2",
+  "output": "52\n0\n67\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "40\n1 56\n2\n2\n1 34\n2\n1 86\n2\n1 44\n1 59\n2\n2\n2\n1 78\n1 57\n1 66\n1 56\n1 23\n1 15\n1 70\n2\n2\n2\n1 81\n2\n2\n1 56\n1 25\n2\n2\n1 27\n1 16\n1 5\n1 40\n2\n1 22\n1 67\n2\n1 42\n2\n1 79",
+  "output": "56\n0\n34\n86\n59\n44\n0\n70\n15\n23\n81\n56\n25\n56\n40\n67\n42\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15\n1 77\n1 79\n1 60\n1 68\n1 44\n1 15\n1 87\n2\n1 10\n1 10\n1 51\n1 91\n1 2\n1 50\n1 59",
+  "output": "87\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "34\n2\n1 5\n2\n1 73\n2\n2\n1 63\n2\n1 30\n2\n1 42\n2\n2\n2\n2\n1 79\n1 81\n2\n2\n1 32\n1 27\n1 22\n1 30\n2\n1 65\n1 53\n1 36\n1 7\n2\n2\n1 66\n2\n2\n2",
+  "output": "0\n5\n73\n0\n63\n30\n42\n0\n0\n0\n81\n79\n30\n7\n36\n66\n53\n65\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "100\n1 42\n2\n1 34\n1 24\n2\n1 28\n2\n1 13\n1 39\n1 56\n2\n2\n1 9\n2\n2\n2\n2\n1 96\n1 44\n1 83\n1 93\n2\n2\n2\n2\n2\n1 12\n2\n2\n2\n1 53\n2\n2\n2\n2\n1 42\n2\n2\n2\n2\n1 3\n1 41\n1 21\n1 72\n2\n2\n2\n1 81\n2\n2\n1 50\n2\n1 92\n2\n2\n1 58\n2\n1 84\n2\n1 49\n2\n1 75\n1 51\n1 74\n1 26\n1 79\n1 43\n1 76\n2\n1 1\n1 4\n1 99\n1 2\n1 64\n1 59\n2\n1 8\n1 45\n2\n1 57\n1 21\n1 56\n1 40\n1 75\n2\n1 56\n1 63\n1 77\n1 55\n1 26\n2\n2\n2\n1 38\n1 36\n2\n1 14\n2\n2\n2",
+  "output": "42\n24\n28\n56\n39\n9\n13\n34\n0\n93\n83\n44\n96\n0\n12\n0\n0\n53\n0\n0\n0\n42\n0\n0\n0\n72\n21\n41\n81\n3\n50\n92\n0\n58\n84\n49\n76\n59\n45\n75\n26\n55\n77\n36\n14\n38\n63\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "8\n2\n1 13\n1 34\n2\n2\n1 48\n2\n2",
+  "output": "0\n34\n13\n48\n0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "5\n1 67\n2\n1 23\n2\n1 86",
+  "output": "67\n23\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "34\n1 50\n1 6\n1 87\n2\n2\n1 30\n1 76\n2\n1 52\n1 45\n1 99\n2\n2\n1 85\n2\n2\n1 65\n2\n2\n2\n1 65\n1 9\n2\n2\n2\n2\n1 70\n2\n1 46\n2\n1 49\n1 92\n1 71\n1 20",
+  "output": "87\n6\n76\n99\n45\n85\n52\n65\n30\n50\n9\n65\n0\n0\n70\n46\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9\n1 63\n2\n2\n2\n2\n1 40\n2\n1 54\n1 13",
+  "output": "63\n0\n0\n0\n40\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "99\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2\n1 100\n2",
+  "output": "0\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n100\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7\n1 9\n1 54\n2\n2\n1 56\n2\n2",
+  "output": "54\n9\n56\n0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "10\n2\n2\n1 23\n2\n2\n1 46\n2\n2\n2\n2",
+  "output": "0\n0\n23\n0\n46\n0\n0\n0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "7\n2\n1 1\n1 73\n2\n2\n2\n1 26",
+  "output": "0\n73\n1\n0\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "15\n2\n1 17\n1 32\n2\n2\n2\n1 55\n1 24\n2\n1 66\n2\n1 96\n2\n2\n1 69",
+  "output": "0\n32\n17\n0\n24\n66\n96\n55\n",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3\n1 1\n1 89\n2",
+  "output": "89\n",
+  "testtype": "stdin"
+ }
+]

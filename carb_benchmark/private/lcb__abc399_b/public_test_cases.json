@@ -1,0 +1,22 @@
+[
+ {
+  "input": "4\n3 12 9 9",
+  "output": "4\n1\n2\n2",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3\n3 9 6",
+  "output": "3\n1\n2",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\n100 100 100 100",
+  "output": "1\n1\n1\n1",
+  "testtype": "stdin"
+ },
+ {
+  "input": "8\n87 87 87 88 41 38 41 38",
+  "output": "2\n2\n2\n1\n5\n7\n5\n7",
+  "testtype": "stdin"
+ }
+]
