@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__abc398_d",
+  "source": "livecodebench_v5",
+  "question_id": "abc398_d",
+  "question_title": "Bonfire",
+  "contest_id": "abc398",
+  "contest_date": "2025-03-22T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc398_d",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 3,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

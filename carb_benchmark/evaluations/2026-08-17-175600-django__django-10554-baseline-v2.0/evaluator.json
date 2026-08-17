@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-08-17-175600-django__django-10554-baseline-v2.0",
+  "task_id": "django__django-10554",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 1213.5,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "PASS: no \u2014 re-evaluated 2026-08-17 18:xx after fixing missing test_command in spec; FAIL_TO_PASS rc=1 (DatabaseError: ORDER BY term does not match any column in the result set.)",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "django/db/models/query.py",
+      "django/db/models/sql/query.py",
+      "tests/queries/test_qs_combinators.py"
+    ],
+    "lines_added": 38,
+    "lines_deleted": 1,
+    "total_lines_changed": 39,
+    "hunks_count": 5
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration pilot | re-graded with corrected spec; genuine FAIL (real 39-line fix attempt, hidden test still red)"
+}

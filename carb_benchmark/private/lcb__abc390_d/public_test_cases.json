@@ -1,0 +1,17 @@
+[
+ {
+  "input": "3\n2 5 7",
+  "output": "3",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2\n100000000000000000 100000000000000000",
+  "output": "2",
+  "testtype": "stdin"
+ },
+ {
+  "input": "6\n71 74 45 34 31 60",
+  "output": "84",
+  "testtype": "stdin"
+ }
+]

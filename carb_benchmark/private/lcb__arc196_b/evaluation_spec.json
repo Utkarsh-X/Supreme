@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__arc196_b",
+  "source": "livecodebench_v5",
+  "question_id": "arc196_b",
+  "question_title": "Torus Loop",
+  "contest_id": "arc196",
+  "contest_date": "2025-04-06T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc196_b",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 1,
+  "public_test_count": 1,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

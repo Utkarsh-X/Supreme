@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__abc389_e",
+  "source": "livecodebench_v5",
+  "question_id": "abc389_e",
+  "question_title": "Square Price",
+  "contest_id": "abc389",
+  "contest_date": "2025-01-18T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc389_e",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 2,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

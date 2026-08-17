@@ -28,5 +28,175 @@
     "workspace_path": "carb_workspaces\\sympy__sympy-17630",
     "prompt_file": "carb_workspaces\\sympy__sympy-17630\\prompt.txt",
     "private_dir": "private\\sympy__sympy-17630"
+  },
+  {
+    "instance_id": "astropy__astropy-14369",
+    "repo": "astropy/astropy",
+    "base_commit": "fa4e8d1cd279acf9b24560813c8652494ccd5922",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\astropy__astropy-14369",
+    "prompt_file": "carb_workspaces\\astropy__astropy-14369\\prompt.txt",
+    "private_dir": "private\\astropy__astropy-14369"
+  },
+  {
+    "instance_id": "django__django-11138",
+    "repo": "django/django",
+    "base_commit": "c84b91b7603e488f7171fdff8f08368ef3d6b856",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-11138",
+    "prompt_file": "carb_workspaces\\django__django-11138\\prompt.txt",
+    "private_dir": "private\\django__django-11138"
+  },
+  {
+    "instance_id": "django__django-11400",
+    "repo": "django/django",
+    "base_commit": "1f8382d34d54061eddc41df6994e20ee38c60907",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-11400",
+    "prompt_file": "carb_workspaces\\django__django-11400\\prompt.txt",
+    "private_dir": "private\\django__django-11400"
+  },
+  {
+    "instance_id": "django__django-11885",
+    "repo": "django/django",
+    "base_commit": "04ac9b45a34440fa447feb6ae934687aacbfc5f4",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-11885",
+    "prompt_file": "carb_workspaces\\django__django-11885\\prompt.txt",
+    "private_dir": "private\\django__django-11885"
+  },
+  {
+    "instance_id": "django__django-12325",
+    "repo": "django/django",
+    "base_commit": "29c126bb349526b5f1cd78facbe9f25906f18563",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-12325",
+    "prompt_file": "carb_workspaces\\django__django-12325\\prompt.txt",
+    "private_dir": "private\\django__django-12325"
+  },
+  {
+    "instance_id": "django__django-12708",
+    "repo": "django/django",
+    "base_commit": "447980e72ac01da1594dd3373a03ba40b7ee6f80",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-12708",
+    "prompt_file": "carb_workspaces\\django__django-12708\\prompt.txt",
+    "private_dir": "private\\django__django-12708"
+  },
+  {
+    "instance_id": "django__django-13128",
+    "repo": "django/django",
+    "base_commit": "2d67222472f80f251607ae1b720527afceba06ad",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-13128",
+    "prompt_file": "carb_workspaces\\django__django-13128\\prompt.txt",
+    "private_dir": "private\\django__django-13128"
+  },
+  {
+    "instance_id": "django__django-13212",
+    "repo": "django/django",
+    "base_commit": "f4e93919e4608cfc50849a1f764fd856e0917401",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-13212",
+    "prompt_file": "carb_workspaces\\django__django-13212\\prompt.txt",
+    "private_dir": "private\\django__django-13212"
+  },
+  {
+    "instance_id": "django__django-13344",
+    "repo": "django/django",
+    "base_commit": "e39e727ded673e74016b5d3658d23cbe20234d11",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-13344",
+    "prompt_file": "carb_workspaces\\django__django-13344\\prompt.txt",
+    "private_dir": "private\\django__django-13344"
+  },
+  {
+    "instance_id": "django__django-13449",
+    "repo": "django/django",
+    "base_commit": "2a55431a5678af52f669ffe7dff3dd0bd21727f8",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-13449",
+    "prompt_file": "carb_workspaces\\django__django-13449\\prompt.txt",
+    "private_dir": "private\\django__django-13449"
+  },
+  {
+    "instance_id": "django__django-13837",
+    "repo": "django/django",
+    "base_commit": "415f50298f97fb17f841a9df38d995ccf347dfcc",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-13837",
+    "prompt_file": "carb_workspaces\\django__django-13837\\prompt.txt",
+    "private_dir": "private\\django__django-13837"
+  },
+  {
+    "instance_id": "django__django-14007",
+    "repo": "django/django",
+    "base_commit": "619f26d2895d121854b1bed1b535d42b722e2eba",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-14007",
+    "prompt_file": "carb_workspaces\\django__django-14007\\prompt.txt",
+    "private_dir": "private\\django__django-14007"
+  },
+  {
+    "instance_id": "django__django-14011",
+    "repo": "django/django",
+    "base_commit": "e4430f22c8e3d29ce5d9d0263fba57121938d06d",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-14011",
+    "prompt_file": "carb_workspaces\\django__django-14011\\prompt.txt",
+    "private_dir": "private\\django__django-14011"
+  },
+  {
+    "instance_id": "django__django-14631",
+    "repo": "django/django",
+    "base_commit": "84400d2e9db7c51fee4e9bb04c028f665b8e7624",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-14631",
+    "prompt_file": "carb_workspaces\\django__django-14631\\prompt.txt",
+    "private_dir": "private\\django__django-14631"
+  },
+  {
+    "instance_id": "django__django-15957",
+    "repo": "django/django",
+    "base_commit": "f387d024fc75569d2a4a338bfda76cc2f328f627",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-15957",
+    "prompt_file": "carb_workspaces\\django__django-15957\\prompt.txt",
+    "private_dir": "private\\django__django-15957"
+  },
+  {
+    "instance_id": "django__django-16263",
+    "repo": "django/django",
+    "base_commit": "321ecb40f4da842926e1bc07e11df4aabe53ca4b",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-16263",
+    "prompt_file": "carb_workspaces\\django__django-16263\\prompt.txt",
+    "private_dir": "private\\django__django-16263"
+  },
+  {
+    "instance_id": "django__django-16560",
+    "repo": "django/django",
+    "base_commit": "51c9bb7cd16081133af4f0ab6d06572660309730",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-16560",
+    "prompt_file": "carb_workspaces\\django__django-16560\\prompt.txt",
+    "private_dir": "private\\django__django-16560"
   }
 ]

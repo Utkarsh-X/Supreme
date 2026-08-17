@@ -1,0 +1,17 @@
+[
+ {
+  "input": "6 -2 1\nNNEEWS",
+  "output": "001010",
+  "testtype": "stdin"
+ },
+ {
+  "input": "10 1 2\nNEESESWEES",
+  "output": "0001101011",
+  "testtype": "stdin"
+ },
+ {
+  "input": "20 -1 -2\nWWNNWSWEWNSWWENSNWWN",
+  "output": "00100111111000101111",
+  "testtype": "stdin"
+ }
+]

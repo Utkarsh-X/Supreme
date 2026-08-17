@@ -1,0 +1,7 @@
+[
+ {
+  "input": "3\n3 3\nAAB\nAAB\nBBB\n3 3\nBBA\nABA\nAAB\n3 4\nBAAB\nBABA\nBBAA",
+  "output": "2\n0\n2",
+  "testtype": "stdin"
+ }
+]

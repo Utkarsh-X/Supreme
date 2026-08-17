@@ -1,0 +1,17 @@
+[
+ {
+  "input": "([])<>()",
+  "output": "Yes",
+  "testtype": "stdin"
+ },
+ {
+  "input": "([<)]>",
+  "output": "No",
+  "testtype": "stdin"
+ },
+ {
+  "input": "())",
+  "output": "No",
+  "testtype": "stdin"
+ }
+]

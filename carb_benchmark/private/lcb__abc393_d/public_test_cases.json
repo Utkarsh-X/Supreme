@@ -1,0 +1,17 @@
+[
+ {
+  "input": "7\n0101001",
+  "output": "3",
+  "testtype": "stdin"
+ },
+ {
+  "input": "3\n100",
+  "output": "0",
+  "testtype": "stdin"
+ },
+ {
+  "input": "10\n0101001001",
+  "output": "7",
+  "testtype": "stdin"
+ }
+]

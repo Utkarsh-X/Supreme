@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__abc400_e",
+  "source": "livecodebench_v5",
+  "question_id": "abc400_e",
+  "question_title": "Ringo's Favorite Numbers 3",
+  "contest_id": "abc400",
+  "contest_date": "2025-04-05T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc400_e",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 4,
+  "public_test_count": 1,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

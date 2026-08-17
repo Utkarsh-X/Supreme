@@ -1,0 +1,22 @@
+[
+ {
+  "input": "6\nafbfda\nbkckbb",
+  "output": "4",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\nabac\nabac",
+  "output": "0",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\nabac\nabrc",
+  "output": "-1",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\nabac\nbcba",
+  "output": "4",
+  "testtype": "stdin"
+ }
+]
