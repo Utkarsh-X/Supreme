@@ -1,0 +1,7 @@
+{
+  "instance_id": "matplotlib__matplotlib-13989",
+  "verdict": "REJECTED",
+  "detail": "matplotlib 3.0: no runnable env (no era-appropriate Python with Windows wheels available)",
+  "phases": {},
+  "timestamp": "2026-08-15 16:14:16"
+}

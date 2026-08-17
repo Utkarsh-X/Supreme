@@ -1,0 +1,7 @@
+{
+  "instance_id": "astropy__astropy-7671",
+  "verdict": "REJECTED",
+  "detail": "astropy 1.3: no runnable env (no era-appropriate Python with Windows wheels available)",
+  "phases": {},
+  "timestamp": "2026-08-15 16:14:16"
+}

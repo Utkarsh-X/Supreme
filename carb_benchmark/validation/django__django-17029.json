@@ -1,0 +1,20 @@
+{
+  "instance_id": "django__django-17029",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (9s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-17029\\django'\nImporting application apps\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_clear_cache (apps.tests.AppsTests.test_clear_cache) ... FAIL\n\n======================================================================\nFAIL: test_clear_cache (apps.tests.AppsTests.test_clear_cache)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-17029\\django\\test\\utils.py\", line 443, in inner\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-17029\\tests\\apps\\tests.py\", line 208, in test_clear_cache\n    self.assertEqual(apps.get_swappable_settings_name.cache_info().currsize, 0)\nAssertionError: 1 != 0\n\n----------------------------------------------------------------------\nRan 1 test in 0.036s\n\nFAILED (failures=1)\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-17029\\django'\nImporting application apps\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_clear_cache (apps.tests.AppsTests.test_clear_cache) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nOK\n"
+    },
+    "gold_p2p": {
+      "rc": 0,
+      "output": "# GOLD-P2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-17029\\django'\nImporting application apps\nFound 9 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_app_default_auto_field (apps.tests.AppConfigTests.test_app_default_auto_field) ... ok\ntest_default_auto_field_setting (apps.tests.AppConfigTests.test_default_auto_field_setting) ... ok\ntest_invalid_label (apps.tests.AppConfigTests.test_invalid_label) ... ok\ntest_repr (apps.tests.AppConfigTests.test_repr) ... ok\ntest_duplicate_labels (apps.tests.AppsTests.test_duplicate_labels) ... ok\ntest_duplicate_names (apps.tests.AppsTests.test_duplicate_names) ... ok\ntest_no_such_app_config (apps.tests.AppsTests.test_no_such_app_config) ... ok\ntest_no_such_app_config_with_choices (apps.tests.AppsTests.test_no_such_app_config_with_choices) ... ok\ntest_relabeling (apps.tests.AppsTests.test_relabeling) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.005s\n\nOK\n"
+    }
+  },
+  "timestamp": "2026-08-15 19:16:38"
+}

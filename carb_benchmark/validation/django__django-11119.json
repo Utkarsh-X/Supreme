@@ -1,0 +1,20 @@
+{
+  "instance_id": "django__django-11119",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (2s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-11119\\django'\nImporting application template_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_autoescape_off (template_tests.test_engine.RenderToStringTest) ... FAIL\n\n======================================================================\nFAIL: test_autoescape_off (template_tests.test_engine.RenderToStringTest)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-11119\\tests\\template_tests\\test_engine.py\", line 26, in test_autoescape_off\n    self.assertEqual(\nAssertionError: 'obj:&lt;script&gt;\\n' != 'obj:<script>\\n'\n\n----------------------------------------------------------------------\nRan 1 test in 0.016s\n\nFAILED (failures=1)\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-11119\\django'\nImporting application template_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_autoescape_off (template_tests.test_engine.RenderToStringTest) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n"
+    },
+    "gold_p2p": {
+      "rc": 0,
+      "output": "# GOLD-P2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-11119\\django'\nImporting application template_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_cached_loader_priority (template_tests.test_engine.LoaderTests)\nThe order of template loader works. Refs #21460. ... ok\ntest_loader_priority (template_tests.test_engine.LoaderTests)\n#21460 -- The order of template loader works. ... ok\ntest_origin (template_tests.test_engine.LoaderTests) ... ok\ntest_basic_context (template_tests.test_engine.RenderToStringTest) ... ok\ntest_multiple_engines_configured (template_tests.test_engine.GetDefaultTests) ... ok\ntest_no_engines_configured (template_tests.test_engine.GetDefaultTests) ... ok\ntest_single_engine_configured (template_tests.test_engine.GetDefaultTests) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.035s\n\nOK\n"
+    }
+  },
+  "timestamp": "2026-08-15 15:12:04"
+}

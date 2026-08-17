@@ -1,0 +1,20 @@
+{
+  "instance_id": "matplotlib__matplotlib-23476",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0) | P2P rc=4 (note)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (6s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_figure.py F                                    [100%]\n\n================================== FAILURES ===================================\n____________________ test_unpickle_with_device_pixel_ratio ____________________\nlib\\matplotlib\\tests\\test_figure.py:1391: in test_unpickle_with_device_pixel_ratio\n    assert fig2.dpi == 42\nE   assert 294 == 42\nE    +  where 294 = <Figure size 2352x1764 with 0 Axes>.dpi\n=========================== short test summary info ===========================\nFAILED lib/matplotlib/tests/test_figure.py::test_unpickle_with_device_pixel_ratio\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 1.34s ==============================\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_figure.py .                                    [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED lib/matplotlib/tests/test_figure.py::test_unpickle_with_device_pixel_ratio\n============================== 1 passed in 0.77s ==============================\n"
+    },
+    "gold_p2p": {
+      "rc": 4,
+      "output": "# GOLD-P2P rc=4 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\nconfigfile: pytest.ini\ncollected 100 items\n\n============================ no tests ran in 0.56s ============================\nERROR: not found: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\\lib\\matplotlib\\tests\\test_figure.py::TestSubplotMosaic::test_fail[x0-(?m)we\n(no name 'E:\\\\RofU\\\\Supreme\\\\carb_workspaces\\\\matplotlib__matplotlib-23476\\\\lib\\\\matplotlib\\\\tests\\\\test_figure.py::TestSubplotMosaic::test_fail[x0-(?m)we' in any of [<Module test_figure.py>])\n\nERROR: not found: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\\lib\\matplotlib\\tests\\test_figure.py::TestSubplotMosaic::test_fail[x1-There\n(no name 'E:\\\\RofU\\\\Supreme\\\\carb_workspaces\\\\matplotlib__matplotlib-23476\\\\lib\\\\matplotlib\\\\tests\\\\test_figure.py::TestSubplotMosaic::test_fail[x1-There' in any of [<Module test_figure.py>])\n\nERROR: not found: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\\lib\\matplotlib\\tests\\test_figure.py::TestSubplotMosaic::test_fail[AAA\\nc\\nBBB-All\n(no name 'E:\\\\RofU\\\\Supreme\\\\carb_workspaces\\\\matplotlib__matplotlib-23476\\\\lib\\\\matplotlib\\\\tests\\\\test_figure.py::TestSubplotMosaic::test_fail[AAA\\\\nc\\\\nBBB-All' in any of [<Module test_figure.py>])\n\nERROR: not found: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\\lib\\matplotlib\\tests\\test_figure.py::TestSubplotMosaic::test_fail[x3-All\n(no name 'E:\\\\RofU\\\\Supreme\\\\carb_workspaces\\\\matplotlib__matplotlib-23476\\\\lib\\\\matplotlib\\\\tests\\\\test_figure.py::TestSubplotMosaic::test_fail[x3-All' in any of [<Module test_figure.py>])\n\n"
+    }
+  },
+  "timestamp": "2026-08-15 15:59:33"
+}

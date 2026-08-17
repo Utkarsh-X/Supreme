@@ -1,0 +1,20 @@
+{
+  "instance_id": "matplotlib__matplotlib-24627",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0) | P2P rc=-1 (note)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-24627\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_axes.py F                                      [100%]\n\n================================== FAILURES ===================================\n____________________ test_cla_clears_children_axes_and_fig ____________________\nlib\\matplotlib\\tests\\test_axes.py:8382: in test_cla_clears_children_axes_and_fig\n    assert art.axes is None\nE   assert <Axes: > is None\nE    +  where <Axes: > = <matplotlib.lines.Line2D object at 0x00000199C22DB2B0>.axes\n=========================== short test summary info ===========================\nFAILED lib/matplotlib/tests/test_axes.py::test_cla_clears_children_axes_and_fig\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 1.37s ==============================\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-24627\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_axes.py .                                      [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED lib/matplotlib/tests/test_axes.py::test_cla_clears_children_axes_and_fig\n============================== 1 passed in 0.94s ==============================\n"
+    },
+    "gold_p2p": {
+      "rc": -1,
+      "output": "# GOLD-P2P rc=-1 (0s)\nEXCEPTION: [WinError 206] The filename or extension is too long"
+    }
+  },
+  "timestamp": "2026-08-15 15:59:39"
+}

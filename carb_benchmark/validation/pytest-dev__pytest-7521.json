@@ -1,0 +1,20 @@
+{
+  "instance_id": "pytest-dev__pytest-7521",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0) | P2P rc=4 (note)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-6.0, py-1.11.0, pluggy-0.13.1\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-7521, configfile: pyproject.toml\ncollected 2 items\n\ntesting\\test_capture.py F\n\n================================== FAILURES ===================================\n____________ TestCaptureFixture.test_cafd_preserves_newlines[\\r\\n] ____________\ntesting\\test_capture.py:521: in test_cafd_preserves_newlines\n    assert out.endswith(nl)\nE   AssertionError: assert False\nE    +  where False = <built-in method endswith of str object at 0x0000024F1268C6B0>('\\r\\n')\nE    +    where <built-in method endswith of str object at 0x0000024F1268C6B0> = 'test\\n\\n'.endswith\n=========================== short test summary info ===========================\nFAILED testing/test_capture.py::TestCaptureFixture::test_cafd_preserves_newlines[\\r\\n]\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 0.21s ==============================\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-6.0, py-1.11.0, pluggy-0.13.1\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-7521, configfile: pyproject.toml\ncollected 2 items\n\ntesting\\test_capture.py ..                                               [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED testing/test_capture.py::TestCaptureFixture::test_cafd_preserves_newlines[\\r\\n]\nPASSED testing/test_capture.py::TestCaptureFixture::test_cafd_preserves_newlines[\\r]\n============================== 2 passed in 0.22s ==============================\n"
+    },
+    "gold_p2p": {
+      "rc": 4,
+      "output": "# GOLD-P2P rc=4 (0s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-6.0, py-1.11.0, pluggy-0.13.1\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\pytest-dev__pytest-7521, configfile: pyproject.toml\ncollected 0 items\n\n============================ no tests ran in 0.00s ============================\nERROR: file not found: test_capsysbinary.py::test_hello\n\n"
+    }
+  },
+  "timestamp": "2026-08-15 15:37:54"
+}

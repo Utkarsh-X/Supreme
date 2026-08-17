@@ -1,0 +1,20 @@
+{
+  "instance_id": "django__django-16485",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (3s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-16485\\django'\nImporting application template_tests\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_zero_values (template_tests.filter_tests.test_floatformat.FunctionTests.test_zero_values) ... ERROR\n\n======================================================================\nERROR: test_zero_values (template_tests.filter_tests.test_floatformat.FunctionTests.test_zero_values)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-16485\\tests\\template_tests\\filter_tests\\test_floatformat.py\", line 114, in test_zero_values\n    self.assertEqual(floatformat(\"0.00\", 0), \"0\")\n                     ^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-16485\\django\\template\\defaultfilters.py\", line 190, in floatformat\n    rounded_d = d.quantize(exp, ROUND_HALF_UP, Context(prec=prec))\n                                               ^^^^^^^^^^^^^^^^^^\nValueError: valid range for prec is [1, MAX_PREC]\n\n----------------------------------------------------------------------\nRan 1 test in 0.013s\n\nFAILED (errors=1)\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-16485\\django'\nImporting application template_tests\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_zero_values (template_tests.filter_tests.test_floatformat.FunctionTests.test_zero_values) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nOK\n"
+    },
+    "gold_p2p": {
+      "rc": 0,
+      "output": "# GOLD-P2P rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-16485\\django'\nImporting application template_tests\nFound 8 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_floatformat01 (template_tests.filter_tests.test_floatformat.FloatformatTests.test_floatformat01) ... ok\ntest_floatformat02 (template_tests.filter_tests.test_floatformat.FloatformatTests.test_floatformat02) ... ok\ntest_float_dunder_method (template_tests.filter_tests.test_floatformat.FunctionTests.test_float_dunder_method) ... ok\ntest_force_grouping (template_tests.filter_tests.test_floatformat.FunctionTests.test_force_grouping) ... ok\ntest_infinity (template_tests.filter_tests.test_floatformat.FunctionTests.test_infinity) ... ok\ntest_inputs (template_tests.filter_tests.test_floatformat.FunctionTests.test_inputs) ... ok\ntest_negative_zero_values (template_tests.filter_tests.test_floatformat.FunctionTests.test_negative_zero_values) ... ok\ntest_unlocalize (template_tests.filter_tests.test_floatformat.FunctionTests.test_unlocalize) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.108s\n\nOK\n"
+    }
+  },
+  "timestamp": "2026-08-15 15:21:43"
+}

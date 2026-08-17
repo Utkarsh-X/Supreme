@@ -1,0 +1,7 @@
+{
+  "instance_id": "scikit-learn__scikit-learn-13439",
+  "verdict": "REJECTED",
+  "detail": "scikit-learn 0.21: no runnable env (no era-appropriate Python with Windows wheels available)",
+  "phases": {},
+  "timestamp": "2026-08-15 16:14:16"
+}

@@ -1,0 +1,20 @@
+{
+  "instance_id": "scikit-learn__scikit-learn-14141",
+  "verdict": "VALIDATED",
+  "detail": "bug fails F2P (rc=1), gold passes F2P (rc=0)",
+  "phases": {
+    "buggy_f2p": {
+      "rc": 1,
+      "output": "# BUGGY rc=1 (10s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\scikit-learn__scikit-learn-14141, configfile: setup.cfg\ncollected 1 item\n\nsklearn\\utils\\tests\\test_show_versions.py F                              [100%]\n\n================================== FAILURES ===================================\n_____________________________ test_get_deps_info ______________________________\nsklearn\\utils\\tests\\test_show_versions.py:26: in test_get_deps_info\n    assert 'joblib' in deps_info\nE   AssertionError: assert 'joblib' in {'Cython': None, 'matplotlib': None, 'numpy': '1.19.5', 'pandas': None, ...}\n=========================== short test summary info ===========================\nFAILED sklearn/utils/tests/test_show_versions.py::test_get_deps_info - Assert...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 0.16s ==============================\n"
+    },
+    "gold_f2p": {
+      "rc": 0,
+      "output": "# GOLD-F2P rc=0 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\scikit-learn__scikit-learn-14141, configfile: setup.cfg\ncollected 1 item\n\nsklearn\\utils\\tests\\test_show_versions.py .                              [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sklearn/utils/tests/test_show_versions.py::test_get_deps_info\n============================== 1 passed in 0.03s ==============================\n"
+    },
+    "gold_p2p": {
+      "rc": 0,
+      "output": "# GOLD-P2P rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\scikit-learn__scikit-learn-14141, configfile: setup.cfg\ncollected 2 items\n\nsklearn\\utils\\tests\\test_show_versions.py ..                             [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sklearn/utils/tests/test_show_versions.py::test_get_sys_info\nPASSED sklearn/utils/tests/test_show_versions.py::test_show_versions_with_blas\n======================== 2 passed, 3 warnings in 1.24s ========================\n"
+    }
+  },
+  "timestamp": "2026-08-15 16:02:12"
+}
