@@ -10,10 +10,20 @@ LiveCodeBench v5 (`sources/data/lcb_v5.jsonl`, 175 problems).*
 
 ## 0. Execution status (2026-08-18)
 
-- Candidate pool locked: `task_registry/v3_calibration_tasks.txt` (20
-  VALIDATED hard-tier SWE + 21 fresh LCB), 41 tasks. 5 SWE candidates were
-  REJECTED during validation (unresolvable test labels / env limits) and
-  dropped from the registry; rejection records kept in `validation/`.
+- Candidate pool (expanded 2026-08-18, now 93 tasks in
+  `task_registry/v3_calibration_tasks.txt`):
+  - 20 VALIDATED hard-tier SWE (1-4h / >4h) — the full venv-supported hard
+    tier on this Windows box; 5 more candidates REJECTED in validation
+    (unresolvable test labels / env limits), rejection records kept.
+  - 46 fresh LCB (21 original + 25 hard-tier added tranche 2; all 2025
+    post-cutoff AtCoder, no v2 exposure).
+  - 27 VALIDATED medium-tier SWE (15min-1h) added tranche 3 (3 REJECTED:
+    2 unresolvable labels, 1 env/ABI).
+  Rationale for expansion: 41 candidates would calibrate down to only ~18-20
+  baseline-failing tasks; the target is ~50 final tasks, which needs a pool
+  of ~110-130. Expansion materialized + validated what the platform can run;
+  remaining untapped sources are TerminalBench 2.0 and custom diagnostics
+  (harness work needed).
 - Phase A running via `scripts/run_v3_calibration.py` ->
   `results/v3_calibration.json` (resumable, baseline-only). First datapoints:
   baseline FAILS django-10554 (39-line real fix attempt, hidden test red) and
