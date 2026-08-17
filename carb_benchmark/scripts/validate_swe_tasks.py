@@ -489,8 +489,11 @@ def main():
     only = None
     if "--only" in args:
         only = args[args.index("--only") + 1]
+    registry_path = REGISTRY
+    if "--registry" in args:
+        registry_path = Path(args[args.index("--registry") + 1])
 
-    registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
     verified = {}
     with VERIFIED.open(encoding="utf-8") as f:
         for line in f:
@@ -533,15 +536,11 @@ def main():
             write_sklearn_compat(venv)
             write_sklearn_shims(workspace)
 
-        test_args = resolve_test_args(f2p, test_patch, workspace, repo)
-        p2p_args = [a for a in resolve_test_args(p2p, test_patch, workspace, repo)
-                    if not a.startswith("__UNRESOLVABLE__")]
-        unresolvable = [a for a in test_args if a.startswith("__UNRESOLVABLE__")]
-        if unresolvable:
-            record(iid, "REJECTED",
-                   f"F2P entries not mappable to test labels: {unresolvable}", {})
-            summary.append((iid, "REJECTED"))
-            continue
+        # NOTE: F2P labels are resolved AFTER the hidden test patch is applied —
+        # patch-added tests (e.g. sympy test_issue_17624 added by test_patch) are
+        # found by the workspace search only once the patch is in place; resolving
+        # before patching yields bare names and pytest "file or directory not
+        # found" errors (observed on sympy-17630 during v3 validation).
 
         phases = {}
         # --- phase 1: buggy state, expect F2P to fail -----------------------
@@ -550,6 +549,15 @@ def main():
             record(iid, "REJECTED", "test_patch does not apply", {})
             summary.append((iid, "REJECTED"))
             continue
+        test_args = resolve_test_args(f2p, test_patch, workspace, repo)
+        unresolvable = [a for a in test_args if a.startswith("__UNRESOLVABLE__")]
+        if unresolvable:
+            record(iid, "REJECTED",
+                   f"F2P entries not mappable to test labels: {unresolvable}", {})
+            summary.append((iid, "REJECTED"))
+            continue
+        p2p_args = [a for a in resolve_test_args(p2p, test_patch, workspace, repo)
+                    if not a.startswith("__UNRESOLVABLE__")]
         rc_buggy, out_buggy = run_tests(venv, workspace, repo, test_args, "BUGGY")
         phases["buggy_f2p"] = {"rc": rc_buggy, "output": out_buggy}
         bug_fails = rc_buggy != 0

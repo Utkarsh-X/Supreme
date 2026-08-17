@@ -144,6 +144,10 @@ def main():
                 "FAIL_TO_PASS": inst["FAIL_TO_PASS"],
                 "PASS_TO_PASS": inst["PASS_TO_PASS"],
                 "test_command_hint": "pytest <FAIL_TO_PASS files>",
+                # the runner grades via the shared SWE evaluator; without this
+                # field the verdict is "NO TEST COMMAND" (cannot be a pass)
+                "test_command": f"python ../../carb_benchmark/scripts/eval_swe.py {iid}",
+                "test_timeout_seconds": 600,
             }, f, indent=2, ensure_ascii=False)
 
         git_init_commit(workspace)
