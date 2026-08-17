@@ -42,3 +42,6 @@ carb_benchmark/results/_inspect_tmp.txt
 # Secrets (defense in depth — already excluded via tooling/)
 *keyring*
 *_auth_profile*
+
+# scratch files rewritten by apply_patch() on every eval/validation run
+carb_benchmark/validation/*.lf.patch
