@@ -1,0 +1,11 @@
+{
+  "instance_id": "django__django-13212",
+  "repo": "django/django",
+  "base_commit": "f4e93919e4608cfc50849a1f764fd856e0917401",
+  "environment_setup_commit": "65dfb06a1ab56c238cc80f5e1c31f61210c4577d",
+  "FAIL_TO_PASS": "[\"test_value_placeholder_with_char_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\", \"test_value_placeholder_with_decimal_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\", \"test_value_placeholder_with_file_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\", \"test_value_placeholder_with_integer_field (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\", \"test_value_placeholder_with_null_character (forms_tests.tests.test_validators.ValidatorCustomMessageTests)\"]",
+  "PASS_TO_PASS": "[\"test_all_errors_get_reported (forms_tests.tests.test_validators.TestFieldWithValidators)\", \"test_field_validators_can_be_any_iterable (forms_tests.tests.test_validators.TestFieldWithValidators)\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>",
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-13212",
+  "test_timeout_seconds": 600
+}

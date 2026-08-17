@@ -1,0 +1,7 @@
+{
+  "instance_id": "django__django-14631",
+  "verdict": "REJECTED",
+  "detail": "F2P entries not mappable to test labels: ['__UNRESOLVABLE__:The cleaned value for a form with a disabled DateTimeField and callable', '__UNRESOLVABLE__:Cleaning a form with a disabled DateTimeField and callable initial']",
+  "phases": {},
+  "timestamp": "2026-08-17 18:36:49"
+}

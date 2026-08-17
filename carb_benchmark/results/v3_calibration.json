@@ -1,0 +1,16 @@
+{
+  "config": "baseline-v2.0",
+  "notes": "v3 Phase A calibration (baseline-only)",
+  "started_at": "2026-08-17T18:00:00",
+  "results": {
+    "django__django-10554": {
+      "run_id": "2026-08-17-175600-django__django-10554-baseline-v2.0",
+      "passed": false,
+      "wall_clock_seconds": 1213.5,
+      "diff": 39,
+      "timed_out": false,
+      "note": "real 39-line fix attempt; hidden test still red (VALIDATED passable via gold)"
+    }
+  },
+  "last_update": "2026-08-17T18:00:00"
+}

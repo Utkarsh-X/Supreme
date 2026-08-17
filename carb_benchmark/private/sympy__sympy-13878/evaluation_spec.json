@@ -1,0 +1,9 @@
+{
+  "instance_id": "sympy__sympy-13878",
+  "repo": "sympy/sympy",
+  "base_commit": "7b127bdf71a36d85216315f80c1b54d22b060818",
+  "environment_setup_commit": "ec9e3c0436fbff934fa84e22bf07f1b3ef5bfac3",
+  "FAIL_TO_PASS": "[\"test_arcsin\"]",
+  "PASS_TO_PASS": "[\"test_ContinuousDomain\", \"test_characteristic_function\", \"test_benini\", \"test_chi\", \"test_chi_noncentral\", \"test_chi_squared\", \"test_gompertz\", \"test_shiftedgompertz\", \"test_trapezoidal\", \"test_quadratic_u\", \"test_von_mises\", \"test_prefab_sampling\", \"test_input_value_assertions\", \"test_probability_unevaluated\", \"test_density_unevaluated\", \"test_random_parameters\", \"test_random_parameters_given\", \"test_conjugate_priors\", \"test_issue_10003\"]",
+  "test_command_hint": "pytest <FAIL_TO_PASS files>"
+}

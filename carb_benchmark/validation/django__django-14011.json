@@ -1,0 +1,7 @@
+{
+  "instance_id": "django__django-14011",
+  "verdict": "REJECTED",
+  "detail": "F2P entries not mappable to test labels: ['__UNRESOLVABLE__:Data written to the database by a view can be read.', '__UNRESOLVABLE__:Fixtures are properly loaded and visible to the live server thread.', '__UNRESOLVABLE__:A HTTP 1.1 server is supposed to support keep-alive. Since our', '__UNRESOLVABLE__:See `test_closes_connection_without_content_length` for details. This', '__UNRESOLVABLE__:LiveServerTestCase reports a 404 status code when HTTP client', '__UNRESOLVABLE__:Launched server serves with HTTP 1.1.', '__UNRESOLVABLE__:Each LiveServerTestCase binds to a unique port or fails to start a', \"__UNRESOLVABLE__:LiveServerTestCase.port customizes the server's port.\"]",
+  "phases": {},
+  "timestamp": "2026-08-17 18:36:49"
+}

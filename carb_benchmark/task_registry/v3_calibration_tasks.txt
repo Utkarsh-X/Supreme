@@ -1,0 +1,50 @@
+# V3 Phase A calibration candidates (baseline-only, locked before challengers run).
+# Source of truth: task_registry/swe_tasks_v3.json (20 VALIDATED hard-tier SWE,
+# 5 REJECTED dropped on 2026-08-18) + task_registry/v3_lcb_calibration.jsonl
+# (21 fresh LCB medium/hard, one per contest, no v2 exposure).
+# Protocol: protocol/v3_discriminative_set_proposal.md
+# Runner: scripts/run_v3_calibration.py (idempotent, resumes from results/v3_calibration.json)
+#
+# ---- SWE-bench Verified hard tier (VALIDATED on this platform) ----
+django__django-10554
+django__django-11138
+django__django-11885
+django__django-12325
+django__django-12708
+django__django-13128
+django__django-13212
+django__django-13344
+django__django-13449
+django__django-13837
+django__django-14007
+django__django-15957
+django__django-16263
+django__django-16560
+django__django-16631
+sympy__sympy-13852
+sympy__sympy-13878
+sympy__sympy-14248
+sympy__sympy-16597
+sympy__sympy-17630
+# ---- LiveCodeBench v5 (medium + hard AtCoder, fresh) ----
+lcb__abc388_d
+lcb__abc389_e
+lcb__abc390_d
+lcb__abc391_e
+lcb__abc392_d
+lcb__abc393_d
+lcb__abc394_d
+lcb__abc395_c
+lcb__abc396_d
+lcb__abc397_f
+lcb__abc398_d
+lcb__abc399_e
+lcb__abc400_e
+lcb__arc190_c
+lcb__arc191_c
+lcb__arc192_b
+lcb__arc193_b
+lcb__arc194_b
+lcb__arc195_b
+lcb__arc196_a
+lcb__arc196_b
