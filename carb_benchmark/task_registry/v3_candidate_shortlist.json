@@ -1,0 +1,3838 @@
+{
+ "v3_candidate_shortlist_version": "0.1",
+ "generated_by": "v3_propose_tasks.py",
+ "excludes": {
+  "v2_instances": [
+   "django__django-11119",
+   "django__django-11133",
+   "django__django-11179",
+   "django__django-11880",
+   "django__django-12419",
+   "django__django-12965",
+   "django__django-14089",
+   "django__django-14493",
+   "django__django-15851",
+   "django__django-16082",
+   "django__django-16485",
+   "django__django-17029",
+   "lcb__abc387_b",
+   "lcb__abc388_c",
+   "lcb__abc389_d",
+   "lcb__abc390_c",
+   "lcb__abc391_d",
+   "lcb__abc392_b",
+   "lcb__abc393_b",
+   "lcb__abc394_b",
+   "lcb__abc395_b",
+   "lcb__abc396_b",
+   "lcb__abc397_c",
+   "lcb__abc398_b",
+   "lcb__abc399_b",
+   "lcb__abc400_c",
+   "lcb__arc190_a",
+   "lcb__arc191_a",
+   "lcb__arc192_a",
+   "lcb__arc193_a",
+   "lcb__arc194_a",
+   "lcb__arc195_a",
+   "matplotlib__matplotlib-23299",
+   "matplotlib__matplotlib-23476",
+   "matplotlib__matplotlib-24177",
+   "matplotlib__matplotlib-24627",
+   "pytest-dev__pytest-5262",
+   "pytest-dev__pytest-7521",
+   "scikit-learn__scikit-learn-14141",
+   "sphinx-doc__sphinx-10435",
+   "sphinx-doc__sphinx-8595",
+   "sphinx-doc__sphinx-9230",
+   "sphinx-doc__sphinx-9367",
+   "sphinx-doc__sphinx-9698",
+   "sympy__sympy-13480",
+   "sympy__sympy-14711",
+   "sympy__sympy-15875",
+   "sympy__sympy-16886",
+   "sympy__sympy-19637",
+   "sympy__sympy-23950"
+  ]
+ },
+ "swe_bench_verified": {
+  "hard_tier": [
+   {
+    "instance_id": "astropy__astropy-13398",
+    "repo": "astropy/astropy",
+    "difficulty": "1-4 hours",
+    "version": "5.0",
+    "gold_patch_bytes": 13884,
+    "fail_to_pass_count": 396,
+    "pass_to_pass_count": 6769
+   },
+   {
+    "instance_id": "astropy__astropy-13579",
+    "repo": "astropy/astropy",
+    "difficulty": "1-4 hours",
+    "version": "5.0",
+    "gold_patch_bytes": 1023,
+    "fail_to_pass_count": 84,
+    "pass_to_pass_count": 3721
+   },
+   {
+    "instance_id": "astropy__astropy-14369",
+    "repo": "astropy/astropy",
+    "difficulty": "1-4 hours",
+    "version": "5.1",
+    "gold_patch_bytes": 12099,
+    "fail_to_pass_count": 217,
+    "pass_to_pass_count": 58353
+   },
+   {
+    "instance_id": "django__django-10554",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.0",
+    "gold_patch_bytes": 1554,
+    "fail_to_pass_count": 213,
+    "pass_to_pass_count": 1990
+   },
+   {
+    "instance_id": "django__django-11138",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.0",
+    "gold_patch_bytes": 7548,
+    "fail_to_pass_count": 67,
+    "pass_to_pass_count": 4969
+   },
+   {
+    "instance_id": "django__django-11400",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.0",
+    "gold_patch_bytes": 3224,
+    "fail_to_pass_count": 487,
+    "pass_to_pass_count": 4097
+   },
+   {
+    "instance_id": "django__django-11885",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.1",
+    "gold_patch_bytes": 10818,
+    "fail_to_pass_count": 74,
+    "pass_to_pass_count": 2471
+   },
+   {
+    "instance_id": "django__django-12325",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.1",
+    "gold_patch_bytes": 1614,
+    "fail_to_pass_count": 174,
+    "pass_to_pass_count": 17209
+   },
+   {
+    "instance_id": "django__django-12708",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.1",
+    "gold_patch_bytes": 850,
+    "fail_to_pass_count": 101,
+    "pass_to_pass_count": 7752
+   },
+   {
+    "instance_id": "django__django-13128",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.2",
+    "gold_patch_bytes": 3354,
+    "fail_to_pass_count": 480,
+    "pass_to_pass_count": 9438
+   },
+   {
+    "instance_id": "django__django-13212",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.2",
+    "gold_patch_bytes": 7779,
+    "fail_to_pass_count": 540,
+    "pass_to_pass_count": 197
+   },
+   {
+    "instance_id": "django__django-13344",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.2",
+    "gold_patch_bytes": 5088,
+    "fail_to_pass_count": 152,
+    "pass_to_pass_count": 21479
+   },
+   {
+    "instance_id": "django__django-13449",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.2",
+    "gold_patch_bytes": 1290,
+    "fail_to_pass_count": 72,
+    "pass_to_pass_count": 3354
+   },
+   {
+    "instance_id": "django__django-13837",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "3.2",
+    "gold_patch_bytes": 1037,
+    "fail_to_pass_count": 82,
+    "pass_to_pass_count": 4508
+   },
+   {
+    "instance_id": "django__django-14007",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.0",
+    "gold_patch_bytes": 2029,
+    "fail_to_pass_count": 67,
+    "pass_to_pass_count": 665
+   },
+   {
+    "instance_id": "django__django-14011",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.0",
+    "gold_patch_bytes": 2233,
+    "fail_to_pass_count": 1056,
+    "pass_to_pass_count": 80
+   },
+   {
+    "instance_id": "django__django-14631",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.0",
+    "gold_patch_bytes": 5201,
+    "fail_to_pass_count": 145,
+    "pass_to_pass_count": 8716
+   },
+   {
+    "instance_id": "django__django-15128",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.1",
+    "gold_patch_bytes": 3798,
+    "fail_to_pass_count": 89,
+    "pass_to_pass_count": 17244
+   },
+   {
+    "instance_id": "django__django-15268",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.1",
+    "gold_patch_bytes": 1228,
+    "fail_to_pass_count": 193,
+    "pass_to_pass_count": 9192
+   },
+   {
+    "instance_id": "django__django-15503",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.1",
+    "gold_patch_bytes": 3313,
+    "fail_to_pass_count": 126,
+    "pass_to_pass_count": 5504
+   },
+   {
+    "instance_id": "django__django-15629",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.1",
+    "gold_patch_bytes": 5128,
+    "fail_to_pass_count": 131,
+    "pass_to_pass_count": 7819
+   },
+   {
+    "instance_id": "django__django-15957",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.2",
+    "gold_patch_bytes": 3039,
+    "fail_to_pass_count": 268,
+    "pass_to_pass_count": 6420
+   },
+   {
+    "instance_id": "django__django-16263",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "4.2",
+    "gold_patch_bytes": 9785,
+    "fail_to_pass_count": 285,
+    "pass_to_pass_count": 7329
+   },
+   {
+    "instance_id": "django__django-16560",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "5.0",
+    "gold_patch_bytes": 10743,
+    "fail_to_pass_count": 765,
+    "pass_to_pass_count": 6490
+   },
+   {
+    "instance_id": "django__django-16631",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "version": "5.0",
+    "gold_patch_bytes": 2723,
+    "fail_to_pass_count": 99,
+    "pass_to_pass_count": 795
+   },
+   {
+    "instance_id": "pytest-dev__pytest-10356",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "1-4 hours",
+    "version": "7.2",
+    "gold_patch_bytes": 2091,
+    "fail_to_pass_count": 39,
+    "pass_to_pass_count": 5336
+   },
+   {
+    "instance_id": "pytest-dev__pytest-5787",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "1-4 hours",
+    "version": "5.1",
+    "gold_patch_bytes": 9824,
+    "fail_to_pass_count": 181,
+    "pass_to_pass_count": 9872
+   },
+   {
+    "instance_id": "pytest-dev__pytest-6197",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "1-4 hours",
+    "version": "5.2",
+    "gold_patch_bytes": 1868,
+    "fail_to_pass_count": 131,
+    "pass_to_pass_count": 10365
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-25102",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "1-4 hours",
+    "version": "1.3",
+    "gold_patch_bytes": 3888,
+    "fail_to_pass_count": 159,
+    "pass_to_pass_count": 5659
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-11510",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "1-4 hours",
+    "version": "7.2",
+    "gold_patch_bytes": 2867,
+    "fail_to_pass_count": 146,
+    "pass_to_pass_count": 387
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-7590",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": ">4 hours",
+    "version": "3.1",
+    "gold_patch_bytes": 10055,
+    "fail_to_pass_count": 46,
+    "pass_to_pass_count": 1388
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8548",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "1-4 hours",
+    "version": "3.4",
+    "gold_patch_bytes": 3907,
+    "fail_to_pass_count": 73,
+    "pass_to_pass_count": 324
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-9229",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "1-4 hours",
+    "version": "4.1",
+    "gold_patch_bytes": 1666,
+    "fail_to_pass_count": 75,
+    "pass_to_pass_count": 859
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-9461",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "1-4 hours",
+    "version": "4.2",
+    "gold_patch_bytes": 4777,
+    "fail_to_pass_count": 165,
+    "pass_to_pass_count": 3438
+   },
+   {
+    "instance_id": "sympy__sympy-12489",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "version": "1.0",
+    "gold_patch_bytes": 9648,
+    "fail_to_pass_count": 32,
+    "pass_to_pass_count": 138
+   },
+   {
+    "instance_id": "sympy__sympy-13852",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "version": "1.1",
+    "gold_patch_bytes": 2593,
+    "fail_to_pass_count": 23,
+    "pass_to_pass_count": 87
+   },
+   {
+    "instance_id": "sympy__sympy-13878",
+    "repo": "sympy/sympy",
+    "difficulty": ">4 hours",
+    "version": "1.1",
+    "gold_patch_bytes": 14547,
+    "fail_to_pass_count": 15,
+    "pass_to_pass_count": 444
+   },
+   {
+    "instance_id": "sympy__sympy-14248",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "version": "1.1",
+    "gold_patch_bytes": 3801,
+    "fail_to_pass_count": 61,
+    "pass_to_pass_count": 10114
+   },
+   {
+    "instance_id": "sympy__sympy-16597",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "version": "1.5",
+    "gold_patch_bytes": 10210,
+    "fail_to_pass_count": 59,
+    "pass_to_pass_count": 1740
+   },
+   {
+    "instance_id": "sympy__sympy-17630",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "version": "1.5",
+    "gold_patch_bytes": 589,
+    "fail_to_pass_count": 44,
+    "pass_to_pass_count": 435
+   },
+   {
+    "instance_id": "sympy__sympy-18199",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "version": "1.6",
+    "gold_patch_bytes": 2838,
+    "fail_to_pass_count": 22,
+    "pass_to_pass_count": 2668
+   }
+  ],
+  "medium_tier": [
+   {
+    "instance_id": "astropy__astropy-12907",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.3",
+    "gold_patch_bytes": 470,
+    "fail_to_pass_count": 170,
+    "pass_to_pass_count": 989
+   },
+   {
+    "instance_id": "astropy__astropy-13033",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.3",
+    "gold_patch_bytes": 1486,
+    "fail_to_pass_count": 67,
+    "pass_to_pass_count": 1510
+   },
+   {
+    "instance_id": "astropy__astropy-13236",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 853,
+    "fail_to_pass_count": 132,
+    "pass_to_pass_count": 49633
+   },
+   {
+    "instance_id": "astropy__astropy-13453",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 512,
+    "fail_to_pass_count": 75,
+    "pass_to_pass_count": 668
+   },
+   {
+    "instance_id": "astropy__astropy-13977",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.1",
+    "gold_patch_bytes": 5777,
+    "fail_to_pass_count": 2900,
+    "pass_to_pass_count": 31395
+   },
+   {
+    "instance_id": "astropy__astropy-14096",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.1",
+    "gold_patch_bytes": 728,
+    "fail_to_pass_count": 87,
+    "pass_to_pass_count": 49151
+   },
+   {
+    "instance_id": "astropy__astropy-14182",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.1",
+    "gold_patch_bytes": 2186,
+    "fail_to_pass_count": 65,
+    "pass_to_pass_count": 608
+   },
+   {
+    "instance_id": "astropy__astropy-14365",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.1",
+    "gold_patch_bytes": 955,
+    "fail_to_pass_count": 60,
+    "pass_to_pass_count": 517
+   },
+   {
+    "instance_id": "astropy__astropy-14508",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.1",
+    "gold_patch_bytes": 1517,
+    "fail_to_pass_count": 109,
+    "pass_to_pass_count": 15666
+   },
+   {
+    "instance_id": "astropy__astropy-14539",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.1",
+    "gold_patch_bytes": 481,
+    "fail_to_pass_count": 146,
+    "pass_to_pass_count": 3562
+   },
+   {
+    "instance_id": "astropy__astropy-14598",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.2",
+    "gold_patch_bytes": 963,
+    "fail_to_pass_count": 97,
+    "pass_to_pass_count": 15775
+   },
+   {
+    "instance_id": "astropy__astropy-7606",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.3",
+    "gold_patch_bytes": 1062,
+    "fail_to_pass_count": 57,
+    "pass_to_pass_count": 15373
+   },
+   {
+    "instance_id": "astropy__astropy-7671",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.3",
+    "gold_patch_bytes": 910,
+    "fail_to_pass_count": 62,
+    "pass_to_pass_count": 195
+   },
+   {
+    "instance_id": "astropy__astropy-8707",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 5131,
+    "fail_to_pass_count": 83,
+    "pass_to_pass_count": 871
+   },
+   {
+    "instance_id": "astropy__astropy-8872",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 1674,
+    "fail_to_pass_count": 83,
+    "pass_to_pass_count": 6137
+   },
+   {
+    "instance_id": "django__django-10973",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 2434,
+    "fail_to_pass_count": 362,
+    "pass_to_pass_count": 2
+   },
+   {
+    "instance_id": "django__django-11087",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 3186,
+    "fail_to_pass_count": 69,
+    "pass_to_pass_count": 2352
+   },
+   {
+    "instance_id": "django__django-11095",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 945,
+    "fail_to_pass_count": 107,
+    "pass_to_pass_count": 1565
+   },
+   {
+    "instance_id": "django__django-11141",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 1519,
+    "fail_to_pass_count": 65,
+    "pass_to_pass_count": 1511
+   },
+   {
+    "instance_id": "django__django-11149",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 4267,
+    "fail_to_pass_count": 167,
+    "pass_to_pass_count": 3210
+   },
+   {
+    "instance_id": "django__django-11206",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 831,
+    "fail_to_pass_count": 147,
+    "pass_to_pass_count": 283
+   },
+   {
+    "instance_id": "django__django-11211",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 527,
+    "fail_to_pass_count": 75,
+    "pass_to_pass_count": 5531
+   },
+   {
+    "instance_id": "django__django-11265",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 1668,
+    "fail_to_pass_count": 69,
+    "pass_to_pass_count": 2252
+   },
+   {
+    "instance_id": "django__django-11276",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 2760,
+    "fail_to_pass_count": 1813,
+    "pass_to_pass_count": 41146
+   },
+   {
+    "instance_id": "django__django-11292",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 1713,
+    "fail_to_pass_count": 58,
+    "pass_to_pass_count": 2331
+   },
+   {
+    "instance_id": "django__django-11333",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 1236,
+    "fail_to_pass_count": 93,
+    "pass_to_pass_count": 118
+   },
+   {
+    "instance_id": "django__django-11477",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 610,
+    "fail_to_pass_count": 236,
+    "pass_to_pass_count": 10667
+   },
+   {
+    "instance_id": "django__django-11532",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 4525,
+    "fail_to_pass_count": 63,
+    "pass_to_pass_count": 8246
+   },
+   {
+    "instance_id": "django__django-11551",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 2499,
+    "fail_to_pass_count": 86,
+    "pass_to_pass_count": 8726
+   },
+   {
+    "instance_id": "django__django-11728",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 3304,
+    "fail_to_pass_count": 140,
+    "pass_to_pass_count": 3309
+   },
+   {
+    "instance_id": "django__django-11734",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 2077,
+    "fail_to_pass_count": 63,
+    "pass_to_pass_count": 16767
+   },
+   {
+    "instance_id": "django__django-11740",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 1777,
+    "fail_to_pass_count": 96,
+    "pass_to_pass_count": 8231
+   },
+   {
+    "instance_id": "django__django-11749",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.0",
+    "gold_patch_bytes": 1022,
+    "fail_to_pass_count": 85,
+    "pass_to_pass_count": 2524
+   },
+   {
+    "instance_id": "django__django-11790",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 806,
+    "fail_to_pass_count": 197,
+    "pass_to_pass_count": 5823
+   },
+   {
+    "instance_id": "django__django-11815",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 739,
+    "fail_to_pass_count": 139,
+    "pass_to_pass_count": 2975
+   },
+   {
+    "instance_id": "django__django-11848",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 869,
+    "fail_to_pass_count": 153,
+    "pass_to_pass_count": 2734
+   },
+   {
+    "instance_id": "django__django-11999",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 870,
+    "fail_to_pass_count": 75,
+    "pass_to_pass_count": 1911
+   },
+   {
+    "instance_id": "django__django-12039",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 1268,
+    "fail_to_pass_count": 71,
+    "pass_to_pass_count": 706
+   },
+   {
+    "instance_id": "django__django-12050",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 1412,
+    "fail_to_pass_count": 61,
+    "pass_to_pass_count": 545
+   },
+   {
+    "instance_id": "django__django-12143",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 745,
+    "fail_to_pass_count": 103,
+    "pass_to_pass_count": 4146
+   },
+   {
+    "instance_id": "django__django-12155",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 2268,
+    "fail_to_pass_count": 88,
+    "pass_to_pass_count": 345
+   },
+   {
+    "instance_id": "django__django-12262",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 680,
+    "fail_to_pass_count": 280,
+    "pass_to_pass_count": 1407
+   },
+   {
+    "instance_id": "django__django-12273",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 563,
+    "fail_to_pass_count": 224,
+    "pass_to_pass_count": 2395
+   },
+   {
+    "instance_id": "django__django-12406",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 2165,
+    "fail_to_pass_count": 252,
+    "pass_to_pass_count": 12492
+   },
+   {
+    "instance_id": "django__django-12663",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 580,
+    "fail_to_pass_count": 74,
+    "pass_to_pass_count": 9499
+   },
+   {
+    "instance_id": "django__django-12713",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 1986,
+    "fail_to_pass_count": 98,
+    "pass_to_pass_count": 4499
+   },
+   {
+    "instance_id": "django__django-12754",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1377,
+    "fail_to_pass_count": 102,
+    "pass_to_pass_count": 8489
+   },
+   {
+    "instance_id": "django__django-12774",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 947,
+    "fail_to_pass_count": 59,
+    "pass_to_pass_count": 2200
+   },
+   {
+    "instance_id": "django__django-12858",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 690,
+    "fail_to_pass_count": 101,
+    "pass_to_pass_count": 6488
+   },
+   {
+    "instance_id": "django__django-13012",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 510,
+    "fail_to_pass_count": 136,
+    "pass_to_pass_count": 9635
+   },
+   {
+    "instance_id": "django__django-13028",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 693,
+    "fail_to_pass_count": 109,
+    "pass_to_pass_count": 16844
+   },
+   {
+    "instance_id": "django__django-13033",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 970,
+    "fail_to_pass_count": 68,
+    "pass_to_pass_count": 1660
+   },
+   {
+    "instance_id": "django__django-13121",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 6564,
+    "fail_to_pass_count": 65,
+    "pass_to_pass_count": 12322
+   },
+   {
+    "instance_id": "django__django-13158",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 961,
+    "fail_to_pass_count": 75,
+    "pass_to_pass_count": 2569
+   },
+   {
+    "instance_id": "django__django-13195",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 2611,
+    "fail_to_pass_count": 402,
+    "pass_to_pass_count": 26981
+   },
+   {
+    "instance_id": "django__django-13279",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1278,
+    "fail_to_pass_count": 841,
+    "pass_to_pass_count": 24730
+   },
+   {
+    "instance_id": "django__django-13315",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1186,
+    "fail_to_pass_count": 79,
+    "pass_to_pass_count": 10741
+   },
+   {
+    "instance_id": "django__django-13343",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 980,
+    "fail_to_pass_count": 74,
+    "pass_to_pass_count": 9623
+   },
+   {
+    "instance_id": "django__django-13346",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1839,
+    "fail_to_pass_count": 120,
+    "pass_to_pass_count": 4512
+   },
+   {
+    "instance_id": "django__django-13401",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 2030,
+    "fail_to_pass_count": 55,
+    "pass_to_pass_count": 2071
+   },
+   {
+    "instance_id": "django__django-13513",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 3686,
+    "fail_to_pass_count": 99,
+    "pass_to_pass_count": 6818
+   },
+   {
+    "instance_id": "django__django-13516",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 476,
+    "fail_to_pass_count": 63,
+    "pass_to_pass_count": 3216
+   },
+   {
+    "instance_id": "django__django-13568",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 672,
+    "fail_to_pass_count": 92,
+    "pass_to_pass_count": 1065
+   },
+   {
+    "instance_id": "django__django-13569",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 519,
+    "fail_to_pass_count": 68,
+    "pass_to_pass_count": 4619
+   },
+   {
+    "instance_id": "django__django-13590",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 823,
+    "fail_to_pass_count": 88,
+    "pass_to_pass_count": 10153
+   },
+   {
+    "instance_id": "django__django-13658",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 854,
+    "fail_to_pass_count": 76,
+    "pass_to_pass_count": 14105
+   },
+   {
+    "instance_id": "django__django-13670",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 476,
+    "fail_to_pass_count": 71,
+    "pass_to_pass_count": 1183
+   },
+   {
+    "instance_id": "django__django-13786",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 935,
+    "fail_to_pass_count": 89,
+    "pass_to_pass_count": 2548
+   },
+   {
+    "instance_id": "django__django-13809",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 1222,
+    "fail_to_pass_count": 58,
+    "pass_to_pass_count": 19073
+   },
+   {
+    "instance_id": "django__django-13810",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1176,
+    "fail_to_pass_count": 104,
+    "pass_to_pass_count": 2776
+   },
+   {
+    "instance_id": "django__django-13820",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1408,
+    "fail_to_pass_count": 77,
+    "pass_to_pass_count": 1526
+   },
+   {
+    "instance_id": "django__django-13925",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 630,
+    "fail_to_pass_count": 190,
+    "pass_to_pass_count": 2274
+   },
+   {
+    "instance_id": "django__django-13964",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 696,
+    "fail_to_pass_count": 97,
+    "pass_to_pass_count": 2342
+   },
+   {
+    "instance_id": "django__django-14017",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 624,
+    "fail_to_pass_count": 169,
+    "pass_to_pass_count": 10214
+   },
+   {
+    "instance_id": "django__django-14034",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 1576,
+    "fail_to_pass_count": 102,
+    "pass_to_pass_count": 1011
+   },
+   {
+    "instance_id": "django__django-14053",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 2122,
+    "fail_to_pass_count": 38,
+    "pass_to_pass_count": 2786
+   },
+   {
+    "instance_id": "django__django-14122",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 1126,
+    "fail_to_pass_count": 81,
+    "pass_to_pass_count": 1707
+   },
+   {
+    "instance_id": "django__django-14140",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 1026,
+    "fail_to_pass_count": 250,
+    "pass_to_pass_count": 14051
+   },
+   {
+    "instance_id": "django__django-14155",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 949,
+    "fail_to_pass_count": 219,
+    "pass_to_pass_count": 6169
+   },
+   {
+    "instance_id": "django__django-14170",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 3448,
+    "fail_to_pass_count": 216,
+    "pass_to_pass_count": 7352
+   },
+   {
+    "instance_id": "django__django-14238",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 627,
+    "fail_to_pass_count": 191,
+    "pass_to_pass_count": 2861
+   },
+   {
+    "instance_id": "django__django-14311",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 947,
+    "fail_to_pass_count": 94,
+    "pass_to_pass_count": 4632
+   },
+   {
+    "instance_id": "django__django-14349",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 926,
+    "fail_to_pass_count": 53,
+    "pass_to_pass_count": 1194
+   },
+   {
+    "instance_id": "django__django-14351",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 770,
+    "fail_to_pass_count": 76,
+    "pass_to_pass_count": 4178
+   },
+   {
+    "instance_id": "django__django-14434",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 1423,
+    "fail_to_pass_count": 53,
+    "pass_to_pass_count": 8201
+   },
+   {
+    "instance_id": "django__django-14500",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 1017,
+    "fail_to_pass_count": 85,
+    "pass_to_pass_count": 1337
+   },
+   {
+    "instance_id": "django__django-14559",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 1349,
+    "fail_to_pass_count": 216,
+    "pass_to_pass_count": 1587
+   },
+   {
+    "instance_id": "django__django-14672",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 511,
+    "fail_to_pass_count": 15373,
+    "pass_to_pass_count": 2
+   },
+   {
+    "instance_id": "django__django-14725",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 2530,
+    "fail_to_pass_count": 223,
+    "pass_to_pass_count": 5451
+   },
+   {
+    "instance_id": "django__django-14771",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 693,
+    "fail_to_pass_count": 66,
+    "pass_to_pass_count": 4726
+   },
+   {
+    "instance_id": "django__django-15022",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 1106,
+    "fail_to_pass_count": 211,
+    "pass_to_pass_count": 4087
+   },
+   {
+    "instance_id": "django__django-15037",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 1403,
+    "fail_to_pass_count": 65,
+    "pass_to_pass_count": 958
+   },
+   {
+    "instance_id": "django__django-15098",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 403,
+    "fail_to_pass_count": 126,
+    "pass_to_pass_count": 5778
+   },
+   {
+    "instance_id": "django__django-15103",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 1606,
+    "fail_to_pass_count": 151,
+    "pass_to_pass_count": 1069
+   },
+   {
+    "instance_id": "django__django-15161",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 1795,
+    "fail_to_pass_count": 189,
+    "pass_to_pass_count": 14239
+   },
+   {
+    "instance_id": "django__django-15252",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 850,
+    "fail_to_pass_count": 172,
+    "pass_to_pass_count": 2433
+   },
+   {
+    "instance_id": "django__django-15278",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 1128,
+    "fail_to_pass_count": 58,
+    "pass_to_pass_count": 8529
+   },
+   {
+    "instance_id": "django__django-15280",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 929,
+    "fail_to_pass_count": 74,
+    "pass_to_pass_count": 6059
+   },
+   {
+    "instance_id": "django__django-15375",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 733,
+    "fail_to_pass_count": 83,
+    "pass_to_pass_count": 6926
+   },
+   {
+    "instance_id": "django__django-15382",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 959,
+    "fail_to_pass_count": 61,
+    "pass_to_pass_count": 11173
+   },
+   {
+    "instance_id": "django__django-15525",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 640,
+    "fail_to_pass_count": 70,
+    "pass_to_pass_count": 3671
+   },
+   {
+    "instance_id": "django__django-15554",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 4891,
+    "fail_to_pass_count": 65,
+    "pass_to_pass_count": 3117
+   },
+   {
+    "instance_id": "django__django-15561",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 2007,
+    "fail_to_pass_count": 60,
+    "pass_to_pass_count": 8689
+   },
+   {
+    "instance_id": "django__django-15563",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 2588,
+    "fail_to_pass_count": 196,
+    "pass_to_pass_count": 2201
+   },
+   {
+    "instance_id": "django__django-15695",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.1",
+    "gold_patch_bytes": 737,
+    "fail_to_pass_count": 79,
+    "pass_to_pass_count": 8460
+   },
+   {
+    "instance_id": "django__django-15731",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 775,
+    "fail_to_pass_count": 59,
+    "pass_to_pass_count": 3727
+   },
+   {
+    "instance_id": "django__django-15732",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 2829,
+    "fail_to_pass_count": 91,
+    "pass_to_pass_count": 8626
+   },
+   {
+    "instance_id": "django__django-15814",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 598,
+    "fail_to_pass_count": 65,
+    "pass_to_pass_count": 1789
+   },
+   {
+    "instance_id": "django__django-15916",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 1709,
+    "fail_to_pass_count": 162,
+    "pass_to_pass_count": 10649
+   },
+   {
+    "instance_id": "django__django-15973",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 633,
+    "fail_to_pass_count": 97,
+    "pass_to_pass_count": 11438
+   },
+   {
+    "instance_id": "django__django-16032",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 2191,
+    "fail_to_pass_count": 206,
+    "pass_to_pass_count": 6034
+   },
+   {
+    "instance_id": "django__django-16136",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 753,
+    "fail_to_pass_count": 131,
+    "pass_to_pass_count": 436
+   },
+   {
+    "instance_id": "django__django-16256",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 5054,
+    "fail_to_pass_count": 825,
+    "pass_to_pass_count": 3898
+   },
+   {
+    "instance_id": "django__django-16315",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 2319,
+    "fail_to_pass_count": 99,
+    "pass_to_pass_count": 3098
+   },
+   {
+    "instance_id": "django__django-16454",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 857,
+    "fail_to_pass_count": 105,
+    "pass_to_pass_count": 4716
+   },
+   {
+    "instance_id": "django__django-16493",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 692,
+    "fail_to_pass_count": 63,
+    "pass_to_pass_count": 8386
+   },
+   {
+    "instance_id": "django__django-16502",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 2176,
+    "fail_to_pass_count": 134,
+    "pass_to_pass_count": 268
+   },
+   {
+    "instance_id": "django__django-16527",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 581,
+    "fail_to_pass_count": 161,
+    "pass_to_pass_count": 517
+   },
+   {
+    "instance_id": "django__django-16612",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 630,
+    "fail_to_pass_count": 340,
+    "pass_to_pass_count": 30117
+   },
+   {
+    "instance_id": "django__django-16661",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 1152,
+    "fail_to_pass_count": 110,
+    "pass_to_pass_count": 3150
+   },
+   {
+    "instance_id": "django__django-16662",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 765,
+    "fail_to_pass_count": 39,
+    "pass_to_pass_count": 4462
+   },
+   {
+    "instance_id": "django__django-16667",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 529,
+    "fail_to_pass_count": 213,
+    "pass_to_pass_count": 2447
+   },
+   {
+    "instance_id": "django__django-16819",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 641,
+    "fail_to_pass_count": 90,
+    "pass_to_pass_count": 3045
+   },
+   {
+    "instance_id": "django__django-16877",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 628,
+    "fail_to_pass_count": 408,
+    "pass_to_pass_count": 2
+   },
+   {
+    "instance_id": "django__django-16901",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 1316,
+    "fail_to_pass_count": 81,
+    "pass_to_pass_count": 396
+   },
+   {
+    "instance_id": "django__django-16938",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 1354,
+    "fail_to_pass_count": 2253,
+    "pass_to_pass_count": 5665
+   },
+   {
+    "instance_id": "django__django-16950",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 824,
+    "fail_to_pass_count": 72,
+    "pass_to_pass_count": 217
+   },
+   {
+    "instance_id": "django__django-17084",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 1421,
+    "fail_to_pass_count": 137,
+    "pass_to_pass_count": 11091
+   },
+   {
+    "instance_id": "django__django-7530",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.11",
+    "gold_patch_bytes": 754,
+    "fail_to_pass_count": 92,
+    "pass_to_pass_count": 5044
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-14623",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 3862,
+    "fail_to_pass_count": 59,
+    "pass_to_pass_count": 28162
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-20488",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.4",
+    "gold_patch_bytes": 928,
+    "fail_to_pass_count": 67,
+    "pass_to_pass_count": 7387
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-20826",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.4",
+    "gold_patch_bytes": 774,
+    "fail_to_pass_count": 66,
+    "pass_to_pass_count": 45984
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-21568",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.4",
+    "gold_patch_bytes": 743,
+    "fail_to_pass_count": 346,
+    "pass_to_pass_count": 5176
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-22865",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.5",
+    "gold_patch_bytes": 844,
+    "fail_to_pass_count": 256,
+    "pass_to_pass_count": 4320
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-22871",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.5",
+    "gold_patch_bytes": 722,
+    "fail_to_pass_count": 59,
+    "pass_to_pass_count": 6322
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-23314",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.5",
+    "gold_patch_bytes": 421,
+    "fail_to_pass_count": 68,
+    "pass_to_pass_count": 59552
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-23412",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.5",
+    "gold_patch_bytes": 654,
+    "fail_to_pass_count": 74,
+    "pass_to_pass_count": 3066
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-24026",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.6",
+    "gold_patch_bytes": 1615,
+    "fail_to_pass_count": 116,
+    "pass_to_pass_count": 52441
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-24637",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.6",
+    "gold_patch_bytes": 802,
+    "fail_to_pass_count": 69,
+    "pass_to_pass_count": 2236
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-24870",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.6",
+    "gold_patch_bytes": 3653,
+    "fail_to_pass_count": 61,
+    "pass_to_pass_count": 4852
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-24970",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.6",
+    "gold_patch_bytes": 1598,
+    "fail_to_pass_count": 64,
+    "pass_to_pass_count": 17883
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-25775",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.7",
+    "gold_patch_bytes": 5178,
+    "fail_to_pass_count": 530,
+    "pass_to_pass_count": 6112
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-25960",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.7",
+    "gold_patch_bytes": 2269,
+    "fail_to_pass_count": 70,
+    "pass_to_pass_count": 9622
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-26291",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.7",
+    "gold_patch_bytes": 583,
+    "fail_to_pass_count": 79,
+    "pass_to_pass_count": 4516
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-26342",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.7",
+    "gold_patch_bytes": 687,
+    "fail_to_pass_count": 69,
+    "pass_to_pass_count": 6098
+   },
+   {
+    "instance_id": "matplotlib__matplotlib-26466",
+    "repo": "matplotlib/matplotlib",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.7",
+    "gold_patch_bytes": 1783,
+    "fail_to_pass_count": 83,
+    "pass_to_pass_count": 7008
+   },
+   {
+    "instance_id": "pytest-dev__pytest-10051",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "7.2",
+    "gold_patch_bytes": 1119,
+    "fail_to_pass_count": 62,
+    "pass_to_pass_count": 947
+   },
+   {
+    "instance_id": "pytest-dev__pytest-5631",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 1016,
+    "fail_to_pass_count": 98,
+    "pass_to_pass_count": 1160
+   },
+   {
+    "instance_id": "pytest-dev__pytest-5840",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.1",
+    "gold_patch_bytes": 3526,
+    "fail_to_pass_count": 137,
+    "pass_to_pass_count": 4218
+   },
+   {
+    "instance_id": "pytest-dev__pytest-7236",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.4",
+    "gold_patch_bytes": 1686,
+    "fail_to_pass_count": 71,
+    "pass_to_pass_count": 3318
+   },
+   {
+    "instance_id": "pytest-dev__pytest-7324",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.4",
+    "gold_patch_bytes": 1245,
+    "fail_to_pass_count": 181,
+    "pass_to_pass_count": 3552
+   },
+   {
+    "instance_id": "pytest-dev__pytest-7490",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "6.0",
+    "gold_patch_bytes": 1711,
+    "fail_to_pass_count": 177,
+    "pass_to_pass_count": 5254
+   },
+   {
+    "instance_id": "pytest-dev__pytest-7571",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "6.0",
+    "gold_patch_bytes": 1307,
+    "fail_to_pass_count": 74,
+    "pass_to_pass_count": 873
+   },
+   {
+    "instance_id": "pytest-dev__pytest-8399",
+    "repo": "pytest-dev/pytest",
+    "difficulty": "15 min - 1 hour",
+    "version": "6.3",
+    "gold_patch_bytes": 2450,
+    "fail_to_pass_count": 70,
+    "pass_to_pass_count": 3839
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-10297",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.20",
+    "gold_patch_bytes": 3739,
+    "fail_to_pass_count": 86,
+    "pass_to_pass_count": 2040
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-10844",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.20",
+    "gold_patch_bytes": 892,
+    "fail_to_pass_count": 105,
+    "pass_to_pass_count": 1359
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-10908",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.20",
+    "gold_patch_bytes": 525,
+    "fail_to_pass_count": 69,
+    "pass_to_pass_count": 3864
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-11578",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.20",
+    "gold_patch_bytes": 575,
+    "fail_to_pass_count": 118,
+    "pass_to_pass_count": 7716
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-12682",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 13568,
+    "fail_to_pass_count": 68,
+    "pass_to_pass_count": 6676
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-12973",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.21",
+    "gold_patch_bytes": 1465,
+    "fail_to_pass_count": 94,
+    "pass_to_pass_count": 2539
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-13124",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.21",
+    "gold_patch_bytes": 1078,
+    "fail_to_pass_count": 77,
+    "pass_to_pass_count": 4977
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-14053",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 558,
+    "fail_to_pass_count": 55,
+    "pass_to_pass_count": 298
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-14087",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 1392,
+    "fail_to_pass_count": 282,
+    "pass_to_pass_count": 15243
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-14629",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 1658,
+    "fail_to_pass_count": 77,
+    "pass_to_pass_count": 2103
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-14710",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 927,
+    "fail_to_pass_count": 117,
+    "pass_to_pass_count": 8069
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-14894",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 1050,
+    "fail_to_pass_count": 72,
+    "pass_to_pass_count": 6222
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-15100",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 808,
+    "fail_to_pass_count": 69,
+    "pass_to_pass_count": 9109
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-25747",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.3",
+    "gold_patch_bytes": 746,
+    "fail_to_pass_count": 77,
+    "pass_to_pass_count": 1084
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-25931",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.3",
+    "gold_patch_bytes": 1701,
+    "fail_to_pass_count": 79,
+    "pass_to_pass_count": 1543
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-26194",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.3",
+    "gold_patch_bytes": 1850,
+    "fail_to_pass_count": 162,
+    "pass_to_pass_count": 17434
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-26323",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.3",
+    "gold_patch_bytes": 771,
+    "fail_to_pass_count": 79,
+    "pass_to_pass_count": 21175
+   },
+   {
+    "instance_id": "scikit-learn__scikit-learn-9288",
+    "repo": "scikit-learn/scikit-learn",
+    "difficulty": "15 min - 1 hour",
+    "version": "0.22",
+    "gold_patch_bytes": 1694,
+    "fail_to_pass_count": 85,
+    "pass_to_pass_count": 10197
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-10466",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.0",
+    "gold_patch_bytes": 685,
+    "fail_to_pass_count": 64,
+    "pass_to_pass_count": 364
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-10614",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "7.2",
+    "gold_patch_bytes": 1276,
+    "fail_to_pass_count": 76,
+    "pass_to_pass_count": 357
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-10673",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "5.2",
+    "gold_patch_bytes": 5462,
+    "fail_to_pass_count": 57,
+    "pass_to_pass_count": 550
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-11445",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "7.1",
+    "gold_patch_bytes": 1508,
+    "fail_to_pass_count": 169,
+    "pass_to_pass_count": 397
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-7748",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 5740,
+    "fail_to_pass_count": 180,
+    "pass_to_pass_count": 852
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-7757",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.1",
+    "gold_patch_bytes": 1738,
+    "fail_to_pass_count": 77,
+    "pass_to_pass_count": 1918
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-7985",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1472,
+    "fail_to_pass_count": 103,
+    "pass_to_pass_count": 162
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8035",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 4802,
+    "fail_to_pass_count": 67,
+    "pass_to_pass_count": 150
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8056",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.2",
+    "gold_patch_bytes": 1878,
+    "fail_to_pass_count": 86,
+    "pass_to_pass_count": 3608
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8120",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.3",
+    "gold_patch_bytes": 1740,
+    "fail_to_pass_count": 53,
+    "pass_to_pass_count": 2101
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8265",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.3",
+    "gold_patch_bytes": 1560,
+    "fail_to_pass_count": 46,
+    "pass_to_pass_count": 1102
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8551",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.4",
+    "gold_patch_bytes": 1205,
+    "fail_to_pass_count": 49,
+    "pass_to_pass_count": 1707
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8593",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "3.5",
+    "gold_patch_bytes": 4830,
+    "fail_to_pass_count": 132,
+    "pass_to_pass_count": 85
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-8638",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.0",
+    "gold_patch_bytes": 653,
+    "fail_to_pass_count": 53,
+    "pass_to_pass_count": 1799
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-9602",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.2",
+    "gold_patch_bytes": 1732,
+    "fail_to_pass_count": 58,
+    "pass_to_pass_count": 2478
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-9658",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.3",
+    "gold_patch_bytes": 1042,
+    "fail_to_pass_count": 48,
+    "pass_to_pass_count": 1436
+   },
+   {
+    "instance_id": "sphinx-doc__sphinx-9673",
+    "repo": "sphinx-doc/sphinx",
+    "difficulty": "15 min - 1 hour",
+    "version": "4.3",
+    "gold_patch_bytes": 817,
+    "fail_to_pass_count": 82,
+    "pass_to_pass_count": 1854
+   },
+   {
+    "instance_id": "sympy__sympy-11618",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.0",
+    "gold_patch_bytes": 925,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 69
+   },
+   {
+    "instance_id": "sympy__sympy-12419",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.0",
+    "gold_patch_bytes": 1327,
+    "fail_to_pass_count": 17,
+    "pass_to_pass_count": 549
+   },
+   {
+    "instance_id": "sympy__sympy-13031",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 1047,
+    "fail_to_pass_count": 22,
+    "pass_to_pass_count": 153
+   },
+   {
+    "instance_id": "sympy__sympy-13091",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 17385,
+    "fail_to_pass_count": 55,
+    "pass_to_pass_count": 1785
+   },
+   {
+    "instance_id": "sympy__sympy-13551",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 680,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 401
+   },
+   {
+    "instance_id": "sympy__sympy-13615",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 871,
+    "fail_to_pass_count": 19,
+    "pass_to_pass_count": 1555
+   },
+   {
+    "instance_id": "sympy__sympy-13647",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 495,
+    "fail_to_pass_count": 19,
+    "pass_to_pass_count": 1333
+   },
+   {
+    "instance_id": "sympy__sympy-13757",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 360,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 3323
+   },
+   {
+    "instance_id": "sympy__sympy-13798",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 1343,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 2274
+   },
+   {
+    "instance_id": "sympy__sympy-13877",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 3483,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 2349
+   },
+   {
+    "instance_id": "sympy__sympy-13974",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 3590,
+    "fail_to_pass_count": 28,
+    "pass_to_pass_count": 115
+   },
+   {
+    "instance_id": "sympy__sympy-14531",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.1",
+    "gold_patch_bytes": 5583,
+    "fail_to_pass_count": 43,
+    "pass_to_pass_count": 1576
+   },
+   {
+    "instance_id": "sympy__sympy-14976",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.2",
+    "gold_patch_bytes": 585,
+    "fail_to_pass_count": 22,
+    "pass_to_pass_count": 301
+   },
+   {
+    "instance_id": "sympy__sympy-15349",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.4",
+    "gold_patch_bytes": 441,
+    "fail_to_pass_count": 31,
+    "pass_to_pass_count": 102
+   },
+   {
+    "instance_id": "sympy__sympy-15599",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.4",
+    "gold_patch_bytes": 1507,
+    "fail_to_pass_count": 12,
+    "pass_to_pass_count": 1962
+   },
+   {
+    "instance_id": "sympy__sympy-15976",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.4",
+    "gold_patch_bytes": 2040,
+    "fail_to_pass_count": 28,
+    "pass_to_pass_count": 1153
+   },
+   {
+    "instance_id": "sympy__sympy-16792",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.5",
+    "gold_patch_bytes": 1793,
+    "fail_to_pass_count": 31,
+    "pass_to_pass_count": 1428
+   },
+   {
+    "instance_id": "sympy__sympy-17318",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.5",
+    "gold_patch_bytes": 1427,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 204
+   },
+   {
+    "instance_id": "sympy__sympy-18211",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.6",
+    "gold_patch_bytes": 933,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 1478
+   },
+   {
+    "instance_id": "sympy__sympy-18698",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.6",
+    "gold_patch_bytes": 1126,
+    "fail_to_pass_count": 21,
+    "pass_to_pass_count": 2988
+   },
+   {
+    "instance_id": "sympy__sympy-19040",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.6",
+    "gold_patch_bytes": 378,
+    "fail_to_pass_count": 19,
+    "pass_to_pass_count": 3009
+   },
+   {
+    "instance_id": "sympy__sympy-19346",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.7",
+    "gold_patch_bytes": 741,
+    "fail_to_pass_count": 13,
+    "pass_to_pass_count": 804
+   },
+   {
+    "instance_id": "sympy__sympy-19783",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.7",
+    "gold_patch_bytes": 1218,
+    "fail_to_pass_count": 36,
+    "pass_to_pass_count": 170
+   },
+   {
+    "instance_id": "sympy__sympy-20154",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.7",
+    "gold_patch_bytes": 1559,
+    "fail_to_pass_count": 32,
+    "pass_to_pass_count": 827
+   },
+   {
+    "instance_id": "sympy__sympy-20428",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.8",
+    "gold_patch_bytes": 418,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 3154
+   },
+   {
+    "instance_id": "sympy__sympy-20438",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.8",
+    "gold_patch_bytes": 2873,
+    "fail_to_pass_count": 31,
+    "pass_to_pass_count": 2191
+   },
+   {
+    "instance_id": "sympy__sympy-20590",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.7",
+    "gold_patch_bytes": 611,
+    "fail_to_pass_count": 18,
+    "pass_to_pass_count": 421
+   },
+   {
+    "instance_id": "sympy__sympy-20801",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.8",
+    "gold_patch_bytes": 731,
+    "fail_to_pass_count": 23,
+    "pass_to_pass_count": 2102
+   },
+   {
+    "instance_id": "sympy__sympy-21379",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.9",
+    "gold_patch_bytes": 1007,
+    "fail_to_pass_count": 12,
+    "pass_to_pass_count": 2200
+   },
+   {
+    "instance_id": "sympy__sympy-21596",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.9",
+    "gold_patch_bytes": 2659,
+    "fail_to_pass_count": 32,
+    "pass_to_pass_count": 1154
+   },
+   {
+    "instance_id": "sympy__sympy-21612",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.9",
+    "gold_patch_bytes": 541,
+    "fail_to_pass_count": 12,
+    "pass_to_pass_count": 1850
+   },
+   {
+    "instance_id": "sympy__sympy-21930",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.9",
+    "gold_patch_bytes": 1007,
+    "fail_to_pass_count": 99,
+    "pass_to_pass_count": 1459
+   },
+   {
+    "instance_id": "sympy__sympy-22080",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.10",
+    "gold_patch_bytes": 1617,
+    "fail_to_pass_count": 87,
+    "pass_to_pass_count": 1913
+   },
+   {
+    "instance_id": "sympy__sympy-22456",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.10",
+    "gold_patch_bytes": 1400,
+    "fail_to_pass_count": 15,
+    "pass_to_pass_count": 658
+   },
+   {
+    "instance_id": "sympy__sympy-22914",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.10",
+    "gold_patch_bytes": 277,
+    "fail_to_pass_count": 26,
+    "pass_to_pass_count": 366
+   },
+   {
+    "instance_id": "sympy__sympy-23262",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.11",
+    "gold_patch_bytes": 649,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 1270
+   },
+   {
+    "instance_id": "sympy__sympy-23413",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.11",
+    "gold_patch_bytes": 1296,
+    "fail_to_pass_count": 23,
+    "pass_to_pass_count": 53
+   },
+   {
+    "instance_id": "sympy__sympy-23824",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.12",
+    "gold_patch_bytes": 632,
+    "fail_to_pass_count": 25,
+    "pass_to_pass_count": 52
+   },
+   {
+    "instance_id": "sympy__sympy-24066",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.12",
+    "gold_patch_bytes": 883,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 706
+   },
+   {
+    "instance_id": "sympy__sympy-24213",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.12",
+    "gold_patch_bytes": 655,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 726
+   },
+   {
+    "instance_id": "sympy__sympy-24443",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.12",
+    "gold_patch_bytes": 2511,
+    "fail_to_pass_count": 21,
+    "pass_to_pass_count": 21
+   },
+   {
+    "instance_id": "sympy__sympy-24661",
+    "repo": "sympy/sympy",
+    "difficulty": "15 min - 1 hour",
+    "version": "1.12",
+    "gold_patch_bytes": 1183,
+    "fail_to_pass_count": 20,
+    "pass_to_pass_count": 702
+   }
+  ]
+ },
+ "livecodebench_v5_atcoder": {
+  "medium": [
+   {
+    "instance_id": "abc387_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc387",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc388_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc388",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc388_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc388",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc389_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc389",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc390_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc390",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc390_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc390",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc391_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc391",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc392_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc392",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc392_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc392",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc394_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc394",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc394_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc394",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc395_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc395",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc396_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc396",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc396_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc396",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc397_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc397",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc397_b",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc397",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc398_b",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc398",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc398_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc398",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc399_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc399",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc399_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc399",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc400_c",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc400",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc400_d",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "abc400",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc191_a",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "arc191",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc192_a",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "arc192",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc194_a",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "arc194",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc195_a",
+    "repo": "atcoder",
+    "difficulty": "medium",
+    "version": "arc195",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   }
+  ],
+  "hard": [
+   {
+    "instance_id": "abc387_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc387",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc388_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc388",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc388_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc388",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc388_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc388",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc389_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc389",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc389_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc389",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc389_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc389",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc390_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc390",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc390_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc390",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc390_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc390",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc391_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc391",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc391_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc391",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc391_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc391",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc392_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc392",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc392_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc392",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc393_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc393",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc393_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc393",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc393_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc393",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc394_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc394",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc394_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc394",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc394_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc394",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc395_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc395",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc395_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc395",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc396_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc396",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc396_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc396",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc396_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc396",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc397_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc397",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc397_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc397",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc397_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc397",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc397_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc397",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc398_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc398",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc398_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc398",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc398_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc398",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc399_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc399",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc399_f",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc399",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc400_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc400",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "abc400_g",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "abc400",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc190_c",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc190",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc190_a",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc190",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc190_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc190",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc191_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc191",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc191_c",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc191",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc192_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc192",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc192_b",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc192",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc192_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc192",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc193_b",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc193",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc193_a",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc193",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc193_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc193",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc194_c",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc194",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc194_b",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc194",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc194_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc194",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc194_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc194",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc195_e",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc195",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc195_b",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc195",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc195_c",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc195",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc195_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc195",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc196_b",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc196",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc196_c",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc196",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc196_a",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc196",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": "arc196_d",
+    "repo": "atcoder",
+    "difficulty": "hard",
+    "version": "arc196",
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   }
+  ]
+ },
+ "never_used_families": {
+  "terminal_bench_2.0": [
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "easy",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   }
+  ],
+  "custom_diagnostic": [
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "medium",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   },
+   {
+    "instance_id": null,
+    "repo": null,
+    "difficulty": "hard",
+    "version": null,
+    "gold_patch_bytes": 0,
+    "fail_to_pass_count": 0,
+    "pass_to_pass_count": 0
+   }
+  ]
+ }
+}
