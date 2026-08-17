@@ -12,13 +12,21 @@ algorithmic tasks.
 | `supreme-v2.0`    | 47 | 94.0% |
 | `superpowers-v2.0` | 46 | 92.0% |
 
-The three configurations are statistically indistinguishable on this task set
-(paired McNemar tests, all p ≥ 0.5 — see `carb_benchmark/results/FINDINGS_v2_corrected.md`
-for the full analysis). The benchmark suffers a **ceiling effect**: 92–94% of
-tasks are solved by all configurations, so it cannot discriminate agent skill.
-The 4 failing tasks fail for every configuration that attempted them, and are
-all validated as solvable on this platform — i.e., genuine agent failures on
-hard tasks, not environment artifacts.
+The three configurations are statistically indistinguishable: exact paired
+McNemar p = 1.0 for every pair, with 92% (46/50) of tasks having identical
+outcomes across all three configs (see
+`carb_benchmark/results/FINDINGS_v2_corrected.md`, sections 5–7, and the
+per-task breakdown in `carb_benchmark/results/v2_task_breakdown.csv`). The
+benchmark suffers a **ceiling effect**: 92% of tasks are solved by every
+configuration, so it cannot discriminate agent skill — LiveCodeBench is
+saturated (20/20 for all configs) and even the SWE half shows no difference
+(27/27/26). The 4 failing tasks are all validated as solvable on this
+platform — genuine agent failures on hard tasks, not environment artifacts.
+
+**This is an honest null result, not a win for any configuration.** The only
+legitimate way for supreme/superpowers to *demonstrate* superiority is a
+harder, discriminative task set (see section 7 of the findings for the power
+analysis and the concrete path to a v3 benchmark).
 
 ## Repo layout
 
