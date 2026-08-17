@@ -1,0 +1,32 @@
+[
+  {
+    "instance_id": "django__django-10554",
+    "repo": "django/django",
+    "base_commit": "14d026cccb144c6877294ba4cd4e03ebf0842498",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\django__django-10554",
+    "prompt_file": "carb_workspaces\\django__django-10554\\prompt.txt",
+    "private_dir": "private\\django__django-10554"
+  },
+  {
+    "instance_id": "sphinx-doc__sphinx-9229",
+    "repo": "sphinx-doc/sphinx",
+    "base_commit": "876fa81e0a038cda466925b85ccf6c5452e0f685",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\sphinx-doc__sphinx-9229",
+    "prompt_file": "carb_workspaces\\sphinx-doc__sphinx-9229\\prompt.txt",
+    "private_dir": "private\\sphinx-doc__sphinx-9229"
+  },
+  {
+    "instance_id": "sympy__sympy-17630",
+    "repo": "sympy/sympy",
+    "base_commit": "58e78209c8577b9890e957b624466e5beed7eb08",
+    "source": "swebench_verified",
+    "difficulty": "1-4 hours",
+    "workspace_path": "carb_workspaces\\sympy__sympy-17630",
+    "prompt_file": "carb_workspaces\\sympy__sympy-17630\\prompt.txt",
+    "private_dir": "private\\sympy__sympy-17630"
+  }
+]

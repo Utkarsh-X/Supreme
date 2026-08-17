@@ -21,6 +21,7 @@ import json
 import os
 import re
 import shutil
+import subprocess
 import sys
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))       # carb_benchmark/
@@ -156,6 +157,18 @@ def main():
             f.write(prompt)
         with open(os.path.join(ws, "main.py"), "w", encoding="utf-8") as f:
             f.write("# Write your solution here. Read from stdin, print the answer to stdout.\n")
+
+        # git golden-state commit so run diffs can be extracted and the
+        # workspace can be reset between sessions (mirrors build_swe_workspaces)
+        subprocess.run(["git", "init"], cwd=ws, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "config", "core.longpaths", "true"], cwd=ws, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "add", "."], cwd=ws, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "commit", "-m", "CARB LCB golden state"],
+                       cwd=ws, check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         # private (agent-hidden)
         with open(os.path.join(priv, "private_test_cases.json"), "w", encoding="utf-8") as f:
