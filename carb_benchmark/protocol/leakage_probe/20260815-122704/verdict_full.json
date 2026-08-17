@@ -1,0 +1,35 @@
+{
+  "probe_type": "full",
+  "model_requested": "Gemini 3.6 Flash (High)",
+  "environment": "real_user_profile",
+  "exit_code": 0,
+  "duration_seconds": 28.29,
+  "timed_out": false,
+  "fib_file_created": true,
+  "fib_script_output": "55",
+  "fib_correct": true,
+  "constitution_markers_hit": [
+    "Supreme",
+    "Evidence Over Assumption",
+    "Minimum Justified Change",
+    "Preserve System Integrity",
+    "Completion Requires Evidence",
+    "User Intent Is Authoritative",
+    "Uncertainty Must Be Explicit",
+    "Progress Theater",
+    "Assumption Cascade",
+    "Scope Explosion",
+    "Revisable Hypotheses",
+    "Plan Rigidity"
+  ],
+  "full_system_markers_hit": [
+    "Operating Protocol",
+    "Sub-Agent"
+  ],
+  "antigravity_builtin_markers_hit": [
+    "Antigravity",
+    "Google DeepMind",
+    "pair programming"
+  ],
+  "raw_output_path": "E:\\RofU\\Supreme\\carb_benchmark\\protocol\\leakage_probe\\20260815-122704\\raw_full.txt"
+}

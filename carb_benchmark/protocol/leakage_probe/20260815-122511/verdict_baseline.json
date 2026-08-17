@@ -1,0 +1,21 @@
+{
+  "probe_type": "baseline",
+  "model_requested": "Gemini 3.6 Flash (High)",
+  "environment": "isolated_temp_profile",
+  "exit_code": 0,
+  "duration_seconds": 25.67,
+  "timed_out": false,
+  "fib_file_created": true,
+  "fib_script_output": "55",
+  "fib_correct": true,
+  "constitution_markers_hit": [
+    "Supreme"
+  ],
+  "full_system_markers_hit": [],
+  "antigravity_builtin_markers_hit": [
+    "Antigravity",
+    "Google DeepMind",
+    "pair programming"
+  ],
+  "raw_output_path": "E:\\RofU\\Supreme\\carb_benchmark\\protocol\\leakage_probe\\20260815-122511\\raw_baseline.txt"
+}
