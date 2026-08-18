@@ -90,9 +90,12 @@ def main():
           f"{len(results)} already recorded", flush=True)
 
     for i, task in enumerate(tasks, 1):
-        if task in results:
+        rec = results.get(task)
+        if rec is not None and rec.get("passed") is not None:
             print(f"[{i}/{len(tasks)}] {task}: already done -> skip", flush=True)
             continue
+        if rec is not None:
+            print(f"[{i}/{len(tasks)}] {task}: incomplete ({rec.get('error')}) -> re-run", flush=True)
         print(f"[{i}/{len(tasks)}] {task}: running baseline...", flush=True)
         t0 = time.time()
         rc = subprocess.run(

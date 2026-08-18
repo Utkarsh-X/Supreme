@@ -205,8 +205,9 @@ def main():
         print(f"   -> Result: {status} | Duration: {duration}s")
 
         # 4. Extract Diff
-        diff_cmd = subprocess.run(["git", "diff"], cwd=workspace_path, capture_output=True, text=True)
-        patch_content = diff_cmd.stdout
+        diff_cmd = subprocess.run(["git", "diff"], cwd=workspace_path, capture_output=True, text=True,
+                                  encoding="utf-8", errors="replace")
+        patch_content = diff_cmd.stdout or ""
         diff_file = os.path.join(run_dir, "final_diff.patch")
         with open(diff_file, "w", encoding="utf-8") as f:
             f.write(patch_content)
