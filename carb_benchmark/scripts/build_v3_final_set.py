@@ -25,6 +25,7 @@ REGISTRY = os.path.join(BASE, "task_registry")
 RESULTS = os.path.join(BASE, "results")
 
 SWE_REGISTRY = os.path.join(REGISTRY, "swe_tasks_v3.json")
+SWE_MEDIUM_REGISTRY = os.path.join(REGISTRY, "swe_tasks_v3_medium.json")
 LCB_REGISTRY = os.path.join(REGISTRY, "v3_lcb_calibration.jsonl")
 CALIBRATION = os.path.join(RESULTS, "v3_calibration.json")
 OUT = os.path.join(REGISTRY, "final_tasks_v3.json")
@@ -39,7 +40,11 @@ def load_calibration():
 def load_registries():
     by_id = {}
     for t in json.load(open(SWE_REGISTRY, encoding="utf-8")):
-        by_id[t["instance_id"]] = {**t, "family": "SWE"}
+        by_id[t["instance_id"]] = {**t, "family": "SWE", "tier": "hard"}
+    medium = json.load(open(SWE_MEDIUM_REGISTRY, encoding="utf-8"))
+    items = medium if isinstance(medium, list) else medium.get("instances", medium.get("tasks", []))
+    for t in items:
+        by_id[t["instance_id"]] = {**t, "family": "SWE", "tier": "medium"}
     with open(LCB_REGISTRY, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
@@ -67,6 +72,7 @@ def main():
         entry = {
             "instance_id": tid,
             "family": meta.get("family", "UNKNOWN"),
+            "tier": meta.get("tier"),
             "repo": meta.get("repo"),
             "difficulty": meta.get("difficulty"),
             "workspace_path": meta.get("workspace_path"),
