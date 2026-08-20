@@ -27,6 +27,7 @@ RESULTS = os.path.join(BASE, "results")
 SWE_REGISTRY = os.path.join(REGISTRY, "swe_tasks_v3.json")
 SWE_MEDIUM_REGISTRY = os.path.join(REGISTRY, "swe_tasks_v3_medium.json")
 LCB_REGISTRY = os.path.join(REGISTRY, "v3_lcb_calibration.jsonl")
+V2_REGISTRY = os.path.join(REGISTRY, "final_tasks_v2.json")
 CALIBRATION = os.path.join(RESULTS, "v3_calibration.json")
 OUT = os.path.join(REGISTRY, "final_tasks_v3.json")
 REPORT = os.path.join(RESULTS, "v3_final_set_report.md")
@@ -58,13 +59,24 @@ def load_registries():
 def main():
     dry = "--dry-run" in sys.argv
     min_keep = 10
+    min_wall = 10  # exclude infrastructure failures (agy crashed in <10s)
     if "--min-keep" in sys.argv:
         min_keep = int(sys.argv[sys.argv.index("--min-keep") + 1])
+    if "--min-wall" in sys.argv:
+        min_wall = int(sys.argv[sys.argv.index("--min-wall") + 1])
 
     results, config, notes = load_calibration()
     registry = load_registries()
 
-    kept, dropped = [], []
+    # Build v2 exclusion set (no cross-version contamination)
+    v2_raw = json.load(open(V2_REGISTRY, encoding="utf-8"))
+    if isinstance(v2_raw, list):
+        v2_ids = set(t.get("instance_id", t.get("id", "")) for t in v2_raw) if v2_raw and isinstance(v2_raw[0], dict) else set(v2_raw)
+    else:
+        v2_ids = set(v2_raw.keys()) if "tasks" not in v2_raw else set(t.get("instance_id", "") for t in v2_raw["tasks"])
+    print(f"v2 exclusion set: {len(v2_ids)} tasks")
+
+    kept, dropped, excluded = [], [], []
     for tid, rec in sorted(results.items()):
         passed = rec.get("passed")
         err = rec.get("error")
@@ -86,6 +98,13 @@ def main():
                 "note": (rec.get("note") or "")[:200],
             },
         }
+        if tid in v2_ids:
+            excluded.append(entry)
+            continue
+        wall = rec.get("wall_clock_seconds") or 0
+        if wall < min_wall:
+            excluded.append({**entry, "exclusion_reason": f"infra-fail ({wall:.1f}s < {min_wall}s)"})
+            continue
         if passed is False:
             kept.append(entry)
         else:
@@ -97,6 +116,7 @@ def main():
     baseline_pass_rate = baseline_pass / n_graded * 100 if n_graded else 0
 
     print(f"calibration: {n_graded} graded cells | config={config}")
+    print(f"excluded: {len(excluded)} (v2: {sum(1 for e in excluded if e.get('exclusion_reason','').startswith('infra'))} infra-fails, rest v2)")
     print(f"baseline pass rate: {baseline_pass}/{n_graded} = {baseline_pass_rate:.1f}%")
     print(f"kept for V3 (baseline FAILED): {n_kept}")
     print(f"dropped (baseline passed):     {len(dropped)}")

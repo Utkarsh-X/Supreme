@@ -5,7 +5,7 @@
 # Protocol: protocol/v3_discriminative_set_proposal.md
 # Runner: scripts/run_v3_calibration.py (idempotent, resumes from results/v3_calibration.json)
 #
-# ---- SWE-bench Verified hard tier (VALIDATED on this platform) ----
+# ---- SWE-bench Verified hard tier (VALIDATED on this platform, original 20) ----
 django__django-10554
 django__django-11138
 django__django-11885
@@ -74,6 +74,28 @@ lcb__abc396_f
 lcb__abc396_g
 lcb__abc397_d
 lcb__abc397_e
+# ---- V3 expansion tranche 4: validated SWE to reach 50 baseline tasks (2026-08-19) ----
+django__django-11119
+django__django-11133
+django__django-11880
+django__django-12419
+django__django-15851
+django__django-17029
+matplotlib__matplotlib-23299
+matplotlib__matplotlib-23476
+matplotlib__matplotlib-24177
+matplotlib__matplotlib-24627
+sphinx-doc__sphinx-8595
+sphinx-doc__sphinx-9230
+sphinx-doc__sphinx-9367
+sphinx-doc__sphinx-9698
+sphinx-doc__sphinx-10435
+pytest-dev__pytest-5262
+pytest-dev__pytest-7521
+sympy__sympy-13480
+sympy__sympy-14711
+sympy__sympy-23950
+scikit-learn__scikit-learn-14141
 # ---- V3 expansion tranche 3: validated medium-tier SWE (2026-08-18) ----
 astropy__astropy-14096
 django__django-11211
@@ -98,6 +120,77 @@ django__django-16612
 django__django-16661
 django__django-16667
 django__django-16901
+# ---- V3 expansion tranche 5: final untested VALIDATED SWE + LCB (2026-08-19) ----
+# 9 VALIDATED SWE workspaces (all untested, validated via validate_swe_tasks.py)
+django__django-11179
+django__django-12965
+django__django-14089
+django__django-14493
+django__django-16082
+django__django-16485
+sympy__sympy-15875
+sympy__sympy-16886
+sympy__sympy-19637
+# 20 untested LCB tasks (medium _c/_d + easy _a/_b variants)
+lcb__abc387_b
+lcb__abc388_c
+lcb__abc389_d
+lcb__abc390_c
+lcb__abc391_d
+lcb__abc392_b
+lcb__abc393_b
+lcb__abc394_b
+lcb__abc395_b
+lcb__abc396_b
+lcb__abc397_c
+lcb__abc398_b
+lcb__abc399_b
+lcb__abc400_c
+lcb__arc190_a
+lcb__arc191_a
+lcb__arc192_a
+lcb__arc193_a
+lcb__arc194_a
+lcb__arc195_a
+# ---- V3 expansion tranche 6: 38 new hard LCB (materialized 2026-08-19) ----
+lcb__abc397_g
+lcb__abc398_f
+lcb__abc398_g
+lcb__abc399_f
+lcb__abc400_g
+lcb__arc190_d
+lcb__arc191_d
+lcb__arc192_e
+lcb__arc192_d
+lcb__arc193_d
+lcb__arc194_c
+lcb__arc194_e
+lcb__arc194_d
+lcb__arc195_e
+lcb__arc195_c
+lcb__arc195_d
+lcb__arc196_c
+lcb__arc196_d
+lcb__3674
+lcb__3725
+lcb__3697
+lcb__3696
+lcb__3762
+lcb__3733
+lcb__3781
+lcb__3770
+lcb__3789
+lcb__3801
+lcb__3744
+lcb__3717
+lcb__3777
+lcb__3687
+lcb__3739
+lcb__3701
+lcb__3692
+lcb__3783
+lcb__3784
+lcb__3765
 matplotlib__matplotlib-23412
 sphinx-doc__sphinx-10466
 sympy__sympy-19346
