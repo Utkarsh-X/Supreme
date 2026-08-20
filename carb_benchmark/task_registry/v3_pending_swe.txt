@@ -1,0 +1,19 @@
+# V3 pending tasks — 17 rate-limited artifacts that need genuine re-run
+# All workspaces exist. API quota has reset.
+django__django-11211
+django__django-11477
+django__django-11848
+django__django-12273
+django__django-12406
+django__django-12663
+django__django-13279
+django__django-13516
+django__django-13568
+django__django-13658
+django__django-13670
+django__django-13964
+django__django-14034
+sphinx-doc__sphinx-10466
+sympy__sympy-19346
+sympy__sympy-24213
+lcb__abc397_d

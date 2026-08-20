@@ -1,0 +1,35 @@
+# V3 Baseline Expansion: 21 additional tasks to reach 50 total baseline tasks
+# These are VALIDATED SWE-bench Verified tasks not yet in v3 calibration
+# Selection rationale: hard/medium tasks across multiple repos for diversity
+# Source: carb_workspaces + carb_benchmark/validation (VALIDATED verdicts)
+# Date: 2026-08-19
+#
+# Task count: 29 (v3_calibration.json failing) + 21 (this file) = 50 baseline tasks
+#
+# ---- Django (15min-1h, medium) ----
+django__django-11119
+django__django-11133
+django__django-11880
+django__django-12419
+django__django-15851
+django__django-17029
+# ---- Matplotlib ----
+matplotlib__matplotlib-23299
+matplotlib__matplotlib-23476
+matplotlib__matplotlib-24177
+matplotlib__matplotlib-24627
+# ---- Sphinx ----
+sphinx-doc__sphinx-8595
+sphinx-doc__sphinx-9230
+sphinx-doc__sphinx-9367
+sphinx-doc__sphinx-9698
+sphinx-doc__sphinx-10435
+# ---- Pytest ----
+pytest-dev__pytest-5262
+pytest-dev__pytest-7521
+# ---- SymPy ----
+sympy__sympy-13480
+sympy__sympy-14711
+sympy__sympy-23950
+# ---- Scikit-learn ----
+scikit-learn__scikit-learn-14141

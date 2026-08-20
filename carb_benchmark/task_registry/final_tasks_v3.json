@@ -1,0 +1,671 @@
+{
+  "v3_final_set_version": "1.0",
+  "config": "baseline-v2.0",
+  "selection_rule": "baseline FAILED in Phase A calibration",
+  "notes": "v3 Phase A calibration (baseline-only)",
+  "tasks": [
+    {
+      "instance_id": "astropy__astropy-14096",
+      "family": "SWE",
+      "tier": "medium",
+      "repo": "astropy/astropy",
+      "difficulty": "15 min - 1 hour",
+      "workspace_path": "carb_workspaces\\astropy__astropy-14096",
+      "prompt_file": "carb_workspaces\\astropy__astropy-14096\\prompt.txt",
+      "private_dir": "private\\astropy__astropy-14096",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 706.21,
+        "diff_lines": 126,
+        "run_id": "2026-08-19-023607-astropy__astropy-14096-baseline-v2.0",
+        "note": "v3 calibration tranche 3 re-run"
+      }
+    },
+    {
+      "instance_id": "django__django-10554",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-10554",
+      "prompt_file": "carb_workspaces\\django__django-10554\\prompt.txt",
+      "private_dir": "private\\django__django-10554",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 1213.5,
+        "diff_lines": 39,
+        "run_id": "2026-08-17-175600-django__django-10554-baseline-v2.0",
+        "note": "real 39-line fix attempt; hidden test still red (VALIDATED passable via gold)"
+      }
+    },
+    {
+      "instance_id": "django__django-11477",
+      "family": "SWE",
+      "tier": "medium",
+      "repo": "django/django",
+      "difficulty": "15 min - 1 hour",
+      "workspace_path": "carb_workspaces\\django__django-11477",
+      "prompt_file": "carb_workspaces\\django__django-11477\\prompt.txt",
+      "private_dir": "private\\django__django-11477",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 127.55,
+        "diff_lines": 10,
+        "run_id": "2026-08-19-030452-django__django-11477-baseline-v2.0",
+        "note": "v3 calibration rate-limit re-run"
+      }
+    },
+    {
+      "instance_id": "django__django-12325",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-12325",
+      "prompt_file": "carb_workspaces\\django__django-12325\\prompt.txt",
+      "private_dir": "private\\django__django-12325",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 102.82,
+        "diff_lines": 40,
+        "run_id": "2026-08-18-005151-django__django-12325-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "django__django-12406",
+      "family": "SWE",
+      "tier": "medium",
+      "repo": "django/django",
+      "difficulty": "15 min - 1 hour",
+      "workspace_path": "carb_workspaces\\django__django-12406",
+      "prompt_file": "carb_workspaces\\django__django-12406\\prompt.txt",
+      "private_dir": "private\\django__django-12406",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 164.34,
+        "diff_lines": 58,
+        "run_id": "2026-08-19-031249-django__django-12406-baseline-v2.0",
+        "note": "v3 calibration rate-limit re-run"
+      }
+    },
+    {
+      "instance_id": "django__django-13212",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-13212",
+      "prompt_file": "carb_workspaces\\django__django-13212\\prompt.txt",
+      "private_dir": "private\\django__django-13212",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 136.94,
+        "diff_lines": 82,
+        "run_id": "2026-08-18-005832-django__django-13212-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "django__django-13837",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-13837",
+      "prompt_file": "carb_workspaces\\django__django-13837\\prompt.txt",
+      "private_dir": "private\\django__django-13837",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 158.07,
+        "diff_lines": 39,
+        "run_id": "2026-08-18-010954-django__django-13837-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "django__django-14007",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-14007",
+      "prompt_file": "carb_workspaces\\django__django-14007\\prompt.txt",
+      "private_dir": "private\\django__django-14007",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 142.79,
+        "diff_lines": 58,
+        "run_id": "2026-08-18-011233-django__django-14007-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "django__django-14034",
+      "family": "SWE",
+      "tier": "medium",
+      "repo": "django/django",
+      "difficulty": "15 min - 1 hour",
+      "workspace_path": "carb_workspaces\\django__django-14034",
+      "prompt_file": "carb_workspaces\\django__django-14034\\prompt.txt",
+      "private_dir": "private\\django__django-14034",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 148.07,
+        "diff_lines": 35,
+        "run_id": "2026-08-19-033942-django__django-14034-baseline-v2.0",
+        "note": "v3 calibration rate-limit re-run"
+      }
+    },
+    {
+      "instance_id": "django__django-15957",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-15957",
+      "prompt_file": "carb_workspaces\\django__django-15957\\prompt.txt",
+      "private_dir": "private\\django__django-15957",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 109.18,
+        "diff_lines": 30,
+        "run_id": "2026-08-18-011456-django__django-15957-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "django__django-16263",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-16263",
+      "prompt_file": "carb_workspaces\\django__django-16263\\prompt.txt",
+      "private_dir": "private\\django__django-16263",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 444.55,
+        "diff_lines": 171,
+        "run_id": "2026-08-18-011646-django__django-16263-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "django__django-16502",
+      "family": "SWE",
+      "tier": "medium",
+      "repo": "django/django",
+      "difficulty": "15 min - 1 hour",
+      "workspace_path": "carb_workspaces\\django__django-16502",
+      "prompt_file": "carb_workspaces\\django__django-16502\\prompt.txt",
+      "private_dir": "private\\django__django-16502",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 354.08,
+        "diff_lines": 49,
+        "run_id": "2026-08-18-051018-django__django-16502-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "django__django-16560",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-16560",
+      "prompt_file": "carb_workspaces\\django__django-16560\\prompt.txt",
+      "private_dir": "private\\django__django-16560",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 401.17,
+        "diff_lines": 282,
+        "run_id": "2026-08-19-010015-django__django-16560-baseline-v2.0",
+        "note": "v3 calibration"
+      }
+    },
+    {
+      "instance_id": "django__django-16631",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "django/django",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\django__django-16631",
+      "prompt_file": "carb_workspaces\\django__django-16631\\prompt.txt",
+      "private_dir": "private\\django__django-16631",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 496.24,
+        "diff_lines": 107,
+        "run_id": "2026-08-18-012926-django__django-16631-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "django__django-16667",
+      "family": "SWE",
+      "tier": "medium",
+      "repo": "django/django",
+      "difficulty": "15 min - 1 hour",
+      "workspace_path": "carb_workspaces\\django__django-16667",
+      "prompt_file": "carb_workspaces\\django__django-16667\\prompt.txt",
+      "private_dir": "private\\django__django-16667",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 441.39,
+        "diff_lines": 3,
+        "run_id": "2026-08-18-053301-django__django-16667-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "lcb__3687",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 97.77,
+        "diff_lines": 94,
+        "run_id": "2026-08-20-163223-lcb__3687-baseline-v2.0",
+        "note": "phantom retry (re-run crashed tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__3696",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 59.55,
+        "diff_lines": 50,
+        "run_id": "2026-08-20-163518-lcb__3696-baseline-v2.0",
+        "note": "phantom retry (re-run crashed tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__3701",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 647.65,
+        "diff_lines": 0,
+        "run_id": "2026-08-20-163741-lcb__3701-baseline-v2.0",
+        "note": "phantom retry (re-run crashed tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__3770",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 204.92,
+        "diff_lines": 86,
+        "run_id": "2026-08-20-182821-lcb__3770-baseline-v2.0",
+        "note": "phantom retry (re-run crashed tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__3783",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 98.92,
+        "diff_lines": 77,
+        "run_id": "2026-08-20-183450-lcb__3783-baseline-v2.0",
+        "note": "phantom retry (re-run crashed tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__3784",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 101.05,
+        "diff_lines": 119,
+        "run_id": "2026-08-20-183632-lcb__3784-baseline-v2.0",
+        "note": "phantom retry (re-run crashed tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__abc388_g",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc388_g",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 318.5,
+        "diff_lines": 0,
+        "run_id": "2026-08-18-143251-lcb__abc388_g-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "lcb__abc390_g",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc390_g",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 569.19,
+        "diff_lines": 200,
+        "run_id": "2026-08-19-104058-lcb__abc390_g-baseline-v2.0",
+        "note": "v3 phantom re-run"
+      }
+    },
+    {
+      "instance_id": "lcb__abc391_f",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc391_f",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 209.27,
+        "diff_lines": 0,
+        "run_id": "2026-08-18-144804-lcb__abc391_f-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "lcb__abc392_d",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "medium",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc392_d",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 44.32,
+        "diff_lines": 46,
+        "run_id": "2026-08-18-104537-lcb__abc392_d-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "lcb__abc392_f",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc392_f",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 56.44,
+        "diff_lines": 33,
+        "run_id": "2026-08-19-010656-lcb__abc392_f-baseline-v2.0",
+        "note": "v3 calibration"
+      }
+    },
+    {
+      "instance_id": "lcb__abc396_e",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc396_e",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 56.79,
+        "diff_lines": 77,
+        "run_id": "2026-08-19-012108-lcb__abc396_e-baseline-v2.0",
+        "note": "v3 calibration"
+      }
+    },
+    {
+      "instance_id": "lcb__abc397_d",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc397_d",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 54.07,
+        "diff_lines": 40,
+        "run_id": "2026-08-19-035509-lcb__abc397_d-baseline-v2.0",
+        "note": "v3 calibration rate-limit re-run"
+      }
+    },
+    {
+      "instance_id": "lcb__abc398_g",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 182.91,
+        "diff_lines": 83,
+        "run_id": "2026-08-20-192211-lcb__abc398_g-baseline-v2.0",
+        "note": "phantom retry (re-run crashed tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__abc399_e",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__abc399_e",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 78.87,
+        "diff_lines": 76,
+        "run_id": "2026-08-18-113513-lcb__abc399_e-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "lcb__abc400_g",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 809.55,
+        "diff_lines": 0,
+        "run_id": "2026-08-20-152820-lcb__abc400_g-baseline-v2.0",
+        "note": "v3 final expansion (all remaining workspaces)"
+      }
+    },
+    {
+      "instance_id": "lcb__arc190_c",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__arc190_c",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 250.11,
+        "diff_lines": 123,
+        "run_id": "2026-08-18-113721-lcb__arc190_c-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "lcb__arc192_b",
+      "family": "LCB",
+      "tier": null,
+      "repo": null,
+      "difficulty": "hard",
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": "private/lcb__arc192_b",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 99.84,
+        "diff_lines": 27,
+        "run_id": "2026-08-18-114527-lcb__arc192_b-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only) resumed after restart"
+      }
+    },
+    {
+      "instance_id": "lcb__arc195_c",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 154.59,
+        "diff_lines": 118,
+        "run_id": "2026-08-20-204011-lcb__arc195_c-baseline-v2.0",
+        "note": "phantom retry (arc tasks)"
+      }
+    },
+    {
+      "instance_id": "lcb__arc195_d",
+      "family": "UNKNOWN",
+      "tier": null,
+      "repo": null,
+      "difficulty": null,
+      "workspace_path": null,
+      "prompt_file": null,
+      "private_dir": null,
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 2400.35,
+        "diff_lines": 138,
+        "run_id": "2026-08-20-204247-lcb__arc195_d-baseline-v2.0",
+        "note": "phantom retry (arc tasks)"
+      }
+    },
+    {
+      "instance_id": "sympy__sympy-13852",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "sympy/sympy",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\sympy__sympy-13852",
+      "prompt_file": "carb_workspaces\\sympy__sympy-13852\\prompt.txt",
+      "private_dir": "private\\sympy__sympy-13852",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 201.64,
+        "diff_lines": 48,
+        "run_id": "2026-08-18-013743-sympy__sympy-13852-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "sympy__sympy-13878",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "sympy/sympy",
+      "difficulty": ">4 hours",
+      "workspace_path": "carb_workspaces\\sympy__sympy-13878",
+      "prompt_file": "carb_workspaces\\sympy__sympy-13878\\prompt.txt",
+      "private_dir": "private\\sympy__sympy-13878",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 492.98,
+        "diff_lines": 170,
+        "run_id": "2026-08-18-014105-sympy__sympy-13878-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "sympy__sympy-14248",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "sympy/sympy",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\sympy__sympy-14248",
+      "prompt_file": "carb_workspaces\\sympy__sympy-14248\\prompt.txt",
+      "private_dir": "private\\sympy__sympy-14248",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 465.32,
+        "diff_lines": 127,
+        "run_id": "2026-08-18-014919-sympy__sympy-14248-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    },
+    {
+      "instance_id": "sympy__sympy-16597",
+      "family": "SWE",
+      "tier": "hard",
+      "repo": "sympy/sympy",
+      "difficulty": "1-4 hours",
+      "workspace_path": "carb_workspaces\\sympy__sympy-16597",
+      "prompt_file": "carb_workspaces\\sympy__sympy-16597\\prompt.txt",
+      "private_dir": "private\\sympy__sympy-16597",
+      "calibration": {
+        "passed": false,
+        "wall_clock_seconds": 439.49,
+        "diff_lines": 42,
+        "run_id": "2026-08-18-015704-sympy__sympy-16597-baseline-v2.0",
+        "note": "v3 Phase A calibration (baseline-only)"
+      }
+    }
+  ]
+}

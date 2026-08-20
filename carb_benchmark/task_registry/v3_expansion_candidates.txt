@@ -1,0 +1,34 @@
+# V3 expansion: validated SWE tasks not yet in calibration
+# Total: 30 tasks
+# These have VALIDATED workspaces and can be run through baseline
+
+django__django-11119
+django__django-11133
+django__django-11179
+django__django-11880
+django__django-12419
+django__django-12965
+django__django-14089
+django__django-14493
+django__django-15851
+django__django-16082
+django__django-16485
+django__django-17029
+matplotlib__matplotlib-23299
+matplotlib__matplotlib-23476
+matplotlib__matplotlib-24177
+matplotlib__matplotlib-24627
+pytest-dev__pytest-5262
+pytest-dev__pytest-7521
+scikit-learn__scikit-learn-14141
+sphinx-doc__sphinx-10435
+sphinx-doc__sphinx-8595
+sphinx-doc__sphinx-9230
+sphinx-doc__sphinx-9367
+sphinx-doc__sphinx-9698
+sympy__sympy-13480
+sympy__sympy-14711
+sympy__sympy-15875
+sympy__sympy-16886
+sympy__sympy-19637
+sympy__sympy-23950
