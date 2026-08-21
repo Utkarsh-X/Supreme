@@ -1,0 +1,1133 @@
+[
+  {
+    "instance_id": "astropy__astropy-14096",
+    "family": "SWE",
+    "tier": "medium",
+    "repo": "astropy/astropy",
+    "difficulty": "15 min - 1 hour",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 706.21,
+      "diff_lines": 126,
+      "run_id": "2026-08-19-023607-astropy__astropy-14096-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-152405-astropy__astropy-14096-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 1085.77,
+      "tools_count": 127,
+      "total_tokens": 709067,
+      "diff_lines": 35
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-171532-astropy__astropy-14096-superpowers-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 783.41,
+      "tools_count": 87,
+      "total_tokens": 459113,
+      "diff_lines": 86
+    }
+  },
+  {
+    "instance_id": "django__django-10554",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 1213.5,
+      "diff_lines": 39,
+      "run_id": "2026-08-17-175600-django__django-10554-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-004719-django__django-10554-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 529.46,
+      "tools_count": 105,
+      "total_tokens": 640131,
+      "diff_lines": 67
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-172845-django__django-10554-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 134.33,
+      "tools_count": 10,
+      "total_tokens": 56366,
+      "diff_lines": 0
+    }
+  },
+  {
+    "instance_id": "django__django-11477",
+    "family": "SWE",
+    "tier": "medium",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 127.55,
+      "diff_lines": 10,
+      "run_id": "2026-08-19-030452-django__django-11477-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-011419-django__django-11477-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 414.86,
+      "tools_count": 45,
+      "total_tokens": 221720,
+      "diff_lines": 116
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-013956-django__django-11477-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 242.1,
+      "tools_count": 12,
+      "total_tokens": 90804,
+      "diff_lines": 0
+    }
+  },
+  {
+    "instance_id": "django__django-12325",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 102.82,
+      "diff_lines": 40,
+      "run_id": "2026-08-18-005151-django__django-12325-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-154232-django__django-12325-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 161.83,
+      "tools_count": 25,
+      "total_tokens": 176052,
+      "diff_lines": 37
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-173931-django__django-12325-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 209.74,
+      "tools_count": 33,
+      "total_tokens": 250466,
+      "diff_lines": 44
+    }
+  },
+  {
+    "instance_id": "django__django-12406",
+    "family": "SWE",
+    "tier": "medium",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 164.34,
+      "diff_lines": 58,
+      "run_id": "2026-08-19-031249-django__django-12406-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-154518-django__django-12406-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 1131.29,
+      "tools_count": 58,
+      "total_tokens": 452490,
+      "diff_lines": 93
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-174303-django__django-12406-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 238.34,
+      "tools_count": 45,
+      "total_tokens": 335701,
+      "diff_lines": 63
+    }
+  },
+  {
+    "instance_id": "django__django-13212",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 136.94,
+      "diff_lines": 82,
+      "run_id": "2026-08-18-005832-django__django-13212-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-120115-django__django-13212-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 197.19,
+      "tools_count": 43,
+      "total_tokens": 262772,
+      "diff_lines": 232
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-120436-django__django-13212-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 216.7,
+      "tools_count": 50,
+      "total_tokens": 301043,
+      "diff_lines": 295
+    }
+  },
+  {
+    "instance_id": "django__django-13837",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 158.07,
+      "diff_lines": 39,
+      "run_id": "2026-08-18-010954-django__django-13837-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-114921-django__django-13837-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 351.42,
+      "tools_count": 59,
+      "total_tokens": 338957,
+      "diff_lines": 113
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-115514-django__django-13837-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 360.3,
+      "tools_count": 55,
+      "total_tokens": 458037,
+      "diff_lines": 143
+    }
+  },
+  {
+    "instance_id": "django__django-14007",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 142.79,
+      "diff_lines": 58,
+      "run_id": "2026-08-18-011233-django__django-14007-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-013612-django__django-14007-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 420.8,
+      "tools_count": 52,
+      "total_tokens": 255647,
+      "diff_lines": 93
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-230656-django__django-14007-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 455.72,
+      "tools_count": 63,
+      "total_tokens": 347049,
+      "diff_lines": 96
+    }
+  },
+  {
+    "instance_id": "django__django-14034",
+    "family": "SWE",
+    "tier": "medium",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 148.07,
+      "diff_lines": 35,
+      "run_id": "2026-08-19-033942-django__django-14034-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-160413-django__django-14034-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 246.27,
+      "tools_count": 40,
+      "total_tokens": 318441,
+      "diff_lines": 60
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-224726-django__django-14034-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 276.15,
+      "tools_count": 38,
+      "total_tokens": 441536,
+      "diff_lines": 66
+    }
+  },
+  {
+    "instance_id": "django__django-15957",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 109.18,
+      "diff_lines": 30,
+      "run_id": "2026-08-18-011456-django__django-15957-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-125319-django__django-15957-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 134.52,
+      "tools_count": 35,
+      "total_tokens": 186230,
+      "diff_lines": 64
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-125534-django__django-15957-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 131.64,
+      "tools_count": 44,
+      "total_tokens": 233496,
+      "diff_lines": 45
+    }
+  },
+  {
+    "instance_id": "django__django-16263",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 444.55,
+      "diff_lines": 171,
+      "run_id": "2026-08-18-011646-django__django-16263-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-111156-django__django-16263-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 1261.63,
+      "tools_count": 102,
+      "total_tokens": 687316,
+      "diff_lines": 113
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-174704-django__django-16263-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 898.26,
+      "tools_count": 126,
+      "total_tokens": 672215,
+      "diff_lines": 184
+    }
+  },
+  {
+    "instance_id": "django__django-16502",
+    "family": "SWE",
+    "tier": "medium",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 354.08,
+      "diff_lines": 49,
+      "run_id": "2026-08-18-051018-django__django-16502-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-223917-django__django-16502-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 426.87,
+      "tools_count": 53,
+      "total_tokens": 422785,
+      "diff_lines": 74
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-124708-django__django-16502-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 244.23,
+      "tools_count": 60,
+      "total_tokens": 395224,
+      "diff_lines": 128
+    }
+  },
+  {
+    "instance_id": "django__django-16560",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 401.17,
+      "diff_lines": 282,
+      "run_id": "2026-08-19-010015-django__django-16560-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-120815-django__django-16560-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 1701.2,
+      "tools_count": 91,
+      "total_tokens": 488331,
+      "diff_lines": 645
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-123637-django__django-16560-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 626.39,
+      "tools_count": 104,
+      "total_tokens": 732950,
+      "diff_lines": 614
+    }
+  },
+  {
+    "instance_id": "django__django-16631",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "django/django",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 496.24,
+      "diff_lines": 107,
+      "run_id": "2026-08-18-012926-django__django-16631-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-005946-django__django-16631-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 872.89,
+      "tools_count": 71,
+      "total_tokens": 435312,
+      "diff_lines": 272
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-013534-django__django-16631-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 260.69,
+      "tools_count": 59,
+      "total_tokens": 314993,
+      "diff_lines": 163
+    }
+  },
+  {
+    "instance_id": "django__django-16667",
+    "family": "SWE",
+    "tier": "medium",
+    "repo": "django/django",
+    "difficulty": "15 min - 1 hour",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 441.39,
+      "diff_lines": 3,
+      "run_id": "2026-08-18-053301-django__django-16667-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-110351-django__django-16667-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 210.47,
+      "tools_count": 21,
+      "total_tokens": 107676,
+      "diff_lines": 25
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-110724-django__django-16667-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 269.42,
+      "tools_count": 26,
+      "total_tokens": 154045,
+      "diff_lines": 25
+    }
+  },
+  {
+    "instance_id": "lcb__3687",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 97.77,
+      "diff_lines": 94,
+      "run_id": "2026-08-20-163223-lcb__3687-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-225206-lcb__3687-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 161.75,
+      "tools_count": 17,
+      "total_tokens": 150820,
+      "diff_lines": 91
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-225452-lcb__3687-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 127.57,
+      "tools_count": 15,
+      "total_tokens": 144358,
+      "diff_lines": 92
+    }
+  },
+  {
+    "instance_id": "lcb__3696",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 59.55,
+      "diff_lines": 50,
+      "run_id": "2026-08-20-163518-lcb__3696-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-221944-lcb__3696-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 148.99,
+      "tools_count": 15,
+      "total_tokens": 161682,
+      "diff_lines": 69
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-222217-lcb__3696-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 110.4,
+      "tools_count": 12,
+      "total_tokens": 127583,
+      "diff_lines": 68
+    }
+  },
+  {
+    "instance_id": "lcb__3701",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 647.65,
+      "diff_lines": 0,
+      "run_id": "2026-08-20-163741-lcb__3701-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-225704-lcb__3701-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 272.05,
+      "tools_count": 24,
+      "total_tokens": 213584,
+      "diff_lines": 202
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-230148-lcb__3701-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 303.15,
+      "tools_count": 20,
+      "total_tokens": 441826,
+      "diff_lines": 151
+    }
+  },
+  {
+    "instance_id": "lcb__3770",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 204.92,
+      "diff_lines": 86,
+      "run_id": "2026-08-20-182821-lcb__3770-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-224214-lcb__3770-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 241.37,
+      "tools_count": 30,
+      "total_tokens": 266671,
+      "diff_lines": 99
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-180205-lcb__3770-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 184.48,
+      "tools_count": 26,
+      "total_tokens": 206464,
+      "diff_lines": 76
+    }
+  },
+  {
+    "instance_id": "lcb__3783",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 98.92,
+      "diff_lines": 77,
+      "run_id": "2026-08-20-183450-lcb__3783-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-221635-lcb__3783-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 87.77,
+      "tools_count": 11,
+      "total_tokens": 80689,
+      "diff_lines": 75
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-221806-lcb__3783-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 95.21,
+      "tools_count": 8,
+      "total_tokens": 103349,
+      "diff_lines": 101
+    }
+  },
+  {
+    "instance_id": "lcb__3784",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 101.05,
+      "diff_lines": 119,
+      "run_id": "2026-08-20-183632-lcb__3784-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-233150-lcb__3784-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 98.96,
+      "tools_count": 12,
+      "total_tokens": 114096,
+      "diff_lines": 121
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-233332-lcb__3784-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 128.61,
+      "tools_count": 15,
+      "total_tokens": 144921,
+      "diff_lines": 137
+    }
+  },
+  {
+    "instance_id": "lcb__abc388_g",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 318.5,
+      "diff_lines": 0,
+      "run_id": "2026-08-18-143251-lcb__abc388_g-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-125114-lcb__abc388_g-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 62.21,
+      "tools_count": 12,
+      "total_tokens": 82295,
+      "diff_lines": 82
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-125219-lcb__abc388_g-superpowers-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 56.7,
+      "tools_count": 9,
+      "total_tokens": 117711,
+      "diff_lines": 75
+    }
+  },
+  {
+    "instance_id": "lcb__abc390_g",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 569.19,
+      "diff_lines": 200,
+      "run_id": "2026-08-19-104058-lcb__abc390_g-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-131051-lcb__abc390_g-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 2400.32,
+      "tools_count": 25,
+      "total_tokens": 0,
+      "diff_lines": 163
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-135121-lcb__abc390_g-superpowers-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 162.81,
+      "tools_count": 30,
+      "total_tokens": 214793,
+      "diff_lines": 115
+    }
+  },
+  {
+    "instance_id": "lcb__abc391_f",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 209.27,
+      "diff_lines": 0,
+      "run_id": "2026-08-18-144804-lcb__abc391_f-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-011738-lcb__abc391_f-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 128.3,
+      "tools_count": 10,
+      "total_tokens": 82897,
+      "diff_lines": 53
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-180513-lcb__abc391_f-superpowers-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 69.64,
+      "tools_count": 13,
+      "total_tokens": 81971,
+      "diff_lines": 66
+    }
+  },
+  {
+    "instance_id": "lcb__abc392_d",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "medium",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 44.32,
+      "diff_lines": 46,
+      "run_id": "2026-08-18-104537-lcb__abc392_d-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-105903-lcb__abc392_d-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 136.2,
+      "tools_count": 10,
+      "total_tokens": 60790,
+      "diff_lines": 45
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-110123-lcb__abc392_d-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 144.72,
+      "tools_count": 10,
+      "total_tokens": 70377,
+      "diff_lines": 58
+    }
+  },
+  {
+    "instance_id": "lcb__abc392_f",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 56.44,
+      "diff_lines": 33,
+      "run_id": "2026-08-19-010656-lcb__abc392_f-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-130230-lcb__abc392_f-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 48.67,
+      "tools_count": 10,
+      "total_tokens": 67106,
+      "diff_lines": 39
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-221457-lcb__abc392_f-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 95.18,
+      "tools_count": 16,
+      "total_tokens": 106301,
+      "diff_lines": 52
+    }
+  },
+  {
+    "instance_id": "lcb__abc396_e",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 56.79,
+      "diff_lines": 77,
+      "run_id": "2026-08-19-012108-lcb__abc396_e-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-160821-lcb__abc396_e-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 45.17,
+      "tools_count": 8,
+      "total_tokens": 69464,
+      "diff_lines": 81
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-232109-lcb__abc396_e-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 95.82,
+      "tools_count": 16,
+      "total_tokens": 118427,
+      "diff_lines": 73
+    }
+  },
+  {
+    "instance_id": "lcb__abc397_d",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 54.07,
+      "diff_lines": 40,
+      "run_id": "2026-08-19-035509-lcb__abc397_d-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-114318-lcb__abc397_d-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 255.44,
+      "tools_count": 7,
+      "total_tokens": 54965,
+      "diff_lines": 34
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-114737-lcb__abc397_d-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 100.76,
+      "tools_count": 11,
+      "total_tokens": 72363,
+      "diff_lines": 50
+    }
+  },
+  {
+    "instance_id": "lcb__abc398_g",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 182.91,
+      "diff_lines": 83,
+      "run_id": "2026-08-20-192211-lcb__abc398_g-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-224729-lcb__abc398_g-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 502.79,
+      "tools_count": 56,
+      "total_tokens": 466633,
+      "diff_lines": 80
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-225555-lcb__abc398_g-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 572.59,
+      "tools_count": 67,
+      "total_tokens": 749211,
+      "diff_lines": 83
+    }
+  },
+  {
+    "instance_id": "lcb__abc399_e",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 78.87,
+      "diff_lines": 76,
+      "run_id": "2026-08-18-113513-lcb__abc399_e-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-113302-lcb__abc399_e-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 191.18,
+      "tools_count": 8,
+      "total_tokens": 97183,
+      "diff_lines": 79
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-113615-lcb__abc399_e-superpowers-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 416.0,
+      "tools_count": 14,
+      "total_tokens": 162221,
+      "diff_lines": 79
+    }
+  },
+  {
+    "instance_id": "lcb__abc400_g",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 809.55,
+      "diff_lines": 0,
+      "run_id": "2026-08-20-152820-lcb__abc400_g-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-230532-lcb__abc400_g-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 284.29,
+      "tools_count": 42,
+      "total_tokens": 310589,
+      "diff_lines": 169
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-231022-lcb__abc400_g-superpowers-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 641.89,
+      "tools_count": 71,
+      "total_tokens": 539551,
+      "diff_lines": 117
+    }
+  },
+  {
+    "instance_id": "lcb__arc190_c",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 250.11,
+      "diff_lines": 123,
+      "run_id": "2026-08-18-113721-lcb__arc190_c-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-160911-lcb__arc190_c-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 2400.3,
+      "tools_count": 55,
+      "total_tokens": 0,
+      "diff_lines": 172
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-180632-lcb__arc190_c-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 289.91,
+      "tools_count": 37,
+      "total_tokens": 414287,
+      "diff_lines": 139
+    }
+  },
+  {
+    "instance_id": "lcb__arc192_b",
+    "family": "LCB",
+    "tier": null,
+    "repo": null,
+    "difficulty": "hard",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 99.84,
+      "diff_lines": 27,
+      "run_id": "2026-08-18-114527-lcb__arc192_b-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-125746-lcb__arc192_b-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 135.59,
+      "tools_count": 29,
+      "total_tokens": 237985,
+      "diff_lines": 34
+    },
+    "superpowers": {
+      "run_id": "2026-08-19-130005-lcb__arc192_b-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 142.29,
+      "tools_count": 30,
+      "total_tokens": 195881,
+      "diff_lines": 35
+    }
+  },
+  {
+    "instance_id": "lcb__arc195_c",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 154.59,
+      "diff_lines": 118,
+      "run_id": "2026-08-20-204011-lcb__arc195_c-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-221612-lcb__arc195_c-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 1049.46,
+      "tools_count": 101,
+      "total_tokens": 1092101,
+      "diff_lines": 117
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-223342-lcb__arc195_c-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 334.17,
+      "tools_count": 23,
+      "total_tokens": 310215,
+      "diff_lines": 94
+    }
+  },
+  {
+    "instance_id": "lcb__arc195_d",
+    "family": "UNKNOWN",
+    "tier": null,
+    "repo": null,
+    "difficulty": null,
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 2400.35,
+      "diff_lines": 138,
+      "run_id": "2026-08-20-204247-lcb__arc195_d-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-20-232250-lcb__arc195_d-supreme-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 264.32,
+      "tools_count": 36,
+      "total_tokens": 379882,
+      "diff_lines": 75
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-232715-lcb__arc195_d-superpowers-v2.0",
+      "status": "SUCCESS",
+      "wall_clock_seconds": 274.55,
+      "tools_count": 35,
+      "total_tokens": 262634,
+      "diff_lines": 63
+    }
+  },
+  {
+    "instance_id": "sympy__sympy-13852",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 201.64,
+      "diff_lines": 48,
+      "run_id": "2026-08-18-013743-sympy__sympy-13852-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-164933-sympy__sympy-13852-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 1554.76,
+      "tools_count": 67,
+      "total_tokens": 809849,
+      "diff_lines": 204
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-181143-sympy__sympy-13852-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 733.62,
+      "tools_count": 83,
+      "total_tokens": 582042,
+      "diff_lines": 224
+    }
+  },
+  {
+    "instance_id": "sympy__sympy-13878",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "sympy/sympy",
+    "difficulty": ">4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 492.98,
+      "diff_lines": 170,
+      "run_id": "2026-08-18-014105-sympy__sympy-13878-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-135422-sympy__sympy-13878-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 139.6,
+      "tools_count": 41,
+      "total_tokens": 236116,
+      "diff_lines": 41
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-011843-sympy__sympy-13878-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 945.28,
+      "tools_count": 91,
+      "total_tokens": 440525,
+      "diff_lines": 433
+    }
+  },
+  {
+    "instance_id": "sympy__sympy-14248",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 465.32,
+      "diff_lines": 127,
+      "run_id": "2026-08-18-014919-sympy__sympy-14248-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-21-012513-sympy__sympy-14248-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 494.53,
+      "tools_count": 62,
+      "total_tokens": 303669,
+      "diff_lines": 160
+    },
+    "superpowers": {
+      "run_id": "2026-08-21-182400-sympy__sympy-14248-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 1736.38,
+      "tools_count": 179,
+      "total_tokens": 1688365,
+      "diff_lines": 550
+    }
+  },
+  {
+    "instance_id": "sympy__sympy-16597",
+    "family": "SWE",
+    "tier": "hard",
+    "repo": "sympy/sympy",
+    "difficulty": "1-4 hours",
+    "baseline": {
+      "status": "FAILURE",
+      "wall_clock_seconds": 439.49,
+      "diff_lines": 42,
+      "run_id": "2026-08-18-015704-sympy__sympy-16597-baseline-v2.0"
+    },
+    "supreme": {
+      "run_id": "2026-08-19-130325-sympy__sympy-16597-supreme-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 442.0,
+      "tools_count": 116,
+      "total_tokens": 694605,
+      "diff_lines": 212
+    },
+    "superpowers": {
+      "run_id": "2026-08-20-222411-sympy__sympy-16597-superpowers-v2.0",
+      "status": "FAILURE",
+      "wall_clock_seconds": 1082.41,
+      "tools_count": 113,
+      "total_tokens": 899423,
+      "diff_lines": 177
+    }
+  }
+]
