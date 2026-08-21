@@ -1,0 +1,17 @@
+[
+ {
+  "input": "\"cdcd\"",
+  "output": "\"cccc\"",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"aca\"",
+  "output": "\"aaa\"",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"bc\"",
+  "output": "\"\"",
+  "testtype": "functional"
+ }
+]

@@ -1,0 +1,17 @@
+[
+ {
+  "input": "4 3\n1 2\n2 3\n3 4",
+  "output": "Aoki",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4 2\n1 2\n3 4",
+  "output": "Takahashi",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9 5\n2 9\n2 3\n4 6\n5 7\n1 8",
+  "output": "Aoki",
+  "testtype": "stdin"
+ }
+]

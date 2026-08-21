@@ -1,0 +1,12 @@
+[
+ {
+  "input": "[[1, 2], [2, 4]]",
+  "output": "3",
+  "testtype": "functional"
+ },
+ {
+  "input": "[[2, 6]]",
+  "output": "4",
+  "testtype": "functional"
+ }
+]

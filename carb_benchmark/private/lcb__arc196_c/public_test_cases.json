@@ -1,0 +1,17 @@
+[
+ {
+  "input": "2\nBWBW",
+  "output": "1",
+  "testtype": "stdin"
+ },
+ {
+  "input": "4\nBWWBWBWB",
+  "output": "0",
+  "testtype": "stdin"
+ },
+ {
+  "input": "9\nBWWBWBBBWWBWBBWWBW",
+  "output": "240792",
+  "testtype": "stdin"
+ }
+]

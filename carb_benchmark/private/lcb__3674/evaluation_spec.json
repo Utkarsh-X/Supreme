@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__3674",
+  "source": "livecodebench_v5",
+  "question_id": "3674",
+  "question_title": "count-non-decreasing-subarrays-after-k-operations",
+  "contest_id": "weekly-contest-432",
+  "contest_date": "2025-01-11T18:30:00",
+  "platform": "leetcode",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3674",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 2,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

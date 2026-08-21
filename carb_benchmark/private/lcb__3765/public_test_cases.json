@@ -1,0 +1,12 @@
+[
+ {
+  "input": "[3, 1, 4]\n[4, 6, 6]\n1",
+  "output": "110",
+  "testtype": "functional"
+ },
+ {
+  "input": "[4, 8, 5, 1, 14, 2, 2, 12, 1]\n[7, 2, 8, 4, 2, 2, 1, 1, 2]\n7",
+  "output": "985",
+  "testtype": "functional"
+ }
+]

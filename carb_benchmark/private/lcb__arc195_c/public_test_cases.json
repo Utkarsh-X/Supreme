@@ -1,0 +1,7 @@
+[
+ {
+  "input": "3\n2 3\n1 1\n4 0",
+  "output": "Yes\nB 2 3\nR 3 2 \nB 2 2\nB 3 3\nR 2 4\nNo\nYes\nR 1 1\nR 1 2\nR 2 2\nR 2 1",
+  "testtype": "stdin"
+ }
+]

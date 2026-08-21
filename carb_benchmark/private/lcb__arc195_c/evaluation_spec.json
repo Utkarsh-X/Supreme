@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__arc195_c",
+  "source": "livecodebench_v5",
+  "question_id": "arc195_c",
+  "question_title": "Hamiltonian Pieces",
+  "contest_id": "arc195",
+  "contest_date": "2025-03-23T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_c",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 4,
+  "public_test_count": 1,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

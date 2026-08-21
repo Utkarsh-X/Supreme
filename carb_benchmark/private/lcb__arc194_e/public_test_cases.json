@@ -1,0 +1,12 @@
+[
+ {
+  "input": "9 2 1\n000111001\n011000011",
+  "output": "Yes",
+  "testtype": "stdin"
+ },
+ {
+  "input": "1 1 1\n0\n1",
+  "output": "No",
+  "testtype": "stdin"
+ }
+]

@@ -1,0 +1,22 @@
+[
+ {
+  "input": "\"abaacbaecebce\"\n\"ba*c*ce\"",
+  "output": "8",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"baccbaadbc\"\n\"cc*baa*adb\"",
+  "output": "-1",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"a\"\n\"**\"",
+  "output": "0",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"madlogic\"\n\"*adlogi*\"",
+  "output": "6",
+  "testtype": "functional"
+ }
+]

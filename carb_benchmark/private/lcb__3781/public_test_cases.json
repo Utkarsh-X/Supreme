@@ -1,0 +1,17 @@
+[
+ {
+  "input": "2\n[[0, 2], [2, 0], [2, 2], [0, 0]]\n4",
+  "output": "2",
+  "testtype": "functional"
+ },
+ {
+  "input": "2\n[[0, 0], [1, 2], [2, 0], [2, 2], [2, 1]]\n4",
+  "output": "1",
+  "testtype": "functional"
+ },
+ {
+  "input": "2\n[[0, 0], [0, 1], [0, 2], [1, 2], [2, 0], [2, 2], [2, 1]]\n5",
+  "output": "1",
+  "testtype": "functional"
+ }
+]

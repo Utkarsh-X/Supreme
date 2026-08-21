@@ -1,0 +1,17 @@
+[
+ {
+  "input": "\"TFTF\"\n\"ab\"",
+  "output": "\"ababa\"",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"TFTF\"\n\"abc\"",
+  "output": "\"\"",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"F\"\n\"d\"",
+  "output": "\"a\"",
+  "testtype": "functional"
+ }
+]

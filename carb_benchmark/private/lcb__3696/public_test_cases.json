@@ -1,0 +1,17 @@
+[
+ {
+  "input": "\"12936\"",
+  "output": "11",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"5701283\"",
+  "output": "18",
+  "testtype": "functional"
+ },
+ {
+  "input": "\"1010101010\"",
+  "output": "25",
+  "testtype": "functional"
+ }
+]

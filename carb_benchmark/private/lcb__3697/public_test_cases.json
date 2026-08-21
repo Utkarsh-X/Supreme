@@ -1,0 +1,17 @@
+[
+ {
+  "input": "[1, 2, 3]\n[4]",
+  "output": "1",
+  "testtype": "functional"
+ },
+ {
+  "input": "[8, 4]\n[10, 5]",
+  "output": "2",
+  "testtype": "functional"
+ },
+ {
+  "input": "[7, 9, 10]\n[7]",
+  "output": "0",
+  "testtype": "functional"
+ }
+]

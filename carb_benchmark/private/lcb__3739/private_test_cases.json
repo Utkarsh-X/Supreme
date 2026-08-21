@@ -1,0 +1,202 @@
+[
+ {
+  "input": "1\n6\n3",
+  "output": "140",
+  "testtype": "functional"
+ },
+ {
+  "input": "1000\n100\n5667",
+  "output": "827055022",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n100000\n100000",
+  "output": "665483338",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n5\n5",
+  "output": "20",
+  "testtype": "functional"
+ },
+ {
+  "input": "10\n10000\n50059",
+  "output": "425009600",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n6\n4",
+  "output": "210",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n100000\n2",
+  "output": "665483338",
+  "testtype": "functional"
+ },
+ {
+  "input": "3\n1\n3",
+  "output": "4",
+  "testtype": "functional"
+ },
+ {
+  "input": "4\n1\n4",
+  "output": "10",
+  "testtype": "functional"
+ },
+ {
+  "input": "1000\n100\n89750",
+  "output": "787949119",
+  "testtype": "functional"
+ },
+ {
+  "input": "1000\n100\n65646",
+  "output": "563321150",
+  "testtype": "functional"
+ },
+ {
+  "input": "100000\n1\n2",
+  "output": "665483338",
+  "testtype": "functional"
+ },
+ {
+  "input": "10000\n10\n91185",
+  "output": "424272280",
+  "testtype": "functional"
+ },
+ {
+  "input": "4\n1\n2",
+  "output": "10",
+  "testtype": "functional"
+ },
+ {
+  "input": "4\n1\n3",
+  "output": "20",
+  "testtype": "functional"
+ },
+ {
+  "input": "3\n1\n2",
+  "output": "4",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n6\n6",
+  "output": "35",
+  "testtype": "functional"
+ },
+ {
+  "input": "5\n1\n4",
+  "output": "60",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n100000\n50000",
+  "output": "381759899",
+  "testtype": "functional"
+ },
+ {
+  "input": "100000\n1\n100000",
+  "output": "665483338",
+  "testtype": "functional"
+ },
+ {
+  "input": "2\n2\n3",
+  "output": "16",
+  "testtype": "functional"
+ },
+ {
+  "input": "100000\n1\n84688",
+  "output": "925855947",
+  "testtype": "functional"
+ },
+ {
+  "input": "5\n1\n5",
+  "output": "20",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n3\n3",
+  "output": "4",
+  "testtype": "functional"
+ },
+ {
+  "input": "2\n2\n2",
+  "output": "8",
+  "testtype": "functional"
+ },
+ {
+  "input": "1000\n100\n96642",
+  "output": "175063341",
+  "testtype": "functional"
+ },
+ {
+  "input": "1000\n100\n16734",
+  "output": "472217145",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n5\n2",
+  "output": "20",
+  "testtype": "functional"
+ },
+ {
+  "input": "5\n1\n2",
+  "output": "20",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n4\n4",
+  "output": "10",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n6\n2",
+  "output": "35",
+  "testtype": "functional"
+ },
+ {
+  "input": "5\n1\n3",
+  "output": "60",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n5\n3",
+  "output": "60",
+  "testtype": "functional"
+ },
+ {
+  "input": "1000\n100\n34539",
+  "output": "994159415",
+  "testtype": "functional"
+ },
+ {
+  "input": "2\n2\n4",
+  "output": "8",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n5\n4",
+  "output": "60",
+  "testtype": "functional"
+ },
+ {
+  "input": "1000\n100\n67373",
+  "output": "621889263",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n4\n2",
+  "output": "10",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n4\n3",
+  "output": "20",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n6\n5",
+  "output": "140",
+  "testtype": "functional"
+ }
+]

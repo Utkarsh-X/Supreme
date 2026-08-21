@@ -1,0 +1,17 @@
+[
+ {
+  "input": "4\n6",
+  "output": "[3, 4, 1, 2]",
+  "testtype": "functional"
+ },
+ {
+  "input": "3\n2",
+  "output": "[3, 2, 1]",
+  "testtype": "functional"
+ },
+ {
+  "input": "2\n3",
+  "output": "[]",
+  "testtype": "functional"
+ }
+]

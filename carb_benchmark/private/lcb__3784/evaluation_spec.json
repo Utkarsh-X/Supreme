@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__3784",
+  "source": "livecodebench_v5",
+  "question_id": "3784",
+  "question_title": "longest-common-prefix-of-k-strings-after-removal",
+  "contest_id": "biweekly-contest-152",
+  "contest_date": "2025-03-15T07:30:00",
+  "platform": "leetcode",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3784",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 2,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

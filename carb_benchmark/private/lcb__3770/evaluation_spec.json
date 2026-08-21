@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__3770",
+  "source": "livecodebench_v5",
+  "question_id": "3770",
+  "question_title": "lexicographically-smallest-generated-string",
+  "contest_id": "weekly-contest-439",
+  "contest_date": "2025-03-01T18:30:00",
+  "platform": "leetcode",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3770",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 3,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

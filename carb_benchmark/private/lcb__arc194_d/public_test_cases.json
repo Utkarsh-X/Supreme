@@ -1,0 +1,12 @@
+[
+ {
+  "input": "6\n(())()",
+  "output": "2",
+  "testtype": "stdin"
+ },
+ {
+  "input": "2\n()",
+  "output": "1",
+  "testtype": "stdin"
+ }
+]

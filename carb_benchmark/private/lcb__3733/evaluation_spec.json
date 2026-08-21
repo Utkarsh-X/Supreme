@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__3733",
+  "source": "livecodebench_v5",
+  "question_id": "3733",
+  "question_title": "length-of-longest-v-shaped-diagonal-segment",
+  "contest_id": "weekly-contest-437",
+  "contest_date": "2025-02-15T18:30:00",
+  "platform": "leetcode",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3733",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 4,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

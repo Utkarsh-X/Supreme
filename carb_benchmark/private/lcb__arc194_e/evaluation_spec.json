@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__arc194_e",
+  "source": "livecodebench_v5",
+  "question_id": "arc194_e",
+  "question_title": "Swap 0^X and 1^Y",
+  "contest_id": "arc194",
+  "contest_date": "2025-03-09T00:00:00",
+  "platform": "atcoder",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc194_e",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 2,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

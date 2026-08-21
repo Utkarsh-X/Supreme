@@ -1,0 +1,17 @@
+[
+ {
+  "input": "ABC",
+  "output": "ABCBA",
+  "testtype": "stdin"
+ },
+ {
+  "input": "Z",
+  "output": "Z",
+  "testtype": "stdin"
+ },
+ {
+  "input": "TREE",
+  "output": "TREERT",
+  "testtype": "stdin"
+ }
+]

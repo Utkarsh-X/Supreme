@@ -1,0 +1,12 @@
+[
+ {
+  "input": "[\"jump\", \"run\", \"run\", \"jump\", \"run\"]\n2",
+  "output": "[3, 4, 4, 3, 4]",
+  "testtype": "functional"
+ },
+ {
+  "input": "[\"dog\", \"racer\", \"car\"]\n2",
+  "output": "[0, 0, 0]",
+  "testtype": "functional"
+ }
+]

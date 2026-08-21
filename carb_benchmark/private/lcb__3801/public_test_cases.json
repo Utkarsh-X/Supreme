@@ -1,0 +1,12 @@
+[
+ {
+  "input": "10\n20",
+  "output": "2",
+  "testtype": "functional"
+ },
+ {
+  "input": "1\n15",
+  "output": "10",
+  "testtype": "functional"
+ }
+]

@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__3744",
+  "source": "livecodebench_v5",
+  "question_id": "3744",
+  "question_title": "minimum-operations-to-make-array-elements-zero",
+  "contest_id": "weekly-contest-442",
+  "contest_date": "2025-03-22T19:30:00",
+  "platform": "leetcode",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3744",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 2,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

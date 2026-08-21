@@ -1,0 +1,19 @@
+{
+  "task_id": "lcb__3725",
+  "source": "livecodebench_v5",
+  "question_id": "3725",
+  "question_title": "maximum-and-minimum-sums-of-at-most-size-k-subarrays",
+  "contest_id": "weekly-contest-433",
+  "contest_date": "2025-01-18T18:30:00",
+  "platform": "leetcode",
+  "difficulty": "hard",
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3725",
+  "test_timeout_seconds": 300,
+  "test_type": "io_exact_match",
+  "private_test_count": 40,
+  "public_test_count": 2,
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400
+}

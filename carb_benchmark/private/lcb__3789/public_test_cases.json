@@ -1,0 +1,12 @@
+[
+ {
+  "input": "4\n[[2, 3], [1, 4]]",
+  "output": "9",
+  "testtype": "functional"
+ },
+ {
+  "input": "5\n[[1, 2], [2, 5], [3, 5]]",
+  "output": "12",
+  "testtype": "functional"
+ }
+]
