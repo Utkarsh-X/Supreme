@@ -1,0 +1,73 @@
+diff --git a/main.py b/main.py
+index c86f6c8..8d8646d 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,67 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    if N % 2 == 1:
++        if M % 2 == 1:
++            print("Aoki")
++        else:
++            print("Takahashi")
++        return
++
++    adj = [[] for _ in range(N + 1)]
++    idx = 2
++    for _ in range(M):
++        u = int(input_data[idx])
++        v = int(input_data[idx + 1])
++        adj[u].append(v)
++        adj[v].append(u)
++        idx += 2
++
++    color = [-1] * (N + 1)
++    
++    even_comps = []
++    odd_comps = []
++
++    for i in range(1, N + 1):
++        if color[i] == -1:
++            color[i] = 0
++            q = [i]
++            c0 = 0
++            c1 = 0
++            for u in q:
++                if color[u] == 0:
++                    c0 += 1
++                else:
++                    c1 += 1
++                for v in adj[u]:
++                    if color[v] == -1:
++                        color[v] = 1 - color[u]
++                        q.append(v)
++            
++            sz = c0 + c1
++            if sz % 2 == 1:
++                odd_comps.append((c0, c1))
++            else:
++                even_comps.append((c0, c1))
++
++    has_odd_ge_3 = any((c0 + c1) >= 3 for c0, c1 in odd_comps)
++
++    if not has_odd_ge_3:
++        E0 = sum(c0 % 2 for c0, c1 in even_comps) % 2
++        K = len(odd_comps) // 2
++        if (E0 + M + K) % 2 == 1:
++            print("Aoki")
++        else:
++            print("Takahashi")
++    else:
++        print("Aoki")
++
++if __name__ == '__main__':
++    main()

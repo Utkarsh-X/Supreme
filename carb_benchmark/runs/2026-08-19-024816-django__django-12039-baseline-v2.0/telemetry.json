@@ -1,0 +1,14 @@
+{
+  "run_id": "2026-08-19-024816-django__django-12039-baseline-v2.0",
+  "task_id": "django__django-12039",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 1.05,
+  "tool_calls": [],
+  "tool_call_counts": {},
+  "time_to_first_edit": null,
+  "num_turns": null,
+  "duration_seconds": null,
+  "status": null,
+  "usage": null,
+  "error": null
+}

@@ -1,0 +1,21 @@
+diff --git a/main.py b/main.py
+index c86f6c8..3276cbe 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,15 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    n = int(input_data[0])
++    p = [int(x) for x in input_data[1:n+1]]
++    
++    for x in p:
++        rank = 1 + sum(1 for y in p if y > x)
++        print(rank)
++
++if __name__ == '__main__':
++    main()

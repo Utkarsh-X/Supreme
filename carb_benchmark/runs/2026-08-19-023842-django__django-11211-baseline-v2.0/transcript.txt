@@ -1,0 +1,26 @@
+### Root Cause
+
+When `prefetch_related` is used with a `GenericForeignKey` (GFK), `GenericForeignKey.get_prefetch_queryset` generates a key dictionary to match retrieved target model instances with source instances in Python.
+
+Previously, `gfk_key` coerced the foreign key field value using `model._meta.pk.get_prep_value(...)`. For `UUIDField` primary keys, `Field.get_prep_value` returns the string representation of the UUID (or leaves string values unchanged), whereas the retrieved target model instance's `pk` is coerced into a `uuid.UUID` instance. Consequently, matching `(uuid.UUID(...), ModelClass)` from `rel_obj_attr` against `('string-representation', ModelClass)` from `gfk_key` failed to match, causing `prefetch_related` to assign `None` to the GFK attribute.
+
+### Solution
+
+Updated `gfk_key` in [django/contrib/contenttypes/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/django/contrib/contenttypes/fields.py#L202-L207) to use `model._meta.pk.to_python(...)` instead of `get_prep_value(...)`. This ensures the FK value is converted into the proper Python type expected by the target model's primary key (such as `uuid.UUID`), aligning with `GenericForeignKey.__get__` and `GenericRelatedObjectManager.get_prefetch_queryset`.
+
+### Verification
+
+Added `test_prefetch_gfk_to_uuid_pk` in [tests/prefetch_related/test_uuid.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/tests/prefetch_related/test_uuid.py#L56-L71) and ran the test suite across `contenttypes_tests`, `generic_relations`, `generic_relations_regress`, `prefetch_related`, and `model_fields` to verify clean execution.
+### Root Cause
+
+When `prefetch_related` is used with a `GenericForeignKey` (GFK), `GenericForeignKey.get_prefetch_queryset` generates a key dictionary to match retrieved target model instances with source instances in Python.
+
+Previously, `gfk_key` coerced the foreign key field value using `model._meta.pk.get_prep_value(...)`. For `UUIDField` primary keys, `Field.get_prep_value` returns the string representation of the UUID (or leaves string values unchanged), whereas the retrieved target model instance's `pk` is coerced into a `uuid.UUID` instance. Consequently, matching `(uuid.UUID(...), ModelClass)` from `rel_obj_attr` against `('string-representation', ModelClass)` from `gfk_key` failed to match, causing `prefetch_related` to assign `None` to the GFK attribute.
+
+### Solution
+
+Updated `gfk_key` in [django/contrib/contenttypes/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/django/contrib/contenttypes/fields.py#L202-L207) to use `model._meta.pk.to_python(...)` instead of `get_prep_value(...)`. This ensures the FK value is converted into the proper Python type expected by the target model's primary key (such as `uuid.UUID`), aligning with `GenericForeignKey.__get__` and `GenericRelatedObjectManager.get_prefetch_queryset`.
+
+### Verification
+
+Added `test_prefetch_gfk_to_uuid_pk` in [tests/prefetch_related/test_uuid.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/tests/prefetch_related/test_uuid.py#L56-L71) and ran the test suite across `contenttypes_tests`, `generic_relations`, `generic_relations_regress`, `prefetch_related`, and `model_fields` to verify clean execution.

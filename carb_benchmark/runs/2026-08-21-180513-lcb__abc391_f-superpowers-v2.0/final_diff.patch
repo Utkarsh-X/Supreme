@@ -1,0 +1,66 @@
+diff --git a/main.py b/main.py
+index c86f6c8..b30cbb9 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,60 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import heapq
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    K = int(input_data[1])
++    
++    A = [int(x) for x in input_data[2 : 2 + N]]
++    B = [int(x) for x in input_data[2 + N : 2 + 2 * N]]
++    C = [int(x) for x in input_data[2 + 2 * N : 2 + 3 * N]]
++    
++    A.sort(reverse=True)
++    B.sort(reverse=True)
++    C.sort(reverse=True)
++    
++    visited = set()
++    visited.add((0, 0, 0))
++    
++    v0 = A[0] * B[0] + B[0] * C[0] + C[0] * A[0]
++    heap = [(-v0, 0, 0, 0)]
++    
++    ans = 0
++    for step in range(K):
++        neg_v, i, j, k = heapq.heappop(heap)
++        if step == K - 1:
++            ans = -neg_v
++            break
++        
++        # Candidate 1: (i+1, j, k)
++        if i + 1 < N:
++            nxt = (i + 1, j, k)
++            if nxt not in visited:
++                visited.add(nxt)
++                v = A[i+1] * B[j] + B[j] * C[k] + C[k] * A[i+1]
++                heapq.heappush(heap, (-v, i + 1, j, k))
++                
++        # Candidate 2: (i, j+1, k)
++        if j + 1 < N:
++            nxt = (i, j + 1, k)
++            if nxt not in visited:
++                visited.add(nxt)
++                v = A[i] * B[j+1] + B[j+1] * C[k] + C[k] * A[i]
++                heapq.heappush(heap, (-v, i, j + 1, k))
++                
++        # Candidate 3: (i, j, k+1)
++        if k + 1 < N:
++            nxt = (i, j, k + 1)
++            if nxt not in visited:
++                visited.add(nxt)
++                v = A[i] * B[j] + B[j] * C[k+1] + C[k+1] * A[i]
++                heapq.heappush(heap, (-v, i, j, k + 1))
++                
++    print(ans)
++
++if __name__ == '__main__':
++    main()

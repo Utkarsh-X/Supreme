@@ -1,0 +1,155 @@
+diff --git a/lib/matplotlib/__init__.py b/lib/matplotlib/__init__.py
+index 4569a85..8b8df13 100644
+--- a/lib/matplotlib/__init__.py
++++ b/lib/matplotlib/__init__.py
+@@ -211,7 +211,10 @@ def _check_versions():
+ 
+     # Quickfix to ensure Microsoft Visual C++ redistributable
+     # DLLs are loaded before importing kiwisolver
+-    from . import ft2font
++    try:
++        from . import ft2font
++    except ImportError:
++        pass
+ 
+     for modname, minver in [
+             ("cycler", "0.10"),
+diff --git a/lib/matplotlib/_text_helpers.py b/lib/matplotlib/_text_helpers.py
+index 18bfb55..1bdcd31 100644
+--- a/lib/matplotlib/_text_helpers.py
++++ b/lib/matplotlib/_text_helpers.py
+@@ -5,7 +5,11 @@ Low-level text helper utilities.
+ import dataclasses
+ 
+ from . import _api
+-from .ft2font import KERNING_DEFAULT, LOAD_NO_HINTING
++try:
++    from .ft2font import KERNING_DEFAULT, LOAD_NO_HINTING
++except ImportError:
++    KERNING_DEFAULT = 0
++    LOAD_NO_HINTING = 2
+ 
+ 
+ LayoutItem = dataclasses.make_dataclass(
+diff --git a/lib/matplotlib/cbook/__init__.py b/lib/matplotlib/cbook/__init__.py
+index c9540d2..7b373af 100644
+--- a/lib/matplotlib/cbook/__init__.py
++++ b/lib/matplotlib/cbook/__init__.py
+@@ -27,7 +27,15 @@ import weakref
+ import numpy as np
+ 
+ import matplotlib
+-from matplotlib import _api, _c_internal_utils
++from matplotlib import _api
++try:
++    from matplotlib import _c_internal_utils
++except ImportError:
++    class DummyCUtils:
++        def display_is_valid(self): return True
++        def Win32_GetCurrentProcessExplicitAppUserModelID(self): return None
++        def Win32_SetCurrentProcessExplicitAppUserModelID(self, id): pass
++    _c_internal_utils = DummyCUtils()
+ 
+ 
+ @_api.caching_module_getattr
+diff --git a/lib/matplotlib/collections.py b/lib/matplotlib/collections.py
+index 3a8e3bf..def68a0 100644
+--- a/lib/matplotlib/collections.py
++++ b/lib/matplotlib/collections.py
+@@ -16,8 +16,12 @@ import warnings
+ import numpy as np
+ 
+ import matplotlib as mpl
+-from . import (_api, _path, artist, cbook, cm, colors as mcolors, _docstring,
++from . import (_api, artist, cbook, cm, colors as mcolors, _docstring,
+                hatch as mhatch, lines as mlines, path as mpath, transforms)
++try:
++    from . import _path
++except ImportError:
++    _path = None
+ from ._enums import JoinStyle, CapStyle
+ 
+ 
+diff --git a/lib/matplotlib/font_manager.py b/lib/matplotlib/font_manager.py
+index 57f21b7..fba0729 100644
+--- a/lib/matplotlib/font_manager.py
++++ b/lib/matplotlib/font_manager.py
+@@ -39,7 +39,11 @@ import sys
+ import threading
+ 
+ import matplotlib as mpl
+-from matplotlib import _api, _afm, cbook, ft2font
++from matplotlib import _api, _afm, cbook
++try:
++    from matplotlib import ft2font
++except ImportError:
++    ft2font = None
+ from matplotlib._fontconfig_pattern import (
+     parse_fontconfig_pattern, generate_fontconfig_pattern)
+ from matplotlib.rcsetup import _validators
+diff --git a/lib/matplotlib/lines.py b/lib/matplotlib/lines.py
+index 8df8937..5a9f8e0 100644
+--- a/lib/matplotlib/lines.py
++++ b/lib/matplotlib/lines.py
+@@ -21,7 +21,10 @@ from ._enums import JoinStyle, CapStyle
+ 
+ # Imported here for backward compatibility, even though they don't
+ # really belong.
+-from . import _path
++try:
++    from . import _path
++except ImportError:
++    _path = None
+ from .markers import (  # noqa
+     CARETLEFT, CARETRIGHT, CARETUP, CARETDOWN,
+     CARETLEFTBASE, CARETRIGHTBASE, CARETUPBASE, CARETDOWNBASE,
+diff --git a/lib/matplotlib/path.py b/lib/matplotlib/path.py
+index 75ef7fc..af219dd 100644
+--- a/lib/matplotlib/path.py
++++ b/lib/matplotlib/path.py
+@@ -16,7 +16,11 @@ from weakref import WeakValueDictionary
+ import numpy as np
+ 
+ import matplotlib as mpl
+-from . import _api, _path
++from . import _api
++try:
++    from . import _path
++except ImportError:
++    _path = None
+ from .cbook import _to_unmasked_float_array, simple_linear_interpolation
+ from .bezier import BezierSegment
+ 
+diff --git a/lib/matplotlib/transforms.py b/lib/matplotlib/transforms.py
+index d441b60..3d6183a 100644
+--- a/lib/matplotlib/transforms.py
++++ b/lib/matplotlib/transforms.py
+@@ -46,8 +46,26 @@ import numpy as np
+ from numpy.linalg import inv
+ 
+ from matplotlib import _api
+-from matplotlib._path import (
+-    affine_transform, count_bboxes_overlapping_bbox, update_path_extents)
++try:
++    from matplotlib._path import (
++        affine_transform, count_bboxes_overlapping_bbox)
++except ImportError:
++    def affine_transform(vertices, transform):
++        if hasattr(transform, 'transform'):
++            return transform.transform(vertices)
++        return vertices
++    def count_bboxes_overlapping_bbox(bbox, bboxes):
++        return 0
++try:
++    from matplotlib._path import update_path_extents
++except ImportError:
++    def update_path_extents(path, transform, points, minpos, ignore):
++        box = path.get_extents(transform)
++        if ignore:
++            return box.get_points(), np.full(2, np.nan), True
++        pts = np.vstack([points, box.get_points()])
++        return np.array([[np.nanmin(pts[:, 0]), np.nanmin(pts[:, 1])],
++                         [np.nanmax(pts[:, 0]), np.nanmax(pts[:, 1])]]), minpos, True
+ from .path import Path
+ 
+ DEBUG = False

@@ -1,0 +1,38 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3770/main.py).
+
+### Approach & Algorithm
+
+1. **'T' Constraints Enforcement**:
+   - Initialize `word` of length $L = n + m - 1$ with default character `'a'` for all positions, and track fixed positions.
+   - For every index $i$ where `str1[i] == 'T'`, force `word[i + j] = str2[j]` for $0 \le j < m$. If a conflict occurs (two `'T'` requirements force different characters at the same index), return `""`.
+
+2. **Validation & Initial `'F'` Violation Identification**:
+   - Check if any `'F'` window consists entirely of fixed positions that match `str2`. If so, return `""` as it cannot be modified.
+   - Iterate from left to right over all `'F'` windows. If `word[i .. i + m - 1] == str2`, the window is violated.
+
+3. **Greedy Lexicographical Fix**:
+   - To keep `word` lexicographically minimal, preference is given to preserving `'a'` at earlier positions.
+   - For a violated `'F'` window, select the **rightmost** un-fixed position $pos$ in the window and attempt candidate characters `'b'`, `'c'`, ..., `'z'`.
+   - Verify that changing `word[pos]` to the candidate character does not introduce any new `'F'` violations in overlapping windows. If valid, lock the character and proceed.
+
+4. **Verification**:
+   - Verified against all provided public examples as well as extensive randomized stress tests against a brute-force DFS oracle. All test cases passed.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3770/main.py).
+
+### Approach & Algorithm
+
+1. **'T' Constraints Enforcement**:
+   - Initialize `word` of length $L = n + m - 1$ with default character `'a'` for all positions, and track fixed positions.
+   - For every index $i$ where `str1[i] == 'T'`, force `word[i + j] = str2[j]` for $0 \le j < m$. If a conflict occurs (two `'T'` requirements force different characters at the same index), return `""`.
+
+2. **Validation & Initial `'F'` Violation Identification**:
+   - Check if any `'F'` window consists entirely of fixed positions that match `str2`. If so, return `""` as it cannot be modified.
+   - Iterate from left to right over all `'F'` windows. If `word[i .. i + m - 1] == str2`, the window is violated.
+
+3. **Greedy Lexicographical Fix**:
+   - To keep `word` lexicographically minimal, preference is given to preserving `'a'` at earlier positions.
+   - For a violated `'F'` window, select the **rightmost** un-fixed position $pos$ in the window and attempt candidate characters `'b'`, `'c'`, ..., `'z'`.
+   - Verify that changing `word[pos]` to the candidate character does not introduce any new `'F'` violations in overlapping windows. If valid, lock the character and proceed.
+
+4. **Verification**:
+   - Verified against all provided public examples as well as extensive randomized stress tests against a brute-force DFS oracle. All test cases passed.

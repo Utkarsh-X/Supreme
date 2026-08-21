@@ -1,0 +1,20 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3674/main.py).
+
+### Method Summary
+1. **Cost Function Property**: For any subarray `nums[L..R]`, to make it non-decreasing with minimal operations, each element `nums[i]` (for `L <= i <= R`) must be incremented to `M(L, i) = max_{L <= j <= i} nums[j]`. The minimum operations required is `cost(L, R) = sum_{i=L}^R (M(L, i) - nums[i])`.
+2. **Monotonic Stack & Step Function**: As `i` increases from `L` to `R`, `M(L, i)` forms a step function determined by the monotonic stack of next greater elements starting at `L`. By iterating `L` from `n - 1` down to `0`, we maintain the monotonic stack along with prefix sums of block contributions `nums[s_j] * (s_{j+1} - s_j)`.
+3. **Two-Pointer Monotonicity**: The maximum valid right boundary `max_R(L)` such that `cost(L, max_R(L)) <= k` is non-increasing as `L` decreases. Using a two-pointer approach for `max_R` along with binary search (`bisect_left`) over the stack to compute `cost(L, R)` in `O(log N)` time yields an overall time complexity of `O(N log N)`.
+
+### Verification
+- Tested against Public Examples 1 and 2, producing expected outputs `17` and `12`.
+- Tested against a stress test with $N = 100,000$, executing in ~0.20s.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3674/main.py).
+
+### Method Summary
+1. **Cost Function Property**: For any subarray `nums[L..R]`, to make it non-decreasing with minimal operations, each element `nums[i]` (for `L <= i <= R`) must be incremented to `M(L, i) = max_{L <= j <= i} nums[j]`. The minimum operations required is `cost(L, R) = sum_{i=L}^R (M(L, i) - nums[i])`.
+2. **Monotonic Stack & Step Function**: As `i` increases from `L` to `R`, `M(L, i)` forms a step function determined by the monotonic stack of next greater elements starting at `L`. By iterating `L` from `n - 1` down to `0`, we maintain the monotonic stack along with prefix sums of block contributions `nums[s_j] * (s_{j+1} - s_j)`.
+3. **Two-Pointer Monotonicity**: The maximum valid right boundary `max_R(L)` such that `cost(L, max_R(L)) <= k` is non-increasing as `L` decreases. Using a two-pointer approach for `max_R` along with binary search (`bisect_left`) over the stack to compute `cost(L, R)` in `O(log N)` time yields an overall time complexity of `O(N log N)`.
+
+### Verification
+- Tested against Public Examples 1 and 2, producing expected outputs `17` and `12`.
+- Tested against a stress test with $N = 100,000$, executing in ~0.20s.

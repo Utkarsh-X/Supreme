@@ -1,0 +1,46 @@
+Wait for task-110 to complete.
+### Summary of Changes
+
+#### Problem
+When `SECRET_KEY` was rotated and previous keys were placed in `SECRET_KEY_FALLBACKS`, users were being logged out on subsequent requests. This occurred because:
+1. `AbstractBaseUser.get_session_auth_hash()` generated the session authentication hash using only `settings.SECRET_KEY`.
+2. `django.contrib.auth.get_user()` and `login()` validated session auth hashes solely against the primary `get_session_auth_hash()`, without checking keys in `SECRET_KEY_FALLBACKS`.
+
+#### Solution
+1. **[base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L134-L150)**:
+   - Updated `AbstractBaseUser.get_session_auth_hash(self, secret=None)` to accept an optional `secret` argument.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes(self)` method to yield session authentication hashes generated using each secret key in `settings.SECRET_KEY_FALLBACKS`.
+
+2. **[auth/__init__.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L106-L220)**:
+   - Updated `get_user(request)` to check `get_session_auth_fallback_hashes()` if the session hash does not match `user.get_session_auth_hash()`.
+   - Updated `login(request, user)` to check `get_session_auth_fallback_hashes()` before determining whether an existing session for the same user should be flushed during login.
+
+3. **Tests**:
+   - Added unit tests in `tests/auth_tests/test_basic.py` to verify `get_session_auth_fallback_hashes()` and `get_user()` fallback hash resolution.
+   - Added test `test_login_secret_key_fallbacks` in `tests/auth_tests/test_views.py` to verify session key retention and session hash rotation during `login()`.
+
+#### Verification
+All 609 tests in `auth_tests` as well as test suites `sessions_tests`, `signing`, and `settings_tests` executed cleanly and passed.
+Wait for task-110 to complete.
+### Summary of Changes
+
+#### Problem
+When `SECRET_KEY` was rotated and previous keys were placed in `SECRET_KEY_FALLBACKS`, users were being logged out on subsequent requests. This occurred because:
+1. `AbstractBaseUser.get_session_auth_hash()` generated the session authentication hash using only `settings.SECRET_KEY`.
+2. `django.contrib.auth.get_user()` and `login()` validated session auth hashes solely against the primary `get_session_auth_hash()`, without checking keys in `SECRET_KEY_FALLBACKS`.
+
+#### Solution
+1. **[base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L134-L150)**:
+   - Updated `AbstractBaseUser.get_session_auth_hash(self, secret=None)` to accept an optional `secret` argument.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes(self)` method to yield session authentication hashes generated using each secret key in `settings.SECRET_KEY_FALLBACKS`.
+
+2. **[auth/__init__.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L106-L220)**:
+   - Updated `get_user(request)` to check `get_session_auth_fallback_hashes()` if the session hash does not match `user.get_session_auth_hash()`.
+   - Updated `login(request, user)` to check `get_session_auth_fallback_hashes()` before determining whether an existing session for the same user should be flushed during login.
+
+3. **Tests**:
+   - Added unit tests in `tests/auth_tests/test_basic.py` to verify `get_session_auth_fallback_hashes()` and `get_user()` fallback hash resolution.
+   - Added test `test_login_secret_key_fallbacks` in `tests/auth_tests/test_views.py` to verify session key retention and session hash rotation during `login()`.
+
+#### Verification
+All 609 tests in `auth_tests` as well as test suites `sessions_tests`, `signing`, and `settings_tests` executed cleanly and passed.

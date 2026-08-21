@@ -1,0 +1,117 @@
+diff --git a/main.py b/main.py
+index c86f6c8..52ff25f 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,111 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import ast
++import re
++from collections import deque
++
++def parse_input():
++    content = sys.stdin.read().strip()
++    if not content:
++        return None, None, None
++
++    # First try standard line-by-line reading
++    lines = [line.strip() for line in content.splitlines() if line.strip()]
++    if len(lines) == 3:
++        try:
++            nums = ast.literal_eval(lines[0])
++            cost = ast.literal_eval(lines[1])
++            k = int(lines[2])
++            return nums, cost, k
++        except Exception:
++            pass
++
++    # Next try regex extraction of two lists and one integer
++    list_matches = re.findall(r'\[[\s\d,-]*\]', content)
++    if len(list_matches) >= 2:
++        try:
++            nums = json.loads(list_matches[0])
++            cost = json.loads(list_matches[1])
++            end_pos = content.rfind(']')
++            rem_text = content[end_pos + 1:].strip()
++            k_match = re.search(r'\d+', rem_text)
++            if k_match:
++                k = int(k_match.group(0))
++                return nums, cost, k
++        except Exception:
++            pass
++
++    # Fallback: line by line with json
++    if len(lines) >= 3:
++        nums = json.loads(lines[0])
++        cost = json.loads(lines[1])
++        k = int(lines[2])
++        return nums, cost, k
++
++    return None, None, None
++
++def solve(nums, cost, k):
++    n = len(nums)
++    P = [0] * n
++    C = [0] * n
++
++    curr_p = 0
++    for idx, val in enumerate(nums):
++        curr_p += val
++        P[idx] = curr_p
++
++    curr_c = 0
++    for idx, val in enumerate(cost):
++        curr_c += val
++        C[idx] = curr_c
++
++    prev_dp = [0] * n
++    for j in range(n):
++        prev_dp[j] = (P[j] + k) * C[j]
++
++    ans = prev_dp[n - 1]
++
++    for i in range(2, n + 1):
++        curr_dp = [float('inf')] * n
++        hull = deque()
++
++        for j in range(i - 1, n):
++            p = j - 1
++            m = -C[p]
++            c = prev_dp[p]
++
++            while len(hull) >= 2:
++                m1, c1 = hull[-2]
++                m2, c2 = hull[-1]
++                m3, c3 = m, c
++                if (c2 - c1) * (m2 - m3) >= (c3 - c2) * (m1 - m2):
++                    hull.pop()
++                else:
++                    break
++            hull.append((m, c))
++
++            x = P[j] + k * i
++            while len(hull) >= 2:
++                m1, c1 = hull[0]
++                m2, c2 = hull[1]
++                if m1 * x + c1 >= m2 * x + c2:
++                    hull.popleft()
++                else:
++                    break
++
++            m_opt, c_opt = hull[0]
++            curr_dp[j] = x * C[j] + (m_opt * x + c_opt)
++
++        ans = min(ans, curr_dp[n - 1])
++        prev_dp = curr_dp
++
++    return ans
++
++def main():
++    nums, cost, k = parse_input()
++    if nums is not None and cost is not None and k is not None:
++        result = solve(nums, cost, k)
++        print(result)
++
++if __name__ == '__main__':
++    main()

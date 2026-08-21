@@ -1,0 +1,50 @@
+I have solved the problem and implemented the complete solution in `main.py`.
+
+### Method Explanation
+
+1. **Cost Function Formulation**:
+   If every upper and lower tooth pair after grinding satisfies $U'_i + D'_i = H$, then the total grinding cost spent across all teeth is:
+   $$\text{Cost} = \sum_{i=1}^N (U_i - U'_i + D_i - D'_i) = \sum_{i=1}^N (U_i + D_i) - N \cdot H$$
+   Notice that $\sum_{i=1}^N (U_i + D_i)$ is constant. Therefore, minimizing the cost is equivalent to **maximizing the common height $H$**.
+
+2. **Feasibility of Height $H$**:
+   For a given height $H$, tooth $i$ must satisfy:
+   - $0 \le U'_i \le U_i$
+   - $0 \le D'_i \le D_i \iff 0 \le H - U'_i \le D_i \iff H - D_i \le U'_i \le H$
+
+   Combining these gives the valid interval for upper tooth length $U'_i$:
+   $$L_i(H) = \max(0, H - D_i) \le U'_i \le \min(U_i, H) = R_i(H)$$
+
+   We need to find if there exists a sequence $U'_1, U'_2, \dots, U'_N$ such that $L_i(H) \le U'_i \le R_i(H)$ for all $i$ and $|U'_i - U'_{i+1}| \le X$ for all $1 \le i < N$.
+
+3. **Check Algorithm & Monotonicity**:
+   - The condition of feasibility is monotonic with respect to $H$.
+   - We can check if a given $H$ is valid in $O(N)$ time by maintaining the valid range $[l_i, r_i]$ of reachable values for $U'_i$ from left to right:
+     $$l_i = \max(L_i(H), l_{i-1} - X), \quad r_i = \min(R_i(H), r_{i-1} + X)$$
+     If at any step $l_i > r_i$, the height $H$ is infeasible.
+   - Binary search over $H \in [0, \min_i(U_i + D_i)]$ finds the maximum valid $H$ in $O(N \log (\max H))$ time.
+I have solved the problem and implemented the complete solution in `main.py`.
+
+### Method Explanation
+
+1. **Cost Function Formulation**:
+   If every upper and lower tooth pair after grinding satisfies $U'_i + D'_i = H$, then the total grinding cost spent across all teeth is:
+   $$\text{Cost} = \sum_{i=1}^N (U_i - U'_i + D_i - D'_i) = \sum_{i=1}^N (U_i + D_i) - N \cdot H$$
+   Notice that $\sum_{i=1}^N (U_i + D_i)$ is constant. Therefore, minimizing the cost is equivalent to **maximizing the common height $H$**.
+
+2. **Feasibility of Height $H$**:
+   For a given height $H$, tooth $i$ must satisfy:
+   - $0 \le U'_i \le U_i$
+   - $0 \le D'_i \le D_i \iff 0 \le H - U'_i \le D_i \iff H - D_i \le U'_i \le H$
+
+   Combining these gives the valid interval for upper tooth length $U'_i$:
+   $$L_i(H) = \max(0, H - D_i) \le U'_i \le \min(U_i, H) = R_i(H)$$
+
+   We need to find if there exists a sequence $U'_1, U'_2, \dots, U'_N$ such that $L_i(H) \le U'_i \le R_i(H)$ for all $i$ and $|U'_i - U'_{i+1}| \le X$ for all $1 \le i < N$.
+
+3. **Check Algorithm & Monotonicity**:
+   - The condition of feasibility is monotonic with respect to $H$.
+   - We can check if a given $H$ is valid in $O(N)$ time by maintaining the valid range $[l_i, r_i]$ of reachable values for $U'_i$ from left to right:
+     $$l_i = \max(L_i(H), l_{i-1} - X), \quad r_i = \min(R_i(H), r_{i-1} + X)$$
+     If at any step $l_i > r_i$, the height $H$ is infeasible.
+   - Binary search over $H \in [0, \min_i(U_i + D_i)]$ finds the maximum valid $H$ in $O(N \log (\max H))$ time.

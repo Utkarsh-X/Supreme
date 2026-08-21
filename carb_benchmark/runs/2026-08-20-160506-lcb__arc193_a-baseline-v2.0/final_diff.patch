@@ -1,0 +1,105 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ef0f67e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,99 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    
++    W = [0] + [int(next(iterator)) for _ in range(N)]
++    
++    L = [0] * (N + 1)
++    R = [0] * (N + 1)
++    
++    max_coord = 2 * N + 2
++    INF = float('inf')
++    
++    min_R = [INF] * (max_coord + 1)
++    min_L = [INF] * (max_coord + 1)
++    
++    for i in range(1, N + 1):
++        l = int(next(iterator))
++        r = int(next(iterator))
++        L[i] = l
++        R[i] = r
++        if W[i] < min_R[r]:
++            min_R[r] = W[i]
++        if W[i] < min_L[l]:
++            min_L[l] = W[i]
++            
++    min_left = [INF] * (max_coord + 1)
++    curr = INF
++    for x in range(1, max_coord + 1):
++        if min_R[x - 1] < curr:
++            curr = min_R[x - 1]
++        min_left[x] = curr
++        
++    min_right = [INF] * (max_coord + 1)
++    curr = INF
++    for y in range(max_coord, 0, -1):
++        if y + 1 <= max_coord and min_L[y + 1] < curr:
++            curr = min_L[y + 1]
++        min_right[y] = curr
++        
++    Q = int(next(iterator))
++    out = []
++    
++    for _ in range(Q):
++        s = int(next(iterator))
++        t = int(next(iterator))
++        
++        ans = INF
++        
++        # Candidate 1: Direct edge (1-hop)
++        if R[s] < L[t] or R[t] < L[s]:
++            ans = W[s] + W[t]
++            
++        # Candidate 2: 2-hop via left
++        min_l_st = L[s] if L[s] < L[t] else L[t]
++        mL = min_left[min_l_st]
++        if mL != INF:
++            val = W[s] + W[t] + mL
++            if val < ans:
++                ans = val
++                
++        # Candidate 3: 2-hop via right
++        max_r_st = R[s] if R[s] > R[t] else R[t]
++        mR = min_right[max_r_st]
++        if mR != INF:
++            val = W[s] + W[t] + mR
++            if val < ans:
++                ans = val
++                
++        # Candidate 4: 3-hop left_s -> right_t
++        mLs = min_left[L[s]]
++        mRt = min_right[R[t]]
++        if mLs != INF and mRt != INF:
++            val = W[s] + W[t] + mLs + mRt
++            if val < ans:
++                ans = val
++                
++        # Candidate 5: 3-hop right_s -> left_t
++        mRs = min_right[R[s]]
++        mLt = min_left[L[t]]
++        if mRs != INF and mLt != INF:
++            val = W[s] + W[t] + mRs + mLt
++            if val < ans:
++                ans = val
++                
++        if ans == INF:
++            out.append("-1")
++        else:
++            out.append(str(ans))
++            
++    sys.stdout.write("\n".join(out) + "\n")
++
++if __name__ == '__main__':
++    main()

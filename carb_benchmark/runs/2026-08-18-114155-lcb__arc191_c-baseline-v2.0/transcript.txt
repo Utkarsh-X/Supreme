@@ -1,0 +1,48 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc191_c/main.py).
+
+### Method Explanation
+
+For any given positive integer $N$, we can choose:
+$$A = N + 1$$
+$$M = N^2$$
+
+**Mathematical Proof of Correctness:**
+Using the binomial expansion:
+$$A^n - 1 = (N + 1)^n - 1 = \sum_{k=1}^n \binom{n}{k} N^k = n N + \sum_{k=2}^n \binom{n}{k} N^k$$
+
+For every term with $k \ge 2$, $N^k$ contains $N^2$ as a factor, so $\binom{n}{k} N^k$ is a multiple of $N^2$. Taking modulo $N^2$:
+$$A^n - 1 \equiv n N \pmod{N^2}$$
+
+Thus, $A^n - 1$ is a multiple of $M = N^2$ if and only if $n N$ is a multiple of $N^2$, which simplifies to $N \mid n$.
+The smallest positive integer $n$ that satisfies $N \mid n$ is $n = N$.
+
+**Constraints Check:**
+Given $1 \le N \le 10^9$:
+- $1 \le A = N + 1 \le 10^9 + 1 \le 10^{18}$
+- $1 \le M = N^2 \le 10^{18}$
+
+Both $A$ and $M$ strictly satisfy the required constraints ($1 \le A, M \le 10^{18}$).
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc191_c/main.py).
+
+### Method Explanation
+
+For any given positive integer $N$, we can choose:
+$$A = N + 1$$
+$$M = N^2$$
+
+**Mathematical Proof of Correctness:**
+Using the binomial expansion:
+$$A^n - 1 = (N + 1)^n - 1 = \sum_{k=1}^n \binom{n}{k} N^k = n N + \sum_{k=2}^n \binom{n}{k} N^k$$
+
+For every term with $k \ge 2$, $N^k$ contains $N^2$ as a factor, so $\binom{n}{k} N^k$ is a multiple of $N^2$. Taking modulo $N^2$:
+$$A^n - 1 \equiv n N \pmod{N^2}$$
+
+Thus, $A^n - 1$ is a multiple of $M = N^2$ if and only if $n N$ is a multiple of $N^2$, which simplifies to $N \mid n$.
+The smallest positive integer $n$ that satisfies $N \mid n$ is $n = N$.
+
+**Constraints Check:**
+Given $1 \le N \le 10^9$:
+- $1 \le A = N + 1 \le 10^9 + 1 \le 10^{18}$
+- $1 \le M = N^2 \le 10^{18}$
+
+Both $A$ and $M$ strictly satisfy the required constraints ($1 \le A, M \le 10^{18}$).

@@ -1,0 +1,117 @@
+diff --git a/main.py b/main.py
+index c86f6c8..a2b3cdf 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,111 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import itertools
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    num_test_cases = int(next(iterator))
++    
++    output = []
++    
++    for _ in range(num_test_cases):
++        N = int(next(iterator))
++        K = int(next(iterator))
++        
++        cakes = []
++        for i in range(N):
++            x = int(next(iterator))
++            y = int(next(iterator))
++            z = int(next(iterator))
++            
++            if x >= y and x >= z:
++                cat = 0
++                v = x
++            elif y >= z:
++                cat = 1
++                v = y
++            else:
++                cat = 2
++                v = z
++            
++            cakes.append({'id': i, 'v': v, 'cat': cat, 'x': x, 'y': y, 'z': z})
++            
++        cakes.sort(key=lambda item: item['v'], reverse=True)
++        chosen = cakes[:2 * K]
++        unchosen = cakes[2 * K:]
++        
++        base_val = sum(item['v'] for item in chosen)
++        counts = [0, 0, 0]
++        chosen_by_cat = [[], [], []]
++        for item in chosen:
++            counts[item['cat']] += 1
++            chosen_by_cat[item['cat']].append(item)
++            
++        if counts[0] % 2 == 0 and counts[1] % 2 == 0 and counts[2] % 2 == 0:
++            output.append(str(base_val))
++            continue
++            
++        candidate_chosen = set()
++        for c in range(3):
++            for target in [-1, 0, 1, 2]:
++                if target == c:
++                    continue
++                def get_loss(item, t=target):
++                    v_old = item['v']
++                    v_new = 0 if t == -1 else (item['x'] if t == 0 else (item['y'] if t == 1 else item['z']))
++                    return v_old - v_new
++                sorted_cat = sorted(chosen_by_cat[c], key=get_loss)
++                for item in sorted_cat[:2]:
++                    candidate_chosen.add(item['id'])
++                    
++        candidate_unchosen = set()
++        for target in [0, 1, 2]:
++            def get_gain(item, t=target):
++                return item['x'] if t == 0 else (item['y'] if t == 1 else item['z'])
++            sorted_un = sorted(unchosen, key=get_gain, reverse=True)
++            for item in sorted_un[:2]:
++                candidate_unchosen.add(item['id'])
++                
++        cand_c_items = [item for item in chosen if item['id'] in candidate_chosen]
++        cand_u_items = [item for item in unchosen if item['id'] in candidate_unchosen]
++        
++        best_val = 0
++        for num_c in (0, 1, 2):
++            for num_u in (0, 1, 2):
++                if num_c + num_u == 0:
++                    continue
++                c_options = list(itertools.product((-1, 0, 1, 2), repeat=num_c))
++                u_options = list(itertools.product((0, 1, 2), repeat=num_u))
++                for c_comb in itertools.combinations(cand_c_items, num_c):
++                    for u_comb in itertools.combinations(cand_u_items, num_u):
++                        for c_acts in c_options:
++                            for u_acts in u_options:
++                                new_counts = list(counts)
++                                cur_val = base_val
++                                
++                                for item, act in zip(c_comb, c_acts):
++                                    old_cat = item['cat']
++                                    old_v = item['v']
++                                    new_counts[old_cat] -= 1
++                                    cur_val -= old_v
++                                    if act != -1:
++                                        new_counts[act] += 1
++                                        cur_val += (item['x'] if act == 0 else (item['y'] if act == 1 else item['z']))
++                                        
++                                for item, act in zip(u_comb, u_acts):
++                                    new_counts[act] += 1
++                                    cur_val += (item['x'] if act == 0 else (item['y'] if act == 1 else item['z']))
++                                    
++                                if new_counts[0] % 2 == 0 and new_counts[1] % 2 == 0 and new_counts[2] % 2 == 0 and sum(new_counts) == 2 * K:
++                                    if cur_val > best_val:
++                                        best_val = cur_val
++                                        
++        output.append(str(best_val))
++        
++    print('\n'.join(output))
++
++if __name__ == '__main__':
++    main()

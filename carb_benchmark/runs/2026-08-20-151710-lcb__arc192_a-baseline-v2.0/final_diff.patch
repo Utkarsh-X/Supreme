@@ -1,0 +1,68 @@
+diff --git a/main.py b/main.py
+index c86f6c8..10293a1 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,62 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input = sys.stdin.read
++    data = input().split()
++    if not data:
++        return
++    N = int(data[0])
++    A = [int(x) for x in data[1:]]
++
++    if all(x == 1 for x in A):
++        print("Yes")
++        return
++
++    is_n_mod_4_eq_2 = (N % 4 == 2)
++
++    for start_state in (0, 1):
++        reachable = [False, False]
++        max_zz = [-1, -1]
++        
++        reachable[start_state] = True
++        max_zz[start_state] = 0
++        
++        for i in range(N):
++            next_reachable = [False, False]
++            next_max_zz = [-1, -1]
++            a_val = A[i]
++            
++            for prev in (0, 1):
++                if not reachable[prev]:
++                    continue
++                for curr in (0, 1):
++                    if prev == 1 and curr == 1:
++                        continue
++                    if prev == 0 and curr == 0:
++                        if a_val == 0:
++                            continue
++                        inc = 1
++                    else:
++                        inc = 0
++                    
++                    next_reachable[curr] = True
++                    cand = max_zz[prev] + inc
++                    if cand > next_max_zz[curr]:
++                        next_max_zz[curr] = cand
++            
++            reachable = next_reachable
++            max_zz = next_max_zz
++        
++        if reachable[start_state]:
++            if is_n_mod_4_eq_2:
++                if max_zz[start_state] > 0:
++                    print("Yes")
++                    return
++            else:
++                print("Yes")
++                return
++
++    print("No")
++
++if __name__ == "__main__":
++    solve()

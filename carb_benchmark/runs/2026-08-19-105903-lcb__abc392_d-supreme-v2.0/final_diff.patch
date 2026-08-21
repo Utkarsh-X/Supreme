@@ -1,0 +1,45 @@
+diff --git a/main.py b/main.py
+index c86f6c8..94011a9 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,39 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import Counter
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    
++    dice = []
++    for _ in range(N):
++        K = int(next(iterator))
++        faces = [int(next(iterator)) for _ in range(K)]
++        counts = Counter(faces)
++        prob_dict = {val: cnt / K for val, cnt in counts.items()}
++        dice.append(prob_dict)
++    
++    max_prob = 0.0
++    for i in range(N):
++        d_i = dice[i]
++        for j in range(i + 1, N):
++            d_j = dice[j]
++            if len(d_i) > len(d_j):
++                d_i, d_j = d_j, d_i
++            
++            prob = 0.0
++            for x, p_x in d_i.items():
++                if x in d_j:
++                    prob += p_x * d_j[x]
++            
++            if prob > max_prob:
++                max_prob = prob
++    
++    print(f"{max_prob:.15f}")
++
++if __name__ == '__main__':
++    main()

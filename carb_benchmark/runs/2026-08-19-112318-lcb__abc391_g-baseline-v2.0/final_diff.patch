@@ -1,0 +1,73 @@
+diff --git a/main.py b/main.py
+index c86f6c8..52c9277 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,67 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++
++    MOD = 998244353
++
++    def mask_to_dp(mask, N):
++        dp = [0] * (N + 1)
++        for i in range(1, N + 1):
++            dp[i] = dp[i - 1] + ((mask >> (i - 1)) & 1)
++        return dp
++
++    def dp_to_mask(dp, N):
++        mask = 0
++        for i in range(1, N + 1):
++            if dp[i] - dp[i - 1] == 1:
++                mask |= 1 << (i - 1)
++        return mask
++
++    def step_dp(dp, c_char, S, N):
++        next_dp = [0] * (N + 1)
++        for i in range(1, N + 1):
++            if S[i - 1] == c_char:
++                next_dp[i] = dp[i - 1] + 1
++            else:
++                next_dp[i] = max(dp[i], next_dp[i - 1])
++        return next_dp
++
++    adj = []
++    alphabet = [chr(ord('a') + i) for i in range(26)]
++    for mask in range(1 << N):
++        dp = mask_to_dp(mask, N)
++        trans = {}
++        for c in alphabet:
++            next_dp = step_dp(dp, c, S, N)
++            next_mask = dp_to_mask(next_dp, N)
++            trans[next_mask] = trans.get(next_mask, 0) + 1
++        adj.append(list(trans.items()))
++
++    dp_counts = [0] * (1 << N)
++    dp_counts[0] = 1
++
++    for _ in range(M):
++        next_dp_counts = [0] * (1 << N)
++        for mask in range(1 << N):
++            c = dp_counts[mask]
++            if not c:
++                continue
++            for next_mask, cnt in adj[mask]:
++                next_dp_counts[next_mask] = (next_dp_counts[next_mask] + c * cnt) % MOD
++        dp_counts = next_dp_counts
++
++    ans = [0] * (N + 1)
++    for mask in range(1 << N):
++        k = bin(mask).count('1')
++        ans[k] = (ans[k] + dp_counts[mask]) % MOD
++
++    print(' '.join(map(str, ans)))
++
++if __name__ == '__main__':
++    main()

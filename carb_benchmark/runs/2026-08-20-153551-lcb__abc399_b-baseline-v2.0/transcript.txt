@@ -1,0 +1,22 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Method Explanation
+The problem asks for the rank of each person according to the rule:
+- Initial rank starts at 1.
+- Each unique score group receives a rank equal to $1 + (\text{number of people with a strictly higher score})$.
+
+For each person $i$, their rank is calculated as $1 + \sum_{j: P_j > P_i} 1$. Since $N \le 100$, this $O(N^2)$ solution executes virtually instantaneously and satisfies all constraints.
+
+### Verification
+All provided sample test cases were verified and passed successfully.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Method Explanation
+The problem asks for the rank of each person according to the rule:
+- Initial rank starts at 1.
+- Each unique score group receives a rank equal to $1 + (\text{number of people with a strictly higher score})$.
+
+For each person $i$, their rank is calculated as $1 + \sum_{j: P_j > P_i} 1$. Since $N \le 100$, this $O(N^2)$ solution executes virtually instantaneously and satisfies all constraints.
+
+### Verification
+All provided sample test cases were verified and passed successfully.

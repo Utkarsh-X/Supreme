@@ -1,0 +1,28 @@
+The solution has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_b/main.py).
+
+### Method Explanation
+
+The problem asks us to simulate coloring an $N \times N$ grid. For $i = 1, 2, \dots, N$:
+1. $j = N + 1 - i$.
+2. If $i \le j$, we fill the subgrid with top-left corner $(i, i)$ and bottom-right corner $(j, j)$ (1-indexed) with `#` if $i$ is odd or `.` if $i$ is even. Overwriting any previous color.
+3. If $i > j$, we stop.
+
+Since $N \le 50$, directly simulating the step-by-step rectangular fill operations runs well within time limits ($O(N^3)$ operations at most).
+
+### Verification
+
+The implementation was tested against all sample cases ($N=11$, $N=5$, $N=8$, $N=2$) and passed successfully.
+The solution has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_b/main.py).
+
+### Method Explanation
+
+The problem asks us to simulate coloring an $N \times N$ grid. For $i = 1, 2, \dots, N$:
+1. $j = N + 1 - i$.
+2. If $i \le j$, we fill the subgrid with top-left corner $(i, i)$ and bottom-right corner $(j, j)$ (1-indexed) with `#` if $i$ is odd or `.` if $i$ is even. Overwriting any previous color.
+3. If $i > j$, we stop.
+
+Since $N \le 50$, directly simulating the step-by-step rectangular fill operations runs well within time limits ($O(N^3)$ operations at most).
+
+### Verification
+
+The implementation was tested against all sample cases ($N=11$, $N=5$, $N=8$, $N=2$) and passed successfully.

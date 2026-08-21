@@ -1,0 +1,36 @@
+I have identified and resolved the bug causing docstring parameters with complex type signatures (such as `dict(str, str)`) to render incorrectly.
+
+### Root Cause
+In [docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301), `DocFieldTransformer.transform()` parsed inline type and parameter name specifications (e.g. `:param type name:`) by calling `fieldarg.split(None, 1)`. 
+When given a multi-word or compound type like `dict(str, str) opc_meta`, `split(None, 1)` split at the first space, resulting in:
+- `argtype` = `'dict(str,'`
+- `argname` = `'str) opc_meta'`
+
+This led to the rendered output `str) opc_meta (dict(str,) – (optional)`.
+
+### Solution
+- Updated [docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301) to use `fieldarg.rsplit(None, 1)` instead of `split(None, 1)`. Since parameter names are single identifier tokens at the end of the argument string, splitting from the right correctly separates the entire type signature (`dict(str, str)`) from the parameter name (`opc_meta`).
+- Added unit test `test_info_field_list_type_with_spaces` in [test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L1011-L1034) to verify that parameters with types containing spaces are correctly parsed and cross-referenced.
+The background test run finished. All domain, field transformation, and docfield tests passed.
+
+### Summary of Fix
+1. **[docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301)**: Updated `fieldarg.split(None, 1)` to `fieldarg.rsplit(None, 1)`. When processing inline parameter field type declarations (such as `:param dict(str, str) opc_meta:`), `rsplit` ensures that parameter names containing no spaces are extracted from the right-hand side, leaving complex type definitions with spaces intact.
+2. **[test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L1011-L1034)**: Added `test_info_field_list_type_with_spaces` to prevent regression.
+I have identified and resolved the bug causing docstring parameters with complex type signatures (such as `dict(str, str)`) to render incorrectly.
+
+### Root Cause
+In [docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301), `DocFieldTransformer.transform()` parsed inline type and parameter name specifications (e.g. `:param type name:`) by calling `fieldarg.split(None, 1)`. 
+When given a multi-word or compound type like `dict(str, str) opc_meta`, `split(None, 1)` split at the first space, resulting in:
+- `argtype` = `'dict(str,'`
+- `argname` = `'str) opc_meta'`
+
+This led to the rendered output `str) opc_meta (dict(str,) – (optional)`.
+
+### Solution
+- Updated [docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301) to use `fieldarg.rsplit(None, 1)` instead of `split(None, 1)`. Since parameter names are single identifier tokens at the end of the argument string, splitting from the right correctly separates the entire type signature (`dict(str, str)`) from the parameter name (`opc_meta`).
+- Added unit test `test_info_field_list_type_with_spaces` in [test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L1011-L1034) to verify that parameters with types containing spaces are correctly parsed and cross-referenced.
+The background test run finished. All domain, field transformation, and docfield tests passed.
+
+### Summary of Fix
+1. **[docfields.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/sphinx/util/docfields.py#L301)**: Updated `fieldarg.split(None, 1)` to `fieldarg.rsplit(None, 1)`. When processing inline parameter field type declarations (such as `:param dict(str, str) opc_meta:`), `rsplit` ensures that parameter names containing no spaces are extracted from the right-hand side, leaving complex type definitions with spaces intact.
+2. **[test_domain_py.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9230/tests/test_domain_py.py#L1011-L1034)**: Added `test_info_field_list_type_with_spaces` to prevent regression.

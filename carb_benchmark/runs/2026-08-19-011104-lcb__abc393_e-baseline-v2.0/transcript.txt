@@ -1,0 +1,12 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc393_e/main.py).
+
+### Method Explanation
+1. **Divisor Multiple Counts**: We compute `cnt[g]`, which represents the number of elements in array $A$ that are divisible by $g$. For all integers $g \in [1, M]$ (where $M = \max(A)$), we can efficiently compute `cnt[g]` using slice sums over the frequency array of $A$. This takes $O(M \log M)$ operations overall.
+2. **Maximum Divisor Assignment**: A value $g$ is a candidate answer for element $A_i$ if $g$ divides $A_i$ and `cnt[g] >= K`. By iterating $g$ from $1$ to $M$, whenever `cnt[g] >= K`, we update all multiples of $g$ (i.e. $g, 2g, 3g, \dots \le M$) with $g$. Since $g$ is processed in increasing order, the final recorded value for each number $x \le M$ will be its maximum valid divisor $g$.
+3. **Lookup**: For each element $A_i$, its result is directly retrieved from our precomputed answers in $O(1)$ time per element.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc393_e/main.py).
+
+### Method Explanation
+1. **Divisor Multiple Counts**: We compute `cnt[g]`, which represents the number of elements in array $A$ that are divisible by $g$. For all integers $g \in [1, M]$ (where $M = \max(A)$), we can efficiently compute `cnt[g]` using slice sums over the frequency array of $A$. This takes $O(M \log M)$ operations overall.
+2. **Maximum Divisor Assignment**: A value $g$ is a candidate answer for element $A_i$ if $g$ divides $A_i$ and `cnt[g] >= K`. By iterating $g$ from $1$ to $M$, whenever `cnt[g] >= K`, we update all multiples of $g$ (i.e. $g, 2g, 3g, \dots \le M$) with $g$. Since $g$ is processed in increasing order, the final recorded value for each number $x \le M$ will be its maximum valid divisor $g$.
+3. **Lookup**: For each element $A_i$, its result is directly retrieved from our precomputed answers in $O(1)$ time per element.

@@ -1,0 +1,32 @@
+I have addressed the issue where `SECRET_KEY_FALLBACKS` was not used for session authentication hash validation.
+
+### Cause
+`AbstractBaseUser.get_session_auth_hash()` previously called `salted_hmac()` without specifying a secret key, defaulting to `settings.SECRET_KEY`. When verifying user sessions during authentication, `django.contrib.auth.get_user()` and `login()` only checked `user.get_session_auth_hash()` against the primary key. When `SECRET_KEY` was rotated, existing user session authentication hashes (derived from the old key) failed validation and sessions were invalidated/flushed.
+
+### Summary of Changes
+1. **[`django/contrib/auth/base_user.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py)**:
+   - Added an optional `secret=None` parameter to `AbstractBaseUser.get_session_auth_hash(self, secret=None)` so session authentication hashes can be generated for specific fallback secret keys.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes(self)` method to yield session authentication hashes for all keys defined in `settings.SECRET_KEY_FALLBACKS`.
+
+2. **[`django/contrib/auth/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py)**:
+   - Updated `get_user()` and `login()` to verify the session hash against `user.get_session_auth_fallback_hashes()` if the hash does not match `user.get_session_auth_hash()`.
+
+3. **Documentation & Unit/Integration Tests**:
+   - Updated `docs/topics/auth/customizing.txt` to document `get_session_auth_hash(secret=None)` and `get_session_auth_fallback_hashes()`.
+   - Added test coverage in [`tests/auth_tests/test_middleware.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_middleware.py) and [`tests/auth_tests/test_models.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_models.py).
+I have addressed the issue where `SECRET_KEY_FALLBACKS` was not used for session authentication hash validation.
+
+### Cause
+`AbstractBaseUser.get_session_auth_hash()` previously called `salted_hmac()` without specifying a secret key, defaulting to `settings.SECRET_KEY`. When verifying user sessions during authentication, `django.contrib.auth.get_user()` and `login()` only checked `user.get_session_auth_hash()` against the primary key. When `SECRET_KEY` was rotated, existing user session authentication hashes (derived from the old key) failed validation and sessions were invalidated/flushed.
+
+### Summary of Changes
+1. **[`django/contrib/auth/base_user.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py)**:
+   - Added an optional `secret=None` parameter to `AbstractBaseUser.get_session_auth_hash(self, secret=None)` so session authentication hashes can be generated for specific fallback secret keys.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes(self)` method to yield session authentication hashes for all keys defined in `settings.SECRET_KEY_FALLBACKS`.
+
+2. **[`django/contrib/auth/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py)**:
+   - Updated `get_user()` and `login()` to verify the session hash against `user.get_session_auth_fallback_hashes()` if the hash does not match `user.get_session_auth_hash()`.
+
+3. **Documentation & Unit/Integration Tests**:
+   - Updated `docs/topics/auth/customizing.txt` to document `get_session_auth_hash(secret=None)` and `get_session_auth_fallback_hashes()`.
+   - Added test coverage in [`tests/auth_tests/test_middleware.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_middleware.py) and [`tests/auth_tests/test_models.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_models.py).

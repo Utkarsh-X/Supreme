@@ -1,0 +1,91 @@
+diff --git a/main.py b/main.py
+index c86f6c8..89be873 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,85 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve(str1: str, str2: str) -> str:
++    n = len(str1)
++    m = len(str2)
++    N = n + m - 1
++    
++    fixed = [None] * N
++    
++    # Process 'T'
++    for i in range(n):
++        if str1[i] == 'T':
++            for j in range(m):
++                if fixed[i + j] is not None and fixed[i + j] != str2[j]:
++                    return ""
++                fixed[i + j] = str2[j]
++                
++    # Process 'F'
++    unbroken = [False] * n
++    last_unfixed_windows = [[] for _ in range(N)]
++    
++    for i in range(n):
++        if str1[i] == 'F':
++            already_broken = False
++            for j in range(m):
++                if fixed[i + j] is not None and fixed[i + j] != str2[j]:
++                    already_broken = True
++                    break
++            if already_broken:
++                continue
++            
++            last_unfixed = -1
++            for j in range(m):
++                if fixed[i + j] is None:
++                    last_unfixed = i + j
++            if last_unfixed == -1:
++                # All fixed positions match str2 completely, violating 'F'
++                return ""
++            
++            unbroken[i] = True
++            last_unfixed_windows[last_unfixed].append(i)
++            
++    word = [''] * N
++    
++    for p in range(N):
++        F_p = set()
++        for i in last_unfixed_windows[p]:
++            if unbroken[i]:
++                F_p.add(str2[p - i])
++                
++        if fixed[p] is not None:
++            ch = fixed[p]
++            if ch in F_p:
++                return ""
++            word[p] = ch
++        else:
++            chosen = None
++            for c_code in range(ord('a'), ord('z') + 1):
++                c = chr(c_code)
++                if c not in F_p:
++                    chosen = c
++                    break
++            if chosen is None:
++                return ""
++            word[p] = chosen
++            
++        for i in range(max(0, p - m + 1), min(n, p + 1)):
++            if unbroken[i]:
++                if word[p] != str2[p - i]:
++                    unbroken[i] = False
++                    
++    return "".join(word)
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    str1 = input_data[0].strip().strip('"')
++    str2 = input_data[1].strip().strip('"')
++    
++    result = solve(str1, str2)
++    print(result)
++
++if __name__ == '__main__':
++    main()

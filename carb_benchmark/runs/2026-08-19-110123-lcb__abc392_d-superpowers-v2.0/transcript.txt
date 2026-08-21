@@ -1,0 +1,44 @@
+An optimal solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_d/main.py).
+
+### Overview & Algorithm
+
+1. **Probability Formulation**:
+   For any pair of dice $i$ and $j$, the probability that both dice roll the exact same face value $v$ is:
+   $$P(i, j) = \sum_{v} \left( \frac{c_{i, v}}{K_i} \times \frac{c_{j, v}}{K_j} \right) = \frac{1}{K_i K_j} \sum_{v} (c_{i, v} \cdot c_{j, v})$$
+   where $c_{i, v}$ is the frequency of value $v$ on die $i$.
+
+2. **Efficient Frequency Matching**:
+   - For each die $i$, count face frequencies $c_{i, v}$.
+   - Map each face value $v$ to the list of dice that contain $v$.
+   - For each value $v$, iterate over pairs of dice containing $v$ and accumulate their product $c_{i, v} \cdot c_{j, v}$ into `same_count[i][j]`.
+   - Calculate $P(i, j)$ for all pairs $1 \le i < j \le N$ and take the maximum.
+
+3. **Complexity**:
+   - Time Complexity: $\mathcal{O}(N \cdot \sum K_i + N^2) \approx \mathcal{O}(100 \times 10^5 + 100^2)$ operations, running well under 0.2 seconds.
+   - Space Complexity: $\mathcal{O}(N^2 + \sum K_i)$.
+
+### Verification
+- Validated on sample cases 1 and 2.
+- Verified on a maximum constraint stress-test case ($N = 100$, $\sum K_i = 10^5$).
+An optimal solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_d/main.py).
+
+### Overview & Algorithm
+
+1. **Probability Formulation**:
+   For any pair of dice $i$ and $j$, the probability that both dice roll the exact same face value $v$ is:
+   $$P(i, j) = \sum_{v} \left( \frac{c_{i, v}}{K_i} \times \frac{c_{j, v}}{K_j} \right) = \frac{1}{K_i K_j} \sum_{v} (c_{i, v} \cdot c_{j, v})$$
+   where $c_{i, v}$ is the frequency of value $v$ on die $i$.
+
+2. **Efficient Frequency Matching**:
+   - For each die $i$, count face frequencies $c_{i, v}$.
+   - Map each face value $v$ to the list of dice that contain $v$.
+   - For each value $v$, iterate over pairs of dice containing $v$ and accumulate their product $c_{i, v} \cdot c_{j, v}$ into `same_count[i][j]`.
+   - Calculate $P(i, j)$ for all pairs $1 \le i < j \le N$ and take the maximum.
+
+3. **Complexity**:
+   - Time Complexity: $\mathcal{O}(N \cdot \sum K_i + N^2) \approx \mathcal{O}(100 \times 10^5 + 100^2)$ operations, running well under 0.2 seconds.
+   - Space Complexity: $\mathcal{O}(N^2 + \sum K_i)$.
+
+### Verification
+- Validated on sample cases 1 and 2.
+- Verified on a maximum constraint stress-test case ($N = 100$, $\sum K_i = 10^5$).

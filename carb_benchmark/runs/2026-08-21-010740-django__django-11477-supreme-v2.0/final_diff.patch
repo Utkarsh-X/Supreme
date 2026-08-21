@@ -1,0 +1,48 @@
+diff --git a/django/urls/base.py b/django/urls/base.py
+index 0e1c3d9..624e7b1 100644
+--- a/django/urls/base.py
++++ b/django/urls/base.py
+@@ -172,7 +172,9 @@ def translate_url(url, lang_code):
+         to_be_reversed = "%s:%s" % (match.namespace, match.url_name) if match.namespace else match.url_name
+         with override(lang_code):
+             try:
+-                url = reverse(to_be_reversed, args=match.args, kwargs=match.kwargs)
++                args = [arg for arg in match.args if arg is not None]
++                kwargs = {k: v for k, v in match.kwargs.items() if v is not None}
++                url = reverse(to_be_reversed, args=args, kwargs=kwargs)
+             except NoReverseMatch:
+                 pass
+             else:
+diff --git a/tests/i18n/patterns/tests.py b/tests/i18n/patterns/tests.py
+index 6ed2c4f..191e855 100644
+--- a/tests/i18n/patterns/tests.py
++++ b/tests/i18n/patterns/tests.py
+@@ -153,6 +153,8 @@ class URLTranslationTests(URLTestCaseBase):
+         with translation.override('en'):
+             self.assertEqual(translate_url('/en/nonexistent/', 'nl'), '/en/nonexistent/')
+             self.assertEqual(translate_url('/en/users/', 'nl'), '/nl/gebruikers/')
++            self.assertEqual(translate_url('/en/with-optional/', 'nl'), '/nl/with-optional/')
++            self.assertEqual(translate_url('/en/with-optional/foo/', 'nl'), '/nl/with-optional/foo/')
+             # Namespaced URL
+             self.assertEqual(translate_url('/en/account/register/', 'nl'), '/nl/profiel/registreren/')
+             # path() URL pattern
+@@ -161,6 +163,8 @@ class URLTranslationTests(URLTestCaseBase):
+ 
+         with translation.override('nl'):
+             self.assertEqual(translate_url('/nl/gebruikers/', 'en'), '/en/users/')
++            self.assertEqual(translate_url('/nl/with-optional/', 'en'), '/en/with-optional/')
++            self.assertEqual(translate_url('/nl/with-optional/foo/', 'en'), '/en/with-optional/foo/')
+             self.assertEqual(translation.get_language(), 'nl')
+ 
+ 
+diff --git a/tests/i18n/patterns/urls/default.py b/tests/i18n/patterns/urls/default.py
+index b0c2f25..e5aeca3 100644
+--- a/tests/i18n/patterns/urls/default.py
++++ b/tests/i18n/patterns/urls/default.py
+@@ -16,5 +16,6 @@ urlpatterns += i18n_patterns(
+     path('prefixed/', view, name='prefixed'),
+     path('prefixed.xml', view, name='prefixed_xml'),
+     re_path(_(r'^users/$'), view, name='users'),
++    re_path(_(r'^with-optional/(?:(?P<arg>\w+)/)?$'), view, name='with-optional'),
+     re_path(_(r'^account/'), include('i18n.patterns.urls.namespace', namespace='account')),
+ )

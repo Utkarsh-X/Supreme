@@ -1,0 +1,46 @@
+An optimal solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc190_d/main.py).
+
+### Method Explanation
+
+The problem asks for $\sum_{B} B^p \pmod p$, where $B$ is formed by replacing each of the $K$ zero entries in $A$ with an element from $\{1, 2, \ldots, p-1\}$.
+
+Elementwise, $(B^p)_{i,j}$ is the sum over all paths $P = (v_0, v_1, \ldots, v_p)$ of length $p$ starting at $v_0 = i$ and ending at $v_p = j$ of the path product $\prod_{m=1}^p B_{v_{m-1}, v_m}$.
+Summing over all choices of variables $z_{r,c} \in \{1, \dots, p-1\}$ for zero entries:
+- Fermat's Little Theorem states that $\sum_{x=1}^{p-1} x^d \equiv -1 \pmod p$ if $(p-1) \mid d$ or $d = 0$, and $0 \pmod p$ otherwise.
+
+Analyzing by prime cases:
+1. **Case $p = 2$**:
+   Since $p-1 = 1$, every non-negative integer degree $d \ge 0$ is divisible by 1. Thus every zero position replaced with 1 gives a valid non-zero term. This reduces to computing $M^2 \pmod 2$, where $M$ is formed by replacing all zero entries of $A$ with 1.
+
+2. **Case $p > 2$**:
+   Since path length is $p$, any zero edge $z \in \text{Zeros}$ can appear at most $p$ times in a path. For its sum over $x \in \{1, \dots, p-1\}$ to be non-zero modulo $p$, its degree $d_z(P)$ must be either $0$ or $p-1$.
+   - **Type 1 ($0$ zero edges used)**: The path consists solely of fixed (non-zero) entries of $A$. The sum of all such paths is $(-1)^K A_{\text{fixed}}^p \pmod p$, computed using matrix exponentiation in $O(N^3 \log p)$.
+   - **Type 2 ($p-1$ instances of a zero edge $z_0$)**:
+     - For any $p \ge 3$, if $z_0 = (u_0, v_0)$ appears at $p-1$ positions, consecutive occurrences of $z_0$ force $z_0$ to be a zero self-loop $(u_0, u_0)$, with the single non-zero edge $e_{\text{fixed}}$ located either at the start ($k=1$) or end ($k=p$) of the path.
+     - For the special case $p = 3$, $p-1 = 2$ zero edges can also be separated by a non-zero edge $e_{\text{fixed}} = (v_0, u_0)$ at $k=2$, allowing non-self-loop zero edges $(u_0, v_0)$.
+
+### Verification
+The solution has been verified using random unit tests and against all three sample test cases.
+An optimal solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc190_d/main.py).
+
+### Method Explanation
+
+The problem asks for $\sum_{B} B^p \pmod p$, where $B$ is formed by replacing each of the $K$ zero entries in $A$ with an element from $\{1, 2, \ldots, p-1\}$.
+
+Elementwise, $(B^p)_{i,j}$ is the sum over all paths $P = (v_0, v_1, \ldots, v_p)$ of length $p$ starting at $v_0 = i$ and ending at $v_p = j$ of the path product $\prod_{m=1}^p B_{v_{m-1}, v_m}$.
+Summing over all choices of variables $z_{r,c} \in \{1, \dots, p-1\}$ for zero entries:
+- Fermat's Little Theorem states that $\sum_{x=1}^{p-1} x^d \equiv -1 \pmod p$ if $(p-1) \mid d$ or $d = 0$, and $0 \pmod p$ otherwise.
+
+Analyzing by prime cases:
+1. **Case $p = 2$**:
+   Since $p-1 = 1$, every non-negative integer degree $d \ge 0$ is divisible by 1. Thus every zero position replaced with 1 gives a valid non-zero term. This reduces to computing $M^2 \pmod 2$, where $M$ is formed by replacing all zero entries of $A$ with 1.
+
+2. **Case $p > 2$**:
+   Since path length is $p$, any zero edge $z \in \text{Zeros}$ can appear at most $p$ times in a path. For its sum over $x \in \{1, \dots, p-1\}$ to be non-zero modulo $p$, its degree $d_z(P)$ must be either $0$ or $p-1$.
+   - **Type 1 ($0$ zero edges used)**: The path consists solely of fixed (non-zero) entries of $A$. The sum of all such paths is $(-1)^K A_{\text{fixed}}^p \pmod p$, computed using matrix exponentiation in $O(N^3 \log p)$.
+   - **Type 2 ($p-1$ instances of a zero edge $z_0$)**:
+     - For any $p \ge 3$, if $z_0 = (u_0, v_0)$ appears at $p-1$ positions, consecutive occurrences of $z_0$ force $z_0$ to be a zero self-loop $(u_0, u_0)$, with the single non-zero edge $e_{\text{fixed}}$ located either at the start ($k=1$) or end ($k=p$) of the path.
+     - For the special case $p = 3$, $p-1 = 2$ zero edges can also be separated by a non-zero edge $e_{\text{fixed}} = (v_0, u_0)$ at $k=2$, allowing non-self-loop zero edges $(u_0, v_0)$.
+
+### Verification
+The solution has been verified using random unit tests and against all three sample test cases.

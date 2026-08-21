@@ -1,0 +1,34 @@
+An optimal solution for the game has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_g/main.py).
+
+### Method Explanation
+
+The game asks us to determine the winner of a game where two players take turns adding edges to a graph without creating any odd cycles (i.e. preserving bipartiteness). When no more valid edges can be added, the game ends and the player with no valid moves remaining loses.
+
+In any maximal state, all connected components will have merged into a single bipartite component, forming a complete bipartite graph $K_{S_0, S_1}$ with $S_0 + S_1 = N$.
+
+1. **When $N$ is odd:**
+   $S_0 + S_1 = N$ (odd), so one of $S_0$ or $S_1$ is even, making the maximum total edges $S_0 \times S_1$ **always even**. Thus, the total number of moves in the game is $S_0 S_1 - M \equiv M \pmod 2$.
+   - Aoki (first player) wins if and only if $M \equiv 1 \pmod 2$.
+
+2. **When $N$ is even:**
+   Let $C_1, C_2, \ldots, C_k$ be the initial bipartite connected components.
+   - If there is at least one odd component of size $\ge 3$, Aoki can always choose the orientation when merging components to dictate the final parity of $S_0$ and win.
+   - If all odd components have size $1$ (i.e. single vertices, which includes the case with $0$ odd components), no choice of orientation can alter the parity. The parity of total moves is fixed to $(E_0 + M + K) \pmod 2$, where $E_0 = \sum_{C \text{ even}} (a_C \bmod 2) \bmod 2$ and $K = \text{count(odd components)} / 2$.
+     - Aoki wins if and only if $(E_0 + M + K) \equiv 1 \pmod 2$.
+An optimal solution for the game has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_g/main.py).
+
+### Method Explanation
+
+The game asks us to determine the winner of a game where two players take turns adding edges to a graph without creating any odd cycles (i.e. preserving bipartiteness). When no more valid edges can be added, the game ends and the player with no valid moves remaining loses.
+
+In any maximal state, all connected components will have merged into a single bipartite component, forming a complete bipartite graph $K_{S_0, S_1}$ with $S_0 + S_1 = N$.
+
+1. **When $N$ is odd:**
+   $S_0 + S_1 = N$ (odd), so one of $S_0$ or $S_1$ is even, making the maximum total edges $S_0 \times S_1$ **always even**. Thus, the total number of moves in the game is $S_0 S_1 - M \equiv M \pmod 2$.
+   - Aoki (first player) wins if and only if $M \equiv 1 \pmod 2$.
+
+2. **When $N$ is even:**
+   Let $C_1, C_2, \ldots, C_k$ be the initial bipartite connected components.
+   - If there is at least one odd component of size $\ge 3$, Aoki can always choose the orientation when merging components to dictate the final parity of $S_0$ and win.
+   - If all odd components have size $1$ (i.e. single vertices, which includes the case with $0$ odd components), no choice of orientation can alter the parity. The parity of total moves is fixed to $(E_0 + M + K) \pmod 2$, where $E_0 = \sum_{C \text{ even}} (a_C \bmod 2) \bmod 2$ and $K = \text{count(odd components)} / 2$.
+     - Aoki wins if and only if $(E_0 + M + K) \equiv 1 \pmod 2$.

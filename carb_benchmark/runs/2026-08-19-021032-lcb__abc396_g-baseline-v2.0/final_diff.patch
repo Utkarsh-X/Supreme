@@ -1,0 +1,52 @@
+diff --git a/main.py b/main.py
+index c86f6c8..7a60a6e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,46 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from operator import add, sub
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    H = int(input_data[0])
++    W = int(input_data[1])
++    
++    N = 1 << W
++    C = [0] * N
++    for i in range(H):
++        C[int(input_data[2 + i], 2)] += 1
++        
++    G = [0] * N
++    for v in range(N):
++        pc = bin(v).count('1')
++        G[v] = min(pc, W - pc)
++        
++    def fwht(a):
++        h = 1
++        thresh = 256
++        while h < N:
++            if h <= thresh:
++                for j in range(h):
++                    u = a[j::2*h]
++                    v = a[j+h::2*h]
++                    a[j::2*h] = list(map(add, u, v))
++                    a[j+h::2*h] = list(map(sub, u, v))
++            else:
++                for i in range(0, N, h * 2):
++                    u = a[i : i + h]
++                    v = a[i + h : i + 2 * h]
++                    a[i : i + h] = list(map(add, u, v))
++                    a[i + h : i + 2 * h] = list(map(sub, u, v))
++            h *= 2
++
++    fwht(C)
++    fwht(G)
++    F = [c * g for c, g in zip(C, G)]
++    fwht(F)
++    print(min(F) // N)
++
++if __name__ == '__main__':
++    main()

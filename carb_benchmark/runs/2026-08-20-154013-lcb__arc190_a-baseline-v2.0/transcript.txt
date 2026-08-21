@@ -1,0 +1,54 @@
+I have launched a background task to benchmark the performance on maximum constraints ($N=1,000,000, M=200,000$). I will inspect the log output once it completes.
+I have launched a background task to benchmark the Case C binary search time on maximum constraints. I will inspect the log output once it completes.
+I have launched a background task to benchmark the optimized Case C search time. I will inspect the result once it completes.
+I have launched a background task to benchmark the full Case C search with `high = M`. I will inspect the log output once it completes.
+I have implemented the solution in `main.py`.
+
+### Method Explanation
+
+The problem asks us to transform an array $x$ of length $N$ (initially all 0s) to all 1s with the minimum number of non-zero operations. Each operation $i$ gives us a choice:
+- **Operation 0**: Cost 0, does nothing.
+- **Operation 1**: Cost 1, sets interval $[L_i, R_i]$ to 1s.
+- **Operation 2**: Cost 1, sets complement interval $[1, L_i-1] \cup [R_i+1, N]$ to 1s.
+
+Notice that no operation ever turns 1 into 0. Thus, any set of non-zero operations chosen specifies a collection of elements that are set to 1.
+- Choosing Op 1 for operation $i$ covers interval $[L_i, R_i]$.
+- Choosing Op 2 for operation $i$ leaves a "hole" $[L_i, R_i]$ uncovered by this operation.
+
+By analyzing the structure of operations:
+1. **At most 2 Op 2s are ever needed** in an optimal solution. If 3 or more Op 2s were chosen, by Helly's property for 1D intervals, their intersection of holes is determined by at most 2 intervals, so any larger set of Op 2s can be reduced to at most 2 Op 2s without changing the uncovered set.
+2. We divide into cases based on the number of Op 2s chosen ($|S_2| \in \{0, 1, 2\}$):
+   - **Cost 1 / Cost 2**: Checked in $O(M)$ time for small special cases (e.g. single Op 1 covering $[1, N]$, two Op 1s, one Op 1 containing one Op 2, two disjoint Op 2s).
+   - **Case A ($|S_2| = 0$)**: Minimum Op 1 intervals to cover $[1, N]$, solved in $O(\log N)$ using binary lifting.
+   - **Case B ($|S_2| = 1$)**: For each $j \in \{1, \dots, M\}$, find the minimum number of Op 1 intervals needed to cover $[L_j, R_j]$ (hole of Op 2 $j$), evaluated in $O(M \log N)$ total time.
+   - **Case C ($|S_2| = 2$)**: Two Op 2s with intersecting holes $[L_{j_A}, R_{j_A}]$ and $[L_{j_B}, R_{j_B}]$, whose intersection is $H = [L_{j_A}, R_{j_B}]$. We use binary search over $k$ (the number of Op 1 jumps) and binary lifting to find the optimal pair $(j_A, j_B)$ and minimum cost.
+
+### Verification
+The solution was tested against all public sample inputs and verified with large-scale benchmarks ($N = 1,000,000, M = 200,000$).
+I have launched a background task to benchmark the performance on maximum constraints ($N=1,000,000, M=200,000$). I will inspect the log output once it completes.
+I have launched a background task to benchmark the Case C binary search time on maximum constraints. I will inspect the log output once it completes.
+I have launched a background task to benchmark the optimized Case C search time. I will inspect the result once it completes.
+I have launched a background task to benchmark the full Case C search with `high = M`. I will inspect the log output once it completes.
+I have implemented the solution in `main.py`.
+
+### Method Explanation
+
+The problem asks us to transform an array $x$ of length $N$ (initially all 0s) to all 1s with the minimum number of non-zero operations. Each operation $i$ gives us a choice:
+- **Operation 0**: Cost 0, does nothing.
+- **Operation 1**: Cost 1, sets interval $[L_i, R_i]$ to 1s.
+- **Operation 2**: Cost 1, sets complement interval $[1, L_i-1] \cup [R_i+1, N]$ to 1s.
+
+Notice that no operation ever turns 1 into 0. Thus, any set of non-zero operations chosen specifies a collection of elements that are set to 1.
+- Choosing Op 1 for operation $i$ covers interval $[L_i, R_i]$.
+- Choosing Op 2 for operation $i$ leaves a "hole" $[L_i, R_i]$ uncovered by this operation.
+
+By analyzing the structure of operations:
+1. **At most 2 Op 2s are ever needed** in an optimal solution. If 3 or more Op 2s were chosen, by Helly's property for 1D intervals, their intersection of holes is determined by at most 2 intervals, so any larger set of Op 2s can be reduced to at most 2 Op 2s without changing the uncovered set.
+2. We divide into cases based on the number of Op 2s chosen ($|S_2| \in \{0, 1, 2\}$):
+   - **Cost 1 / Cost 2**: Checked in $O(M)$ time for small special cases (e.g. single Op 1 covering $[1, N]$, two Op 1s, one Op 1 containing one Op 2, two disjoint Op 2s).
+   - **Case A ($|S_2| = 0$)**: Minimum Op 1 intervals to cover $[1, N]$, solved in $O(\log N)$ using binary lifting.
+   - **Case B ($|S_2| = 1$)**: For each $j \in \{1, \dots, M\}$, find the minimum number of Op 1 intervals needed to cover $[L_j, R_j]$ (hole of Op 2 $j$), evaluated in $O(M \log N)$ total time.
+   - **Case C ($|S_2| = 2$)**: Two Op 2s with intersecting holes $[L_{j_A}, R_{j_A}]$ and $[L_{j_B}, R_{j_B}]$, whose intersection is $H = [L_{j_A}, R_{j_B}]$. We use binary search over $k$ (the number of Op 1 jumps) and binary lifting to find the optimal pair $(j_A, j_B)$ and minimum cost.
+
+### Verification
+The solution was tested against all public sample inputs and verified with large-scale benchmarks ($N = 1,000,000, M = 200,000$).

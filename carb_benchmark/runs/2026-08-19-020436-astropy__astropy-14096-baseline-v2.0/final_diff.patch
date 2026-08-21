@@ -1,0 +1,156 @@
+diff --git a/astropy/coordinates/sky_coordinate.py b/astropy/coordinates/sky_coordinate.py
+index ab475f7..538b603 100644
+--- a/astropy/coordinates/sky_coordinate.py
++++ b/astropy/coordinates/sky_coordinate.py
+@@ -894,10 +894,7 @@ class SkyCoord(ShapedLikeNDArray):
+             if frame_cls is not None and self.frame.is_transformable_to(frame_cls):
+                 return self.transform_to(attr)
+ 
+-        # Fail
+-        raise AttributeError(
+-            f"'{self.__class__.__name__}' object has no attribute '{attr}'"
+-        )
++        return self.__getattribute__(attr)  # Raise AttributeError.
+ 
+     def __setattr__(self, attr, val):
+         # This is to make anything available through __getattr__ immutable
+diff --git a/astropy/coordinates/tests/test_sky_coord.py b/astropy/coordinates/tests/test_sky_coord.py
+index 4dcfba0..8aad97a 100644
+--- a/astropy/coordinates/tests/test_sky_coord.py
++++ b/astropy/coordinates/tests/test_sky_coord.py
+@@ -2165,3 +2165,21 @@ def test_match_to_catalog_3d_and_sky():
+     npt.assert_array_equal(idx, [0, 1, 2, 3])
+     assert_allclose(angle, 0 * u.deg, atol=1e-14 * u.deg, rtol=0)
+     assert_allclose(distance, 0 * u.kpc, atol=1e-14 * u.kpc, rtol=0)
++
++
++def test_subclass_property_exception_error():
++    """Regression test for gh-8340.
++
++    Non-existing attribute access inside a property should give attribute
++    error for the attribute, not for the property.
++    """
++
++    class custom_coord(SkyCoord):
++        @property
++        def prop(self):
++            return self.random_attr
++
++    c = custom_coord("00h42m30s", "+41d12m00s", frame="icrs")
++    with pytest.raises(AttributeError, match="random_attr"):
++        # Before this matched "prop" rather than "random_attr"
++        c.prop
+diff --git a/astropy/units/quantity_helper/function_helpers.py b/astropy/units/quantity_helper/function_helpers.py
+index 17f1438..db4c57c 100644
+--- a/astropy/units/quantity_helper/function_helpers.py
++++ b/astropy/units/quantity_helper/function_helpers.py
+@@ -56,37 +56,39 @@ DISPATCHED_FUNCTIONS = {}
+ """Functions for which we provide our own implementation."""
+ UNSUPPORTED_FUNCTIONS = set()
+ """Functions that cannot sensibly be used with quantities."""
+-SUBCLASS_SAFE_FUNCTIONS |= {
+-    np.shape, np.size, np.ndim,
+-    np.reshape, np.ravel, np.moveaxis, np.rollaxis, np.swapaxes,
+-    np.transpose, np.atleast_1d, np.atleast_2d, np.atleast_3d,
+-    np.expand_dims, np.squeeze, np.broadcast_to, np.broadcast_arrays,
+-    np.flip, np.fliplr, np.flipud, np.rot90,
+-    np.argmin, np.argmax, np.argsort, np.lexsort, np.searchsorted,
+-    np.nonzero, np.argwhere, np.flatnonzero,
+-    np.diag_indices_from, np.triu_indices_from, np.tril_indices_from,
+-    np.real, np.imag, np.diagonal, np.diagflat, np.empty_like,
+-    np.compress, np.extract, np.delete, np.trim_zeros, np.roll, np.take,
+-    np.put, np.fill_diagonal, np.tile, np.repeat,
+-    np.split, np.array_split, np.hsplit, np.vsplit, np.dsplit,
+-    np.stack, np.column_stack, np.hstack, np.vstack, np.dstack,
+-    np.amax, np.amin, np.ptp, np.sum, np.cumsum,
+-    np.prod, np.product, np.cumprod, np.cumproduct,
+-    np.round, np.around,
+-    np.fix, np.angle, np.i0, np.clip,
+-    np.isposinf, np.isneginf, np.isreal, np.iscomplex,
+-    np.average, np.mean, np.std, np.var, np.median, np.trace,
+-    np.nanmax, np.nanmin, np.nanargmin, np.nanargmax, np.nanmean,
+-    np.nanmedian, np.nansum, np.nancumsum, np.nanstd, np.nanvar,
+-    np.nanprod, np.nancumprod,
+-    np.einsum_path, np.trapz, np.linspace,
+-    np.sort, np.msort, np.partition, np.meshgrid,
+-    np.common_type, np.result_type, np.can_cast, np.min_scalar_type,
+-    np.iscomplexobj, np.isrealobj,
+-    np.shares_memory, np.may_share_memory,
+-    np.apply_along_axis, np.take_along_axis, np.put_along_axis,
+-    np.linalg.cond, np.linalg.multi_dot,
+-}  # fmt: skip
++_subclass_safe_names = [
++    "shape", "size", "ndim",
++    "reshape", "ravel", "moveaxis", "rollaxis", "swapaxes",
++    "transpose", "atleast_1d", "atleast_2d", "atleast_3d",
++    "expand_dims", "squeeze", "broadcast_to", "broadcast_arrays",
++    "flip", "fliplr", "flipud", "rot90",
++    "argmin", "argmax", "argsort", "lexsort", "searchsorted",
++    "nonzero", "argwhere", "flatnonzero",
++    "diag_indices_from", "triu_indices_from", "tril_indices_from",
++    "real", "imag", "diagonal", "diagflat", "empty_like",
++    "compress", "extract", "delete", "trim_zeros", "roll", "take",
++    "put", "fill_diagonal", "tile", "repeat",
++    "split", "array_split", "hsplit", "vsplit", "dsplit",
++    "stack", "column_stack", "hstack", "vstack", "dstack",
++    "amax", "amin", "ptp", "sum", "cumsum",
++    "prod", "product", "cumprod", "cumproduct",
++    "round", "around",
++    "fix", "angle", "i0", "clip",
++    "isposinf", "isneginf", "isreal", "iscomplex",
++    "average", "mean", "std", "var", "median", "trace",
++    "nanmax", "nanmin", "nanargmin", "nanargmax", "nanmean",
++    "nanmedian", "nansum", "nancumsum", "nanstd", "nanvar",
++    "nanprod", "nancumprod",
++    "einsum_path", "trapz", "trapezoid", "linspace",
++    "sort", "msort", "partition", "meshgrid",
++    "common_type", "result_type", "can_cast", "min_scalar_type",
++    "iscomplexobj", "isrealobj",
++    "shares_memory", "may_share_memory",
++    "apply_along_axis", "take_along_axis", "put_along_axis",
++]
++SUBCLASS_SAFE_FUNCTIONS |= {getattr(np, f) for f in _subclass_safe_names if hasattr(np, f)}
++SUBCLASS_SAFE_FUNCTIONS |= {getattr(np.linalg, f) for f in ("cond", "multi_dot") if hasattr(np.linalg, f)}
++
+ 
+ # Implemented as methods on Quantity:
+ # np.ediff1d is from setops, but we support it anyway; the others
+diff --git a/astropy/utils/shapes.py b/astropy/utils/shapes.py
+index 20568b9..53a2615 100644
+--- a/astropy/utils/shapes.py
++++ b/astropy/utils/shapes.py
+@@ -273,7 +273,7 @@ class ShapedLikeNDArray(NDArrayShapeMethods, metaclass=abc.ABCMeta):
+             "alltrue": "all",
+             "sometrue": "any",
+         }.get(name, name)
+-        for name in np.core.fromnumeric.__all__
++        for name in getattr(getattr(np, "core", None), "fromnumeric", getattr(np, "_core", None).fromnumeric).__all__
+         if name not in ["alen", "sort", "partition"]
+     }
+     # Add np.copy, which we may as well let defer to our method.
+diff --git a/astropy/wcs/wcs.py b/astropy/wcs/wcs.py
+index bd315bc..3deed05 100644
+--- a/astropy/wcs/wcs.py
++++ b/astropy/wcs/wcs.py
+@@ -90,7 +90,7 @@ __all__ = [
+ __doctest_skip__ = ["WCS.all_world2pix"]
+ 
+ 
+-if _wcs is not None:
++if _wcs is not None and hasattr(_wcs, "_Wcs") and hasattr(_wcs, "__version__"):
+     if Version(_wcs.__version__) < Version("5.8"):
+         raise ImportError(
+             "astropy.wcs is built with wcslib {0}, but only versions 5.8 and "
+@@ -172,6 +172,12 @@ else:
+     _WCS_TPD_WARN_LT71 = False
+     _WCS_TPD_WARN_LT74 = False
+ 
++    WCSSUB_LONGITUDE = 0x1
++    WCSSUB_LATITUDE = 0x2
++    WCSSUB_CELESTIAL = 0x3
++    WCSSUB_SPECTRAL = 0x4
++    WCSSUB_STOKES = 0x8
++
+ 
+ # Additional relax bit flags
+ WCSHDO_SIP = 0x80000

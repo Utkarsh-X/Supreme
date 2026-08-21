@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-08-19-021248-lcb__abc397_e-baseline-v2.0",
+  "task_id": "lcb__abc397_e",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 2104.94,
+  "tool_calls": [
+    "list_dir",
+    "view_file",
+    "view_file",
+    "write_to_file",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "list_dir": 1,
+    "view_file": 2,
+    "write_to_file": 1,
+    "run_command": 1
+  },
+  "time_to_first_edit": 74.716,
+  "num_turns": null,
+  "duration_seconds": null,
+  "status": null,
+  "usage": null,
+  "error": null
+}

@@ -1,0 +1,107 @@
+diff --git a/main.py b/main.py
+index c86f6c8..426b17a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,101 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    ptr = 0
++    N = int(input_data[ptr])
++    ptr += 1
++    
++    W = [0] * N
++    for i in range(N):
++        W[i] = int(input_data[ptr])
++        ptr += 1
++        
++    intervals = [None] * N
++    max_coord = 2 * N
++    for i in range(N):
++        l = int(input_data[ptr])
++        r = int(input_data[ptr + 1])
++        ptr += 2
++        intervals[i] = (l, r)
++        if r > max_coord:
++            max_coord = r
++            
++    Q = int(input_data[ptr])
++    ptr += 1
++    
++    INF = 10**18
++    MAX_COORD = max_coord + 5
++    
++    min_w_by_R = [INF] * (MAX_COORD + 1)
++    min_w_by_L = [INF] * (MAX_COORD + 1)
++    
++    for i in range(N):
++        l, r = intervals[i]
++        w = W[i]
++        if w < min_w_by_R[r]:
++            min_w_by_R[r] = w
++        if w < min_w_by_L[l]:
++            min_w_by_L[l] = w
++            
++    pref_min_R = [INF] * (MAX_COORD + 1)
++    curr = INF
++    for i in range(1, MAX_COORD + 1):
++        if min_w_by_R[i] < curr:
++            curr = min_w_by_R[i]
++        pref_min_R[i] = curr
++        
++    suff_min_L = [INF] * (MAX_COORD + 1)
++    curr = INF
++    for i in range(MAX_COORD, 0, -1):
++        if min_w_by_L[i] < curr:
++            curr = min_w_by_L[i]
++        suff_min_L[i] = curr
++        
++    out = []
++    for _ in range(Q):
++        s = int(input_data[ptr]) - 1
++        t = int(input_data[ptr + 1]) - 1
++        ptr += 2
++        
++        Ls, Rs = intervals[s]
++        Lt, Rt = intervals[t]
++        Ws = W[s]
++        Wt = W[t]
++        
++        ans = INF
++        # Case 0: Direct edge
++        if Rs < Lt or Rt < Ls:
++            ans = Ws + Wt
++            
++        # Case 1: Length 2 path
++        lim1 = (Ls if Ls < Lt else Lt) - 1
++        mlb = pref_min_R[lim1]
++        if mlb != INF and Ws + Wt + mlb < ans:
++            ans = Ws + Wt + mlb
++            
++        lim2 = (Rs if Rs > Rt else Rt) + 1
++        mrb = suff_min_L[lim2]
++        if mrb != INF and Ws + Wt + mrb < ans:
++            ans = Ws + Wt + mrb
++            
++        # Case 2: Length 3 path
++        mls = pref_min_R[Ls - 1]
++        mrt = suff_min_L[Rt + 1]
++        if mls != INF and mrt != INF and Ws + Wt + mls + mrt < ans:
++            ans = Ws + Wt + mls + mrt
++            
++        mrs = suff_min_L[Rs + 1]
++        mlt = pref_min_R[Lt - 1]
++        if mrs != INF and mlt != INF and Ws + Wt + mrs + mlt < ans:
++            ans = Ws + Wt + mrs + mlt
++            
++        out.append(str(-1 if ans == INF else ans))
++        
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    main()

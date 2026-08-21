@@ -1,0 +1,52 @@
+### Cause & Root Analysis
+
+When defining a model with multi-table inheritance that has multiple `OneToOneField` references to the same parent model (e.g., one explicit parent link with `parent_link=True` and another secondary reference like `origin`), Django collects parent links during model creation in `ModelBase.__new__` ([django/db/models/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/django/db/models/base.py#L204-L208)).
+
+Previously, when iterating through local fields:
+```python
+for field in base._meta.local_fields:
+    if isinstance(field, OneToOneField):
+        related = resolve_relation(new_class, field.remote_field.model)
+        parent_links[make_model_tuple(related)] = field
+```
+Every `OneToOneField` targeting the parent model unconditionally overwrote `parent_links[make_model_tuple(related)]`. If the field with `parent_link=True` was defined before another `OneToOneField` without `parent_link=True`, `parent_links` ended up storing the non-parent-link field. Subsequently, `_prepare` attempted to promote this non-parent-link field as the MTI primary key link and raised `ImproperlyConfigured: Add parent_link=True to ...`.
+
+### Solution
+
+In [django/db/models/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/django/db/models/base.py#L204-L208), update `parent_links` population so that an existing parent link entry is not overwritten by a `OneToOneField` unless the new field explicitly specifies `parent_link=True`:
+
+```python
+if parent_type not in parent_links or field.remote_field.parent_link:
+    parent_links[parent_type] = field
+```
+
+### Verification
+
+- Added regression test `test_multiple_onetoone_to_parent` in [tests/model_inheritance/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/tests/model_inheritance/tests.py#L177-L186).
+- Ran the test suite (`model_inheritance`, `model_inheritance_regress`, `invalid_models_tests`) and confirmed all 272 tests pass without errors.
+### Cause & Root Analysis
+
+When defining a model with multi-table inheritance that has multiple `OneToOneField` references to the same parent model (e.g., one explicit parent link with `parent_link=True` and another secondary reference like `origin`), Django collects parent links during model creation in `ModelBase.__new__` ([django/db/models/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/django/db/models/base.py#L204-L208)).
+
+Previously, when iterating through local fields:
+```python
+for field in base._meta.local_fields:
+    if isinstance(field, OneToOneField):
+        related = resolve_relation(new_class, field.remote_field.model)
+        parent_links[make_model_tuple(related)] = field
+```
+Every `OneToOneField` targeting the parent model unconditionally overwrote `parent_links[make_model_tuple(related)]`. If the field with `parent_link=True` was defined before another `OneToOneField` without `parent_link=True`, `parent_links` ended up storing the non-parent-link field. Subsequently, `_prepare` attempted to promote this non-parent-link field as the MTI primary key link and raised `ImproperlyConfigured: Add parent_link=True to ...`.
+
+### Solution
+
+In [django/db/models/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/django/db/models/base.py#L204-L208), update `parent_links` population so that an existing parent link entry is not overwritten by a `OneToOneField` unless the new field explicitly specifies `parent_link=True`:
+
+```python
+if parent_type not in parent_links or field.remote_field.parent_link:
+    parent_links[parent_type] = field
+```
+
+### Verification
+
+- Added regression test `test_multiple_onetoone_to_parent` in [tests/model_inheritance/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/tests/model_inheritance/tests.py#L177-L186).
+- Ran the test suite (`model_inheritance`, `model_inheritance_regress`, `invalid_models_tests`) and confirmed all 272 tests pass without errors.

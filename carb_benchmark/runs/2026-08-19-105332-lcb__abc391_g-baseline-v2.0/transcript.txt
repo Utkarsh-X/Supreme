@@ -1,0 +1,24 @@
+I have completed the task and written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_g/main.py).
+
+### Method Explanation
+1. **LCS DP Automaton Compression**:
+   For a given string $S$ of length $N$, the standard LCS state when matching with a prefix of $T$ is an array $dp[0 \dots N]$, where $dp[0] = 0$ and $dp[i] - dp[i-1] \in \{0, 1\}$.
+   Because the consecutive differences are binary, any valid DP array $dp$ of length $N+1$ can be uniquely encoded as an $N$-bit mask `mask`, where the $i$-th bit represents $dp[i+1] - dp[i]$. Since $N \le 10$, there are at most $2^N = 1024$ states.
+
+2. **Transition Precomputation**:
+   For each state `mask` ($0 \le \text{mask} < 2^N$) and each alphabet character $c \in \{'a', \dots, 'z'\}$, we compute the next DP state and corresponding bitmask `nmask`. We group identical transitions for each state to minimize transition iterations.
+
+3. **Dynamic Programming**:
+   We compute the number of strings of length $M$ reaching each `mask` iteratively for $M$ steps modulo $998244353$. Finally, the answer for each LCS length $k \in \{0, \dots, N\}$ is obtained by summing the counts of all masks with popcount equal to $k$.
+I have completed the task and written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_g/main.py).
+
+### Method Explanation
+1. **LCS DP Automaton Compression**:
+   For a given string $S$ of length $N$, the standard LCS state when matching with a prefix of $T$ is an array $dp[0 \dots N]$, where $dp[0] = 0$ and $dp[i] - dp[i-1] \in \{0, 1\}$.
+   Because the consecutive differences are binary, any valid DP array $dp$ of length $N+1$ can be uniquely encoded as an $N$-bit mask `mask`, where the $i$-th bit represents $dp[i+1] - dp[i]$. Since $N \le 10$, there are at most $2^N = 1024$ states.
+
+2. **Transition Precomputation**:
+   For each state `mask` ($0 \le \text{mask} < 2^N$) and each alphabet character $c \in \{'a', \dots, 'z'\}$, we compute the next DP state and corresponding bitmask `nmask`. We group identical transitions for each state to minimize transition iterations.
+
+3. **Dynamic Programming**:
+   We compute the number of strings of length $M$ reaching each `mask` iteratively for $M$ steps modulo $998244353$. Finally, the answer for each LCS length $k \in \{0, \dots, N\}$ is obtained by summing the counts of all masks with popcount equal to $k$.

@@ -1,0 +1,122 @@
+diff --git a/django/db/backends/ddl_references.py b/django/db/backends/ddl_references.py
+index 44e4980..37ef7de 100644
+--- a/django/db/backends/ddl_references.py
++++ b/django/db/backends/ddl_references.py
+@@ -81,14 +81,17 @@ class Columns(TableColumns):
+         self.col_suffixes = col_suffixes
+         super().__init__(table, columns)
+ 
+-    def __str__(self):
+-        def col_str(column, idx):
+-            try:
+-                return self.quote_name(column) + self.col_suffixes[idx]
+-            except IndexError:
+-                return self.quote_name(column)
++    def col_str(self, column, idx):
++        try:
++            suffix = self.col_suffixes[idx]
++            if suffix:
++                return '{} {}'.format(self.quote_name(column), suffix.strip())
++        except IndexError:
++            pass
++        return self.quote_name(column)
+ 
+-        return ', '.join(col_str(column, idx) for idx, column in enumerate(self.columns))
++    def __str__(self):
++        return ', '.join(self.col_str(column, idx) for idx, column in enumerate(self.columns))
+ 
+ 
+ class IndexName(TableColumns):
+@@ -108,18 +111,21 @@ class IndexColumns(Columns):
+         self.opclasses = opclasses
+         super().__init__(table, columns, quote_name, col_suffixes)
+ 
++    def col_str(self, column, idx):
++        # Index.__init__() guarantees that self.opclasses is the same
++        # length as self.columns.
++        opclass = self.opclasses[idx]
++        col = '{} {}'.format(self.quote_name(column), opclass) if opclass else self.quote_name(column)
++        try:
++            suffix = self.col_suffixes[idx]
++            if suffix:
++                col = '{} {}'.format(col, suffix.strip())
++        except IndexError:
++            pass
++        return col
++
+     def __str__(self):
+-        def col_str(column, idx):
+-            # Index.__init__() guarantees that self.opclasses is the same
+-            # length as self.columns.
+-            col = '{} {}'.format(self.quote_name(column), self.opclasses[idx])
+-            try:
+-                col = '{} {}'.format(col, self.col_suffixes[idx])
+-            except IndexError:
+-                pass
+-            return col
+-
+-        return ', '.join(col_str(column, idx) for idx, column in enumerate(self.columns))
++        return ', '.join(self.col_str(column, idx) for idx, column in enumerate(self.columns))
+ 
+ 
+ class ForeignKeyName(TableColumns):
+diff --git a/tests/backends/test_ddl_references.py b/tests/backends/test_ddl_references.py
+index d96ebcb..40de573 100644
+--- a/tests/backends/test_ddl_references.py
++++ b/tests/backends/test_ddl_references.py
+@@ -1,5 +1,5 @@
+ from django.db.backends.ddl_references import (
+-    Columns, ForeignKeyName, IndexName, Statement, Table,
++    Columns, ForeignKeyName, IndexColumns, IndexName, Statement, Table,
+ )
+ from django.test import SimpleTestCase
+ 
+@@ -56,6 +56,48 @@ class ColumnsTests(TableTests):
+     def test_str(self):
+         self.assertEqual(str(self.reference), 'FIRST_COLUMN, SECOND_COLUMN')
+ 
++    def test_str_with_suffixes(self):
++        columns = Columns(
++            'table',
++            ['first_column', 'second_column'],
++            lambda column: column.upper(),
++            col_suffixes=['', 'DESC'],
++        )
++        self.assertEqual(str(columns), 'FIRST_COLUMN, SECOND_COLUMN DESC')
++
++
++class IndexColumnsTests(ColumnsTests):
++    def setUp(self):
++        self.reference = IndexColumns(
++            'table',
++            ['first_column', 'second_column'],
++            lambda column: column.upper(),
++            col_suffixes=['', 'DESC'],
++            opclasses=['text_pattern_ops', 'varchar_pattern_ops'],
++        )
++
++    def test_repr(self):
++        self.assertEqual(
++            repr(self.reference),
++            "<IndexColumns 'FIRST_COLUMN text_pattern_ops, SECOND_COLUMN varchar_pattern_ops DESC'>",
++        )
++
++    def test_str(self):
++        self.assertEqual(
++            str(self.reference),
++            'FIRST_COLUMN text_pattern_ops, SECOND_COLUMN varchar_pattern_ops DESC',
++        )
++
++    def test_str_without_opclasses(self):
++        columns = IndexColumns(
++            'table',
++            ['first_column', 'second_column'],
++            lambda column: column.upper(),
++            col_suffixes=['', 'DESC'],
++            opclasses=['', ''],
++        )
++        self.assertEqual(str(columns), 'FIRST_COLUMN, SECOND_COLUMN DESC')
++
+ 
+ class IndexNameTests(ColumnsTests):
+     def setUp(self):

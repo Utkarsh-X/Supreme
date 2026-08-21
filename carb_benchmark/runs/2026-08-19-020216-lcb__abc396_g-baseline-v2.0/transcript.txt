@@ -1,0 +1,42 @@
+I have completed the task and verified the solution against the provided example test cases and maximum constraint limits.
+
+### Method Explanation
+
+The problem asks to find the minimum sum of grid values after performing row flips and column flips any number of times.
+
+1. **Problem Formulation**:
+   - Each column $j$ is either flipped ($c_j = 1$) or not ($c_j = 0$). The flips across all columns can be represented as a bitmask $C \in [0, 2^W - 1]$.
+   - For a fixed column flip mask $C$, the binary values of row $i$ (with initial bitmask $R_i$) become $R_i \oplus C$.
+   - Since each row $i$ can be flipped independently, row $i$ will choose whether to flip to minimize its number of 1s:
+     $$ \min(\text{popcount}(R_i \oplus C), W - \text{popcount}(R_i \oplus C)) $$
+   - Summing over all rows, the total sum for a fixed column flip mask $C$ is:
+     $$ f(C) = \sum_{m=0}^{2^W-1} \text{cnt}[m] \cdot g(m \oplus C) $$
+     where $\text{cnt}[m]$ is the count of rows with bitmask $m$, and $g(S) = \min(\text{popcount}(S), W - \text{popcount}(S))$.
+
+2. **Fast Walsh-Hadamard Transform (FWHT)**:
+   - $f(C)$ is an XOR convolution of arrays $\text{cnt}$ and $g$ of size $N = 2^W \le 262,144$.
+   - We compute the Fast Walsh-Hadamard Transform (FWHT) of $\text{cnt}$ and $g$, perform pointwise multiplication, and compute the inverse FWHT to obtain $f(C)$ for all $C \in [0, 2^W - 1]$.
+   - The final answer is $\min_{0 \le C < 2^W} f(C)$.
+
+The solution is implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_g/main.py).
+I have completed the task and verified the solution against the provided example test cases and maximum constraint limits.
+
+### Method Explanation
+
+The problem asks to find the minimum sum of grid values after performing row flips and column flips any number of times.
+
+1. **Problem Formulation**:
+   - Each column $j$ is either flipped ($c_j = 1$) or not ($c_j = 0$). The flips across all columns can be represented as a bitmask $C \in [0, 2^W - 1]$.
+   - For a fixed column flip mask $C$, the binary values of row $i$ (with initial bitmask $R_i$) become $R_i \oplus C$.
+   - Since each row $i$ can be flipped independently, row $i$ will choose whether to flip to minimize its number of 1s:
+     $$ \min(\text{popcount}(R_i \oplus C), W - \text{popcount}(R_i \oplus C)) $$
+   - Summing over all rows, the total sum for a fixed column flip mask $C$ is:
+     $$ f(C) = \sum_{m=0}^{2^W-1} \text{cnt}[m] \cdot g(m \oplus C) $$
+     where $\text{cnt}[m]$ is the count of rows with bitmask $m$, and $g(S) = \min(\text{popcount}(S), W - \text{popcount}(S))$.
+
+2. **Fast Walsh-Hadamard Transform (FWHT)**:
+   - $f(C)$ is an XOR convolution of arrays $\text{cnt}$ and $g$ of size $N = 2^W \le 262,144$.
+   - We compute the Fast Walsh-Hadamard Transform (FWHT) of $\text{cnt}$ and $g$, perform pointwise multiplication, and compute the inverse FWHT to obtain $f(C)$ for all $C \in [0, 2^W - 1]$.
+   - The final answer is $\min_{0 \le C < 2^W} f(C)$.
+
+The solution is implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_g/main.py).

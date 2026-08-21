@@ -1,0 +1,120 @@
+diff --git a/main.py b/main.py
+index c86f6c8..87ad363 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,114 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from bisect import bisect_left
++
++class BIT:
++    def __init__(self, size):
++        self.size = size
++        self.tree = [0] * (size + 1)
++        
++    def add(self, idx, val):
++        while idx <= self.size:
++            self.tree[idx] += val
++            idx += idx & (-idx)
++            
++    def query(self, idx):
++        s = 0
++        while idx > 0:
++            s += self.tree[idx]
++            idx -= idx & (-idx)
++        return s
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++    B = [int(x) for x in input_data[N+1:2*N+1]]
++    C = [int(x) for x in input_data[2*N+1:3*N+1]]
++    
++    U = []
++    V = []
++    Wall = []
++    
++    for i in range(N):
++        if A[i] == 1 and B[i] == 0:
++            U.append(C[i])
++        elif A[i] == 0 and B[i] == 1:
++            V.append(C[i])
++        elif A[i] == 1 and B[i] == 1:
++            Wall.append(C[i])
++            
++    Wall.sort(reverse=True)
++    u = len(U)
++    v = len(V)
++    W = len(Wall)
++    
++    all_c = sorted(list(set(C)))
++    m = len(all_c)
++    
++    def get_idx(val):
++        return bisect_left(all_c, val) + 1
++        
++    P_count_bit = BIT(m)
++    P_sum_bit = BIT(m)
++    P_root_s = 0
++    P_root_w = 0
++    
++    def insert_P(x):
++        nonlocal P_root_s, P_root_w
++        idx = get_idx(x)
++        c_le = P_count_bit.query(idx)
++        s_gt = P_root_s - P_sum_bit.query(idx)
++        
++        P_root_w += (c_le + 1) * x + s_gt
++        P_root_s += x
++        P_count_bit.add(idx, 1)
++        P_sum_bit.add(idx, x)
++
++    Q_count_bit = BIT(m)
++    Q_sum_bit = BIT(m)
++    Q_root_s = 0
++    Q_root_w = 0
++
++    def insert_Q(x):
++        nonlocal Q_root_s, Q_root_w
++        idx = get_idx(x)
++        c_le = Q_count_bit.query(idx)
++        s_gt = Q_root_s - Q_sum_bit.query(idx)
++        
++        Q_root_w += (c_le + 1) * x + s_gt
++        Q_root_s += x
++        Q_count_bit.add(idx, 1)
++        Q_sum_bit.add(idx, x)
++
++    for x in U:
++        insert_P(x)
++    for x in V:
++        insert_Q(x)
++        
++    sum_W0 = sum(Wall)
++    best_cost = float('inf')
++    
++    for w in range(W + 1):
++        p = u + w
++        q = v + w
++        
++        cost1 = p * sum_W0 + (p * P_root_s - P_root_w)
++        cost2 = q * sum_W0 + ((q + 1) * Q_root_s - Q_root_w)
++        
++        total = cost1 + cost2
++        if total < best_cost:
++            best_cost = total
++            
++        if w < W:
++            x = Wall[w]
++            sum_W0 -= x
++            insert_P(x)
++            insert_Q(x)
++            
++    print(best_cost)
++
++if __name__ == '__main__':
++    main()

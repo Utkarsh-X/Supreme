@@ -1,0 +1,22 @@
+### Cause of the Issue
+When using window functions such as `Lag()` (or other functions inheriting from `Func`) on a `DecimalField` in SQLite:
+1. `Func` inherits `SQLiteNumericMixin`, which overrides `as_sqlite()` to wrap expressions whose `output_field` is `DecimalField` inside `CAST(%s AS NUMERIC)`.
+2. When `Window.as_sql()` compiled its `source_expression` via `compiler.compile(self.source_expression)`, SQLite's compiler invoked `as_sqlite()` on `Lag`, generating `CAST(LAG(...) AS NUMERIC)`.
+3. `Window.as_sql()` then formatted the query template `%(expression)s OVER (%(window)s)`, placing `OVER (...)` after `CAST(...)`: `CAST(LAG(...) AS NUMERIC) OVER (...)`.
+4. In SQLite syntax, `OVER` must attach directly to a window/aggregate function call (e.g. `LAG(...) OVER (...)`), not to `CAST(...)`, causing SQLite to raise `OperationalError: near "OVER": syntax error`.
+
+### Solution
+1. Made [`Window`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/django/db/models/expressions.py#L1256) inherit from [`SQLiteNumericMixin`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/django/db/models/expressions.py#L18) so that casting to `NUMERIC` on SQLite applies around the complete window expression (`CAST(LAG(...) OVER (...) AS NUMERIC)`).
+2. Updated [`Window.as_sql()`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/django/db/models/expressions.py#L1301) to compile `self.source_expression` using `as_sql()` when on SQLite, preventing the inner function expression from adding `CAST` directly before `OVER`.
+3. Added a regression test [`test_lag_decimalfield`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/tests/expressions_window/tests.py#L206) in `tests/expressions_window`.
+### Cause of the Issue
+When using window functions such as `Lag()` (or other functions inheriting from `Func`) on a `DecimalField` in SQLite:
+1. `Func` inherits `SQLiteNumericMixin`, which overrides `as_sqlite()` to wrap expressions whose `output_field` is `DecimalField` inside `CAST(%s AS NUMERIC)`.
+2. When `Window.as_sql()` compiled its `source_expression` via `compiler.compile(self.source_expression)`, SQLite's compiler invoked `as_sqlite()` on `Lag`, generating `CAST(LAG(...) AS NUMERIC)`.
+3. `Window.as_sql()` then formatted the query template `%(expression)s OVER (%(window)s)`, placing `OVER (...)` after `CAST(...)`: `CAST(LAG(...) AS NUMERIC) OVER (...)`.
+4. In SQLite syntax, `OVER` must attach directly to a window/aggregate function call (e.g. `LAG(...) OVER (...)`), not to `CAST(...)`, causing SQLite to raise `OperationalError: near "OVER": syntax error`.
+
+### Solution
+1. Made [`Window`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/django/db/models/expressions.py#L1256) inherit from [`SQLiteNumericMixin`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/django/db/models/expressions.py#L18) so that casting to `NUMERIC` on SQLite applies around the complete window expression (`CAST(LAG(...) OVER (...) AS NUMERIC)`).
+2. Updated [`Window.as_sql()`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/django/db/models/expressions.py#L1301) to compile `self.source_expression` using `as_sql()` when on SQLite, preventing the inner function expression from adding `CAST` directly before `OVER`.
+3. Added a regression test [`test_lag_decimalfield`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13449/tests/expressions_window/tests.py#L206) in `tests/expressions_window`.

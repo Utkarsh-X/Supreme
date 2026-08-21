@@ -1,0 +1,18 @@
+I have fixed the issue where `is_zero` gave incorrect results for complex expressions in `Add`.
+
+### Root Cause
+In [add.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L567), `Add._eval_is_zero` previously assumed that if the sum of real terms was zero and imaginary terms were present (`im is True`), the entire expression could not be zero and returned `False`. However, when multiple imaginary terms were present (such as `-2*I` and `(1 + I)**2`), their imaginary parts could sum to zero (`-2*I + 2*I = 0`). Returning `False` prematurely prevented SymPy from evaluating the sum of the imaginary components.
+
+### Fix
+- Updated `Add._eval_is_zero` in [add.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L580) to collect non-zero imaginary terms (`imag_nz`) alongside real terms (`real_nz`).
+- Imaginary terms are evaluated by converting them to real terms (`I * a`), allowing `is_zero` on both real (`re_zero`) and imaginary (`im_zero`) parts to be correctly evaluated and combined.
+- Added test cases in [test_arit.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/tests/test_arit.py#L1985-L1989).
+I have fixed the issue where `is_zero` gave incorrect results for complex expressions in `Add`.
+
+### Root Cause
+In [add.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L567), `Add._eval_is_zero` previously assumed that if the sum of real terms was zero and imaginary terms were present (`im is True`), the entire expression could not be zero and returned `False`. However, when multiple imaginary terms were present (such as `-2*I` and `(1 + I)**2`), their imaginary parts could sum to zero (`-2*I + 2*I = 0`). Returning `False` prematurely prevented SymPy from evaluating the sum of the imaginary components.
+
+### Fix
+- Updated `Add._eval_is_zero` in [add.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/add.py#L532-L580) to collect non-zero imaginary terms (`imag_nz`) alongside real terms (`real_nz`).
+- Imaginary terms are evaluated by converting them to real terms (`I * a`), allowing `is_zero` on both real (`re_zero`) and imaginary (`im_zero`) parts to be correctly evaluated and combined.
+- Added test cases in [test_arit.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-15875/sympy/core/tests/test_arit.py#L1985-L1989).

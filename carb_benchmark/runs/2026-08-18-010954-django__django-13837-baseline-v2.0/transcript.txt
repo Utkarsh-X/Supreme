@@ -1,0 +1,24 @@
+I have updated `django.utils.autoreload.get_child_arguments()` to allow autoreloading when Python is executed as `python -m <pkg_other_than_django> runserver`.
+
+### Summary of Changes
+
+1. **[django/utils/autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/django/utils/autoreload.py#L213-L229)**:
+   - Updated `get_child_arguments()` to inspect `getattr(__main__, '__spec__', None)` and check if `__main__.__spec__.parent` exists and is non-empty.
+   - When launched with `python -m <pkg>`, Python sets `__main__.__spec__.parent` to `<pkg>` (e.g. `'django'`, `'other_package'`, or `'pkg.subpackage'`), whereas directory/zipfile executions set `parent` to `""` and direct script executions leave `__spec__` as `None`.
+   - Replaced hardcoded comparison against `django.__main__.__file__` with `['-m', __main__.__spec__.parent] + sys.argv[1:]`.
+
+2. **[tests/utils_tests/test_autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/tests/utils_tests/test_autoreload.py#L158-L175)**:
+   - Updated `TestChildArguments.test_run_as_module` to test `python -m <pkg>` for `django`, custom packages, and subpackages.
+   - Updated `RestartWithReloaderTests.test_python_m_django` and added `test_python_m_other_package` to verify autoreload restarts correctly when launched as a custom package.
+I have updated `django.utils.autoreload.get_child_arguments()` to allow autoreloading when Python is executed as `python -m <pkg_other_than_django> runserver`.
+
+### Summary of Changes
+
+1. **[django/utils/autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/django/utils/autoreload.py#L213-L229)**:
+   - Updated `get_child_arguments()` to inspect `getattr(__main__, '__spec__', None)` and check if `__main__.__spec__.parent` exists and is non-empty.
+   - When launched with `python -m <pkg>`, Python sets `__main__.__spec__.parent` to `<pkg>` (e.g. `'django'`, `'other_package'`, or `'pkg.subpackage'`), whereas directory/zipfile executions set `parent` to `""` and direct script executions leave `__spec__` as `None`.
+   - Replaced hardcoded comparison against `django.__main__.__file__` with `['-m', __main__.__spec__.parent] + sys.argv[1:]`.
+
+2. **[tests/utils_tests/test_autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/tests/utils_tests/test_autoreload.py#L158-L175)**:
+   - Updated `TestChildArguments.test_run_as_module` to test `python -m <pkg>` for `django`, custom packages, and subpackages.
+   - Updated `RestartWithReloaderTests.test_python_m_django` and added `test_python_m_other_package` to verify autoreload restarts correctly when launched as a custom package.

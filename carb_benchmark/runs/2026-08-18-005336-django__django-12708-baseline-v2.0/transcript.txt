@@ -1,0 +1,11 @@
+I have fixed the issue where deleting `index_together` failed with `ValueError: Found wrong number (2) of constraints` when a `unique_together` constraint existed on the exact same fields.
+
+### Cause
+When `alter_index_together` invoked `_delete_composed_index(model, fields, {'index': True}, self.sql_delete_index)`, database introspection returned both:
+1. The non-unique index created by `index_together` (`index=True`, `unique=False`)
+2. The unique constraint/index created by `unique_together` (`index=True`, `unique=True`)
+
+Since `constraint_kwargs` did not specify `unique=False`, `_constraint_names()` matched both constraints (`len(constraint_names) == 2`) and raised `ValueError`.
+
+### Solution
+Updated [`alter_index_together`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12708/django/db/backends/base/schema.py#L396) in `django/db/backends/base/schema.py` to pass `{'index': True, 'unique': False}` when deleting composed indexes, ensuring unique constraints on the same fields are ignored. Added unit test [`test_remove_index_together_with_unique_together`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12708/tests/schema/tests.py#L2249) in `tests/schema/tests.py`.

@@ -1,0 +1,38 @@
+I have solved the problem and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_f/main.py).
+
+### Method Explanation
+
+1. **Alkane Subgraph Structure**:
+   An alkane subgraph $T[S]$ consists of a set $K$ of internal vertices (each having degree 4 in $T[S]$) and a set of leaves attached to vertices in $K$ (each having degree 1 in $T[S]$).
+   - Because $T[S]$ is a tree, $K$ must be a connected subtree of $T$.
+   - Any vertex $u \in K$ must have degree $d_T(u) \ge 4$ in the original tree $T$, and degree $d_K(u) \le 4$ in the subtree $K$.
+   - Each vertex $u \in K$ requires $4 - d_K(u)$ leaves from $T \setminus K$. Since $d_T(u) \ge 4$, there are always at least $4 - d_K(u)$ disjoint leaves available in $T \setminus K$.
+   - For a set of $m = |K|$ internal vertices, the total number of vertices in the alkane subgraph $T[S]$ is $3m + 2$.
+
+2. **Algorithm**:
+   - Filter all candidate internal vertices $V_{\ge 4} = \{v \in V(T) : d_T(v) \ge 4\}$. If $V_{\ge 4} = \emptyset$, output `-1`.
+   - Consider the forest induced by $V_{\ge 4}$.
+   - For each connected component, root it arbitrarily and use bottom-up dynamic programming:
+     - `dp[u]` computes the maximum size of a valid subtree of internal vertices rooted at $u$ when $u$'s parent in $T[V_{\ge 4}]$ is also included (so $u$ can pick at most 3 children).
+     - `ans[u]` computes the maximum size of a valid subtree of internal vertices rooted at $u$ when $u$ is the root of $K$ (so $u$ can pick at most 4 children).
+   - Find the maximum number of internal vertices $m = \max_u ans[u]$.
+   - Output $3m + 2$. If no valid $K$ exists ($m = 0$), output `-1`.
+I have solved the problem and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_f/main.py).
+
+### Method Explanation
+
+1. **Alkane Subgraph Structure**:
+   An alkane subgraph $T[S]$ consists of a set $K$ of internal vertices (each having degree 4 in $T[S]$) and a set of leaves attached to vertices in $K$ (each having degree 1 in $T[S]$).
+   - Because $T[S]$ is a tree, $K$ must be a connected subtree of $T$.
+   - Any vertex $u \in K$ must have degree $d_T(u) \ge 4$ in the original tree $T$, and degree $d_K(u) \le 4$ in the subtree $K$.
+   - Each vertex $u \in K$ requires $4 - d_K(u)$ leaves from $T \setminus K$. Since $d_T(u) \ge 4$, there are always at least $4 - d_K(u)$ disjoint leaves available in $T \setminus K$.
+   - For a set of $m = |K|$ internal vertices, the total number of vertices in the alkane subgraph $T[S]$ is $3m + 2$.
+
+2. **Algorithm**:
+   - Filter all candidate internal vertices $V_{\ge 4} = \{v \in V(T) : d_T(v) \ge 4\}$. If $V_{\ge 4} = \emptyset$, output `-1`.
+   - Consider the forest induced by $V_{\ge 4}$.
+   - For each connected component, root it arbitrarily and use bottom-up dynamic programming:
+     - `dp[u]` computes the maximum size of a valid subtree of internal vertices rooted at $u$ when $u$'s parent in $T[V_{\ge 4}]$ is also included (so $u$ can pick at most 3 children).
+     - `ans[u]` computes the maximum size of a valid subtree of internal vertices rooted at $u$ when $u$ is the root of $K$ (so $u$ can pick at most 4 children).
+   - Find the maximum number of internal vertices $m = \max_u ans[u]$.
+   - Output $3m + 2$. If no valid $K$ exists ($m = 0$), output `-1`.

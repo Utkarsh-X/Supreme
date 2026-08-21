@@ -1,0 +1,52 @@
+{
+  "run_id": "2026-08-19-110724-django__django-16667-superpowers-v2.0",
+  "task_id": "django__django-16667",
+  "configuration_id": "superpowers-v2.0",
+  "wall_clock_seconds": 269.42,
+  "tool_calls": [
+    "view_file",
+    "view_file",
+    "grep_search",
+    "grep_search",
+    "view_file",
+    "grep_search",
+    "grep_search",
+    "view_file",
+    "view_file",
+    "view_file",
+    "view_file",
+    "run_command",
+    "grep_search",
+    "view_file",
+    "view_file",
+    "view_file",
+    "grep_search",
+    "grep_search",
+    "grep_search",
+    "view_file",
+    "replace_file_content",
+    "view_file",
+    "replace_file_content",
+    "run_command",
+    "run_command",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "view_file": 12,
+    "grep_search": 8,
+    "run_command": 4,
+    "replace_file_content": 2
+  },
+  "time_to_first_edit": 230.036,
+  "num_turns": 1,
+  "duration_seconds": 251.2911722,
+  "status": "SUCCESS",
+  "usage": {
+    "input_tokens": 144817,
+    "output_tokens": 9228,
+    "thinking_tokens": 5976,
+    "cache_read_tokens": 1186272,
+    "total_tokens": 154045
+  },
+  "error": null
+}

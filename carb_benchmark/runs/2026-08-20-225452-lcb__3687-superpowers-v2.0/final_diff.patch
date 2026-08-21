@@ -1,0 +1,92 @@
+diff --git a/main.py b/main.py
+index c86f6c8..336c96b 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,86 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++
++def solve(edges, nums):
++    n = len(nums)
++    if n == 0:
++        return [0, 0]
++    
++    adj = [[] for _ in range(n)]
++    for u, v, w in edges:
++        adj[u].append((v, w))
++        adj[v].append((u, w))
++    
++    pos = {}
++    path_dist = []
++    
++    max_len = 0
++    min_nodes = 1
++    
++    # Iterative DFS stack
++    # ('ENTER', u, parent, weight_from_parent, parent_last_start)
++    # ('EXIT', u, old_depth)
++    stack = [('ENTER', 0, -1, 0, 0)]
++    
++    while stack:
++        item = stack.pop()
++        kind = item[0]
++        
++        if kind == 'EXIT':
++            _, u, old_depth = item
++            val = nums[u]
++            if old_depth == -1:
++                del pos[val]
++            else:
++                pos[val] = old_depth
++            path_dist.pop()
++        else:
++            _, u, parent, w, parent_last_start = item
++            
++            depth = len(path_dist)
++            current_dist = path_dist[-1] + w if depth > 0 else 0
++            
++            val = nums[u]
++            old_depth = pos.get(val, -1)
++            pos[val] = depth
++            
++            last_start = max(parent_last_start, old_depth + 1)
++            
++            if last_start == depth:
++                path_len = 0
++                path_nodes = 1
++            else:
++                path_len = current_dist - path_dist[last_start]
++                path_nodes = depth - last_start + 1
++            
++            if path_len > max_len:
++                max_len = path_len
++                min_nodes = path_nodes
++            elif path_len == max_len:
++                if path_nodes < min_nodes:
++                    min_nodes = path_nodes
++            
++            path_dist.append(current_dist)
++            stack.append(('EXIT', u, old_depth))
++            
++            for v, weight in adj[u]:
++                if v != parent:
++                    stack.append(('ENTER', v, u, weight, last_start))
++
++    return [max_len, min_nodes]
++
++def main():
++    input_text = sys.stdin.read().strip()
++    if not input_text:
++        return
++    
++    decoder = json.JSONDecoder()
++    edges, idx = decoder.raw_decode(input_text)
++    input_text2 = input_text[idx:].lstrip()
++    nums, _ = decoder.raw_decode(input_text2)
++    
++    res = solve(edges, nums)
++    print(json.dumps(res))
++
++if __name__ == '__main__':
++    main()

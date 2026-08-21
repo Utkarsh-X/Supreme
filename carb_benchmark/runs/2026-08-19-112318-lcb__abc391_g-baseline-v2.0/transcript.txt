@@ -1,0 +1,30 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_g/main.py).
+
+### Approach
+1. **LCS Automaton State Compression**:
+   In standard dynamic programming for Longest Common Subsequence (LCS) between string $S$ of length $N$ and a prefix of $T$, the DP array $dp[0 \dots N]$ satisfies $0 \le dp[i] - dp[i-1] \le 1$ for all $i \in [1, N]$.
+   Since $N \le 10$, the difference vector $\Delta dp_i = dp[i] - dp[i-1]$ can be encoded as a bitmask of length $N$ ($2^N \le 1024$ states).
+
+2. **Transition Precomputation**:
+   For each state `mask` $\in [0, 2^N-1]$ and each lowercase English letter $c \in [\text{'a'}, \text{'z'}]$, we simulate appending character $c$ to compute the next DP state bitmask. We build a transition table `adj[mask]` storing `(next_mask, count)`.
+
+3. **Dynamic Programming**:
+   We iterate $M$ steps ($M \le 100$). At each step, we update the state counts `dp_counts[mask]` using the precomputed transitions modulo $998244353$.
+
+4. **Output Generation**:
+   For each state `mask`, the LCS length with $S$ is given by the popcount of `mask`. We aggregate the total count for each $k \in [0, N]$ and output `ans_0 ans_1 ... ans_N`.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_g/main.py).
+
+### Approach
+1. **LCS Automaton State Compression**:
+   In standard dynamic programming for Longest Common Subsequence (LCS) between string $S$ of length $N$ and a prefix of $T$, the DP array $dp[0 \dots N]$ satisfies $0 \le dp[i] - dp[i-1] \le 1$ for all $i \in [1, N]$.
+   Since $N \le 10$, the difference vector $\Delta dp_i = dp[i] - dp[i-1]$ can be encoded as a bitmask of length $N$ ($2^N \le 1024$ states).
+
+2. **Transition Precomputation**:
+   For each state `mask` $\in [0, 2^N-1]$ and each lowercase English letter $c \in [\text{'a'}, \text{'z'}]$, we simulate appending character $c$ to compute the next DP state bitmask. We build a transition table `adj[mask]` storing `(next_mask, count)`.
+
+3. **Dynamic Programming**:
+   We iterate $M$ steps ($M \le 100$). At each step, we update the state counts `dp_counts[mask]` using the precomputed transitions modulo $998244353$.
+
+4. **Output Generation**:
+   For each state `mask`, the LCS length with $S$ is given by the popcount of `mask`. We aggregate the total count for each $k \in [0, N]$ and output `ans_0 ans_1 ... ans_N`.

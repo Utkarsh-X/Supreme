@@ -1,0 +1,30 @@
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc389_e/main.py).
+
+### Method Explanation
+1. **Marginal Cost Analysis**: The cost to buy $k$ units of product $i$ is $k^2 P_i$. The marginal cost of purchasing the $k$-th unit of product $i$ (for $k \ge 1$) is:
+   $$(k^2 - (k-1)^2) P_i = (2k - 1) P_i$$
+   Since marginal costs are strictly increasing for each product, maximizing total units for a given budget $M$ is equivalent to greedily buying individual units in increasing order of their marginal costs.
+
+2. **Binary Search on Marginal Cost Threshold**:
+   For a given marginal cost threshold $X$:
+   - A product with price $P_i$ will contribute $k_i = \lfloor \frac{\lfloor X / P_i \rfloor + 1}{2} \rfloor$ units.
+   - The total cost for $k_i$ units of product $i$ is $k_i^2 P_i$.
+
+3. **Counting & Remaining Budget**:
+   - We binary search to find the maximum integer threshold $X_{\text{max}}$ such that the total cost of all units with marginal cost $\le X_{\text{max}}$ does not exceed $M$.
+   - Any leftover budget $R = M - \sum k_i^2 P_i$ is used to purchase additional units that cost exactly $X_{\text{max}} + 1$ each.
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc389_e/main.py).
+
+### Method Explanation
+1. **Marginal Cost Analysis**: The cost to buy $k$ units of product $i$ is $k^2 P_i$. The marginal cost of purchasing the $k$-th unit of product $i$ (for $k \ge 1$) is:
+   $$(k^2 - (k-1)^2) P_i = (2k - 1) P_i$$
+   Since marginal costs are strictly increasing for each product, maximizing total units for a given budget $M$ is equivalent to greedily buying individual units in increasing order of their marginal costs.
+
+2. **Binary Search on Marginal Cost Threshold**:
+   For a given marginal cost threshold $X$:
+   - A product with price $P_i$ will contribute $k_i = \lfloor \frac{\lfloor X / P_i \rfloor + 1}{2} \rfloor$ units.
+   - The total cost for $k_i$ units of product $i$ is $k_i^2 P_i$.
+
+3. **Counting & Remaining Budget**:
+   - We binary search to find the maximum integer threshold $X_{\text{max}}$ such that the total cost of all units with marginal cost $\le X_{\text{max}}$ does not exceed $M$.
+   - Any leftover budget $R = M - \sum k_i^2 P_i$ is used to purchase additional units that cost exactly $X_{\text{max}} + 1$ each.

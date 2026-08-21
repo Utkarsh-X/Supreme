@@ -1,0 +1,88 @@
+diff --git a/main.py b/main.py
+index c86f6c8..dfe80f7 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,82 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    adj = [[] for _ in range(N)]
++    idx = 2
++    for _ in range(M):
++        u = int(input_data[idx]) - 1
++        v = int(input_data[idx + 1]) - 1
++        idx += 2
++        adj[u].append(v)
++        adj[v].append(u)
++        
++    color = [-1] * N
++    comps = []
++    
++    for i in range(N):
++        if color[i] == -1:
++            color[i] = 0
++            w = 0
++            b = 0
++            q = [i]
++            head = 0
++            while head < len(q):
++                curr = q[head]
++                head += 1
++                if color[curr] == 0:
++                    w += 1
++                else:
++                    b += 1
++                for nxt in adj[curr]:
++                    if color[nxt] == -1:
++                        color[nxt] = 1 - color[curr]
++                        q.append(nxt)
++            comps.append((w, b))
++            
++    if N % 2 == 1:
++        if M % 2 == 1:
++            print("Aoki")
++        else:
++            print("Takahashi")
++        return
++        
++    odd_comps = []
++    even_comps = []
++    for w, b in comps:
++        if (w + b) % 2 != 0:
++            odd_comps.append((w, b))
++        else:
++            even_comps.append((w, b))
++            
++    O = len(odd_comps)
++    if O == 0:
++        W_even = sum(w for w, b in even_comps)
++        if (W_even - M) % 2 == 1:
++            print("Aoki")
++        else:
++            print("Takahashi")
++    else:
++        pure = True
++        for w, b in odd_comps:
++            if w != 0 and b != 0:
++                pure = False
++                break
++        if not pure:
++            print("Aoki")
++        else:
++            max_R = sum(w * b for w, b in even_comps)
++            R = max_R - M
++            if (R + O // 2) % 2 == 1:
++                print("Aoki")
++            else:
++                print("Takahashi")
++
++if __name__ == '__main__':
++    main()

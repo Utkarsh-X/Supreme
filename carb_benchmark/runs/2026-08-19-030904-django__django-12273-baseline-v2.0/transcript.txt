@@ -1,0 +1,32 @@
+### Root Cause
+
+In Django's multi-table inheritance:
+1. A child model instance maintains two primary key attributes: the parent link pointer (e.g. `item_ptr_id`) and the parent model's primary key field (e.g. `uid` or `id`).
+2. Setting `instance.pk = None` cleared `item_ptr_id` but left `uid` intact.
+3. Setting `instance.uid = None` cleared `uid` but left `item_ptr_id` intact.
+4. During [`_save_parents`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12273/django/db/models/base.py#L804-L828), when `instance._state.adding` was `False`, Django previously copied `item_ptr_id` back into `uid` (overriding the reset `uid`) or updated the parent table row using `uid` and restored `item_ptr_id`, causing `save()` to overwrite the existing database object instead of saving a new copy.
+
+---
+
+### Solution
+
+1. Updated [`_set_pk_val`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12273/django/db/models/base.py#L571-L575) in `django/db/models/base.py` so that setting `instance.pk = value` updates the primary key fields of all parent models in the inheritance hierarchy.
+2. Updated [`_save_parents`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12273/django/db/models/base.py#L807-L820) in `django/db/models/base.py` to synchronize parent primary key and link fields properly:
+   - When a parent primary key field or link field is `None` on an existing instance (`_state.adding` is `False`), the corresponding link or parent primary key field is also set to `None`, triggering an insert of new parent and child rows.
+   - Syncing parent primary key from parent link field is now strictly scoped to newly added instances (`_state.adding` is `True`), such as when linking a new child instance to an existing parent instance.
+### Root Cause
+
+In Django's multi-table inheritance:
+1. A child model instance maintains two primary key attributes: the parent link pointer (e.g. `item_ptr_id`) and the parent model's primary key field (e.g. `uid` or `id`).
+2. Setting `instance.pk = None` cleared `item_ptr_id` but left `uid` intact.
+3. Setting `instance.uid = None` cleared `uid` but left `item_ptr_id` intact.
+4. During [`_save_parents`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12273/django/db/models/base.py#L804-L828), when `instance._state.adding` was `False`, Django previously copied `item_ptr_id` back into `uid` (overriding the reset `uid`) or updated the parent table row using `uid` and restored `item_ptr_id`, causing `save()` to overwrite the existing database object instead of saving a new copy.
+
+---
+
+### Solution
+
+1. Updated [`_set_pk_val`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12273/django/db/models/base.py#L571-L575) in `django/db/models/base.py` so that setting `instance.pk = value` updates the primary key fields of all parent models in the inheritance hierarchy.
+2. Updated [`_save_parents`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12273/django/db/models/base.py#L807-L820) in `django/db/models/base.py` to synchronize parent primary key and link fields properly:
+   - When a parent primary key field or link field is `None` on an existing instance (`_state.adding` is `False`), the corresponding link or parent primary key field is also set to `None`, triggering an insert of new parent and child rows.
+   - Syncing parent primary key from parent link field is now strictly scoped to newly added instances (`_state.adding` is `True`), such as when linking a new child instance to an existing parent instance.

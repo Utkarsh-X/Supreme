@@ -1,0 +1,20 @@
+{
+  "run_id": "2026-08-19-135656-lcb__abc391_f-superpowers-v2.0",
+  "task_id": "lcb__abc391_f",
+  "configuration_id": "superpowers-v2.0",
+  "wall_clock_seconds": 0.29,
+  "tool_calls": [],
+  "tool_call_counts": {},
+  "time_to_first_edit": null,
+  "num_turns": 0,
+  "duration_seconds": 0,
+  "status": "ERROR",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "total_tokens": 0
+  },
+  "error": null
+}

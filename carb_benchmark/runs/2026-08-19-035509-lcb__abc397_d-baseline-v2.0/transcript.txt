@@ -1,0 +1,36 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_d/main.py).
+
+### Method Explanation
+For positive integers $x > y \ge 1$, let $d = x - y \ge 1$.
+Using the algebraic identity:
+$$N = x^3 - y^3 = (x - y)(x^2 + xy + y^2) = d \cdot K$$
+where $K = \frac{N}{d} = x^2 + xy + y^2$.
+
+Since $y \ge 1$, we have $N = 3dy^2 + 3d^2y + d^3 > d^3$, which implies $d < N^{1/3} \le (10^{18})^{1/3} = 10^6$.
+Thus, $d$ must be a positive integer divisor of $N$ less than $10^6$.
+
+Furthermore, using the algebraic identity:
+$$4K - d^2 = 4(x^2 + xy + y^2) - (x - y)^2 = 3(x + y)^2$$
+We can solve for $S = x + y$:
+$$S = \sqrt{\frac{4K - d^2}{3}}$$
+If $S$ is an integer such that $S > d$ and $S - d$ is even, then $x = \frac{S + d}{2}$ and $y = \frac{S - d}{2}$ are valid positive integers.
+
+Since $d \le 10^6$, we iterate over all candidate values of $d$ up to $\lfloor (N-1)^{1/3} \rfloor \le 999,999$. This requires at most $10^6$ loop iterations and finishes in under 0.03 seconds.
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_d/main.py).
+
+### Method Explanation
+For positive integers $x > y \ge 1$, let $d = x - y \ge 1$.
+Using the algebraic identity:
+$$N = x^3 - y^3 = (x - y)(x^2 + xy + y^2) = d \cdot K$$
+where $K = \frac{N}{d} = x^2 + xy + y^2$.
+
+Since $y \ge 1$, we have $N = 3dy^2 + 3d^2y + d^3 > d^3$, which implies $d < N^{1/3} \le (10^{18})^{1/3} = 10^6$.
+Thus, $d$ must be a positive integer divisor of $N$ less than $10^6$.
+
+Furthermore, using the algebraic identity:
+$$4K - d^2 = 4(x^2 + xy + y^2) - (x - y)^2 = 3(x + y)^2$$
+We can solve for $S = x + y$:
+$$S = \sqrt{\frac{4K - d^2}{3}}$$
+If $S$ is an integer such that $S > d$ and $S - d$ is even, then $x = \frac{S + d}{2}$ and $y = \frac{S - d}{2}$ are valid positive integers.
+
+Since $d \le 10^6$, we iterate over all candidate values of $d$ up to $\lfloor (N-1)^{1/3} \rfloor \le 999,999$. This requires at most $10^6$ loop iterations and finishes in under 0.03 seconds.

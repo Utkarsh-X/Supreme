@@ -1,0 +1,26 @@
+I have updated the built-in validators to include the provided input `value` in `ValidationError.params`.
+
+### Summary of Changes
+
+1. **[django/core/validators.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/django/core/validators.py)**:
+   - Added `params={'value': value}` (or merged `'value': value` into existing `params`) when raising `ValidationError` across all built-in validators: `RegexValidator`, `URLValidator`, `EmailValidator`, `validate_ipv4_address`, `validate_ipv6_address`, `validate_ipv46_address`, `DecimalValidator`, `FileExtensionValidator`, and `ProhibitNullCharactersValidator`.
+   - Ensures custom error messages can now utilize the `%(value)s` placeholder.
+
+2. **[django/contrib/postgres/validators.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/django/contrib/postgres/validators.py)**:
+   - Added `'value': value` to `params` in `KeysValidator`.
+
+3. **Tests ([tests/validators/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/tests/validators/tests.py) & [tests/postgres_tests/test_hstore.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/tests/postgres_tests/test_hstore.py))**:
+   - Added unit tests `test_value_in_error_params` and `test_custom_message_with_value` to verify that `ValidationError.params['value']` is populated and `%(value)s` interpolation works as expected.
+I have updated the built-in validators to include the provided input `value` in `ValidationError.params`.
+
+### Summary of Changes
+
+1. **[django/core/validators.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/django/core/validators.py)**:
+   - Added `params={'value': value}` (or merged `'value': value` into existing `params`) when raising `ValidationError` across all built-in validators: `RegexValidator`, `URLValidator`, `EmailValidator`, `validate_ipv4_address`, `validate_ipv6_address`, `validate_ipv46_address`, `DecimalValidator`, `FileExtensionValidator`, and `ProhibitNullCharactersValidator`.
+   - Ensures custom error messages can now utilize the `%(value)s` placeholder.
+
+2. **[django/contrib/postgres/validators.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/django/contrib/postgres/validators.py)**:
+   - Added `'value': value` to `params` in `KeysValidator`.
+
+3. **Tests ([tests/validators/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/tests/validators/tests.py) & [tests/postgres_tests/test_hstore.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/tests/postgres_tests/test_hstore.py))**:
+   - Added unit tests `test_value_in_error_params` and `test_custom_message_with_value` to verify that `ValidationError.params['value']` is populated and `%(value)s` interpolation works as expected.

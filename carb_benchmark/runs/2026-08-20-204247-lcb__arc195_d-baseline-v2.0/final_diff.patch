@@ -1,0 +1,143 @@
+diff --git a/main.py b/main.py
+index c86f6c8..931596a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,137 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import Counter
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++        
++    T = int(input_data[0])
++    idx = 1
++    
++    out = []
++    for _ in range(T):
++        N = int(input_data[idx])
++        idx += 1
++        A = [int(x) for x in input_data[idx:idx+N]]
++        idx += N
++        
++        runs = []
++        for x in A:
++            if not runs or runs[-1][0] != x:
++                runs.append([x, 1])
++            else:
++                runs[-1][1] += 1
++                
++        R = len(runs)
++        if R <= 2:
++            out.append(str(R))
++            continue
++            
++        last_occ = {runs[i][0]: i for i in range(R)}
++        
++        dp = [float('inf')] * (R + 1)
++        dp[0] = 0
++        
++        for i in range(R):
++            dp[i+1] = min(dp[i+1], dp[i] + 1)
++            
++            # Pattern 1: Alternating 2-value subsegment starting at i
++            val1 = runs[i][0]
++            if i + 1 < R:
++                val2 = runs[i+1][0]
++                j = i + 2
++                
++                while j < R:
++                    expected_val = val1 if (j - i) % 2 == 0 else val2
++                    if runs[j][0] != expected_val:
++                        break
++                        
++                    ep1 = j if expected_val == val1 else last_occ[val1]
++                    ep2 = last_occ[val2] if expected_val == val1 else j
++                    max_ep = max(ep1, ep2)
++                    
++                    if any(runs[f][1] != 1 for f in range(j + 1, max_ep + 1)):
++                        j += 1
++                        continue
++                    
++                    inv_inside = 0
++                    for k1 in range(i, j + 1):
++                        for k2 in range(k1 + 1, j + 1):
++                            v_k1 = runs[k1][0]
++                            v_k2 = runs[k2][0]
++                            ep_k1 = ep1 if v_k1 == val1 else ep2
++                            ep_k2 = ep1 if v_k2 == val1 else ep2
++                            if ep_k1 > ep_k2:
++                                inv_inside += runs[k1][1] * runs[k2][1]
++                                
++                    endpoints = 2
++                    
++                    inv_prev = 0
++                    for p in range(i):
++                        v_p = runs[p][0]
++                        if v_p not in (val1, val2):
++                            ep_p = last_occ[v_p]
++                            for k in range(i, j + 1):
++                                ep_k = ep1 if runs[k][0] == val1 else ep2
++                                if p < k and ep_p > ep_k:
++                                    inv_prev += runs[p][1] * runs[k][1]
++
++                    inv_after = 0
++                    v1_cnt = sum(runs[k][1] for k in range(i, j + 1) if runs[k][0] == val1)
++                    v2_cnt = sum(runs[k][1] for k in range(i, j + 1) if runs[k][0] == val2)
++                    
++                    for f in range(j + 1, max_ep + 1):
++                        v_f = runs[f][0]
++                        if v_f not in (val1, val2):
++                            ep_f = last_occ[v_f]
++                            if f < ep1 and ep1 > ep_f:
++                                inv_after += runs[f][1] * v1_cnt
++                            if f < ep2 and ep2 > ep_f:
++                                inv_after += runs[f][1] * v2_cnt
++
++                    total_cost = endpoints + inv_inside + inv_prev + inv_after
++                    target = max_ep + 1
++                    dp[target] = min(dp[target], dp[i] + total_cost)
++                    j += 1
++                    
++            # Pattern 2: Interleaved m-value pattern runs[i..j] of length 2m
++            for m in range(2, (R - i + 1) // 2 + 1):
++                j = i + 2 * m - 1
++                sub = runs[i:j+1]
++                if any(r[1] != 1 for r in sub[1:-1]):
++                    break
++                    
++                vals = [r[0] for r in sub]
++                counts = Counter(vals)
++                if len(counts) == m and all(cnt == 2 for cnt in counts.values()):
++                    first_occ = {}
++                    second_occ = {}
++                    for idx_v, v in enumerate(vals):
++                        if v not in first_occ:
++                            first_occ[v] = idx_v
++                        else:
++                            second_occ[v] = idx_v
++                    ordered_vals = sorted(first_occ.keys(), key=lambda v: first_occ[v])
++                    seconds = [second_occ[v] for v in ordered_vals]
++                    if seconds == sorted(seconds):
++                        pattern_vals = set(vals)
++                        prev_invalid = False
++                        for prev_r in range(i):
++                            if runs[prev_r][1] > 1 and last_occ[runs[prev_r][0]] >= j:
++                                prev_invalid = True
++                                break
++                        next_invalid = False
++                        for next_r in range(j + 1, R):
++                            if runs[next_r][0] in pattern_vals and runs[next_r][1] > 1:
++                                next_invalid = True
++                                break
++                        if not prev_invalid and not next_invalid:
++                            dp[j+1] = min(dp[j+1], dp[i] + (2 * m - 1))
++
++        out.append(str(dp[R]))
++        
++    print('\n'.join(out))
++
++if __name__ == '__main__':
++    solve()

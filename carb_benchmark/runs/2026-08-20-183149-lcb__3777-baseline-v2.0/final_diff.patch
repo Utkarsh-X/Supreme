@@ -1,0 +1,95 @@
+diff --git a/main.py b/main.py
+index c86f6c8..042e80a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,89 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++
++def solve():
++    input_data = sys.stdin.read().splitlines()
++    lines = [line.strip() for line in input_data if line.strip()]
++    if len(lines) < 3:
++        return
++
++    line1 = lines[0]
++    if '=' in line1:
++        line1 = line1.split('=', 1)[1]
++    nums = json.loads(line1.strip())
++
++    line2 = lines[1]
++    if '=' in line2:
++        line2 = line2.split('=', 1)[1]
++    k = int(line2.strip())
++
++    line3 = lines[2]
++    if '=' in line3:
++        line3 = line3.split('=', 1)[1]
++    limit = int(line3.strip())
++
++    if k < -900 or k > 900:
++        print(-1)
++        return
++
++    dp = {}
++
++    for x in nums:
++        next_dp = {}
++        for state, (hz, ho, ps) in dp.items():
++            next_dp[state] = (hz, ho, set(ps))
++
++        def add_state(p, s, hz, ho, ps):
++            state = (p, s)
++            if state in next_dp:
++                cur_hz, cur_ho, cur_ps = next_dp[state]
++                next_dp[state] = (cur_hz or hz, cur_ho or ho, cur_ps | ps)
++            else:
++                next_dp[state] = (hz, ho, set(ps))
++
++        # Start a new subsequence [x]
++        p_new = 1
++        s_new = x
++        if x == 0:
++            add_state(p_new, s_new, True, False, set())
++        elif x <= limit:
++            add_state(p_new, s_new, False, False, {x})
++        else:
++            add_state(p_new, s_new, False, True, set())
++
++        # Extend existing states in dp with x
++        for (p, s), (hz, ho, ps) in dp.items():
++            p_ext = 1 - p
++            s_ext = s + x if p == 0 else s - x
++
++            if x == 0:
++                add_state(p_ext, s_ext, True, False, set())
++            elif x == 1:
++                add_state(p_ext, s_ext, hz, ho, ps)
++            else:
++                new_hz = hz
++                new_ho = ho
++                new_ps = set()
++                max_v = limit // x
++                for v in ps:
++                    if v <= max_v:
++                        new_ps.add(v * x)
++                    else:
++                        new_ho = True
++                add_state(p_ext, s_ext, new_hz, new_ho, new_ps)
++
++        dp = next_dp
++
++    ans = -1
++    for p in (0, 1):
++        if (p, k) in dp:
++            hz, ho, ps = dp[(p, k)]
++            if hz:
++                ans = max(ans, 0)
++            if ps:
++                ans = max(ans, max(ps))
++
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

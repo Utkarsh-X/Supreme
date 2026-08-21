@@ -1,0 +1,47 @@
+diff --git a/main.py b/main.py
+index c86f6c8..f7fd93d 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,41 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    H = int(input_data[0])
++    W = int(input_data[1])
++    rows = input_data[2:2+H]
++    
++    N = 1 << W
++    cnt = [0] * N
++    for r in rows:
++        cnt[int(r, 2)] += 1
++    
++    F = [0] * N
++    pc = [0] * N
++    for i in range(1, N):
++        pc[i] = pc[i >> 1] + (i & 1)
++        
++    for k in range(N):
++        F[k] = min(pc[k], W - pc[k])
++    
++    def fwht(a):
++        for bit in range(W):
++            h = 1 << bit
++            for i in range(0, N, h << 1):
++                for j in range(i, i + h):
++                    u, v = a[j], a[j + h]
++                    a[j], a[j + h] = u + v, u - v
++
++    fwht(cnt)
++    fwht(F)
++    C = [u * v for u, v in zip(cnt, F)]
++    fwht(C)
++    
++    ans = min(x >> W for x in C)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,42 @@
+The solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_d/main.py).
+
+### Method Explanation
+
+1. **Grid Displacement Tracking**:
+   Let $P(t) = (r(t), c(t))$ be the cumulative wind displacement vector from time $0$ to time $t$, with $P(0) = (0,0)$.
+   All smoke present on the grid moves according to the same wind vector. Thus, if a smoke blob was generated at $(0,0)$ at time $k$ ($0 \le k \le t$), its position at time $t$ (and $t+0.5$) is given by $P(t) - P(k)$.
+
+2. **Creation of New Smoke**:
+   A new smoke blob is created at $(0,0)$ at time $t$ if and only if no existing smoke blob occupies $(0,0)$ after the wind at time $t$. 
+   Since existing blobs are at positions $P(t) - P(k)$ for previously created $k$, $(0,0)$ is empty if and only if $P(t) \neq P(k)$ for all previously created $k$.
+   Inductively, a new smoke blob is created at time $t$ if and only if $P(t)$ is appearing for the first time in the sequence $P(0), P(1), \dots, P(t)$. Therefore, the set of positions of created blobs $\{P(k) \mid k \in \text{Created}, k \le t\}$ is identical to the set of all distinct prefix positions seen up to time $t$, $\{P(0), P(1), \dots, P(t)\}$.
+
+3. **Querying Takahashi's Position $(R,C)$**:
+   Smoke exists at cell $(R,C)$ at time $t+0.5$ if and only if there exists some created blob $k \le t$ at $(R,C)$, which means $P(t) - P(k) = (R,C) \iff P(k) = P(t) - (R,C)$.
+   By our equivalence above, such a $k$ exists if and only if the target position $T_t = P(t) - (R,C)$ has appeared in $P(0), \dots, P(t)$.
+   By precomputing the first occurrence index `first_seen[pos]` for each position in $O(N)$ time, we can check if `first_seen.get(T_t, ∞) <= t` in $O(1)$ time per step.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$ total time to process prefix sums and respond to queries.
+- **Space Complexity**: $\mathcal{O}(N)$ space to store the prefix sums and position hash map.
+The solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_d/main.py).
+
+### Method Explanation
+
+1. **Grid Displacement Tracking**:
+   Let $P(t) = (r(t), c(t))$ be the cumulative wind displacement vector from time $0$ to time $t$, with $P(0) = (0,0)$.
+   All smoke present on the grid moves according to the same wind vector. Thus, if a smoke blob was generated at $(0,0)$ at time $k$ ($0 \le k \le t$), its position at time $t$ (and $t+0.5$) is given by $P(t) - P(k)$.
+
+2. **Creation of New Smoke**:
+   A new smoke blob is created at $(0,0)$ at time $t$ if and only if no existing smoke blob occupies $(0,0)$ after the wind at time $t$. 
+   Since existing blobs are at positions $P(t) - P(k)$ for previously created $k$, $(0,0)$ is empty if and only if $P(t) \neq P(k)$ for all previously created $k$.
+   Inductively, a new smoke blob is created at time $t$ if and only if $P(t)$ is appearing for the first time in the sequence $P(0), P(1), \dots, P(t)$. Therefore, the set of positions of created blobs $\{P(k) \mid k \in \text{Created}, k \le t\}$ is identical to the set of all distinct prefix positions seen up to time $t$, $\{P(0), P(1), \dots, P(t)\}$.
+
+3. **Querying Takahashi's Position $(R,C)$**:
+   Smoke exists at cell $(R,C)$ at time $t+0.5$ if and only if there exists some created blob $k \le t$ at $(R,C)$, which means $P(t) - P(k) = (R,C) \iff P(k) = P(t) - (R,C)$.
+   By our equivalence above, such a $k$ exists if and only if the target position $T_t = P(t) - (R,C)$ has appeared in $P(0), \dots, P(t)$.
+   By precomputing the first occurrence index `first_seen[pos]` for each position in $O(N)$ time, we can check if `first_seen.get(T_t, ∞) <= t` in $O(1)$ time per step.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$ total time to process prefix sums and respond to queries.
+- **Space Complexity**: $\mathcal{O}(N)$ space to store the prefix sums and position hash map.

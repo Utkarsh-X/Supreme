@@ -1,0 +1,69 @@
+diff --git a/main.py b/main.py
+index c86f6c8..48e0fd7 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,63 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().strip()
++    if not input_data:
++        return
++    s = input_data.strip('"\'\r\n\t ')
++    if not s:
++        return
++    
++    ans = 0
++    freq3 = [0] * 3
++    freq3[0] = 1
++    cur3 = 0
++
++    freq9 = [0] * 9
++    freq9[0] = 1
++    cur9 = 0
++
++    freq7 = [0] * 7
++    freq7[0] = 1
++    cur_p7 = 0
++    pow5 = 1
++
++    for j, ch in enumerate(s):
++        d = ord(ch) - 48
++
++        cur3 = (cur3 + d) % 3
++        cur9 = (cur9 + d) % 9
++
++        cur_p7 = (cur_p7 * 10 + d) % 7
++        pow5 = (pow5 * 5) % 7
++        rem7 = (cur_p7 * pow5) % 7
++
++        if d == 1 or d == 2 or d == 5:
++            ans += j + 1
++        elif d == 3 or d == 6:
++            ans += freq3[cur3]
++        elif d == 9:
++            ans += freq9[cur9]
++        elif d == 7:
++            ans += freq7[rem7]
++        elif d == 4:
++            ans += 1
++            if j > 0 and (ord(s[j - 1]) - 48) % 2 == 0:
++                ans += j
++        elif d == 8:
++            ans += 1
++            if j >= 1 and (ord(s[j - 1]) - 48) in (0, 4, 8):
++                ans += 1
++            if j >= 2:
++                v3 = (ord(s[j - 2]) - 48) * 100 + (ord(s[j - 1]) - 48) * 10 + 8
++                if v3 % 8 == 0:
++                    ans += j - 1
++
++        freq3[cur3] += 1
++        freq9[cur9] += 1
++        freq7[rem7] += 1
++
++    print(ans)
++
++if __name__ == '__main__':
++    main()

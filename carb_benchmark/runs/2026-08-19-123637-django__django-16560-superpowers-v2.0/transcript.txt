@@ -1,0 +1,34 @@
+An editable install (`pip install -e .`) has been launched in the background. I will wait for it to complete before proceeding with running the test suite.
+I have added support for customizing the `violation_error_code` attribute of `ValidationError`s raised by `BaseConstraint.validate()` and its subclasses (`CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint`).
+
+### Summary of Changes
+
+1. **`django.db.models.constraints`**:
+   - Added `violation_error_code = None` attribute to `BaseConstraint`.
+   - Updated `BaseConstraint.__init__`, `deconstruct()`, and `clone()` to handle `violation_error_code`.
+   - Added `violation_error_code` parameter to `CheckConstraint.__init__()`, `UniqueConstraint.__init__()`, and `ExclusionConstraint.__init__()`.
+   - Updated `validate()` in `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` to pass `code=self.violation_error_code` when raising `ValidationError`.
+   - Updated `__repr__` and `__eq__` methods in `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` to account for `violation_error_code`.
+
+2. **Documentation**:
+   - Documented `violation_error_code` under `BaseConstraint`, `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` in `docs/ref/models/constraints.txt` and `docs/ref/contrib/postgres/constraints.txt`.
+
+3. **Tests**:
+   - Added unit tests for default `violation_error_code`, custom `violation_error_code`, cloning, deconstruction, equality, representation (`__repr__`), and `validate()` error code assertion in `tests/constraints/tests.py` and `tests/postgres_tests/test_constraints.py`.
+An editable install (`pip install -e .`) has been launched in the background. I will wait for it to complete before proceeding with running the test suite.
+I have added support for customizing the `violation_error_code` attribute of `ValidationError`s raised by `BaseConstraint.validate()` and its subclasses (`CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint`).
+
+### Summary of Changes
+
+1. **`django.db.models.constraints`**:
+   - Added `violation_error_code = None` attribute to `BaseConstraint`.
+   - Updated `BaseConstraint.__init__`, `deconstruct()`, and `clone()` to handle `violation_error_code`.
+   - Added `violation_error_code` parameter to `CheckConstraint.__init__()`, `UniqueConstraint.__init__()`, and `ExclusionConstraint.__init__()`.
+   - Updated `validate()` in `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` to pass `code=self.violation_error_code` when raising `ValidationError`.
+   - Updated `__repr__` and `__eq__` methods in `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` to account for `violation_error_code`.
+
+2. **Documentation**:
+   - Documented `violation_error_code` under `BaseConstraint`, `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` in `docs/ref/models/constraints.txt` and `docs/ref/contrib/postgres/constraints.txt`.
+
+3. **Tests**:
+   - Added unit tests for default `violation_error_code`, custom `violation_error_code`, cloning, deconstruction, equality, representation (`__repr__`), and `validate()` error code assertion in `tests/constraints/tests.py` and `tests/postgres_tests/test_constraints.py`.

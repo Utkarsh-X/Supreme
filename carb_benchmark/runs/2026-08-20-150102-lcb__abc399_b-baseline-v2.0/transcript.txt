@@ -1,0 +1,22 @@
+I have written the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Summary of Solution
+
+1. **Algorithm**:
+   - According to the specified process, person $i$ with score $P_i$ receives a rank determined by how many people scored strictly higher than $P_i$.
+   - Specifically, if there are $m$ people with a score strictly greater than $P_i$, person $i$'s rank is $1 + m$.
+   - For each person $i$, we count the number of scores $P_j > P_i$ and print $1 + m$.
+
+2. **Verification**:
+   - Verified the code against all example test cases. All tests passed.
+I have written the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Summary of Solution
+
+1. **Algorithm**:
+   - According to the specified process, person $i$ with score $P_i$ receives a rank determined by how many people scored strictly higher than $P_i$.
+   - Specifically, if there are $m$ people with a score strictly greater than $P_i$, person $i$'s rank is $1 + m$.
+   - For each person $i$, we count the number of scores $P_j > P_i$ and print $1 + m$.
+
+2. **Verification**:
+   - Verified the code against all example test cases. All tests passed.

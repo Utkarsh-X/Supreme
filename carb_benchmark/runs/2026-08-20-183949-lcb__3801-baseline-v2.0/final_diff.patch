@@ -1,0 +1,58 @@
+diff --git a/main.py b/main.py
+index c86f6c8..57dd13c 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,52 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from functools import lru_cache
++
++def count_beautiful_up_to(N):
++    if N <= 0:
++        return 0
++    s_str = str(N)
++    L = len(s_str)
++    digits = [int(c) for c in s_str]
++    
++    total = 0
++    max_S = 9 * L
++    
++    for S in range(1, max_S + 1):
++        @lru_cache(None)
++        def dp(idx, current_sum, current_prod, is_less, is_started):
++            rem_len = L - idx
++            if current_sum > S or current_sum + 9 * rem_len < S:
++                return 0
++            if idx == L:
++                return 1 if (is_started and current_sum == S and current_prod == 0) else 0
++            
++            limit = 9 if is_less else digits[idx]
++            ans = 0
++            for d in range(limit + 1):
++                next_less = is_less or (d < limit)
++                if not is_started:
++                    if d == 0:
++                        ans += dp(idx + 1, 0, 1, next_less, False)
++                    else:
++                        ans += dp(idx + 1, d, d % S, next_less, True)
++                else:
++                    ans += dp(idx + 1, current_sum + d, (current_prod * d) % S, next_less, True)
++            
++            return ans
++
++        total += dp(0, 0, 1, False, False)
++        
++    return total
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    l = int(input_data[0])
++    r = int(input_data[1])
++    
++    ans = count_beautiful_up_to(r) - count_beautiful_up_to(l - 1)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

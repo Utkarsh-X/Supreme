@@ -1,0 +1,22 @@
+An optimal solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3739/main.py).
+
+### Method Explanation
+1. **Combinatorial Frequency**: For a grid of size $m \times n$ with total cells $N = m \cdot n$, any chosen pair of cells $c_1, c_2$ contains a pair of pieces in $\binom{N-2}{k-2}$ valid arrangements of $k$ pieces.
+2. **Sum of Pairwise Distances**: The sum of Manhattan distances over all cell pairs on an $m \times n$ grid decomposes independently into row differences and column differences:
+   $$D = \sum_{c_1 \neq c_2} (|x_1 - x_2| + |y_1 - y_2|) = n^2 \binom{m+1}{3} + m^2 \binom{n+1}{3}$$
+3. **Total Sum**: The total sum across all valid arrangements is $\binom{N-2}{k-2} \times D \pmod{10^9 + 7}$.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(m \cdot n)$ to precompute factorials for combination counts.
+- **Space Complexity**: $\mathcal{O}(m \cdot n)$ space for the factorial arrays.
+An optimal solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3739/main.py).
+
+### Method Explanation
+1. **Combinatorial Frequency**: For a grid of size $m \times n$ with total cells $N = m \cdot n$, any chosen pair of cells $c_1, c_2$ contains a pair of pieces in $\binom{N-2}{k-2}$ valid arrangements of $k$ pieces.
+2. **Sum of Pairwise Distances**: The sum of Manhattan distances over all cell pairs on an $m \times n$ grid decomposes independently into row differences and column differences:
+   $$D = \sum_{c_1 \neq c_2} (|x_1 - x_2| + |y_1 - y_2|) = n^2 \binom{m+1}{3} + m^2 \binom{n+1}{3}$$
+3. **Total Sum**: The total sum across all valid arrangements is $\binom{N-2}{k-2} \times D \pmod{10^9 + 7}$.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(m \cdot n)$ to precompute factorials for combination counts.
+- **Space Complexity**: $\mathcal{O}(m \cdot n)$ space for the factorial arrays.

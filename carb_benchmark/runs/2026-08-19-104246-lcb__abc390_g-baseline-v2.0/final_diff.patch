@@ -1,0 +1,205 @@
+diff --git a/main.py b/main.py
+index c86f6c8..bdf7459 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,199 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++MOD = 998244353
++G = 3
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++
++    MAX_FACT = N + 5
++    fact = [1] * MAX_FACT
++    invFact = [1] * MAX_FACT
++
++    for i in range(1, MAX_FACT):
++        fact[i] = (fact[i - 1] * i) % MOD
++
++    invFact[MAX_FACT - 1] = pow(fact[MAX_FACT - 1], MOD - 2, MOD)
++    for i in range(MAX_FACT - 2, -1, -1):
++        invFact[i] = (invFact[i + 1] * (i + 1)) % MOD
++
++    def nbinom(n, k):
++        if k < 0 or k > n:
++            return 0
++        return fact[n] * invFact[k] % MOD * invFact[n - k] % MOD
++
++    max_ntt_size = 1
++    while max_ntt_size < N + 1:
++        max_ntt_size <<= 1
++
++    roots = [1] * max_ntt_size
++    inv_roots = [1] * max_ntt_size
++
++    w = pow(G, (MOD - 1) // max_ntt_size, MOD)
++    winv = pow(w, MOD - 2, MOD)
++    for i in range(1, max_ntt_size):
++        roots[i] = (roots[i - 1] * w) % MOD
++        inv_roots[i] = (inv_roots[i - 1] * winv) % MOD
++
++    W4_FWD = roots[max_ntt_size // 4] if max_ntt_size >= 4 else 1
++    W4_INV = inv_roots[max_ntt_size // 4] if max_ntt_size >= 4 else 1
++
++    swap_pairs = {}
++    k = 1
++    while k <= max_ntt_size:
++        pairs = []
++        j = 0
++        for i in range(1, k):
++            bit = k >> 1
++            while j & bit:
++                j ^= bit
++                bit >>= 1
++            j ^= bit
++            if i < j:
++                pairs.append((i, j))
++        swap_pairs[k] = pairs
++        k <<= 1
++
++    def ntt(a, inverse=False):
++        n = len(a)
++        for i, j in swap_pairs[n]:
++            a[i], a[j] = a[j], a[i]
++
++        r_table = inv_roots if inverse else roots
++        step = max_ntt_size // 2
++
++        # Stage 1: length = 2, half = 1
++        if n >= 2:
++            for i in range(0, n, 2):
++                u = a[i]
++                v = a[i + 1]
++                a[i] = u + v if u + v < MOD else u + v - MOD
++                a[i + 1] = u - v if u - v >= 0 else u - v + MOD
++            step >>= 1
++
++        # Stage 2: length = 4, half = 2
++        if n >= 4:
++            w4 = W4_INV if inverse else W4_FWD
++            for i in range(0, n, 4):
++                u0 = a[i]
++                v0 = a[i + 2]
++                a[i] = u0 + v0 if u0 + v0 < MOD else u0 + v0 - MOD
++                a[i + 2] = u0 - v0 if u0 - v0 >= 0 else u0 - v0 + MOD
++
++                u1 = a[i + 1]
++                v1 = (a[i + 3] * w4) % MOD
++                a[i + 1] = u1 + v1 if u1 + v1 < MOD else u1 + v1 - MOD
++                a[i + 3] = u1 - v1 if u1 - v1 >= 0 else u1 - v1 + MOD
++            step >>= 1
++
++        length = 8
++        while length <= n:
++            half = length >> 1
++            w_sub = r_table[::step]
++            if length == n:
++                for k_idx in range(half):
++                    u = a[k_idx]
++                    v = (a[k_idx + half] * w_sub[k_idx]) % MOD
++                    a[k_idx] = u + v if u + v < MOD else u + v - MOD
++                    a[k_idx + half] = u - v if u - v >= 0 else u - v + MOD
++            elif length == n >> 1:
++                for k_idx in range(half):
++                    w_val = w_sub[k_idx]
++                    u1 = a[k_idx]
++                    v1 = (a[k_idx + half] * w_val) % MOD
++                    a[k_idx] = u1 + v1 if u1 + v1 < MOD else u1 + v1 - MOD
++                    a[k_idx + half] = u1 - v1 if u1 - v1 >= 0 else u1 - v1 + MOD
++
++                    u2 = a[k_idx + length]
++                    v2 = (a[k_idx + length + half] * w_val) % MOD
++                    a[k_idx + length] = u2 + v2 if u2 + v2 < MOD else u2 + v2 - MOD
++                    a[k_idx + length + half] = u2 - v2 if u2 - v2 >= 0 else u2 - v2 + MOD
++            else:
++                for k_idx in range(half):
++                    w_val = w_sub[k_idx]
++                    for i in range(k_idx, n, length):
++                        u = a[i]
++                        v = (a[i + half] * w_val) % MOD
++                        a[i] = u + v if u + v < MOD else u + v - MOD
++                        a[i + half] = u - v if u - v >= 0 else u - v + MOD
++            length <<= 1
++            step >>= 1
++
++        if inverse:
++            n_inv = pow(n, MOD - 2, MOD)
++            for i in range(n):
++                a[i] = (a[i] * n_inv) % MOD
++
++    def poly_mul(A, B):
++        degA = len(A) - 1
++        degB = len(B) - 1
++        target_len = degA + degB + 1
++        n = 1
++        while n < target_len:
++            n <<= 1
++
++        fa = A + [0] * (n - len(A))
++        fb = B + [0] * (n - len(B))
++
++        ntt(fa, False)
++        ntt(fb, False)
++
++        fc = [(fa[i] * fb[i]) % MOD for i in range(n)]
++        ntt(fc, True)
++
++        return fc[:target_len]
++
++    C = [0] * 7
++    S = [0] * 7
++
++    for L in range(1, 7):
++        low = max(1, 10**(L - 1))
++        high = min(N, 10**L - 1)
++        if low <= high:
++            C[L] = high - low + 1
++            count = C[L]
++            total_sum = (low + high) * count // 2
++            S[L] = total_sum % MOD
++
++    active_polys = []
++    for L in range(1, 7):
++        if C[L] > 0:
++            val = pow(10, L, MOD)
++            poly = [0] * (C[L] + 1)
++            pow_val = 1
++            for m in range(C[L] + 1):
++                poly[m] = nbinom(C[L], m) * pow_val % MOD
++                pow_val = (pow_val * val) % MOD
++            active_polys.append(poly)
++
++    active_polys.sort(key=len)
++    while len(active_polys) > 1:
++        p1 = active_polys.pop(0)
++        p2 = active_polys.pop(0)
++        p_new = poly_mul(p1, p2)
++        active_polys.append(p_new)
++        active_polys.sort(key=len)
++
++    P = active_polys[0]
++
++    comb_fact = [fact[N - 1 - k] * fact[k] % MOD for k in range(N)]
++
++    ans = 0
++    for L in range(1, 7):
++        if C[L] > 0:
++            v = pow(10, L, MOD)
++            b_k = P[0]
++            ML = comb_fact[0] * b_k % MOD
++            for k in range(1, N):
++                b_k = (P[k] - v * b_k) % MOD
++                ML = (ML + comb_fact[k] * b_k) % MOD
++
++            ans = (ans + S[L] * ML) % MOD
++
++    print(ans)
++
++if __name__ == '__main__':
++    main()

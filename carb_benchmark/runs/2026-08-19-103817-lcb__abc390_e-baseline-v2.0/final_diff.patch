@@ -1,0 +1,72 @@
+diff --git a/main.py b/main.py
+index c86f6c8..98ae214 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,66 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from bisect import bisect_left
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    X = int(input_data[1])
++    
++    foods1 = []
++    foods2 = []
++    foods3 = []
++    
++    idx = 2
++    for _ in range(N):
++        v = int(input_data[idx])
++        a = int(input_data[idx+1])
++        c = int(input_data[idx+2])
++        idx += 3
++        if v == 1:
++            foods1.append((a, c))
++        elif v == 2:
++            foods2.append((a, c))
++        else:
++            foods3.append((a, c))
++            
++    def compute_dp(foods):
++        dp = [0] * (X + 1)
++        max_w = 0
++        for a, c in foods:
++            new_max_w = min(X, max_w + c)
++            for j in range(new_max_w, c - 1, -1):
++                val = dp[j - c] + a
++                if val > dp[j]:
++                    dp[j] = val
++            max_w = new_max_w
++        for j in range(1, X + 1):
++            if dp[j - 1] > dp[j]:
++                dp[j] = dp[j - 1]
++        return dp
++
++    dp1 = compute_dp(foods1)
++    dp2 = compute_dp(foods2)
++    dp3 = compute_dp(foods3)
++
++    low = 0
++    high = 10**9 + 7
++    ans = 0
++
++    while low <= high:
++        mid = (low + high) // 2
++        c1 = bisect_left(dp1, mid)
++        c2 = bisect_left(dp2, mid)
++        c3 = bisect_left(dp3, mid)
++        if c1 + c2 + c3 <= X:
++            ans = mid
++            low = mid + 1
++        else:
++            high = mid - 1
++
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,76 @@
+diff --git a/django/db/models/expressions.py b/django/db/models/expressions.py
+index 90d9011..6d081d4 100644
+--- a/django/db/models/expressions.py
++++ b/django/db/models/expressions.py
+@@ -1253,7 +1253,7 @@ class OrderBy(BaseExpression):
+         self.descending = True
+ 
+ 
+-class Window(Expression):
++class Window(SQLiteNumericMixin, Expression):
+     template = '%(expression)s OVER (%(window)s)'
+     # Although the main expression may either be an aggregate or an
+     # expression with an aggregate function, the GROUP BY that will
+@@ -1302,7 +1302,10 @@ class Window(Expression):
+         connection.ops.check_expression_support(self)
+         if not connection.features.supports_over_clause:
+             raise NotSupportedError('This backend does not support window expressions.')
+-        expr_sql, params = compiler.compile(self.source_expression)
++        if connection.vendor == 'sqlite':
++            expr_sql, params = self.source_expression.as_sql(compiler, connection)
++        else:
++            expr_sql, params = compiler.compile(self.source_expression)
+         window_sql, window_params = [], []
+ 
+         if self.partition_by is not None:
+diff --git a/tests/expressions_window/models.py b/tests/expressions_window/models.py
+index ce6f662..fdd365a 100644
+--- a/tests/expressions_window/models.py
++++ b/tests/expressions_window/models.py
+@@ -12,3 +12,8 @@ class Employee(models.Model):
+     hire_date = models.DateField(blank=False, null=False)
+     age = models.IntegerField(blank=False, null=False)
+     classification = models.ForeignKey('Classification', on_delete=models.CASCADE, null=True)
++
++
++class Detail(models.Model):
++    value = models.DecimalField(max_digits=5, decimal_places=2)
++
+diff --git a/tests/expressions_window/tests.py b/tests/expressions_window/tests.py
+index 30ed64f..7ca9623 100644
+--- a/tests/expressions_window/tests.py
++++ b/tests/expressions_window/tests.py
+@@ -1,4 +1,5 @@
+ import datetime
++from decimal import Decimal
+ from unittest import mock, skipIf
+ 
+ from django.core.exceptions import FieldError
+@@ -13,7 +14,7 @@ from django.db.models.functions import (
+ )
+ from django.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+ 
+-from .models import Employee
++from .models import Detail, Employee
+ 
+ 
+ @skipUnlessDBFeature('supports_over_clause')
+@@ -202,6 +203,18 @@ class WindowFunctionTests(TestCase):
+             ('Smith', 55000, 'Sales', 53000),
+         ], transform=lambda row: (row.name, row.salary, row.department, row.lag))
+ 
++    def test_lag_decimalfield(self):
++        Detail.objects.create(value=Decimal('12.34'))
++        Detail.objects.create(value=Decimal('56.78'))
++        qs = Detail.objects.annotate(lag=Window(
++            expression=Lag('value', 1),
++            order_by=F('value').asc(),
++        )).order_by('value')
++        self.assertEqual(
++            [(row.value, row.lag) for row in qs],
++            [(Decimal('12.34'), None), (Decimal('56.78'), Decimal('12.34'))],
++        )
++
+     def test_first_value(self):
+         qs = Employee.objects.annotate(first_value=Window(
+             expression=FirstValue('salary'),

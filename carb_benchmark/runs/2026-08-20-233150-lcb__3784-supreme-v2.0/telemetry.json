@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-08-20-233150-lcb__3784-supreme-v2.0",
+  "task_id": "lcb__3784",
+  "configuration_id": "supreme-v2.0",
+  "wall_clock_seconds": 98.96,
+  "tool_calls": [
+    "view_file",
+    "view_file",
+    "list_dir",
+    "view_file",
+    "view_file",
+    "write_to_file",
+    "write_to_file",
+    "run_command",
+    "write_to_file",
+    "run_command",
+    "manage_task",
+    "view_file"
+  ],
+  "tool_call_counts": {
+    "view_file": 5,
+    "list_dir": 1,
+    "write_to_file": 3,
+    "run_command": 2,
+    "manage_task": 1
+  },
+  "time_to_first_edit": 63.182,
+  "num_turns": 1,
+  "duration_seconds": 85.1929288,
+  "status": "SUCCESS",
+  "usage": {
+    "input_tokens": 84441,
+    "output_tokens": 29655,
+    "thinking_tokens": 25881,
+    "cache_read_tokens": 461050,
+    "total_tokens": 114096
+  },
+  "error": null
+}

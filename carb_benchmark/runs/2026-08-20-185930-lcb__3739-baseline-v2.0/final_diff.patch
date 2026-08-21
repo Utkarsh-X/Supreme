@@ -1,0 +1,41 @@
+diff --git a/main.py b/main.py
+index c86f6c8..a53d6d2 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,35 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    m = int(input_data[0])
++    n = int(input_data[1])
++    k = int(input_data[2])
++
++    MOD = 10**9 + 7
++
++    def S(L):
++        return (L - 1) * L * (L + 1) // 6 % MOD
++
++    cell_sum = (n * n % MOD * S(m) + m * m % MOD * S(n)) % MOD
++
++    N = m * n - 2
++    R = k - 2
++
++    fact = [1] * (N + 1)
++    for i in range(1, N + 1):
++        fact[i] = (fact[i - 1] * i) % MOD
++
++    inv = [1] * (N + 1)
++    inv[N] = pow(fact[N], MOD - 2, MOD)
++    for i in range(N - 1, -1, -1):
++        inv[i] = (inv[i + 1] * (i + 1)) % MOD
++
++    comb = fact[N] * inv[R] % MOD * inv[N - R] % MOD
++    ans = (cell_sum * comb) % MOD
++    print(ans)
++
++if __name__ == '__main__':
++    main()

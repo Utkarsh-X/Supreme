@@ -1,0 +1,56 @@
+diff --git a/main.py b/main.py
+index c86f6c8..49bde44 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,50 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import Counter, defaultdict
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N + 1]]
++    B = [int(x) for x in input_data[N + 1:2 * N + 1]]
++    
++    A_real = [x for x in A if x != -1]
++    B_real = [x for x in B if x != -1]
++    
++    c_A = N - len(A_real)
++    c_B = N - len(B_real)
++    
++    K = len(A_real) - c_B
++    if K <= 0:
++        print("Yes")
++        return
++        
++    M_max = 0
++    if A_real:
++        M_max = max(M_max, max(A_real))
++    if B_real:
++        M_max = max(M_max, max(B_real))
++        
++    cntA = Counter(A_real)
++    cntB = Counter(B_real)
++    
++    itemsA = list(cntA.items())
++    itemsB = list(cntB.items())
++    
++    M = defaultdict(int)
++    for u, ca in itemsA:
++        for v, cb in itemsB:
++            S = u + v
++            if S >= M_max:
++                val = ca if ca < cb else cb
++                M[S] += val
++                if M[S] >= K:
++                    print("Yes")
++                    return
++                    
++    print("No")
++
++if __name__ == '__main__':
++    main()

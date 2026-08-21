@@ -1,0 +1,92 @@
+I have investigated and resolved the issue where differences of `MatrixSymbol` terms were printed with explicit `(-1)` coefficients or `+ -` signs in `str`, `pprint`, and `latex` outputs (e.g. `(-1)*B + (-1)*A*B + A` or `-B + -A⋅B + A` instead of `-B - A*B + A`).
+
+### Root Cause
+1. `_coeff_isneg` in `sympy.core.function` only checked `a.is_Mul` to extract leading numeric coefficients and returned `False` for `MatMul` instances such as `MatMul(-1, B)` or `MatMul(-1, A, B)`.
+2. `PRECEDENCE_FUNCTIONS` in `sympy.printing.precedence` did not register `"MatMul": precedence_Mul`, causing `MatMul` with negative coefficients to have multiplication precedence instead of addition precedence when parenthesized.
+3. `MatAdd` lacked an `as_ordered_terms` method, causing `Printer._as_ordered_terms` to treat `MatAdd` as a single opaque term rather than iterating through its terms.
+4. Printers (`str`, `pretty`, `latex`) handled `_print_MatAdd` by simply joining terms with `' + '` without delegating to `_print_Add`, which strips negative leading signs and formats subtraction operators.
+
+### Key Changes
+- **`sympy/core/function.py`**: Updated `_coeff_isneg` to check `a.is_MatMul` and extract the scalar coefficient via `a.as_coeff_matrices()[0]`.
+- **`sympy/matrices/expressions/matadd.py`**: Added `as_ordered_terms` method to `MatAdd` returning `list(self.args)`.
+- **`sympy/printing/precedence.py`**: Added `"MatMul": precedence_Mul` to `PRECEDENCE_FUNCTIONS`.
+- **`sympy/printing/str.py`**:
+  - Updated `_print_MatAdd` to delegate to `self._print_Add(expr)`.
+  - Updated `_print_MatMul` to separate negative coefficient signs cleanly.
+- **`sympy/printing/pretty/pretty.py`**:
+  - Updated `_print_MatAdd` to delegate to `self._print_Add(expr)`.
+  - Updated `_print_Add` to recognize `term.is_MatMul` and format negative `MatMul` terms using `pretty_negative`.
+- **`sympy/printing/latex.py`**:
+  - Updated `_print_MatAdd` to delegate to `self._print_Add(expr)`.
+  - Updated `_print_MatMul` and `_print_Add` to strip negative signs from `MatMul` terms when printing subtraction operators.
+
+### Verification
+Given the test case:
+```python
+from sympy import MatrixSymbol, pprint, latex
+
+A = MatrixSymbol('A', 2, 2)
+B = MatrixSymbol('B', 2, 2)
+
+print(str(A - A*B - B))
+pprint(A - A*B - B)
+print(latex(A - A*B - B))
+```
+
+**Before:**
+- `str`: `(-1)*B + (-1)*A*B + A`
+- `pprint`: `-B + -A⋅B + A`
+- `latex`: `'-1 B + -1 A B + A'`
+
+**After:**
+- `str`: `-B - A*B + A`
+- `pprint`: `-B - A*B + A`
+- `latex`: `'- B - A B + A'`
+
+All tests in `test_str.py`, `test_pretty.py`, `test_latex.py`, and `sympy/matrices/expressions/tests/` passed cleanly (433 passed, 0 failures).
+I have investigated and resolved the issue where differences of `MatrixSymbol` terms were printed with explicit `(-1)` coefficients or `+ -` signs in `str`, `pprint`, and `latex` outputs (e.g. `(-1)*B + (-1)*A*B + A` or `-B + -A⋅B + A` instead of `-B - A*B + A`).
+
+### Root Cause
+1. `_coeff_isneg` in `sympy.core.function` only checked `a.is_Mul` to extract leading numeric coefficients and returned `False` for `MatMul` instances such as `MatMul(-1, B)` or `MatMul(-1, A, B)`.
+2. `PRECEDENCE_FUNCTIONS` in `sympy.printing.precedence` did not register `"MatMul": precedence_Mul`, causing `MatMul` with negative coefficients to have multiplication precedence instead of addition precedence when parenthesized.
+3. `MatAdd` lacked an `as_ordered_terms` method, causing `Printer._as_ordered_terms` to treat `MatAdd` as a single opaque term rather than iterating through its terms.
+4. Printers (`str`, `pretty`, `latex`) handled `_print_MatAdd` by simply joining terms with `' + '` without delegating to `_print_Add`, which strips negative leading signs and formats subtraction operators.
+
+### Key Changes
+- **`sympy/core/function.py`**: Updated `_coeff_isneg` to check `a.is_MatMul` and extract the scalar coefficient via `a.as_coeff_matrices()[0]`.
+- **`sympy/matrices/expressions/matadd.py`**: Added `as_ordered_terms` method to `MatAdd` returning `list(self.args)`.
+- **`sympy/printing/precedence.py`**: Added `"MatMul": precedence_Mul` to `PRECEDENCE_FUNCTIONS`.
+- **`sympy/printing/str.py`**:
+  - Updated `_print_MatAdd` to delegate to `self._print_Add(expr)`.
+  - Updated `_print_MatMul` to separate negative coefficient signs cleanly.
+- **`sympy/printing/pretty/pretty.py`**:
+  - Updated `_print_MatAdd` to delegate to `self._print_Add(expr)`.
+  - Updated `_print_Add` to recognize `term.is_MatMul` and format negative `MatMul` terms using `pretty_negative`.
+- **`sympy/printing/latex.py`**:
+  - Updated `_print_MatAdd` to delegate to `self._print_Add(expr)`.
+  - Updated `_print_MatMul` and `_print_Add` to strip negative signs from `MatMul` terms when printing subtraction operators.
+
+### Verification
+Given the test case:
+```python
+from sympy import MatrixSymbol, pprint, latex
+
+A = MatrixSymbol('A', 2, 2)
+B = MatrixSymbol('B', 2, 2)
+
+print(str(A - A*B - B))
+pprint(A - A*B - B)
+print(latex(A - A*B - B))
+```
+
+**Before:**
+- `str`: `(-1)*B + (-1)*A*B + A`
+- `pprint`: `-B + -A⋅B + A`
+- `latex`: `'-1 B + -1 A B + A'`
+
+**After:**
+- `str`: `-B - A*B + A`
+- `pprint`: `-B - A*B + A`
+- `latex`: `'- B - A B + A'`
+
+All tests in `test_str.py`, `test_pretty.py`, `test_latex.py`, and `sympy/matrices/expressions/tests/` passed cleanly (433 passed, 0 failures).

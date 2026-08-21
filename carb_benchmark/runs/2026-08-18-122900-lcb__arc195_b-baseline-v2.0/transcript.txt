@@ -1,0 +1,30 @@
+I have implemented the solution in `main.py`.
+
+### Solution Overview
+1. **Problem Analysis**:
+   - We are given two sequences $A$ and $B$ of length $N$, where $-1$ represents a flexible wildcard that can be replaced by any non-negative integer.
+   - Sequence $A$ can be permuted arbitrarily. Thus, matching elements of $A$ and $B$ is equivalent to finding a matching between the elements (fixed or wildcard) of $A$ and $B$.
+   - Let $A_{real}$ and $B_{real}$ be the multisets of non-negative integers in $A$ and $B$ respectively, and let $c_A, c_B$ be the count of $-1$s in $A$ and $B$.
+   - A valid sum $S$ must satisfy $S \ge M_{max} = \max(A_{real} \cup B_{real} \cup \{0\})$.
+   - The number of non-wildcard elements of $A$ that MUST be paired with non-wildcard elements of $B$ is at least $K = |A_{real}| - c_B = |B_{real}| - c_A$.
+   
+2. **Algorithm**:
+   - If $K \le 0$, we have enough wildcards on both sides to pair with all fixed elements independently. Thus, any target sum $S = M_{max}$ works. Output `Yes`.
+   - If $K > 0$, any valid target sum $S$ must be formed by at least $K$ pairs $(a, b)$ with $a \in A_{real}, b \in B_{real}$ such that $a + b = S$.
+   - We count the number of matching pairs $M(S) = \sum_x \min(\text{count}_A(x), \text{count}_B(S - x))$ for all candidate sums $S = u + v \ge M_{max}$ where $u \in A_{real}$ and $v \in B_{real}$.
+   - If there exists any $S$ with $M(S) \ge K$, we output `Yes`; otherwise `No`.
+I have implemented the solution in `main.py`.
+
+### Solution Overview
+1. **Problem Analysis**:
+   - We are given two sequences $A$ and $B$ of length $N$, where $-1$ represents a flexible wildcard that can be replaced by any non-negative integer.
+   - Sequence $A$ can be permuted arbitrarily. Thus, matching elements of $A$ and $B$ is equivalent to finding a matching between the elements (fixed or wildcard) of $A$ and $B$.
+   - Let $A_{real}$ and $B_{real}$ be the multisets of non-negative integers in $A$ and $B$ respectively, and let $c_A, c_B$ be the count of $-1$s in $A$ and $B$.
+   - A valid sum $S$ must satisfy $S \ge M_{max} = \max(A_{real} \cup B_{real} \cup \{0\})$.
+   - The number of non-wildcard elements of $A$ that MUST be paired with non-wildcard elements of $B$ is at least $K = |A_{real}| - c_B = |B_{real}| - c_A$.
+   
+2. **Algorithm**:
+   - If $K \le 0$, we have enough wildcards on both sides to pair with all fixed elements independently. Thus, any target sum $S = M_{max}$ works. Output `Yes`.
+   - If $K > 0$, any valid target sum $S$ must be formed by at least $K$ pairs $(a, b)$ with $a \in A_{real}, b \in B_{real}$ such that $a + b = S$.
+   - We count the number of matching pairs $M(S) = \sum_x \min(\text{count}_A(x), \text{count}_B(S - x))$ for all candidate sums $S = u + v \ge M_{max}$ where $u \in A_{real}$ and $v \in B_{real}$.
+   - If there exists any $S$ with $M(S) \ge K$, we output `Yes`; otherwise `No`.

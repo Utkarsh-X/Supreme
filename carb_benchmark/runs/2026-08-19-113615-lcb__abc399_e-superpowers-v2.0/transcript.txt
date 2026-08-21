@@ -1,0 +1,22 @@
+I have implemented the complete solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_e/main.py).
+
+### Method Explanation
+1. **Consistency Check**: We check whether any character in $S$ maps to multiple distinct characters in $T$. If so, it is impossible to transform $S$ into $T$, so we output `-1`.
+2. **Identical Case**: If $S = T$, 0 operations are required.
+3. **26-Character Constraint**: If $S \neq T$ and $T$ contains all 26 lowercase English letters, no free letter is available to break non-trivial permutation cycles, making it impossible to transform $S$ into $T$. In this case, we output `-1`.
+4. **Graph Formulation & Pure Cycle Counting**:
+   - Construct a directed graph where each character $c$ present in $S$ has a directed edge to $f(c)$.
+   - Each operation $x \to y$ can eliminate at most one non-self-loop edge ($E_{\text{non\_self}}$).
+   - Any weakly connected component that forms a **pure cycle** of length $L \ge 2$ (where every vertex in the component has $\text{in\_degree} = 1$ and $\text{out\_degree} = 1$) requires $1$ extra operation using a temporary/free character.
+   - The total minimum operations is given by $E_{\text{non\_self}} + C_{\text{pure}}$.
+I have implemented the complete solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_e/main.py).
+
+### Method Explanation
+1. **Consistency Check**: We check whether any character in $S$ maps to multiple distinct characters in $T$. If so, it is impossible to transform $S$ into $T$, so we output `-1`.
+2. **Identical Case**: If $S = T$, 0 operations are required.
+3. **26-Character Constraint**: If $S \neq T$ and $T$ contains all 26 lowercase English letters, no free letter is available to break non-trivial permutation cycles, making it impossible to transform $S$ into $T$. In this case, we output `-1`.
+4. **Graph Formulation & Pure Cycle Counting**:
+   - Construct a directed graph where each character $c$ present in $S$ has a directed edge to $f(c)$.
+   - Each operation $x \to y$ can eliminate at most one non-self-loop edge ($E_{\text{non\_self}}$).
+   - Any weakly connected component that forms a **pure cycle** of length $L \ge 2$ (where every vertex in the component has $\text{in\_degree} = 1$ and $\text{out\_degree} = 1$) requires $1$ extra operation using a temporary/free character.
+   - The total minimum operations is given by $E_{\text{non\_self}} + C_{\text{pure}}$.

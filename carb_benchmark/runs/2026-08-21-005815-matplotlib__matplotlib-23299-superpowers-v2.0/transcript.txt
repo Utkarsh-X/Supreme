@@ -1,0 +1,30 @@
+### Root Cause
+When Matplotlib initializes before a backend is explicitly selected or used, `rcParams['backend']` holds `rcsetup._auto_backend_sentinel`. 
+When entering `rc_context` (or `plt.xkcd()`), `rcParams.copy()` captures `_auto_backend_sentinel` in `orig['backend']`. 
+
+If a figure is created inside the context block (or backend resolution is triggered), `rcParams['backend']` resolves from `_auto_backend_sentinel` to a concrete backend name (such as `'TkAgg'`, `'QtAgg'`, etc.). However, upon exiting the context block, `dict.update(rcParams, orig)` bypassed `RcParams.__setitem__` and restored `_auto_backend_sentinel` into `rcParams['backend']`.
+
+Subsequent access to `rcParams['backend']` (such as calling `matplotlib.get_backend()`) detected `_auto_backend_sentinel` and invoked `plt.switch_backend(...)`, which starts by calling `plt.close("all")`, thereby clearing all figures from `Gcf.figs`.
+
+### Fix
+- Updated [rc_context](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py#L1095-L1100) and [_xkcd](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/pyplot.py#L688-L693) context managers to ensure that if `orig['backend']` was `_auto_backend_sentinel` and `rcParams['backend']` was resolved to a concrete backend during context execution, `orig['backend']` is updated to the resolved backend before `dict.update(rcParams, orig)` runs.
+- Added a regression unit test [test_rc_context_backend_resolution](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/tests/test_rcparams.py#L588-L602) to `lib/matplotlib/tests/test_rcparams.py`.
+
+### Verification
+- Ran the reproduction script and verified that figures created inside `rc_context` are preserved in `Gcf.figs` after calling `get_backend()`.
+- Verified that `test_rc_context_backend_resolution` and `test_backend_fallback_headful` pass cleanly with pytest.
+### Root Cause
+When Matplotlib initializes before a backend is explicitly selected or used, `rcParams['backend']` holds `rcsetup._auto_backend_sentinel`. 
+When entering `rc_context` (or `plt.xkcd()`), `rcParams.copy()` captures `_auto_backend_sentinel` in `orig['backend']`. 
+
+If a figure is created inside the context block (or backend resolution is triggered), `rcParams['backend']` resolves from `_auto_backend_sentinel` to a concrete backend name (such as `'TkAgg'`, `'QtAgg'`, etc.). However, upon exiting the context block, `dict.update(rcParams, orig)` bypassed `RcParams.__setitem__` and restored `_auto_backend_sentinel` into `rcParams['backend']`.
+
+Subsequent access to `rcParams['backend']` (such as calling `matplotlib.get_backend()`) detected `_auto_backend_sentinel` and invoked `plt.switch_backend(...)`, which starts by calling `plt.close("all")`, thereby clearing all figures from `Gcf.figs`.
+
+### Fix
+- Updated [rc_context](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py#L1095-L1100) and [_xkcd](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/pyplot.py#L688-L693) context managers to ensure that if `orig['backend']` was `_auto_backend_sentinel` and `rcParams['backend']` was resolved to a concrete backend during context execution, `orig['backend']` is updated to the resolved backend before `dict.update(rcParams, orig)` runs.
+- Added a regression unit test [test_rc_context_backend_resolution](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/tests/test_rcparams.py#L588-L602) to `lib/matplotlib/tests/test_rcparams.py`.
+
+### Verification
+- Ran the reproduction script and verified that figures created inside `rc_context` are preserved in `Gcf.figs` after calling `get_backend()`.
+- Verified that `test_rc_context_backend_resolution` and `test_backend_fallback_headful` pass cleanly with pytest.

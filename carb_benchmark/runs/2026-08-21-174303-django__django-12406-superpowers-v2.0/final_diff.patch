@@ -1,0 +1,63 @@
+diff --git a/django/forms/models.py b/django/forms/models.py
+index dafc11f..0cac281 100644
+--- a/django/forms/models.py
++++ b/django/forms/models.py
+@@ -13,7 +13,7 @@ from django.forms.forms import BaseForm, DeclarativeFieldsMetaclass
+ from django.forms.formsets import BaseFormSet, formset_factory
+ from django.forms.utils import ErrorList
+ from django.forms.widgets import (
+-    HiddenInput, MultipleHiddenInput, SelectMultiple,
++    HiddenInput, MultipleHiddenInput, RadioSelect, SelectMultiple,
+ )
+ from django.utils.text import capfirst, get_text_list
+ from django.utils.translation import gettext, gettext_lazy as _
+@@ -1185,17 +1185,16 @@ class ModelChoiceField(ChoiceField):
+                  required=True, widget=None, label=None, initial=None,
+                  help_text='', to_field_name=None, limit_choices_to=None,
+                  **kwargs):
+-        if required and (initial is not None):
+-            self.empty_label = None
+-        else:
+-            self.empty_label = empty_label
+-
+         # Call Field instead of ChoiceField __init__() because we don't need
+         # ChoiceField.__init__().
+         Field.__init__(
+             self, required=required, widget=widget, label=label,
+             initial=initial, help_text=help_text, **kwargs
+         )
++        if self.required and (self.initial is not None or isinstance(self.widget, RadioSelect)):
++            self.empty_label = None
++        else:
++            self.empty_label = empty_label
+         self.queryset = queryset
+         self.limit_choices_to = limit_choices_to   # limit the queryset later.
+         self.to_field_name = to_field_name
+diff --git a/tests/model_forms/test_modelchoicefield.py b/tests/model_forms/test_modelchoicefield.py
+index 4a2ef30..0f5ee35 100644
+--- a/tests/model_forms/test_modelchoicefield.py
++++ b/tests/model_forms/test_modelchoicefield.py
+@@ -353,3 +353,23 @@ class ModelChoiceFieldTests(TestCase):
+         )
+         with self.assertNumQueries(2):
+             template.render(Context({'form': CategoriesForm()}))
++
++    def test_radioselect_required_empty_label(self):
++        f = forms.ModelChoiceField(Category.objects.all(), widget=forms.RadioSelect, required=True)
++        self.assertIsNone(f.empty_label)
++        self.assertEqual(list(f.choices), [
++            (self.c1.pk, 'Entertainment'),
++            (self.c2.pk, 'A test'),
++            (self.c3.pk, 'Third'),
++        ])
++
++    def test_radioselect_optional_empty_label(self):
++        f = forms.ModelChoiceField(Category.objects.all(), widget=forms.RadioSelect, required=False)
++        self.assertEqual(f.empty_label, '---------')
++        self.assertEqual(list(f.choices), [
++            ('', '---------'),
++            (self.c1.pk, 'Entertainment'),
++            (self.c2.pk, 'A test'),
++            (self.c3.pk, 'Third'),
++        ])
++

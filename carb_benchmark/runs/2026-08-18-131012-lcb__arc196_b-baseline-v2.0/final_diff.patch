@@ -1,0 +1,116 @@
+diff --git a/main.py b/main.py
+index c86f6c8..99ba936 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,110 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    T_str = next(iterator, None)
++    if T_str is None:
++        return
++    T = int(T_str)
++    
++    MOD = 998244353
++    out = []
++    
++    for _ in range(T):
++        H = int(next(iterator))
++        W = int(next(iterator))
++        grid = [next(iterator) for _ in range(H)]
++        
++        # Check row parities
++        possible = True
++        for i in range(H):
++            if grid[i].count('A') & 1:
++                possible = False
++                break
++                
++        if not possible:
++            out.append(0)
++            continue
++            
++        # Check col parities
++        col_A = [0] * W
++        for i in range(H):
++            row = grid[i]
++            for j in range(W):
++                if row[j] == 'A':
++                    col_A[j] ^= 1
++                    
++        for j in range(W):
++            if col_A[j]:
++                possible = False
++                break
++                
++        if not possible:
++            out.append(0)
++            continue
++            
++        # Build bipartite graph for 'B' cells
++        N = H + W
++        adj = [[] for _ in range(N)]
++        Px = [0] * W
++        
++        for i in range(H):
++            row = grid[i]
++            if i > 0:
++                for j in range(W):
++                    if row[j] == 'A':
++                        Px[j] ^= 1
++                        
++            Py = 0
++            for j in range(W):
++                if j > 0 and row[j] == 'A':
++                    Py ^= 1
++                if row[j] == 'B':
++                    K = 1 ^ Px[j] ^ Py
++                    u = i
++                    v = H + j
++                    adj[u].append((v << 1) | K)
++                    adj[v].append((u << 1) | K)
++                    
++        # BFS / DFS to check consistency and count components
++        val = [-1] * N
++        comp_count = 0
++        consistent = True
++        
++        for start in range(N):
++            if val[start] == -1:
++                comp_count += 1
++                val[start] = 0
++                st = [start]
++                while st:
++                    u = st.pop()
++                    val_u = val[u]
++                    for item in adj[u]:
++                        v = item >> 1
++                        w = item & 1
++                        expected = val_u ^ w
++                        if val[v] == -1:
++                            val[v] = expected
++                            st.append(v)
++                        elif val[v] != expected:
++                            consistent = False
++                            break
++                    if not consistent:
++                        break
++            if not consistent:
++                break
++                
++        if not consistent:
++            out.append(0)
++        else:
++            ans = pow(2, comp_count, MOD)
++            out.append(ans)
++            
++    sys.stdout.write('\n'.join(map(str, out)) + '\n')
++
++if __name__ == '__main__':
++    solve()

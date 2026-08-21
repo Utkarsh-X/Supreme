@@ -1,0 +1,56 @@
+diff --git a/main.py b/main.py
+index c86f6c8..afb102a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,50 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++    T = input_data[3]
++    
++    TM = int(T[-1])
++    
++    avail = [0] * 10
++    for idx in range(M - 1):
++        avail[int(T[idx])] += 1
++        
++    rem = list(avail)
++    rem[TM] += 1
++    
++    used_TM = False
++    res = []
++    
++    for i in range(N):
++        s_val = int(S[i])
++        
++        best_d = 0
++        for d in range(9, s_val, -1):
++            if rem[d] > 0:
++                best_d = d
++                break
++                
++        if best_d > 0:
++            res.append(str(best_d))
++            rem[best_d] -= 1
++            if best_d == TM:
++                used_TM = True
++        else:
++            res.append(str(s_val))
++            if s_val == TM and not used_TM:
++                used_TM = True
++                rem[TM] -= 1
++                
++    if not used_TM:
++        res[-1] = str(TM)
++        
++    sys.stdout.write("".join(res) + "\n")
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,40 @@
+I have implemented the solution in `main.py`.
+
+### Method Explanation
+
+The problem asks for the minimum sum of elements in an $H \times W$ grid after applying any number of row flip and column flip operations.
+
+1. **Choice of Operations**:
+   - Each column $j$ is either flipped ($c_j = 1$) or not flipped ($c_j = 0$). This forms a length-$W$ binary mask $c = (c_1, c_2, \ldots, c_W)$.
+   - For a fixed column mask $c$, row $i$ with initial mask $A_i$ will have value $(A_{i, j} \oplus c_j)$ at column $j$ if not flipped, or $1 - (A_{i, j} \oplus c_j)$ if flipped.
+   - Thus, for a fixed row $i$ and column mask $c$, the optimal choice of row flip gives a row sum of $\min(\text{popcount}(A_i \oplus c), W - \text{popcount}(A_i \oplus c))$.
+
+2. **XOR Convolution with Fast Walsh-Hadamard Transform (FWHT)**:
+   - Let $cnt[mask]$ be the frequency of rows in the input matching $mask$.
+   - Let $f(mask) = \min(\text{popcount}(mask), W - \text{popcount}(mask))$.
+   - The total grid sum for a column flip mask $c$ is:
+     $$S(c) = \sum_{mask=0}^{2^W-1} cnt[mask] \cdot f(mask \oplus c)$$
+   - This is the XOR convolution of array $cnt$ and array $f$. Using the Fast Walsh-Hadamard Transform (FWHT):
+     $$FWHT(S) = FWHT(cnt) \times FWHT(f)$$
+     $$S = \frac{1}{2^W} FWHT(FWHT(S))$$
+   - Computing $S(c)$ for all $c \in [0, 2^W - 1]$ takes $O(W \cdot 2^W)$ time using FWHT, which easily handles $W \le 18$. The minimum value in $S$ is the answer.
+I have implemented the solution in `main.py`.
+
+### Method Explanation
+
+The problem asks for the minimum sum of elements in an $H \times W$ grid after applying any number of row flip and column flip operations.
+
+1. **Choice of Operations**:
+   - Each column $j$ is either flipped ($c_j = 1$) or not flipped ($c_j = 0$). This forms a length-$W$ binary mask $c = (c_1, c_2, \ldots, c_W)$.
+   - For a fixed column mask $c$, row $i$ with initial mask $A_i$ will have value $(A_{i, j} \oplus c_j)$ at column $j$ if not flipped, or $1 - (A_{i, j} \oplus c_j)$ if flipped.
+   - Thus, for a fixed row $i$ and column mask $c$, the optimal choice of row flip gives a row sum of $\min(\text{popcount}(A_i \oplus c), W - \text{popcount}(A_i \oplus c))$.
+
+2. **XOR Convolution with Fast Walsh-Hadamard Transform (FWHT)**:
+   - Let $cnt[mask]$ be the frequency of rows in the input matching $mask$.
+   - Let $f(mask) = \min(\text{popcount}(mask), W - \text{popcount}(mask))$.
+   - The total grid sum for a column flip mask $c$ is:
+     $$S(c) = \sum_{mask=0}^{2^W-1} cnt[mask] \cdot f(mask \oplus c)$$
+   - This is the XOR convolution of array $cnt$ and array $f$. Using the Fast Walsh-Hadamard Transform (FWHT):
+     $$FWHT(S) = FWHT(cnt) \times FWHT(f)$$
+     $$S = \frac{1}{2^W} FWHT(FWHT(S))$$
+   - Computing $S(c)$ for all $c \in [0, 2^W - 1]$ takes $O(W \cdot 2^W)$ time using FWHT, which easily handles $W \le 18$. The minimum value in $S$ is the answer.

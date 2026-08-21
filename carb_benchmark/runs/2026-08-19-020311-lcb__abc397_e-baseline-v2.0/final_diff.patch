@@ -1,0 +1,60 @@
+diff --git a/main.py b/main.py
+index c86f6c8..de37f54 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,54 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import deque
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    K = int(input_data[1])
++    V = N * K
++    
++    adj = [[] for _ in range(V + 1)]
++    idx = 2
++    for _ in range(V - 1):
++        u = int(input_data[idx])
++        v = int(input_data[idx + 1])
++        adj[u].append(v)
++        adj[v].append(u)
++        idx += 2
++    
++    parent = [0] * (V + 1)
++    order = [1]
++    visited = [False] * (V + 1)
++    visited[1] = True
++    
++    head = 0
++    while head < len(order):
++        u = order[head]
++        head += 1
++        for v in adj[u]:
++            if not visited[v]:
++                visited[v] = True
++                parent[v] = u
++                order.append(v)
++                
++    sz = [1] * (V + 1)
++    deg_active = [0] * (V + 1)
++    
++    for u in reversed(order):
++        if u != 1:
++            p = parent[u]
++            sz[p] += sz[u]
++            if sz[u] % K != 0:
++                deg_active[u] += 1
++                deg_active[p] += 1
++                
++    if max(deg_active[1:]) <= 2:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    main()

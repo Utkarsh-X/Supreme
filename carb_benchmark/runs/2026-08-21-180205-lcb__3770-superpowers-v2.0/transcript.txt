@@ -1,0 +1,22 @@
+The Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3770/main.py).
+
+### Method Summary
+1. **'T' Constraints Handling**: We maintain an array `word` of length $n + m - 1$ and a boolean tracking array `is_fixed`. For each index $i$ where `str1[i] == 'T'`, we place `str2[j]` at position $i + j$. If any position has conflicting required characters from multiple 'T' constraints, we immediately return `""`.
+2. **Default Initialization**: All unfixed positions (not covered by any 'T') are initialized to `'a'` to ensure the constructed string is lexicographically smallest.
+3. **'F' Constraints Handling**: For each index $i$ where `str1[i] == 'F'`, if `word[i .. i + m - 1]` matches `str2`, we break the match by changing the rightmost unfixed position in the window $[i, i + m - 1]$ to `'b'`. If no unfixed position exists in that window, the condition cannot be satisfied, so we return `""`.
+4. **Final Verification**: A final validation pass verifies all 'T' and 'F' constraints are strictly met before outputting the result.
+
+### Verification
+- Tested against all provided example cases (both quoted and unquoted input formats).
+- Verified against thousands of randomized test cases against an exhaustive brute-force solver.
+The Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3770/main.py).
+
+### Method Summary
+1. **'T' Constraints Handling**: We maintain an array `word` of length $n + m - 1$ and a boolean tracking array `is_fixed`. For each index $i$ where `str1[i] == 'T'`, we place `str2[j]` at position $i + j$. If any position has conflicting required characters from multiple 'T' constraints, we immediately return `""`.
+2. **Default Initialization**: All unfixed positions (not covered by any 'T') are initialized to `'a'` to ensure the constructed string is lexicographically smallest.
+3. **'F' Constraints Handling**: For each index $i$ where `str1[i] == 'F'`, if `word[i .. i + m - 1]` matches `str2`, we break the match by changing the rightmost unfixed position in the window $[i, i + m - 1]$ to `'b'`. If no unfixed position exists in that window, the condition cannot be satisfied, so we return `""`.
+4. **Final Verification**: A final validation pass verifies all 'T' and 'F' constraints are strictly met before outputting the result.
+
+### Verification
+- Tested against all provided example cases (both quoted and unquoted input formats).
+- Verified against thousands of randomized test cases against an exhaustive brute-force solver.

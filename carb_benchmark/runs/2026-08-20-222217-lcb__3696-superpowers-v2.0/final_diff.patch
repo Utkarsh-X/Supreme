@@ -1,0 +1,68 @@
+diff --git a/main.py b/main.py
+index c86f6c8..53db781 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,62 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    s = input_data[0]
++    
++    ans = 0
++    cur3 = 0
++    cur9 = 0
++    count3 = [0] * 3
++    count3[0] = 1
++    count9 = [0] * 9
++    count9[0] = 1
++    cnt7 = [0] * 7
++    
++    for j, char in enumerate(s):
++        c = ord(char) - 48
++        cur3 = (cur3 + c) % 3
++        cur9 = (cur9 + c) % 9
++        
++        # DP state for digit 7
++        new_cnt7 = [0] * 7
++        for r in range(7):
++            v = cnt7[r]
++            if v:
++                new_cnt7[(r * 10 + c) % 7] += v
++        new_cnt7[c % 7] += 1
++        cnt7 = new_cnt7
++        
++        if c == 1 or c == 2 or c == 5:
++            ans += j + 1
++        elif c == 3 or c == 6:
++            ans += count3[cur3]
++        elif c == 9:
++            ans += count9[cur9]
++        elif c == 4:
++            ans += 1
++            if j > 0 and (ord(s[j-1]) - 48) % 2 == 0:
++                ans += j
++        elif c == 8:
++            ans += 1
++            if j >= 1:
++                prev1 = ord(s[j-1]) - 48
++                if prev1 in (0, 4, 8):
++                    ans += 1
++            if j >= 2:
++                prev2 = ord(s[j-2]) - 48
++                prev1 = ord(s[j-1]) - 48
++                if (4 * prev2 + 2 * prev1) % 8 == 0:
++                    ans += j - 1
++        elif c == 7:
++            ans += cnt7[0]
++            
++        count3[cur3] += 1
++        count9[cur9] += 1
++        
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

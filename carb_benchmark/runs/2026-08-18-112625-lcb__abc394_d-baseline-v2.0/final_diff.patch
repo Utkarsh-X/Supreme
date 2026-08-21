@@ -1,0 +1,30 @@
+diff --git a/main.py b/main.py
+index c86f6c8..df2e89b 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,24 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    s = sys.stdin.read().strip()
++    stack = []
++    match = {')': '(', ']': '[', '>': '<'}
++    
++    for ch in s:
++        if ch in match:
++            if stack and stack[-1] == match[ch]:
++                stack.pop()
++            else:
++                print("No")
++                return
++        else:
++            stack.append(ch)
++            
++    if not stack:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,116 @@
+diff --git a/main.py b/main.py
+index c86f6c8..7b1e93b 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,110 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import re
++
++def solve():
++    input_data = sys.stdin.read().strip()
++    if not input_data:
++        return
++
++    # Parse nums and k
++    bracket_match = re.search(r'\[(.*?)\]', input_data, re.DOTALL)
++    if bracket_match:
++        nums = json.loads(bracket_match.group(0))
++        rest = input_data[bracket_match.end():]
++        k_matches = re.findall(r'\d+', rest)
++        if k_matches:
++            k_val = int(k_matches[-1])
++        else:
++            before = input_data[:bracket_match.start()]
++            k_matches = re.findall(r'\d+', before)
++            k_val = int(k_matches[0])
++    else:
++        all_ints = [int(x) for x in re.findall(r'-?\d+', input_data)]
++        nums = all_ints[:-1]
++        k_val = all_ints[-1]
++
++    N = len(nums)
++    if N == 0:
++        print(0)
++        return
++
++    # Prefix sum array P
++    P = [0] * (N + 1)
++    for i in range(N):
++        P[i + 1] = P[i] + nums[i]
++
++    # Monotonic stack for NGE (strictly greater)
++    NGE = [N] * N
++    stack = []
++    for i in range(N):
++        while stack and nums[stack[-1]] < nums[i]:
++            NGE[stack.pop()] = i
++        stack.append(i)
++
++    # Binary lifting table setup
++    LOG = 18
++    up = [[N] * (N + 1) for _ in range(LOG)]
++    weight = [[0] * (N + 1) for _ in range(LOG)]
++
++    # Base layer k = 0
++    for i in range(N):
++        nxt = NGE[i]
++        up[0][i] = nxt
++        weight[0][i] = (nxt - i) * nums[i]
++
++    up[0][N] = N
++    weight[0][N] = 0
++
++    # Fill binary lifting tables
++    for k in range(1, LOG):
++        up_prev = up[k - 1]
++        weight_prev = weight[k - 1]
++        up_curr = up[k]
++        weight_curr = weight[k]
++        for i in range(N + 1):
++            p = up_prev[i]
++            up_curr[i] = up_prev[p]
++            weight_curr[i] = weight_prev[i] + weight_prev[p]
++
++    total_subarrays = 0
++
++    # Process each L from 0 to N-1
++    for L in range(N):
++        curr = L
++        acc_S = 0
++
++        # Binary lifting to find furthest ancestor with cost <= k_val
++        for k in range(LOG - 1, -1, -1):
++            nxt = up[k][curr]
++            if nxt <= N:
++                # Cost if we reach R = nxt - 1
++                cost = acc_S + weight[k][curr] - (P[nxt] - P[L])
++                if cost <= k_val:
++                    acc_S += weight[k][curr]
++                    curr = nxt
++
++        if curr == N:
++            ans_R = N - 1
++        else:
++            # Binary search in range [curr, min(N - 1, up[0][curr] - 1)]
++            low = curr
++            high = min(N - 1, up[0][curr] - 1)
++            ans_R = curr - 1
++            nums_curr = nums[curr]
++
++            while low <= high:
++                mid = (low + high) // 2
++                cost = acc_S + (mid + 1 - curr) * nums_curr - (P[mid + 1] - P[L])
++                if cost <= k_val:
++                    ans_R = mid
++                    low = mid + 1
++                else:
++                    high = mid - 1
++
++        total_subarrays += (ans_R - L + 1)
++
++    print(total_subarrays)
++
++if __name__ == '__main__':
++    solve()

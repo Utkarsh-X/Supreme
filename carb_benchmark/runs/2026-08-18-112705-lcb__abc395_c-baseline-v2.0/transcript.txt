@@ -1,0 +1,22 @@
+The solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_c/main.py).
+
+### Summary of Implementation
+
+1. **Algorithm**: We maintain a dictionary storing the last seen 0-indexed position for each element in sequence $A$.
+2. **Iteration**: As we iterate through $A$ from left to right:
+   - If an element $A_i$ has been seen before at index `last_pos[A_i]`, the contiguous subarray $A[\text{last\_pos}[A_i] \dots i]$ contains $A_i$ at least twice, with length $i - \text{last\_pos}[A_i] + 1$.
+   - We update the candidate minimum length `ans = min(ans, i - last_pos[A_i] + 1)`.
+   - Update `last_pos[A_i] = i`.
+3. **Output**: If no duplicates were found, we output `-1`; otherwise, we output the minimum length found.
+4. **Complexity**: $O(N)$ time complexity and $O(N)$ auxiliary space complexity, comfortably meeting time and space constraints.
+The solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_c/main.py).
+
+### Summary of Implementation
+
+1. **Algorithm**: We maintain a dictionary storing the last seen 0-indexed position for each element in sequence $A$.
+2. **Iteration**: As we iterate through $A$ from left to right:
+   - If an element $A_i$ has been seen before at index `last_pos[A_i]`, the contiguous subarray $A[\text{last\_pos}[A_i] \dots i]$ contains $A_i$ at least twice, with length $i - \text{last\_pos}[A_i] + 1$.
+   - We update the candidate minimum length `ans = min(ans, i - last_pos[A_i] + 1)`.
+   - Update `last_pos[A_i] = i`.
+3. **Output**: If no duplicates were found, we output `-1`; otherwise, we output the minimum length found.
+4. **Complexity**: $O(N)$ time complexity and $O(N)$ auxiliary space complexity, comfortably meeting time and space constraints.

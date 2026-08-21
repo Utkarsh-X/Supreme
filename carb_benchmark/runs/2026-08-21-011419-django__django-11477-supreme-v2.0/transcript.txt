@@ -1,0 +1,24 @@
+I have investigated and fixed the issue where `translate_url()` creates an incorrect URL or fails to translate when optional named/positional groups are missing in the URL pattern.
+
+### Root Cause
+When resolving a URL matching a regex pattern with optional groups (e.g., `re_path(r'^with-arguments/(?P<argument>[\w-]+)/(?:(?P<optional>[\w-]+).html)?$')`), Python's `re.Match.groupdict()` and `groups()` return `None` for optional groups that were not matched. `RegexPattern.match()` included these `None` values in `match.kwargs` and `match.args`. When `translate_url()` passed `match.kwargs` to `reverse()`, `reverse()` either failed with `NoReverseMatch` (leaving the URL untranslated) or converted `None` to the string `'None'` (producing incorrect URLs like `/nl/with-arguments/regular/None.html`).
+
+### Solution
+1. In [django/urls/resolvers.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/resolvers.py#L156-L158), updated `RegexPattern.match()` to filter out `None` values from `match.groupdict()` and `match.groups()` so unmatched optional parameters are omitted from `args` and `kwargs`.
+2. In [django/urls/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L175-L177), updated `translate_url()` to filter out `None` values from `match.args` and `match.kwargs` before calling `reverse()`.
+3. Verified and added unit tests in [tests/urlpatterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/urlpatterns/tests.py#L57-L70) and [tests/i18n/patterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L161-L169).
+
+### Verification
+Ran the `i18n`, `urlpatterns`, and `urlpatterns_reverse` test suites; all 325+ tests passed cleanly.
+I have investigated and fixed the issue where `translate_url()` creates an incorrect URL or fails to translate when optional named/positional groups are missing in the URL pattern.
+
+### Root Cause
+When resolving a URL matching a regex pattern with optional groups (e.g., `re_path(r'^with-arguments/(?P<argument>[\w-]+)/(?:(?P<optional>[\w-]+).html)?$')`), Python's `re.Match.groupdict()` and `groups()` return `None` for optional groups that were not matched. `RegexPattern.match()` included these `None` values in `match.kwargs` and `match.args`. When `translate_url()` passed `match.kwargs` to `reverse()`, `reverse()` either failed with `NoReverseMatch` (leaving the URL untranslated) or converted `None` to the string `'None'` (producing incorrect URLs like `/nl/with-arguments/regular/None.html`).
+
+### Solution
+1. In [django/urls/resolvers.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/resolvers.py#L156-L158), updated `RegexPattern.match()` to filter out `None` values from `match.groupdict()` and `match.groups()` so unmatched optional parameters are omitted from `args` and `kwargs`.
+2. In [django/urls/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L175-L177), updated `translate_url()` to filter out `None` values from `match.args` and `match.kwargs` before calling `reverse()`.
+3. Verified and added unit tests in [tests/urlpatterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/urlpatterns/tests.py#L57-L70) and [tests/i18n/patterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L161-L169).
+
+### Verification
+Ran the `i18n`, `urlpatterns`, and `urlpatterns_reverse` test suites; all 325+ tests passed cleanly.

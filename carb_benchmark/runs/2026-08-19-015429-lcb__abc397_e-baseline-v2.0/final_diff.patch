@@ -1,0 +1,85 @@
+diff --git a/main.py b/main.py
+index c86f6c8..d92705e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,79 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++# Increase recursion depth limit just in case
++sys.setrecursionlimit(300000)
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    K = int(input_data[1])
++    
++    NK = N * K
++    if NK == 0:
++        print("Yes")
++        return
++
++    adj = [[] for _ in range(NK + 1)]
++    idx = 2
++    for _ in range(NK - 1):
++        u = int(input_data[idx])
++        v = int(input_data[idx+1])
++        idx += 2
++        adj[u].append(v)
++        adj[v].append(u)
++
++    # BFS from root = 1 to construct tree topology
++    parent = [0] * (NK + 1)
++    q = [1]
++    visited = [False] * (NK + 1)
++    visited[1] = True
++    
++    head = 0
++    while head < len(q):
++        u = q[head]
++        head += 1
++        for v in adj[u]:
++            if not visited[v]:
++                visited[v] = True
++                parent[v] = u
++                q.append(v)
++
++    if len(q) != NK:
++        print("No")
++        return
++
++    size = [0] * (NK + 1)
++    deg = [0] * (NK + 1)
++
++    for u in reversed(q):
++        size[u] += 1
++        
++        if size[u] > K:
++            print("No")
++            return
++        
++        if size[u] == K:
++            if deg[u] > 2:
++                print("No")
++                return
++            # Edge (u, parent[u]) is cut
++        else:  # size[u] < K
++            if deg[u] > 1:
++                print("No")
++                return
++            p = parent[u]
++            if p != 0:
++                size[p] += size[u]
++                deg[p] += 1
++
++    if size[1] != K:
++        print("No")
++        return
++
++    print("Yes")
++
++if __name__ == '__main__':
++    main()

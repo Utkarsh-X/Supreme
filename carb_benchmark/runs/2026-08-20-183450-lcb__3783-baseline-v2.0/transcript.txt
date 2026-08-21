@@ -1,0 +1,28 @@
+Wait for task completion notification.    
+I have completed the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3783/main.py).
+
+### Solution Overview
+1. **Combinatorial Factorial Counting**:
+   - An alternating permutation requires every pair of adjacent elements to differ in parity. Once the first element $p_1$ is chosen, the required parity for all subsequent positions $p_2, p_3, \dots, p_n$ is fixed.
+   - At position $m$ (1-indexed), choosing a candidate value $v$ determines the remaining counts of available odd numbers (`new_odds`) and even numbers (`new_evens`).
+   - For the remaining $n - m$ positions, we check if the required count of odd and even positions matches the available counts. If matched, the number of valid completions is `new_odds! * new_evens!`; otherwise, it is 0.
+
+2. **Lexicographical Selection**:
+   - We construct the permutation element-by-element from $1$ to $n$. At each position $m$, we iterate over valid candidates in ascending numerical order.
+   - If $k$ is less than or equal to the number of completions for a candidate, that candidate is chosen for position $m$.
+   - Otherwise, $k$ is decremented by the candidate's completion count, and we test the next candidate.
+   - If $k$ exceeds the total number of valid alternating completions, the program outputs `[]`.
+Wait for task completion notification.    
+I have completed the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3783/main.py).
+
+### Solution Overview
+1. **Combinatorial Factorial Counting**:
+   - An alternating permutation requires every pair of adjacent elements to differ in parity. Once the first element $p_1$ is chosen, the required parity for all subsequent positions $p_2, p_3, \dots, p_n$ is fixed.
+   - At position $m$ (1-indexed), choosing a candidate value $v$ determines the remaining counts of available odd numbers (`new_odds`) and even numbers (`new_evens`).
+   - For the remaining $n - m$ positions, we check if the required count of odd and even positions matches the available counts. If matched, the number of valid completions is `new_odds! * new_evens!`; otherwise, it is 0.
+
+2. **Lexicographical Selection**:
+   - We construct the permutation element-by-element from $1$ to $n$. At each position $m$, we iterate over valid candidates in ascending numerical order.
+   - If $k$ is less than or equal to the number of completions for a candidate, that candidate is chosen for position $m$.
+   - Otherwise, $k$ is decremented by the candidate's completion count, and we test the next candidate.
+   - If $k$ exceeds the total number of valid alternating completions, the program outputs `[]`.

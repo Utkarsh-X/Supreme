@@ -1,0 +1,84 @@
+diff --git a/django/db/models/base.py b/django/db/models/base.py
+index 2428218..57e7b43 100644
+--- a/django/db/models/base.py
++++ b/django/db/models/base.py
+@@ -933,14 +933,9 @@ class Model(metaclass=ModelBase):
+                         "%s() prohibited to prevent data loss due to unsaved "
+                         "related object '%s'." % (operation_name, field.name)
+                     )
+-                elif getattr(self, field.attname) is None:
+-                    # Use pk from related object if it has been saved after
+-                    # an assignment.
+-                    setattr(self, field.attname, obj.pk)
+-                # If the relationship's pk/to_field was changed, clear the
+-                # cached relationship.
+-                if getattr(obj, field.target_field.attname) != getattr(self, field.attname):
+-                    field.delete_cached_value(self)
++                else:
++                    for lh_field, rh_field in field.related_fields:
++                        setattr(self, lh_field.attname, getattr(obj, rh_field.attname))
+ 
+     def delete(self, using=None, keep_parents=False):
+         using = using or router.db_for_write(self.__class__, instance=self)
+diff --git a/tests/many_to_one/models.py b/tests/many_to_one/models.py
+index e9f8fbf..ea6bc22 100644
+--- a/tests/many_to_one/models.py
++++ b/tests/many_to_one/models.py
+@@ -114,3 +114,12 @@ class School(models.Model):
+ 
+ class Student(models.Model):
+     school = models.ForeignKey(School, models.CASCADE)
++
++
++class PrimaryKeyWithNonAuto(models.Model):
++    key = models.CharField(primary_key=True, max_length=50)
++
++
++class ChildWithNonAutoPKParent(models.Model):
++    parent = models.ForeignKey(PrimaryKeyWithNonAuto, models.CASCADE)
++
+diff --git a/tests/many_to_one/tests.py b/tests/many_to_one/tests.py
+index 3c7cd0c..72a1f55 100644
+--- a/tests/many_to_one/tests.py
++++ b/tests/many_to_one/tests.py
+@@ -7,9 +7,9 @@ from django.test import TestCase
+ from django.utils.translation import gettext_lazy
+ 
+ from .models import (
+-    Article, Category, Child, ChildNullableParent, City, Country, District,
+-    First, Parent, Record, Relation, Reporter, School, Student, Third,
+-    ToFieldChild,
++    Article, Category, Child, ChildNullableParent, ChildWithNonAutoPKParent, City,
++    Country, District, First, Parent, PrimaryKeyWithNonAuto, Record, Relation,
++    Reporter, School, Student, Third, ToFieldChild,
+ )
+ 
+ 
+@@ -549,6 +549,27 @@ class ManyToOneTests(TestCase):
+         self.assertEqual(child.parent, parent)
+         self.assertEqual(child.parent_id, parent.name)
+ 
++    def test_save_fk_after_parent_with_non_auto_pk(self):
++        parent = PrimaryKeyWithNonAuto()
++        child = ChildWithNonAutoPKParent(parent=parent)
++        parent.key = 'foo'
++        parent.save()
++        child.save()
++        self.assertEqual(child.parent_id, 'foo')
++        self.assertEqual(child.parent, parent)
++        self.assertTrue(ChildWithNonAutoPKParent.objects.filter(parent=parent).exists())
++
++    def test_save_fk_after_parent_with_to_field_empty(self):
++        parent = Parent()
++        child = ToFieldChild(parent=parent)
++        parent.name = 'jeff'
++        parent.save()
++        child.save()
++        child.refresh_from_db()
++        self.assertEqual(child.parent, parent)
++        self.assertEqual(child.parent_id, parent.name)
++
++
+     def test_fk_to_bigautofield(self):
+         ch = City.objects.create(name='Chicago')
+         District.objects.create(city=ch, name='Far South')

@@ -1,0 +1,16 @@
+### Root Cause
+In `_pytest/capture.py`, `FDCaptureBinary` creates its text-decoding stream wrapper (`self.tmpfile`) using `EncodedFile` (a subclass of `io.TextIOWrapper`). When `EncodedFile` was instantiated without `newline=""`, Python's `io.TextIOWrapper` defaulted `newline` to `None`. In default universal newlines mode (`newline=None`), reading from the text stream automatically translated all `\r` and `\r\n` carriage returns into `\n` newlines.
+
+In contrast, `SysCapture` (`capsys`) used `CaptureIO` which explicitly set `newline=""` (universal newlines enabled on read without line-ending translation).
+
+### Solution
+1. Added `newline=""` to the `EncodedFile` instantiation in [src/_pytest/capture.py](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L393) within `FDCaptureBinary.__init__`, aligning `capfd`'s line-ending handling with `capsys`.
+2. Added unit tests in [testing/test_capture.py](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py) to verify that `capfd` and `capsys` preserve carriage returns (`\r`).
+### Root Cause
+In `_pytest/capture.py`, `FDCaptureBinary` creates its text-decoding stream wrapper (`self.tmpfile`) using `EncodedFile` (a subclass of `io.TextIOWrapper`). When `EncodedFile` was instantiated without `newline=""`, Python's `io.TextIOWrapper` defaulted `newline` to `None`. In default universal newlines mode (`newline=None`), reading from the text stream automatically translated all `\r` and `\r\n` carriage returns into `\n` newlines.
+
+In contrast, `SysCapture` (`capsys`) used `CaptureIO` which explicitly set `newline=""` (universal newlines enabled on read without line-ending translation).
+
+### Solution
+1. Added `newline=""` to the `EncodedFile` instantiation in [src/_pytest/capture.py](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/src/_pytest/capture.py#L386-L393) within `FDCaptureBinary.__init__`, aligning `capfd`'s line-ending handling with `capsys`.
+2. Added unit tests in [testing/test_capture.py](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-7521/testing/test_capture.py) to verify that `capfd` and `capsys` preserve carriage returns (`\r`).

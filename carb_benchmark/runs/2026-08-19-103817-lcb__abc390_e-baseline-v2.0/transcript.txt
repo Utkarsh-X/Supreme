@@ -1,0 +1,24 @@
+An optimal solution for the problem has been written to [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_e/main.py).
+
+### Method Explanation
+1. **Dynamic Programming per Vitamin Category**:
+   - The $N$ foods are partitioned into 3 groups based on their vitamin type $V_i \in \{1, 2, 3\}$.
+   - For each group $v$, we run a standard 0/1 Knapsack DP to compute $dp_v[c]$, which represents the maximum amount of vitamin $v$ attainable using at most $c$ calories.
+   - We then make each $dp_v$ array monotonic non-decreasing with respect to calories $c$.
+
+2. **Binary Search on the Answer**:
+   - We binary search for the maximum achievable minimum intake $K \ge 0$.
+   - For a candidate target $K$, the minimum calories required to get at least $K$ units of vitamin $v$ is the smallest index $c \in [0, X]$ where $dp_v[c] \ge K$ (found via `bisect_left`).
+   - If the total minimum calories required across all three vitamins (`c1 + c2 + c3`) is $\le X$, then target $K$ is achievable. Otherwise, it is impossible.
+An optimal solution for the problem has been written to [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_e/main.py).
+
+### Method Explanation
+1. **Dynamic Programming per Vitamin Category**:
+   - The $N$ foods are partitioned into 3 groups based on their vitamin type $V_i \in \{1, 2, 3\}$.
+   - For each group $v$, we run a standard 0/1 Knapsack DP to compute $dp_v[c]$, which represents the maximum amount of vitamin $v$ attainable using at most $c$ calories.
+   - We then make each $dp_v$ array monotonic non-decreasing with respect to calories $c$.
+
+2. **Binary Search on the Answer**:
+   - We binary search for the maximum achievable minimum intake $K \ge 0$.
+   - For a candidate target $K$, the minimum calories required to get at least $K$ units of vitamin $v$ is the smallest index $c \in [0, X]$ where $dp_v[c] \ge K$ (found via `bisect_left`).
+   - If the total minimum calories required across all three vitamins (`c1 + c2 + c3`) is $\le X$, then target $K$ is achievable. Otherwise, it is impossible.

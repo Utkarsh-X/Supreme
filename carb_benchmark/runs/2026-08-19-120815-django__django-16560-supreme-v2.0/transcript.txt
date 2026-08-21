@@ -1,0 +1,40 @@
+Added the `violation_error_code` parameter to `BaseConstraint` and its subclasses (`CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint`).
+
+### Summary of Changes
+
+1. **`django/db/models/constraints.py`**:
+   - Added `violation_error_code = None` class attribute to `BaseConstraint`.
+   - Added optional `violation_error_code` keyword parameter to `BaseConstraint.__init__`, `CheckConstraint.__init__`, and `UniqueConstraint.__init__`.
+   - Updated `BaseConstraint.deconstruct()`, `__repr__`, and `__eq__` across subclasses to handle `violation_error_code`.
+   - Updated `validate()` in `CheckConstraint` and `UniqueConstraint` to pass `code=self.violation_error_code` when raising `ValidationError`.
+
+2. **`django/contrib/postgres/constraints.py`**:
+   - Added `violation_error_code` parameter to `ExclusionConstraint.__init__`.
+   - Updated `ExclusionConstraint`'s `__repr__`, `__eq__`, and `validate()` to support `violation_error_code`.
+
+3. **Documentation & Release Notes**:
+   - Documented `violation_error_code` parameter and attribute in [docs/ref/models/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [docs/ref/contrib/postgres/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note entry to [docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).
+
+4. **Tests**:
+   - Added test coverage in [tests/constraints/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [tests/postgres_tests/test_constraints.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py) for default `None` code, custom error codes, cloning/deconstruction, string representations, equality, and model validation behavior.
+Added the `violation_error_code` parameter to `BaseConstraint` and its subclasses (`CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint`).
+
+### Summary of Changes
+
+1. **`django/db/models/constraints.py`**:
+   - Added `violation_error_code = None` class attribute to `BaseConstraint`.
+   - Added optional `violation_error_code` keyword parameter to `BaseConstraint.__init__`, `CheckConstraint.__init__`, and `UniqueConstraint.__init__`.
+   - Updated `BaseConstraint.deconstruct()`, `__repr__`, and `__eq__` across subclasses to handle `violation_error_code`.
+   - Updated `validate()` in `CheckConstraint` and `UniqueConstraint` to pass `code=self.violation_error_code` when raising `ValidationError`.
+
+2. **`django/contrib/postgres/constraints.py`**:
+   - Added `violation_error_code` parameter to `ExclusionConstraint.__init__`.
+   - Updated `ExclusionConstraint`'s `__repr__`, `__eq__`, and `validate()` to support `violation_error_code`.
+
+3. **Documentation & Release Notes**:
+   - Documented `violation_error_code` parameter and attribute in [docs/ref/models/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [docs/ref/contrib/postgres/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note entry to [docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).
+
+4. **Tests**:
+   - Added test coverage in [tests/constraints/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [tests/postgres_tests/test_constraints.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py) for default `None` code, custom error codes, cloning/deconstruction, string representations, equality, and model validation behavior.

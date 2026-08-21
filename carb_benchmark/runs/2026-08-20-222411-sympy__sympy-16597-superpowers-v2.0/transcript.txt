@@ -1,0 +1,46 @@
+I have investigated the issue and resolved it.
+
+### Root Cause
+In SymPy's assumption rules:
+1. `even` implies `integer` (`even == integer & !odd`).
+2. `integer` was missing an explicit implication rule `integer -> finite` in old-style assumptions (`_assume_rules` in [assumptions.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L163-L175)), as well as `Implies(Q.integer, Q.finite)` and `Implies(Q.rational, Q.finite)` in new-style assumptions ([ask.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1480-L1495)).
+
+Because of this missing rule, a Symbol initialized with `even=True` deduced `is_even = True` and `is_integer = True`, but `is_finite` evaluated to `None`. Additionally, infinities (`oo`, `-oo`) returned `None` for `is_integer`, `is_even`, and `is_odd`.
+
+### Fix
+1. Added `'integer -> finite'` to `_assume_rules` in [sympy/core/assumptions.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L164-L167).
+2. Added `Implies(Q.integer, Q.finite)` and `Implies(Q.rational, Q.finite)` to `get_known_facts()` in [sympy/assumptions/ask.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1483-L1490) and re-generated [sympy/assumptions/ask_generated.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask_generated.py).
+3. Updated unit tests and added `test_even_implies_finite` in [sympy/core/tests/test_assumptions.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/tests/test_assumptions.py#L1065-L1079).
+
+Now:
+```python
+>>> from sympy import Symbol, Q, ask
+>>> m = Symbol('m', even=True)
+>>> m.is_finite
+True
+>>> ask(Q.finite(m), Q.even(m))
+True
+```
+I have investigated the issue and resolved it.
+
+### Root Cause
+In SymPy's assumption rules:
+1. `even` implies `integer` (`even == integer & !odd`).
+2. `integer` was missing an explicit implication rule `integer -> finite` in old-style assumptions (`_assume_rules` in [assumptions.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L163-L175)), as well as `Implies(Q.integer, Q.finite)` and `Implies(Q.rational, Q.finite)` in new-style assumptions ([ask.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1480-L1495)).
+
+Because of this missing rule, a Symbol initialized with `even=True` deduced `is_even = True` and `is_integer = True`, but `is_finite` evaluated to `None`. Additionally, infinities (`oo`, `-oo`) returned `None` for `is_integer`, `is_even`, and `is_odd`.
+
+### Fix
+1. Added `'integer -> finite'` to `_assume_rules` in [sympy/core/assumptions.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L164-L167).
+2. Added `Implies(Q.integer, Q.finite)` and `Implies(Q.rational, Q.finite)` to `get_known_facts()` in [sympy/assumptions/ask.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1483-L1490) and re-generated [sympy/assumptions/ask_generated.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask_generated.py).
+3. Updated unit tests and added `test_even_implies_finite` in [sympy/core/tests/test_assumptions.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/tests/test_assumptions.py#L1065-L1079).
+
+Now:
+```python
+>>> from sympy import Symbol, Q, ask
+>>> m = Symbol('m', even=True)
+>>> m.is_finite
+True
+>>> ask(Q.finite(m), Q.even(m))
+True
+```

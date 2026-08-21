@@ -1,0 +1,44 @@
+I have completed the task. The algorithm computes the sum of $f(P)$ over all $N!$ permutations modulo $998244353$.
+
+### Overview of Approach
+1. **Linearity of Contribution**:
+   The concatenated integer $f(P)$ for a permutation $P = (P_1, P_2, \ldots, P_N)$ is $\sum_{i=1}^N P_i \cdot 10^{\sum_{j=i+1}^N d(P_j)}$, where $d(x)$ is the number of digits in $x$.
+   Each number $x \in \{1, \ldots, N\}$ with digit length $d(x)$ contributes to $f(P)$ based on the subset of elements appearing after $x$ in $P$.
+
+2. **Generating Functions and Polynomial Division**:
+   Let $w(y) = 10^{d(y)}$. The generating polynomial for the weight of elements is:
+   $$P(t) = \prod_{y=1}^N (1 + w(y) t) = \prod_{d=1}^6 (1 + 10^d t)^{c_d}$$
+   where $c_d$ is the number of elements in $\{1, \ldots, N\}$ with $d$ digits.
+   
+   For any element $x$ with digit length $d$, the generating polynomial of $S \setminus \{x\}$ is $P^{(d)}(t) = \frac{P(t)}{1 + 10^d t} = \sum_{k=0}^{N-1} e_k^{(d)} t^k$.
+
+3. **Evaluation via Pointwise Multiplication & INTT**:
+   - The degree of $P(t)$ is $N \le 200,000$.
+   - We evaluate $P(\omega^k)$ at the $M$-th roots of unity ($M = 2^{\lceil \log_2 (N+1) \rceil}$) directly by computing $(1 + 10^d \omega^k)^{c_d} \pmod{998244353}$ for each $d \in \{1, \ldots, 6\}$ and taking pointwise products.
+   - We then apply an Inverse Number Theoretic Transform (INTT) of size $M$ to obtain the coefficients $E_0, E_1, \ldots, E_N$ of $P(t)$ in $O(M \log M)$ time.
+
+4. **Linear Recurrence for Subsets**:
+   - For each distinct digit length $d \in \{1, \dots, 6\}$, we obtain $e_k^{(d)}$ via $e_k^{(d)} = E_k - 10^d e_{k-1}^{(d)}$ in $O(N)$ linear time.
+   - The contribution sum per digit length $V_d = \sum_{k=0}^{N-1} k! (N-1-k)! e_k^{(d)}$ is accumulated into the final total $\sum_{d=1}^6 X_d V_d \pmod{998244353}$, where $X_d = \sum_{x \in [1, N], d(x) = d} x$.
+I have completed the task. The algorithm computes the sum of $f(P)$ over all $N!$ permutations modulo $998244353$.
+
+### Overview of Approach
+1. **Linearity of Contribution**:
+   The concatenated integer $f(P)$ for a permutation $P = (P_1, P_2, \ldots, P_N)$ is $\sum_{i=1}^N P_i \cdot 10^{\sum_{j=i+1}^N d(P_j)}$, where $d(x)$ is the number of digits in $x$.
+   Each number $x \in \{1, \ldots, N\}$ with digit length $d(x)$ contributes to $f(P)$ based on the subset of elements appearing after $x$ in $P$.
+
+2. **Generating Functions and Polynomial Division**:
+   Let $w(y) = 10^{d(y)}$. The generating polynomial for the weight of elements is:
+   $$P(t) = \prod_{y=1}^N (1 + w(y) t) = \prod_{d=1}^6 (1 + 10^d t)^{c_d}$$
+   where $c_d$ is the number of elements in $\{1, \ldots, N\}$ with $d$ digits.
+   
+   For any element $x$ with digit length $d$, the generating polynomial of $S \setminus \{x\}$ is $P^{(d)}(t) = \frac{P(t)}{1 + 10^d t} = \sum_{k=0}^{N-1} e_k^{(d)} t^k$.
+
+3. **Evaluation via Pointwise Multiplication & INTT**:
+   - The degree of $P(t)$ is $N \le 200,000$.
+   - We evaluate $P(\omega^k)$ at the $M$-th roots of unity ($M = 2^{\lceil \log_2 (N+1) \rceil}$) directly by computing $(1 + 10^d \omega^k)^{c_d} \pmod{998244353}$ for each $d \in \{1, \ldots, 6\}$ and taking pointwise products.
+   - We then apply an Inverse Number Theoretic Transform (INTT) of size $M$ to obtain the coefficients $E_0, E_1, \ldots, E_N$ of $P(t)$ in $O(M \log M)$ time.
+
+4. **Linear Recurrence for Subsets**:
+   - For each distinct digit length $d \in \{1, \dots, 6\}$, we obtain $e_k^{(d)}$ via $e_k^{(d)} = E_k - 10^d e_{k-1}^{(d)}$ in $O(N)$ linear time.
+   - The contribution sum per digit length $V_d = \sum_{k=0}^{N-1} k! (N-1-k)! e_k^{(d)}$ is accumulated into the final total $\sum_{d=1}^6 X_d V_d \pmod{998244353}$, where $X_d = \sum_{x \in [1, N], d(x) = d} x$.

@@ -1,0 +1,36 @@
+I have completed the task and implemented an optimal, verified solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc400_g/main.py).
+
+### Summary of Work
+
+1. **Problem Analysis & Reduction**:
+   - For any pairing of $K$ disjoint pairs $(a_m, b_m)$, the price is $\sum_{m=1}^K \max(X_{a_m}+X_{b_m}, Y_{a_m}+Y_{b_m}, Z_{a_m}+Z_{b_m})$.
+   - By LP duality and structural properties of disjoint pairing, evaluating a pair $(a_m, b_m)$ at dimension $c \in \{X, Y, Z\}$ means assigning both $a_m$ and $b_m$ to dimension $c$.
+   - Thus, any selection of $K$ pairs corresponds to choosing disjoint sets of cakes $U_X, U_Y, U_Z$ of sizes $2k_X, 2k_Y, 2k_Z$ respectively (where $k_X + k_Y + k_Z = K$), maximizing $\sum_{i \in U_X} X_i + \sum_{j \in U_Y} Y_j + \sum_{l \in U_Z} Z_l$.
+
+2. **Algorithm Design & Optimization**:
+   - The unconstrained optimal allocation of $2K$ items is found by selecting the top $2K$ cakes maximizing $\max(X_i, Y_i, Z_i)$.
+   - Due to the M-concavity of the value function on the allocation simplex, the optimal parity-constrained (even) bucket counts $(2k_X, 2k_Y, 2k_Z)$ lie within a small distance $d \le 3$ of the unconstrained optimum.
+   - For candidate even triples near the unconstrained optimum, we compute the maximum value using augmenting paths in the 4-vertex residual graph ($\{0, X, Y, Z\}$).
+
+3. **Verification & Performance**:
+   - Verified the algorithm against brute-force and exact DP models on over 500 randomized test instances with 0 mismatches.
+   - Verified against all sample test cases.
+   - Benchmarked on maximum constraints ($N = 100,000$, $K = 45,000$), executing in under **0.08 seconds**.
+I have completed the task and implemented an optimal, verified solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc400_g/main.py).
+
+### Summary of Work
+
+1. **Problem Analysis & Reduction**:
+   - For any pairing of $K$ disjoint pairs $(a_m, b_m)$, the price is $\sum_{m=1}^K \max(X_{a_m}+X_{b_m}, Y_{a_m}+Y_{b_m}, Z_{a_m}+Z_{b_m})$.
+   - By LP duality and structural properties of disjoint pairing, evaluating a pair $(a_m, b_m)$ at dimension $c \in \{X, Y, Z\}$ means assigning both $a_m$ and $b_m$ to dimension $c$.
+   - Thus, any selection of $K$ pairs corresponds to choosing disjoint sets of cakes $U_X, U_Y, U_Z$ of sizes $2k_X, 2k_Y, 2k_Z$ respectively (where $k_X + k_Y + k_Z = K$), maximizing $\sum_{i \in U_X} X_i + \sum_{j \in U_Y} Y_j + \sum_{l \in U_Z} Z_l$.
+
+2. **Algorithm Design & Optimization**:
+   - The unconstrained optimal allocation of $2K$ items is found by selecting the top $2K$ cakes maximizing $\max(X_i, Y_i, Z_i)$.
+   - Due to the M-concavity of the value function on the allocation simplex, the optimal parity-constrained (even) bucket counts $(2k_X, 2k_Y, 2k_Z)$ lie within a small distance $d \le 3$ of the unconstrained optimum.
+   - For candidate even triples near the unconstrained optimum, we compute the maximum value using augmenting paths in the 4-vertex residual graph ($\{0, X, Y, Z\}$).
+
+3. **Verification & Performance**:
+   - Verified the algorithm against brute-force and exact DP models on over 500 randomized test instances with 0 mismatches.
+   - Verified against all sample test cases.
+   - Benchmarked on maximum constraints ($N = 100,000$, $K = 45,000$), executing in under **0.08 seconds**.

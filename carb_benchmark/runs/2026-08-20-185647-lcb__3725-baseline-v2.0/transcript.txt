@@ -1,0 +1,28 @@
+I have written the complete solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3725/main.py).
+
+### Method Explanation
+1. **Contribution Technique**: The problem asks for the sum of maximum and minimum elements over all contiguous subarrays of length at most $k$. The total sum can be decomposed into:
+   $$\text{Total Sum} = \sum_{\text{subarrays } sub, \, |sub| \le k} \max(sub) + \sum_{\text{subarrays } sub, \, |sub| \le k} \min(sub)$$
+2. **Monotonic Stack**: For each element `nums[i]`, we find the range of valid left bounds $L_i < l \le i$ and right bounds $i \le r < R_i$ where `nums[i]` is the maximum element.
+3. **2D Grid Inclusion-Exclusion Counting**: Counting how many pairs $(l, r)$ satisfy $L_i < l \le i$, $i \le r < R_i$, and $r - l \le k - 1$ reduces to counting integer points $(x, y)$ in $[0, X] \times [0, Y]$ with $x + y \le K$, where $X = i - L_i - 1$, $Y = R_i - i - 1$, and $K = k - 1$. Using 2D Inclusion-Exclusion, this is computed in $O(1)$ time per element:
+   $$\text{Count}(X, Y, K) = T(K) - T(K - X - 1) - T(K - Y - 1) + T(K - X - Y - 2)$$
+   where $T(m) = \frac{(m + 1)(m + 2)}{2}$ for $m \ge 0$ (and $0$ for $m < 0$).
+4. **Symmetry for Minimums**: Calculating the sum of minimums of `nums` is equivalent to $-\text{calc\_max\_sum}(-nums, k)$.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$ time.
+- **Space Complexity**: $\mathcal{O}(N)$ space.
+I have written the complete solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3725/main.py).
+
+### Method Explanation
+1. **Contribution Technique**: The problem asks for the sum of maximum and minimum elements over all contiguous subarrays of length at most $k$. The total sum can be decomposed into:
+   $$\text{Total Sum} = \sum_{\text{subarrays } sub, \, |sub| \le k} \max(sub) + \sum_{\text{subarrays } sub, \, |sub| \le k} \min(sub)$$
+2. **Monotonic Stack**: For each element `nums[i]`, we find the range of valid left bounds $L_i < l \le i$ and right bounds $i \le r < R_i$ where `nums[i]` is the maximum element.
+3. **2D Grid Inclusion-Exclusion Counting**: Counting how many pairs $(l, r)$ satisfy $L_i < l \le i$, $i \le r < R_i$, and $r - l \le k - 1$ reduces to counting integer points $(x, y)$ in $[0, X] \times [0, Y]$ with $x + y \le K$, where $X = i - L_i - 1$, $Y = R_i - i - 1$, and $K = k - 1$. Using 2D Inclusion-Exclusion, this is computed in $O(1)$ time per element:
+   $$\text{Count}(X, Y, K) = T(K) - T(K - X - 1) - T(K - Y - 1) + T(K - X - Y - 2)$$
+   where $T(m) = \frac{(m + 1)(m + 2)}{2}$ for $m \ge 0$ (and $0$ for $m < 0$).
+4. **Symmetry for Minimums**: Calculating the sum of minimums of `nums` is equivalent to $-\text{calc\_max\_sum}(-nums, k)$.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$ time.
+- **Space Complexity**: $\mathcal{O}(N)$ space.

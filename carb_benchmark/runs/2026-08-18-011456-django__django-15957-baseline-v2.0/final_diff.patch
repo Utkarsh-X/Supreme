@@ -1,0 +1,65 @@
+diff --git a/django/db/models/query.py b/django/db/models/query.py
+index be0deb9..9d2e342 100644
+--- a/django/db/models/query.py
++++ b/django/db/models/query.py
+@@ -2145,16 +2145,18 @@ class Prefetch:
+         self.prefetch_through = lookup
+         # `prefetch_to` is the path to the attribute that stores the result.
+         self.prefetch_to = lookup
+-        if queryset is not None and (
+-            isinstance(queryset, RawQuerySet)
+-            or (
++        if queryset is not None:
++            if isinstance(queryset, RawQuerySet) or (
+                 hasattr(queryset, "_iterable_class")
+                 and not issubclass(queryset._iterable_class, ModelIterable)
+-            )
+-        ):
+-            raise ValueError(
+-                "Prefetch querysets cannot use raw(), values(), and values_list()."
+-            )
++            ):
++                raise ValueError(
++                    "Prefetch querysets cannot use raw(), values(), and values_list()."
++                )
++            if queryset.query.is_sliced:
++                raise ValueError(
++                    "Cannot filter a query once a slice has been taken."
++                )
+         if to_attr:
+             self.prefetch_to = LOOKUP_SEP.join(
+                 lookup.split(LOOKUP_SEP)[:-1] + [to_attr]
+diff --git a/docs/ref/models/querysets.txt b/docs/ref/models/querysets.txt
+index 223bb45..ed9482e 100644
+--- a/docs/ref/models/querysets.txt
++++ b/docs/ref/models/querysets.txt
+@@ -4007,6 +4007,13 @@ relation, hence reducing the number of queries even further:
+     >>> Question.objects.prefetch_related(prefetch).get().choice_set.all()
+     <QuerySet [<Choice: The sky>]>
+ 
++.. note::
++
++    Custom querysets cannot use sliced querysets,
++    :meth:`~django.db.models.query.QuerySet.raw()`,
++    :meth:`~django.db.models.query.QuerySet.values()`, or
++    :meth:`~django.db.models.query.QuerySet.values_list()`.
++
+ The ``to_attr`` argument sets the result of the prefetch operation to a custom
+ attribute:
+ 
+diff --git a/tests/prefetch_related/tests.py b/tests/prefetch_related/tests.py
+index 1ac17fd..6c27770 100644
+--- a/tests/prefetch_related/tests.py
++++ b/tests/prefetch_related/tests.py
+@@ -1004,6 +1004,11 @@ class CustomPrefetchTests(TestCase):
+         with self.assertRaisesMessage(ValueError, msg):
+             Prefetch("houses", House.objects.raw("select pk from house"))
+ 
++    def test_sliced_queryset(self):
++        msg = "Cannot filter a query once a slice has been taken."
++        with self.assertRaisesMessage(ValueError, msg):
++            Prefetch("houses", House.objects.all()[:1])
++
+     def test_to_attr_doesnt_cache_through_attr_as_list(self):
+         house = House.objects.prefetch_related(
+             Prefetch("rooms", queryset=Room.objects.all(), to_attr="to_rooms"),

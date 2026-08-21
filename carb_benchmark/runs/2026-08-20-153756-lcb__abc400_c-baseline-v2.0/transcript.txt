@@ -1,0 +1,42 @@
+I have implemented the solution in `main.py`.
+
+### Explanation
+
+An integer $X$ is defined as *good* if $X = 2^a \times b^2$ for positive integers $a \ge 1$ and $b \ge 1$.
+
+We can break down $a$ into two cases based on parity:
+1. **Odd exponent ($a = 2k + 1$ with $k \ge 0$):**
+   $$X = 2^{2k+1} b^2 = 2 \times (2^k b)^2 = 2 y^2$$
+   for some integer $y = 2^k b \ge 1$. Any integer of the form $2y^2$ can be represented this way by choosing $a = 1$ and $b = y$.
+   The number of such integers $\le N$ is $\lfloor \sqrt{\lfloor N / 2 \rfloor} \rfloor$.
+
+2. **Even exponent ($a = 2k + 2$ with $k \ge 0$):**
+   $$X = 2^{2k+2} b^2 = 4 \times (2^k b)^2 = 4 m^2$$
+   for some integer $m = 2^k b \ge 1$. Any integer of the form $4m^2$ can be represented this way by choosing $a = 2$ and $b = m$.
+   The number of such integers $\le N$ is $\lfloor \sqrt{\lfloor N / 4 \rfloor} \rfloor$.
+
+Since $\sqrt{2}$ is irrational, no positive integer can be simultaneously written as $2y^2$ and $4m^2$ (as $2y^2 = 4m^2 \implies y/m = \sqrt{2}$). Therefore, the two sets of integers are completely disjoint.
+
+Thus, the total count of good integers between $1$ and $N$ inclusive is:
+$$\lfloor \sqrt{\lfloor N / 2 \rfloor} \rfloor + \lfloor \sqrt{\lfloor N / 4 \rfloor} \rfloor$$
+I have implemented the solution in `main.py`.
+
+### Explanation
+
+An integer $X$ is defined as *good* if $X = 2^a \times b^2$ for positive integers $a \ge 1$ and $b \ge 1$.
+
+We can break down $a$ into two cases based on parity:
+1. **Odd exponent ($a = 2k + 1$ with $k \ge 0$):**
+   $$X = 2^{2k+1} b^2 = 2 \times (2^k b)^2 = 2 y^2$$
+   for some integer $y = 2^k b \ge 1$. Any integer of the form $2y^2$ can be represented this way by choosing $a = 1$ and $b = y$.
+   The number of such integers $\le N$ is $\lfloor \sqrt{\lfloor N / 2 \rfloor} \rfloor$.
+
+2. **Even exponent ($a = 2k + 2$ with $k \ge 0$):**
+   $$X = 2^{2k+2} b^2 = 4 \times (2^k b)^2 = 4 m^2$$
+   for some integer $m = 2^k b \ge 1$. Any integer of the form $4m^2$ can be represented this way by choosing $a = 2$ and $b = m$.
+   The number of such integers $\le N$ is $\lfloor \sqrt{\lfloor N / 4 \rfloor} \rfloor$.
+
+Since $\sqrt{2}$ is irrational, no positive integer can be simultaneously written as $2y^2$ and $4m^2$ (as $2y^2 = 4m^2 \implies y/m = \sqrt{2}$). Therefore, the two sets of integers are completely disjoint.
+
+Thus, the total count of good integers between $1$ and $N$ inclusive is:
+$$\lfloor \sqrt{\lfloor N / 2 \rfloor} \rfloor + \lfloor \sqrt{\lfloor N / 4 \rfloor} \rfloor$$

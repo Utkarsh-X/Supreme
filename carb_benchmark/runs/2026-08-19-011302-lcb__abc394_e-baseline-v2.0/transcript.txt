@@ -1,0 +1,18 @@
+I have solved the problem and written the solution to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_e/main.py).
+
+### Solution Summary
+- **Approach**: Breadth-First Search (BFS) over the state space of pair of vertices $(u, v)$, representing paths from $u$ to $v$.
+  - **Base Cases**: 
+    - Length 0 palindromes: All pairs $(i, i)$ with distance `0` (empty string).
+    - Length 1 palindromes: All pairs $(i, j)$ where a directed edge $i \to j$ exists with distance `1` (single character string).
+  - **Transitions**: When popping state $(u', v')$ with distance $d$, we transition to state $(u, v)$ with distance $d + 2$ for all edges $u \to u'$ labeled $c$ and $v' \to v$ labeled $c$.
+- **Optimization**: Bitwise operations (bitmasks) are used to keep track of unvisited target vertices for each source vertex $u$. This reduces the search step from $O(N^4)$ down to $O(N^3)$, taking $< 0.1$ seconds even for dense graphs with $N=100$.
+I have solved the problem and written the solution to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_e/main.py).
+
+### Solution Summary
+- **Approach**: Breadth-First Search (BFS) over the state space of pair of vertices $(u, v)$, representing paths from $u$ to $v$.
+  - **Base Cases**: 
+    - Length 0 palindromes: All pairs $(i, i)$ with distance `0` (empty string).
+    - Length 1 palindromes: All pairs $(i, j)$ where a directed edge $i \to j$ exists with distance `1` (single character string).
+  - **Transitions**: When popping state $(u', v')$ with distance $d$, we transition to state $(u, v)$ with distance $d + 2$ for all edges $u \to u'$ labeled $c$ and $v' \to v$ labeled $c$.
+- **Optimization**: Bitwise operations (bitmasks) are used to keep track of unvisited target vertices for each source vertex $u$. This reduces the search step from $O(N^4)$ down to $O(N^3)$, taking $< 0.1$ seconds even for dense graphs with $N=100$.

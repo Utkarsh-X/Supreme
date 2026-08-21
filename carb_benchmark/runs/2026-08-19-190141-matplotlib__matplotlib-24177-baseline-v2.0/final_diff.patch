@@ -1,0 +1,33 @@
+diff --git a/lib/matplotlib/axes/_base.py b/lib/matplotlib/axes/_base.py
+index 4f805e0..056ff7e 100644
+--- a/lib/matplotlib/axes/_base.py
++++ b/lib/matplotlib/axes/_base.py
+@@ -2434,7 +2434,7 @@ class _AxesBase(martist.Artist):
+         # Get all vertices on the path
+         # Loop through each segment to get extrema for Bezier curve sections
+         vertices = []
+-        for curve, code in p.iter_bezier():
++        for curve, code in p.iter_bezier(simplify=False):
+             # Get distance along the curve of any extrema
+             _, dzeros = curve.axis_aligned_extrema()
+             # Calculate vertices of start, end and any extrema in between
+diff --git a/lib/matplotlib/tests/test_axes.py b/lib/matplotlib/tests/test_axes.py
+index bd7940a..42ea949 100644
+--- a/lib/matplotlib/tests/test_axes.py
++++ b/lib/matplotlib/tests/test_axes.py
+@@ -2086,6 +2086,15 @@ def test_hist_unequal_bins_density():
+     assert_allclose(mpl_heights, np_heights)
+ 
+ 
++def test_hist_step_density_autoscale():
++    rng = np.random.RandomState(0)
++    data = rng.randn(100000) * 1.2
++    fig, (ax0, ax1) = plt.subplots(1, 2)
++    ax0.hist(data, bins=100, density=True, histtype='bar')
++    ax1.hist(data, bins=100, density=True, histtype='step')
++    assert_allclose(ax1.get_ylim(), ax0.get_ylim())
++
++
+ def test_hist_datetime_datasets():
+     data = [[datetime.datetime(2017, 1, 1), datetime.datetime(2017, 1, 1)],
+             [datetime.datetime(2017, 1, 1), datetime.datetime(2017, 1, 2)]]

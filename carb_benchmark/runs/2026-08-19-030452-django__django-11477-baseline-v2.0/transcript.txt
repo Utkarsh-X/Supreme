@@ -1,0 +1,54 @@
+### Root Cause Analysis
+
+When resolving a URL pattern that contains optional groups (positional or named), Python's regular expression engine captures groups that did not participate in the match as `None`.
+Consequently:
+- `ResolverMatch.kwargs` contains `{group_name: None}` for any unmatched optional named groups.
+- `ResolverMatch.args` contains `None` elements for any unmatched optional positional groups.
+
+When `django.urls.translate_url()` passed `match.args` and `match.kwargs` directly into `django.urls.reverse()`, `reverse()` received `None` values for missing optional parameters. Instead of treating these optional arguments as omitted:
+1. `reverse()` would try to match pattern signatures that include those arguments and format `None` as `'None'`, producing invalid URLs (e.g. `/nl/with-optional/None/`).
+2. If the pattern regex rejected `'None'` (e.g. numeric groups), `reverse()` raised `NoReverseMatch`, causing `translate_url()` to fall back to returning the original untranslated URL.
+
+### Solution
+
+In [`django/urls/base.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L172-L179), updated `translate_url()` to filter out `None` values from `match.args` and `match.kwargs` before calling `reverse()`:
+
+```python
+url = reverse(
+    to_be_reversed,
+    args=[a for a in match.args if a is not None],
+    kwargs={k: v for k, v in match.kwargs.items() if v is not None},
+)
+```
+
+### Verification
+
+- Added test cases in [`tests/i18n/patterns/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L157-L162) and [`tests/i18n/patterns/urls/default.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/urls/default.py#L17-L21) for URL patterns with optional arguments when the argument is present or missing.
+- Executed `i18n`, `urlpatterns`, and `urlpatterns_reverse` test suites; all 324 tests passed successfully.
+### Root Cause Analysis
+
+When resolving a URL pattern that contains optional groups (positional or named), Python's regular expression engine captures groups that did not participate in the match as `None`.
+Consequently:
+- `ResolverMatch.kwargs` contains `{group_name: None}` for any unmatched optional named groups.
+- `ResolverMatch.args` contains `None` elements for any unmatched optional positional groups.
+
+When `django.urls.translate_url()` passed `match.args` and `match.kwargs` directly into `django.urls.reverse()`, `reverse()` received `None` values for missing optional parameters. Instead of treating these optional arguments as omitted:
+1. `reverse()` would try to match pattern signatures that include those arguments and format `None` as `'None'`, producing invalid URLs (e.g. `/nl/with-optional/None/`).
+2. If the pattern regex rejected `'None'` (e.g. numeric groups), `reverse()` raised `NoReverseMatch`, causing `translate_url()` to fall back to returning the original untranslated URL.
+
+### Solution
+
+In [`django/urls/base.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L172-L179), updated `translate_url()` to filter out `None` values from `match.args` and `match.kwargs` before calling `reverse()`:
+
+```python
+url = reverse(
+    to_be_reversed,
+    args=[a for a in match.args if a is not None],
+    kwargs={k: v for k, v in match.kwargs.items() if v is not None},
+)
+```
+
+### Verification
+
+- Added test cases in [`tests/i18n/patterns/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L157-L162) and [`tests/i18n/patterns/urls/default.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/urls/default.py#L17-L21) for URL patterns with optional arguments when the argument is present or missing.
+- Executed `i18n`, `urlpatterns`, and `urlpatterns_reverse` test suites; all 324 tests passed successfully.

@@ -1,0 +1,65 @@
+diff --git a/django/utils/http.py b/django/utils/http.py
+index 572cfb4..0f1b372 100644
+--- a/django/utils/http.py
++++ b/django/utils/http.py
+@@ -176,10 +176,13 @@ def parse_http_date(date):
+     try:
+         year = int(m.group('year'))
+         if year < 100:
+-            if year < 70:
+-                year += 2000
+-            else:
+-                year += 1900
++            current_year = datetime.datetime.utcnow().year
++            current_century = current_year // 100 * 100
++            year += current_century
++            if year > current_year + 50:
++                year -= 100
++            elif year <= current_year - 50:
++                year += 100
+         month = MONTHS.index(m.group('mon').lower()) + 1
+         day = int(m.group('day'))
+         hour = int(m.group('hour'))
+diff --git a/tests/utils_tests/test_http.py b/tests/utils_tests/test_http.py
+index bc8bcfe..a82ddc9 100644
+--- a/tests/utils_tests/test_http.py
++++ b/tests/utils_tests/test_http.py
+@@ -1,5 +1,6 @@
+ import unittest
+-from datetime import datetime
++from unittest import mock
++from datetime import datetime, timedelta
+ 
+ from django.test import SimpleTestCase, ignore_warnings
+ from django.utils.datastructures import MultiValueDict
+@@ -328,6 +329,30 @@ class HttpDateProcessingTests(unittest.TestCase):
+         parsed = parse_http_date('Sun Nov  6 08:49:37 0037')
+         self.assertEqual(datetime.utcfromtimestamp(parsed), datetime(2037, 11, 6, 8, 49, 37))
+ 
++    def test_parsing_rfc850_two_digit_year(self):
++        class MockDatetime(datetime):
++            @classmethod
++            def utcnow(cls):
++                return cls._utcnow
++
++        tests = (
++            (2019, 'Sunday, 06-Nov-69 08:49:37 GMT', datetime(2069, 11, 6, 8, 49, 37)),
++            (2019, 'Sunday, 06-Nov-70 08:49:37 GMT', datetime(1970, 11, 6, 8, 49, 37)),
++            (2070, 'Sunday, 06-Nov-20 08:49:37 GMT', datetime(2120, 11, 6, 8, 49, 37)),
++            (2070, 'Sunday, 06-Nov-21 08:49:37 GMT', datetime(2021, 11, 6, 8, 49, 37)),
++            (2000, 'Sunday, 06-Nov-50 08:49:37 GMT', datetime(2050, 11, 6, 8, 49, 37)),
++            (2000, 'Sunday, 06-Nov-51 08:49:37 GMT', datetime(1951, 11, 6, 8, 49, 37)),
++            (2099, 'Sunday, 06-Nov-49 08:49:37 GMT', datetime(2149, 11, 6, 8, 49, 37)),
++            (2099, 'Sunday, 06-Nov-50 08:49:37 GMT', datetime(2050, 11, 6, 8, 49, 37)),
++        )
++        for current_year, date_str, expected in tests:
++            with self.subTest(date_str, current_year=current_year):
++                with mock.patch('django.utils.http.datetime.datetime', MockDatetime):
++                    MockDatetime._utcnow = datetime(current_year, 1, 1)
++                    parsed = parse_http_date(date_str)
++                    dt = datetime.utcfromtimestamp(parsed) if parsed >= 0 else datetime(1970, 1, 1) + timedelta(seconds=parsed)
++                    self.assertEqual(dt, expected)
++
+ 
+ class EscapeLeadingSlashesTests(unittest.TestCase):
+     def test(self):

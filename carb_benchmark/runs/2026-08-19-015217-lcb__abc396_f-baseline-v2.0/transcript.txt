@@ -1,0 +1,32 @@
+An optimal $O(N \log M + M)$ solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_f/main.py).
+
+### Key Insight
+When incrementing $k \to k + 1$, elements $A_i$ such that $B(k)_i = M - 1$ (i.e. $A_i = M - 1 - k$) wrap around from $M - 1$ to $0$. All other elements increase by $1$.
+
+For each element at 0-based index $i$ that wraps around from $M - 1 \to 0$:
+- Any non-wrapping element to its right was smaller ($< M-1$) and becomes larger ($> 0$), **reducing** inversions by $1$.
+- Any non-wrapping element to its left was smaller ($< M-1$) and becomes larger ($> 0$), **increasing** inversions by $1$.
+
+Summing over all elements $i$ where $A_i = M - 1 - k$, the net change in inversion count transitioning from $k \to k + 1$ is:
+$$\Delta(k) = \sum_{i : A_i = M - 1 - k} (2i - N + 1)$$
+
+### Algorithm Structure
+1. Compute the initial inversion count for $k = 0$ in $O(N \log M)$ using a Binary Indexed Tree (Fenwick Tree).
+2. Precompute `delta_v[v] = sum(2 * i - N + 1)` for each value $v \in [0, M-1]$.
+3. Iterate $k$ from $0$ to $M-1$, recording the current inversion count and updating `curr_inv += delta_v[M - 1 - k]`.
+An optimal $O(N \log M + M)$ solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_f/main.py).
+
+### Key Insight
+When incrementing $k \to k + 1$, elements $A_i$ such that $B(k)_i = M - 1$ (i.e. $A_i = M - 1 - k$) wrap around from $M - 1$ to $0$. All other elements increase by $1$.
+
+For each element at 0-based index $i$ that wraps around from $M - 1 \to 0$:
+- Any non-wrapping element to its right was smaller ($< M-1$) and becomes larger ($> 0$), **reducing** inversions by $1$.
+- Any non-wrapping element to its left was smaller ($< M-1$) and becomes larger ($> 0$), **increasing** inversions by $1$.
+
+Summing over all elements $i$ where $A_i = M - 1 - k$, the net change in inversion count transitioning from $k \to k + 1$ is:
+$$\Delta(k) = \sum_{i : A_i = M - 1 - k} (2i - N + 1)$$
+
+### Algorithm Structure
+1. Compute the initial inversion count for $k = 0$ in $O(N \log M)$ using a Binary Indexed Tree (Fenwick Tree).
+2. Precompute `delta_v[v] = sum(2 * i - N + 1)` for each value $v \in [0, M-1]$.
+3. Iterate $k$ from $0$ to $M-1$, recording the current inversion count and updating `curr_inv += delta_v[M - 1 - k]`.

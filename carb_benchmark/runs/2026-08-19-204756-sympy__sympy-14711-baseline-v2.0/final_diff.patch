@@ -1,0 +1,218 @@
+diff --git a/sympy/assumptions/sathandlers.py b/sympy/assumptions/sathandlers.py
+index 61d62d0..6bf1519 100644
+--- a/sympy/assumptions/sathandlers.py
++++ b/sympy/assumptions/sathandlers.py
+@@ -1,6 +1,7 @@
+ from __future__ import print_function, division
+ 
+-from collections import MutableMapping, defaultdict
++from collections import defaultdict
++from sympy.core.compatibility import MutableMapping
+ 
+ from sympy.core import (Add, Mul, Pow, Integer, Number, NumberSymbol,)
+ from sympy.core.numbers import ImaginaryUnit
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index bdfebf2..8f0b15b 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,6 +1,7 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++from collections import defaultdict
++from sympy.core.compatibility import Mapping
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+diff --git a/sympy/core/compatibility.py b/sympy/core/compatibility.py
+index fdbf4fa..a4dbb36 100644
+--- a/sympy/core/compatibility.py
++++ b/sympy/core/compatibility.py
+@@ -6,7 +6,17 @@
+ from __future__ import print_function, division
+ 
+ import operator
++import collections
+ from collections import defaultdict
++try:
++    from collections.abc import Iterable, Mapping, MutableMapping, Callable, MutableSet
++    collections.Iterable = Iterable
++    collections.Mapping = Mapping
++    collections.MutableMapping = MutableMapping
++    collections.Callable = Callable
++    collections.MutableSet = MutableSet
++except ImportError:
++    from collections import Iterable, Mapping, MutableMapping, Callable, MutableSet
+ from sympy.external import import_module
+ 
+ """
+diff --git a/sympy/core/containers.py b/sympy/core/containers.py
+index 15abd93..df33be7 100644
+--- a/sympy/core/containers.py
++++ b/sympy/core/containers.py
+@@ -268,7 +268,9 @@ def _sorted_args(self):
+         return tuple(sorted(self.args, key=default_sort_key))
+ 
+ 
+-class OrderedSet(collections.MutableSet):
++from sympy.core.compatibility import MutableSet
++
++class OrderedSet(MutableSet):
+     def __init__(self, iterable=None):
+         if iterable:
+             self.map = collections.OrderedDict((item, None) for item in iterable)
+diff --git a/sympy/core/expr.py b/sympy/core/expr.py
+index 2894db3..c4fbd03 100644
+--- a/sympy/core/expr.py
++++ b/sympy/core/expr.py
+@@ -9,7 +9,8 @@
+ from .compatibility import reduce, as_int, default_sort_key, range
+ from mpmath.libmp import mpf_log, prec_to_dps
+ 
+-from collections import defaultdict, Iterable
++from collections import defaultdict
++from sympy.core.compatibility import Iterable
+ 
+ class Expr(Basic, EvalfMixin):
+     """
+diff --git a/sympy/physics/vector/dyadic.py b/sympy/physics/vector/dyadic.py
+index dc68527..5d899d2 100644
+--- a/sympy/physics/vector/dyadic.py
++++ b/sympy/physics/vector/dyadic.py
+@@ -59,6 +59,8 @@ def __init__(self, inlist):
+ 
+     def __add__(self, other):
+         """The add operator for Dyadic. """
++        if not isinstance(other, bool) and other == 0:
++            return self
+         other = _check_dyadic(other)
+         return Dyadic(self.args + other.args)
+ 
+diff --git a/sympy/physics/vector/tests/test_dyadic.py b/sympy/physics/vector/tests/test_dyadic.py
+index 0ec5ba8..4718f43 100644
+--- a/sympy/physics/vector/tests/test_dyadic.py
++++ b/sympy/physics/vector/tests/test_dyadic.py
+@@ -12,6 +12,12 @@ def test_dyadic():
+     d3 = A.x | A.y
+     assert d1 * 0 == 0
+     assert d1 != 0
++    assert d1 + 0 == d1
++    assert 0 + d1 == d1
++    assert d1 - 0 == d1
++    assert 0 - d1 == -d1
++    assert sum([d1, 0 * d1]) == d1
++    assert sum([d1]) == d1
+     assert d1 * 2 == 2 * A.x | A.x
+     assert d1 / 2. == 0.5 * d1
+     assert d1 & (0 * d1) == 0
+diff --git a/sympy/physics/vector/tests/test_vector.py b/sympy/physics/vector/tests/test_vector.py
+index 828a25f..1a258e3 100644
+--- a/sympy/physics/vector/tests/test_vector.py
++++ b/sympy/physics/vector/tests/test_vector.py
+@@ -58,6 +58,14 @@ def test_Vector():
+     v6 = x*A.x + y*A.y + z*A.z
+     assert v6.free_symbols(A) == {x,y,z}
+ 
++    # Test addition and subtraction with 0
++    assert A.x + 0 == A.x
++    assert 0 + A.x == A.x
++    assert A.x - 0 == A.x
++    assert 0 - A.x == -A.x
++    assert sum([A.x, (0 * A.x)]) == A.x
++    assert sum([A.x]) == A.x
++
+ 
+ def test_Vector_diffs():
+     q1, q2, q3, q4 = dynamicsymbols('q1 q2 q3 q4')
+diff --git a/sympy/physics/vector/vector.py b/sympy/physics/vector/vector.py
+index a048ee5..e42fa21 100644
+--- a/sympy/physics/vector/vector.py
++++ b/sympy/physics/vector/vector.py
+@@ -57,6 +57,8 @@ def __hash__(self):
+ 
+     def __add__(self, other):
+         """The add operator for Vector. """
++        if not isinstance(other, bool) and other == 0:
++            return self
+         other = _check_vector(other)
+         return Vector(self.args + other.args)
+ 
+diff --git a/sympy/plotting/plot.py b/sympy/plotting/plot.py
+index 18c6f7a..765b5c9 100644
+--- a/sympy/plotting/plot.py
++++ b/sympy/plotting/plot.py
+@@ -25,7 +25,7 @@
+ from __future__ import print_function, division
+ 
+ import inspect
+-from collections import Callable
++from sympy.core.compatibility import Callable
+ import warnings
+ import sys
+ 
+diff --git a/sympy/vector/basisdependent.py b/sympy/vector/basisdependent.py
+index 4252c4a..23cd986 100644
+--- a/sympy/vector/basisdependent.py
++++ b/sympy/vector/basisdependent.py
+@@ -191,6 +191,8 @@ def __new__(cls, *args, **options):
+                     arg = cls._mul_func(*(arg.args))
+                 elif isinstance(arg, Add):
+                     arg = cls._add_func(*(arg.args))
++                elif not isinstance(arg, bool) and arg == 0:
++                    continue
+                 else:
+                     raise TypeError(str(arg) +
+                                     " cannot be interpreted correctly")
+@@ -329,6 +331,8 @@ def __eq__(self, other):
+     def __add__(self, other):
+         if isinstance(other, self._expr_type):
+             return other
++        elif not isinstance(other, bool) and other == 0:
++            return self
+         else:
+             raise TypeError("Invalid argument types for addition")
+ 
+@@ -336,6 +340,8 @@ def __add__(self, other):
+     def __radd__(self, other):
+         if isinstance(other, self._expr_type):
+             return other
++        elif not isinstance(other, bool) and other == 0:
++            return self
+         else:
+             raise TypeError("Invalid argument types for addition")
+ 
+@@ -343,6 +349,8 @@ def __radd__(self, other):
+     def __sub__(self, other):
+         if isinstance(other, self._expr_type):
+             return -other
++        elif not isinstance(other, bool) and other == 0:
++            return self
+         else:
+             raise TypeError("Invalid argument types for subtraction")
+ 
+@@ -350,6 +358,8 @@ def __sub__(self, other):
+     def __rsub__(self, other):
+         if isinstance(other, self._expr_type):
+             return other
++        elif not isinstance(other, bool) and other == 0:
++            return -self
+         else:
+             raise TypeError("Invalid argument types for subtraction")
+ 
+diff --git a/sympy/vector/tests/test_vector.py b/sympy/vector/tests/test_vector.py
+index 000baae..e07e08c 100644
+--- a/sympy/vector/tests/test_vector.py
++++ b/sympy/vector/tests/test_vector.py
+@@ -53,6 +53,12 @@ def test_vector():
+     assert i - i == Vector.zero
+     assert i + Vector.zero == i
+     assert i - Vector.zero == i
++    assert i + 0 == i
++    assert 0 + i == i
++    assert i - 0 == i
++    assert 0 - i == -i
++    assert sum([i, 0 * i]) == i
++    assert sum([i]) == i
+     assert Vector.zero != 0
+     assert -Vector.zero == Vector.zero
+ 

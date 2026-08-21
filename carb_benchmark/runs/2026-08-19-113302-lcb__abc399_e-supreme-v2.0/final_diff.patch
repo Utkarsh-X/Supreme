@@ -1,0 +1,79 @@
+diff --git a/main.py b/main.py
+index c86f6c8..7e5bd9a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,73 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    S = input_data[1]
++    T = input_data[2]
++
++    # Map target character for each character in S
++    target = {}
++    for s_char, t_char in zip(S, T):
++        if s_char in target:
++            if target[s_char] != t_char:
++                print(-1)
++                return
++        else:
++            target[s_char] = t_char
++
++    # Check if T contains all 26 lowercase English letters
++    set_T = set(T)
++    if len(set_T) == 26:
++        if S == T:
++            print(0)
++        else:
++            print(-1)
++        return
++
++    # Collect directed edges u -> target[u] for u != target[u]
++    edges = {}
++    for c in target:
++        if target[c] != c:
++            edges[c] = target[c]
++
++    total_edges = len(edges)
++
++    # Find all cycles of length >= 2
++    visited = {}  # 0: unvisited, 1: visiting, 2: visited
++    cycles = []
++
++    for node in edges:
++        if node not in visited:
++            path = []
++            curr = node
++            while curr in edges and curr not in visited:
++                visited[curr] = 1
++                path.append(curr)
++                curr = edges[curr]
++
++            if curr in visited and visited[curr] == 1:
++                # Cycle found
++                cycle_start = path.index(curr)
++                cycles.append(set(path[cycle_start:]))
++
++            for p in path:
++                visited[p] = 2
++
++    # Count pure cycles
++    num_pure_cycles = 0
++    for cycle in cycles:
++        is_pure = True
++        for node, dst in edges.items():
++            if node not in cycle and dst in cycle:
++                is_pure = False
++                break
++        if is_pure:
++            num_pure_cycles += 1
++
++    print(total_edges + num_pure_cycles)
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,60 @@
+diff --git a/sphinx/builders/gettext.py b/sphinx/builders/gettext.py
+index e8bc547..980fe49 100644
+--- a/sphinx/builders/gettext.py
++++ b/sphinx/builders/gettext.py
+@@ -32,7 +32,7 @@ class Message:
+     """An entry of translatable message."""
+     def __init__(self, text: str, locations: List[Tuple[str, int]], uuids: List[str]):
+         self.text = text
+-        self.locations = locations
++        self.locations = list(dict.fromkeys(locations))
+         self.uuids = uuids
+ 
+ 
+diff --git a/tests/test_build_gettext.py b/tests/test_build_gettext.py
+index 3c4617e..ecb9423 100644
+--- a/tests/test_build_gettext.py
++++ b/tests/test_build_gettext.py
+@@ -184,3 +184,42 @@ def test_build_single_pot(app):
+          'msgid "Generated section".*'),
+         result,
+         flags=re.S)
++
++
++def test_message_unique_locations():
++    from sphinx.builders.gettext import Message
++    locations = [
++        ('index.rst', 10),
++        ('index.rst', 0),
++        ('index.rst', 0),
++        ('index.rst', 0),
++        ('index.rst', 12),
++        ('index.rst', 10),
++    ]
++    uuids = ['id1', 'id2', 'id3', 'id4', 'id5', 'id6']
++    msg = Message('test', locations, uuids)
++    assert msg.locations == [
++        ('index.rst', 10),
++        ('index.rst', 0),
++        ('index.rst', 12),
++    ]
++
++
++def test_catalog_unique_locations():
++    from sphinx.builders.gettext import Catalog, MsgOrigin
++    catalog = Catalog()
++    origin1 = MsgOrigin('index.rst', 0)
++    origin2 = MsgOrigin('index.rst', 0)
++    origin3 = MsgOrigin('index.rst', 10)
++
++    catalog.add('message', origin1)
++    catalog.add('message', origin2)
++    catalog.add('message', origin3)
++
++    messages = list(catalog)
++    assert len(messages) == 1
++    assert messages[0].locations == [
++        ('index.rst', 0),
++        ('index.rst', 10),
++    ]
++

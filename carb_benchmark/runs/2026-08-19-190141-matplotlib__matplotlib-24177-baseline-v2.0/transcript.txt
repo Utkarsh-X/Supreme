@@ -1,0 +1,18 @@
+### Cause of the Bug
+When `ax.hist` with `histtype='step'` or `histtype='stepfilled'` is used, a `Polygon` patch is constructed to represent the histogram step curve. When the number of bins is large enough (e.g. 100 bins resulting in 202 path vertices $\ge 128$), the `Polygon` path's `should_simplify` property evaluates to `True`.
+
+When `Axes.add_patch` was called on the `Polygon`, `_update_patch_limits` called `path.iter_bezier()`. Because `simplify=False` was not explicitly passed to `iter_bezier()`, `Path.iter_segments` simplified the path in data coordinates using default threshold values before computing curve extrema. For small data values (such as probability density values when `density=True`), this path simplification clipped or entirely removed peak vertices, causing `_update_patch_limits` to update `Axes.dataLim` with severely underestimated maximum y-values. Consequently, the autoscale algorithm set incorrect, clipped, or default `ylim` values for step histograms.
+
+### Solution
+In [`lib/matplotlib/axes/_base.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2437), updated `_update_patch_limits` to call `p.iter_bezier(simplify=False)`. This ensures patch data limits are computed from exact path vertices rather than simplified rendering vertices.
+
+Added a unit test `test_hist_step_density_autoscale` to [`lib/matplotlib/tests/test_axes.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/tests/test_axes.py#L2089).
+### Cause of the Bug
+When `ax.hist` with `histtype='step'` or `histtype='stepfilled'` is used, a `Polygon` patch is constructed to represent the histogram step curve. When the number of bins is large enough (e.g. 100 bins resulting in 202 path vertices $\ge 128$), the `Polygon` path's `should_simplify` property evaluates to `True`.
+
+When `Axes.add_patch` was called on the `Polygon`, `_update_patch_limits` called `path.iter_bezier()`. Because `simplify=False` was not explicitly passed to `iter_bezier()`, `Path.iter_segments` simplified the path in data coordinates using default threshold values before computing curve extrema. For small data values (such as probability density values when `density=True`), this path simplification clipped or entirely removed peak vertices, causing `_update_patch_limits` to update `Axes.dataLim` with severely underestimated maximum y-values. Consequently, the autoscale algorithm set incorrect, clipped, or default `ylim` values for step histograms.
+
+### Solution
+In [`lib/matplotlib/axes/_base.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/axes/_base.py#L2437), updated `_update_patch_limits` to call `p.iter_bezier(simplify=False)`. This ensures patch data limits are computed from exact path vertices rather than simplified rendering vertices.
+
+Added a unit test `test_hist_step_density_autoscale` to [`lib/matplotlib/tests/test_axes.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-24177/lib/matplotlib/tests/test_axes.py#L2089).

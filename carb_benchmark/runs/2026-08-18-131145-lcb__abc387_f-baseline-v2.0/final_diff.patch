@@ -1,0 +1,106 @@
+diff --git a/main.py b/main.py
+index c86f6c8..15d05d8 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,100 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    A = [int(x) - 1 for x in input_data[2:2 + N]]
++    
++    MOD = 998244353
++    
++    # 1. Cycle detection and component root identification
++    state = [0] * N  # 0: unvisited, 1: visiting, 2: visited
++    comp_root = [-1] * N
++    in_cycle = [False] * N
++    roots = []
++    
++    for i in range(N):
++        if state[i] == 0:
++            path = []
++            curr = i
++            while state[curr] == 0:
++                state[curr] = 1
++                path.append(curr)
++                curr = A[curr]
++            
++            if state[curr] == 1:
++                idx = path.index(curr)
++                cycle_nodes = path[idx:]
++                rep = curr
++                roots.append(rep)
++                for node in cycle_nodes:
++                    in_cycle[node] = True
++                    comp_root[node] = rep
++            
++            for node in path:
++                state[node] = 2
++
++    # 2. Build tree structure
++    children = [[] for _ in range(N)]
++    for u in range(N):
++        if not in_cycle[u]:
++            target = A[u]
++            if in_cycle[target]:
++                p = comp_root[target]
++            else:
++                p = target
++            children[p].append(u)
++
++    # 3. DP computation for each tree
++    ans = 1
++    S = [None] * N
++
++    for R in roots:
++        # Post-order traversal via iterative DFS
++        order = []
++        stack = [(R, False)]
++        while stack:
++            u, vis = stack.pop()
++            if vis:
++                order.append(u)
++            else:
++                stack.append((u, True))
++                for v in children[u]:
++                    stack.append((v, False))
++        
++        for u in order:
++            ch = children[u]
++            if not ch:
++                S[u] = list(range(M + 1))
++            elif len(ch) == 1:
++                S_v = S[ch[0]]
++                S_u = [0] * (M + 1)
++                acc = 0
++                for k in range(1, M + 1):
++                    acc = (acc + S_v[k]) % MOD
++                    S_u[k] = acc
++                S[u] = S_u
++            else:
++                dp_u = [1] * (M + 1)
++                for v in ch:
++                    S_v = S[v]
++                    for k in range(1, M + 1):
++                        dp_u[k] = (dp_u[k] * S_v[k]) % MOD
++                
++                S_u = [0] * (M + 1)
++                acc = 0
++                for k in range(1, M + 1):
++                    acc = (acc + dp_u[k]) % MOD
++                    S_u[k] = acc
++                S[u] = S_u
++            
++        ans = (ans * S[R][M]) % MOD
++
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

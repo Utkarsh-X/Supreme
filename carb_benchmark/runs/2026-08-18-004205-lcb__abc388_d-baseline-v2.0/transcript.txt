@@ -1,0 +1,12 @@
+An $O(N)$ time and $O(N)$ space solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_d/main.py).
+
+### Method Explanation
+1. **Observation**: Alien $j$ receives gifts only at year $j$, when becoming an adult. Afterwards, alien $j$ gives 1 stone every year to newly adult aliens as long as it has at least 1 stone remaining.
+2. **Active Span**: If alien $j$ ends up with $S_j = A_j + G_j$ stones at year $j$, it will remain active (giving 1 stone per year) for years $j+1, j+2, \dots, j+S_j$. Let $E_j = j + S_j$ be its expiration milestone.
+3. **Linear Sweep**: As we iterate $j = 1 \dots N$, we maintain the count of currently active adults `current_active`. At step $j$, any adult that expired at $j-1$ (tracked via an expiration frequency array `expire`) is decremented from `current_active`. Alien $j$ receives $G_j = \text{current\_active}$ stones.
+4. **Final Stones**: After year $N$, alien $j$ has given out $\min(S_j, N - j)$ stones, leaving $\max(0, E_j - N)$ stones.
+
+### Verification
+- Tested and verified against all public test cases.
+- Stress tested with 500 randomized test cases against a naive $O(N^2)$ simulation with zero mismatches.
+- Benchmark for $N = 500,000$ completed in ~0.33 seconds.

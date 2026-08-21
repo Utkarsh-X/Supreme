@@ -1,0 +1,128 @@
+diff --git a/django/core/servers/basehttp.py b/django/core/servers/basehttp.py
+index fef5532..542b1d8 100644
+--- a/django/core/servers/basehttp.py
++++ b/django/core/servers/basehttp.py
+@@ -147,6 +147,29 @@ class ServerHandler(simple_server.ServerHandler):
+         self.get_stdin().read()
+         super().close()
+ 
++    def write(self, data):
++        if self.environ.get("REQUEST_METHOD") == "HEAD":
++            if not self.status:
++                raise AssertionError("write() before start_response()")
++            if not self.headers_sent:
++                self.send_headers()
++        else:
++            super().write(data)
++
++    def finish_response(self):
++        if self.environ.get("REQUEST_METHOD") == "HEAD":
++            try:
++                self.finish_content()
++            except Exception:
++                if hasattr(self.result, "close"):
++                    self.result.close()
++                raise
++            else:
++                self.close()
++        else:
++            super().finish_response()
++
++
+ 
+ class WSGIRequestHandler(simple_server.WSGIRequestHandler):
+     protocol_version = "HTTP/1.1"
+diff --git a/tests/builtin_server/tests.py b/tests/builtin_server/tests.py
+index f654fdd..89a9066 100644
+--- a/tests/builtin_server/tests.py
++++ b/tests/builtin_server/tests.py
+@@ -4,7 +4,10 @@ from io import BytesIO
+ from unittest import TestCase, mock
+ from wsgiref import simple_server
+ 
+-from django.core.servers.basehttp import get_internal_wsgi_application
++from django.core.servers.basehttp import (
++    ServerHandler as BaseServerHandler,
++    get_internal_wsgi_application,
++)
+ from django.core.signals import request_finished
+ from django.test import RequestFactory, override_settings
+ 
+@@ -25,7 +28,6 @@ class ServerHandler(simple_server.ServerHandler):
+ 
+         if not self.status:
+             raise AssertionError("write() before start_response()")
+-
+         elif not self.headers_sent:
+             # Before the first output, send the stored headers
+             self.bytes_sent = len(data)  # make sure we know content-length
+@@ -45,12 +47,16 @@ class ServerHandler(simple_server.ServerHandler):
+ 
+ 
+ class DummyHandler:
++    def __init__(self):
++        self.server = mock.MagicMock()
++
+     def log_request(self, *args, **kwargs):
+         pass
+ 
+ 
+ class FileWrapperHandler(ServerHandler):
+     def __init__(self, *args, **kwargs):
++
+         super().__init__(*args, **kwargs)
+         self.request_handler = DummyHandler()
+         self._used_sendfile = False
+@@ -168,3 +174,52 @@ class ServerHandlerChunksProperly(TestCase):
+         handler = WriteChunkCounterHandler(None, BytesIO(), BytesIO(), env)
+         handler.run(send_big_data_app)
+         self.assertEqual(handler.write_chunk_counter, 2)
++
++
++class ServerHandlerHEADTests(TestCase):
++    def test_head_request_strips_body(self):
++        env = {
++            "SERVER_PROTOCOL": "HTTP/1.1",
++            "REQUEST_METHOD": "HEAD",
++        }
++        stdout = BytesIO()
++        handler = BaseServerHandler(BytesIO(), stdout, BytesIO(), env)
++        handler.request_handler = DummyHandler()
++        handler.run(wsgi_app)
++        output = stdout.getvalue()
++        self.assertTrue(output.startswith(b"HTTP/1.1 200 OK"))
++        self.assertIn(b"Content-Type: text/plain", output)
++        self.assertTrue(output.endswith(b"\r\n\r\n"))
++
++    def test_get_request_returns_body(self):
++        env = {
++            "SERVER_PROTOCOL": "HTTP/1.1",
++            "REQUEST_METHOD": "GET",
++        }
++        stdout = BytesIO()
++        handler = BaseServerHandler(BytesIO(), stdout, BytesIO(), env)
++        handler.request_handler = DummyHandler()
++        handler.run(wsgi_app)
++        output = stdout.getvalue()
++        self.assertTrue(output.startswith(b"HTTP/1.1 200 OK"))
++        self.assertIn(b"Content-Type: text/plain", output)
++        self.assertTrue(output.endswith(b"\r\n\r\nHello World!"))
++
++    @override_settings(ROOT_URLCONF="builtin_server.urls")
++    def test_head_response_closing(self):
++        env = RequestFactory().head("/fileresponse/").environ
++        stdout = BytesIO()
++        handler = BaseServerHandler(BytesIO(), stdout, BytesIO(), env)
++        handler.request_handler = DummyHandler()
++        handler.run(get_internal_wsgi_application())
++        output = stdout.getvalue()
++        self.assertTrue(output.startswith(b"HTTP/1.1 200 OK"))
++        self.assertNotIn(b"foo", output)
++        self.assertIn("response", FILE_RESPONSE_HOLDER)
++        response = FILE_RESPONSE_HOLDER["response"]
++        self.assertIs(response.closed, True)
++        buf1, buf2 = FILE_RESPONSE_HOLDER["buffers"]
++        self.assertIs(buf1.closed, True)
++        self.assertIs(buf2.closed, True)
++        FILE_RESPONSE_HOLDER.clear()
++

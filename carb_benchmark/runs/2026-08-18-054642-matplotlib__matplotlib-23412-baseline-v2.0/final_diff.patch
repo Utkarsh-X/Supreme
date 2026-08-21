@@ -1,0 +1,56 @@
+diff --git a/lib/matplotlib/axes/_base.py b/lib/matplotlib/axes/_base.py
+index 46715e0..c8368c9 100644
+--- a/lib/matplotlib/axes/_base.py
++++ b/lib/matplotlib/axes/_base.py
+@@ -2972,7 +2972,7 @@ class _AxesBase(martist.Artist):
+                     else:
+                         ax.apply_aspect()
+                     axs = axs + [ax]
+-            top = -np.Inf
++            top = -np.inf
+             for ax in axs:
+                 bb = None
+                 if (ax.xaxis.get_ticks_position() in ['top', 'unknown']
+diff --git a/lib/matplotlib/patches.py b/lib/matplotlib/patches.py
+index e062249..0c893aa 100644
+--- a/lib/matplotlib/patches.py
++++ b/lib/matplotlib/patches.py
+@@ -586,10 +586,7 @@ class Patch(artist.Artist):
+         # docstring inherited
+         if not self.get_visible():
+             return
+-        # Patch has traditionally ignored the dashoffset.
+-        with cbook._setattr_cm(
+-                 self, _dash_pattern=(0, self._dash_pattern[1])), \
+-             self._bind_draw_path_function(renderer) as draw_path:
++        with self._bind_draw_path_function(renderer) as draw_path:
+             path = self.get_path()
+             transform = self.get_transform()
+             tpath = transform.transform_path_non_affine(path)
+diff --git a/lib/matplotlib/tests/test_patches.py b/lib/matplotlib/tests/test_patches.py
+index 7064d0d..8a89b73 100644
+--- a/lib/matplotlib/tests/test_patches.py
++++ b/lib/matplotlib/tests/test_patches.py
+@@ -5,6 +5,8 @@ import numpy as np
+ from numpy.testing import assert_almost_equal, assert_array_equal
+ import pytest
+ 
++from unittest.mock import MagicMock
++
+ import matplotlib as mpl
+ from matplotlib.patches import (Annulus, Ellipse, Patch, Polygon, Rectangle,
+                                 FancyArrowPatch, FancyArrow, BoxStyle)
+@@ -808,3 +810,13 @@ def test_default_capstyle():
+ def test_default_joinstyle():
+     patch = Patch()
+     assert patch.get_joinstyle() == 'miter'
++
++
++def test_patch_linestyle_dash_offset():
++    renderer = MagicMock()
++    gc = MagicMock()
++    renderer.new_gc.return_value = gc
++    patch = Rectangle((0, 0), 1, 1, linestyle=(10, (10, 10)))
++    patch.draw(renderer)
++    gc.set_dashes.assert_called_once_with(10, (10, 10))
++

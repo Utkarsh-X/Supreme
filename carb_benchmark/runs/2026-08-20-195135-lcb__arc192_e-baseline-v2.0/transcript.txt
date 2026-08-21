@@ -1,0 +1,34 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc192_e/main.py).
+
+### Method Explanation
+The problem requires counting all valid grid paths starting at any block $(x_1, y_1)$ and ending at any block $(x_2, y_2)$ within $[0, W] \times [0, H]$ such that no lattice point along the path falls into the forbidden hole region $[L, R] \times [D, U]$.
+
+1. **Path Avoidance Properties**:
+   - Any valid monotonic grid path that starts and ends outside the hole either stays entirely within one of four sub-rectangles (Top: $y \ge U+1$, Bottom: $y \le D-1$, Left: $x \le L-1$, Right: $x \ge R+1$), or it crosses between sub-rectangles either **above** the hole (crossing from $y = U \to U+1$ at $x_m \le L-1$) or **to the right of** the hole (crossing from $x = R \to R+1$ at $y_m \le D-1$).
+   - A monotonic path cannot cross both above and to the right of the hole.
+
+2. **Inclusion-Exclusion & Closed Form Calculation**:
+   - We sum total grid paths within the four overlapping boundary regions $S_{\text{Top}}, S_{\text{Bottom}}, S_{\text{Left}}, S_{\text{Right}}$ using Principle of Inclusion-Exclusion. The sum of grid paths between all pairs of points within a sub-rectangle of dimensions $w \times h$ has a closed-form formula:
+     \[ f(w, h) = \binom{w + h + 4}{w + 2} - (w + 3) - (h + 1)(w + 2) \]
+   - For paths crossing above or to the right of the hole between disjoint regions, we iterate over the possible transition points $x_m \in [0, L-1]$ (for above) and $y_m \in [0, D-1]$ (for right). Using combinatorial identities, the path counts starting at $(x_1, y_1)$ to $x_m$ and from $x_m$ to $(x_2, y_2)$ are reduced to $O(1)$ terms per step.
+
+3. **Complexity**:
+   - **Time Complexity**: $O(W + H)$, well within the 2-second time limit for $W, H \le 10^6$.
+   - **Space Complexity**: $O(W + H)$ to store factorials and modular inverses.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc192_e/main.py).
+
+### Method Explanation
+The problem requires counting all valid grid paths starting at any block $(x_1, y_1)$ and ending at any block $(x_2, y_2)$ within $[0, W] \times [0, H]$ such that no lattice point along the path falls into the forbidden hole region $[L, R] \times [D, U]$.
+
+1. **Path Avoidance Properties**:
+   - Any valid monotonic grid path that starts and ends outside the hole either stays entirely within one of four sub-rectangles (Top: $y \ge U+1$, Bottom: $y \le D-1$, Left: $x \le L-1$, Right: $x \ge R+1$), or it crosses between sub-rectangles either **above** the hole (crossing from $y = U \to U+1$ at $x_m \le L-1$) or **to the right of** the hole (crossing from $x = R \to R+1$ at $y_m \le D-1$).
+   - A monotonic path cannot cross both above and to the right of the hole.
+
+2. **Inclusion-Exclusion & Closed Form Calculation**:
+   - We sum total grid paths within the four overlapping boundary regions $S_{\text{Top}}, S_{\text{Bottom}}, S_{\text{Left}}, S_{\text{Right}}$ using Principle of Inclusion-Exclusion. The sum of grid paths between all pairs of points within a sub-rectangle of dimensions $w \times h$ has a closed-form formula:
+     \[ f(w, h) = \binom{w + h + 4}{w + 2} - (w + 3) - (h + 1)(w + 2) \]
+   - For paths crossing above or to the right of the hole between disjoint regions, we iterate over the possible transition points $x_m \in [0, L-1]$ (for above) and $y_m \in [0, D-1]$ (for right). Using combinatorial identities, the path counts starting at $(x_1, y_1)$ to $x_m$ and from $x_m$ to $(x_2, y_2)$ are reduced to $O(1)$ terms per step.
+
+3. **Complexity**:
+   - **Time Complexity**: $O(W + H)$, well within the 2-second time limit for $W, H \le 10^6$.
+   - **Space Complexity**: $O(W + H)$ to store factorials and modular inverses.

@@ -1,0 +1,76 @@
+diff --git a/main.py b/main.py
+index c86f6c8..6e55f3b 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,70 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import deque
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    grid = input_data[1:]
++    
++    in_edges = [{} for _ in range(N)]
++    out_mask = [{} for _ in range(N)]
++    
++    for i in range(N):
++        row = grid[i]
++        for j in range(N):
++            c = row[j]
++            if c != '-':
++                if c not in in_edges[j]:
++                    in_edges[j][c] = []
++                in_edges[j][c].append(i)
++                
++                if c not in out_mask[i]:
++                    out_mask[i][c] = 0
++                out_mask[i][c] |= (1 << j)
++                
++    dist = [[-1] * N for _ in range(N)]
++    unvisited = [(1 << N) - 1 for _ in range(N)]
++    queue = deque()
++    
++    # Distance 0 base cases
++    for i in range(N):
++        dist[i][i] = 0
++        unvisited[i] &= ~(1 << i)
++        queue.append((i, i))
++        
++    # Distance 1 base cases
++    for i in range(N):
++        row = grid[i]
++        for j in range(N):
++            if row[j] != '-':
++                if dist[i][j] == -1:
++                    dist[i][j] = 1
++                    unvisited[i] &= ~(1 << j)
++                    queue.append((i, j))
++                    
++    while queue:
++        u_prime, v_prime = queue.popleft()
++        d = dist[u_prime][v_prime] + 2
++        in_u = in_edges[u_prime]
++        out_v = out_mask[v_prime]
++        for c, u_list in in_u.items():
++            if c in out_v:
++                mask_v = out_v[c]
++                for u in u_list:
++                    cand = unvisited[u] & mask_v
++                    while cand:
++                        v = (cand & -cand).bit_length() - 1
++                        dist[u][v] = d
++                        unvisited[u] &= ~(1 << v)
++                        queue.append((u, v))
++                        cand &= cand - 1
++                        
++    out = []
++    for i in range(N):
++        out.append(" ".join(str(dist[i][j]) for j in range(N)))
++    sys.stdout.write("\n".join(out) + "\n")
++
++if __name__ == '__main__':
++    main()

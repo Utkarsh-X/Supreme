@@ -1,0 +1,86 @@
+diff --git a/main.py b/main.py
+index c86f6c8..0e2d557 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,80 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    
++    adj = [[] for _ in range(N)]
++    deg_T = [0] * N
++    
++    idx = 1
++    for _ in range(N - 1):
++        u = int(input_data[idx]) - 1
++        v = int(input_data[idx + 1]) - 1
++        idx += 2
++        adj[u].append(v)
++        adj[v].append(u)
++        deg_T[u] += 1
++        deg_T[v] += 1
++        
++    is_valid = [deg_T[i] >= 4 for i in range(N)]
++    valid_v = [i for i in range(N) if is_valid[i]]
++    
++    if not valid_v:
++        print(-1)
++        return
++        
++    visited = [False] * N
++    children = [[] for _ in range(N)]
++    dp = [0] * N
++    max_K = 0
++    
++    for root in valid_v:
++        if visited[root]:
++            continue
++            
++        comp = []
++        q = [root]
++        visited[root] = True
++        
++        head = 0
++        while head < len(q):
++            u = q[head]
++            head += 1
++            comp.append(u)
++            
++            for v in adj[u]:
++                if is_valid[v] and not visited[v]:
++                    visited[v] = True
++                    children[u].append(v)
++                    q.append(v)
++                    
++        for u in reversed(comp):
++            ch = children[u]
++            if not ch:
++                dp[u] = 1
++                if 1 > max_K:
++                    max_K = 1
++            else:
++                ch_dps = [dp[v] for v in ch]
++                ch_dps.sort(reverse=True)
++                
++                # dp[u]: max size of K in u's subtree if u's parent is in K (up to 3 children)
++                dp[u] = 1 + sum(ch_dps[:3])
++                
++                # ans_u: max size of K in u's subtree if u is the root of K (up to 4 children)
++                ans_u = 1 + sum(ch_dps[:4])
++                
++                if ans_u > max_K:
++                    max_K = ans_u
++                    
++    if max_K == 0:
++        print(-1)
++    else:
++        print(3 * max_K + 2)
++
++if __name__ == '__main__':
++    main()

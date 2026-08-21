@@ -1,0 +1,18 @@
+I have fixed the issue where `py:method` with the `:property:` option was registering index entries with parentheses `()`.
+
+### Root Cause
+In `PyMethod.get_index_text` ([sphinx/domains/python.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/sphinx/domains/python.py#L784-L804)), when the `:property:` option was present, parentheses `()` were included in the formatted index string (e.g. `_('%s() (%s property)') % (methname, clsname)`). Unlike regular methods, properties are accessed as attributes and do not take argument lists.
+
+### Fix
+- Updated `PyMethod.get_index_text` in `sphinx/domains/python.py` so that when `'property'` is in `self.options`, the index entry text is formatted without parentheses (`()`), matching the behavior of `py:property`.
+- Updated test assertions in `tests/test_domain_py.py` and added test coverage for `py:method` directives with `:property:` across class, module, and top-level scopes.
+All 142 domain test cases passed cleanly. The issue is resolved.
+I have fixed the issue where `py:method` with the `:property:` option was registering index entries with parentheses `()`.
+
+### Root Cause
+In `PyMethod.get_index_text` ([sphinx/domains/python.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-9698/sphinx/domains/python.py#L784-L804)), when the `:property:` option was present, parentheses `()` were included in the formatted index string (e.g. `_('%s() (%s property)') % (methname, clsname)`). Unlike regular methods, properties are accessed as attributes and do not take argument lists.
+
+### Fix
+- Updated `PyMethod.get_index_text` in `sphinx/domains/python.py` so that when `'property'` is in `self.options`, the index entry text is formatted without parentheses (`()`), matching the behavior of `py:property`.
+- Updated test assertions in `tests/test_domain_py.py` and added test coverage for `py:method` directives with `:property:` across class, module, and top-level scopes.
+All 142 domain test cases passed cleanly. The issue is resolved.

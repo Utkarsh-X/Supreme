@@ -1,0 +1,47 @@
+diff --git a/main.py b/main.py
+index c86f6c8..6a1f9eb 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,41 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    m = int(input_data[0])
++    n = int(input_data[1])
++    k = int(input_data[2])
++    
++    MOD = 10**9 + 7
++    N = m * n
++    
++    fact = [1] * (N + 1)
++    inv = [1] * (N + 1)
++    for i in range(1, N + 1):
++        fact[i] = (fact[i - 1] * i) % MOD
++    inv[N] = pow(fact[N], MOD - 2, MOD)
++    for i in range(N - 1, -1, -1):
++        inv[i] = (inv[i + 1] * (i + 1)) % MOD
++        
++    def nCr(n_val, r_val):
++        if r_val < 0 or r_val > n_val:
++            return 0
++        return fact[n_val] * inv[r_val] % MOD * inv[n_val - r_val] % MOD
++        
++    ways = nCr(N - 2, k - 2)
++    
++    inv6 = pow(6, MOD - 2, MOD)
++    sm = m * (m - 1) % MOD * (m + 1) % MOD * inv6 % MOD
++    sn = n * (n - 1) % MOD * (n + 1) % MOD * inv6 % MOD
++    
++    row_sum = (n * n % MOD) * sm % MOD
++    col_sum = (m * m % MOD) * sn % MOD
++    
++    D = (row_sum + col_sum) % MOD
++    ans = (D * ways) % MOD
++    print(ans)
++
++if __name__ == "__main__":
++    solve()

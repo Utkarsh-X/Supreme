@@ -1,0 +1,30 @@
+I have resolved the issue by updating `django.utils.autoreload.get_child_arguments()` to inspect `__main__.__spec__` to determine if Python was launched using `-m <pkg>` or `-m <mod>`.
+
+### Summary of Changes
+
+1. **`django/utils/autoreload.py`**:
+   - Replaced hardcoded `django.__main__` comparison with inspection of `__main__.__spec__`.
+   - When Python is launched via `python -m <module_or_package>`, `sys.modules['__main__'].__spec__` is set and its `name != '__main__'`.
+   - If `spec.name` ends with `.__main__`, the package name is extracted (`spec.name[:-9]`). Otherwise, `spec.name` is used.
+   - Re-executes the child reloader process using `[sys.executable, '-m', package_or_module_name, *sys.argv[1:]]`.
+   - Removed dependency on `django.__main__.__file__` existence.
+
+2. **`tests/utils_tests/test_autoreload.py`**:
+   - Updated `test_run_as_module` and `test_python_m_django` to mock `__main__.__spec__`.
+   - Added unit tests for custom package (`other_pkg.__main__`) and module without `__main__` (`other_mod`).
+   - Verified tests pass cleanly under both `python tests/runtests.py` and `python -m tests.runtests`.
+I have resolved the issue by updating `django.utils.autoreload.get_child_arguments()` to inspect `__main__.__spec__` to determine if Python was launched using `-m <pkg>` or `-m <mod>`.
+
+### Summary of Changes
+
+1. **`django/utils/autoreload.py`**:
+   - Replaced hardcoded `django.__main__` comparison with inspection of `__main__.__spec__`.
+   - When Python is launched via `python -m <module_or_package>`, `sys.modules['__main__'].__spec__` is set and its `name != '__main__'`.
+   - If `spec.name` ends with `.__main__`, the package name is extracted (`spec.name[:-9]`). Otherwise, `spec.name` is used.
+   - Re-executes the child reloader process using `[sys.executable, '-m', package_or_module_name, *sys.argv[1:]]`.
+   - Removed dependency on `django.__main__.__file__` existence.
+
+2. **`tests/utils_tests/test_autoreload.py`**:
+   - Updated `test_run_as_module` and `test_python_m_django` to mock `__main__.__spec__`.
+   - Added unit tests for custom package (`other_pkg.__main__`) and module without `__main__` (`other_mod`).
+   - Verified tests pass cleanly under both `python tests/runtests.py` and `python -m tests.runtests`.

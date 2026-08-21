@@ -1,0 +1,75 @@
+diff --git a/main.py b/main.py
+index c86f6c8..253cab9 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,69 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import bisect
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    A = [int(next(iterator)) for _ in range(N)]
++
++    INF = 10**9
++
++    B = [0] * N
++    for i in range(N):
++        target = 2 * A[i]
++        j = bisect.bisect_left(A, target)
++        if j < N:
++            B[i] = j - i
++        else:
++            B[i] = INF
++
++    # Build Sparse Table for RMQ on B
++    st = [B]
++    k = 1
++    while (1 << k) <= N:
++        prev = st[-1]
++        half = 1 << (k - 1)
++        curr = [max(prev[i], prev[i + half]) for i in range(N - (1 << k) + 1)]
++        st.append(curr)
++        k += 1
++
++    log_table = [0] * (N + 1)
++    for i in range(2, N + 1):
++        log_table[i] = log_table[i // 2] + 1
++
++    Q = int(next(iterator))
++    out = []
++
++    for _ in range(Q):
++        L = int(next(iterator))
++        R = int(next(iterator))
++        l = L - 1
++        r = R - 1
++        M = r - l + 1
++
++        low = 1
++        high = M // 2
++        ans = 0
++
++        while low <= high:
++            mid = (low + high) // 2
++            rem_len = mid
++            k_val = log_table[rem_len]
++            max_B = max(st[k_val][l], st[k_val][l + mid - (1 << k_val)])
++
++            if max_B <= M - mid:
++                ans = mid
++                low = mid + 1
++            else:
++                high = mid - 1
++
++        out.append(str(ans))
++
++    sys.stdout.write("\n".join(out) + "\n")
++
++if __name__ == '__main__':
++    solve()

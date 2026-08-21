@@ -1,0 +1,24 @@
+I have fixed the issue where `prefetch_related` returned `None` for a `GenericForeignKey` pointing to a model using a `UUIDField` as its primary key.
+
+### Root Cause
+In [django/contrib/contenttypes/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/django/contrib/contenttypes/fields.py#L205), `GenericForeignKey.get_prefetch_queryset` constructed lookup keys for source instances in `gfk_key` using:
+```python
+model._meta.pk.get_prep_value(getattr(obj, self.fk_field))
+```
+For target model instances retrieved from the database, `obj.pk` is converted to a Python type (e.g., a `uuid.UUID` instance for a `UUIDField`). However, `UUIDField.get_prep_value(string_val)` returns a string (e.g., `'...'`) rather than converting string values to Python objects (e.g., `UUID('...')`). Because `UUID('...') != '...'`, the hash join in Python between the target model instance and the source model instance failed, leaving the prefetched `GenericForeignKey` attribute as `None`.
+
+### Solution
+- Updated `GenericForeignKey.get_prefetch_queryset()` in [django/contrib/contenttypes/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/django/contrib/contenttypes/fields.py#L205) to use `model._meta.pk.to_python(...)` instead of `get_prep_value(...)`. This matches how `GenericForeignKey.__get__` and `GenericRelation.get_prefetch_queryset` perform object ID / primary key type conversions.
+- Added a unit test `test_prefetch_GFK_uuid_pk` in [tests/prefetch_related/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/tests/prefetch_related/tests.py#L888-L896) to prevent regressions.
+I have fixed the issue where `prefetch_related` returned `None` for a `GenericForeignKey` pointing to a model using a `UUIDField` as its primary key.
+
+### Root Cause
+In [django/contrib/contenttypes/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/django/contrib/contenttypes/fields.py#L205), `GenericForeignKey.get_prefetch_queryset` constructed lookup keys for source instances in `gfk_key` using:
+```python
+model._meta.pk.get_prep_value(getattr(obj, self.fk_field))
+```
+For target model instances retrieved from the database, `obj.pk` is converted to a Python type (e.g., a `uuid.UUID` instance for a `UUIDField`). However, `UUIDField.get_prep_value(string_val)` returns a string (e.g., `'...'`) rather than converting string values to Python objects (e.g., `UUID('...')`). Because `UUID('...') != '...'`, the hash join in Python between the target model instance and the source model instance failed, leaving the prefetched `GenericForeignKey` attribute as `None`.
+
+### Solution
+- Updated `GenericForeignKey.get_prefetch_queryset()` in [django/contrib/contenttypes/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/django/contrib/contenttypes/fields.py#L205) to use `model._meta.pk.to_python(...)` instead of `get_prep_value(...)`. This matches how `GenericForeignKey.__get__` and `GenericRelation.get_prefetch_queryset` perform object ID / primary key type conversions.
+- Added a unit test `test_prefetch_GFK_uuid_pk` in [tests/prefetch_related/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11211/tests/prefetch_related/tests.py#L888-L896) to prevent regressions.

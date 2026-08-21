@@ -1,0 +1,26 @@
+I have fixed the issue where `SelectDateWidget.value_from_datadict` could crash with an `OverflowError` when given large year/month/day integer values exceeding maximum C long / `sys.maxsize`.
+
+### Summary of Changes
+1. **[django/forms/widgets.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/django/forms/widgets.py#L1157-L1163)**: Updated `SelectDateWidget.value_from_datadict()` to catch `(ValueError, OverflowError)` when calling `datetime.date(int(y), int(m), int(d))`. When an `OverflowError` is raised (e.g. from integers exceeding C limits), it gracefully falls back to returning the pseudo-ISO formatted date string (e.g., `'1234567821345678-12-1'`), which is subsequently handled during form validation by `DateField.to_python` raising a standard `ValidationError`.
+2. **[tests/forms_tests/widget_tests/test_selectdatewidget.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/tests/forms_tests/widget_tests/test_selectdatewidget.py#L610-L614)**: Added a test case verifying that `SelectDateWidget.value_from_datadict()` correctly returns the pseudo-ISO string when provided with integer strings that trigger `OverflowError`.
+
+### Verification
+Ran the Django test suite for forms widgets:
+```bash
+python tests/runtests.py forms_tests.widget_tests.test_selectdatewidget
+python tests/runtests.py forms_tests
+```
+All 931 tests passed cleanly.
+I have fixed the issue where `SelectDateWidget.value_from_datadict` could crash with an `OverflowError` when given large year/month/day integer values exceeding maximum C long / `sys.maxsize`.
+
+### Summary of Changes
+1. **[django/forms/widgets.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/django/forms/widgets.py#L1157-L1163)**: Updated `SelectDateWidget.value_from_datadict()` to catch `(ValueError, OverflowError)` when calling `datetime.date(int(y), int(m), int(d))`. When an `OverflowError` is raised (e.g. from integers exceeding C limits), it gracefully falls back to returning the pseudo-ISO formatted date string (e.g., `'1234567821345678-12-1'`), which is subsequently handled during form validation by `DateField.to_python` raising a standard `ValidationError`.
+2. **[tests/forms_tests/widget_tests/test_selectdatewidget.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/tests/forms_tests/widget_tests/test_selectdatewidget.py#L610-L614)**: Added a test case verifying that `SelectDateWidget.value_from_datadict()` correctly returns the pseudo-ISO string when provided with integer strings that trigger `OverflowError`.
+
+### Verification
+Ran the Django test suite for forms widgets:
+```bash
+python tests/runtests.py forms_tests.widget_tests.test_selectdatewidget
+python tests/runtests.py forms_tests
+```
+All 931 tests passed cleanly.

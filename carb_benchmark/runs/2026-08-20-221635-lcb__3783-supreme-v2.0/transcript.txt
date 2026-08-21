@@ -1,0 +1,36 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3783/main.py).
+
+### Summary of Approach
+1. **Combinatorial Digit-by-Digit Construction**: We construct the permutation element-by-element from left to right.
+2. **Counting Valid Completions**: At step `i`, after picking a candidate value `x`, the required parity of all remaining `n - 1 - i` positions is fixed (alternating starting from `1 - (x % 2)`).
+3. **Parity Matching**:
+   - If the count of remaining unused odd numbers equals the required number of odd positions AND the count of remaining unused even numbers equals the required number of even positions, there are `rem_odd! * rem_even!` valid completions.
+   - Otherwise, there are `0` valid completions.
+4. **Lexicographical Selection**:
+   - We iterate through available unused numbers in ascending order.
+   - If `k` is less than or equal to the completion count `cnt`, candidate `x` is selected for position `i`.
+   - If `k > cnt`, we subtract `cnt` from `k` and try the next candidate.
+   - If no valid candidate satisfies `k`, return `[]`.
+
+### Verification
+- Tested against a brute-force generator for all `n` from 1 to 6 and all `k`, matching 100%.
+- Passed all public test cases (Example 1, Example 2, Example 3).
+- Verified performance on maximum constraints (`n = 100, k = 10^15`).
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3783/main.py).
+
+### Summary of Approach
+1. **Combinatorial Digit-by-Digit Construction**: We construct the permutation element-by-element from left to right.
+2. **Counting Valid Completions**: At step `i`, after picking a candidate value `x`, the required parity of all remaining `n - 1 - i` positions is fixed (alternating starting from `1 - (x % 2)`).
+3. **Parity Matching**:
+   - If the count of remaining unused odd numbers equals the required number of odd positions AND the count of remaining unused even numbers equals the required number of even positions, there are `rem_odd! * rem_even!` valid completions.
+   - Otherwise, there are `0` valid completions.
+4. **Lexicographical Selection**:
+   - We iterate through available unused numbers in ascending order.
+   - If `k` is less than or equal to the completion count `cnt`, candidate `x` is selected for position `i`.
+   - If `k > cnt`, we subtract `cnt` from `k` and try the next candidate.
+   - If no valid candidate satisfies `k`, return `[]`.
+
+### Verification
+- Tested against a brute-force generator for all `n` from 1 to 6 and all `k`, matching 100%.
+- Passed all public test cases (Example 1, Example 2, Example 3).
+- Verified performance on maximum constraints (`n = 100, k = 10^15`).

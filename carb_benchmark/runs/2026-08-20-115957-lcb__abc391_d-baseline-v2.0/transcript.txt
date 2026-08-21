@@ -1,0 +1,44 @@
+An optimal Python 3 solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_d/main.py).
+
+### Method Summary
+
+1. **Column Dynamics & Stack Bounds**:
+   - For any column $x$, blocks maintain their vertical ordering over time.
+   - Let $K$ be the minimum number of blocks across all columns $1 \dots W$. If $K = 0$, a full bottom row can never be formed, so no block is ever removed ($R_i = \infty$).
+   - When $K > 0$, at most $K$ row removals occur during the entire simulation.
+
+2. **Row Removal Timing Recurrence**:
+   - The $m$-th row removal (for $1 \le m \le K$) requires the $m$-th block (1-indexed from bottom) in every column to reach row 1.
+   - The time $T_{\text{rem}}(m)$ at which the $m$-th row removal occurs is given by:
+     $$T_{\text{rem}}(1) = \max_{1 \le x \le W} Y_{x, 1}$$
+     $$T_{\text{rem}}(m) = \max(T_{\text{rem}}(m - 1) + 1, \max_{1 \le x \le W} Y_{x, m}) \quad \text{for } m \ge 2$$
+
+3. **Query Evaluation**:
+   - The $k$-th block of column $x$ (for $k \le K$) is destroyed during row removal step $k$ at time $T_{\text{rem}}(k)$. Blocks with $k > K$ are never removed.
+   - For a query $(T_j, A_j)$, block $A_j$ exists at time $T_j + 0.5$ if and only if $T_j < R_{A_j}$.
+
+### Complexity
+- **Time Complexity**: $O(N \log N + Q)$, where $K \times W \le N$, ensuring linear iteration across grid layers.
+- **Space Complexity**: $O(N + Q)$ for block indices, columns, removal times, and standard fast I/O buffering.
+An optimal Python 3 solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_d/main.py).
+
+### Method Summary
+
+1. **Column Dynamics & Stack Bounds**:
+   - For any column $x$, blocks maintain their vertical ordering over time.
+   - Let $K$ be the minimum number of blocks across all columns $1 \dots W$. If $K = 0$, a full bottom row can never be formed, so no block is ever removed ($R_i = \infty$).
+   - When $K > 0$, at most $K$ row removals occur during the entire simulation.
+
+2. **Row Removal Timing Recurrence**:
+   - The $m$-th row removal (for $1 \le m \le K$) requires the $m$-th block (1-indexed from bottom) in every column to reach row 1.
+   - The time $T_{\text{rem}}(m)$ at which the $m$-th row removal occurs is given by:
+     $$T_{\text{rem}}(1) = \max_{1 \le x \le W} Y_{x, 1}$$
+     $$T_{\text{rem}}(m) = \max(T_{\text{rem}}(m - 1) + 1, \max_{1 \le x \le W} Y_{x, m}) \quad \text{for } m \ge 2$$
+
+3. **Query Evaluation**:
+   - The $k$-th block of column $x$ (for $k \le K$) is destroyed during row removal step $k$ at time $T_{\text{rem}}(k)$. Blocks with $k > K$ are never removed.
+   - For a query $(T_j, A_j)$, block $A_j$ exists at time $T_j + 0.5$ if and only if $T_j < R_{A_j}$.
+
+### Complexity
+- **Time Complexity**: $O(N \log N + Q)$, where $K \times W \le N$, ensuring linear iteration across grid layers.
+- **Space Complexity**: $O(N + Q)$ for block indices, columns, removal times, and standard fast I/O buffering.

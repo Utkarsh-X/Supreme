@@ -1,0 +1,20 @@
+{
+  "run_id": "2026-08-20-124758-lcb__3701-baseline-v2.0",
+  "task_id": "lcb__3701",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 0.3,
+  "tool_calls": [],
+  "tool_call_counts": {},
+  "time_to_first_edit": null,
+  "num_turns": 0,
+  "duration_seconds": 0,
+  "status": "ERROR",
+  "usage": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "thinking_tokens": 0,
+    "cache_read_tokens": 0,
+    "total_tokens": 0
+  },
+  "error": null
+}

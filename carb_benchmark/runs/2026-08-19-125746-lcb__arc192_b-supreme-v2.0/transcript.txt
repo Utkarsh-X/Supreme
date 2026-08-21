@@ -1,0 +1,44 @@
+An optimal strategy solution for the board game played by Fennec and Snuke has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc192_b/main.py).
+
+### Method Explanation
+
+1. **Game Structure & Stalling Moves**:
+   - The game ends as soon as all $N$ elements are added to $S$ ($|S| = N$), and the player who adds the $N$-th distinct element wins.
+   - Reaching $|S| = N - 1$ is a winning position for the player to move, because they can immediately pick the last fresh element and win.
+   - Consequently, neither player wants to move to $|S| = N - 1$ until forced to. When $|S| = N - 2$, both players stall by decrementing elements already in $S$.
+   - Each element $A_i$ placed in $S$ provides $A_i - 1$ available stalling moves. The parity of $A_i - 1$ depends solely on whether $A_i$ is even or odd:
+     - If $A_i$ is **even**, $A_i - 1$ is odd ($1 \pmod 2$ stalling move).
+     - If $A_i$ is **odd**, $A_i - 1$ is even ($0 \pmod 2$ stalling moves).
+
+2. **Winning Conditions**:
+   Let $E$ be the count of even numbers in $A$.
+   - **$N = 1$**: Fennec picks the first element and wins immediately ($\text{Fennec}$).
+   - **$N = 2$**: Fennec is forced to make $|S| = 1$, and Snuke picks the second element to win ($\text{Snuke}$).
+   - **$N = 3$**: If all elements are even ($E = 3$), Snuke wins. Otherwise ($E < 3$), Fennec can choose an odd element on Move 1 to force Snuke into picking the second fresh element ($\text{Fennec}$).
+   - **$N \ge 4$**: Fennec wins if $(N + E) \pmod 2 \equiv 1$, otherwise Snuke wins.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$ to count even elements in $A$.
+- **Space Complexity**: $\mathcal{O}(N)$ to store the array from standard input.
+An optimal strategy solution for the board game played by Fennec and Snuke has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc192_b/main.py).
+
+### Method Explanation
+
+1. **Game Structure & Stalling Moves**:
+   - The game ends as soon as all $N$ elements are added to $S$ ($|S| = N$), and the player who adds the $N$-th distinct element wins.
+   - Reaching $|S| = N - 1$ is a winning position for the player to move, because they can immediately pick the last fresh element and win.
+   - Consequently, neither player wants to move to $|S| = N - 1$ until forced to. When $|S| = N - 2$, both players stall by decrementing elements already in $S$.
+   - Each element $A_i$ placed in $S$ provides $A_i - 1$ available stalling moves. The parity of $A_i - 1$ depends solely on whether $A_i$ is even or odd:
+     - If $A_i$ is **even**, $A_i - 1$ is odd ($1 \pmod 2$ stalling move).
+     - If $A_i$ is **odd**, $A_i - 1$ is even ($0 \pmod 2$ stalling moves).
+
+2. **Winning Conditions**:
+   Let $E$ be the count of even numbers in $A$.
+   - **$N = 1$**: Fennec picks the first element and wins immediately ($\text{Fennec}$).
+   - **$N = 2$**: Fennec is forced to make $|S| = 1$, and Snuke picks the second element to win ($\text{Snuke}$).
+   - **$N = 3$**: If all elements are even ($E = 3$), Snuke wins. Otherwise ($E < 3$), Fennec can choose an odd element on Move 1 to force Snuke into picking the second fresh element ($\text{Fennec}$).
+   - **$N \ge 4$**: Fennec wins if $(N + E) \pmod 2 \equiv 1$, otherwise Snuke wins.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$ to count even elements in $A$.
+- **Space Complexity**: $\mathcal{O}(N)$ to store the array from standard input.

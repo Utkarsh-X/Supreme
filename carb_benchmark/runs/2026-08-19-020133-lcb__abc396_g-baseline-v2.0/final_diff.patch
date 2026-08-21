@@ -1,0 +1,71 @@
+diff --git a/main.py b/main.py
+index c86f6c8..038ea46 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,65 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def fwht(A):
++    N = len(A)
++    step = 1
++    if step < N:
++        for i in range(0, N, 2):
++            u = A[i]
++            v = A[i+1]
++            A[i] = u + v
++            A[i+1] = u - v
++        step = 2
++    if step < N:
++        for i in range(0, N, 4):
++            u0, u1 = A[i], A[i+1]
++            v0, v1 = A[i+2], A[i+3]
++            A[i], A[i+1] = u0 + v0, u1 + v1
++            A[i+2], A[i+3] = u0 - v0, u1 - v1
++        step = 4
++    if step < N:
++        for i in range(0, N, 8):
++            u0, u1, u2, u3 = A[i], A[i+1], A[i+2], A[i+3]
++            v0, v1, v2, v3 = A[i+4], A[i+5], A[i+6], A[i+7]
++            A[i], A[i+1], A[i+2], A[i+3] = u0 + v0, u1 + v1, u2 + v2, u3 + v3
++            A[i+4], A[i+5], A[i+6], A[i+7] = u0 - v0, u1 - v1, u2 - v2, u3 - v3
++        step = 8
++    while step < N:
++        for i in range(0, N, step * 2):
++            L = A[i : i + step]
++            R = A[i + step : i + step * 2]
++            A[i : i + step] = [x + y for x, y in zip(L, R)]
++            A[i + step : i + step * 2] = [x - y for x, y in zip(L, R)]
++        step *= 2
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    H = int(input_data[0])
++    W = int(input_data[1])
++    rows = input_data[2:2+H]
++
++    N = 1 << W
++    cnt = [0] * N
++    for r in rows:
++        cnt[int(r, 2)] += 1
++
++    f = [0] * N
++    for mask in range(N):
++        popc = bin(mask).count('1')
++        f[mask] = min(popc, W - popc)
++
++    F_cnt = list(cnt)
++    F_f = list(f)
++    fwht(F_cnt)
++    fwht(F_f)
++
++    F_res = [a * b for a, b in zip(F_cnt, F_f)]
++    fwht(F_res)
++
++    res = [x // N for x in F_res]
++    print(min(res))
++
++if __name__ == '__main__':
++    main()

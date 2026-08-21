@@ -1,0 +1,46 @@
+I have implemented the complete solution for the problem in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc196_d/main.py).
+
+### Method Summary
+
+1. **Stamina & Constraint Formulation**:
+   Let $w_j$ be the weight of road $j$, and let $W_k = \sum_{j=1}^k w_j$ ($W_0 = 0$).
+   Traversing road $j$ changes stamina by $+w_j$ in either direction. For a person traveling between towns $S_i$ and $T_i$, let $a_i = \min(S_i, T_i)$ and $b_i = \max(S_i, T_i)$. Let $L_i = a_i - 1$ and $R_i = b_i - 1$:
+   - Ending stamina $0 \implies W_{L_i} = W_{R_i}$.
+   - Intermediate stamina $> 0$:
+     - If $S_i < T_i$ (Rightward): $W_m > W_{L_i}$ for all $m \in (L_i, R_i)$.
+     - If $S_i > T_i$ (Leftward): $W_m < W_{L_i}$ for all $m \in (L_i, R_i)$.
+
+2. **Conflict Characterization**:
+   A subset of people is valid if and only if no pair of people in the subset conflict. Two people $p$ and $q$ conflict if:
+   - They share the same left endpoint ($L_p = L_q$) or right endpoint ($R_p = R_q$), OR
+   - They have the same direction and crossing intervals ($L_p < L_q < R_p < R_q$ or $L_q < L_p < R_q < R_p$).
+
+3. **Algorithm**:
+   - For each person $q$, we find `limit[q]`, the maximum index $p < q$ of a person that conflicts with $q$.
+   - Same-endpoint conflicts are found in $O(1)$ time per person using hash maps.
+   - Same-direction crossing conflicts are found using **CDQ Divide-and-Conquer** with a 1D Segment Tree in $O(M \log M \log N)$ time with in-place merge-sorting.
+   - For each query left endpoint $L$, we compute the maximum valid right endpoint $R_{\text{max}}[L]$ using a two-pointer sweep in $O(M)$ time.
+   - Each query $(L_k, R_k)$ is answered in $O(1)$ time by checking $R_k \le R_{\text{max}}[L_k]$.
+I have implemented the complete solution for the problem in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc196_d/main.py).
+
+### Method Summary
+
+1. **Stamina & Constraint Formulation**:
+   Let $w_j$ be the weight of road $j$, and let $W_k = \sum_{j=1}^k w_j$ ($W_0 = 0$).
+   Traversing road $j$ changes stamina by $+w_j$ in either direction. For a person traveling between towns $S_i$ and $T_i$, let $a_i = \min(S_i, T_i)$ and $b_i = \max(S_i, T_i)$. Let $L_i = a_i - 1$ and $R_i = b_i - 1$:
+   - Ending stamina $0 \implies W_{L_i} = W_{R_i}$.
+   - Intermediate stamina $> 0$:
+     - If $S_i < T_i$ (Rightward): $W_m > W_{L_i}$ for all $m \in (L_i, R_i)$.
+     - If $S_i > T_i$ (Leftward): $W_m < W_{L_i}$ for all $m \in (L_i, R_i)$.
+
+2. **Conflict Characterization**:
+   A subset of people is valid if and only if no pair of people in the subset conflict. Two people $p$ and $q$ conflict if:
+   - They share the same left endpoint ($L_p = L_q$) or right endpoint ($R_p = R_q$), OR
+   - They have the same direction and crossing intervals ($L_p < L_q < R_p < R_q$ or $L_q < L_p < R_q < R_p$).
+
+3. **Algorithm**:
+   - For each person $q$, we find `limit[q]`, the maximum index $p < q$ of a person that conflicts with $q$.
+   - Same-endpoint conflicts are found in $O(1)$ time per person using hash maps.
+   - Same-direction crossing conflicts are found using **CDQ Divide-and-Conquer** with a 1D Segment Tree in $O(M \log M \log N)$ time with in-place merge-sorting.
+   - For each query left endpoint $L$, we compute the maximum valid right endpoint $R_{\text{max}}[L]$ using a two-pointer sweep in $O(M)$ time.
+   - Each query $(L_k, R_k)$ is answered in $O(1)$ time by checking $R_k \le R_{\text{max}}[L_k]$.

@@ -1,0 +1,20 @@
+I have resolved the issue by updating the `auth.E003` (and `auth.W004`) system check in `django.contrib.auth.checks` to check whether the `USERNAME_FIELD` is covered by a total `UniqueConstraint` on the model.
+
+### Summary of Changes
+
+1. **[django/contrib/auth/checks.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13568/django/contrib/auth/checks.py#L54-L64)**:
+   - Extended the uniqueness check for `cls.USERNAME_FIELD` to evaluate `True` if `cls._meta.get_field(cls.USERNAME_FIELD).unique` is `True` **or** if `cls._meta.total_unique_constraints` contains a single-field `UniqueConstraint` matching `(cls.USERNAME_FIELD,)` without a `condition`.
+
+2. **[tests/auth_tests/test_checks.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13568/tests/auth_tests/test_checks.py#L88-L125)**:
+   - Added `test_username_unique_constraint` to verify that defining a total `UniqueConstraint` for `USERNAME_FIELD` skips `auth.E003`.
+   - Added `test_username_partially_unique_constraint` to verify that defining a partial `UniqueConstraint` (with a `condition`) still triggers `auth.E003`.
+I have resolved the issue by updating the `auth.E003` (and `auth.W004`) system check in `django.contrib.auth.checks` to check whether the `USERNAME_FIELD` is covered by a total `UniqueConstraint` on the model.
+
+### Summary of Changes
+
+1. **[django/contrib/auth/checks.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13568/django/contrib/auth/checks.py#L54-L64)**:
+   - Extended the uniqueness check for `cls.USERNAME_FIELD` to evaluate `True` if `cls._meta.get_field(cls.USERNAME_FIELD).unique` is `True` **or** if `cls._meta.total_unique_constraints` contains a single-field `UniqueConstraint` matching `(cls.USERNAME_FIELD,)` without a `condition`.
+
+2. **[tests/auth_tests/test_checks.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13568/tests/auth_tests/test_checks.py#L88-L125)**:
+   - Added `test_username_unique_constraint` to verify that defining a total `UniqueConstraint` for `USERNAME_FIELD` skips `auth.E003`.
+   - Added `test_username_partially_unique_constraint` to verify that defining a partial `UniqueConstraint` (with a `condition`) still triggers `auth.E003`.

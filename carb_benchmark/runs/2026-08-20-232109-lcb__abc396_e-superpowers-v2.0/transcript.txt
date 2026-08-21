@@ -1,0 +1,48 @@
+I have implemented the solution in `main.py`.
+
+### Method Explanation
+
+The problem asks for a sequence $A = (A_1, A_2, \ldots, A_N)$ of non-negative integers satisfying $A_{X_i} \oplus A_{Y_i} = Z_i$ for all $1 \le i \le M$ while minimizing the sum $\sum_{i=1}^N A_i$.
+
+1. **Connected Components & Relative Values:**
+   We can model the constraints as an undirected graph where each vertex is an element $A_i$ and each edge $(X_i, Y_i)$ has weight $Z_i$.
+   For any connected component $C$:
+   - Fixing the value of a root vertex $r \in C$ as $A_r^{(0)} = 0$ uniquely determines $A_v^{(0)}$ for all $v \in C$ via graph traversal (BFS/DFS): $A_v^{(0)} = A_u^{(0)} \oplus Z_{u, v}$.
+   - We check consistency for all edges in $C$. If for any edge $(u, v)$ with weight $z$ we find $A_u^{(0)} \oplus A_v^{(0)} \neq z$, then no valid assignment exists, so we print `-1`.
+   - Any valid assignment for component $C$ takes the form $A_v = A_v^{(0)} \oplus d$ for some non-negative integer $d$.
+
+2. **Bitwise Independent Optimization:**
+   The sum of elements in component $C$ is:
+   $$\sum_{v \in C} A_v = \sum_{v \in C} (A_v^{(0)} \oplus d) = \sum_{k=0}^{29} 2^k \sum_{v \in C} (A_{v, k}^{(0)} \oplus d_k)$$
+   Because the $k$-th bit choice $d_k \in \{0, 1\}$ is completely independent across bits $0 \le k \le 29$:
+   - Let $\text{cnt}_k$ be the number of vertices in $C$ where the $k$-th bit of $A_v^{(0)}$ is 1.
+   - If $d_k = 0$, the $k$-th bit contributes $\text{cnt}_k$ ones.
+   - If $d_k = 1$, the $k$-th bit contributes $|C| - \text{cnt}_k$ ones.
+   - To minimize the sum, we choose $d_k = 1$ if $\text{cnt}_k > |C| / 2$, and $d_k = 0$ otherwise.
+
+3. **Verification:**
+   The implementation was verified against all sample test cases as well as large benchmark tests ($N = 2 \cdot 10^5, M = 10^5$).
+I have implemented the solution in `main.py`.
+
+### Method Explanation
+
+The problem asks for a sequence $A = (A_1, A_2, \ldots, A_N)$ of non-negative integers satisfying $A_{X_i} \oplus A_{Y_i} = Z_i$ for all $1 \le i \le M$ while minimizing the sum $\sum_{i=1}^N A_i$.
+
+1. **Connected Components & Relative Values:**
+   We can model the constraints as an undirected graph where each vertex is an element $A_i$ and each edge $(X_i, Y_i)$ has weight $Z_i$.
+   For any connected component $C$:
+   - Fixing the value of a root vertex $r \in C$ as $A_r^{(0)} = 0$ uniquely determines $A_v^{(0)}$ for all $v \in C$ via graph traversal (BFS/DFS): $A_v^{(0)} = A_u^{(0)} \oplus Z_{u, v}$.
+   - We check consistency for all edges in $C$. If for any edge $(u, v)$ with weight $z$ we find $A_u^{(0)} \oplus A_v^{(0)} \neq z$, then no valid assignment exists, so we print `-1`.
+   - Any valid assignment for component $C$ takes the form $A_v = A_v^{(0)} \oplus d$ for some non-negative integer $d$.
+
+2. **Bitwise Independent Optimization:**
+   The sum of elements in component $C$ is:
+   $$\sum_{v \in C} A_v = \sum_{v \in C} (A_v^{(0)} \oplus d) = \sum_{k=0}^{29} 2^k \sum_{v \in C} (A_{v, k}^{(0)} \oplus d_k)$$
+   Because the $k$-th bit choice $d_k \in \{0, 1\}$ is completely independent across bits $0 \le k \le 29$:
+   - Let $\text{cnt}_k$ be the number of vertices in $C$ where the $k$-th bit of $A_v^{(0)}$ is 1.
+   - If $d_k = 0$, the $k$-th bit contributes $\text{cnt}_k$ ones.
+   - If $d_k = 1$, the $k$-th bit contributes $|C| - \text{cnt}_k$ ones.
+   - To minimize the sum, we choose $d_k = 1$ if $\text{cnt}_k > |C| / 2$, and $d_k = 0$ otherwise.
+
+3. **Verification:**
+   The implementation was verified against all sample test cases as well as large benchmark tests ($N = 2 \cdot 10^5, M = 10^5$).

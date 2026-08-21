@@ -1,0 +1,18 @@
+I have identified and resolved the issue where autodoc ignored an empty `__all__ = []` attribute in modules.
+
+### Cause of Bug
+In [sphinx/ext/autodoc/__init__.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1077), `ModuleDocumenter.get_object_members` checked `if not self.__all__:` to determine if `__all__` was unset. Because an empty list `[]` evaluates to `False` in Python truthiness checks, autodoc treated `__all__ = []` as if `__all__` were not defined at all, causing all module members to be documented.
+
+### Solution
+1. Updated [ModuleDocumenter.get_object_members](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1074-L1086) to explicitly check `if self.__all__ is None:`. When `self.__all__` is an empty sequence `[]`, members not present in `self.__all__` are marked as `skipped = True` and excluded from documentation.
+2. Updated [ModuleDocumenter.sort_members](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1101-L1116) to check `if self.__all__ is not None:`.
+3. Added unit tests in [tests/test_ext_autodoc.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/test_ext_autodoc.py#L741-L781) and target file [tests/roots/test-ext-autodoc/target/empty_all.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/roots/test-ext-autodoc/target/empty_all.py) to verify that empty `__all__` suppresses member generation while respect to `:ignore-module-all:` is maintained.
+I have identified and resolved the issue where autodoc ignored an empty `__all__ = []` attribute in modules.
+
+### Cause of Bug
+In [sphinx/ext/autodoc/__init__.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1077), `ModuleDocumenter.get_object_members` checked `if not self.__all__:` to determine if `__all__` was unset. Because an empty list `[]` evaluates to `False` in Python truthiness checks, autodoc treated `__all__ = []` as if `__all__` were not defined at all, causing all module members to be documented.
+
+### Solution
+1. Updated [ModuleDocumenter.get_object_members](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1074-L1086) to explicitly check `if self.__all__ is None:`. When `self.__all__` is an empty sequence `[]`, members not present in `self.__all__` are marked as `skipped = True` and excluded from documentation.
+2. Updated [ModuleDocumenter.sort_members](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/sphinx/ext/autodoc/__init__.py#L1101-L1116) to check `if self.__all__ is not None:`.
+3. Added unit tests in [tests/test_ext_autodoc.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/test_ext_autodoc.py#L741-L781) and target file [tests/roots/test-ext-autodoc/target/empty_all.py](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-8595/tests/roots/test-ext-autodoc/target/empty_all.py) to verify that empty `__all__` suppresses member generation while respect to `:ignore-module-all:` is maintained.

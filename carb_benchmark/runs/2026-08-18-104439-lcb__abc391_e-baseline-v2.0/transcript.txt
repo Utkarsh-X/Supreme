@@ -1,0 +1,36 @@
+An optimal Dynamic Programming / Bottom-Up Tree reduction solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_e/main.py).
+
+### Method Explanation
+
+The reduction process forms a full ternary tree of depth $N$, where each non-leaf node's bit value is determined by the majority of its three children.
+
+For any subtree:
+- It has an original majority value $v \in \{0, 1\}$.
+- Keeping the subtree's majority value as $v$ requires 0 changes ($cost = 0$).
+- Changing the subtree's majority value to $1 - v$ requires a minimum number of bit flips, denoted as $dp[u]$.
+
+When combining three children $C_1, C_2, C_3$ to form a parent node $P$:
+1. The parent's original value $v_P$ is the majority of $(v_1, v_2, v_3)$.
+2. To flip the parent's value to $1 - v_P$, at least two children must take the value $1 - v_P$.
+3. The cost to make child $i$ take value $1 - v_P$ is $dp[C_i]$ if $v_i = v_P$, and $0$ if $v_i \neq v_P$ (since child $i$ already takes $1 - v_P$).
+4. The minimum cost $dp[P]$ is the sum of the two smallest values among these three costs.
+
+Processing bottom-up from level 0 (leaves, where $dp[i] = 1$) to level $N$ runs in $O(3^N)$ time and easily finishes within the time limit.
+An optimal Dynamic Programming / Bottom-Up Tree reduction solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_e/main.py).
+
+### Method Explanation
+
+The reduction process forms a full ternary tree of depth $N$, where each non-leaf node's bit value is determined by the majority of its three children.
+
+For any subtree:
+- It has an original majority value $v \in \{0, 1\}$.
+- Keeping the subtree's majority value as $v$ requires 0 changes ($cost = 0$).
+- Changing the subtree's majority value to $1 - v$ requires a minimum number of bit flips, denoted as $dp[u]$.
+
+When combining three children $C_1, C_2, C_3$ to form a parent node $P$:
+1. The parent's original value $v_P$ is the majority of $(v_1, v_2, v_3)$.
+2. To flip the parent's value to $1 - v_P$, at least two children must take the value $1 - v_P$.
+3. The cost to make child $i$ take value $1 - v_P$ is $dp[C_i]$ if $v_i = v_P$, and $0$ if $v_i \neq v_P$ (since child $i$ already takes $1 - v_P$).
+4. The minimum cost $dp[P]$ is the sum of the two smallest values among these three costs.
+
+Processing bottom-up from level 0 (leaves, where $dp[i] = 1$) to level $N$ runs in $O(3^N)$ time and easily finishes within the time limit.

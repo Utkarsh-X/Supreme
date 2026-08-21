@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-08-20-120159-lcb__abc393_b-baseline-v2.0",
+  "task_id": "lcb__abc393_b",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 2400.2,
+  "tool_calls": [
+    "list_dir",
+    "view_file",
+    "write_to_file",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "list_dir": 1,
+    "view_file": 1,
+    "write_to_file": 1,
+    "run_command": 1
+  },
+  "time_to_first_edit": 21.124,
+  "num_turns": null,
+  "duration_seconds": null,
+  "status": null,
+  "usage": null,
+  "error": "AGY EXECUTION TIMED OUT after 2400s (harness cap)"
+}

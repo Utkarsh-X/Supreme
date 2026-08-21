@@ -1,0 +1,36 @@
+This behavior was not intended. `srepr` was missing printer methods for Python built-in container types (`dict`, `set`, and `frozenset`) in [ReprPrinter](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19346/sympy/printing/repr.py#L19), causing it to fall back to Python's default `str(expr)` string representation for those types.
+
+### Solution
+
+Added `_print_dict`, `_print_set`, and `_print_frozenset` methods to `ReprPrinter` in [repr.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19346/sympy/printing/repr.py#L254-L274) so that keys, values, and set elements are recursively printed using `srepr` (and sorted consistently with `default_sort_key`):
+
+```python
+>>> from sympy import srepr
+>>> from sympy.abc import x, y
+>>> srepr({x, y})
+"{Symbol('x'), Symbol('y')}"
+>>> srepr({x: y})
+"{Symbol('x'): Symbol('y')}"
+>>> srepr(set())
+'set()'
+>>> srepr(frozenset({x, y}))
+"frozenset({Symbol('x'), Symbol('y')})"
+```
+This behavior was not intended. `srepr` was missing printer methods for Python built-in container types (`dict`, `set`, and `frozenset`) in [ReprPrinter](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19346/sympy/printing/repr.py#L19), causing it to fall back to Python's default `str(expr)` string representation for those types.
+
+### Solution
+
+Added `_print_dict`, `_print_set`, and `_print_frozenset` methods to `ReprPrinter` in [repr.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19346/sympy/printing/repr.py#L254-L274) so that keys, values, and set elements are recursively printed using `srepr` (and sorted consistently with `default_sort_key`):
+
+```python
+>>> from sympy import srepr
+>>> from sympy.abc import x, y
+>>> srepr({x, y})
+"{Symbol('x'), Symbol('y')}"
+>>> srepr({x: y})
+"{Symbol('x'): Symbol('y')}"
+>>> srepr(set())
+'set()'
+>>> srepr(frozenset({x, y}))
+"frozenset({Symbol('x'), Symbol('y')})"
+```

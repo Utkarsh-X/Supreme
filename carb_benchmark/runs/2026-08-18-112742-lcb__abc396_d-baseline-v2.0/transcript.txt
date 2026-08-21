@@ -1,0 +1,20 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_d/main.py).
+
+### Method Explanation
+The problem asks for the minimum XOR sum of edge labels among all **simple paths** from vertex $1$ to vertex $N$ in a connected undirected graph.
+
+Given the constraint $2 \le N \le 10$, the total number of simple paths from vertex $1$ to vertex $N$ in any graph with $10$ vertices is at most $109,601$. Therefore, a Depth-First Search (DFS) back-tracking algorithm using a bitmask to keep track of visited vertices efficiently explores all simple paths and computes the minimum XOR value.
+
+### Complexity
+- **Time Complexity:** $\mathcal{O}(P \cdot d)$, where $P$ is the number of simple paths from $1$ to $N$ ($\le 109,601$ for $N \le 10$) and $d$ is the maximum degree. This easily runs in under $0.05$ seconds.
+- **Space Complexity:** $\mathcal{O}(N + M)$ for adjacency list storage and recursion stack depth $\le N$.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_d/main.py).
+
+### Method Explanation
+The problem asks for the minimum XOR sum of edge labels among all **simple paths** from vertex $1$ to vertex $N$ in a connected undirected graph.
+
+Given the constraint $2 \le N \le 10$, the total number of simple paths from vertex $1$ to vertex $N$ in any graph with $10$ vertices is at most $109,601$. Therefore, a Depth-First Search (DFS) back-tracking algorithm using a bitmask to keep track of visited vertices efficiently explores all simple paths and computes the minimum XOR value.
+
+### Complexity
+- **Time Complexity:** $\mathcal{O}(P \cdot d)$, where $P$ is the number of simple paths from $1$ to $N$ ($\le 109,601$ for $N \le 10$) and $d$ is the maximum degree. This easily runs in under $0.05$ seconds.
+- **Space Complexity:** $\mathcal{O}(N + M)$ for adjacency list storage and recursion stack depth $\le N$.

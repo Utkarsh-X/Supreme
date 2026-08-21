@@ -1,0 +1,48 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_a/main.py).
+
+### Method Explanation
+The problem asks for the maximum sum of elements in a stack $S$ after performing $N$ operations (each step $i \in \{1, \dots, N\}$ either appends $A_i$ to $S$ or pops the last element of $S$).
+
+1. **Parity Analysis of Stack Operations**:
+   - Any pop operation at step $m$ cancels an earlier push operation at step $j$ ($j < m$). The subsegment between $j$ and $m$ must be properly balanced, meaning $m - j + 1$ is even, so $j$ and $m$ have opposite parities.
+   - Elements remaining in $S$ at the end must be at indices $1 \le i_1 < i_2 < \dots < i_k \le N$ where:
+     - $i_1 \equiv 1 \pmod 2$ (odd 1-indexed input position)
+     - $i_2 \equiv 0 \pmod 2$ (even 1-indexed input position)
+     - In general, $i_m \equiv m \pmod 2$ for all $1 \le m \le k$.
+     - The total count of elements $k$ must satisfy $k \equiv N \pmod 2$.
+
+2. **Dynamic Programming**:
+   - We maintain two states during a single pass over $A_1, \ldots, A_N$:
+     - `dp0`: The maximum sum of a valid subsequence having an **even** number of elements.
+     - `dp1`: The maximum sum of a valid subsequence having an **odd** number of elements.
+   - For an odd 1-indexed step $i$: `dp1 = max(dp1, dp0 + A[i])` (since element at odd input index can transition an even-count sequence to an odd-count sequence).
+   - For an even 1-indexed step $i$: `dp0 = max(dp0, dp1 + A[i])` (since element at even input index can transition an odd-count sequence to an even-count sequence).
+   - After processing all $N$ elements, the answer is `dp0` if $N$ is even, or `dp1` if $N$ is odd.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$
+- **Space Complexity**: $\mathcal{O}(N)$ (to store input array $A$) / $\mathcal{O}(1)$ auxiliary space.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_a/main.py).
+
+### Method Explanation
+The problem asks for the maximum sum of elements in a stack $S$ after performing $N$ operations (each step $i \in \{1, \dots, N\}$ either appends $A_i$ to $S$ or pops the last element of $S$).
+
+1. **Parity Analysis of Stack Operations**:
+   - Any pop operation at step $m$ cancels an earlier push operation at step $j$ ($j < m$). The subsegment between $j$ and $m$ must be properly balanced, meaning $m - j + 1$ is even, so $j$ and $m$ have opposite parities.
+   - Elements remaining in $S$ at the end must be at indices $1 \le i_1 < i_2 < \dots < i_k \le N$ where:
+     - $i_1 \equiv 1 \pmod 2$ (odd 1-indexed input position)
+     - $i_2 \equiv 0 \pmod 2$ (even 1-indexed input position)
+     - In general, $i_m \equiv m \pmod 2$ for all $1 \le m \le k$.
+     - The total count of elements $k$ must satisfy $k \equiv N \pmod 2$.
+
+2. **Dynamic Programming**:
+   - We maintain two states during a single pass over $A_1, \ldots, A_N$:
+     - `dp0`: The maximum sum of a valid subsequence having an **even** number of elements.
+     - `dp1`: The maximum sum of a valid subsequence having an **odd** number of elements.
+   - For an odd 1-indexed step $i$: `dp1 = max(dp1, dp0 + A[i])` (since element at odd input index can transition an even-count sequence to an odd-count sequence).
+   - For an even 1-indexed step $i$: `dp0 = max(dp0, dp1 + A[i])` (since element at even input index can transition an odd-count sequence to an even-count sequence).
+   - After processing all $N$ elements, the answer is `dp0` if $N$ is even, or `dp1` if $N$ is odd.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N)$
+- **Space Complexity**: $\mathcal{O}(N)$ (to store input array $A$) / $\mathcal{O}(1)$ auxiliary space.

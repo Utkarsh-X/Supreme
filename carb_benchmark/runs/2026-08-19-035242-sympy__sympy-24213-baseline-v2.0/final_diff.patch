@@ -1,0 +1,57 @@
+diff --git a/sympy/physics/units/tests/test_quantities.py b/sympy/physics/units/tests/test_quantities.py
+index c1830ba..928ecdc 100644
+--- a/sympy/physics/units/tests/test_quantities.py
++++ b/sympy/physics/units/tests/test_quantities.py
+@@ -22,7 +22,7 @@
+ 
+ from sympy.physics.units.definitions.dimension_definitions import (
+     Dimension, charge, length, time, temperature, pressure,
+-    energy, mass
++    energy, mass, acceleration, velocity
+ )
+ from sympy.physics.units.prefixes import PREFIXES, kilo
+ from sympy.physics.units.quantities import PhysicalConstant, Quantity
+@@ -373,6 +373,21 @@ def test_factor_and_dimension():
+     assert ((Rational(3, 2))**Rational(4, 3), (length/time)**Rational(4, 3)) == \
+         SI._collect_factor_and_dimension(expr)
+ 
++    v_calc = Quantity('v_calc')
++    SI.set_quantity_dimension(v_calc, velocity)
++    SI.set_quantity_scale_factor(v_calc, 2 * meter / second)
++
++    a_calc = Quantity('a_calc')
++    SI.set_quantity_dimension(a_calc, acceleration)
++    SI.set_quantity_scale_factor(a_calc, -9.8 * meter / second**2)
++
++    t_calc = Quantity('t_calc')
++    SI.set_quantity_dimension(t_calc, time)
++    SI.set_quantity_scale_factor(t_calc, 5 * second)
++
++    expr1 = a_calc*t_calc + v_calc
++    assert SI._collect_factor_and_dimension(expr1) == (-47, acceleration*time)
++
+     with warns_deprecated_sympy():
+         assert (3000, Dimension(1)) == Quantity._collect_factor_and_dimension(3000)
+ 
+diff --git a/sympy/physics/units/unitsystem.py b/sympy/physics/units/unitsystem.py
+index a436880..a520a1b 100644
+--- a/sympy/physics/units/unitsystem.py
++++ b/sympy/physics/units/unitsystem.py
+@@ -155,7 +155,7 @@ def _collect_factor_and_dimension(self, expr):
+         """
+         from sympy.physics.units import Quantity
+         if isinstance(expr, Quantity):
+-            return expr.scale_factor, expr.dimension
++            return self.get_quantity_scale_factor(expr), self.get_quantity_dimension(expr)
+         elif isinstance(expr, Mul):
+             factor = 1
+             dimension = Dimension(1)
+@@ -175,7 +175,7 @@ def _collect_factor_and_dimension(self, expr):
+             for addend in expr.args[1:]:
+                 addend_factor, addend_dim = \
+                     self._collect_factor_and_dimension(addend)
+-                if dim != addend_dim:
++                if not self.get_dimension_system().equivalent_dims(dim, addend_dim):
+                     raise ValueError(
+                         'Dimension of "{}" is {}, '
+                         'but it should be {}'.format(

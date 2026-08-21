@@ -1,0 +1,10 @@
+I have fixed the Morse code mapping for the digit `"1"` in `sympy/crypto/crypto.py` and updated unit tests.
+
+### Summary of Changes
+1. **[crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/crypto.py#L1523)**: Corrected the Morse code key for `"1"` in `morse_char` dictionary from `"----"` to `".----"`.
+2. **[test_crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/tests/test_crypto.py#L250-L255)**: Added test cases in `test_encode_morse` and `test_decode_morse` to verify the encoding and decoding of `"1"`.
+I have fixed the Morse code mapping for the digit `"1"` in `sympy/crypto/crypto.py` and updated unit tests.
+
+### Summary of Changes
+1. **[crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/crypto.py#L1523)**: Corrected the Morse code key for `"1"` in `morse_char` dictionary from `"----"` to `".----"`.
+2. **[test_crypto.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16886/sympy/crypto/tests/test_crypto.py#L250-L255)**: Added test cases in `test_encode_morse` and `test_decode_morse` to verify the encoding and decoding of `"1"`.

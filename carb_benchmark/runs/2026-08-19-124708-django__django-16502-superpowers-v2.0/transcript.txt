@@ -1,0 +1,26 @@
+I have fixed the issue where `runserver` returned response bodies for HTTP HEAD requests.
+
+### Root Cause
+In Python's `wsgiref.handlers.BaseHandler` (which Django's `django.core.servers.basehttp.ServerHandler` inherits from), `finish_response()` iterates over the response iterable and invokes `self.write(data)` regardless of the HTTP request method. Because response body stripping was removed from Django in #26052 under the expectation that WSGI servers strip response bodies for HEAD requests, Django's development server (`runserver`) returned full response bodies for HEAD requests.
+
+### Solution
+1. Overrode `write()` and `finish_response()` in `django.core.servers.basehttp.ServerHandler`:
+   - `write()` skips invoking `_write(data)` if `REQUEST_METHOD` is `"HEAD"`, ensuring response content is omitted while calling `send_headers()` if not already sent.
+   - `finish_response()` checks if `REQUEST_METHOD` is `"HEAD"`, in which case it calls `finish_content()` (to send response headers) and `close()` (to properly close the response iterable and trigger cleanup/signals), skipping body iteration.
+2. Added unit tests in `tests/builtin_server/tests.py` verifying that:
+   - HEAD requests send headers without response bodies.
+   - GET requests continue to send both headers and response bodies.
+   - Files and WSGI response iterables are properly closed on HEAD requests.
+I have fixed the issue where `runserver` returned response bodies for HTTP HEAD requests.
+
+### Root Cause
+In Python's `wsgiref.handlers.BaseHandler` (which Django's `django.core.servers.basehttp.ServerHandler` inherits from), `finish_response()` iterates over the response iterable and invokes `self.write(data)` regardless of the HTTP request method. Because response body stripping was removed from Django in #26052 under the expectation that WSGI servers strip response bodies for HEAD requests, Django's development server (`runserver`) returned full response bodies for HEAD requests.
+
+### Solution
+1. Overrode `write()` and `finish_response()` in `django.core.servers.basehttp.ServerHandler`:
+   - `write()` skips invoking `_write(data)` if `REQUEST_METHOD` is `"HEAD"`, ensuring response content is omitted while calling `send_headers()` if not already sent.
+   - `finish_response()` checks if `REQUEST_METHOD` is `"HEAD"`, in which case it calls `finish_content()` (to send response headers) and `close()` (to properly close the response iterable and trigger cleanup/signals), skipping body iteration.
+2. Added unit tests in `tests/builtin_server/tests.py` verifying that:
+   - HEAD requests send headers without response bodies.
+   - GET requests continue to send both headers and response bodies.
+   - Files and WSGI response iterables are properly closed on HEAD requests.

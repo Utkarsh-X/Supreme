@@ -1,0 +1,24 @@
+I have updated `sklearn.show_versions()` to include `joblib` in the list of reported dependencies.
+
+### Summary of Changes
+
+1. **`sklearn/utils/_show_versions.py`** ([_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/_show_versions.py#L42-L52))
+   Added `"joblib"` to the `deps` list in `_get_deps_info()` so that `sklearn.show_versions()` fetches and reports the installed version of `joblib`.
+
+2. **`sklearn/utils/tests/test_show_versions.py`** ([test_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/tests/test_show_versions.py#L15-L27))
+   Added assertion `assert 'joblib' in deps_info` to `test_get_deps_info()`.
+
+3. **`doc/whats_new/v0.22.rst`** ([v0.22.rst](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/doc/whats_new/v0.22.rst#L125-L130))
+   Added a changelog entry under `:mod:\`sklearn.utils\`` for the enhancement.
+I have updated `sklearn.show_versions()` to include `joblib` in the list of reported dependencies.
+
+### Summary of Changes
+
+1. **`sklearn/utils/_show_versions.py`** ([_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/_show_versions.py#L42-L52))
+   Added `"joblib"` to the `deps` list in `_get_deps_info()` so that `sklearn.show_versions()` fetches and reports the installed version of `joblib`.
+
+2. **`sklearn/utils/tests/test_show_versions.py`** ([test_show_versions.py](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/sklearn/utils/tests/test_show_versions.py#L15-L27))
+   Added assertion `assert 'joblib' in deps_info` to `test_get_deps_info()`.
+
+3. **`doc/whats_new/v0.22.rst`** ([v0.22.rst](file:///E:/RofU/Supreme/carb_workspaces/scikit-learn__scikit-learn-14141/doc/whats_new/v0.22.rst#L125-L130))
+   Added a changelog entry under `:mod:\`sklearn.utils\`` for the enhancement.

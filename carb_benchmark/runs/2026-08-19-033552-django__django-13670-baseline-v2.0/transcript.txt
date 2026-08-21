@@ -1,0 +1,16 @@
+I have fixed the issue where `dateformat.y()` failed to correctly format 2-digit years for dates before year 1000.
+
+### Cause
+Previously, `dateformat.DateFormat.y()` in [django/utils/dateformat.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13670/django/utils/dateformat.py#L327-L329) used string slicing `str(self.data.year)[2:]`. For years prior to 1000 (such as `123` or `9`), this produced incorrect strings like `'3'` or `''` instead of `'23'` or `'09'`.
+
+### Fix
+- Updated `y()` in [django/utils/dateformat.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13670/django/utils/dateformat.py#L327-L329) to return `'%02d' % (self.data.year % 100)`.
+- Added test coverage for years < 1000 in [tests/utils_tests/test_dateformat.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13670/tests/utils_tests/test_dateformat.py#L115-L125).
+I have fixed the issue where `dateformat.y()` failed to correctly format 2-digit years for dates before year 1000.
+
+### Cause
+Previously, `dateformat.DateFormat.y()` in [django/utils/dateformat.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13670/django/utils/dateformat.py#L327-L329) used string slicing `str(self.data.year)[2:]`. For years prior to 1000 (such as `123` or `9`), this produced incorrect strings like `'3'` or `''` instead of `'23'` or `'09'`.
+
+### Fix
+- Updated `y()` in [django/utils/dateformat.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13670/django/utils/dateformat.py#L327-L329) to return `'%02d' % (self.data.year % 100)`.
+- Added test coverage for years < 1000 in [tests/utils_tests/test_dateformat.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13670/tests/utils_tests/test_dateformat.py#L115-L125).

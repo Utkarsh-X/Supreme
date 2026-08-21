@@ -1,0 +1,40 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3696/main.py).
+
+### Method Explanation
+
+We need to count all substrings $s[i..j]$ ($0 \le i \le j < N$) whose numerical value $\text{val}(s[i..j])$ is divisible by its last non-zero digit $d = s[j] \in \{1, 2, \dots, 9\}$.
+
+To achieve an optimal $O(N)$ time complexity:
+1. For each non-zero divisor $d \in \{1, \dots, 9\}$, we track the counts of remainders modulo $d$ for all substrings ending at position $j-1$.
+2. There are 45 total possible remainder states across all 9 divisors ($1 + 2 + \dots + 9 = 45$).
+3. As we process each digit $c = s[j]$ from left to right:
+   - Every existing substring remainder $r \pmod d$ transitions to $(r \cdot 10 + c) \pmod d$.
+   - A new single-digit substring $s[j..j]$ starting at $j$ is added with remainder $c \pmod d$.
+   - If $c \neq 0$, the number of substrings ending at index $j$ divisible by $c$ is given by the count of remainder $0$ for divisor $c$.
+
+### Verification
+
+The algorithm was tested against all example cases and ran in ~0.23s for input strings of length $10^5$:
+- Example 1 (`"12936"`): Output `11`
+- Example 2 (`"5701283"`): Output `18`
+- Example 3 (`"1010101010"`): Output `25`
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3696/main.py).
+
+### Method Explanation
+
+We need to count all substrings $s[i..j]$ ($0 \le i \le j < N$) whose numerical value $\text{val}(s[i..j])$ is divisible by its last non-zero digit $d = s[j] \in \{1, 2, \dots, 9\}$.
+
+To achieve an optimal $O(N)$ time complexity:
+1. For each non-zero divisor $d \in \{1, \dots, 9\}$, we track the counts of remainders modulo $d$ for all substrings ending at position $j-1$.
+2. There are 45 total possible remainder states across all 9 divisors ($1 + 2 + \dots + 9 = 45$).
+3. As we process each digit $c = s[j]$ from left to right:
+   - Every existing substring remainder $r \pmod d$ transitions to $(r \cdot 10 + c) \pmod d$.
+   - A new single-digit substring $s[j..j]$ starting at $j$ is added with remainder $c \pmod d$.
+   - If $c \neq 0$, the number of substrings ending at index $j$ divisible by $c$ is given by the count of remainder $0$ for divisor $c$.
+
+### Verification
+
+The algorithm was tested against all example cases and ran in ~0.23s for input strings of length $10^5$:
+- Example 1 (`"12936"`): Output `11`
+- Example 2 (`"5701283"`): Output `18`
+- Example 3 (`"1010101010"`): Output `25`

@@ -1,0 +1,12 @@
+I have implemented the solution in `main.py`.
+
+### Solution Strategy
+- **Reverse Processing & Available Slots**: Insertion of element $i$ at 1-indexed position $P_i$ among currently present elements means that if we process elements in reverse from $i = N$ down to $1$, element $i$ is placed at the $P_i$-th available (unoccupied) slot among the $N$ total positions.
+- **Fenwick Tree with Binary Lifting**: We maintain a Fenwick Tree (Binary Indexed Tree) representing the available status (1 for empty slot, 0 for filled slot) for positions $1 \dots N$. Finding the $P_i$-th available slot is equivalent to finding the smallest position `pos` such that the prefix sum in the Fenwick Tree equals $P_i$. Using BIT binary lifting, this position is found in $O(\log N)$ operations.
+- **Complexity**: $O(N \log N)$ time and $O(N)$ space, efficiently handling $N = 5 \times 10^5$ within ~1.1 seconds in Python.
+I have implemented the solution in `main.py`.
+
+### Solution Strategy
+- **Reverse Processing & Available Slots**: Insertion of element $i$ at 1-indexed position $P_i$ among currently present elements means that if we process elements in reverse from $i = N$ down to $1$, element $i$ is placed at the $P_i$-th available (unoccupied) slot among the $N$ total positions.
+- **Fenwick Tree with Binary Lifting**: We maintain a Fenwick Tree (Binary Indexed Tree) representing the available status (1 for empty slot, 0 for filled slot) for positions $1 \dots N$. Finding the $P_i$-th available slot is equivalent to finding the smallest position `pos` such that the prefix sum in the Fenwick Tree equals $P_i$. Using BIT binary lifting, this position is found in $O(\log N)$ operations.
+- **Complexity**: $O(N \log N)$ time and $O(N)$ space, efficiently handling $N = 5 \times 10^5$ within ~1.1 seconds in Python.

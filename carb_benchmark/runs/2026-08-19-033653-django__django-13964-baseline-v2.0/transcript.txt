@@ -1,0 +1,28 @@
+### Cause
+When a model instance with a non-auto primary key (such as `CharField(primary_key=True)`) or `to_field` is initialized without a primary key value and assigned to a foreign key on another model (`order.product = Product()`), the foreign key attribute on the child instance (`order.product_id`) was set to the initial value (e.g. `""` or `None`).
+
+When the related object's primary key was subsequently assigned (`order.product.sku = "foo"`) and saved (`order.product.save()`), saving the parent object (`order.save()`) invoked [`_prepare_related_fields_for_save`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/django/db/models/base.py#L911-L944). 
+
+Previously, [`_prepare_related_fields_for_save`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/django/db/models/base.py#L911-L944) checked `elif getattr(self, field.attname) is None:`. Because `order.product_id` was `""` (not `None`), it did not synchronize `order.product_id` with `order.product.sku`. It then detected a mismatch (`"foo" != ""`), cleared the cached relationship, and saved the parent model with the stale foreign key value `""`.
+
+### Solution
+In [`_prepare_related_fields_for_save`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/django/db/models/base.py#L911-L944):
+- Whenever a related cached object has a non-`None` primary key, update all foreign key fields on `self` to match the target fields on the cached related instance (`for lh_field, rh_field in field.related_fields:`).
+
+### Verification
+- Added test cases in [`tests/many_to_one/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/tests/many_to_one/tests.py#L552-L570) covering non-auto primary keys and `to_field` relations initialized before PK assignment.
+- Ran test suites for `many_to_one`, `foreign_object`, `one_to_one`, `many_to_many`, `model_fields`, `queries`, `prefetch_related`, `select_related`, etc., all of which passed cleanly (1370 tests passed).
+### Cause
+When a model instance with a non-auto primary key (such as `CharField(primary_key=True)`) or `to_field` is initialized without a primary key value and assigned to a foreign key on another model (`order.product = Product()`), the foreign key attribute on the child instance (`order.product_id`) was set to the initial value (e.g. `""` or `None`).
+
+When the related object's primary key was subsequently assigned (`order.product.sku = "foo"`) and saved (`order.product.save()`), saving the parent object (`order.save()`) invoked [`_prepare_related_fields_for_save`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/django/db/models/base.py#L911-L944). 
+
+Previously, [`_prepare_related_fields_for_save`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/django/db/models/base.py#L911-L944) checked `elif getattr(self, field.attname) is None:`. Because `order.product_id` was `""` (not `None`), it did not synchronize `order.product_id` with `order.product.sku`. It then detected a mismatch (`"foo" != ""`), cleared the cached relationship, and saved the parent model with the stale foreign key value `""`.
+
+### Solution
+In [`_prepare_related_fields_for_save`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/django/db/models/base.py#L911-L944):
+- Whenever a related cached object has a non-`None` primary key, update all foreign key fields on `self` to match the target fields on the cached related instance (`for lh_field, rh_field in field.related_fields:`).
+
+### Verification
+- Added test cases in [`tests/many_to_one/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13964/tests/many_to_one/tests.py#L552-L570) covering non-auto primary keys and `to_field` relations initialized before PK assignment.
+- Ran test suites for `many_to_one`, `foreign_object`, `one_to_one`, `many_to_many`, `model_fields`, `queries`, `prefetch_related`, `select_related`, etc., all of which passed cleanly (1370 tests passed).

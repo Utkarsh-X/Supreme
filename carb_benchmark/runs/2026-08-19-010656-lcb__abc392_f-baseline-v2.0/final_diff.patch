@@ -1,0 +1,38 @@
+diff --git a/main.py b/main.py
+index c86f6c8..8786124 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,32 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    P = [int(x) for x in input_data[1:N+1]]
++    
++    bit = [i & -i for i in range(N + 1)]
++    ans = [0] * N
++    
++    for i in range(N, 0, -1):
++        k = P[i - 1]
++        pos = 0
++        for bit_idx in range(18, -1, -1):
++            next_pos = pos + (1 << bit_idx)
++            if next_pos <= N and bit[next_pos] < k:
++                k -= bit[next_pos]
++                pos = next_pos
++        idx = pos + 1
++        ans[idx - 1] = i
++        
++        x = idx
++        while x <= N:
++            bit[x] -= 1
++            x += x & -x
++            
++    print(*ans)
++
++if __name__ == '__main__':
++    solve()

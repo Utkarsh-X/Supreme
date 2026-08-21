@@ -1,0 +1,68 @@
+diff --git a/sphinx/util/docfields.py b/sphinx/util/docfields.py
+index 3a3367e..6d48e91 100644
+--- a/sphinx/util/docfields.py
++++ b/sphinx/util/docfields.py
+@@ -298,7 +298,7 @@ class DocFieldTransformer:
+             # also support syntax like ``:param type name:``
+             if typedesc.is_typed:
+                 try:
+-                    argtype, argname = fieldarg.split(None, 1)
++                    argtype, argname = fieldarg.rsplit(None, 1)
+                 except ValueError:
+                     pass
+                 else:
+diff --git a/sphinx/util/typing.py b/sphinx/util/typing.py
+index af6edca..912aecc 100644
+--- a/sphinx/util/typing.py
++++ b/sphinx/util/typing.py
+@@ -33,9 +33,9 @@ else:
+             ref = _ForwardRef(self.arg)
+             return ref._eval_type(globalns, localns)
+ 
+-if sys.version_info > (3, 10):
+-    from types import Union as types_Union
+-else:
++try:
++    from types import UnionType as types_Union
++except ImportError:
+     types_Union = None
+ 
+ if False:
+diff --git a/tests/test_domain_py.py b/tests/test_domain_py.py
+index 569390c..8f0c973 100644
+--- a/tests/test_domain_py.py
++++ b/tests/test_domain_py.py
+@@ -1008,6 +1008,33 @@ def test_info_field_list_var(app):
+                 refdomain="py", reftype="class", reftarget="int", **{"py:class": "Class"})
+ 
+ 
++def test_info_field_list_type_with_spaces(app):
++    text = (".. py:module:: example\n"
++            ".. py:class:: Class\n"
++            "\n"
++            "   :param dict(str, str) opc_meta: (optional)\n")
++    doctree = restructuredtext.parse(app, text)
++
++    assert_node(doctree[3][1][0][0],
++                ([nodes.field_name, "Parameters"],
++                 [nodes.field_body, nodes.paragraph]))
++
++    # :param dict(str, str) opc_meta:
++    assert_node(doctree[3][1][0][0][1][0],
++                ([addnodes.literal_strong, "opc_meta"],
++                 " (",
++                 [pending_xref, addnodes.literal_emphasis, "dict"],
++                 [addnodes.literal_emphasis, "("],
++                 [pending_xref, addnodes.literal_emphasis, "str"],
++                 [addnodes.literal_emphasis, ", "],
++                 [pending_xref, addnodes.literal_emphasis, "str"],
++                 [addnodes.literal_emphasis, ")"],
++                 ")",
++                 " -- ",
++                 "(optional)"))
++
++
++
+ @pytest.mark.sphinx(freshenv=True)
+ def test_module_index(app):
+     text = (".. py:module:: docutils\n"

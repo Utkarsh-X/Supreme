@@ -1,0 +1,46 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+
+To determine if a tree of $NK$ vertices can be decomposed into $N$ vertex-disjoint paths of length $K$:
+
+1. **Tree Subtree Property**:
+   In any vertex-disjoint path decomposition of a tree rooted at vertex 1:
+   - Across the edge connecting a subtree $T_u$ to its parent, at most 1 path can cross into the rest of the tree.
+   - Any path completely contained within $T_u$ must have size $K$.
+   - Thus, the number of vertices in $T_u$ belonging to the path extending out of $T_u$ is uniquely fixed to $R_u = |T_u| \bmod K$.
+
+2. **Degree & Path Constraints**:
+   At each vertex $u$:
+   - Let $S_u$ be the number of children $v$ of $u$ such that $R_v > 0$ (i.e. children that send a path fragment up to $u$).
+   - Since $u$ can belong to at most one simple path, the total degree of $u$ within paths must not exceed 2.
+   - If $R_u > 0$, the path fragment extends to $u$'s parent, so $|S_u| + 1 \le 2 \implies |S_u| \le 1$.
+   - If $R_u = 0$, the path terminates at $u$, so $|S_u| \le 2$.
+
+3. **Algorithm**:
+   - Perform a BFS to determine parent pointers and a post-order traversal ordering (reverse BFS).
+   - In reverse BFS order, compute $size[u]$ and $R_u = size[u] \bmod K$, and check if $|S_u|$ satisfies the limit ($\le 1$ if $R_u > 0$, else $\le 2$).
+   - If any vertex violates this limit, output `No`; otherwise, output `Yes`.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+
+To determine if a tree of $NK$ vertices can be decomposed into $N$ vertex-disjoint paths of length $K$:
+
+1. **Tree Subtree Property**:
+   In any vertex-disjoint path decomposition of a tree rooted at vertex 1:
+   - Across the edge connecting a subtree $T_u$ to its parent, at most 1 path can cross into the rest of the tree.
+   - Any path completely contained within $T_u$ must have size $K$.
+   - Thus, the number of vertices in $T_u$ belonging to the path extending out of $T_u$ is uniquely fixed to $R_u = |T_u| \bmod K$.
+
+2. **Degree & Path Constraints**:
+   At each vertex $u$:
+   - Let $S_u$ be the number of children $v$ of $u$ such that $R_v > 0$ (i.e. children that send a path fragment up to $u$).
+   - Since $u$ can belong to at most one simple path, the total degree of $u$ within paths must not exceed 2.
+   - If $R_u > 0$, the path fragment extends to $u$'s parent, so $|S_u| + 1 \le 2 \implies |S_u| \le 1$.
+   - If $R_u = 0$, the path terminates at $u$, so $|S_u| \le 2$.
+
+3. **Algorithm**:
+   - Perform a BFS to determine parent pointers and a post-order traversal ordering (reverse BFS).
+   - In reverse BFS order, compute $size[u]$ and $R_u = size[u] \bmod K$, and check if $|S_u|$ satisfies the limit ($\le 1$ if $R_u > 0$, else $\le 2$).
+   - If any vertex violates this limit, output `No`; otherwise, output `Yes`.

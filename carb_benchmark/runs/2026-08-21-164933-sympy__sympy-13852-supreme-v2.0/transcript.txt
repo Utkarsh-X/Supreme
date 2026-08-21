@@ -1,0 +1,28 @@
+I have implemented the evaluation of `polylog(2, 1/2)` and updated the expansion of `polylog(1, z)` to `-log(1 - z)`.
+
+### Summary of Changes
+
+1. **Evaluation of `polylog(2, 1/2)`**:
+   - Added evaluation in `polylog.eval` in `sympy/functions/special/zeta_functions.py` so `polylog(2, S.Half)` evaluates directly to `pi**2/12 - log(2)**2/2`.
+
+2. **Expansion of `polylog(1, z)`**:
+   - Updated `_eval_expand_func` in `polylog` to return `-log(1 - z)` instead of `-log(1 + exp_polar(-I*pi)*z)`.
+   - Updated doctests and docstrings accordingly.
+
+3. **Testing & Verification**:
+   - Added test cases in `sympy/functions/special/tests/test_zeta_functions.py` for both `polylog(2, S.Half)` evaluation and `polylog(1, z)` expansion.
+   - All tests in `test_zeta_functions.py` pass cleanly.
+I have implemented the evaluation of `polylog(2, 1/2)` and updated the expansion of `polylog(1, z)` to `-log(1 - z)`.
+
+### Summary of Changes
+
+1. **Evaluation of `polylog(2, 1/2)`**:
+   - Added evaluation in `polylog.eval` in `sympy/functions/special/zeta_functions.py` so `polylog(2, S.Half)` evaluates directly to `pi**2/12 - log(2)**2/2`.
+
+2. **Expansion of `polylog(1, z)`**:
+   - Updated `_eval_expand_func` in `polylog` to return `-log(1 - z)` instead of `-log(1 + exp_polar(-I*pi)*z)`.
+   - Updated doctests and docstrings accordingly.
+
+3. **Testing & Verification**:
+   - Added test cases in `sympy/functions/special/tests/test_zeta_functions.py` for both `polylog(2, S.Half)` evaluation and `polylog(1, z)` expansion.
+   - All tests in `test_zeta_functions.py` pass cleanly.

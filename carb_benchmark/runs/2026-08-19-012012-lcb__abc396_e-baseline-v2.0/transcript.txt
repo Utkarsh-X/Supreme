@@ -1,0 +1,44 @@
+An optimal solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_e/main.py).
+
+### Method Explanation
+
+1. **Independent Bitwise Decomposition & Graph Model**:
+   - The condition $A_{X_i} \oplus A_{Y_i} = Z_i$ decomposes into independent bitwise XOR constraints for each bit position $k \in [0, 29]$.
+   - The total sum $\sum_{i=1}^N A_i = \sum_{k=0}^{29} 2^k \left(\sum_{i=1}^N A_{i,k}\right)$ is minimized when each bit position $k$ independently minimizes the number of $1$s across all vertices.
+   - We construct a graph where each edge $(X_i, Y_i)$ has weight $Z_i$.
+
+2. **Connected Components & Consistency Check**:
+   - For each connected component, we fix a root vertex $r$ with relative value $V_r = 0$. For any other vertex $u$ in the same component, $V_u = \text{XOR sum of edge weights from } r \text{ to } u$.
+   - Using Breadth-First Search (BFS), if we discover a cycle or edge $(u, v, w)$ such that $V_u \oplus V_v \neq w$, the constraints are contradictory and we output `-1`.
+
+3. **Bitwise Sum Minimization**:
+   - If $A_r$ is chosen for the root vertex $r$, then $A_u = A_r \oplus V_u$ for all vertices in the component.
+   - For each bit position $k$, $A_{u, k} = A_{r, k} \oplus V_{u, k}$.
+   - We count the number of vertices in the component with $V_{u, k} = 1$ (`ones`) vs $V_{u, k} = 0$ (`zeros`).
+   - If `ones > zeros`, setting $A_{r, k} = 1$ flips all bits and results in fewer total $1$s (`zeros < ones`). Otherwise, we choose $A_{r, k} = 0$.
+
+4. **Complexity**:
+   - Time Complexity: $\mathcal{O}(N + M + 30N)$, which comfortably runs within $0.7$ seconds for $N = 2 \times 10^5$.
+   - Space Complexity: $\mathcal{O}(N + M)$.
+An optimal solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_e/main.py).
+
+### Method Explanation
+
+1. **Independent Bitwise Decomposition & Graph Model**:
+   - The condition $A_{X_i} \oplus A_{Y_i} = Z_i$ decomposes into independent bitwise XOR constraints for each bit position $k \in [0, 29]$.
+   - The total sum $\sum_{i=1}^N A_i = \sum_{k=0}^{29} 2^k \left(\sum_{i=1}^N A_{i,k}\right)$ is minimized when each bit position $k$ independently minimizes the number of $1$s across all vertices.
+   - We construct a graph where each edge $(X_i, Y_i)$ has weight $Z_i$.
+
+2. **Connected Components & Consistency Check**:
+   - For each connected component, we fix a root vertex $r$ with relative value $V_r = 0$. For any other vertex $u$ in the same component, $V_u = \text{XOR sum of edge weights from } r \text{ to } u$.
+   - Using Breadth-First Search (BFS), if we discover a cycle or edge $(u, v, w)$ such that $V_u \oplus V_v \neq w$, the constraints are contradictory and we output `-1`.
+
+3. **Bitwise Sum Minimization**:
+   - If $A_r$ is chosen for the root vertex $r$, then $A_u = A_r \oplus V_u$ for all vertices in the component.
+   - For each bit position $k$, $A_{u, k} = A_{r, k} \oplus V_{u, k}$.
+   - We count the number of vertices in the component with $V_{u, k} = 1$ (`ones`) vs $V_{u, k} = 0$ (`zeros`).
+   - If `ones > zeros`, setting $A_{r, k} = 1$ flips all bits and results in fewer total $1$s (`zeros < ones`). Otherwise, we choose $A_{r, k} = 0$.
+
+4. **Complexity**:
+   - Time Complexity: $\mathcal{O}(N + M + 30N)$, which comfortably runs within $0.7$ seconds for $N = 2 \times 10^5$.
+   - Space Complexity: $\mathcal{O}(N + M)$.

@@ -1,0 +1,82 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ea9c1f5 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,76 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    adj = [[] for _ in range(N + 1)]
++    
++    idx = 2
++    for _ in range(M):
++        u = int(input_data[idx])
++        v = int(input_data[idx+1])
++        w = int(input_data[idx+2])
++        idx += 3
++        adj[u].append((v, w))
++        adj[v].append((u, w))
++        
++    visited = [False] * (N + 1)
++    V = [0] * (N + 1)
++    A = [0] * (N + 1)
++    
++    for i in range(1, N + 1):
++        if visited[i]:
++            continue
++            
++        visited[i] = True
++        V[i] = 0
++        
++        # BFS
++        component = [i]
++        q_head = 0
++        
++        inconsistent = False
++        while q_head < len(component):
++            u = component[q_head]
++            q_head += 1
++            
++            for v, w in adj[u]:
++                if not visited[v]:
++                    visited[v] = True
++                    V[v] = V[u] ^ w
++                    component.append(v)
++                else:
++                    if V[v] ^ V[u] != w:
++                        inconsistent = True
++                        break
++            if inconsistent:
++                break
++                
++        if inconsistent:
++            print(-1)
++            return
++            
++        # Optimize bits for this component
++        S = len(component)
++        A_root = 0
++        
++        for k in range(30):
++            ones = 0
++            for u in component:
++                if (V[u] >> k) & 1:
++                    ones += 1
++            if ones * 2 > S:
++                A_root |= (1 << k)
++                
++        for u in component:
++            A[u] = A_root ^ V[u]
++            
++    print(*(A[1:]))
++
++if __name__ == '__main__':
++    main()

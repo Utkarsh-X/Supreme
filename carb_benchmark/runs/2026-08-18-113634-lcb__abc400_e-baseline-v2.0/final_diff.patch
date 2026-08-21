@@ -1,0 +1,35 @@
+diff --git a/main.py b/main.py
+index c86f6c8..dbf9310 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,29 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import bisect
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    Q = int(input_data[0])
++    queries = [int(x) for x in input_data[1:Q+1]]
++    
++    MAX = 10**6
++    omega = bytearray(MAX + 1)
++    for i in range(2, MAX + 1):
++        if omega[i] == 0:
++            for j in range(i, MAX + 1, i):
++                omega[j] += 1
++                
++    valid_N = [i * i for i in range(MAX + 1) if omega[i] == 2]
++    
++    out = []
++    for A in queries:
++        idx = bisect.bisect_right(valid_N, A) - 1
++        out.append(str(valid_N[idx]))
++        
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    main()

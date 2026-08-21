@@ -1,0 +1,39 @@
+diff --git a/main.py b/main.py
+index c86f6c8..3c53cfe 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,33 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    P = [int(x) for x in input_data[1:]]
++    
++    tree = [i & -i for i in range(N + 1)]
++    ans = [0] * N
++    highest_bit = 1 << (N.bit_length() - 1)
++    
++    for i, k in zip(range(N, 0, -1), reversed(P)):
++        idx = 0
++        bit_mask = highest_bit
++        while bit_mask > 0:
++            next_idx = idx + bit_mask
++            if next_idx <= N and tree[next_idx] < k:
++                idx = next_idx
++                k -= tree[next_idx]
++            bit_mask >>= 1
++        pos = idx + 1
++        ans[pos - 1] = i
++        
++        while pos <= N:
++            tree[pos] -= 1
++            pos += pos & -pos
++
++    print(' '.join(map(str, ans)))
++
++if __name__ == '__main__':
++    main()

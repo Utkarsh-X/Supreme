@@ -1,0 +1,34 @@
+An optimal solution has been implemented in `main.py` [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3697/main.py).
+
+### Method Explanation
+
+1. **Least Common Multiple (LCM) for Submasks**:
+   Since $|target| \le 4$, there are at most $2^4 - 1 = 15$ non-empty target submasks. For an element $x \in nums$ to satisfy all elements in a target submask, $x$ must be incremented to a multiple of $L = \text{lcm}(\text{submask})$. The cost to increment $x$ is $(L - (x \bmod L)) \bmod L$.
+
+2. **Candidate Pruning**:
+   Any optimal assignment requires at most $m = |target| \le 4$ distinct elements from `nums`. For any target submask $S$, at most the top $m$ elements in `nums` with the lowest costs for $S$ could ever be part of an optimal assignment. We take the union of top $m$ elements across all 15 submasks, reducing `nums` from up to 50,000 elements to at most $15 \times 4 = 60$ candidate elements.
+
+3. **Bitmask Dynamic Programming**:
+   We compute DP transitions over the pruned candidate elements:
+   - `dp[mask]` stores the minimum operations required to satisfy the subset of target elements represented by `mask`.
+   - For each candidate element $x$ and current satisfied `mask`, we iterate over submasks of remaining target elements `rem` to transition to `mask | submask`.
+
+4. **Input Parsing & Verification**:
+   The stdin parser handles list format inputs safely. The solution was tested and verified against all example test cases and performance benchmarks.
+An optimal solution has been implemented in `main.py` [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3697/main.py).
+
+### Method Explanation
+
+1. **Least Common Multiple (LCM) for Submasks**:
+   Since $|target| \le 4$, there are at most $2^4 - 1 = 15$ non-empty target submasks. For an element $x \in nums$ to satisfy all elements in a target submask, $x$ must be incremented to a multiple of $L = \text{lcm}(\text{submask})$. The cost to increment $x$ is $(L - (x \bmod L)) \bmod L$.
+
+2. **Candidate Pruning**:
+   Any optimal assignment requires at most $m = |target| \le 4$ distinct elements from `nums`. For any target submask $S$, at most the top $m$ elements in `nums` with the lowest costs for $S$ could ever be part of an optimal assignment. We take the union of top $m$ elements across all 15 submasks, reducing `nums` from up to 50,000 elements to at most $15 \times 4 = 60$ candidate elements.
+
+3. **Bitmask Dynamic Programming**:
+   We compute DP transitions over the pruned candidate elements:
+   - `dp[mask]` stores the minimum operations required to satisfy the subset of target elements represented by `mask`.
+   - For each candidate element $x$ and current satisfied `mask`, we iterate over submasks of remaining target elements `rem` to transition to `mask | submask`.
+
+4. **Input Parsing & Verification**:
+   The stdin parser handles list format inputs safely. The solution was tested and verified against all example test cases and performance benchmarks.

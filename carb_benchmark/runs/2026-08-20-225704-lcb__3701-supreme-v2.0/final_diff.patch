@@ -1,0 +1,202 @@
+diff --git a/main.py b/main.py
+index c86f6c8..544ff33 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,196 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++
++def solve():
++    raw_input = sys.stdin.read().strip()
++    if not raw_input:
++        print(json.dumps(""))
++        return
++        
++    try:
++        caption = json.loads(raw_input)
++    except Exception:
++        caption = raw_input.strip('"\'\r\n\t ')
++        
++    n = len(caption)
++    if n < 3:
++        print(json.dumps(""))
++        return
++
++    # Precompute character indices (0..25)
++    ords = [ord(c) - 97 for c in caption]
++    
++    # Precompute absolute differences table
++    ABS = [[abs(i - j) for j in range(26)] for i in range(26)]
++    
++    # Double Hashing parameters
++    MOD1 = 10**9 + 7
++    MOD2 = 10**9 + 9
++    BASE = 313
++    
++    NUM_LEVELS = 16
++    BPOW1 = [BASE] * NUM_LEVELS
++    BPOW2 = [BASE] * NUM_LEVELS
++    for m in range(1, NUM_LEVELS):
++        BPOW1[m] = (BPOW1[m-1] * BPOW1[m-1]) % MOD1
++        BPOW2[m] = (BPOW2[m-1] * BPOW2[m-1]) % MOD2
++
++    INF = float('inf')
++    dp = [INF] * (n + 1)
++    dp[n] = 0
++    
++    node_of = [0] * (n + 1)
++    node_of[n] = 0 # 0 is ROOT
++    
++    MAX_NODES = n * 5 + 100
++    depth = [0] * MAX_NODES
++    char_val = [0] * MAX_NODES
++    
++    up = [0] * (MAX_NODES * NUM_LEVELS)
++    hash1 = [0] * (MAX_NODES * NUM_LEVELS)
++    hash2 = [0] * (MAX_NODES * NUM_LEVELS)
++    
++    next_node_id = 1
++    
++    def create_chain(c_val, L, parent_node):
++        nonlocal next_node_id
++        cur = parent_node
++        for _ in range(L):
++            u = next_node_id
++            next_node_id += 1
++            
++            depth[u] = depth[cur] + 1
++            char_val[u] = c_val
++            
++            u0 = u * NUM_LEVELS
++            up[u0] = cur
++            hash1[u0] = c_val
++            hash2[u0] = c_val
++            
++            p = cur
++            p0 = p * NUM_LEVELS
++            for m in range(1, NUM_LEVELS):
++                um = u0 + m
++                pm = p0 + (m - 1)
++                p_up = up[pm]
++                up[um] = p_up
++                hash1[um] = (hash1[u0 + m - 1] * BPOW1[m - 1] + hash1[pm]) % MOD1
++                hash2[um] = (hash2[u0 + m - 1] * BPOW2[m - 1] + hash2[pm]) % MOD2
++                p = p_up
++                p0 = p * NUM_LEVELS
++                
++            cur = u
++        return cur
++
++    def compare_nodes(u, v):
++        if u == v:
++            return False
++        u0 = u * NUM_LEVELS
++        v0 = v * NUM_LEVELS
++        for m in range(NUM_LEVELS - 1, -1, -1):
++            um = u0 + m
++            vm = v0 + m
++            if up[um] != up[vm] and hash1[um] == hash1[vm] and hash2[um] == hash2[vm]:
++                u = up[um]
++                v = up[vm]
++                u0 = u * NUM_LEVELS
++                v0 = v * NUM_LEVELS
++                
++        if char_val[u] != char_val[v]:
++            return char_val[u] < char_val[v]
++            
++        u_parent = up[u0]
++        v_parent = up[v0]
++        if u_parent != v_parent:
++            return char_val[u_parent] < char_val[v_parent]
++            
++        return depth[u] < depth[v]
++
++    # Suffix DP from n-3 down to 0
++    for i in range(n - 3, -1, -1):
++        min_cost = INF
++        
++        # Check valid transitions for L in {3, 4, 5}
++        for L in (3, 4, 5):
++            if i + L <= n and dp[i + L] != INF:
++                # Calculate cost for all c in 0..25
++                if L == 3:
++                    o0, o1, o2 = ords[i], ords[i+1], ords[i+2]
++                    A0, A1, A2 = ABS[o0], ABS[o1], ABS[o2]
++                    for c in range(26):
++                        cost = A0[c] + A1[c] + A2[c] + dp[i + 3]
++                        if cost < min_cost:
++                            min_cost = cost
++                elif L == 4:
++                    o0, o1, o2, o3 = ords[i], ords[i+1], ords[i+2], ords[i+3]
++                    A0, A1, A2, A3 = ABS[o0], ABS[o1], ABS[o2], ABS[o3]
++                    for c in range(26):
++                        cost = A0[c] + A1[c] + A2[c] + A3[c] + dp[i + 4]
++                        if cost < min_cost:
++                            min_cost = cost
++                else: # L == 5
++                    o0, o1, o2, o3, o4 = ords[i], ords[i+1], ords[i+2], ords[i+3], ords[i+4]
++                    A0, A1, A2, A3, A4 = ABS[o0], ABS[o1], ABS[o2], ABS[o3], ABS[o4]
++                    for c in range(26):
++                        cost = A0[c] + A1[c] + A2[c] + A3[c] + A4[c] + dp[i + 5]
++                        if cost < min_cost:
++                            min_cost = cost
++                            
++        dp[i] = min_cost
++        if min_cost == INF:
++            continue
++            
++        c_min = 26
++        valid_Ls = []
++        for c in range(26):
++            for L in (3, 4, 5):
++                if i + L <= n and dp[i + L] != INF:
++                    if L == 3:
++                        if ABS[ords[i]][c] + ABS[ords[i+1]][c] + ABS[ords[i+2]][c] + dp[i + 3] == min_cost:
++                            valid_Ls.append(3)
++                    elif L == 4:
++                        if ABS[ords[i]][c] + ABS[ords[i+1]][c] + ABS[ords[i+2]][c] + ABS[ords[i+3]][c] + dp[i + 4] == min_cost:
++                            valid_Ls.append(4)
++                    else: # L == 5
++                        if ABS[ords[i]][c] + ABS[ords[i+1]][c] + ABS[ords[i+2]][c] + ABS[ords[i+3]][c] + ABS[ords[i+4]][c] + dp[i + 5] == min_cost:
++                            valid_Ls.append(5)
++            if valid_Ls:
++                c_min = c
++                break
++
++        c_min_val = c_min + 1 # 1..26
++
++        if len(valid_Ls) == 1:
++            best_L = valid_Ls[0]
++            node_of[i] = create_chain(c_min_val, best_L, node_of[i + best_L])
++        else:
++            saved_node_id = next_node_id
++            candidates = []
++            for L in valid_Ls:
++                head = create_chain(c_min_val, L, node_of[i + L])
++                candidates.append((head, L))
++                
++            best_head = candidates[0][0]
++            best_L = candidates[0][1]
++            for head, L in candidates[1:]:
++                if compare_nodes(head, best_head):
++                    best_head = head
++                    best_L = L
++                    
++            next_node_id = saved_node_id
++            node_of[i] = create_chain(c_min_val, best_L, node_of[i + best_L])
++
++    if dp[0] == INF:
++        print(json.dumps(""))
++        return
++        
++    res = []
++    cur = node_of[0]
++    while cur != 0:
++        res.append(chr(char_val[cur] + 96))
++        cur = up[cur * NUM_LEVELS]
++        
++    print(json.dumps("".join(res)))
++
++if __name__ == '__main__':
++    solve()

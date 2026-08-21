@@ -1,0 +1,37 @@
+diff --git a/sympy/functions/elementary/hyperbolic.py b/sympy/functions/elementary/hyperbolic.py
+index 2a4555d..5fbb73c 100644
+--- a/sympy/functions/elementary/hyperbolic.py
++++ b/sympy/functions/elementary/hyperbolic.py
+@@ -587,7 +587,7 @@ def eval(cls, arg):
+                 x, m = _peeloff_ipi(arg)
+                 if m:
+                     cothm = coth(m)
+-                    if cotm is S.ComplexInfinity:
++                    if cothm is S.ComplexInfinity:
+                         return coth(x)
+                     else: # cothm == 0
+                         return tanh(x)
+diff --git a/sympy/functions/elementary/tests/test_hyperbolic.py b/sympy/functions/elementary/tests/test_hyperbolic.py
+index dd9ebd7..150841c 100644
+--- a/sympy/functions/elementary/tests/test_hyperbolic.py
++++ b/sympy/functions/elementary/tests/test_hyperbolic.py
+@@ -202,7 +202,8 @@ def test_tanh():
+     assert tanh(17*k*pi*I) == 0
+ 
+     assert tanh(k*pi*I/2) == tan(k*pi/2)*I
+-
++    assert tanh(x + I*pi) == tanh(x)
++    assert tanh(x + I*pi/2) == coth(x)
+ 
+ def test_tanh_series():
+     x = Symbol('x')
+@@ -271,6 +272,9 @@ def test_coth():
+     assert coth(17*k*pi*I) == -cot(17*k*pi)*I
+ 
+     assert coth(k*pi*I) == -cot(k*pi)*I
++    assert coth(x + I*pi) == coth(x)
++    assert coth(x + I*pi/2) == tanh(x)
++    assert coth(log(tan(x))).subs(x, 2) == coth(log(-tan(2)))
+ 
+ 
+ def test_coth_series():

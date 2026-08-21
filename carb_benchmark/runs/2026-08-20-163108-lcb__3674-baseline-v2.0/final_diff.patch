@@ -1,0 +1,94 @@
+diff --git a/main.py b/main.py
+index c86f6c8..e9bf6a8 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,88 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import re
++from bisect import bisect_left
++
++def solve():
++    raw = sys.stdin.read().strip()
++    if not raw:
++        return
++    
++    lines = [line.strip() for line in raw.splitlines() if line.strip()]
++    
++    bracket_line = None
++    for line in lines:
++        if '[' in line and ']' in line:
++            bracket_line = line
++            break
++            
++    if bracket_line:
++        s = bracket_line[bracket_line.find('['):bracket_line.rfind(']')+1]
++        nums = json.loads(s)
++        other_text = raw.replace(bracket_line, '')
++        k_tokens = re.findall(r'\d+', other_text)
++        k = int(k_tokens[-1]) if k_tokens else 0
++    else:
++        all_nums = [int(x) for x in re.findall(r'\d+', raw)]
++        if not all_nums:
++            return
++        if len(lines) == 2:
++            nums = [int(x) for x in re.findall(r'\d+', lines[0])]
++            k = int(re.findall(r'\d+', lines[1])[0])
++        elif len(lines) == 3:
++            nums = [int(x) for x in re.findall(r'\d+', lines[1])]
++            k = int(re.findall(r'\d+', lines[2])[0])
++        else:
++            nums = all_nums[:-1]
++            k = all_nums[-1]
++
++    n = len(nums)
++    if n == 0:
++        print(0)
++        return
++
++    # Prefix sums of nums
++    P = [0] * (n + 1)
++    for i in range(n):
++        P[i + 1] = P[i] + nums[i]
++
++    stack = []
++    neg_stack = []
++    stack_pref = [0]
++
++    def get_cost(L, R):
++        idx = bisect_left(neg_stack, -R)
++        m_len = len(stack)
++        complete_sum = stack_pref[m_len] - stack_pref[idx + 1]
++        partial_sum = nums[stack[idx]] * (R - stack[idx] + 1)
++        M_sum = complete_sum + partial_sum
++        P_sum = P[R + 1] - P[L]
++        return M_sum - P_sum
++
++    ans = 0
++    max_R = n - 1
++
++    for L in range(n - 1, -1, -1):
++        val = nums[L]
++        while stack and val >= nums[stack[-1]]:
++            stack.pop()
++            neg_stack.pop()
++            stack_pref.pop()
++        
++        limit = stack[-1] if stack else n
++        count = limit - L
++        block_contrib = val * count
++        
++        stack.append(L)
++        neg_stack.append(-L)
++        stack_pref.append(stack_pref[-1] + block_contrib)
++
++        while max_R >= L and get_cost(L, max_R) > k:
++            max_R -= 1
++
++        ans += (max_R - L + 1)
++
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

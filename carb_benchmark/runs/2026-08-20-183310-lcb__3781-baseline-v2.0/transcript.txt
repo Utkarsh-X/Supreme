@@ -1,0 +1,36 @@
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3781/main.py).
+
+### Method Explanation
+
+1. **Perimeter Parameterization**: 
+   Since all points lie on the boundary of a square of edge length `side`, we map each 2D boundary coordinate $(x, y)$ counter-clockwise to a 1D perimeter distance $d \in [0, 4 \times \text{side})$.
+
+2. **Equivalence of Distances for $k \ge 4$**:
+   Since $k \ge 4$, the maximum possible minimum Manhattan distance $D$ between selected points cannot exceed $\frac{4 \times \text{side}}{k} \le \text{side}$. For any pair of points on the boundary of a square:
+   - For same or adjacent edges, Manhattan distance equals perimeter distance.
+   - For opposite edges, Manhattan distance is at least `side` $\ge D$.
+   
+   Thus, maximizing the minimum Manhattan distance is equivalent to maximizing the minimum perimeter distance on the 1D circular perimeter.
+
+3. **Binary Search & Binary Lifting Feasibility Check**:
+   - We binary search for the answer $D \in [1, \lfloor \frac{4 \times \text{side}}{k} \rfloor]$.
+   - For a candidate $D$, we check feasibility on the circular array using **two-pointers** to find the next point at distance $\ge D$ for each position, combined with **binary lifting** (jump pointers) to make $k - 1$ steps efficiently.
+   - Time complexity: $O(N \log N + N \log(\text{side} / k))$, which executes in $\sim 0.18$s for $N = 15000$.
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3781/main.py).
+
+### Method Explanation
+
+1. **Perimeter Parameterization**: 
+   Since all points lie on the boundary of a square of edge length `side`, we map each 2D boundary coordinate $(x, y)$ counter-clockwise to a 1D perimeter distance $d \in [0, 4 \times \text{side})$.
+
+2. **Equivalence of Distances for $k \ge 4$**:
+   Since $k \ge 4$, the maximum possible minimum Manhattan distance $D$ between selected points cannot exceed $\frac{4 \times \text{side}}{k} \le \text{side}$. For any pair of points on the boundary of a square:
+   - For same or adjacent edges, Manhattan distance equals perimeter distance.
+   - For opposite edges, Manhattan distance is at least `side` $\ge D$.
+   
+   Thus, maximizing the minimum Manhattan distance is equivalent to maximizing the minimum perimeter distance on the 1D circular perimeter.
+
+3. **Binary Search & Binary Lifting Feasibility Check**:
+   - We binary search for the answer $D \in [1, \lfloor \frac{4 \times \text{side}}{k} \rfloor]$.
+   - For a candidate $D$, we check feasibility on the circular array using **two-pointers** to find the next point at distance $\ge D$ for each position, combined with **binary lifting** (jump pointers) to make $k - 1$ steps efficiently.
+   - Time complexity: $O(N \log N + N \log(\text{side} / k))$, which executes in $\sim 0.18$s for $N = 15000$.

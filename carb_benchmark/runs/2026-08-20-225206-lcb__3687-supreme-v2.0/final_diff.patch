@@ -1,0 +1,91 @@
+diff --git a/main.py b/main.py
+index c86f6c8..5e97cca 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,85 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import ast
++
++sys.setrecursionlimit(200000)
++
++def read_input():
++    content = sys.stdin.read().strip()
++    if not content:
++        return [], []
++    
++    try:
++        decoder = json.JSONDecoder()
++        idx = 0
++        objs = []
++        while idx < len(content):
++            content_stripped = content[idx:].lstrip()
++            if not content_stripped:
++                break
++            idx += len(content[idx:]) - len(content_stripped)
++            obj, end_idx = decoder.raw_decode(content, idx)
++            objs.append(obj)
++            idx = end_idx
++        if len(objs) >= 2:
++            return objs[0], objs[1]
++    except Exception:
++        pass
++    
++    lines = [line.strip() for line in content.splitlines() if line.strip()]
++    if len(lines) >= 2:
++        return ast.literal_eval(lines[0]), ast.literal_eval(lines[1])
++    
++    return [], []
++
++def main():
++    edges, nums = read_input()
++    if not nums:
++        return
++    
++    n = len(nums)
++    adj = [[] for _ in range(n)]
++    for u, v, w in edges:
++        adj[u].append((v, w))
++        adj[v].append((u, w))
++        
++    max_len = 0
++    min_nodes = 1
++    last_seen = {}
++    path_dist = []
++    
++    def dfs(u, parent, depth, dist_so_far, top_idx):
++        nonlocal max_len, min_nodes
++        val = nums[u]
++        prev_idx = last_seen.get(val, -1)
++        
++        new_top_idx = max(top_idx, prev_idx + 1)
++        
++        path_dist.append(dist_so_far)
++        last_seen[val] = depth
++        
++        cur_len = dist_so_far - path_dist[new_top_idx]
++        cur_nodes = depth - new_top_idx + 1
++        
++        if cur_len > max_len:
++            max_len = cur_len
++            min_nodes = cur_nodes
++        elif cur_len == max_len:
++            if cur_nodes < min_nodes:
++                min_nodes = cur_nodes
++                
++        for v, w in adj[u]:
++            if v != parent:
++                dfs(v, u, depth + 1, dist_so_far + w, new_top_idx)
++                
++        path_dist.pop()
++        if prev_idx == -1:
++            del last_seen[val]
++        else:
++            last_seen[val] = prev_idx
++
++    dfs(0, -1, 0, 0, 0)
++    print([max_len, min_nodes])
++
++if __name__ == '__main__':
++    main()

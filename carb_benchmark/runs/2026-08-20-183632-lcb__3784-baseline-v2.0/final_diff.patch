@@ -1,0 +1,124 @@
+diff --git a/main.py b/main.py
+index c86f6c8..1b9328c 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,118 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import ast
++
++def solve():
++    raw_input = sys.stdin.read().strip()
++    if not raw_input:
++        return
++    
++    lines = [line.strip() for line in raw_input.splitlines() if line.strip()]
++    if len(lines) >= 2:
++        try:
++            words = json.loads(lines[0])
++        except Exception:
++            words = ast.literal_eval(lines[0])
++        k = int(lines[1])
++    else:
++        decoder = json.JSONDecoder()
++        words, idx = decoder.raw_decode(raw_input)
++        rest = raw_input[idx:].strip()
++        k = int(rest)
++
++    N = len(words)
++    if N - 1 < k:
++        print(json.dumps([0] * N))
++        return
++
++    children = [{}]
++    count = [0]
++    depth = [0]
++    node_count = 1
++    word_paths = []
++
++    for w in words:
++        curr = 0
++        path = [0]
++        count[0] += 1
++        for ch in w:
++            c = ord(ch) - 97
++            if c not in children[curr]:
++                children[curr][c] = node_count
++                node_count += 1
++                children.append({})
++                count.append(0)
++                depth.append(depth[curr] + 1)
++            curr = children[curr][c]
++            count[curr] += 1
++            path.append(curr)
++        word_paths.append(path)
++
++    max_depth_in_S = [0] * node_count
++    for u in range(node_count - 1, -1, -1):
++        if count[u] >= k:
++            m = depth[u]
++            for c in children[u].values():
++                if count[c] >= k:
++                    if max_depth_in_S[c] > m:
++                        m = max_depth_in_S[c]
++            max_depth_in_S[u] = m
++        else:
++            max_depth_in_S[u] = 0
++
++    max1 = [0] * node_count
++    max1_child = [-1] * node_count
++    max2 = [0] * node_count
++
++    for u in range(node_count):
++        m1 = 0
++        m1_c = -1
++        m2 = 0
++        for c in children[u].values():
++            if count[c] >= k:
++                d = max_depth_in_S[c]
++                if d > m1:
++                    m2 = m1
++                    m1 = d
++                    m1_c = c
++                elif d > m2:
++                    m2 = d
++        max1[u] = m1
++        max1_child[u] = m1_c
++        max2[u] = m2
++
++    ans = []
++    for i in range(N):
++        path = word_paths[i]
++        L = len(path) - 1
++
++        m2_val = 0
++        for node in path:
++            if count[node] >= k + 1:
++                m2_val = depth[node]
++            else:
++                break
++
++        m1_val = 0
++        for d in range(L + 1):
++            v_d = path[d]
++            if count[v_d] < k:
++                break
++            if d < L:
++                next_c = path[d + 1]
++                if next_c == max1_child[v_d]:
++                    other = max2[v_d]
++                else:
++                    other = max1[v_d]
++            else:
++                other = max1[v_d]
++
++            if other > m1_val:
++                m1_val = other
++
++        ans.append(max(m1_val, m2_val))
++
++    print(json.dumps(ans))
++
++if __name__ == '__main__':
++    solve()

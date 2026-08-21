@@ -1,0 +1,45 @@
+diff --git a/main.py b/main.py
+index c86f6c8..bf7cc18 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,39 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    R = int(input_data[1])
++    C = int(input_data[2])
++    S = input_data[3]
++
++    curr_r, curr_c = 0, 0
++    P = [(0, 0)]
++    dirs = {'N': (-1, 0), 'W': (0, -1), 'S': (1, 0), 'E': (0, 1)}
++
++    for char in S:
++        dr, dc = dirs[char]
++        curr_r += dr
++        curr_c += dc
++        P.append((curr_r, curr_c))
++
++    first_seen = {}
++    for idx, p in enumerate(P):
++        if p not in first_seen:
++            first_seen[p] = idx
++
++    res = []
++    limit = N + 1
++    for t in range(1, N + 1):
++        target = (P[t][0] - R, P[t][1] - C)
++        if first_seen.get(target, limit) <= t:
++            res.append('1')
++        else:
++            res.append('0')
++
++    sys.stdout.write(''.join(res) + '\n')
++
++if __name__ == '__main__':
++    main()

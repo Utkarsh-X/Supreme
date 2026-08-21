@@ -1,0 +1,101 @@
+diff --git a/django/middleware/cache.py b/django/middleware/cache.py
+index e92f768..e5f87c5 100644
+--- a/django/middleware/cache.py
++++ b/django/middleware/cache.py
+@@ -70,7 +70,7 @@ class UpdateCacheMiddleware(MiddlewareMixin):
+         self.key_prefix = settings.CACHE_MIDDLEWARE_KEY_PREFIX
+         self.cache_alias = settings.CACHE_MIDDLEWARE_ALIAS
+         self.cache = caches[self.cache_alias]
+-        self.get_response = get_response
++        super().__init__(get_response)
+ 
+     def _should_update_cache(self, request, response):
+         return hasattr(request, '_cache_update_cache') and request._cache_update_cache
+@@ -132,7 +132,7 @@ class FetchFromCacheMiddleware(MiddlewareMixin):
+         self.key_prefix = settings.CACHE_MIDDLEWARE_KEY_PREFIX
+         self.cache_alias = settings.CACHE_MIDDLEWARE_ALIAS
+         self.cache = caches[self.cache_alias]
+-        self.get_response = get_response
++        super().__init__(get_response)
+ 
+     def process_request(self, request):
+         """
+@@ -173,8 +173,7 @@ class CacheMiddleware(UpdateCacheMiddleware, FetchFromCacheMiddleware):
+     # RemovedInDjango40Warning: when the deprecation ends, replace with:
+     #   def __init__(self, get_response, cache_timeout=None, page_timeout=None, **kwargs):
+     def __init__(self, get_response=None, cache_timeout=None, page_timeout=None, **kwargs):
+-        self._get_response_none_deprecation(get_response)
+-        self.get_response = get_response
++        super().__init__(get_response)
+         # We need to differentiate between "provided, but using default value",
+         # and "not provided". If the value is provided using a default, then
+         # we fall back to system defaults. If it is not provided at all,
+diff --git a/django/middleware/security.py b/django/middleware/security.py
+index 035c329..8bfd615 100644
+--- a/django/middleware/security.py
++++ b/django/middleware/security.py
+@@ -19,7 +19,7 @@ class SecurityMiddleware(MiddlewareMixin):
+         self.redirect_host = settings.SECURE_SSL_HOST
+         self.redirect_exempt = [re.compile(r) for r in settings.SECURE_REDIRECT_EXEMPT]
+         self.referrer_policy = settings.SECURE_REFERRER_POLICY
+-        self.get_response = get_response
++        super().__init__(get_response)
+ 
+     def process_request(self, request):
+         path = request.path.lstrip("/")
+diff --git a/django/utils/deprecation.py b/django/utils/deprecation.py
+index b2c681b..1f62009 100644
+--- a/django/utils/deprecation.py
++++ b/django/utils/deprecation.py
+@@ -97,15 +97,20 @@ class MiddlewareMixin:
+         self._async_check()
+         super().__init__()
+ 
++    @property
++    def _is_coroutine(self):
++        return (
++            asyncio.coroutines._is_coroutine
++            if asyncio.iscoroutinefunction(getattr(self, 'get_response', None))
++            else None
++        )
++
+     def _async_check(self):
+         """
+         If get_response is a coroutine function, turns us into async mode so
+         a thread is not consumed during a whole request.
+         """
+-        if asyncio.iscoroutinefunction(self.get_response):
+-            # Mark the class as async-capable, but do the actual switch
+-            # inside __call__ to avoid swapping out dunder methods
+-            self._is_coroutine = asyncio.coroutines._is_coroutine
++        pass
+ 
+     def __call__(self, request):
+         # Exit out to async mode, if needed
+diff --git a/tests/deprecation/test_middleware_mixin.py b/tests/deprecation/test_middleware_mixin.py
+index c90aeb8..65bbfa7 100644
+--- a/tests/deprecation/test_middleware_mixin.py
++++ b/tests/deprecation/test_middleware_mixin.py
+@@ -78,3 +78,22 @@ class MiddlewareMixinTests(SimpleTestCase):
+ 
+         self.assertEqual(len(threads_and_connections), 4)
+         self.assertEqual(len(set(threads_and_connections)), 1)
++
++    async def test_middleware_mixin_async_chain(self):
++        async def get_response(request):
++            return HttpResponse()
++
++        class CustomInitMiddleware(MiddlewareMixin):
++            def __init__(self, get_response=None):
++                self.get_response = get_response
++
++        class FirstMiddleware(MiddlewareMixin):
++            def process_response(self, request, response):
++                self.response_type = type(response)
++                return response
++
++        first_mw = FirstMiddleware(CustomInitMiddleware(get_response))
++        response = await first_mw(HttpRequest())
++        self.assertIsInstance(response, HttpResponse)
++        self.assertIs(first_mw.response_type, HttpResponse)
++

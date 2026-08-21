@@ -1,0 +1,36 @@
+### Root Cause
+When a `Figure` is rendered on a High DPI display (such as an M1 Mac Retina screen or HiDPI display), the canvas sets `_device_pixel_ratio` (e.g., `2.0`), scaling `figure.dpi` to the physical DPI (e.g., `200.0`) while preserving the unscaled logical DPI in `figure._original_dpi` (e.g., `100.0`).
+
+When unpickling the figure (`pickle.load`), `Figure.__setstate__` instantiates a new canvas via [FigureCanvasBase](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1656). Previously, [FigureCanvasBase.__init__](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1656) unconditionally executed:
+```python
+figure._original_dpi = figure.dpi
+```
+This overwrote `figure._original_dpi` with `figure.dpi` (200.0). When the backend GUI initialized the window and re-applied `_set_device_pixel_ratio(2.0)`, it calculated `dpi = ratio * figure._original_dpi` (`2.0 * 200.0 = 400.0`), doubling the figure DPI on every pickling iteration until an `OverflowError` occurred.
+
+### Fix
+Updated [FigureCanvasBase.__init__](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1656-L1657) in [lib/matplotlib/backend_bases.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py) to set `figure._original_dpi` only if `figure` does not already have `_original_dpi` set:
+
+```python
+if not hasattr(figure, '_original_dpi'):
+    figure._original_dpi = figure.dpi
+```
+
+A unit test `test_unpickle_dpi_device_pixel_ratio` has been added to [lib/matplotlib/tests/test_pickle.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_pickle.py#L241-L248).
+### Root Cause
+When a `Figure` is rendered on a High DPI display (such as an M1 Mac Retina screen or HiDPI display), the canvas sets `_device_pixel_ratio` (e.g., `2.0`), scaling `figure.dpi` to the physical DPI (e.g., `200.0`) while preserving the unscaled logical DPI in `figure._original_dpi` (e.g., `100.0`).
+
+When unpickling the figure (`pickle.load`), `Figure.__setstate__` instantiates a new canvas via [FigureCanvasBase](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1656). Previously, [FigureCanvasBase.__init__](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1656) unconditionally executed:
+```python
+figure._original_dpi = figure.dpi
+```
+This overwrote `figure._original_dpi` with `figure.dpi` (200.0). When the backend GUI initialized the window and re-applied `_set_device_pixel_ratio(2.0)`, it calculated `dpi = ratio * figure._original_dpi` (`2.0 * 200.0 = 400.0`), doubling the figure DPI on every pickling iteration until an `OverflowError` occurred.
+
+### Fix
+Updated [FigureCanvasBase.__init__](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py#L1656-L1657) in [lib/matplotlib/backend_bases.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/backend_bases.py) to set `figure._original_dpi` only if `figure` does not already have `_original_dpi` set:
+
+```python
+if not hasattr(figure, '_original_dpi'):
+    figure._original_dpi = figure.dpi
+```
+
+A unit test `test_unpickle_dpi_device_pixel_ratio` has been added to [lib/matplotlib/tests/test_pickle.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23476/lib/matplotlib/tests/test_pickle.py#L241-L248).

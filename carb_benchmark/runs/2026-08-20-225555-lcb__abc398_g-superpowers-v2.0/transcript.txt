@@ -1,0 +1,28 @@
+I have solved the problem and implemented the optimal game strategy in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_g/main.py).
+
+### Summary of Mathematical Strategy & Solution:
+
+1. **Bipartite Graph Structure**:
+   Since the initial graph $G$ contains no odd cycles, $G$ is bipartite. Adding edges without introducing odd cycles requires that the graph remains bipartite at all times until it forms a complete bipartite graph.
+
+2. **Game Analysis & Winning Rules**:
+   - **$N$ is Odd**: The final complete bipartite graph on $N$ vertices always has partition sizes $(B, W)$ with $B + W = N$. Because $N$ is odd, one of $B, W$ is even and the other is odd, making $B \cdot W$ **always even**. The total number of moves made in the game is $B \cdot W - M \equiv M \pmod 2$. Thus, the total game length parity is fixed: Aoki wins if $M$ is odd, and Takahashi wins if $M$ is even.
+   - **$N$ is Even**: Let $K_{\text{odd}}$ be the number of connected components with an odd number of vertices.
+     - **$K_{\text{odd}} = 0$**: Every component has an even number of vertices. Color class size parities remain invariant regardless of merges. Total game moves parity is $(\sum_{i} b_i - M) \pmod 2$. Aoki wins if this is 1 (odd), else Takahashi.
+     - **$K_{\text{odd}} \ge 2$**:
+       - If all $K_{\text{odd}}$ odd components are isolated vertices (size 1), there is no orientation choice when merging isolated vertices. Aoki wins if $(\sum_{i \text{ even}} b_i + K_{\text{odd}} / 2 - M) \pmod 2 \equiv 1$, else Takahashi.
+       - If at least one odd component has size $> 1$, Aoki (the first player) can choose the merge orientation of that component to control the parity of the total game moves and is guaranteed to win (`Aoki`).
+I have solved the problem and implemented the optimal game strategy in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_g/main.py).
+
+### Summary of Mathematical Strategy & Solution:
+
+1. **Bipartite Graph Structure**:
+   Since the initial graph $G$ contains no odd cycles, $G$ is bipartite. Adding edges without introducing odd cycles requires that the graph remains bipartite at all times until it forms a complete bipartite graph.
+
+2. **Game Analysis & Winning Rules**:
+   - **$N$ is Odd**: The final complete bipartite graph on $N$ vertices always has partition sizes $(B, W)$ with $B + W = N$. Because $N$ is odd, one of $B, W$ is even and the other is odd, making $B \cdot W$ **always even**. The total number of moves made in the game is $B \cdot W - M \equiv M \pmod 2$. Thus, the total game length parity is fixed: Aoki wins if $M$ is odd, and Takahashi wins if $M$ is even.
+   - **$N$ is Even**: Let $K_{\text{odd}}$ be the number of connected components with an odd number of vertices.
+     - **$K_{\text{odd}} = 0$**: Every component has an even number of vertices. Color class size parities remain invariant regardless of merges. Total game moves parity is $(\sum_{i} b_i - M) \pmod 2$. Aoki wins if this is 1 (odd), else Takahashi.
+     - **$K_{\text{odd}} \ge 2$**:
+       - If all $K_{\text{odd}}$ odd components are isolated vertices (size 1), there is no orientation choice when merging isolated vertices. Aoki wins if $(\sum_{i \text{ even}} b_i + K_{\text{odd}} / 2 - M) \pmod 2 \equiv 1$, else Takahashi.
+       - If at least one odd component has size $> 1$, Aoki (the first player) can choose the merge orientation of that component to control the parity of the total game moves and is guaranteed to win (`Aoki`).

@@ -1,0 +1,38 @@
+I have solved the problem by modeling the BFS layering of undirected connected simple graphs from vertex 1 and counting valid graphs with dynamic programming.
+
+### Method Overview
+1. **BFS Layer Partitioning**:
+   - Vertex 1 forms $L_0 = \{1\}$ (distance 0).
+   - Any connected simple graph has a unique BFS layer structure $(L_0, L_1, L_2, \ldots, L_d)$ partitioning $\{1, \ldots, N\}$.
+   - Vertices at even distance from 1 form $E = L_0 \cup L_2 \cup L_4 \dots$, and at odd distance form $O = L_1 \cup L_3 \cup L_5 \dots$.
+   - The condition $|E| = |O| = N/2 = K$ requires $c_1 + c_3 + \dots = K$ and $c_2 + c_4 + \dots = K - 1$ where $c_i = |L_i|$.
+
+2. **Generating Functions for Edge Choices**:
+   - Each vertex in $L_k$ must connect to at least one vertex in $L_{k-1}$ (generating function $((1+x)^a - 1)^b$, where $a = |L_{k-1}|$ and $b = |L_k|$).
+   - Edges within $L_k$ are independently chosen (generating function $(1+x)^{\binom{b}{2}}$).
+   - Using polynomial binomial identities, $Q_{a,b}(x) = \frac{1}{b!} ((1+x)^a - 1)^b (1+x)^{\binom{b}{2}}$ is precomputed in $O(a b^2)$ time with no unnecessary polynomial power multiplications.
+
+3. **Dynamic Programming**:
+   - DP state: `dp[(s_odd, s_even, last_size, parity)]` tracks the generating polynomial of edge counts for partial layerings.
+   - Vertices are labeled, so the result is multiplied by $(N-1)!$ to account for set partitions of $\{2, \ldots, N\}$.
+
+The implementation in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc389_g/main.py) was verified against all sample inputs.
+I have solved the problem by modeling the BFS layering of undirected connected simple graphs from vertex 1 and counting valid graphs with dynamic programming.
+
+### Method Overview
+1. **BFS Layer Partitioning**:
+   - Vertex 1 forms $L_0 = \{1\}$ (distance 0).
+   - Any connected simple graph has a unique BFS layer structure $(L_0, L_1, L_2, \ldots, L_d)$ partitioning $\{1, \ldots, N\}$.
+   - Vertices at even distance from 1 form $E = L_0 \cup L_2 \cup L_4 \dots$, and at odd distance form $O = L_1 \cup L_3 \cup L_5 \dots$.
+   - The condition $|E| = |O| = N/2 = K$ requires $c_1 + c_3 + \dots = K$ and $c_2 + c_4 + \dots = K - 1$ where $c_i = |L_i|$.
+
+2. **Generating Functions for Edge Choices**:
+   - Each vertex in $L_k$ must connect to at least one vertex in $L_{k-1}$ (generating function $((1+x)^a - 1)^b$, where $a = |L_{k-1}|$ and $b = |L_k|$).
+   - Edges within $L_k$ are independently chosen (generating function $(1+x)^{\binom{b}{2}}$).
+   - Using polynomial binomial identities, $Q_{a,b}(x) = \frac{1}{b!} ((1+x)^a - 1)^b (1+x)^{\binom{b}{2}}$ is precomputed in $O(a b^2)$ time with no unnecessary polynomial power multiplications.
+
+3. **Dynamic Programming**:
+   - DP state: `dp[(s_odd, s_even, last_size, parity)]` tracks the generating polynomial of edge counts for partial layerings.
+   - Vertices are labeled, so the result is multiplied by $(N-1)!$ to account for set partitions of $\{2, \ldots, N\}$.
+
+The implementation in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc389_g/main.py) was verified against all sample inputs.

@@ -1,0 +1,121 @@
+diff --git a/main.py b/main.py
+index c86f6c8..d15f079 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,115 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++
++def solve():
++    input_data = sys.stdin.read().strip()
++    if not input_data:
++        return
++    
++    decoder = json.JSONDecoder()
++    try:
++        words, idx = decoder.raw_decode(input_data)
++        rest = input_data[idx:].strip()
++        k = int(rest)
++    except Exception:
++        lines = [line.strip() for line in input_data.splitlines() if line.strip()]
++        words = json.loads(lines[0])
++        k = int(lines[1])
++
++    N = len(words)
++    if N <= k:
++        print(json.dumps([0] * N))
++        return
++
++    # Build Trie
++    children = [{}]
++    cnt = [0]
++    depth = [0]
++
++    cnt[0] = N
++    for w in words:
++        curr = 0
++        for ch in w:
++            if ch not in children[curr]:
++                nxt = len(children)
++                children[curr][ch] = nxt
++                children.append({})
++                cnt.append(0)
++                depth.append(depth[curr] + 1)
++            curr = children[curr][ch]
++            cnt[curr] += 1
++
++    # D_{k+1}: max depth of node with cnt >= k + 1
++    D_k1 = 0
++    for u in range(len(children)):
++        if cnt[u] >= k + 1:
++            if depth[u] > D_k1:
++                D_k1 = depth[u]
++
++    # BFS order for bottom-up calculation of T_k subtree max depths
++    queue = [0]
++    for u in queue:
++        for ch, c in children[u].items():
++            queue.append(c)
++
++    subtree_max_depth = [0] * len(children)
++    b1_val = [0] * len(children)
++    b1_child = [-1] * len(children)
++    b2_val = [0] * len(children)
++
++    for u in reversed(queue):
++        if cnt[u] >= k:
++            s_max = depth[u]
++            bv1 = 0
++            bc1 = -1
++            bv2 = 0
++            for ch, c in children[u].items():
++                if cnt[c] >= k:
++                    val = subtree_max_depth[c]
++                    if val > s_max:
++                        s_max = val
++                    if val > bv1:
++                        bv2 = bv1
++                        bv1 = val
++                        bc1 = c
++                    elif val > bv2:
++                        bv2 = val
++            subtree_max_depth[u] = s_max
++            b1_val[u] = bv1
++            b1_child[u] = bc1
++            b2_val[u] = bv2
++
++    # Query for each word
++    ans = [0] * N
++    for i, w in enumerate(words):
++        curr = 0
++        path = [0]
++        for ch in w:
++            if ch in children[curr] and cnt[children[curr][ch]] >= k:
++                curr = children[curr][ch]
++                path.append(curr)
++            else:
++                break
++        
++        d_off = 0
++        for j in range(len(path) - 1):
++            u_j = path[j]
++            u_next = path[j + 1]
++            if u_next == b1_child[u_j]:
++                val = b2_val[u_j]
++            else:
++                val = b1_val[u_j]
++            if val > d_off:
++                d_off = val
++        
++        u_m = path[-1]
++        val = b1_val[u_m]
++        if val > d_off:
++            d_off = val
++            
++        ans[i] = max(D_k1, d_off)
++
++    print(json.dumps(ans))
++
++if __name__ == '__main__':
++    solve()

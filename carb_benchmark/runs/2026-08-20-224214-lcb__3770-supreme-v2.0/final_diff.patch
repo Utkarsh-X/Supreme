@@ -1,0 +1,99 @@
+diff --git a/main.py b/main.py
+index c86f6c8..4b0a8e7 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,93 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve(str1: str, str2: str) -> str:
++    n = len(str1)
++    m = len(str2)
++    L = n + m - 1
++    
++    str2_list = list(str2)
++    fixed = [False] * L
++    word = ['a'] * L
++    
++    # 1. Apply 'T' constraints
++    for i in range(n):
++        if str1[i] == 'T':
++            for j in range(m):
++                pos = i + j
++                if fixed[pos] and word[pos] != str2_list[j]:
++                    return ""
++                fixed[pos] = True
++                word[pos] = str2_list[j]
++                
++    # 2. Check impossible 'F' windows where all positions are fixed and equal to str2
++    for i in range(n):
++        if str1[i] == 'F':
++            if all(fixed[i + j] for j in range(m)):
++                if word[i:i+m] == str2_list:
++                    return ""
++
++    # 3. Fix violated 'F' windows
++    for i in range(n):
++        if str1[i] == 'F':
++            if word[i:i+m] == str2_list:
++                # Need to fix window i by changing an unfixed position
++                unfixed = [i + j for j in range(m) if not fixed[i + j]]
++                if not unfixed:
++                    return ""
++                
++                fixed_window = False
++                # Try unfixed positions from right to left
++                for pos in reversed(unfixed):
++                    old_ch = word[pos]
++                    for ch_code in range(ord('b'), ord('z') + 1):
++                        ch = chr(ch_code)
++                        word[pos] = ch
++                        
++                        # Check if any window k becomes violated
++                        valid = True
++                        min_k = max(0, pos - m + 1)
++                        max_k = min(n - 1, pos)
++                        for k in range(min_k, max_k + 1):
++                            if str1[k] == 'F':
++                                if word[k:k+m] == str2_list:
++                                    valid = False
++                                    break
++                        if valid:
++                            fixed_window = True
++                            break
++                    if fixed_window:
++                        break
++                    else:
++                        word[pos] = old_ch
++                if not fixed_window:
++                    return ""
++
++    return "".join(word)
++
++def main():
++    raw_input = sys.stdin.read().strip()
++    if not raw_input:
++        return
++
++    lines = [line.strip() for line in raw_input.splitlines() if line.strip()]
++    if len(lines) < 2:
++        import re
++        tokens = re.findall(r'"[^"]*"|\'\S*\'|\S+', raw_input)
++        lines = tokens
++
++    def clean_str(s):
++        s = s.strip()
++        if '=' in s:
++            s = s.split('=', 1)[1].strip()
++        if len(s) >= 2 and ((s.startswith('"') and s.endswith('"')) or (s.startswith("'") and s.endswith("'"))):
++            s = s[1:-1]
++        return s
++
++    if len(lines) >= 2:
++        str1 = clean_str(lines[0])
++        str2 = clean_str(lines[1])
++        ans = solve(str1, str2)
++        print(ans)
++
++if __name__ == '__main__':
++    main()

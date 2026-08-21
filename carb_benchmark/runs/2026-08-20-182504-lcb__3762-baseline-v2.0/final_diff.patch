@@ -1,0 +1,82 @@
+diff --git a/main.py b/main.py
+index c86f6c8..e54be23 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,76 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import ast
++
++def solve():
++    input_data = sys.stdin.read().strip()
++    if not input_data:
++        return
++
++    lines = [line.strip() for line in input_data.splitlines() if line.strip()]
++    if len(lines) < 2:
++        return
++
++    # Parse points
++    try:
++        points = json.loads(lines[0])
++    except Exception:
++        try:
++            points = ast.literal_eval(lines[0])
++        except Exception:
++            # Fallback if formatted differently
++            cleaned = lines[0].strip('[]')
++            points = [int(x) for x in cleaned.replace(',', ' ').split()]
++
++    # Parse m
++    m = int(lines[1])
++
++    n = len(points)
++    if m < n:
++        print(0)
++        return
++
++    def check(V):
++        if V == 0:
++            return True
++        moves = 1
++        count_curr = 1
++        for i in range(n - 1):
++            p = points[i]
++            k_i = (V + p - 1) // p
++            rem = k_i - count_curr
++            if rem < 0:
++                rem = 0
++            
++            if i < n - 2:
++                moves += 2 * rem + 1
++                count_next = rem + 1
++                count_curr = count_next
++            else:
++                moves += 2 * rem
++                count_next = rem
++                p_last = points[n - 1]
++                k_last = (V + p_last - 1) // p_last
++                rem_last = k_last - count_next
++                if rem_last > 0:
++                    moves += 2 * rem_last - 1
++            if moves > m:
++                return False
++        return moves <= m
++
++    low = 1
++    high = max(points) * m
++    ans = 0
++
++    while low <= high:
++        mid = (low + high) // 2
++        if check(mid):
++            ans = mid
++            low = mid + 1
++        else:
++            high = mid - 1
++
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

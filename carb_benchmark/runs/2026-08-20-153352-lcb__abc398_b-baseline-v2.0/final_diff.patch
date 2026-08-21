@@ -1,0 +1,25 @@
+diff --git a/main.py b/main.py
+index c86f6c8..27cf5a1 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,19 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import Counter
++from itertools import combinations
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    A = list(map(int, input_data))
++    
++    for comb in combinations(A, 5):
++        counts = sorted(Counter(comb).values())
++        if counts == [2, 3]:
++            print("Yes")
++            return
++    print("No")
++
++if __name__ == "__main__":
++    solve()

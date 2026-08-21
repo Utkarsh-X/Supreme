@@ -1,0 +1,48 @@
+An optimal solution for the problem has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc193_d/main.py).
+
+### Method Explanation
+
+1. **Characterization of Operations**:
+   - Let initial piece positions be $a_1 < a_2 < \dots < a_m$ (derived from 1s in $A$) and target occupied positions be $b_1 < b_2 < \dots < b_k$ (derived from 1s in $B$).
+   - Relative order of pieces is preserved under operations, and pieces never separate once merged.
+   - Any valid mapping $q_1 \le q_2 \le \dots \le q_m$ of pieces to target positions requires:
+     - $q_1 = b_1$ and $q_m = b_k$.
+     - $\{q_1, \dots, q_m\} = \{b_1, \dots, b_k\}$.
+     - Displacements $d_j = a_j - q_j$ are non-decreasing ($d_1 \le d_2 \le \dots \le d_m$), which means adjacent initial gaps $g_j = a_{j+1} - a_j$ and target gaps $h_v = b_{v+1} - b_v$ must satisfy $g_{j_v} \ge h_v$ for a strictly increasing subsequence of indices $j_1 < j_2 < \dots < j_{k-1}$.
+
+2. **Existence of Mapping**:
+   - If $m < k$, it is impossible (output `-1`).
+   - Otherwise, we use a greedy two-pointer scan to check if the target gap sequence $h_1, \dots, h_{k-1}$ can be matched to a subsequence of initial gaps $g_1, \dots, g_{m-1}$ such that $g_{j_v} \ge h_v$. If no such subsequence exists, output `-1`.
+
+3. **Minimum Operations Formula**:
+   - For any valid mapping $q$, the minimum number of operations required is:
+     $$\max\left(a_m - b_k, \; b_1 - a_1, \; \left\lceil \frac{(a_m - a_1) - (b_k - b_1)}{2} \right\rceil\right)$$
+   - Notice that this quantity depends only on the endpoints $a_1, a_m, b_1, b_k$, and is thus constant across all valid mappings.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(\sum N)$, scanning the strings and running the greedy matching takes linear time.
+- **Space Complexity**: $\mathcal{O}(\sum N)$ to store piece positions and gaps.
+An optimal solution for the problem has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc193_d/main.py).
+
+### Method Explanation
+
+1. **Characterization of Operations**:
+   - Let initial piece positions be $a_1 < a_2 < \dots < a_m$ (derived from 1s in $A$) and target occupied positions be $b_1 < b_2 < \dots < b_k$ (derived from 1s in $B$).
+   - Relative order of pieces is preserved under operations, and pieces never separate once merged.
+   - Any valid mapping $q_1 \le q_2 \le \dots \le q_m$ of pieces to target positions requires:
+     - $q_1 = b_1$ and $q_m = b_k$.
+     - $\{q_1, \dots, q_m\} = \{b_1, \dots, b_k\}$.
+     - Displacements $d_j = a_j - q_j$ are non-decreasing ($d_1 \le d_2 \le \dots \le d_m$), which means adjacent initial gaps $g_j = a_{j+1} - a_j$ and target gaps $h_v = b_{v+1} - b_v$ must satisfy $g_{j_v} \ge h_v$ for a strictly increasing subsequence of indices $j_1 < j_2 < \dots < j_{k-1}$.
+
+2. **Existence of Mapping**:
+   - If $m < k$, it is impossible (output `-1`).
+   - Otherwise, we use a greedy two-pointer scan to check if the target gap sequence $h_1, \dots, h_{k-1}$ can be matched to a subsequence of initial gaps $g_1, \dots, g_{m-1}$ such that $g_{j_v} \ge h_v$. If no such subsequence exists, output `-1`.
+
+3. **Minimum Operations Formula**:
+   - For any valid mapping $q$, the minimum number of operations required is:
+     $$\max\left(a_m - b_k, \; b_1 - a_1, \; \left\lceil \frac{(a_m - a_1) - (b_k - b_1)}{2} \right\rceil\right)$$
+   - Notice that this quantity depends only on the endpoints $a_1, a_m, b_1, b_k$, and is thus constant across all valid mappings.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(\sum N)$, scanning the strings and running the greedy matching takes linear time.
+- **Space Complexity**: $\mathcal{O}(\sum N)$ to store piece positions and gaps.

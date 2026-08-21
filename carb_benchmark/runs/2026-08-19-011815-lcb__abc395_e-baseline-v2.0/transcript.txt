@@ -1,0 +1,32 @@
+I have solved the problem by implementing the optimal graph search algorithm in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_e/main.py).
+
+### Method Explanation
+The problem can be modeled as finding the shortest path on a **2-layer graph**:
+- **Layer 0**: Represents the graph in its original orientation. Directed edges $u \to v$ have weight $1$.
+- **Layer 1**: Represents the graph in its reversed orientation. Directed edges $v \to u$ have weight $1$.
+- **Inter-layer edges**: At any vertex $v$, transitioning between Layer 0 and Layer 1 (in either direction) represents reversing all edges in the graph, which incurs a cost of $X$.
+
+Using Dijkstra's algorithm on this $2N$-vertex graph starting at vertex $1$ in Layer 0:
+1. Moving along an edge in the current layer costs $1$.
+2. Switching layers at the current vertex costs $X$.
+3. The first time target vertex $N$ (in either Layer 0 or Layer 1) is popped from the priority queue, its distance is the minimum possible total cost.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}((N + M) \log N)$, running in $<0.2$s for $N, M = 200,000$.
+- **Space Complexity**: $\mathcal{O}(N + M)$ to store the 2-layer graph adjacency list and distance array.
+I have solved the problem by implementing the optimal graph search algorithm in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_e/main.py).
+
+### Method Explanation
+The problem can be modeled as finding the shortest path on a **2-layer graph**:
+- **Layer 0**: Represents the graph in its original orientation. Directed edges $u \to v$ have weight $1$.
+- **Layer 1**: Represents the graph in its reversed orientation. Directed edges $v \to u$ have weight $1$.
+- **Inter-layer edges**: At any vertex $v$, transitioning between Layer 0 and Layer 1 (in either direction) represents reversing all edges in the graph, which incurs a cost of $X$.
+
+Using Dijkstra's algorithm on this $2N$-vertex graph starting at vertex $1$ in Layer 0:
+1. Moving along an edge in the current layer costs $1$.
+2. Switching layers at the current vertex costs $X$.
+3. The first time target vertex $N$ (in either Layer 0 or Layer 1) is popped from the priority queue, its distance is the minimum possible total cost.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}((N + M) \log N)$, running in $<0.2$s for $N, M = 200,000$.
+- **Space Complexity**: $\mathcal{O}(N + M)$ to store the 2-layer graph adjacency list and distance array.

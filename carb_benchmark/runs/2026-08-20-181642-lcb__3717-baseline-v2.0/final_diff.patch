@@ -1,0 +1,152 @@
+diff --git a/main.py b/main.py
+index c86f6c8..b5bb09e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,146 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import heapq
++import json
++import ast
++import re
++from collections import defaultdict
++
++def heap_window_costs(nums, x):
++    left = []   # max heap (stored as -val)
++    right = []  # min heap (stored as val)
++    left_size = 0
++    right_size = 0
++    sum_left = 0
++    sum_right = 0
++    delayed = defaultdict(int)
++    
++    target_left = (x + 1) // 2
++    
++    def prune_left():
++        while left and delayed[-left[0]] > 0:
++            val = -heapq.heappop(left)
++            delayed[val] -= 1
++            
++    def prune_right():
++        while right and delayed[right[0]] > 0:
++            val = heapq.heappop(right)
++            delayed[val] -= 1
++
++    def rebalance():
++        nonlocal left_size, right_size, sum_left, sum_right
++        while left_size > target_left:
++            prune_left()
++            val = -heapq.heappop(left)
++            sum_left -= val
++            left_size -= 1
++            heapq.heappush(right, val)
++            sum_right += val
++            right_size += 1
++            
++        while left_size < target_left and right_size > 0:
++            prune_right()
++            val = heapq.heappop(right)
++            sum_right -= val
++            right_size -= 1
++            heapq.heappush(left, -val)
++            sum_left += val
++            left_size += 1
++
++    def add_num(val):
++        nonlocal left_size, right_size, sum_left, sum_right
++        prune_left()
++        if not left or val <= -left[0]:
++            heapq.heappush(left, -val)
++            sum_left += val
++            left_size += 1
++        else:
++            heapq.heappush(right, val)
++            sum_right += val
++            right_size += 1
++        rebalance()
++
++    def remove_num(val):
++        nonlocal left_size, right_size, sum_left, sum_right
++        prune_left()
++        prune_right()
++        if val <= -left[0]:
++            left_size -= 1
++            sum_left -= val
++            if val == -left[0]:
++                heapq.heappop(left)
++            else:
++                delayed[val] += 1
++        else:
++            right_size -= 1
++            sum_right -= val
++            if val == right[0]:
++                heapq.heappop(right)
++            else:
++                delayed[val] += 1
++        rebalance()
++
++    def get_cost():
++        prune_left()
++        med = -left[0]
++        if x % 2 == 1:
++            return sum_right - sum_left + med
++        else:
++            return sum_right - sum_left
++
++    for i in range(x):
++        add_num(nums[i])
++        
++    costs = [get_cost()]
++    
++    for i in range(x, len(nums)):
++        remove_num(nums[i - x])
++        add_num(nums[i])
++        costs.append(get_cost())
++        
++    return costs
++
++def solve(nums, x, k):
++    costs = heap_window_costs(nums, x)
++    n = len(nums)
++    dp = [0] * (n + 1)
++    
++    for j in range(1, k + 1):
++        next_dp = [float('inf')] * (n + 1)
++        j_x = j * x
++        for i in range(j_x, n + 1):
++            cand = dp[i - x] + costs[i - x]
++            prev = next_dp[i - 1]
++            next_dp[i] = cand if cand < prev else prev
++        dp = next_dp
++        
++    return dp[n]
++
++def main():
++    text = sys.stdin.read().strip()
++    if not text:
++        return
++    
++    if '[' in text and ']' in text:
++        start_idx = text.find('[')
++        end_idx = text.rfind(']') + 1
++        arr_str = text[start_idx:end_idx]
++        try:
++            nums = json.loads(arr_str)
++        except Exception:
++            nums = ast.literal_eval(arr_str)
++            
++        remaining_text = text[end_idx:]
++        remaining_ints = [int(val) for val in re.findall(r'-?\d+', remaining_text)]
++        x = remaining_ints[0]
++        k = remaining_ints[1]
++    else:
++        all_ints = [int(val) for val in re.findall(r'-?\d+', text)]
++        nums = all_ints[:-2]
++        x = all_ints[-2]
++        k = all_ints[-1]
++        
++    ans = solve(nums, x, k)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

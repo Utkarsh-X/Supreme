@@ -1,0 +1,64 @@
+diff --git a/main.py b/main.py
+index c86f6c8..5443ae3 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,58 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import re
++
++def solve():
++    input_data = sys.stdin.read()
++    if not input_data.strip():
++        return
++    
++    nums = [int(x) for x in re.findall(r'\d+', input_data)]
++    if not nums:
++        return
++    
++    n = nums[0]
++    pair_coords = nums[1:]
++    m = len(pair_coords) // 2
++    
++    pairs_at_v = [[] for _ in range(n + 1)]
++    for i in range(m):
++        a = pair_coords[2 * i]
++        b = pair_coords[2 * i + 1]
++        u = a if a < b else b
++        v = b if a < b else a
++        pairs_at_v[v].append((u, i))
++        
++    gain = [0] * m
++    base_total = 0
++    
++    max1_val = 0
++    max1_cnt = 0
++    max1_id = None
++    
++    max2_val = 0
++    max2_cnt = 0
++    max2_id = None
++    
++    for R in range(1, n + 1):
++        for u, pid in pairs_at_v[R]:
++            if u > max1_val:
++                max2_val, max2_cnt, max2_id = max1_val, max1_cnt, max1_id
++                max1_val, max1_cnt, max1_id = u, 1, pid
++            elif u == max1_val:
++                max1_cnt += 1
++                max1_id = None
++            elif u > max2_val:
++                max2_val, max2_cnt, max2_id = u, 1, pid
++            elif u == max2_val:
++                max2_cnt += 1
++                max2_id = None
++        
++        base_total += R - max1_val
++        if max1_cnt == 1 and max1_id is not None:
++            gain[max1_id] += max1_val - max2_val
++            
++    ans = base_total + max(gain)
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

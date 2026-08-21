@@ -1,0 +1,75 @@
+diff --git a/main.py b/main.py
+index c86f6c8..18a8fea 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,69 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import heapq
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++    
++    if N % 2 == 0:
++        A.sort()
++        K = N // 2
++        ans = sum(A[K:]) - sum(A[:K])
++        print(ans)
++        return
++    
++    def get_half_scores(arr):
++        lower = []  # max-heap storing negated values
++        upper = []  # min-heap storing values
++        sum_upper = 0
++        total_sum = 0
++        scores = [0] * ((len(arr) // 2) + 1)
++        
++        for i in range(0, len(arr) - 1, 2):
++            x = arr[i]
++            y = arr[i+1]
++            total_sum += x + y
++            
++            if upper and x >= upper[0]:
++                heapq.heappush(upper, x)
++                sum_upper += x
++            else:
++                heapq.heappush(lower, -x)
++                
++            if upper and y >= upper[0]:
++                heapq.heappush(upper, y)
++                sum_upper += y
++            else:
++                heapq.heappush(lower, -y)
++            
++            target_k = (i // 2) + 1
++            while len(upper) > target_k:
++                val = heapq.heappop(upper)
++                sum_upper -= val
++                heapq.heappush(lower, -val)
++            while len(upper) < target_k:
++                val = -heapq.heappop(lower)
++                heapq.heappush(upper, val)
++                sum_upper += val
++                
++            scores[target_k] = 2 * sum_upper - total_sum
++        return scores
++
++    pref = get_half_scores(A)
++    suff = get_half_scores(A[::-1])
++    
++    ans = 0
++    num_pairs = (N - 1) // 2
++    for left_pairs in range(num_pairs + 1):
++        right_pairs = num_pairs - left_pairs
++        score = pref[left_pairs] + suff[right_pairs]
++        if score > ans:
++            ans = score
++            
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,54 @@
+### Problem Analysis
+When subclassing `SkyCoord` (or `BaseCoordinateFrame`) and defining custom `@property` descriptors whose getters access non-existent attributes (e.g. `self.random_attr`), accessing `c.prop` was raising a misleading error message:
+```python
+AttributeError: 'custom_coord' object has no attribute 'prop'
+```
+instead of reporting the actual missing attribute:
+```python
+AttributeError: 'custom_coord' object has no attribute 'random_attr'
+```
+
+#### Root Cause
+In Python, when attribute access `c.prop` resolves to a descriptor property, `object.__getattribute__` invokes `prop.__get__(c, custom_coord)`. If the property's getter raises an `AttributeError` (for instance, when accessing `self.random_attr`), Python's attribute lookup mechanism catches that `AttributeError` and falls back to calling `c.__getattr__('prop')`.
+
+`SkyCoord.__getattr__` receives `attr = 'prop'`. Previously, `SkyCoord.__getattr__` did not check whether `attr` was already defined on the class (or anywhere in `type(self).__mro__`). As a result, it fell through to raising a generic `AttributeError` claiming that `'prop'` did not exist on the object, thereby masking the original `AttributeError` from inside the property getter.
+
+Additionally, delegating attribute lookup to `self._sky_coord_frame` via `hasattr(self._sky_coord_frame, attr)` would swallow `AttributeError`s raised inside properties defined on frame classes.
+
+### Solution
+1. In [astropy/coordinates/sky_coordinate.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L871-L895):
+   - Added a check at the beginning of `SkyCoord.__getattr__(self, attr)` to see if `attr` is present in `type(self).__mro__`. If so, calling `self.__getattribute__(attr)` re-evaluates the descriptor access directly without falling back to `__getattr__`, propagating the exact `AttributeError` raised inside the property getter.
+   - Updated the delegation check for `self._sky_coord_frame` to check `attr in dir(self._sky_coord_frame)` before `hasattr`, preventing `hasattr` from swallowing `AttributeError`s raised within frame properties.
+2. Added unit test `test_subclass_skycoord_attribute_error` in [astropy/coordinates/tests/test_sky_coord.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/tests/test_sky_coord.py#L2169-L2205) to verify attribute error messages on subclassed `SkyCoord` objects and custom frame classes.
+
+### Verification
+Ran the `pytest` test suite on `astropy/coordinates/tests/test_sky_coord.py`:
+- 431 passed (including the new regression test `test_subclass_skycoord_attribute_error`).
+I have completed the task. All requirements are met, and tests in `astropy/coordinates/tests/test_sky_coord.py` pass.
+### Problem Analysis
+When subclassing `SkyCoord` (or `BaseCoordinateFrame`) and defining custom `@property` descriptors whose getters access non-existent attributes (e.g. `self.random_attr`), accessing `c.prop` was raising a misleading error message:
+```python
+AttributeError: 'custom_coord' object has no attribute 'prop'
+```
+instead of reporting the actual missing attribute:
+```python
+AttributeError: 'custom_coord' object has no attribute 'random_attr'
+```
+
+#### Root Cause
+In Python, when attribute access `c.prop` resolves to a descriptor property, `object.__getattribute__` invokes `prop.__get__(c, custom_coord)`. If the property's getter raises an `AttributeError` (for instance, when accessing `self.random_attr`), Python's attribute lookup mechanism catches that `AttributeError` and falls back to calling `c.__getattr__('prop')`.
+
+`SkyCoord.__getattr__` receives `attr = 'prop'`. Previously, `SkyCoord.__getattr__` did not check whether `attr` was already defined on the class (or anywhere in `type(self).__mro__`). As a result, it fell through to raising a generic `AttributeError` claiming that `'prop'` did not exist on the object, thereby masking the original `AttributeError` from inside the property getter.
+
+Additionally, delegating attribute lookup to `self._sky_coord_frame` via `hasattr(self._sky_coord_frame, attr)` would swallow `AttributeError`s raised inside properties defined on frame classes.
+
+### Solution
+1. In [astropy/coordinates/sky_coordinate.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L871-L895):
+   - Added a check at the beginning of `SkyCoord.__getattr__(self, attr)` to see if `attr` is present in `type(self).__mro__`. If so, calling `self.__getattribute__(attr)` re-evaluates the descriptor access directly without falling back to `__getattr__`, propagating the exact `AttributeError` raised inside the property getter.
+   - Updated the delegation check for `self._sky_coord_frame` to check `attr in dir(self._sky_coord_frame)` before `hasattr`, preventing `hasattr` from swallowing `AttributeError`s raised within frame properties.
+2. Added unit test `test_subclass_skycoord_attribute_error` in [astropy/coordinates/tests/test_sky_coord.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/tests/test_sky_coord.py#L2169-L2205) to verify attribute error messages on subclassed `SkyCoord` objects and custom frame classes.
+
+### Verification
+Ran the `pytest` test suite on `astropy/coordinates/tests/test_sky_coord.py`:
+- 431 passed (including the new regression test `test_subclass_skycoord_attribute_error`).
+I have completed the task. All requirements are met, and tests in `astropy/coordinates/tests/test_sky_coord.py` pass.

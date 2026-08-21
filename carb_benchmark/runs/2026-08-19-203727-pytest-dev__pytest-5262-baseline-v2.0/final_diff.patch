@@ -1,0 +1,60 @@
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 25eab7f..ec48156 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -447,6 +447,14 @@ class EncodedFile(object):
+         """Ensure that file.name is a string."""
+         return repr(self.buffer)
+ 
++    @property
++    def mode(self):
++        """Ensure that file.mode does not contain 'b'."""
++        buffer_mode = getattr(self.buffer, "mode", None)
++        if isinstance(buffer_mode, str):
++            return buffer_mode.replace("b", "")
++        return buffer_mode
++
+     def __getattr__(self, name):
+         return getattr(object.__getattribute__(self, "buffer"), name)
+ 
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index 5d80eb6..44ed86e 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1461,6 +1461,36 @@ def test_pickling_and_unpickling_encoded_file():
+     pickle.loads(ef_as_str)
+ 
+ 
++def test_encodedfile_mode():
++    class Buffer(object):
++        def __init__(self, mode):
++            self.mode = mode
++
++    for mode, expected in [
++        ("rb+", "r+"),
++        ("wb+", "w+"),
++        ("r+b", "r+"),
++        ("w+b", "w+"),
++        ("rb", "r"),
++        ("wb", "w"),
++    ]:
++        ef = capture.EncodedFile(Buffer(mode), "utf-8")
++        assert ef.mode == expected
++        assert "b" not in ef.mode
++
++    ef_none = capture.EncodedFile(None, "utf-8")
++    assert ef_none.mode is None
++
++
++def test_safe_text_dupfile_mode(tmpdir):
++    f = open(str(tmpdir.join("test")), "wb+")
++    dup = capture.safe_text_dupfile(f, mode="wb+")
++    assert "b" not in dup.mode
++    dup.close()
++    f.close()
++
++
++
+ def test_global_capture_with_live_logging(testdir):
+     # Issue 3819
+     # capture should work with live cli logging

@@ -1,0 +1,35 @@
+diff --git a/main.py b/main.py
+index c86f6c8..de89baa 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,29 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import numpy as np
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    if N < 3:
++        print(0)
++        return
++        
++    S = np.array(input_data[1:N+1], dtype=np.int64)
++    max_val = int(np.max(S))
++    
++    P = np.zeros(max_val + 1, dtype=np.float64)
++    P[S] = 1.0
++    
++    n_fft = 1 << int(2 * max_val).bit_length()
++    f = np.fft.rfft(P, n=n_fft)
++    f2 = f * f
++    conv = np.fft.irfft(f2, n=n_fft)
++    conv = np.rint(conv).astype(np.int64)
++    
++    ans = np.sum((conv[2 * S] - 1) // 2)
++    print(int(ans))
++
++if __name__ == '__main__':
++    main()

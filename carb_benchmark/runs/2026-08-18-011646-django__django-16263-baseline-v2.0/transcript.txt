@@ -1,0 +1,34 @@
+I have updated Django's query execution engine to strip unused annotations when performing `.count()` queries.
+
+### Summary of Changes
+
+1. **Reference Detection (`Query._get_referenced_annotation_aliases`)**:
+   - Implemented a helper on [Query](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/django/db/models/sql/query.py#L548) that inspects query clauses (`where`, `having`, `order_by`, `group_by`, `distinct_fields`, `select`, `extra`, `combined_queries`, and `annotation_select_mask`) to identify annotation aliases that are actually referenced.
+   - Handles transitive dependencies between annotations (e.g. if annotation `c2` references `c1`, and `c2` is used in a filter, both `c1` and `c2` are preserved).
+
+2. **Unused Annotation & Join Stripping (`Query.get_count`)**:
+   - In [Query.get_count](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/django/db/models/sql/query.py#L650), after calling `clear_ordering(force=False)`, unused annotations are purged from `obj.annotations` and `obj.annotation_select_mask`.
+   - Table joins added solely by unused annotations are unreferenced using `obj.unref_alias(...)` up their join chains so that unnecessary `JOIN` operations and `GROUP BY` subqueries are omitted from the SQL query generated for `.count()`.
+
+3. **Column Alias Resolution (`Query._gen_col_aliases`)**:
+   - Updated [_gen_col_aliases](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/django/db/models/sql/query.py#L2028) to pass `include_external=True`, allowing subqueries and external references to be accurately unreferenced when stripping annotations.
+
+4. **Tests**:
+   - Added unit tests in [tests/annotations/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/tests/annotations/tests.py#L1414) verifying that `.count()` queries strip unused annotations and avoid unnecessary `JOIN` and `GROUP BY` clauses, while preserving annotations referenced in `filter()` or by transitive expressions.
+I have updated Django's query execution engine to strip unused annotations when performing `.count()` queries.
+
+### Summary of Changes
+
+1. **Reference Detection (`Query._get_referenced_annotation_aliases`)**:
+   - Implemented a helper on [Query](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/django/db/models/sql/query.py#L548) that inspects query clauses (`where`, `having`, `order_by`, `group_by`, `distinct_fields`, `select`, `extra`, `combined_queries`, and `annotation_select_mask`) to identify annotation aliases that are actually referenced.
+   - Handles transitive dependencies between annotations (e.g. if annotation `c2` references `c1`, and `c2` is used in a filter, both `c1` and `c2` are preserved).
+
+2. **Unused Annotation & Join Stripping (`Query.get_count`)**:
+   - In [Query.get_count](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/django/db/models/sql/query.py#L650), after calling `clear_ordering(force=False)`, unused annotations are purged from `obj.annotations` and `obj.annotation_select_mask`.
+   - Table joins added solely by unused annotations are unreferenced using `obj.unref_alias(...)` up their join chains so that unnecessary `JOIN` operations and `GROUP BY` subqueries are omitted from the SQL query generated for `.count()`.
+
+3. **Column Alias Resolution (`Query._gen_col_aliases`)**:
+   - Updated [_gen_col_aliases](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/django/db/models/sql/query.py#L2028) to pass `include_external=True`, allowing subqueries and external references to be accurately unreferenced when stripping annotations.
+
+4. **Tests**:
+   - Added unit tests in [tests/annotations/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16263/tests/annotations/tests.py#L1414) verifying that `.count()` queries strip unused annotations and avoid unnecessary `JOIN` and `GROUP BY` clauses, while preserving annotations referenced in `filter()` or by transitive expressions.

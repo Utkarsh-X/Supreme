@@ -1,0 +1,117 @@
+diff --git a/main.py b/main.py
+index c86f6c8..20771d8 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,111 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++    T = input_data[3]
++    
++    S_digits = [int(c) for c in S]
++    
++    # Precompute min_suffix[j] = min(S_digits[j:]) for j in 0..N
++    min_suffix = [10] * (N + 1)
++    curr_min = 10
++    for j in range(N - 1, -1, -1):
++        if S_digits[j] < curr_min:
++            curr_min = S_digits[j]
++        min_suffix[j] = curr_min
++        
++    opts = [0] * 10
++    for i in range(M - 1):
++        opts[int(T[i])] += 1
++    m = int(T[M - 1])
++    
++    def get_D(v):
++        D = [0] * 10
++        rem = v
++        for d in range(9, 0, -1):
++            take = min(rem, opts[d])
++            D[d] += take
++            rem -= take
++            if rem == 0:
++                break
++        D[m] += 1
++        
++        flat = []
++        for d in range(9, 0, -1):
++            if D[d] > 0:
++                flat.extend([d] * D[d])
++        return flat
++
++    def evaluate_greedy(v):
++        D = get_D(v)
++        u = len(D)
++        rem_D = u
++        idx = 0
++        res = []
++        
++        for j in range(N):
++            rem_S = N - j
++            if rem_S == rem_D:
++                res.extend([str(x) for x in D[idx:]])
++                break
++            if idx < u:
++                d_val = D[idx]
++                s_val = S_digits[j]
++                if d_val > s_val:
++                    res.append(str(d_val))
++                    idx += 1
++                    rem_D -= 1
++                elif d_val == s_val:
++                    if min_suffix[j + 1] < d_val:
++                        res.append(str(s_val))
++                    else:
++                        res.append(str(d_val))
++                        idx += 1
++                        rem_D -= 1
++                else:
++                    res.append(str(s_val))
++            else:
++                res.extend(S[j:])
++                break
++                
++        return "".join(res)
++
++    max_v = min(N - 1, M - 1)
++    memo = {}
++    
++    def eval_v(v):
++        if v in memo:
++            return memo[v]
++        res = evaluate_greedy(v)
++        memo[v] = res
++        return res
++
++    low = 0
++    high = max_v
++    
++    while high - low > 3:
++        m1 = low + (high - low) // 3
++        m2 = high - (high - low) // 3
++        val1 = eval_v(m1)
++        val2 = eval_v(m2)
++        if val1 < val2:
++            low = m1 + 1
++        else:
++            high = m2 - 1
++
++    best_out = ""
++    for v in range(low, high + 1):
++        out = eval_v(v)
++        if out > best_out:
++            best_out = out
++            
++    print(best_out)
++
++if __name__ == '__main__':
++    solve()

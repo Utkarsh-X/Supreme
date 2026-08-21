@@ -1,0 +1,125 @@
+diff --git a/main.py b/main.py
+index c86f6c8..9fa3c9e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,119 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import heapq
++import json
++import re
++
++def main():
++    content = sys.stdin.read().strip()
++    if not content:
++        return
++    
++    if '[' in content and ']' in content:
++        start_idx = content.find('[')
++        end_idx = content.rfind(']')
++        nums_str = content[start_idx:end_idx+1]
++        nums = json.loads(nums_str)
++        remaining = content[end_idx+1:].strip()
++        tokens = re.findall(r'-?\d+', remaining)
++        x = int(tokens[0])
++        k = int(tokens[1])
++    else:
++        tokens = re.findall(r'-?\d+', content)
++        x = int(tokens[-2])
++        k = int(tokens[-1])
++        nums = [int(t) for t in tokens[:-2]]
++        
++    n = len(nums)
++    target_L = x // 2
++    target_R = x - target_L
++    
++    max_heap_L = []  # (-val, idx)
++    min_heap_R = []  # (val, idx)
++    in_R = [False] * n
++    
++    sum_L = 0
++    sum_R = 0
++    size_L = 0
++    size_R = 0
++    
++    cost = [0] * (n - x + 1)
++    
++    def clean_L(w_start):
++        while max_heap_L and max_heap_L[0][1] < w_start:
++            heapq.heappop(max_heap_L)
++
++    def clean_R(w_start):
++        while min_heap_R and min_heap_R[0][1] < w_start:
++            heapq.heappop(min_heap_R)
++
++    for i in range(n):
++        w_start = i - x + 1
++        if i >= x:
++            out_idx = i - x
++            if in_R[out_idx]:
++                sum_R -= nums[out_idx]
++                size_R -= 1
++            else:
++                sum_L -= nums[out_idx]
++                size_L -= 1
++        
++        clean_R(w_start)
++        if min_heap_R and nums[i] >= min_heap_R[0][0]:
++            heapq.heappush(min_heap_R, (nums[i], i))
++            sum_R += nums[i]
++            size_R += 1
++            in_R[i] = True
++        else:
++            heapq.heappush(max_heap_L, (-nums[i], i))
++            sum_L += nums[i]
++            size_L += 1
++            in_R[i] = False
++        
++        while size_L > target_L:
++            clean_L(w_start)
++            neg_val, idx = heapq.heappop(max_heap_L)
++            val = -neg_val
++            sum_L -= val
++            size_L -= 1
++            heapq.heappush(min_heap_R, (val, idx))
++            sum_R += val
++            size_R += 1
++            in_R[idx] = True
++
++        while size_R > target_R:
++            clean_R(w_start)
++            val, idx = heapq.heappop(min_heap_R)
++            sum_R -= val
++            size_R -= 1
++            heapq.heappush(max_heap_L, (-val, idx))
++            sum_L += val
++            size_L += 1
++            in_R[idx] = False
++
++        if i >= x - 1:
++            clean_R(w_start)
++            M = min_heap_R[0][0]
++            cost[w_start] = sum_R - sum_L - (target_R - target_L) * M
++
++    m = len(cost)
++    INF = float('inf')
++    dp = [0] * m
++    
++    for c in range(1, k + 1):
++        next_dp = [INF] * m
++        for i in range(m):
++            if c == 1:
++                prev = 0
++            else:
++                prev = dp[i - x] if i - x >= 0 else INF
++            
++            if prev != INF:
++                next_dp[i] = prev + cost[i]
++            if i > 0 and next_dp[i - 1] < next_dp[i]:
++                next_dp[i] = next_dp[i - 1]
++        dp = next_dp
++
++    print(dp[-1])
++
++if __name__ == '__main__':
++    main()

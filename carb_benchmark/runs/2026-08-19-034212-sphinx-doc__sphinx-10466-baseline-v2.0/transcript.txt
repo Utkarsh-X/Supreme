@@ -1,0 +1,20 @@
+### Summary of Changes
+
+- **Deduplicated `Message.locations`**: Updated [`Message.__init__`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/sphinx/builders/gettext.py#L31-L37) in `sphinx/builders/gettext.py` to deduplicate location tuples `(source, line)` using `list(dict.fromkeys(locations))`. This removes duplicate location entries while preserving their original order of appearance in the catalog.
+- **Added Unit Tests**: Added `test_message_unique_locations` and `test_catalog_unique_locations` in [`tests/test_build_gettext.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/tests/test_build_gettext.py#L188-L225) to verify that duplicate locations are removed when creating `Message` objects or building catalogs via `Catalog.add()`.
+### Summary of Solution
+
+- **Root Cause**: When translatable elements in a document tree originate from the same line or share the same source file and line number (e.g. `hair.rst:0`), `Catalog.add()` accumulates duplicate location tuples `(source, line)` in `self.metadata`. When `Message` instances were created, `self.locations` retained those duplicates, causing `message.pot_t` to output redundant `#: location:line` comment lines in `.pot` catalog files.
+- **Fix**: In [`Message.__init__`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/sphinx/builders/gettext.py#L31-L37) in `sphinx/builders/gettext.py`, `locations` are deduplicated via `list(dict.fromkeys(locations))`, which preserves insertion order while guaranteeing unique location lines per message entry.
+- **Tests Added**: Added `test_message_unique_locations` and `test_catalog_unique_locations` in [`tests/test_build_gettext.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/tests/test_build_gettext.py#L188-L225) to verify deduplication behavior.
+The issue has been resolved and verified with tests.
+### Summary of Changes
+
+- **Deduplicated `Message.locations`**: Updated [`Message.__init__`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/sphinx/builders/gettext.py#L31-L37) in `sphinx/builders/gettext.py` to deduplicate location tuples `(source, line)` using `list(dict.fromkeys(locations))`. This removes duplicate location entries while preserving their original order of appearance in the catalog.
+- **Added Unit Tests**: Added `test_message_unique_locations` and `test_catalog_unique_locations` in [`tests/test_build_gettext.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/tests/test_build_gettext.py#L188-L225) to verify that duplicate locations are removed when creating `Message` objects or building catalogs via `Catalog.add()`.
+### Summary of Solution
+
+- **Root Cause**: When translatable elements in a document tree originate from the same line or share the same source file and line number (e.g. `hair.rst:0`), `Catalog.add()` accumulates duplicate location tuples `(source, line)` in `self.metadata`. When `Message` instances were created, `self.locations` retained those duplicates, causing `message.pot_t` to output redundant `#: location:line` comment lines in `.pot` catalog files.
+- **Fix**: In [`Message.__init__`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/sphinx/builders/gettext.py#L31-L37) in `sphinx/builders/gettext.py`, `locations` are deduplicated via `list(dict.fromkeys(locations))`, which preserves insertion order while guaranteeing unique location lines per message entry.
+- **Tests Added**: Added `test_message_unique_locations` and `test_catalog_unique_locations` in [`tests/test_build_gettext.py`](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10466/tests/test_build_gettext.py#L188-L225) to verify deduplication behavior.
+The issue has been resolved and verified with tests.

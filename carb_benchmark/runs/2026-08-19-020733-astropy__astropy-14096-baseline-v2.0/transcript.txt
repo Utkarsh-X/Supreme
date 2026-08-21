@@ -1,0 +1,30 @@
+I have investigated and resolved the issue where subclassing `SkyCoord` produced a misleading `AttributeError` message when custom properties accessed non-existent attributes.
+
+### Root Cause
+When accessing a property `c.prop` on a subclass of [SkyCoord](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L869), Python's `object.__getattribute__` executes the property getter `prop.__get__(c)`. If an `AttributeError` (such as `'custom_coord' object has no attribute 'random_attr'`) occurs inside `prop.__get__`, Python's `object.__getattribute__` catches it and falls back to invoking `__getattr__('prop')`. 
+
+Previously, [SkyCoord.__getattr__](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L869) caught all unhandled attributes and raised a new `AttributeError` stating `'custom_coord' object has no attribute 'prop'`, masking the underlying `AttributeError` raised inside the property getter.
+
+### Solution
+Updated [SkyCoord.__getattr__](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L869-L905) to delegate to `return self.__getattribute__(attr)` at the end (matching the pattern used in `BaseCoordinateFrame.__getattr__`). When `__getattr__('prop')` calls `self.__getattribute__('prop')`, the descriptor getter is re-evaluated inside `__getattr__`, propagating the original `AttributeError` (pointing to `'random_attr'`) and its full traceback to the caller.
+
+### Changes Made
+1. **[astropy/coordinates/sky_coordinate.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L901-L905)**:
+   Replaced `raise AttributeError(...)` at the end of `SkyCoord.__getattr__` with `return self.__getattribute__(attr)`.
+2. **[astropy/coordinates/tests/test_sky_coord.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/tests/test_sky_coord.py#L2181-L2194)**:
+   Added `test_subclass_attribute_error` to test and ensure that custom properties on `SkyCoord` subclasses correctly report internal attribute errors.
+I have investigated and resolved the issue where subclassing `SkyCoord` produced a misleading `AttributeError` message when custom properties accessed non-existent attributes.
+
+### Root Cause
+When accessing a property `c.prop` on a subclass of [SkyCoord](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L869), Python's `object.__getattribute__` executes the property getter `prop.__get__(c)`. If an `AttributeError` (such as `'custom_coord' object has no attribute 'random_attr'`) occurs inside `prop.__get__`, Python's `object.__getattribute__` catches it and falls back to invoking `__getattr__('prop')`. 
+
+Previously, [SkyCoord.__getattr__](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L869) caught all unhandled attributes and raised a new `AttributeError` stating `'custom_coord' object has no attribute 'prop'`, masking the underlying `AttributeError` raised inside the property getter.
+
+### Solution
+Updated [SkyCoord.__getattr__](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L869-L905) to delegate to `return self.__getattribute__(attr)` at the end (matching the pattern used in `BaseCoordinateFrame.__getattr__`). When `__getattr__('prop')` calls `self.__getattribute__('prop')`, the descriptor getter is re-evaluated inside `__getattr__`, propagating the original `AttributeError` (pointing to `'random_attr'`) and its full traceback to the caller.
+
+### Changes Made
+1. **[astropy/coordinates/sky_coordinate.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L901-L905)**:
+   Replaced `raise AttributeError(...)` at the end of `SkyCoord.__getattr__` with `return self.__getattribute__(attr)`.
+2. **[astropy/coordinates/tests/test_sky_coord.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/tests/test_sky_coord.py#L2181-L2194)**:
+   Added `test_subclass_attribute_error` to test and ensure that custom properties on `SkyCoord` subclasses correctly report internal attribute errors.

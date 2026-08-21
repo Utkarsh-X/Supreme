@@ -1,0 +1,26 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_d/main.py).
+
+### Method Explanation
+
+The problem asks whether a bracket sequence containing three pair types—`()`, `[]`, and `<>`—can be completely reduced to an empty string by repeatedly removing adjacent matching pairs.
+
+This problem can be solved in $O(N)$ time using a **stack**:
+1. We process each character of the string $S$ from left to right.
+2. If the current character is an opening bracket (`(`, `[`, or `<`), we push it onto the stack.
+3. If the current character is a closing bracket (`)`, `]`, or `>`), we check the top of the stack:
+   - If the stack is non-empty and the top character matches the corresponding opening bracket, we pop the top character off the stack.
+   - Otherwise, the brackets are mismatched (or unmatched closing bracket), so $S$ cannot be fully reduced. We can immediately output `No`.
+4. After processing the entire string, if the stack is empty, then $S$ is a colorful bracket sequence and we output `Yes`. Otherwise, we output `No`.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc394_d/main.py).
+
+### Method Explanation
+
+The problem asks whether a bracket sequence containing three pair types—`()`, `[]`, and `<>`—can be completely reduced to an empty string by repeatedly removing adjacent matching pairs.
+
+This problem can be solved in $O(N)$ time using a **stack**:
+1. We process each character of the string $S$ from left to right.
+2. If the current character is an opening bracket (`(`, `[`, or `<`), we push it onto the stack.
+3. If the current character is a closing bracket (`)`, `]`, or `>`), we check the top of the stack:
+   - If the stack is non-empty and the top character matches the corresponding opening bracket, we pop the top character off the stack.
+   - Otherwise, the brackets are mismatched (or unmatched closing bracket), so $S$ cannot be fully reduced. We can immediately output `No`.
+4. After processing the entire string, if the stack is empty, then $S$ is a colorful bracket sequence and we output `Yes`. Otherwise, we output `No`.

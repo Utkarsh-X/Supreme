@@ -1,0 +1,32 @@
+I have solved the problem and written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc191_d/main.py).
+
+### Summary of Approach
+1. **Graph Traversal & BFS**:
+   We compute the shortest path distances $d_S$ and $d_T$ from $S$ and $T$ respectively using BFS.
+
+2. **Swap Candidate Analysis**:
+   Two pieces can swap relative order without colliding only at specific graph structures:
+   - **Vertices of degree $\ge 3$**: A vertex $v$ with degree $\ge 3$ acts as a siding/turnout. If $v$ lies on or off the path, the cost to swap is computed considering whether $v$ lies behind $S$ or $T$ on the shortest path (in which case a 2-move penalty occurs due to path overlap).
+   - **Cycles (Non-tree edges)**: For any simple cycle formed by non-tree edges in the BFS trees rooted at $S$ and $T$, we compute the LCA and binary lifting range minimum queries over $d_S$ and $d_T$ along tree paths to find the minimal cost of swapping on the cycle.
+
+3. **Complexity**:
+   - Building BFS trees and binary lifting tables: $O(N \log N + M)$.
+   - Evaluating candidate swap structures: $O((N + M) \log N)$.
+   - Total Time Complexity: $O((N + M) \log N)$, well within the 2.0 second limit for $N, M \le 2 \times 10^5$.
+   - Space Complexity: $O(N \log N + M)$.
+I have solved the problem and written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc191_d/main.py).
+
+### Summary of Approach
+1. **Graph Traversal & BFS**:
+   We compute the shortest path distances $d_S$ and $d_T$ from $S$ and $T$ respectively using BFS.
+
+2. **Swap Candidate Analysis**:
+   Two pieces can swap relative order without colliding only at specific graph structures:
+   - **Vertices of degree $\ge 3$**: A vertex $v$ with degree $\ge 3$ acts as a siding/turnout. If $v$ lies on or off the path, the cost to swap is computed considering whether $v$ lies behind $S$ or $T$ on the shortest path (in which case a 2-move penalty occurs due to path overlap).
+   - **Cycles (Non-tree edges)**: For any simple cycle formed by non-tree edges in the BFS trees rooted at $S$ and $T$, we compute the LCA and binary lifting range minimum queries over $d_S$ and $d_T$ along tree paths to find the minimal cost of swapping on the cycle.
+
+3. **Complexity**:
+   - Building BFS trees and binary lifting tables: $O(N \log N + M)$.
+   - Evaluating candidate swap structures: $O((N + M) \log N)$.
+   - Total Time Complexity: $O((N + M) \log N)$, well within the 2.0 second limit for $N, M \le 2 \times 10^5$.
+   - Space Complexity: $O(N \log N + M)$.

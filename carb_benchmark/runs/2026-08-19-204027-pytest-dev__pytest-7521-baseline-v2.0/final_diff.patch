@@ -1,0 +1,50 @@
+diff --git a/src/_pytest/capture.py b/src/_pytest/capture.py
+index 3f9c60f..f538b67 100644
+--- a/src/_pytest/capture.py
++++ b/src/_pytest/capture.py
+@@ -388,6 +388,7 @@ class FDCaptureBinary:
+                 TemporaryFile(buffering=0),  # type: ignore[arg-type]
+                 encoding="utf-8",
+                 errors="replace",
++                newline="",
+                 write_through=True,
+             )
+             if targetfd in patchsysdict:
+diff --git a/testing/test_capture.py b/testing/test_capture.py
+index a3bd4b6..d74a8e6 100644
+--- a/testing/test_capture.py
++++ b/testing/test_capture.py
+@@ -1034,6 +1034,14 @@ class TestStdCapture:
+             out, err = cap.readouterr()
+         assert out == "hxąć\n"
+ 
++    def test_capturing_carriage_return(self):
++        with self.getcapture() as cap:
++            sys.stdout.write("Greetings from DOS\r")
++            sys.stderr.write("Greetings from DOS\r")
++            out, err = cap.readouterr()
++        assert out == "Greetings from DOS\r"
++        assert err == "Greetings from DOS\r"
++
+     def test_reset_twice_error(self):
+         with self.getcapture() as cap:
+             print("hello")
+@@ -1257,6 +1265,18 @@ def test_capsys_results_accessible_by_attribute(capsys):
+     assert capture_result.err == "eggs"
+ 
+ 
++def test_capfd_includes_carriage_return(capfd):
++    print("Greetings from DOS", end="\r")
++    out, err = capfd.readouterr()
++    assert out == "Greetings from DOS\r"
++
++
++def test_capsys_includes_carriage_return(capsys):
++    print("Greetings from DOS", end="\r")
++    out, err = capsys.readouterr()
++    assert out == "Greetings from DOS\r"
++
++
+ def test_fdcapture_tmpfile_remains_the_same() -> None:
+     cap = StdCaptureFD(out=False, err=True)
+     try:

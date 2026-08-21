@@ -1,0 +1,34 @@
+I have implemented the solution for the **400 numbers** problem in `main.py`.
+
+### Solution Explanation
+
+1. **Mathematical Property**:
+   - A positive integer $N$ is a "400 number" if and only if it has exactly 2 distinct prime factors and all prime factor exponents in its prime factorization are positive even integers.
+   - Any number whose prime factor exponents are all even is a perfect square $N = X^2$.
+   - The set of prime factors of $N = X^2$ is identical to the set of prime factors of $X$.
+   - Therefore, $N$ is a 400 number if and only if $N = X^2$ where $X$ is a positive integer with **exactly 2 distinct prime factors** ($\omega(X) = 2$).
+
+2. **Precomputation**:
+   - Since $A \le 10^{12}$, $X \le \sqrt{10^{12}} = 10^6$.
+   - Using a linear sieve modification up to $10^6$, we compute $\omega(X)$ (the number of distinct prime factors) for all $X \le 10^6$ in $O(M \log \log M)$ time where $M = 10^6$.
+   - We store $X^2$ for all $X$ where $\omega(X) = 2$ in a sorted array `valid_N`.
+
+3. **Query Processing**:
+   - For each query $A$, we use `bisect.bisect_right` on `valid_N` to quickly locate the largest 400 number not exceeding $A$ in $O(\log K)$ time.
+I have implemented the solution for the **400 numbers** problem in `main.py`.
+
+### Solution Explanation
+
+1. **Mathematical Property**:
+   - A positive integer $N$ is a "400 number" if and only if it has exactly 2 distinct prime factors and all prime factor exponents in its prime factorization are positive even integers.
+   - Any number whose prime factor exponents are all even is a perfect square $N = X^2$.
+   - The set of prime factors of $N = X^2$ is identical to the set of prime factors of $X$.
+   - Therefore, $N$ is a 400 number if and only if $N = X^2$ where $X$ is a positive integer with **exactly 2 distinct prime factors** ($\omega(X) = 2$).
+
+2. **Precomputation**:
+   - Since $A \le 10^{12}$, $X \le \sqrt{10^{12}} = 10^6$.
+   - Using a linear sieve modification up to $10^6$, we compute $\omega(X)$ (the number of distinct prime factors) for all $X \le 10^6$ in $O(M \log \log M)$ time where $M = 10^6$.
+   - We store $X^2$ for all $X$ where $\omega(X) = 2$ in a sorted array `valid_N`.
+
+3. **Query Processing**:
+   - For each query $A$, we use `bisect.bisect_right` on `valid_N` to quickly locate the largest 400 number not exceeding $A$ in $O(\log K)$ time.

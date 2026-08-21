@@ -1,0 +1,16 @@
+I have fixed the issue where `Q(...) ^ Q(...) ^ Q(...)` with more than two arguments was incorrectly evaluated as "exactly one argument is true" instead of parity ("an odd number of arguments are true") on database backends that do not natively support logical XOR.
+
+### Root Cause
+In [where.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/django/db/models/sql/where.py#L129-L142), the fallback SQL generation for `XOR` previously combined the expressions into `(a OR b OR c OR ...) AND (a + b + c + ...) == 1`. For 3 or more arguments, checking `sum == 1` enforced that *exactly one* argument was true, failing parity logic where an odd count of true arguments (such as 1, 3, 5, etc.) should evaluate to `True`.
+
+### Fix
+- Updated the XOR fallback in [where.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/django/db/models/sql/where.py#L129-L142) to check `(a + b + c + ...) % 2 == 1` using `Exact(1, Mod(rhs_sum, 2))`.
+- Added tests in [tests/or_lookups/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/tests/or_lookups/tests.py#L224-L270) and [tests/queries/test_q.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/tests/queries/test_q.py#L264-L272) verifying XOR parity for odd vs. even counts of true `Q` expressions.
+I have fixed the issue where `Q(...) ^ Q(...) ^ Q(...)` with more than two arguments was incorrectly evaluated as "exactly one argument is true" instead of parity ("an odd number of arguments are true") on database backends that do not natively support logical XOR.
+
+### Root Cause
+In [where.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/django/db/models/sql/where.py#L129-L142), the fallback SQL generation for `XOR` previously combined the expressions into `(a OR b OR c OR ...) AND (a + b + c + ...) == 1`. For 3 or more arguments, checking `sum == 1` enforced that *exactly one* argument was true, failing parity logic where an odd count of true arguments (such as 1, 3, 5, etc.) should evaluate to `True`.
+
+### Fix
+- Updated the XOR fallback in [where.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/django/db/models/sql/where.py#L129-L142) to check `(a + b + c + ...) % 2 == 1` using `Exact(1, Mod(rhs_sum, 2))`.
+- Added tests in [tests/or_lookups/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/tests/or_lookups/tests.py#L224-L270) and [tests/queries/test_q.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16901/tests/queries/test_q.py#L264-L272) verifying XOR parity for odd vs. even counts of true `Q` expressions.

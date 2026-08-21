@@ -1,0 +1,44 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_e/main.py).
+
+### Method Explanation
+
+1. **Invariants & Observations**:
+   - **Operation A** swaps a contiguous block $0^X 1^Y$ to $1^Y 0^X$. This shifts each of the $X$ zeros right by $Y$ positions (index $+Y$), and each of the $Y$ ones left by $X$ positions (index $-X$).
+   - **Operation B** is the inverse ($1^Y 0^X \to 0^X 1^Y$), shifting each zero left by $Y$ positions (index $-Y$) and each one right by $X$ positions (index $+X$).
+   - In both operations:
+     - The relative order of all zeros is preserved (zeros never cross each other).
+     - The relative order of all ones is preserved (ones never cross each other).
+     - The 0-based position of the $k$-th zero can only change in steps of $\pm Y$. Thus, $(pos_0^T[k] - pos_0^S[k]) \pmod Y = 0$ for all $k$.
+     - The 0-based position of the $m$-th one can only change in steps of $\pm X$. Thus, $(pos_1^T[m] - pos_1^S[m]) \pmod X = 0$ for all $m$.
+
+2. **Algorithm**:
+   - Verify that the total counts of `0`s (and consequently `1`s) match between $S$ and $T$.
+   - Extract the list of 0-based indices of all `0`s in $S$ and $T$. Verify that $pos_0^T[k] \equiv pos_0^S[k] \pmod Y$ for all $k$.
+   - Extract the list of 0-based indices of all `1`s in $S$ and $T$. Verify that $pos_1^T[m] \equiv pos_1^S[m] \pmod X$ for all $m$.
+   - Print `Yes` if all conditions hold; otherwise print `No`.
+
+3. **Complexity**:
+   - Time Complexity: $O(N)$
+   - Space Complexity: $O(N)$
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_e/main.py).
+
+### Method Explanation
+
+1. **Invariants & Observations**:
+   - **Operation A** swaps a contiguous block $0^X 1^Y$ to $1^Y 0^X$. This shifts each of the $X$ zeros right by $Y$ positions (index $+Y$), and each of the $Y$ ones left by $X$ positions (index $-X$).
+   - **Operation B** is the inverse ($1^Y 0^X \to 0^X 1^Y$), shifting each zero left by $Y$ positions (index $-Y$) and each one right by $X$ positions (index $+X$).
+   - In both operations:
+     - The relative order of all zeros is preserved (zeros never cross each other).
+     - The relative order of all ones is preserved (ones never cross each other).
+     - The 0-based position of the $k$-th zero can only change in steps of $\pm Y$. Thus, $(pos_0^T[k] - pos_0^S[k]) \pmod Y = 0$ for all $k$.
+     - The 0-based position of the $m$-th one can only change in steps of $\pm X$. Thus, $(pos_1^T[m] - pos_1^S[m]) \pmod X = 0$ for all $m$.
+
+2. **Algorithm**:
+   - Verify that the total counts of `0`s (and consequently `1`s) match between $S$ and $T$.
+   - Extract the list of 0-based indices of all `0`s in $S$ and $T$. Verify that $pos_0^T[k] \equiv pos_0^S[k] \pmod Y$ for all $k$.
+   - Extract the list of 0-based indices of all `1`s in $S$ and $T$. Verify that $pos_1^T[m] \equiv pos_1^S[m] \pmod X$ for all $m$.
+   - Print `Yes` if all conditions hold; otherwise print `No`.
+
+3. **Complexity**:
+   - Time Complexity: $O(N)$
+   - Space Complexity: $O(N)$

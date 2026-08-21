@@ -1,0 +1,52 @@
+In SymPy, all integers (and thus all even and odd numbers) are finite mathematical entities. 
+
+The issue was that `integer` was missing an explicit implication rule `integer -> finite` in the old assumptions rules (`_assume_rules` in [`sympy/core/assumptions.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L163-L200)) as well as in the predicate assumptions system ([`sympy/assumptions/ask.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1483-L1487)).
+
+### Changes Made
+
+1. **Old Assumptions System ([`sympy/core/assumptions.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L165))**:
+   - Added `'integer -> finite'` to `_assume_rules`. Since `even` and `odd` both imply `integer`, `m.is_even = True` or `m.is_odd = True` now automatically implies `m.is_finite = True`.
+
+2. **New Assumptions System ([`sympy/assumptions/ask.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1485) and [`sympy/assumptions/ask_generated.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask_generated.py#L28))**:
+   - Added `Implies(Q.integer, Q.finite)` to `get_known_facts()` and regenerated `ask_generated.py`.
+
+3. **Tests ([`sympy/core/tests/test_assumptions.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/tests/test_assumptions.py#L593-L598))**:
+   - Verified that `Symbol('m', even=True).is_finite` evaluates to `True`.
+   - Updated assumptions tests to verify that infinite quantities (`oo`, `-\infty`) have `is_integer = False`, `is_even = False`, and `is_odd = False`.
+
+### Verification
+
+```python
+>>> from sympy import Symbol, ask, Q
+>>> m = Symbol('m', even=True)
+>>> m.is_finite
+True
+>>> ask(Q.finite(m))
+True
+```
+In SymPy, all integers (and thus all even and odd numbers) are finite mathematical entities. 
+
+The issue was that `integer` was missing an explicit implication rule `integer -> finite` in the old assumptions rules (`_assume_rules` in [`sympy/core/assumptions.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L163-L200)) as well as in the predicate assumptions system ([`sympy/assumptions/ask.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1483-L1487)).
+
+### Changes Made
+
+1. **Old Assumptions System ([`sympy/core/assumptions.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/assumptions.py#L165))**:
+   - Added `'integer -> finite'` to `_assume_rules`. Since `even` and `odd` both imply `integer`, `m.is_even = True` or `m.is_odd = True` now automatically implies `m.is_finite = True`.
+
+2. **New Assumptions System ([`sympy/assumptions/ask.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask.py#L1485) and [`sympy/assumptions/ask_generated.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/assumptions/ask_generated.py#L28))**:
+   - Added `Implies(Q.integer, Q.finite)` to `get_known_facts()` and regenerated `ask_generated.py`.
+
+3. **Tests ([`sympy/core/tests/test_assumptions.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-16597/sympy/core/tests/test_assumptions.py#L593-L598))**:
+   - Verified that `Symbol('m', even=True).is_finite` evaluates to `True`.
+   - Updated assumptions tests to verify that infinite quantities (`oo`, `-\infty`) have `is_integer = False`, `is_even = False`, and `is_odd = False`.
+
+### Verification
+
+```python
+>>> from sympy import Symbol, ask, Q
+>>> m = Symbol('m', even=True)
+>>> m.is_finite
+True
+>>> ask(Q.finite(m))
+True
+```

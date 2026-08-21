@@ -1,0 +1,32 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_f/main.py).
+
+### Method Explanation
+1. **Mathematical Observation & Bounds**:
+   Sorting $A, B, C$ in descending order guarantees that for any triple index $(i, j, k)$, increasing $i$, $j$, or $k$ non-increases the value $f(i, j, k) = A_i B_j + B_j C_k + C_k A_i$. Since $K \le 5 \times 10^5$, we only need to retain the top $\min(N, K)$ elements of each array.
+
+2. **Dijkstra / Max-Heap Traversal**:
+   We model the set of triples $(i, j, k)$ as a directed spanning tree rooted at $(0, 0, 0)$:
+   - From $(i, 0, 0)$, we transition to $(i+1, 0, 0)$, $(i, 1, 0)$, and $(i, 0, 1)$.
+   - From $(i, j, 0)$ with $j > 0$, we transition to $(i, j+1, 0)$ and $(i, j, 1)$.
+   - From $(i, j, k)$ with $k > 0$, we transition to $(i, j, k+1)$.
+
+   This guarantees every valid triple is visited exactly once along a monotonic path without requiring a hash set for deduplication. Extracting $K$ maximum elements from the max-heap takes $O(K \log K)$ time and $O(K)$ space.
+
+### Verification
+The solution was tested against all sample inputs and produced exact matching outputs in under 0.6 seconds.
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_f/main.py).
+
+### Method Explanation
+1. **Mathematical Observation & Bounds**:
+   Sorting $A, B, C$ in descending order guarantees that for any triple index $(i, j, k)$, increasing $i$, $j$, or $k$ non-increases the value $f(i, j, k) = A_i B_j + B_j C_k + C_k A_i$. Since $K \le 5 \times 10^5$, we only need to retain the top $\min(N, K)$ elements of each array.
+
+2. **Dijkstra / Max-Heap Traversal**:
+   We model the set of triples $(i, j, k)$ as a directed spanning tree rooted at $(0, 0, 0)$:
+   - From $(i, 0, 0)$, we transition to $(i+1, 0, 0)$, $(i, 1, 0)$, and $(i, 0, 1)$.
+   - From $(i, j, 0)$ with $j > 0$, we transition to $(i, j+1, 0)$ and $(i, j, 1)$.
+   - From $(i, j, k)$ with $k > 0$, we transition to $(i, j, k+1)$.
+
+   This guarantees every valid triple is visited exactly once along a monotonic path without requiring a hash set for deduplication. Extracting $K$ maximum elements from the max-heap takes $O(K \log K)$ time and $O(K)$ space.
+
+### Verification
+The solution was tested against all sample inputs and produced exact matching outputs in under 0.6 seconds.

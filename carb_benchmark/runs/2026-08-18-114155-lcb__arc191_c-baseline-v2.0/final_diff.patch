@@ -1,0 +1,23 @@
+diff --git a/main.py b/main.py
+index c86f6c8..f18f13f 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,17 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    T = int(input_data[0])
++    results = []
++    for i in range(1, T + 1):
++        N = int(input_data[i])
++        A = N + 1
++        M = N * N
++        results.append(f"{A} {M}")
++    print('\n'.join(results))
++
++if __name__ == '__main__':
++    main()

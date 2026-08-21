@@ -1,0 +1,28 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_f/main.py).
+
+### Method Explanation
+To construct the shortest palindrome having $S$ as its prefix, we need to find the longest palindromic suffix of $S$. If $S = A + P$, where $P$ is the longest palindromic suffix of $S$, then appending $A^R$ (the reverse of $A$) to $S$ yields $A + P + A^R$, which is a palindrome of minimal total length.
+
+We compute the length of $P$ using the Knuth-Morris-Pratt (KMP) prefix function algorithm:
+1. Construct string $T = S^R + \text{'\#'} + S$.
+2. Compute the KMP $\pi$ table (prefix function array) for $T$.
+3. The value $\pi[|T|-1]$ gives the length of the longest proper prefix of $T$ that is also a suffix of $T$. Because $T = S^R + \text{'\#'} + S$, this matching length represents the length of the longest palindromic suffix of $S$.
+4. The remaining prefix $A = S[0 : |S| - \text{pal\_len}]$ is reversed and appended to $S$.
+
+### Verification
+- Tested against all provided sample cases (`ABC`, `Z`, `TREE`) and edge cases (`AAAAA`, `ABACABA`, `RACECAR`, `AB`, `BA`, etc.).
+- Performance benchmarked on maximum constraint ($|S| = 500,000$), running in ~0.08s.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_f/main.py).
+
+### Method Explanation
+To construct the shortest palindrome having $S$ as its prefix, we need to find the longest palindromic suffix of $S$. If $S = A + P$, where $P$ is the longest palindromic suffix of $S$, then appending $A^R$ (the reverse of $A$) to $S$ yields $A + P + A^R$, which is a palindrome of minimal total length.
+
+We compute the length of $P$ using the Knuth-Morris-Pratt (KMP) prefix function algorithm:
+1. Construct string $T = S^R + \text{'\#'} + S$.
+2. Compute the KMP $\pi$ table (prefix function array) for $T$.
+3. The value $\pi[|T|-1]$ gives the length of the longest proper prefix of $T$ that is also a suffix of $T$. Because $T = S^R + \text{'\#'} + S$, this matching length represents the length of the longest palindromic suffix of $S$.
+4. The remaining prefix $A = S[0 : |S| - \text{pal\_len}]$ is reversed and appended to $S$.
+
+### Verification
+- Tested against all provided sample cases (`ABC`, `Z`, `TREE`) and edge cases (`AAAAA`, `ABACABA`, `RACECAR`, `AB`, `BA`, etc.).
+- Performance benchmarked on maximum constraint ($|S| = 500,000$), running in ~0.08s.

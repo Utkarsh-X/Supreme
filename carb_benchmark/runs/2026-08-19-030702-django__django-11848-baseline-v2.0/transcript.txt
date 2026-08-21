@@ -1,0 +1,16 @@
+I have resolved the issue by updating `parse_http_date` to dynamically compare two-digit years against the current UTC year according to RFC 7231 Section 7.1.1.1.
+
+### Root Cause
+Previously, [django/utils/http.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11848/django/utils/http.py#L178-L182) hardcoded `0-69` to mean `2000-2069` and `70-99` to mean `1970-1999`. RFC 7231 specifies that a two-digit year MUST be interpreted such that any year appearing to be more than 50 years in the future is interpreted as representing the most recent year in the past with the same last two digits.
+
+### Solution
+1. Updated [django/utils/http.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11848/django/utils/http.py#L176-L186) in `parse_http_date` to dynamically determine `current_year` (`datetime.datetime.utcnow().year`) and adjust the parsed two-digit year such that it falls within `[current_year - 49, current_year + 50]`.
+2. Added unit tests in [tests/utils_tests/test_http.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11848/tests/utils_tests/test_http.py#L332-L354) (`test_parsing_rfc850_two_digit_year`) to verify 2-digit year interpretation across various current years (e.g. 2000, 2019, 2070, 2099).
+I have resolved the issue by updating `parse_http_date` to dynamically compare two-digit years against the current UTC year according to RFC 7231 Section 7.1.1.1.
+
+### Root Cause
+Previously, [django/utils/http.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11848/django/utils/http.py#L178-L182) hardcoded `0-69` to mean `2000-2069` and `70-99` to mean `1970-1999`. RFC 7231 specifies that a two-digit year MUST be interpreted such that any year appearing to be more than 50 years in the future is interpreted as representing the most recent year in the past with the same last two digits.
+
+### Solution
+1. Updated [django/utils/http.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11848/django/utils/http.py#L176-L186) in `parse_http_date` to dynamically determine `current_year` (`datetime.datetime.utcnow().year`) and adjust the parsed two-digit year such that it falls within `[current_year - 49, current_year + 50]`.
+2. Added unit tests in [tests/utils_tests/test_http.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11848/tests/utils_tests/test_http.py#L332-L354) (`test_parsing_rfc850_two_digit_year`) to verify 2-digit year interpretation across various current years (e.g. 2000, 2019, 2070, 2099).

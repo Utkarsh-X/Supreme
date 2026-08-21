@@ -1,0 +1,93 @@
+diff --git a/django/db/models/sql/compiler.py b/django/db/models/sql/compiler.py
+index f02199d..9d213de 100644
+--- a/django/db/models/sql/compiler.py
++++ b/django/db/models/sql/compiler.py
+@@ -1412,13 +1412,19 @@ class SQLInsertCompiler(SQLCompiler):
+             if not self.returning_fields:
+                 return []
+             if self.connection.features.can_return_rows_from_bulk_insert and len(self.query.objs) > 1:
+-                return self.connection.ops.fetch_returned_insert_rows(cursor)
+-            if self.connection.features.can_return_columns_from_insert:
++                rows = self.connection.ops.fetch_returned_insert_rows(cursor)
++            elif self.connection.features.can_return_columns_from_insert:
+                 assert len(self.query.objs) == 1
+-                return [self.connection.ops.fetch_returned_insert_columns(cursor, self.returning_params)]
+-            return [(self.connection.ops.last_insert_id(
+-                cursor, self.query.get_meta().db_table, self.query.get_meta().pk.column
+-            ),)]
++                rows = [self.connection.ops.fetch_returned_insert_columns(cursor, self.returning_params)]
++            else:
++                rows = [(self.connection.ops.last_insert_id(
++                    cursor, self.query.get_meta().db_table, self.query.get_meta().pk.column
++                ),)]
++            cols = [field.get_col(self.query.get_meta().db_table) for field in self.returning_fields]
++            converters = self.get_converters(cols)
++            if converters:
++                return list(self.apply_converters(rows, converters))
++            return rows
+ 
+ 
+ class SQLDeleteCompiler(SQLCompiler):
+diff --git a/tests/from_db_value/models.py b/tests/from_db_value/models.py
+index 58e8ec3..35d1893 100644
+--- a/tests/from_db_value/models.py
++++ b/tests/from_db_value/models.py
+@@ -21,3 +21,31 @@ class CashField(models.DecimalField):
+ 
+ class CashModel(models.Model):
+     cash = CashField()
++
++
++class MyWrapper:
++    def __init__(self, value):
++        self.value = value
++
++    def __eq__(self, other):
++        if isinstance(other, MyWrapper):
++            return self.value == other.value
++        return self.value == other
++
++
++class MyAutoField(models.BigAutoField):
++    def from_db_value(self, value, expression, connection):
++        if value is None:
++            return None
++        return MyWrapper(value)
++
++    def get_prep_value(self, value):
++        if value is None:
++            return None
++        if isinstance(value, MyWrapper):
++            return value.value
++        return int(value)
++
++
++class AutoModel(models.Model):
++    id = MyAutoField(primary_key=True)
+diff --git a/tests/from_db_value/tests.py b/tests/from_db_value/tests.py
+index ab92f37..5445709 100644
+--- a/tests/from_db_value/tests.py
++++ b/tests/from_db_value/tests.py
+@@ -2,7 +2,7 @@ from django.db import connection
+ from django.db.models import Max
+ from django.test import TestCase
+ 
+-from .models import Cash, CashModel
++from .models import AutoModel, Cash, CashModel, MyWrapper
+ 
+ 
+ class FromDBValueTest(TestCase):
+@@ -33,3 +33,13 @@ class FromDBValueTest(TestCase):
+     def test_connection(self):
+         instance = CashModel.objects.get()
+         self.assertEqual(instance.cash.vendor, connection.vendor)
++
++    def test_create_db_returning(self):
++        instance = AutoModel.objects.create()
++        self.assertIsInstance(instance.id, MyWrapper)
++
++    def test_bulk_create_db_returning(self):
++        instances = [AutoModel()]
++        AutoModel.objects.bulk_create(instances)
++        if connection.features.can_return_rows_from_bulk_insert:
++            self.assertIsInstance(instances[0].id, MyWrapper)

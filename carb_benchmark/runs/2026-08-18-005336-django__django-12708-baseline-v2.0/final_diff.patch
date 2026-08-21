@@ -1,0 +1,73 @@
+diff --git a/django/db/backends/base/schema.py b/django/db/backends/base/schema.py
+index 61f8840..1f521cf 100644
+--- a/django/db/backends/base/schema.py
++++ b/django/db/backends/base/schema.py
+@@ -393,7 +393,7 @@ class BaseDatabaseSchemaEditor:
+         news = {tuple(fields) for fields in new_index_together}
+         # Deleted indexes
+         for fields in olds.difference(news):
+-            self._delete_composed_index(model, fields, {'index': True}, self.sql_delete_index)
++            self._delete_composed_index(model, fields, {'index': True, 'unique': False}, self.sql_delete_index)
+         # Created indexes
+         for field_names in news.difference(olds):
+             fields = [model._meta.get_field(field) for field in field_names]
+diff --git a/tests/schema/models.py b/tests/schema/models.py
+index 6d44658..ff6b992 100644
+--- a/tests/schema/models.py
++++ b/tests/schema/models.py
+@@ -80,6 +80,16 @@ class AuthorWithUniqueNameAndBirthday(models.Model):
+         unique_together = [['name', 'birthday']]
+ 
+ 
++class AuthorWithUniqueAndIndexTogether(models.Model):
++    name = models.CharField(max_length=255)
++    birthday = models.DateField()
++
++    class Meta:
++        apps = new_apps
++        unique_together = [['name', 'birthday']]
++        index_together = [['name', 'birthday']]
++
++
+ class Book(models.Model):
+     author = models.ForeignKey(Author, models.CASCADE)
+     title = models.CharField(max_length=100, db_index=True)
+diff --git a/tests/schema/tests.py b/tests/schema/tests.py
+index 9aa1e23..479dac4 100644
+--- a/tests/schema/tests.py
++++ b/tests/schema/tests.py
+@@ -29,7 +29,7 @@ from .models import (
+     Author, AuthorCharFieldWithIndex, AuthorTextFieldWithIndex,
+     AuthorWithDefaultHeight, AuthorWithEvenLongerName, AuthorWithIndexedName,
+     AuthorWithIndexedNameAndBirthday, AuthorWithUniqueName,
+-    AuthorWithUniqueNameAndBirthday, Book, BookForeignObj, BookWeak,
++    AuthorWithUniqueNameAndBirthday, AuthorWithUniqueAndIndexTogether, Book, BookForeignObj, BookWeak,
+     BookWithLongName, BookWithO2O, BookWithoutAuthor, BookWithSlug, IntegerPK,
+     Node, Note, NoteRename, Tag, TagIndexed, TagM2MTest, TagUniqueRename,
+     Thing, UniqueTest, new_apps,
+@@ -2245,6 +2245,25 @@ class SchemaTests(TransactionTestCase):
+             AuthorWithIndexedNameAndBirthday._meta.indexes = []
+             editor.remove_index(AuthorWithIndexedNameAndBirthday, index)
+ 
++    @skipUnlessDBFeature('allows_multiple_constraints_on_same_fields')
++    def test_remove_index_together_with_unique_together(self):
++        with connection.schema_editor() as editor:
++            editor.create_model(AuthorWithUniqueAndIndexTogether)
++        try:
++            index_together = AuthorWithUniqueAndIndexTogether._meta.index_together
++            with connection.schema_editor() as editor:
++                editor.alter_index_together(AuthorWithUniqueAndIndexTogether, index_together, [])
++            constraints = self.get_constraints(AuthorWithUniqueAndIndexTogether._meta.db_table)
++            matching_constraints = [
++                details for details in constraints.values()
++                if details['columns'] == ['name', 'birthday']
++            ]
++            self.assertEqual(len(matching_constraints), 1)
++            self.assertTrue(matching_constraints[0]['unique'])
++        finally:
++            with connection.schema_editor() as editor:
++                editor.delete_model(AuthorWithUniqueAndIndexTogether)
++
+     @isolate_apps('schema')
+     def test_db_table(self):
+         """

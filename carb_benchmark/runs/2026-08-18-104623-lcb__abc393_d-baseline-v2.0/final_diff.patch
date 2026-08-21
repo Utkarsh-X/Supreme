@@ -1,0 +1,26 @@
+diff --git a/main.py b/main.py
+index c86f6c8..32d1893 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,20 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    n = int(input_data[0])
++    s = input_data[1]
++
++    P = [i for i, ch in enumerate(s) if ch == '1']
++    K = len(P)
++    A = [P[i] - i for i in range(K)]
++    
++    med = A[K // 2]
++    
++    ans = sum(abs(a - med) for a in A)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,76 @@
+diff --git a/main.py b/main.py
+index c86f6c8..807c183 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,70 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    str1 = input_data[0].strip().strip('"').strip("'")
++    str2 = input_data[1].strip().strip('"').strip("'")
++    
++    n = len(str1)
++    m = len(str2)
++    L = n + m - 1
++    
++    word = [None] * L
++    is_fixed = [False] * L
++    
++    # Step 1: Process 'T' constraints
++    for i in range(n):
++        if str1[i] == 'T':
++            for j in range(m):
++                pos = i + j
++                if word[pos] is not None and word[pos] != str2[j]:
++                    print("")
++                    return
++                word[pos] = str2[j]
++                is_fixed[pos] = True
++                
++    # Step 2: Initialize unfixed positions to 'a'
++    for i in range(L):
++        if word[i] is None:
++            word[i] = 'a'
++            
++    # Step 3: Process 'F' constraints
++    for i in range(n):
++        if str1[i] == 'F':
++            match = True
++            for j in range(m):
++                if word[i + j] != str2[j]:
++                    match = False
++                    break
++            if match:
++                # Find rightmost unfixed position in range [i, i + m - 1]
++                idx_to_change = -1
++                for j in range(i + m - 1, i - 1, -1):
++                    if not is_fixed[j]:
++                        idx_to_change = j
++                        break
++                if idx_to_change == -1:
++                    print("")
++                    return
++                word[idx_to_change] = 'b'
++                
++    # Step 4: Validate all constraints
++    for i in range(n):
++        match = True
++        for j in range(m):
++            if word[i + j] != str2[j]:
++                match = False
++                break
++        if str1[i] == 'T' and not match:
++            print("")
++            return
++        if str1[i] == 'F' and match:
++            print("")
++            return
++            
++    print("".join(word))
++
++if __name__ == '__main__':
++    solve()

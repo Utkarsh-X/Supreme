@@ -1,0 +1,64 @@
+diff --git a/main.py b/main.py
+index c86f6c8..7035c76 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,58 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import heapq
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    X = int(input_data[2])
++    
++    adj = [[] for _ in range(2 * N)]
++    
++    idx = 3
++    for _ in range(M):
++        u = int(input_data[idx]) - 1
++        v = int(input_data[idx + 1]) - 1
++        idx += 2
++        
++        # Original edge (layer 0 -> layer 0)
++        adj[u].append((v, 1))
++        # Reversed edge (layer 1 -> layer 1)
++        adj[v + N].append((u + N, 1))
++        
++    for i in range(N):
++        # Edge flip transitions between layer 0 and layer 1
++        adj[i].append((i + N, X))
++        adj[i + N].append((i, X))
++        
++    INF = float('inf')
++    dist = [INF] * (2 * N)
++    dist[0] = 0
++    pq = [(0, 0)]
++    
++    target1 = N - 1
++    target2 = 2 * N - 1
++    
++    ans = -1
++    while pq:
++        d, u = heapq.heappop(pq)
++        
++        if d > dist[u]:
++            continue
++            
++        if u == target1 or u == target2:
++            ans = d
++            break
++            
++        for v, w in adj[u]:
++            if d + w < dist[v]:
++                dist[v] = d + w
++                heapq.heappush(pq, (d + w, v))
++                
++    print(ans)
++
++if __name__ == '__main__':
++    main()

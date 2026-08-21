@@ -1,0 +1,51 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ef54220 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,45 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    idx = 1
++    
++    K = [0] * N
++    counts = [{} for _ in range(N)]
++    
++    for i in range(N):
++        k = int(input_data[idx])
++        K[i] = k
++        idx += 1
++        cnt = counts[i]
++        for _ in range(k):
++            val = int(input_data[idx])
++            cnt[val] = cnt.get(val, 0) + 1
++            idx += 1
++            
++    ans = 0.0
++    for i in range(N):
++        c1 = counts[i]
++        k1 = K[i]
++        for j in range(i + 1, N):
++            c2 = counts[j]
++            k2 = K[j]
++            
++            # Iterate over the smaller dict
++            if len(c1) < len(c2):
++                s = sum(c * c2[val] for val, c in c1.items() if val in c2)
++            else:
++                s = sum(c * c1[val] for val, c in c2.items() if val in c1)
++            
++            prob = s / (k1 * k2)
++            if prob > ans:
++                ans = prob
++                
++    print(f"{ans:.15f}")
++
++if __name__ == '__main__':
++    main()

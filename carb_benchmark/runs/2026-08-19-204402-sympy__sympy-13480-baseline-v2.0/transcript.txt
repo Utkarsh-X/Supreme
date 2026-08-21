@@ -1,0 +1,20 @@
+### Cause of the Bug
+
+In [`sympy/functions/elementary/hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L586-L594), within `coth.eval()`, when evaluating an expression with an `Add` argument where `_peeloff_ipi` yields an imaginary $\pi$ multiple `m`, the variable storing the evaluated hyperbolic cotangent of `m` was assigned as `cothm = coth(m)`. However, the subsequent conditional checked `if cotm is S.ComplexInfinity:`, referencing an undefined variable `cotm` (a typo copied from `cot.eval()` in `trigonometric.py`).
+
+When `x` is assigned integral values like 2, 3, 5, etc., $\tan(x)$ is negative. Evaluating $\log(\tan(x))$ produces a complex logarithm with an imaginary component $+\pi i$. When passed to `coth()`, `_peeloff_ipi` extracts `m = \pi i`. Attempting to evaluate `if cotm is S.ComplexInfinity:` raised `NameError: name 'cotm' is not defined`.
+
+### Fix
+
+1. Replaced `cotm` with `cothm` in [`coth.eval()`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L590).
+2. Added unit tests in [`sympy/functions/elementary/tests/test_hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/tests/test_hyperbolic.py#L272-L277) to verify `coth(x + I*pi)`, `coth(x + I*pi/2)`, `coth(log(tan(x))).subs(x, 2)`, and `tanh(x + I*pi)`.
+### Cause of the Bug
+
+In [`sympy/functions/elementary/hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L586-L594), within `coth.eval()`, when evaluating an expression with an `Add` argument where `_peeloff_ipi` yields an imaginary $\pi$ multiple `m`, the variable storing the evaluated hyperbolic cotangent of `m` was assigned as `cothm = coth(m)`. However, the subsequent conditional checked `if cotm is S.ComplexInfinity:`, referencing an undefined variable `cotm` (a typo copied from `cot.eval()` in `trigonometric.py`).
+
+When `x` is assigned integral values like 2, 3, 5, etc., $\tan(x)$ is negative. Evaluating $\log(\tan(x))$ produces a complex logarithm with an imaginary component $+\pi i$. When passed to `coth()`, `_peeloff_ipi` extracts `m = \pi i`. Attempting to evaluate `if cotm is S.ComplexInfinity:` raised `NameError: name 'cotm' is not defined`.
+
+### Fix
+
+1. Replaced `cotm` with `cothm` in [`coth.eval()`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/hyperbolic.py#L590).
+2. Added unit tests in [`sympy/functions/elementary/tests/test_hyperbolic.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13480/sympy/functions/elementary/tests/test_hyperbolic.py#L272-L277) to verify `coth(x + I*pi)`, `coth(x + I*pi/2)`, `coth(log(tan(x))).subs(x, 2)`, and `tanh(x + I*pi)`.

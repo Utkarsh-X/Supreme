@@ -1,0 +1,104 @@
+diff --git a/main.py b/main.py
+index c86f6c8..14db574 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,98 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++
++    if N % 4 == 0:
++        print("Yes")
++        return
++
++    need_diff = (N % 4 == 2)
++
++    def case1():
++        # x_0 = 1, x_{N-1} = 0
++        dp00, dp01, dp10, dp11 = False, False, True, False
++        for i in range(1, N):
++            E_i = 1 if (i & 1) == 0 else 0
++            a_i = A[i]
++            ndp00, ndp01, ndp10, ndp11 = False, False, False, False
++
++            if dp00:
++                if a_i == 1:
++                    if 0 != E_i: ndp01 = True
++                    else: ndp00 = True
++                if 1 != E_i: ndp11 = True
++                else: ndp10 = True
++
++            if dp01:
++                if a_i == 1: ndp01 = True
++                ndp11 = True
++
++            if dp10:
++                if 0 != E_i: ndp01 = True
++                else: ndp00 = True
++
++            if dp11:
++                ndp01 = True
++
++            dp00, dp01, dp10, dp11 = ndp00, ndp01, ndp10, ndp11
++
++        return dp01 if need_diff else (dp00 or dp01)
++
++    def case2():
++        # x_0 = 0, x_{N-1} = 1
++        dp00, dp01, dp10, dp11 = True, False, False, False
++        for i in range(1, N):
++            O_i = 0 if (i & 1) == 0 else 1
++            a_i = A[i]
++            ndp00, ndp01, ndp10, ndp11 = False, False, False, False
++
++            if dp00:
++                if a_i == 1:
++                    if 0 != O_i: ndp01 = True
++                    else: ndp00 = True
++                if 1 != O_i: ndp11 = True
++                else: ndp10 = True
++
++            if dp01:
++                if a_i == 1: ndp01 = True
++                ndp11 = True
++
++            if dp10:
++                if 0 != O_i: ndp01 = True
++                else: ndp00 = True
++
++            if dp11:
++                ndp01 = True
++
++            dp00, dp01, dp10, dp11 = ndp00, ndp01, ndp10, ndp11
++
++        return dp11 if need_diff else (dp10 or dp11)
++
++    def case3():
++        # x_0 = 0, x_{N-1} = 0
++        if A[0] == 0:
++            return False
++        dp0, dp1 = True, False
++        for i in range(1, N):
++            a_i = A[i]
++            ndp0, ndp1 = False, False
++            if dp0:
++                if a_i == 1: ndp0 = True
++                ndp1 = True
++            if dp1:
++                ndp0 = True
++            dp0, dp1 = ndp0, ndp1
++        return dp0
++
++    if case1() or case2() or case3():
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    main()

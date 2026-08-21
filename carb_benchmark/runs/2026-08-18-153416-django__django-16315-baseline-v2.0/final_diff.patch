@@ -1,0 +1,178 @@
+diff --git a/django/db/backends/mysql/operations.py b/django/db/backends/mysql/operations.py
+index 76ca815..ec9ae6d 100644
+--- a/django/db/backends/mysql/operations.py
++++ b/django/db/backends/mysql/operations.py
+@@ -451,8 +451,13 @@ class DatabaseOperations(BaseDatabaseOperations):
+ 
+             fields = ", ".join(
+                 [
+-                    field_sql % {"field": field}
+-                    for field in map(self.quote_name, update_fields)
++                    field_sql
++                    % {
++                        "field": self.quote_name(
++                            field.column if hasattr(field, "column") else field
++                        )
++                    }
++                    for field in update_fields
+                 ]
+             )
+             return conflict_suffix_sql % {"fields": fields}
+diff --git a/django/db/backends/postgresql/operations.py b/django/db/backends/postgresql/operations.py
+index 62273fc..796d13e 100644
+--- a/django/db/backends/postgresql/operations.py
++++ b/django/db/backends/postgresql/operations.py
+@@ -354,11 +354,18 @@ class DatabaseOperations(BaseDatabaseOperations):
+             return "ON CONFLICT DO NOTHING"
+         if on_conflict == OnConflict.UPDATE:
+             return "ON CONFLICT(%s) DO UPDATE SET %s" % (
+-                ", ".join(map(self.quote_name, unique_fields)),
+                 ", ".join(
+                     [
+-                        f"{field} = EXCLUDED.{field}"
+-                        for field in map(self.quote_name, update_fields)
++                        self.quote_name(
++                            field.column if hasattr(field, "column") else field
++                        )
++                        for field in unique_fields
++                    ]
++                ),
++                ", ".join(
++                    [
++                        f"{self.quote_name(field.column if hasattr(field, 'column') else field)} = EXCLUDED.{self.quote_name(field.column if hasattr(field, 'column') else field)}"
++                        for field in update_fields
+                     ]
+                 ),
+             )
+diff --git a/django/db/backends/sqlite3/operations.py b/django/db/backends/sqlite3/operations.py
+index bb84d52..8fb8be1 100644
+--- a/django/db/backends/sqlite3/operations.py
++++ b/django/db/backends/sqlite3/operations.py
+@@ -418,11 +418,18 @@ class DatabaseOperations(BaseDatabaseOperations):
+             and self.connection.features.supports_update_conflicts_with_target
+         ):
+             return "ON CONFLICT(%s) DO UPDATE SET %s" % (
+-                ", ".join(map(self.quote_name, unique_fields)),
+                 ", ".join(
+                     [
+-                        f"{field} = EXCLUDED.{field}"
+-                        for field in map(self.quote_name, update_fields)
++                        self.quote_name(
++                            field.column if hasattr(field, "column") else field
++                        )
++                        for field in unique_fields
++                    ]
++                ),
++                ", ".join(
++                    [
++                        f"{self.quote_name(field.column if hasattr(field, 'column') else field)} = EXCLUDED.{self.quote_name(field.column if hasattr(field, 'column') else field)}"
++                        for field in update_fields
+                     ]
+                 ),
+             )
+diff --git a/django/db/models/query.py b/django/db/models/query.py
+index be8580f..42d000c 100644
+--- a/django/db/models/query.py
++++ b/django/db/models/query.py
+@@ -698,7 +698,7 @@ class QuerySet(AltersData):
+                 raise NotSupportedError(
+                     "This database backend does not support ignoring conflicts."
+                 )
+-            return OnConflict.IGNORE
++            return OnConflict.IGNORE, None, None
+         elif update_conflicts:
+             if not db_features.supports_update_conflicts:
+                 raise NotSupportedError(
+@@ -720,7 +720,10 @@ class QuerySet(AltersData):
+                     "Unique fields that can trigger the upsert must be provided."
+                 )
+             # Updating primary keys and non-concrete fields is forbidden.
+-            update_fields = [self.model._meta.get_field(name) for name in update_fields]
++            update_fields = [
++                self.model._meta.get_field(name) if isinstance(name, str) else name
++                for name in update_fields
++            ]
+             if any(not f.concrete or f.many_to_many for f in update_fields):
+                 raise ValueError(
+                     "bulk_create() can only be used with concrete fields in "
+@@ -733,15 +736,16 @@ class QuerySet(AltersData):
+                 )
+             if unique_fields:
+                 unique_fields = [
+-                    self.model._meta.get_field(name) for name in unique_fields
++                    self.model._meta.get_field(name) if isinstance(name, str) else name
++                    for name in unique_fields
+                 ]
+                 if any(not f.concrete or f.many_to_many for f in unique_fields):
+                     raise ValueError(
+                         "bulk_create() can only be used with concrete fields "
+                         "in unique_fields."
+                     )
+-            return OnConflict.UPDATE
+-        return None
++            return OnConflict.UPDATE, update_fields, unique_fields
++        return None, None, None
+ 
+     def bulk_create(
+         self,
+@@ -788,7 +792,7 @@ class QuerySet(AltersData):
+             unique_fields = [
+                 opts.pk.name if name == "pk" else name for name in unique_fields
+             ]
+-        on_conflict = self._check_bulk_create_options(
++        on_conflict, update_fields, unique_fields = self._check_bulk_create_options(
+             ignore_conflicts,
+             update_conflicts,
+             update_fields,
+diff --git a/tests/bulk_create/models.py b/tests/bulk_create/models.py
+index 27abc41..29d6e78 100644
+--- a/tests/bulk_create/models.py
++++ b/tests/bulk_create/models.py
+@@ -136,3 +136,9 @@ class RelatedModel(models.Model):
+     name = models.CharField(max_length=15, null=True)
+     country = models.OneToOneField(Country, models.CASCADE, primary_key=True)
+     big_auto_fields = models.ManyToManyField(BigAutoFieldModel)
++
++
++class CustomDbColumn(models.Model):
++    custom_field = models.IntegerField(unique=True, db_column="custom_column")
++    custom_field_other = models.IntegerField(db_column="Custom_Column_Other")
++
+diff --git a/tests/bulk_create/tests.py b/tests/bulk_create/tests.py
+index 6c490d1..811cbd3 100644
+--- a/tests/bulk_create/tests.py
++++ b/tests/bulk_create/tests.py
+@@ -21,6 +21,7 @@ from django.test import (
+ from .models import (
+     BigAutoFieldModel,
+     Country,
++    CustomDbColumn,
+     NoFields,
+     NullableFields,
+     Pizzeria,
+@@ -640,6 +641,25 @@ class BulkCreateTests(TestCase):
+     def test_update_conflicts_two_fields_no_unique_fields(self):
+         self._test_update_conflicts_two_fields([])
+ 
++    @skipUnlessDBFeature("supports_update_conflicts")
++    def test_update_conflicts_db_column(self):
++        CustomDbColumn.objects.bulk_create(
++            [CustomDbColumn(custom_field=1, custom_field_other=1)]
++        )
++        unique_fields = ["custom_field"]
++        if not connection.features.supports_update_conflicts_with_target:
++            unique_fields = None
++        CustomDbColumn.objects.bulk_create(
++            [CustomDbColumn(custom_field=1, custom_field_other=2)],
++            update_conflicts=True,
++            unique_fields=unique_fields,
++            update_fields=["custom_field_other"],
++        )
++        self.assertEqual(
++            CustomDbColumn.objects.get().custom_field_other,
++            2,
++        )
++
+     def _test_update_conflicts_unique_two_fields(self, unique_fields):
+         Country.objects.bulk_create(self.data)
+         self.assertEqual(Country.objects.count(), 4)

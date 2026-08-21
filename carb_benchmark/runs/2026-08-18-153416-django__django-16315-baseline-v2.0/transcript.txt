@@ -1,0 +1,18 @@
+I have resolved the issue where `QuerySet.bulk_create()` failed to respect `db_column` / mixed-case column names when compiling `update_fields` and `unique_fields` in `ON CONFLICT` / `ON DUPLICATE KEY UPDATE` SQL clauses.
+
+### Root Cause
+1. In [query.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/models/query.py), `_check_bulk_create_options()` converted model field names string values in `update_fields` and `unique_fields` to `Field` instances locally, but did not return them to `bulk_create()`. Thus, model field names (e.g. `sectorid`) instead of `Field` objects were passed downstream to `_batched_insert()` and `on_conflict_suffix_sql()`.
+2. Backend implementations of `on_conflict_suffix_sql()` in [postgresql/operations.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/backends/postgresql/operations.py), [sqlite3/operations.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/backends/sqlite3/operations.py), and [mysql/operations.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/backends/mysql/operations.py) directly quoted the raw items without resolving `field.column` (the actual DB column name).
+
+### Fix
+- Updated `_check_bulk_create_options()` in `django/db/models/query.py` to return the resolved `Field` instances for `update_fields` and `unique_fields`.
+- Updated `on_conflict_suffix_sql()` in PostgreSQL, SQLite, and MySQL backend operations to use `field.column` when referencing fields, correctly mapping fields with custom or mixed-case `db_column` values to their database column names.
+I have resolved the issue where `QuerySet.bulk_create()` failed to respect `db_column` / mixed-case column names when compiling `update_fields` and `unique_fields` in `ON CONFLICT` / `ON DUPLICATE KEY UPDATE` SQL clauses.
+
+### Root Cause
+1. In [query.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/models/query.py), `_check_bulk_create_options()` converted model field names string values in `update_fields` and `unique_fields` to `Field` instances locally, but did not return them to `bulk_create()`. Thus, model field names (e.g. `sectorid`) instead of `Field` objects were passed downstream to `_batched_insert()` and `on_conflict_suffix_sql()`.
+2. Backend implementations of `on_conflict_suffix_sql()` in [postgresql/operations.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/backends/postgresql/operations.py), [sqlite3/operations.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/backends/sqlite3/operations.py), and [mysql/operations.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16315/django/db/backends/mysql/operations.py) directly quoted the raw items without resolving `field.column` (the actual DB column name).
+
+### Fix
+- Updated `_check_bulk_create_options()` in `django/db/models/query.py` to return the resolved `Field` instances for `update_fields` and `unique_fields`.
+- Updated `on_conflict_suffix_sql()` in PostgreSQL, SQLite, and MySQL backend operations to use `field.column` when referencing fields, correctly mapping fields with custom or mixed-case `db_column` values to their database column names.

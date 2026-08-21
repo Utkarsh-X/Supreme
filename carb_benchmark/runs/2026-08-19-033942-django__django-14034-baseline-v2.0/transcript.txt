@@ -1,0 +1,22 @@
+I have investigated and fixed the issue where `MultiValueField` ignored required values of subfields when `require_all_fields=False` and `required=False`.
+
+### Root Cause
+When `MultiValueField.clean(value)` was called with a list or tuple of empty subfield values (e.g. `['', '']`), the logic checked if all values in `value` were empty. If so, it checked `if self.required:`. Because `self.required` was `False`, it immediately returned `self.compress([])` without checking `self.require_all_fields`. As a result, individual subfields with `field.required=True` were never evaluated during cleaning when all subfield inputs were submitted as empty strings.
+
+### Solution
+In `django.forms.fields.MultiValueField.clean`, when a list/tuple of empty subfield values is supplied, the early exit (`return self.compress([])`) now checks `elif self.require_all_fields:`. When `require_all_fields` is `False` and `required` is `False`, execution falls through to the per-subfield validation loop so individual fields with `field.required=True` can trigger an `incomplete` validation error when left empty.
+
+### Code Links
+- Modified [`django/forms/fields.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14034/django/forms/fields.py#L1022-L1037)
+- Added tests to [`tests/forms_tests/field_tests/test_multivaluefield.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14034/tests/forms_tests/field_tests/test_multivaluefield.py#L175-L194) and [`tests/forms_tests/tests/test_forms.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14034/tests/forms_tests/tests/test_forms.py#L3099-L3102).
+I have investigated and fixed the issue where `MultiValueField` ignored required values of subfields when `require_all_fields=False` and `required=False`.
+
+### Root Cause
+When `MultiValueField.clean(value)` was called with a list or tuple of empty subfield values (e.g. `['', '']`), the logic checked if all values in `value` were empty. If so, it checked `if self.required:`. Because `self.required` was `False`, it immediately returned `self.compress([])` without checking `self.require_all_fields`. As a result, individual subfields with `field.required=True` were never evaluated during cleaning when all subfield inputs were submitted as empty strings.
+
+### Solution
+In `django.forms.fields.MultiValueField.clean`, when a list/tuple of empty subfield values is supplied, the early exit (`return self.compress([])`) now checks `elif self.require_all_fields:`. When `require_all_fields` is `False` and `required` is `False`, execution falls through to the per-subfield validation loop so individual fields with `field.required=True` can trigger an `incomplete` validation error when left empty.
+
+### Code Links
+- Modified [`django/forms/fields.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14034/django/forms/fields.py#L1022-L1037)
+- Added tests to [`tests/forms_tests/field_tests/test_multivaluefield.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14034/tests/forms_tests/field_tests/test_multivaluefield.py#L175-L194) and [`tests/forms_tests/tests/test_forms.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14034/tests/forms_tests/tests/test_forms.py#L3099-L3102).

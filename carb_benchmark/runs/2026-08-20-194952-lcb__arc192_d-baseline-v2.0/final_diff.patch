@@ -1,0 +1,102 @@
+diff --git a/main.py b/main.py
+index c86f6c8..acff374 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,96 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:]]
++    MOD = 998244353
++
++    # Collect primes dividing any A_i
++    primes = set()
++    for x in A:
++        temp = x
++        d = 2
++        while d * d <= temp:
++            if temp % d == 0:
++                primes.add(d)
++                while temp % d == 0:
++                    temp //= d
++            d += 1
++        if temp > 1:
++            primes.add(temp)
++    
++    total_score_sum = 1
++
++    for p in primes:
++        a = [0] * (N - 1)
++        for i in range(N - 1):
++            temp = A[i]
++            cnt = 0
++            while temp % p == 0:
++                cnt += 1
++                temp //= p
++            a[i] = cnt
++        
++        S_p = sum(a)
++        if S_p == 0:
++            continue
++
++        # Precompute pow_p for single-step transitions
++        max_a = max(a)
++        max_exp = S_p + N * max_a + 100
++        pow_p = [1] * (max_exp + 1)
++        cur = 1
++        for k in range(1, max_exp + 1):
++            cur = (cur * p) % MOD
++            pow_p[k] = cur
++
++        # DP dict mapping y -> sum of p^W % MOD
++        dp = {0: 1}
++
++        j = 1
++        while j <= N - 1:
++            if a[j - 1] == 0:
++                # Group consecutive zeros
++                start_j = j
++                while j <= N - 1 and a[j - 1] == 0:
++                    j += 1
++                k = j - start_j
++                new_dp = {}
++                for y, val in dp.items():
++                    exp = (k * y) % (MOD - 1)
++                    mult = pow(p, exp, MOD)
++                    new_dp[y] = (val * mult) % MOD
++                dp = new_dp
++            else:
++                aj = a[j - 1]
++                new_dp = {}
++                for y, val in dp.items():
++                    # Choice 1: +aj
++                    y1 = y + aj
++                    mult1 = pow_p[y1]
++                    new_dp[y1] = (new_dp.get(y1, 0) + val * mult1) % MOD
++
++                    # Choice 2: -aj
++                    if y >= aj:
++                        y2 = y - aj
++                        w2 = y2
++                    else:
++                        y2 = 0
++                        w2 = (aj - y) * j
++                    mult2 = pow_p[w2]
++                    new_dp[y2] = (new_dp.get(y2, 0) + val * mult2) % MOD
++
++                dp = new_dp
++                j += 1
++
++        prime_sum = sum(dp.values()) % MOD
++        total_score_sum = (total_score_sum * prime_sum) % MOD
++
++    print(total_score_sum)
++
++if __name__ == '__main__':
++    solve()

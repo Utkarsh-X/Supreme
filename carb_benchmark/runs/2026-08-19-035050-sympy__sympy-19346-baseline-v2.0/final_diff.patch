@@ -1,0 +1,70 @@
+diff --git a/sympy/printing/repr.py b/sympy/printing/repr.py
+index c936a69..128d440 100644
+--- a/sympy/printing/repr.py
++++ b/sympy/printing/repr.py
+@@ -11,6 +11,7 @@
+ 
+ from sympy.core.function import AppliedUndef
+ from sympy.core.mul import Mul
++from sympy.utilities import default_sort_key
+ from mpmath.libmp import repr_dps, to_str as mlib_to_str
+ 
+ from .printer import Printer
+@@ -250,6 +251,28 @@ def _print_tuple(self, expr):
+         else:
+             return "(%s)" % self.reprify(expr, ", ")
+ 
++    def _print_dict(self, d):
++        keys = sorted(d.keys(), key=default_sort_key)
++        items = []
++
++        for key in keys:
++            item = "%s: %s" % (self._print(key), self._print(d[key]))
++            items.append(item)
++
++        return "{%s}" % ", ".join(items)
++
++    def _print_set(self, s):
++        if not s:
++            return "set()"
++        items = sorted(s, key=default_sort_key)
++        args = ', '.join(self._print(item) for item in items)
++        return '{%s}' % args
++
++    def _print_frozenset(self, s):
++        if not s:
++            return "frozenset()"
++        return "frozenset(%s)" % self._print_set(s)
++
+     def _print_WildFunction(self, expr):
+         return "%s('%s')" % (expr.__class__.__name__, expr.name)
+ 
+diff --git a/sympy/printing/tests/test_repr.py b/sympy/printing/tests/test_repr.py
+index f749683..698ce71 100644
+--- a/sympy/printing/tests/test_repr.py
++++ b/sympy/printing/tests/test_repr.py
+@@ -99,6 +99,24 @@ def test_list():
+     sT([x, Integer(4)], "[Symbol('x'), Integer(4)]")
+ 
+ 
++def test_dict():
++    sT({x: Integer(4)}, "{Symbol('x'): Integer(4)}")
++    sT({x: y}, "{Symbol('x'): Symbol('y')}")
++    sT({}, "{}")
++
++
++def test_set():
++    sT({x, Integer(4)}, "{Integer(4), Symbol('x')}")
++    sT({x, y}, "{Symbol('x'), Symbol('y')}")
++    sT(set(), "set()")
++
++
++def test_frozenset():
++    sT(frozenset([x, Integer(4)]), "frozenset({Integer(4), Symbol('x')})")
++    sT(frozenset([x, y]), "frozenset({Symbol('x'), Symbol('y')})")
++    sT(frozenset(), "frozenset()")
++
++
+ def test_Matrix():
+     for cls, name in [(Matrix, "MutableDenseMatrix"), (ImmutableDenseMatrix, "ImmutableDenseMatrix")]:
+         sT(cls([[x**+1, 1], [y, x + y]]),

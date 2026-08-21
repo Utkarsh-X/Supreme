@@ -1,0 +1,57 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ced4d45 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,51 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++    
++    pos = [[] for _ in range(N + 1)]
++    for i, a in enumerate(A):
++        pos[a].append(i + 1)
++        
++    def count_empty(indices, N):
++        res = 0
++        prev = 0
++        for p in indices:
++            gap = p - prev - 1
++            res += gap * (gap + 1) // 2
++            prev = p
++        gap = N - prev
++        res += gap * (gap + 1) // 2
++        return res
++
++    ans = 0
++    total_pairs = N * (N + 1) // 2
++    E_prev = total_pairs
++    
++    for x in range(1, N + 1):
++        p_prev = pos[x - 1]
++        p_curr = pos[x]
++        
++        if not p_prev:
++            merged = p_curr
++        elif not p_curr:
++            merged = p_prev
++        else:
++            merged = sorted(p_prev + p_curr)
++            
++        E_both = count_empty(merged, N)
++        ans += E_prev - E_both
++        
++        if not p_curr:
++            E_prev = total_pairs
++        else:
++            E_prev = count_empty(p_curr, N)
++            
++    print(ans)
++
++if __name__ == '__main__':
++    main()

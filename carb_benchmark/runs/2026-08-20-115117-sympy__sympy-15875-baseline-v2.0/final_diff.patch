@@ -1,0 +1,97 @@
+diff --git a/sympy/core/add.py b/sympy/core/add.py
+index 83a5f2a..bef9d36 100644
+--- a/sympy/core/add.py
++++ b/sympy/core/add.py
+@@ -534,36 +534,61 @@ def _eval_is_zero(self):
+             # issue 10528: there is no way to know if a nc symbol
+             # is zero or not
+             return
+-        nz = []
+-        z = 0
+-        im_or_z = False
+-        im = False
++        real_nz = []
++        imag_nz = []
++        real_unknown = False
++        imag_unknown = False
+         for a in self.args:
+             if a.is_real:
+                 if a.is_zero:
+-                    z += 1
++                    continue
+                 elif a.is_zero is False:
+-                    nz.append(a)
++                    real_nz.append(a)
+                 else:
+-                    return
++                    real_unknown = True
+             elif a.is_imaginary:
+-                im = True
++                imag_nz.append(a)
+             elif (S.ImaginaryUnit*a).is_real:
+-                im_or_z = True
++                ia = S.ImaginaryUnit * a
++                if ia.is_zero:
++                    continue
++                elif ia.is_zero is False:
++                    imag_nz.append(a)
++                else:
++                    imag_unknown = True
+             else:
+                 return
+-        if z == len(self.args):
+-            return True
+-        if len(nz) == len(self.args):
++
++        if real_unknown:
++            re_zero = None
++        elif not real_nz:
++            re_zero = True
++        elif len(real_nz) == len(self.args):
+             return None
+-        b = self.func(*nz)
+-        if b.is_zero:
+-            if not im_or_z and not im:
+-                return True
+-            if im and not im_or_z:
++        else:
++            b_real = self.func(*real_nz)
++            if b_real.is_zero is False:
+                 return False
+-        if b.is_zero is False:
++            re_zero = b_real.is_zero
++
++        if re_zero is False:
++            return False
++
++        if imag_unknown:
++            im_zero = None
++        elif not imag_nz:
++            im_zero = True
++        else:
++            b_imag_real = self.func(*[S.ImaginaryUnit * a for a in imag_nz])
++            if b_imag_real.is_zero is False:
++                return False
++            im_zero = b_imag_real.is_zero
++
++        if re_zero and im_zero:
++            return True
++        if im_zero is False:
+             return False
++        return None
+ 
+     def _eval_is_odd(self):
+         l = [f for f in self.args if not (f.is_even is True)]
+diff --git a/sympy/core/tests/test_arit.py b/sympy/core/tests/test_arit.py
+index e2398a4..c20e3f3 100644
+--- a/sympy/core/tests/test_arit.py
++++ b/sympy/core/tests/test_arit.py
+@@ -1985,6 +1985,8 @@ def test_issue_8247_8354():
+ def test_Add_is_zero():
+     x, y = symbols('x y', zero=True)
+     assert (x + y).is_zero
++    e = -2*I + (1 + I)**2
++    assert e.is_zero is True
+ 
+ 
+ def test_issue_14392():

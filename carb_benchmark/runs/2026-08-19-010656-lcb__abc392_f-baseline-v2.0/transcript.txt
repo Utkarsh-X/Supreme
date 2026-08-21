@@ -1,0 +1,16 @@
+An efficient solution using a Binary Indexed Tree (Fenwick Tree) with binary lifting has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_f/main.py).
+
+### Method Explanation
+- By working backwards from step $N$ down to $1$, the element $i$ is placed into the $P_i$-th currently available (empty) slot among the final $N$ positions of array $A$.
+- A Binary Indexed Tree (BIT) tracks the available slots across positions $1 \dots N$.
+- Using binary lifting on the BIT, we find the 1-indexed position of the $P_i$-th available slot in $O(\log N)$ time per operation.
+- After placing element $i$, we update the BIT in $O(\log N)$ to mark that position as occupied.
+- Overall Time Complexity: $O(N \log N)$, which easily executes well within the time limit for $N = 5 \times 10^5$.
+An efficient solution using a Binary Indexed Tree (Fenwick Tree) with binary lifting has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_f/main.py).
+
+### Method Explanation
+- By working backwards from step $N$ down to $1$, the element $i$ is placed into the $P_i$-th currently available (empty) slot among the final $N$ positions of array $A$.
+- A Binary Indexed Tree (BIT) tracks the available slots across positions $1 \dots N$.
+- Using binary lifting on the BIT, we find the 1-indexed position of the $P_i$-th available slot in $O(\log N)$ time per operation.
+- After placing element $i$, we update the BIT in $O(\log N)$ to mark that position as occupied.
+- Overall Time Complexity: $O(N \log N)$, which easily executes well within the time limit for $N = 5 \times 10^5$.

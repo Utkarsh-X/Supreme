@@ -1,0 +1,34 @@
+### Cause of the Issue
+`AbstractBaseUser.get_session_auth_hash()` hardcoded calls to `salted_hmac` without passing a custom `secret` parameter (defaulting strictly to `settings.SECRET_KEY`). Additionally, `django.contrib.auth.get_user()` and `login()` only verified session authentication hashes against `user.get_session_auth_hash()`. When `SECRET_KEY` was rotated and the old key moved to `SECRET_KEY_FALLBACKS`, existing logged-in session hashes (computed with the previous key) failed validation and triggered session flushing.
+
+### Summary of Changes
+1. **[base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py)**:
+   - Updated `AbstractBaseUser.get_session_auth_hash(self, secret=None)` to accept an optional `secret` parameter.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes(self)` method to yield session auth hashes for each fallback secret in `settings.SECRET_KEY_FALLBACKS`.
+2. **[__init__.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py)**:
+   - Added `_get_session_auth_hashes(user)` helper function to yield the primary session auth hash and any fallback hashes.
+   - Updated `get_user()` and `login()` session hash verification logic to validate session hashes against both the current secret key and keys in `SECRET_KEY_FALLBACKS` using constant-time comparison.
+3. **[test_auth_backends.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_auth_backends.py)**:
+   - Added `SessionAuthHashFallbackTests` test suite covering `get_user()`, `login()`, invalid hash handling, and `get_session_auth_fallback_hashes()` with `SECRET_KEY_FALLBACKS`.
+4. **Documentation Updates**:
+   - Added documentation for `get_session_auth_fallback_hashes()` in [customizing.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/topics/auth/customizing.txt) and [auth.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/ref/contrib/auth.txt), and release notes in [5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/releases/5.0.txt).
+
+### Verification
+All 610 tests in `auth_tests` suite executed and passed cleanly.
+### Cause of the Issue
+`AbstractBaseUser.get_session_auth_hash()` hardcoded calls to `salted_hmac` without passing a custom `secret` parameter (defaulting strictly to `settings.SECRET_KEY`). Additionally, `django.contrib.auth.get_user()` and `login()` only verified session authentication hashes against `user.get_session_auth_hash()`. When `SECRET_KEY` was rotated and the old key moved to `SECRET_KEY_FALLBACKS`, existing logged-in session hashes (computed with the previous key) failed validation and triggered session flushing.
+
+### Summary of Changes
+1. **[base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py)**:
+   - Updated `AbstractBaseUser.get_session_auth_hash(self, secret=None)` to accept an optional `secret` parameter.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes(self)` method to yield session auth hashes for each fallback secret in `settings.SECRET_KEY_FALLBACKS`.
+2. **[__init__.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py)**:
+   - Added `_get_session_auth_hashes(user)` helper function to yield the primary session auth hash and any fallback hashes.
+   - Updated `get_user()` and `login()` session hash verification logic to validate session hashes against both the current secret key and keys in `SECRET_KEY_FALLBACKS` using constant-time comparison.
+3. **[test_auth_backends.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_auth_backends.py)**:
+   - Added `SessionAuthHashFallbackTests` test suite covering `get_user()`, `login()`, invalid hash handling, and `get_session_auth_fallback_hashes()` with `SECRET_KEY_FALLBACKS`.
+4. **Documentation Updates**:
+   - Added documentation for `get_session_auth_fallback_hashes()` in [customizing.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/topics/auth/customizing.txt) and [auth.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/ref/contrib/auth.txt), and release notes in [5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/releases/5.0.txt).
+
+### Verification
+All 610 tests in `auth_tests` suite executed and passed cleanly.

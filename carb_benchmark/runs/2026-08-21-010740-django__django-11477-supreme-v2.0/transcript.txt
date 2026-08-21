@@ -1,0 +1,54 @@
+<task_notification taskId="c9670646-265d-46d5-beac-498bb9f9d560/task-109" exitCode="0">
+<task_output>
+...................................................................................................................................
+----------------------------------------------------------------------
+Ran 131 tests in 1.258s
+
+OK
+Testing against Django installed in 'E:\RofU\Supreme\carb_workspaces\django__django-11477\django'
+System check identified no issues (0 silenced).
+</task_output>
+</task_notification>
+
+I have fixed the issue where [translate_url()](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L160-L181) created incorrect or untranslated URLs when URL patterns contained optional groups (named or positional) that were missing in the matched URL.
+
+### Cause of the Issue
+When resolving a URL path matching a regex pattern with optional groups, `resolve()` returns a `ResolverMatch` object containing `args` (positional groups) and `kwargs` (named groups). Unmatched optional groups produce `None` values in `match.args` or `match.kwargs`.
+
+When `translate_url()` subsequently called `reverse(to_be_reversed, args=match.args, kwargs=match.kwargs)`, passing `None` values caused `reverse()` to either:
+1. Raise `NoReverseMatch` (falling back to returning the untranslated URL), or
+2. Match a pattern variant expecting the optional parameter, formatting `str(None)` as `'None'` into the URL string (creating corrupted URLs like `/nl/item/None/42/`).
+
+### Solution
+In [django/urls/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L173-L177), `None` values are now filtered out from both `match.args` and `match.kwargs` prior to calling `reverse()`.
+
+### Verification
+- Added test coverage in [tests/i18n/patterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L156-L167) and [tests/i18n/patterns/urls/default.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/urls/default.py#L19).
+- Verified that all 202 `i18n` tests and 122 `urlpatterns`/`urlpatterns_reverse` tests pass cleanly.
+<task_notification taskId="c9670646-265d-46d5-beac-498bb9f9d560/task-109" exitCode="0">
+<task_output>
+...................................................................................................................................
+----------------------------------------------------------------------
+Ran 131 tests in 1.258s
+
+OK
+Testing against Django installed in 'E:\RofU\Supreme\carb_workspaces\django__django-11477\django'
+System check identified no issues (0 silenced).
+</task_output>
+</task_notification>
+
+I have fixed the issue where [translate_url()](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L160-L181) created incorrect or untranslated URLs when URL patterns contained optional groups (named or positional) that were missing in the matched URL.
+
+### Cause of the Issue
+When resolving a URL path matching a regex pattern with optional groups, `resolve()` returns a `ResolverMatch` object containing `args` (positional groups) and `kwargs` (named groups). Unmatched optional groups produce `None` values in `match.args` or `match.kwargs`.
+
+When `translate_url()` subsequently called `reverse(to_be_reversed, args=match.args, kwargs=match.kwargs)`, passing `None` values caused `reverse()` to either:
+1. Raise `NoReverseMatch` (falling back to returning the untranslated URL), or
+2. Match a pattern variant expecting the optional parameter, formatting `str(None)` as `'None'` into the URL string (creating corrupted URLs like `/nl/item/None/42/`).
+
+### Solution
+In [django/urls/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L173-L177), `None` values are now filtered out from both `match.args` and `match.kwargs` prior to calling `reverse()`.
+
+### Verification
+- Added test coverage in [tests/i18n/patterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L156-L167) and [tests/i18n/patterns/urls/default.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/urls/default.py#L19).
+- Verified that all 202 `i18n` tests and 122 `urlpatterns`/`urlpatterns_reverse` tests pass cleanly.

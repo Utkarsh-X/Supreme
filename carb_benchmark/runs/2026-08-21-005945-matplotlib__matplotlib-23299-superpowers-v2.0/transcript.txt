@@ -1,0 +1,20 @@
+### Root Cause Analysis
+When figures are created within an `rc_context` block before an explicit backend has been requested, `rcParams['backend']` starts as `rcsetup._auto_backend_sentinel`. 
+1. Entering `rc_context` stores a copy of `rcParams` in `orig`, which captures `'backend': rcsetup._auto_backend_sentinel`.
+2. Inside `rc_context`, creating a figure resolves the backend sentinel and updates `rcParams['backend']` to the active backend (e.g., `'tkagg'` or `'qtagg'`).
+3. Exiting `rc_context` restored `orig` via `dict.update(rcParams, orig)`, which reset `rcParams['backend']` back to `rcsetup._auto_backend_sentinel`.
+4. Subsequent calls to `get_backend()` triggered `rcParams['backend']` resolution again. Because `rcParams['backend']` had reverted to `_auto_backend_sentinel`, `switch_backend()` was re-invoked, which executed `Gcf.destroy_all()` / `close("all")` and removed all figures in `Gcf.figs`.
+
+### Solution
+- Updated `rc_context` in `lib/matplotlib/__init__.py` so that if `orig` captured `_auto_backend_sentinel` for `"backend"` and the backend was resolved during the context manager execution, `orig["backend"]` is updated to the resolved backend before `dict.update(rcParams, orig)` runs.
+- Added a unit test `test_rc_context_backend_figure` in `lib/matplotlib/tests/test_rcparams.py` to prevent regression.
+### Root Cause Analysis
+When figures are created within an `rc_context` block before an explicit backend has been requested, `rcParams['backend']` starts as `rcsetup._auto_backend_sentinel`. 
+1. Entering `rc_context` stores a copy of `rcParams` in `orig`, which captures `'backend': rcsetup._auto_backend_sentinel`.
+2. Inside `rc_context`, creating a figure resolves the backend sentinel and updates `rcParams['backend']` to the active backend (e.g., `'tkagg'` or `'qtagg'`).
+3. Exiting `rc_context` restored `orig` via `dict.update(rcParams, orig)`, which reset `rcParams['backend']` back to `rcsetup._auto_backend_sentinel`.
+4. Subsequent calls to `get_backend()` triggered `rcParams['backend']` resolution again. Because `rcParams['backend']` had reverted to `_auto_backend_sentinel`, `switch_backend()` was re-invoked, which executed `Gcf.destroy_all()` / `close("all")` and removed all figures in `Gcf.figs`.
+
+### Solution
+- Updated `rc_context` in `lib/matplotlib/__init__.py` so that if `orig` captured `_auto_backend_sentinel` for `"backend"` and the backend was resolved during the context manager execution, `orig["backend"]` is updated to the resolved backend before `dict.update(rcParams, orig)` runs.
+- Added a unit test `test_rc_context_backend_figure` in `lib/matplotlib/tests/test_rcparams.py` to prevent regression.

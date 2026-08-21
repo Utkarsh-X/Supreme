@@ -1,0 +1,38 @@
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_c/main.py).
+
+### Method Explanation
+
+1. **Parity Analysis**:
+   - Each Red piece move changes the parity of $r + c$ (from even to odd or vice versa) because $\Delta r + \Delta c \in \{\pm 1\}$.
+   - Each Blue piece move preserves the parity of $r + c$ because $\Delta r + \Delta c \in \{0, \pm 2\}$.
+   - Since the pieces form a closed cycle of $R + B$ moves returning to the starting position, the total number of parity changes along the cycle must be even. Hence, **$R$ must be even**.
+   - Furthermore, when $R = 0$, all moves are Blue diagonal moves. Since every Blue move changes both $r$ and $c$ by $\pm 1$, the sum of $x$-displacements $\sum \Delta r_i = 0$ requires the total number of steps $B$ to be **even**.
+
+2. **Construction**:
+   - **$R$ is odd**: Output `No`.
+   - **$R = 0$**: If $B$ is odd, output `No`. If $B$ is even ($B \ge 2$), construct a closed $B$-step diagonal path.
+   - **$R \ge 2$ (even)**:
+     - If $B = 0$: Construct a rectangular Red cycle of dimensions $2 \times (R/2)$.
+     - If $B$ is even ($B = 2k, k \ge 1$): Construct a Blue path of $B$ steps from $(0,0)$ to $(0,2)$, followed by $R$ Red steps connecting $(0,2)$ back to $(0,0)$.
+     - If $B$ is odd ($B = 2k+1, k \ge 0$): Construct a Blue path of $B$ steps from $(0,0)$ to $(1,1)$, followed by $R$ Red steps connecting $(1,1)$ back to $(0,0)$.
+
+   All generated coordinates are shifted by an offset (e.g. $5 \times 10^8$) to ensure they strictly satisfy $1 \le r, c \le 10^9$.
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_c/main.py).
+
+### Method Explanation
+
+1. **Parity Analysis**:
+   - Each Red piece move changes the parity of $r + c$ (from even to odd or vice versa) because $\Delta r + \Delta c \in \{\pm 1\}$.
+   - Each Blue piece move preserves the parity of $r + c$ because $\Delta r + \Delta c \in \{0, \pm 2\}$.
+   - Since the pieces form a closed cycle of $R + B$ moves returning to the starting position, the total number of parity changes along the cycle must be even. Hence, **$R$ must be even**.
+   - Furthermore, when $R = 0$, all moves are Blue diagonal moves. Since every Blue move changes both $r$ and $c$ by $\pm 1$, the sum of $x$-displacements $\sum \Delta r_i = 0$ requires the total number of steps $B$ to be **even**.
+
+2. **Construction**:
+   - **$R$ is odd**: Output `No`.
+   - **$R = 0$**: If $B$ is odd, output `No`. If $B$ is even ($B \ge 2$), construct a closed $B$-step diagonal path.
+   - **$R \ge 2$ (even)**:
+     - If $B = 0$: Construct a rectangular Red cycle of dimensions $2 \times (R/2)$.
+     - If $B$ is even ($B = 2k, k \ge 1$): Construct a Blue path of $B$ steps from $(0,0)$ to $(0,2)$, followed by $R$ Red steps connecting $(0,2)$ back to $(0,0)$.
+     - If $B$ is odd ($B = 2k+1, k \ge 0$): Construct a Blue path of $B$ steps from $(0,0)$ to $(1,1)$, followed by $R$ Red steps connecting $(1,1)$ back to $(0,0)$.
+
+   All generated coordinates are shifted by an offset (e.g. $5 \times 10^8$) to ensure they strictly satisfy $1 \le r, c \le 10^9$.

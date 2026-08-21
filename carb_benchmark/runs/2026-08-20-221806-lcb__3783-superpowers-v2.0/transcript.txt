@@ -1,0 +1,24 @@
+I have implemented the solution for finding the $k$-th alternating permutation in `main.py`.
+
+### Overview of Approach
+1. **Combinatorial Digit-by-Digit Construction**:
+   - An alternating permutation requires parities to alternate strictly at every step ($O, E, O, E\dots$ or $E, O, E, O\dots$).
+   - At position $0$, we evaluate candidate starting integers $x \in [1, n]$. Picking an odd or even starting integer determines the required parity sequence for all remaining positions $1 \dots n-1$.
+   - The number of valid remaining completions after selecting a candidate depends only on whether the available counts of remaining odd and even integers match the required odd and even slot counts for positions $1 \dots n-1$. If they match, the number of valid completions is $(\text{available\_odds})! \times (\text{available\_evens})!$.
+   - At each position $i > 0$, all remaining available numbers of the forced parity yield an equal number of valid downstream completions ($w$). We use integer division (`(k - 1) // w`) to pick the exact index in $O(1)$ time per position.
+
+2. **Complexity**:
+   - Time Complexity: $O(n)$ per query, well within the limit for $n \le 100$.
+   - Space Complexity: $O(n)$ to store available integers and answer list.
+I have implemented the solution for finding the $k$-th alternating permutation in `main.py`.
+
+### Overview of Approach
+1. **Combinatorial Digit-by-Digit Construction**:
+   - An alternating permutation requires parities to alternate strictly at every step ($O, E, O, E\dots$ or $E, O, E, O\dots$).
+   - At position $0$, we evaluate candidate starting integers $x \in [1, n]$. Picking an odd or even starting integer determines the required parity sequence for all remaining positions $1 \dots n-1$.
+   - The number of valid remaining completions after selecting a candidate depends only on whether the available counts of remaining odd and even integers match the required odd and even slot counts for positions $1 \dots n-1$. If they match, the number of valid completions is $(\text{available\_odds})! \times (\text{available\_evens})!$.
+   - At each position $i > 0$, all remaining available numbers of the forced parity yield an equal number of valid downstream completions ($w$). We use integer division (`(k - 1) // w`) to pick the exact index in $O(1)$ time per position.
+
+2. **Complexity**:
+   - Time Complexity: $O(n)$ per query, well within the limit for $n \le 100$.
+   - Space Complexity: $O(n)$ to store available integers and answer list.

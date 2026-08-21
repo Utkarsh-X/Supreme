@@ -1,0 +1,145 @@
+diff --git a/main.py b/main.py
+index c86f6c8..9e101c8 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,139 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(map(int, input_data))
++    H = next(iterator)
++    W = next(iterator)
++    
++    N = H * W
++    F = [0] * N
++    
++    for idx in range(N):
++        F[idx] = next(iterator)
++            
++    edges = []
++    # Collect horizontal edges
++    for r in range(H):
++        row_offset = r * W
++        for c in range(W - 1):
++            u = row_offset + c
++            v = row_offset + c + 1
++            w = F[u] if F[u] < F[v] else F[v]
++            edges.append((w, u, v))
++            
++    # Collect vertical edges
++    for r in range(H - 1):
++        row_offset = r * W
++        for c in range(W):
++            u = row_offset + c
++            v = row_offset + W + c
++            w = F[u] if F[u] < F[v] else F[v]
++            edges.append((w, u, v))
++            
++    # Sort edges descending by weight
++    edges.sort(key=lambda x: x[0], reverse=True)
++    
++    # Kruskal Reconstruction Tree
++    max_nodes = 2 * N
++    parent_dsu = list(range(max_nodes))
++    node_val = [0] * max_nodes
++    for i in range(N):
++        node_val[i] = F[i]
++        
++    def find(i):
++        root = i
++        while parent_dsu[root] != root:
++            root = parent_dsu[root]
++        curr = i
++        while curr != root:
++            nxt = parent_dsu[curr]
++            parent_dsu[curr] = root
++            curr = nxt
++        return root
++
++    tree_parent = list(range(max_nodes))
++    next_node = N
++    
++    for w, u, v in edges:
++        ru = find(u)
++        rv = find(v)
++        if ru != rv:
++            p = next_node
++            next_node += 1
++            node_val[p] = w
++            parent_dsu[ru] = p
++            parent_dsu[rv] = p
++            tree_parent[ru] = p
++            tree_parent[rv] = p
++
++    root = next_node - 1
++    tree_parent[root] = root
++    
++    depth = [0] * next_node
++    for u in range(next_node - 2, -1, -1):
++        depth[u] = depth[tree_parent[u]] + 1
++
++    LOG = 19
++    up = [tree_parent[:next_node]]
++    for k in range(1, LOG):
++        prev = up[k - 1]
++        curr = [prev[prev[u]] for u in range(next_node)]
++        up.append(curr)
++
++    up0 = up[0]
++
++    def get_lca(u, v):
++        if depth[u] < depth[v]:
++            u, v = v, u
++        diff = depth[u] - depth[v]
++        while diff:
++            lsb = diff & -diff
++            k = lsb.bit_length() - 1
++            u = up[k][u]
++            diff ^= lsb
++        if u != v:
++            start_k = depth[u].bit_length() - 1
++            if start_k >= LOG:
++                start_k = LOG - 1
++            for k in range(start_k, -1, -1):
++                if up[k][u] != up[k][v]:
++                    u = up[k][u]
++                    v = up[k][v]
++            u = up0[u]
++        return u
++
++    Q = next(iterator)
++    out = []
++    
++    for _ in range(Q):
++        A = next(iterator) - 1
++        B = next(iterator) - 1
++        Y = next(iterator)
++        C = next(iterator) - 1
++        D = next(iterator) - 1
++        Z = next(iterator)
++        
++        u = A * W + B
++        v = C * W + D
++        
++        if u == v:
++            L = F[u]
++        else:
++            lca_node = get_lca(u, v)
++            L = node_val[lca_node]
++            
++        min_floor = Y if Y < Z else Z
++        if L < min_floor:
++            min_floor = L
++            
++        ans = Y + Z - 2 * min_floor
++        out.append(str(ans))
++        
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,16 @@
+I have resolved the issue where database converters (`from_db_value` and database-backend specific converters) were not called for `returning_fields` on insert (e.g. `Model.objects.create()` and `Model.objects.bulk_create()`).
+
+### Root Cause
+In [`SQLInsertCompiler.execute_sql`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/django/db/models/sql/compiler.py#L1403-L1425), rows returned from the database (`INSERT ... RETURNING` or `last_insert_id`) were returned directly without passing through `get_converters` and `apply_converters`.
+
+### Fix
+- Updated [`SQLInsertCompiler.execute_sql`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/django/db/models/sql/compiler.py#L1403-L1425) to convert `self.returning_fields` into column expressions (`cols`), fetch defined database converters via `self.get_converters(cols)`, and apply them to the returned insert rows using `self.apply_converters(rows, converters)`.
+- Added test coverage in [`tests/from_db_value/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/tests.py#L36-L45) and [`tests/from_db_value/models.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/models.py#L25-L48) to verify that `AutoField`/`BigAutoField` subclasses implementing `from_db_value` return wrapped values on `.create()` and `.bulk_create()`.
+I have resolved the issue where database converters (`from_db_value` and database-backend specific converters) were not called for `returning_fields` on insert (e.g. `Model.objects.create()` and `Model.objects.bulk_create()`).
+
+### Root Cause
+In [`SQLInsertCompiler.execute_sql`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/django/db/models/sql/compiler.py#L1403-L1425), rows returned from the database (`INSERT ... RETURNING` or `last_insert_id`) were returned directly without passing through `get_converters` and `apply_converters`.
+
+### Fix
+- Updated [`SQLInsertCompiler.execute_sql`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/django/db/models/sql/compiler.py#L1403-L1425) to convert `self.returning_fields` into column expressions (`cols`), fetch defined database converters via `self.get_converters(cols)`, and apply them to the returned insert rows using `self.apply_converters(rows, converters)`.
+- Added test coverage in [`tests/from_db_value/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/tests.py#L36-L45) and [`tests/from_db_value/models.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/models.py#L25-L48) to verify that `AutoField`/`BigAutoField` subclasses implementing `from_db_value` return wrapped values on `.create()` and `.bulk_create()`.

@@ -1,0 +1,280 @@
+diff --git a/main.py b/main.py
+index c86f6c8..8521e5f 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,274 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++# Increase recursion depth just in case
++sys.setrecursionlimit(2000000)
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    ops = []
++    idx = 2
++    for i in range(M):
++        L = int(input_data[idx])
++        R = int(input_data[idx+1])
++        idx += 2
++        ops.append((L, R))
++        
++    # Check Cost 1: single Op 1 covering [1, N]
++    for i in range(M):
++        if ops[i][0] == 1 and ops[i][1] == N:
++            print(1)
++            res = ['0'] * M
++            res[i] = '1'
++            print(' '.join(res))
++            return
++
++    # Precompute by_L to store top 3 operations starting at each L
++    by_L = [[] for _ in range(N + 2)]
++    for i in range(M):
++        L, R = ops[i]
++        by_L[L].append((R, i))
++
++    for L in range(1, N + 1):
++        if len(by_L[L]) > 3:
++            by_L[L].sort(key=lambda x: x[0], reverse=True)
++            by_L[L] = by_L[L][:3]
++
++    best_op = [[] for _ in range(N + 2)]
++    curr = []
++    for p in range(1, N + 1):
++        if by_L[p]:
++            combined = curr + by_L[p]
++            combined.sort(key=lambda x: x[0], reverse=True)
++            curr = combined[:3]
++        best_op[p] = curr
++
++    # Check 2a: Two Op 1s covering [1, N]
++    best_l1 = -1
++    max_r1 = -1
++    for i in range(M):
++        if ops[i][0] == 1 and ops[i][1] > max_r1:
++            max_r1 = ops[i][1]
++            best_l1 = i
++
++    best_rn = -1
++    min_ln = N + 2
++    for i in range(M):
++        if ops[i][1] == N and ops[i][0] < min_ln:
++            min_ln = ops[i][0]
++            best_rn = i
++
++    if best_l1 != -1 and best_rn != -1 and best_l1 != best_rn and min_ln <= max_r1 + 1:
++        print(2)
++        res = ['0'] * M
++        res[best_l1] = '1'
++        res[best_rn] = '1'
++        print(' '.join(res))
++        return
++
++    # Check 2b: One Op 1 (i) and One Op 2 (j) with i != j such that [L_j, R_j] <= [L_i, R_i]
++    for j in range(M):
++        Lj, Rj = ops[j]
++        for R_cand, i_cand in best_op[Lj]:
++            if i_cand != j and R_cand >= Rj:
++                print(2)
++                res = ['0'] * M
++                res[i_cand] = '1'
++                res[j] = '2'
++                print(' '.join(res))
++                return
++
++    # Check 2c: Two Op 2s (i != j) with disjoint holes
++    min_r_id = min(range(M), key=lambda i: ops[i][1])
++    max_l_id = max(range(M), key=lambda i: ops[i][0])
++    if ops[min_r_id][1] < ops[max_l_id][0]:
++        print(2)
++        res = ['0'] * M
++        res[min_r_id] = '2'
++        res[max_l_id] = '2'
++        print(' '.join(res))
++        return
++
++    # Build binary lifting table up
++    LOGN = 20
++    up = [[0] * (N + 2) for _ in range(LOGN)]
++    for p in range(1, N + 1):
++        if best_op[p]:
++            up[0][p] = best_op[p][0][0] + 1
++        else:
++            up[0][p] = p
++    up[0][N + 1] = N + 1
++
++    up_curr = list(up[0])
++    for k in range(1, LOGN):
++        up_curr = [up_curr[x] for x in up_curr]
++        up[k] = up_curr
++
++    def get_steps_clean(l, r):
++        if l > r:
++            return 0, []
++        p = l
++        steps = 0
++        for k in range(LOGN - 1, -1, -1):
++            if up[k][p] <= r:
++                p = up[k][p]
++                steps += (1 << k)
++        if up[0][p] <= r:
++            return float('inf'), []
++        steps += 1
++        
++        p = l
++        ops_used = []
++        for _ in range(steps):
++            best_i = best_op[p][0][1]
++            ops_used.append(best_i)
++            p = ops[best_i][1] + 1
++        return steps, ops_used
++
++    def get_steps_with_forbidden(l, r, forbidden_set):
++        if l > r:
++            return 0, []
++        p = l
++        steps = 0
++        ops_used = []
++        while p <= r:
++            best_i = -1
++            best_R = -1
++            for R_cand, i_cand in best_op[p]:
++                if i_cand not in forbidden_set:
++                    best_R = R_cand
++                    best_i = i_cand
++                    break
++            if best_i == -1 or best_R < p:
++                return float('inf'), []
++            ops_used.append(best_i)
++            p = best_R + 1
++            steps += 1
++        return steps, ops_used
++
++    # Case A: 0 Op 2s
++    cost_A, ops_A = get_steps_clean(1, N)
++
++    # Case B: 1 Op 2
++    cost_B = float('inf')
++    best_j_B = -1
++    for j in range(M):
++        Lj, Rj = ops[j]
++        kJ, _ = get_steps_clean(Lj, Rj)
++        if kJ >= 2 and 1 + kJ < cost_B:
++            cost_B = 1 + kJ
++            best_j_B = j
++
++    # Case C: 2 Op 2s
++    top_jB = sorted([(ops[j][1], j) for j in range(M)])[:5]
++    unique_L = list(set(ops[j][0] for j in range(M)))
++    jump_at_L = [0] * (N + 2)
++
++    def check_k_case_c(k):
++        bits = [b for b in range(LOGN) if (k & (1 << b))]
++        for L in unique_L:
++            p = L
++            for b in bits:
++                p = up[b][p]
++            jump_at_L[L] = p
++            
++        max1_val, max1_j = -1, -1
++        max2_val, max2_j = -1, -1
++        max3_val, max3_j = -1, -1
++        max4_val, max4_j = -1, -1
++        max5_val, max5_j = -1, -1
++        for j in range(M):
++            val = jump_at_L[ops[j][0]]
++            if val > max1_val:
++                max5_val, max5_j = max4_val, max4_j
++                max4_val, max4_j = max3_val, max3_j
++                max3_val, max3_j = max2_val, max2_j
++                max2_val, max2_j = max1_val, max1_j
++                max1_val, max1_j = val, j
++            elif val > max2_val:
++                max5_val, max5_j = max4_val, max4_j
++                max4_val, max4_j = max3_val, max3_j
++                max3_val, max3_j = max2_val, max2_j
++                max2_val, max2_j = val, j
++            elif val > max3_val:
++                max5_val, max5_j = max4_val, max4_j
++                max4_val, max4_j = max3_val, max3_j
++                max3_val, max3_j = val, j
++            elif val > max4_val:
++                max5_val, max5_j = max4_val, max4_j
++                max4_val, max4_j = val, j
++            elif val > max5_val:
++                max5_val, max5_j = val, j
++
++        top_jA = [(max1_val, max1_j), (max2_val, max2_j), (max3_val, max3_j), (max4_val, max4_j), (max5_val, max5_j)]
++
++        for jump_val, jA in top_jA:
++            if jA == -1: continue
++            for R_val, jB in top_jB:
++                if jA != jB and ops[jA][0] <= ops[jB][1]:
++                    stps, _ = get_steps_with_forbidden(ops[jA][0], ops[jB][1], {jA, jB})
++                    if stps <= k:
++                        return True, jA, jB
++        return False, -1, -1
++
++    high = M
++    if cost_A != float('inf') or cost_B != float('inf'):
++        high = min(cost_A, cost_B) - 2
++
++    best_k_C = float('inf')
++    best_jA_C = -1
++    best_jB_C = -1
++
++    if high >= 1:
++        ok, jA, jB = check_k_case_c(high)
++        if ok:
++            best_k_C = high
++            best_jA_C = jA
++            best_jB_C = jB
++            low = 1
++            high_bs = high - 1
++            while low <= high_bs:
++                mid = (low + high_bs) // 2
++                ok_mid, jA_mid, jB_mid = check_k_case_c(mid)
++                if ok_mid:
++                    best_k_C = mid
++                    best_jA_C = jA_mid
++                    best_jB_C = jB_mid
++                    high_bs = mid - 1
++                else:
++                    low = mid + 1
++
++    cost_C = 2 + best_k_C if best_k_C != float('inf') else float('inf')
++
++    min_cost = min(cost_A, cost_B, cost_C)
++
++    if min_cost == float('inf'):
++        print(-1)
++        return
++
++    res = ['0'] * M
++    if min_cost == cost_A:
++        for idx in ops_A:
++            res[idx] = '1'
++    elif min_cost == cost_B:
++        res[best_j_B] = '2'
++        _, ops_B = get_steps_with_forbidden(ops[best_j_B][0], ops[best_j_B][1], {best_j_B})
++        for idx in ops_B:
++            res[idx] = '1'
++    else:
++        res[best_jA_C] = '2'
++        res[best_jB_C] = '2'
++        _, ops_C = get_steps_with_forbidden(ops[best_jA_C][0], ops[best_jB_C][1], {best_jA_C, best_jB_C})
++        for idx in ops_C:
++            res[idx] = '1'
++
++    print(min_cost)
++    print(' '.join(res))
++
++if __name__ == '__main__':
++    main()

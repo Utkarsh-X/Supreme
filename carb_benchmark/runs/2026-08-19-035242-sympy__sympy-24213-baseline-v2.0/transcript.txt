@@ -1,0 +1,64 @@
+<notification>
+Task completed (0e22092f-f840-4167-8fde-1b205445b107/task-37): pytest sympy/physics/units/tests/
+
+Process exited with code 0
+
+Output:
+============================= test session starts =============================
+platform win32 -- Python 3.10.12, pytest-7.4.0, pluggy-1.2.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sympy__sympy-24213
+collected 83 items
+
+sympy\physics\units\tests\test_dimensions.py ........                 [  9%]
+sympy\physics\units\tests\test_dimensionsystem.py .......              [ 18%]
+sympy\physics\units\tests\test_prefixes.py ....                        [ 22%]
+sympy\physics\units\tests\test_quantities.py ......................... [ 53%]
+...X................                                                   [ 77%]
+sympy\physics\units\tests\test_str.py .                                [ 78%]
+sympy\physics\units\tests\test_unitsystem.py .........                [ 89%]
+sympy\physics\units\tests\test_util.py .........                       [100%]
+
+======================== 82 passed, 1 xfailed in 1.48s ========================
+
+I have resolved the issue where `_collect_factor_and_dimension` failed to recognize equivalent dimensions during addition (e.g. `acceleration * time` vs `velocity`).
+
+### Root Cause
+In `UnitSystem._collect_factor_and_dimension`:
+1. When handling expressions of type `Add`, addend dimensions were checked using exact equality `if dim != addend_dim:` instead of testing dimensional equivalence via `self.get_dimension_system().equivalent_dims(dim, addend_dim)`.
+2. `Quantity` evaluation inside `_collect_factor_and_dimension` queried global default dimensions (`expr.dimension`) rather than checking quantity definitions registered on `self` (`self.get_quantity_dimension(expr)` and `self.get_quantity_scale_factor(expr)`).
+
+### Changes Made
+- Updated [unitsystem.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-24213/sympy/physics/units/unitsystem.py#L157-L184) so `Add` term dimension comparison uses `self.get_dimension_system().equivalent_dims(dim, addend_dim)` and `Quantity` lookups use `self.get_quantity_scale_factor` and `self.get_quantity_dimension`.
+- Added unit test coverage in [test_quantities.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-24213/sympy/physics/units/tests/test_quantities.py#L373-L390).
+<notification>
+Task completed (0e22092f-f840-4167-8fde-1b205445b107/task-37): pytest sympy/physics/units/tests/
+
+Process exited with code 0
+
+Output:
+============================= test session starts =============================
+platform win32 -- Python 3.10.12, pytest-7.4.0, pluggy-1.2.0
+rootdir: E:\RofU\Supreme\carb_workspaces\sympy__sympy-24213
+collected 83 items
+
+sympy\physics\units\tests\test_dimensions.py ........                 [  9%]
+sympy\physics\units\tests\test_dimensionsystem.py .......              [ 18%]
+sympy\physics\units\tests\test_prefixes.py ....                        [ 22%]
+sympy\physics\units\tests\test_quantities.py ......................... [ 53%]
+...X................                                                   [ 77%]
+sympy\physics\units\tests\test_str.py .                                [ 78%]
+sympy\physics\units\tests\test_unitsystem.py .........                [ 89%]
+sympy\physics\units\tests\test_util.py .........                       [100%]
+
+======================== 82 passed, 1 xfailed in 1.48s ========================
+
+I have resolved the issue where `_collect_factor_and_dimension` failed to recognize equivalent dimensions during addition (e.g. `acceleration * time` vs `velocity`).
+
+### Root Cause
+In `UnitSystem._collect_factor_and_dimension`:
+1. When handling expressions of type `Add`, addend dimensions were checked using exact equality `if dim != addend_dim:` instead of testing dimensional equivalence via `self.get_dimension_system().equivalent_dims(dim, addend_dim)`.
+2. `Quantity` evaluation inside `_collect_factor_and_dimension` queried global default dimensions (`expr.dimension`) rather than checking quantity definitions registered on `self` (`self.get_quantity_dimension(expr)` and `self.get_quantity_scale_factor(expr)`).
+
+### Changes Made
+- Updated [unitsystem.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-24213/sympy/physics/units/unitsystem.py#L157-L184) so `Add` term dimension comparison uses `self.get_dimension_system().equivalent_dims(dim, addend_dim)` and `Quantity` lookups use `self.get_quantity_scale_factor` and `self.get_quantity_dimension`.
+- Added unit test coverage in [test_quantities.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-24213/sympy/physics/units/tests/test_quantities.py#L373-L390).

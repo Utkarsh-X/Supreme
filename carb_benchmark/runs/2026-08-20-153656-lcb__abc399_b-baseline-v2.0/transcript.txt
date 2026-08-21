@@ -1,0 +1,24 @@
+The solution for calculating the rank of each person according to the contest rules has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Method Explanation
+The standard procedure assigns rank \( r \) starting at 1. Each time the maximum score among undetermined participants is processed, all participants with that score are assigned rank \( r \), and \( r \) is incremented by the number of people sharing that score.
+
+Under this procedure, the rank of a person with score \( P_i \) is equal to:
+\[ \text{Rank}_i = 1 + (\text{number of people with score strictly greater than } P_i) \]
+
+Given the constraint \( N \le 100 \), computing this directly for each person takes \( O(N^2) \) time, which comfortably executes well within runtime limits.
+
+### Verification
+All public sample test cases were verified and passed cleanly.
+The solution for calculating the rank of each person according to the contest rules has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_b/main.py).
+
+### Method Explanation
+The standard procedure assigns rank \( r \) starting at 1. Each time the maximum score among undetermined participants is processed, all participants with that score are assigned rank \( r \), and \( r \) is incremented by the number of people sharing that score.
+
+Under this procedure, the rank of a person with score \( P_i \) is equal to:
+\[ \text{Rank}_i = 1 + (\text{number of people with score strictly greater than } P_i) \]
+
+Given the constraint \( N \le 100 \), computing this directly for each person takes \( O(N^2) \) time, which comfortably executes well within runtime limits.
+
+### Verification
+All public sample test cases were verified and passed cleanly.

@@ -1,0 +1,12 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+1. **Edge Cut Characterization**: When any edge $e = (u, v)$ is removed from a tree of size $NK$, the tree splits into two connected components. For $e$ to be part of a path in the decomposition, the size of each component must not be a multiple of $K$. Thus, an edge is designated as *active* if and only if the component sizes it separates are non-zero modulo $K$.
+2. **Degree Constraint**: In any valid partition of vertices into simple paths, each vertex can be incident to at most $2$ path edges (i.e. degree $\le 2$). Because active edges are strictly required by modular arithmetic constraints, the graph formed by all active edges must partition the tree into vertex-disjoint simple paths, each of length $K$.
+3. **Algorithm**: We root the tree at vertex 1 and perform a BFS to determine parent-child relationships and bottom-up order. We then compute subtree sizes $sz[u]$. For every non-root node $u$ with $sz[u] \pmod K \neq 0$, the edge $(u, \text{parent}(u))$ is active, incrementing the active degree of both endpoints. If every vertex has an active degree $\le 2$, the output is `Yes`; otherwise, `No`.
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+1. **Edge Cut Characterization**: When any edge $e = (u, v)$ is removed from a tree of size $NK$, the tree splits into two connected components. For $e$ to be part of a path in the decomposition, the size of each component must not be a multiple of $K$. Thus, an edge is designated as *active* if and only if the component sizes it separates are non-zero modulo $K$.
+2. **Degree Constraint**: In any valid partition of vertices into simple paths, each vertex can be incident to at most $2$ path edges (i.e. degree $\le 2$). Because active edges are strictly required by modular arithmetic constraints, the graph formed by all active edges must partition the tree into vertex-disjoint simple paths, each of length $K$.
+3. **Algorithm**: We root the tree at vertex 1 and perform a BFS to determine parent-child relationships and bottom-up order. We then compute subtree sizes $sz[u]$. For every non-root node $u$ with $sz[u] \pmod K \neq 0$, the edge $(u, \text{parent}(u))$ is active, incrementing the active degree of both endpoints. If every vertex has an active degree $\le 2$, the output is `Yes`; otherwise, `No`.

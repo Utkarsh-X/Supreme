@@ -1,0 +1,46 @@
+I have completed the task and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3784/main.py).
+
+### Method Summary
+
+1. **Trie Construction**:
+   - Build a Trie containing all $N$ strings, tracking character counts `cnt[u]` and depth `depth[u]` at each node.
+   - Total number of Trie nodes is bounded by $\sum |words[i]| \le 10^5$.
+
+2. **Precalculating Maximum Depths**:
+   - $D_{k+1}$: Calculate the global maximum depth among nodes in the Trie with count $\ge k + 1$. Any such node retains count $\ge k$ even after removing any single word.
+   - For nodes with count $\ge k$ ($T_{\ge k}$), compute bottom-up using BFS order:
+     - `subtree_max_depth[u]`: Maximum depth achievable in the subtree of $u$ within $T_{\ge k}$.
+     - `b1_val[u]`, `b1_child[u]`, `b2_val[u]`: Top two maximum subtree depths among $u$'s children in $T_{\ge k}$.
+
+3. **Per-Word Query**:
+   - For each word $w_i$, trace its prefix path $P(w_i) \cap T_{\ge k}$.
+   - Max depth of nodes in $T_{\ge k}$ off $P(w_i)$ ($D_{k, \text{off}}(i)$) is queried in $O(|w_i|)$ time by inspecting alternative child branches at each node along the path.
+   - Answer for index $i$ is $\max(D_{k+1}, D_{k, \text{off}}(i))$. If $N \le k$, the output is `[0] * N`.
+
+### Verification
+- Tested against public test cases (Example 1, Example 2).
+- Ran unit tests for edge cases ($N = k$, $k = 1$, duplicate strings, prefix strings).
+- Ran a 100-case randomized stress test comparing outputs against a brute-force validator. All tests passed cleanly.
+I have completed the task and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3784/main.py).
+
+### Method Summary
+
+1. **Trie Construction**:
+   - Build a Trie containing all $N$ strings, tracking character counts `cnt[u]` and depth `depth[u]` at each node.
+   - Total number of Trie nodes is bounded by $\sum |words[i]| \le 10^5$.
+
+2. **Precalculating Maximum Depths**:
+   - $D_{k+1}$: Calculate the global maximum depth among nodes in the Trie with count $\ge k + 1$. Any such node retains count $\ge k$ even after removing any single word.
+   - For nodes with count $\ge k$ ($T_{\ge k}$), compute bottom-up using BFS order:
+     - `subtree_max_depth[u]`: Maximum depth achievable in the subtree of $u$ within $T_{\ge k}$.
+     - `b1_val[u]`, `b1_child[u]`, `b2_val[u]`: Top two maximum subtree depths among $u$'s children in $T_{\ge k}$.
+
+3. **Per-Word Query**:
+   - For each word $w_i$, trace its prefix path $P(w_i) \cap T_{\ge k}$.
+   - Max depth of nodes in $T_{\ge k}$ off $P(w_i)$ ($D_{k, \text{off}}(i)$) is queried in $O(|w_i|)$ time by inspecting alternative child branches at each node along the path.
+   - Answer for index $i$ is $\max(D_{k+1}, D_{k, \text{off}}(i))$. If $N \le k$, the output is `[0] * N`.
+
+### Verification
+- Tested against public test cases (Example 1, Example 2).
+- Ran unit tests for edge cases ($N = k$, $k = 1$, duplicate strings, prefix strings).
+- Ran a 100-case randomized stress test comparing outputs against a brute-force validator. All tests passed cleanly.

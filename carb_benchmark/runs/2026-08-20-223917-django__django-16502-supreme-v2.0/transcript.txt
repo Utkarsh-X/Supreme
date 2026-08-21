@@ -1,0 +1,38 @@
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-25' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-25' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-70' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-70' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-70' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-103' to check output.
+### Summary of Work
+
+#### Root Cause
+Following ticket #26052, response body stripping was removed from Django's core application layer under the assumption that WSGI servers (e.g., gunicorn, mod_wsgi) strip response bodies for `HEAD` requests. However, `runserver`'s `ServerHandler` (which inherits from Python's standard `wsgiref.simple_server.ServerHandler`) did not suppress body transmission during `HEAD` requests, leading to non-compliance with RFC 2616 / RFC 7230 / RFC 9110 and causing potential `BrokenPipeError` exceptions when clients closed connections after reading response headers.
+
+#### Fix
+Modified [basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/django/core/servers/basehttp.py#L150-L165) in `django/core/servers/basehttp.py`:
+- Overrode `write(self, data)` in `ServerHandler`: for `HEAD` requests (`self.environ.get("REQUEST_METHOD") == "HEAD"`), headers are transmitted if not already sent (`self.send_headers()`), and `self.bytes_sent` is updated, but body bytes are suppressed (skipping `self._write()` and `self._flush()`).
+- Overrode `sendfile(self)` in `ServerHandler`: for `HEAD` requests, headers are transmitted if not already sent and `True` is returned to bypass file body transmission.
+
+#### Verification
+- Added `test_head_strips_body` in [test_basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/tests/servers/test_basehttp.py#L109-L144).
+- Ran all unit tests in `tests/servers/` (`python tests/runtests.py servers`). All 28 tests passed successfully.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-25' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-25' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-70' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-70' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-70' to check output.
+Ask default_api:manage_task with Action='status', TaskId='22a220d6-3de3-4195-98d5-83f0ef85f83a/task-103' to check output.
+### Summary of Work
+
+#### Root Cause
+Following ticket #26052, response body stripping was removed from Django's core application layer under the assumption that WSGI servers (e.g., gunicorn, mod_wsgi) strip response bodies for `HEAD` requests. However, `runserver`'s `ServerHandler` (which inherits from Python's standard `wsgiref.simple_server.ServerHandler`) did not suppress body transmission during `HEAD` requests, leading to non-compliance with RFC 2616 / RFC 7230 / RFC 9110 and causing potential `BrokenPipeError` exceptions when clients closed connections after reading response headers.
+
+#### Fix
+Modified [basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/django/core/servers/basehttp.py#L150-L165) in `django/core/servers/basehttp.py`:
+- Overrode `write(self, data)` in `ServerHandler`: for `HEAD` requests (`self.environ.get("REQUEST_METHOD") == "HEAD"`), headers are transmitted if not already sent (`self.send_headers()`), and `self.bytes_sent` is updated, but body bytes are suppressed (skipping `self._write()` and `self._flush()`).
+- Overrode `sendfile(self)` in `ServerHandler`: for `HEAD` requests, headers are transmitted if not already sent and `True` is returned to bypass file body transmission.
+
+#### Verification
+- Added `test_head_strips_body` in [test_basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/tests/servers/test_basehttp.py#L109-L144).
+- Ran all unit tests in `tests/servers/` (`python tests/runtests.py servers`). All 28 tests passed successfully.

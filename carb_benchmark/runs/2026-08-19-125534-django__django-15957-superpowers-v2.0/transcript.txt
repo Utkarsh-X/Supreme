@@ -1,0 +1,20 @@
+I have resolved the issue where `Prefetch()` objects failed with a downstream filter error when passed a sliced queryset.
+
+### Summary of Changes
+
+1. **[django/db/models/query.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/django/db/models/query.py#L2145-L2158)**:
+   - Added validation in `Prefetch.__init__` to check `queryset.query.is_sliced`.
+   - Immediately raises a `ValueError("Cannot filter a query once a slice has been taken.")` upon initialization when a sliced queryset is provided to `Prefetch`.
+
+2. **[tests/prefetch_related/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/tests/prefetch_related/tests.py#L1007-L1011)**:
+   - Added `test_sliced_queryset` to verify that instantiating `Prefetch` with a sliced queryset raises `ValueError` with the expected error message.
+I have resolved the issue where `Prefetch()` objects failed with a downstream filter error when passed a sliced queryset.
+
+### Summary of Changes
+
+1. **[django/db/models/query.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/django/db/models/query.py#L2145-L2158)**:
+   - Added validation in `Prefetch.__init__` to check `queryset.query.is_sliced`.
+   - Immediately raises a `ValueError("Cannot filter a query once a slice has been taken.")` upon initialization when a sliced queryset is provided to `Prefetch`.
+
+2. **[tests/prefetch_related/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/tests/prefetch_related/tests.py#L1007-L1011)**:
+   - Added `test_sliced_queryset` to verify that instantiating `Prefetch` with a sliced queryset raises `ValueError` with the expected error message.

@@ -1,0 +1,60 @@
+diff --git a/main.py b/main.py
+index c86f6c8..bd547c1 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,54 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input = sys.stdin.read
++    data = input().split()
++    if not data:
++        return
++    
++    N = int(data[0])
++    K = int(data[1])
++    A = [int(x) for x in data[2:]]
++    
++    MOD = 998244353
++    
++    # Precompute combinations C(K, j)
++    comb = [1] * (K + 1)
++    for j in range(1, K + 1):
++        comb[j] = comb[j - 1] * (K - j + 1) // j
++        
++    # Precompute (-1)^(K-j) % MOD
++    sign = [1 if (K - j) % 2 == 0 else MOD - 1 for j in range(K + 1)]
++    
++    cnt = [0] * (K + 1)
++    cnt[0] = 1  # l = 0, S_0 = 0, so S_0^0 = 1, S_0^m = 0 for m > 0
++    
++    ans = 0
++    S_r = 0
++    
++    for x in A:
++        S_r = (S_r + x) % MOD
++        
++        # Precompute powers of S_r up to K
++        pow_Sr = [1] * (K + 1)
++        for j in range(1, K + 1):
++            pow_Sr[j] = (pow_Sr[j - 1] * S_r) % MOD
++            
++        # Calculate contribution for current r
++        term_sum = 0
++        for j in range(K + 1):
++            term = (comb[j] * sign[j]) % MOD
++            term = (term * pow_Sr[j]) % MOD
++            term = (term * cnt[K - j]) % MOD
++            term_sum = (term_sum + term) % MOD
++            
++        ans = (ans + term_sum) % MOD
++        
++        # Update cnt with S_r powers
++        for j in range(K + 1):
++            cnt[j] = (cnt[j] + pow_Sr[j]) % MOD
++            
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

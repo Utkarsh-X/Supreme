@@ -1,0 +1,41 @@
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index d4ca323..b0fd390 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,13 +1,13 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++from collections import defaultdict
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+ from .cache import cacheit
+ from .sympify import _sympify, sympify, SympifyError
+ from .compatibility import (iterable, Iterator, ordered,
+-    string_types, with_metaclass, zip_longest, range)
++    string_types, with_metaclass, zip_longest, range, Mapping)
+ from .singleton import S
+ 
+ from inspect import getmro
+diff --git a/sympy/core/compatibility.py b/sympy/core/compatibility.py
+index 1f1ec06..2716ba7 100644
+--- a/sympy/core/compatibility.py
++++ b/sympy/core/compatibility.py
+@@ -6,7 +6,16 @@
+ from __future__ import print_function, division
+ 
+ import operator
++import collections
+ from collections import defaultdict
++try:
++    import collections.abc as collections_abc
++    for _name in ['Iterable', 'Mapping', 'MutableMapping', 'MutableSet', 'Callable', 'Hashable', 'Sequence', 'Set']:
++        if not hasattr(collections, _name) and hasattr(collections_abc, _name):
++            setattr(collections, _name, getattr(collections_abc, _name))
++    from collections.abc import Iterable, Mapping, MutableMapping, MutableSet, Callable
++except ImportError:
++    from collections import Iterable, Mapping, MutableMapping, MutableSet, Callable
+ from sympy.external import import_module
+ 
+ """

@@ -1,0 +1,42 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3784/main.py).
+
+### Method Explanation
+
+1. **Trie Construction**:
+   - We insert all strings into a Trie, maintaining the prefix `depth` and character `count` at each node.
+   - We store the full node path $P_i$ for each string `words[i]`.
+
+2. **Subtree Max Depths for $S = \{ u \mid \text{count}[u] \ge k \}$**:
+   - In reverse topological order (bottom-up), we compute `max_depth_in_S[u]`, which tracks the maximum depth of any Trie node in $u$'s subtree that has $\text{count} \ge k$.
+   - For each node $u$, we precompute the top two child subtree maximum depths (`max1` and `max2`).
+
+3. **Query Evaluation per String `words[i]`**:
+   When $words[i]$ is removed:
+   - **Nodes on path $P_i$**: The node count decreases by 1. A node $v \in P_i$ remains valid if `count[v] >= k + 1`. We compute $M_2(i) = \max \{ \text{depth}[v] \mid v \in P_i \text{ and } \text{count}[v] \ge k + 1 \}$.
+   - **Nodes outside path $P_i$**: The node counts are unaffected. For each node $v_d \in P_i$, any descendant branching into a child $c \notin P_i$ has count $\ge k$ iff its original `max_depth_in_S` is valid. We query `max1` / `max2` at $v_d$ to find $M_1(i)$, the maximum valid depth outside $P_i$.
+   - `answer[i] = max(M_1(i), M_2(i))`.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N + \sum |words[i]|)$, running in $\sim 0.1$ seconds for $N=10^5$ and total character count $10^5$.
+- **Space Complexity**: $\mathcal{O}(\sum |words[i]|)$ for the Trie structures and precalculated depth arrays.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3784/main.py).
+
+### Method Explanation
+
+1. **Trie Construction**:
+   - We insert all strings into a Trie, maintaining the prefix `depth` and character `count` at each node.
+   - We store the full node path $P_i$ for each string `words[i]`.
+
+2. **Subtree Max Depths for $S = \{ u \mid \text{count}[u] \ge k \}$**:
+   - In reverse topological order (bottom-up), we compute `max_depth_in_S[u]`, which tracks the maximum depth of any Trie node in $u$'s subtree that has $\text{count} \ge k$.
+   - For each node $u$, we precompute the top two child subtree maximum depths (`max1` and `max2`).
+
+3. **Query Evaluation per String `words[i]`**:
+   When $words[i]$ is removed:
+   - **Nodes on path $P_i$**: The node count decreases by 1. A node $v \in P_i$ remains valid if `count[v] >= k + 1`. We compute $M_2(i) = \max \{ \text{depth}[v] \mid v \in P_i \text{ and } \text{count}[v] \ge k + 1 \}$.
+   - **Nodes outside path $P_i$**: The node counts are unaffected. For each node $v_d \in P_i$, any descendant branching into a child $c \notin P_i$ has count $\ge k$ iff its original `max_depth_in_S` is valid. We query `max1` / `max2` at $v_d$ to find $M_1(i)$, the maximum valid depth outside $P_i$.
+   - `answer[i] = max(M_1(i), M_2(i))`.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N + \sum |words[i]|)$, running in $\sim 0.1$ seconds for $N=10^5$ and total character count $10^5$.
+- **Space Complexity**: $\mathcal{O}(\sum |words[i]|)$ for the Trie structures and precalculated depth arrays.

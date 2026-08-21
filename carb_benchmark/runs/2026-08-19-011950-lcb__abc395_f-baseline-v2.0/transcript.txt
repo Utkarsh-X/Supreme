@@ -1,0 +1,40 @@
+An optimal Python 3 solution has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_f/main.py).
+
+### Method Explanation
+
+1. **Cost Formula Simplification**:
+   If Takahashi chooses target tooth lengths $U'_i$ and $D'_i$ such that $U'_i + D'_i = H$ for all $i=1, \dots, N$, the total cost is:
+   $$\text{Cost} = \sum_{i=1}^N (U_i - U'_i) + (D_i - D'_i) = \sum_{i=1}^N (U_i + D_i) - N \cdot H$$
+   Thus, for a given $H$, the cost depends solely on $H$ and decreases as $H$ increases. To minimize total cost, we need to find the maximum integer $H \ge 0$ for which a valid upper tooth length sequence $U'_1, \dots, U'_N$ exists.
+
+2. **Feasibility Check for $H$**:
+   For a fixed $H$, the length $U'_i$ must satisfy $0 \le U'_i \le U_i$ and $0 \le D'_i = H - U'_i \le D_i$, which translates to $U'_i \in [L_i(H), R_i(H)]$, where:
+   - $L_i(H) = \max(0, H - D_i)$
+   - $R_i(H) = \min(U_i, H)$
+
+   We maintain the interval $[cur\_l, cur\_r]$ of reachable values for $U'_i$. Moving from tooth $i$ to $i+1$, the allowed set of values for $U'_{i+1}$ is:
+   $$[L_{i+1}(H), R_{i+1}(H)] \cap [cur\_l - X, cur\_r + X]$$
+   If this interval becomes empty at any step, $H$ is infeasible.
+
+3. **Binary Search**:
+   Since feasibility is monotonic with respect to $H$, we binary search for the maximum valid $H$ in the range $[0, \min_i(U_i + D_i)]$.
+An optimal Python 3 solution has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc395_f/main.py).
+
+### Method Explanation
+
+1. **Cost Formula Simplification**:
+   If Takahashi chooses target tooth lengths $U'_i$ and $D'_i$ such that $U'_i + D'_i = H$ for all $i=1, \dots, N$, the total cost is:
+   $$\text{Cost} = \sum_{i=1}^N (U_i - U'_i) + (D_i - D'_i) = \sum_{i=1}^N (U_i + D_i) - N \cdot H$$
+   Thus, for a given $H$, the cost depends solely on $H$ and decreases as $H$ increases. To minimize total cost, we need to find the maximum integer $H \ge 0$ for which a valid upper tooth length sequence $U'_1, \dots, U'_N$ exists.
+
+2. **Feasibility Check for $H$**:
+   For a fixed $H$, the length $U'_i$ must satisfy $0 \le U'_i \le U_i$ and $0 \le D'_i = H - U'_i \le D_i$, which translates to $U'_i \in [L_i(H), R_i(H)]$, where:
+   - $L_i(H) = \max(0, H - D_i)$
+   - $R_i(H) = \min(U_i, H)$
+
+   We maintain the interval $[cur\_l, cur\_r]$ of reachable values for $U'_i$. Moving from tooth $i$ to $i+1$, the allowed set of values for $U'_{i+1}$ is:
+   $$[L_{i+1}(H), R_{i+1}(H)] \cap [cur\_l - X, cur\_r + X]$$
+   If this interval becomes empty at any step, $H$ is infeasible.
+
+3. **Binary Search**:
+   Since feasibility is monotonic with respect to $H$, we binary search for the maximum valid $H$ in the range $[0, \min_i(U_i + D_i)]$.

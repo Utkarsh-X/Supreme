@@ -1,0 +1,82 @@
+diff --git a/main.py b/main.py
+index c86f6c8..7b33725 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,76 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    n = int(input_data[0])
++    k = int(input_data[1])
++    
++    rem_odds = [x for x in range(1, n + 1) if x % 2 == 1]
++    rem_evens = [x for x in range(1, n + 1) if x % 2 == 0]
++    
++    fact = [1] * (n + 1)
++    for i in range(1, n + 1):
++        fact[i] = fact[i - 1] * i
++        
++    ans = []
++    
++    for m in range(1, n + 1):
++        if m == 1:
++            candidates = sorted(rem_odds + rem_evens)
++        else:
++            prev_parity = ans[-1] % 2
++            req_m_parity = 1 - prev_parity
++            if req_m_parity == 1:
++                candidates = list(rem_odds)
++            else:
++                candidates = list(rem_evens)
++                
++        chosen = None
++        for v in candidates:
++            v_parity = v % 2
++            if v_parity == 1:
++                new_odds = len(rem_odds) - 1
++                new_evens = len(rem_evens)
++            else:
++                new_odds = len(rem_odds)
++                new_evens = len(rem_evens) - 1
++                
++            rem_len = n - m
++            req_opp = (rem_len + 1) // 2
++            req_same = rem_len // 2
++            
++            if (1 - v_parity) == 1:
++                req_odds = req_opp
++                req_evens = req_same
++            else:
++                req_odds = req_same
++                req_evens = req_opp
++                
++            if req_odds == new_odds and req_evens == new_evens:
++                completions = fact[new_odds] * fact[new_evens]
++            else:
++                completions = 0
++                
++            if k <= completions:
++                chosen = v
++                break
++            else:
++                k -= completions
++                
++        if chosen is None:
++            print("[]")
++            return
++            
++        ans.append(chosen)
++        if chosen % 2 == 1:
++            rem_odds.remove(chosen)
++        else:
++            rem_evens.remove(chosen)
++            
++    print(str(ans))
++
++if __name__ == '__main__':
++    solve()

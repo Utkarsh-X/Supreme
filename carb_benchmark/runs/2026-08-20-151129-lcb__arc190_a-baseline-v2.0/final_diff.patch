@@ -1,0 +1,167 @@
+diff --git a/main.py b/main.py
+index c86f6c8..0012d2b 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,161 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input = sys.stdin.read
++    data = input().split()
++    if not data:
++        return
++    
++    N = int(data[0])
++    M = int(data[1])
++    
++    L = [0] * (M + 1)
++    R = [0] * (M + 1)
++    
++    max_L = 0
++    argmax_L = 1
++    min_R = N + 1
++    argmin_R = 1
++    
++    for i in range(1, M + 1):
++        l = int(data[2 * i])
++        r = int(data[2 * i + 1])
++        L[i] = l
++        R[i] = r
++        
++        if l > max_L:
++            max_L = l
++            argmax_L = i
++        if r < min_R:
++            min_R = r
++            argmin_R = i
++
++    # Step 1: Check Cost = 1
++    for i in range(1, M + 1):
++        if L[i] == 1 and R[i] == N:
++            ops = ['0'] * M
++            ops[i - 1] = '1'
++            print(1)
++            print(' '.join(ops))
++            return
++
++    # Build buckets for intervals by left endpoint
++    head = [-1] * (N + 2)
++    nxt = [-1] * (M + 1)
++    for i in range(1, M + 1):
++        nxt[i] = head[L[i]]
++        head[L[i]] = i
++
++    # Build farthest and best_interval
++    farthest = [0] * (N + 2)
++    best_interval = [0] * (N + 2)
++    for x in range(1, N + 1):
++        farthest[x] = farthest[x - 1]
++        best_interval[x] = best_interval[x - 1]
++        i = head[x]
++        while i != -1:
++            if R[i] > farthest[x]:
++                farthest[x] = R[i]
++                best_interval[x] = i
++            i = nxt[i]
++
++    # Step 2: Check Cost = 2
++
++    # Candidate 2.1: Two Op 1s cover [1, N]
++    idx1 = best_interval[1]
++    r1 = farthest[1]
++    if r1 >= 1 and r1 < N:
++        idx2 = best_interval[r1 + 1]
++        r2 = farthest[r1 + 1]
++        if r2 >= N and idx1 != idx2 and idx1 != 0 and idx2 != 0:
++            ops = ['0'] * M
++            ops[idx1 - 1] = '1'
++            ops[idx2 - 1] = '1'
++            print(2)
++            print(' '.join(ops))
++            return
++
++    # Candidate 2.2: Two Op 2s with disjoint intervals (min_R < max_L)
++    if min_R < max_L:
++        a = argmax_L
++        b = argmin_R
++        ops = ['0'] * M
++        ops[a - 1] = '2'
++        ops[b - 1] = '2'
++        print(2)
++        print(' '.join(ops))
++        return
++
++    # Candidate 2.3: One Op 2 and One Op 1 (Op 1 covers Op 2 interval)
++    top1_R = [0] * (N + 2)
++    top1_idx = [0] * (N + 2)
++    top2_R = [0] * (N + 2)
++    top2_idx = [0] * (N + 2)
++
++    for x in range(1, N + 1):
++        top1_R[x] = top1_R[x - 1]
++        top1_idx[x] = top1_idx[x - 1]
++        top2_R[x] = top2_R[x - 1]
++        top2_idx[x] = top2_idx[x - 1]
++
++        i = head[x]
++        while i != -1:
++            r = R[i]
++            t1_idx = top1_idx[x]
++            t1_r = top1_R[x]
++
++            if r > t1_r:
++                if i != t1_idx:
++                    top2_R[x] = t1_r
++                    top2_idx[x] = t1_idx
++                top1_R[x] = r
++                top1_idx[x] = i
++            elif i != t1_idx and r > top2_R[x]:
++                top2_R[x] = r
++                top2_idx[x] = i
++
++            i = nxt[i]
++
++    for i in range(1, M + 1):
++        l_i = L[i]
++        r_i = R[i]
++        
++        t1_idx = top1_idx[l_i]
++        t1_r = top1_R[l_i]
++        if t1_idx != 0 and t1_idx != i and t1_r >= r_i:
++            ops = ['0'] * M
++            ops[i - 1] = '2'
++            ops[t1_idx - 1] = '1'
++            print(2)
++            print(' '.join(ops))
++            return
++            
++        t2_idx = top2_idx[l_i]
++        t2_r = top2_R[l_i]
++        if t2_idx != 0 and t2_idx != i and t2_r >= r_i:
++            ops = ['0'] * M
++            ops[i - 1] = '2'
++            ops[t2_idx - 1] = '1'
++            print(2)
++            print(' '.join(ops))
++            return
++
++    # Step 3: Check Cost = 3 (if M >= 3)
++    if M >= 3:
++        a = argmax_L
++        b = argmin_R
++        for c in range(1, M + 1):
++            if c != a and c != b:
++                ops = ['0'] * M
++                ops[a - 1] = '2'
++                ops[b - 1] = '2'
++                ops[c - 1] = '1'
++                print(3)
++                print(' '.join(ops))
++                return
++
++    # Step 4: Impossible
++    print(-1)
++
++if __name__ == '__main__':
++    solve()

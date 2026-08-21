@@ -1,0 +1,66 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ac1c979 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,60 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++
++    it = iter(input_data)
++    N = int(next(it))
++    W = int(next(it))
++
++    cols = [[] for _ in range(W + 1)]
++    for i in range(1, N + 1):
++        x = int(next(it))
++        y = int(next(it))
++        cols[x].append((y, i))
++
++    for x in range(1, W + 1):
++        cols[x].sort(key=lambda item: item[0])
++
++    K = min(len(cols[x]) for x in range(1, W + 1))
++
++    R = [float('inf')] * (N + 1)
++
++    if K > 0:
++        M = [0] * (K + 1)
++        for x in range(1, W + 1):
++            col_x = cols[x]
++            for m in range(1, K + 1):
++                y = col_x[m - 1][0]
++                if y > M[m]:
++                    M[m] = y
++
++        Trem = [0] * (K + 1)
++        Trem[1] = M[1]
++        for m in range(2, K + 1):
++            t_prev = Trem[m - 1] + 1
++            y_curr = M[m]
++            Trem[m] = t_prev if t_prev > y_curr else y_curr
++
++        for x in range(1, W + 1):
++            col_x = cols[x]
++            for k in range(1, K + 1):
++                block_id = col_x[k - 1][1]
++                R[block_id] = Trem[k]
++
++    Q = int(next(it))
++    out = []
++    for _ in range(Q):
++        t = int(next(it))
++        a = int(next(it))
++        if t < R[a]:
++            out.append("Yes")
++        else:
++            out.append("No")
++
++    sys.stdout.write("\n".join(out) + "\n")
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,103 @@
+diff --git a/django/db/models/sql/where.py b/django/db/models/sql/where.py
+index aaab173..b0cf43b 100644
+--- a/django/db/models/sql/where.py
++++ b/django/db/models/sql/where.py
+@@ -6,6 +6,7 @@ from functools import reduce
+ 
+ from django.core.exceptions import EmptyResultSet, FullResultSet
+ from django.db.models.expressions import Case, When
++from django.db.models.functions import Mod
+ from django.db.models.lookups import Exact
+ from django.utils import tree
+ from django.utils.functional import cached_property
+@@ -129,14 +130,13 @@ class WhereNode(tree.Node):
+             # Convert if the database doesn't support XOR:
+             #   a XOR b XOR c XOR ...
+             # to:
+-            #   (a OR b OR c OR ...) AND (a + b + c + ...) == 1
+-            lhs = self.__class__(self.children, OR)
++            #   (a + b + c + ...) % 2 == 1
+             rhs_sum = reduce(
+                 operator.add,
+                 (Case(When(c, then=1), default=0) for c in self.children),
+             )
+-            rhs = Exact(1, rhs_sum)
+-            return self.__class__([lhs, rhs], AND, self.negated).as_sql(
++            rhs = Exact(1, Mod(rhs_sum, 2))
++            return self.__class__([rhs], AND, self.negated).as_sql(
+                 compiler, connection
+             )
+ 
+diff --git a/tests/or_lookups/tests.py b/tests/or_lookups/tests.py
+index bfcb32b..ea790f4 100644
+--- a/tests/or_lookups/tests.py
++++ b/tests/or_lookups/tests.py
+@@ -220,3 +220,51 @@ class OrLookupsTests(TestCase):
+             ),
+             {self.a1: Article.objects.get(pk=self.a1)},
+         )
++
++    def test_xor(self):
++        self.assertEqual(Article.objects.filter(Q(pk=self.a1)).count(), 1)
++        self.assertEqual(
++            Article.objects.filter(Q(pk=self.a1) ^ Q(pk=self.a1)).count(), 0
++        )
++        self.assertEqual(
++            Article.objects.filter(
++                Q(pk=self.a1) ^ Q(pk=self.a1) ^ Q(pk=self.a1)
++            ).count(),
++            1,
++        )
++        self.assertEqual(
++            Article.objects.filter(
++                Q(pk=self.a1) ^ Q(pk=self.a1) ^ Q(pk=self.a1) ^ Q(pk=self.a1)
++            ).count(),
++            0,
++        )
++        self.assertEqual(
++            Article.objects.filter(
++                Q(pk=self.a1)
++                ^ Q(pk=self.a1)
++                ^ Q(pk=self.a1)
++                ^ Q(pk=self.a1)
++                ^ Q(pk=self.a1)
++            ).count(),
++            1,
++        )
++        self.assertSequenceEqual(
++            Article.objects.filter(
++                Q(pk=self.a1)
++                ^ Q(headline__startswith="Hello")
++                ^ Q(headline__contains="bye")
++            ),
++            [Article.objects.get(pk=self.a2)],
++        )
++        self.assertSequenceEqual(
++            Article.objects.filter(
++                Q(pk=self.a3)
++                ^ Q(headline__startswith="Hello")
++                ^ Q(headline__contains="bye")
++            ),
++            [
++                Article.objects.get(pk=self.a1),
++                Article.objects.get(pk=self.a2),
++                Article.objects.get(pk=self.a3),
++            ],
++        )
+diff --git a/tests/queries/test_q.py b/tests/queries/test_q.py
+index cdf4029..0d6ec4d 100644
+--- a/tests/queries/test_q.py
++++ b/tests/queries/test_q.py
+@@ -261,3 +261,12 @@ class QCheckTests(TestCase):
+             f"Got a database error calling check() on {q!r}: ",
+             cm.records[0].getMessage(),
+         )
++
++    def test_xor(self):
++        q1 = Q(price=10)
++        q2 = Q(price=20)
++        q3 = Q(price=30)
++        self.assertIs((q1 ^ q2 ^ q3).check({"price": 10}), True)
++        self.assertIs((q1 ^ q1 ^ q1).check({"price": 10}), True)
++        self.assertIs((q1 ^ q1 ^ q1 ^ q1).check({"price": 10}), False)
++        self.assertIs((q1 ^ q1 ^ q1 ^ q1 ^ q1).check({"price": 10}), True)

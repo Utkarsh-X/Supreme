@@ -1,0 +1,51 @@
+diff --git a/django/contrib/sessions/backends/base.py b/django/contrib/sessions/backends/base.py
+index b545316..0fda7d8 100644
+--- a/django/contrib/sessions/backends/base.py
++++ b/django/contrib/sessions/backends/base.py
+@@ -108,11 +108,20 @@ class SessionBase:
+ 
+     def encode(self, session_dict):
+         "Return the given session dictionary serialized and encoded as a string."
++        if settings.DEFAULT_HASHING_ALGORITHM == 'sha1':
++            return self._legacy_encode(session_dict)
+         return signing.dumps(
+             session_dict, salt=self.key_salt, serializer=self.serializer,
+             compress=True,
+         )
+ 
++    def _legacy_encode(self, session_dict):
++        # RemovedInDjango40Warning: pre-Django 3.1 format will be invalid.
++        serialized = self.serializer().dumps(session_dict)
++        hash = self._hash(serialized)
++        return base64.b64encode(hash.encode('ascii') + b':' + serialized).decode('ascii')
++
++
+     def decode(self, session_data):
+         try:
+             return signing.loads(session_data, salt=self.key_salt, serializer=self.serializer)
+diff --git a/tests/sessions_tests/tests.py b/tests/sessions_tests/tests.py
+index 248dae8..0076db5 100644
+--- a/tests/sessions_tests/tests.py
++++ b/tests/sessions_tests/tests.py
+@@ -318,10 +318,20 @@ class SessionTestsMixin:
+             'OWUzNTNmNWQxNTBjOWExZmM4MmQ3NzNhMDRmMjU4NmYwNDUyNGI2NDp7ImEgdGVzd'
+             'CBrZXkiOiJhIHRlc3QgdmFsdWUifQ=='
+         )
++        data = {'a test key': 'a test value'}
+         self.assertEqual(
+             self.session.decode(legacy_encoded),
+-            {'a test key': 'a test value'},
++            data,
+         )
++        with override_settings(DEFAULT_HASHING_ALGORITHM='sha1'):
++            encoded = self.session.encode(data)
++            self.assertEqual(encoded, legacy_encoded)
++            self.assertEqual(self.session.decode(encoded), data)
++        with override_settings(DEFAULT_HASHING_ALGORITHM='sha256'):
++            encoded = self.session.encode(data)
++            self.assertNotEqual(encoded, legacy_encoded)
++            self.assertEqual(self.session.decode(encoded), data)
++
+ 
+     def test_decode_failure_logged_to_security(self):
+         bad_encode = base64.b64encode(b'flaskdj:alkdjf').decode('ascii')

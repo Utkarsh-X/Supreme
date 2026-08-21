@@ -1,0 +1,11 @@
+I have launched the test run in the background. I will wait for it to complete before proceeding.
+I have updated `Collector.collect()` in `django/db/models/deletion.py` to combine fast delete queries targetting the same table/model.
+
+### Root Cause
+When multiple foreign keys (or self-referencing ManyToMany fields) on a related model point back to a model being deleted (e.g. `created_by` and `updated_by` on `Entry`, or `from_person` and `to_person` on a self M2M table `Person_friends`), `Collector.collect()` previously generated and executed separate fast delete queries for each relation.
+
+### Solution
+1. **Grouping Candidate Relations**: In `Collector.collect()`, candidate relations targeting the same `related_model` are grouped together.
+2. **Combining Fast Delete QuerySets**: For candidate relations that qualify for `can_fast_delete`, QuerySets for the same related model and batch are combined using `OR` logic (`reduce(operator.or_, sub_objs_list)`).
+3. **Batch Size Respect**: `bulk_batch_size` calculates the batching limit across all combined fields (`field_names = [rel.field.name for rel in fast_deletes_rels]`) to ensure database query parameter limits (e.g. SQLite's variable limits) are respected.
+4. **Tests**: Added tests `test_fast_delete_combined_relationships` and `test_fast_delete_combined_m2m` in `tests/delete/tests.py` to ensure fast delete queries combine foreign key and self-m2m relationships into a single `DELETE ... WHERE field1 IN (...) OR field2 IN (...)` query.

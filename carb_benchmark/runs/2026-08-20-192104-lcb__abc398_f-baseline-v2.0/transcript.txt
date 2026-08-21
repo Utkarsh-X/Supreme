@@ -1,0 +1,26 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_f/main.py).
+
+### Method Explanation
+
+To find the shortest palindrome that has $S$ as its prefix:
+1. Any palindrome $P$ with prefix $S$ can be expressed as $S + T$ for some string $T$.
+2. For $S + T$ to be a palindrome, the suffix of $S$ of length $k$ (where $k = |S| - |T|$) must equal its own reverse, meaning it forms a **palindromic suffix** of $S$.
+3. To minimize the length of $P = S + T$, we need to maximize $k$, the length of the longest palindromic suffix of $S$.
+4. We construct the string $T = S^R + \# + S$ (where $S^R$ is the reversed string $S$).
+5. Using the Knuth-Morris-Pratt (KMP) prefix function on string $T$, the value of the prefix function at the last character gives the length $k$ of the longest prefix of $S^R$ that matches a suffix of $S$ (which is precisely the longest palindromic suffix of $S$).
+6. The shortest palindrome is then $S + (S[:|S|-k])^R$.
+
+This approach runs in $O(|S|)$ time and $O(|S|)$ space complexity.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_f/main.py).
+
+### Method Explanation
+
+To find the shortest palindrome that has $S$ as its prefix:
+1. Any palindrome $P$ with prefix $S$ can be expressed as $S + T$ for some string $T$.
+2. For $S + T$ to be a palindrome, the suffix of $S$ of length $k$ (where $k = |S| - |T|$) must equal its own reverse, meaning it forms a **palindromic suffix** of $S$.
+3. To minimize the length of $P = S + T$, we need to maximize $k$, the length of the longest palindromic suffix of $S$.
+4. We construct the string $T = S^R + \# + S$ (where $S^R$ is the reversed string $S$).
+5. Using the Knuth-Morris-Pratt (KMP) prefix function on string $T$, the value of the prefix function at the last character gives the length $k$ of the longest prefix of $S^R$ that matches a suffix of $S$ (which is precisely the longest palindromic suffix of $S$).
+6. The shortest palindrome is then $S + (S[:|S|-k])^R$.
+
+This approach runs in $O(|S|)$ time and $O(|S|)$ space complexity.

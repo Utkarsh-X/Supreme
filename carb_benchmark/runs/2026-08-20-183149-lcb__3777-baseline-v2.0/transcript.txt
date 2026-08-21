@@ -1,0 +1,56 @@
+The solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3777/main.py).
+
+### Approach
+1. **Dynamic Programming State**:
+   We track the reachable states as we process each element $x$ in `nums`. A state is defined by `(parity, sum)` where:
+   - `parity`: 0 if the subsequence length so far is even (so the next element added will have sign `+`), and 1 if odd (so the next element added will have sign `-`).
+   - `sum`: the current alternating sum of the subsequence.
+
+2. **Tracking Products**:
+   For each state `(parity, sum)`, we maintain:
+   - `has_zero`: boolean indicating whether product 0 can be formed (if any element in the subsequence is 0).
+   - `has_over`: boolean indicating whether a product $> \text{limit}$ can be formed.
+   - `prod_set`: a set of all possible products $\le \text{limit}$ that can be formed.
+
+3. **Transitions**:
+   For each element $x$:
+   - We can carry over existing states (skip element $x$).
+   - We can start a new single-element subsequence $[x]$ (parity 1, sum $x$, product $x$).
+   - We can extend an existing state `(p, s)`:
+     - New parity $p' = 1 - p$.
+     - New sum $s' = s + x$ if $p = 0$, else $s - x$.
+     - Product transition:
+       - If $x = 0$: sets `has_zero = True` for $s'$.
+       - If $x = 1$: products stay unchanged.
+       - If $x \ge 2$: for each product $v \in \text{prod\_set}$, if $v \times x \le \text{limit}$, add $v \times x$ to the new set; otherwise, set `has_over = True`.
+
+4. **Result Extraction**:
+   After processing all numbers, we inspect states `(0, k)` and `(1, k)` to find the maximum product $\le \text{limit}$. If no valid product (including 0) exists, we return `-1`.
+The solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3777/main.py).
+
+### Approach
+1. **Dynamic Programming State**:
+   We track the reachable states as we process each element $x$ in `nums`. A state is defined by `(parity, sum)` where:
+   - `parity`: 0 if the subsequence length so far is even (so the next element added will have sign `+`), and 1 if odd (so the next element added will have sign `-`).
+   - `sum`: the current alternating sum of the subsequence.
+
+2. **Tracking Products**:
+   For each state `(parity, sum)`, we maintain:
+   - `has_zero`: boolean indicating whether product 0 can be formed (if any element in the subsequence is 0).
+   - `has_over`: boolean indicating whether a product $> \text{limit}$ can be formed.
+   - `prod_set`: a set of all possible products $\le \text{limit}$ that can be formed.
+
+3. **Transitions**:
+   For each element $x$:
+   - We can carry over existing states (skip element $x$).
+   - We can start a new single-element subsequence $[x]$ (parity 1, sum $x$, product $x$).
+   - We can extend an existing state `(p, s)`:
+     - New parity $p' = 1 - p$.
+     - New sum $s' = s + x$ if $p = 0$, else $s - x$.
+     - Product transition:
+       - If $x = 0$: sets `has_zero = True` for $s'$.
+       - If $x = 1$: products stay unchanged.
+       - If $x \ge 2$: for each product $v \in \text{prod\_set}$, if $v \times x \le \text{limit}$, add $v \times x$ to the new set; otherwise, set `has_over = True`.
+
+4. **Result Extraction**:
+   After processing all numbers, we inspect states `(0, k)` and `(1, k)` to find the maximum product $\le \text{limit}$. If no valid product (including 0) exists, we return `-1`.

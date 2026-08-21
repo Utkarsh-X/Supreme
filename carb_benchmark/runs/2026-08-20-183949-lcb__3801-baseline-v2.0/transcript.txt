@@ -1,0 +1,36 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3801/main.py).
+
+### Method Explanation
+
+The problem asks for the count of numbers in the range $[l, r]$ where the product of their digits is divisible by the sum of their digits. Since $r < 10^9$, a number has at most 9 digits, so the maximum possible sum of digits $S$ is at most $9 \times 9 = 81$.
+
+We can compute the result for any $N$ using Digit DP:
+- We iterate over all possible target digit sums $S \in [1, 9 \times L]$ (where $L$ is the number of digits in $N$).
+- For a fixed target sum $S$, a number's digit product is divisible by $S$ if and only if $(\text{digit product}) \bmod S = 0$.
+- We use memoized dynamic programming with states `(idx, current_sum, current_prod_mod_S, is_less, is_started)`:
+  - `idx`: current digit position being considered.
+  - `current_sum`: running sum of digits.
+  - `current_prod`: running product of digits modulo $S$.
+  - `is_less`: boolean indicating if the prefix is strictly smaller than $N$'s prefix.
+  - `is_started`: boolean indicating if non-zero digits have started (to ignore leading zeros in product and sum computations).
+- We prune state searches early if `current_sum > S` or `current_sum + 9 * (L - idx) < S`.
+
+The count of beautiful numbers in $[l, r]$ is then `count_beautiful_up_to(r) - count_beautiful_up_to(l - 1)`.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3801/main.py).
+
+### Method Explanation
+
+The problem asks for the count of numbers in the range $[l, r]$ where the product of their digits is divisible by the sum of their digits. Since $r < 10^9$, a number has at most 9 digits, so the maximum possible sum of digits $S$ is at most $9 \times 9 = 81$.
+
+We can compute the result for any $N$ using Digit DP:
+- We iterate over all possible target digit sums $S \in [1, 9 \times L]$ (where $L$ is the number of digits in $N$).
+- For a fixed target sum $S$, a number's digit product is divisible by $S$ if and only if $(\text{digit product}) \bmod S = 0$.
+- We use memoized dynamic programming with states `(idx, current_sum, current_prod_mod_S, is_less, is_started)`:
+  - `idx`: current digit position being considered.
+  - `current_sum`: running sum of digits.
+  - `current_prod`: running product of digits modulo $S$.
+  - `is_less`: boolean indicating if the prefix is strictly smaller than $N$'s prefix.
+  - `is_started`: boolean indicating if non-zero digits have started (to ignore leading zeros in product and sum computations).
+- We prune state searches early if `current_sum > S` or `current_sum + 9 * (L - idx) < S`.
+
+The count of beautiful numbers in $[l, r]$ is then `count_beautiful_up_to(r) - count_beautiful_up_to(l - 1)`.

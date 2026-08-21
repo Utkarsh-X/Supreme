@@ -1,0 +1,60 @@
+diff --git a/django/forms/fields.py b/django/forms/fields.py
+index 65d6a9e..b108c50 100644
+--- a/django/forms/fields.py
++++ b/django/forms/fields.py
+@@ -1025,7 +1025,7 @@ class MultiValueField(Field):
+             if not value or not [v for v in value if v not in self.empty_values]:
+                 if self.required:
+                     raise ValidationError(self.error_messages['required'], code='required')
+-                else:
++                elif self.require_all_fields or not value or not any(f.required for f in self.fields):
+                     return self.compress([])
+         else:
+             raise ValidationError(self.error_messages['invalid'], code='invalid')
+diff --git a/tests/forms_tests/field_tests/test_multivaluefield.py b/tests/forms_tests/field_tests/test_multivaluefield.py
+index 29287d0..3bfd09c 100644
+--- a/tests/forms_tests/field_tests/test_multivaluefield.py
++++ b/tests/forms_tests/field_tests/test_multivaluefield.py
+@@ -172,3 +172,29 @@ class MultiValueFieldTest(SimpleTestCase):
+         })
+         form.is_valid()
+         self.assertEqual(form.cleaned_data['field1'], 'some text,JP,2007-04-25 06:24:00')
++
++    def test_clean_empty_subfields_required(self):
++        class MF(MultiValueField):
++            def __init__(self):
++                fields = [
++                    CharField(required=False),
++                    CharField(required=True),
++                ]
++                widget = MultiWidget(widgets=[f.widget for f in fields])
++                super().__init__(
++                    fields=fields,
++                    widget=widget,
++                    require_all_fields=False,
++                    required=False,
++                )
++
++            def compress(self, value):
++                return value
++
++        class F(Form):
++            mf = MF()
++
++        form = F({'mf_0': '', 'mf_1': ''})
++        self.assertIs(form.is_valid(), False)
++        self.assertEqual(form.errors, {'mf': ['Enter a complete value.']})
++
+diff --git a/tests/forms_tests/tests/test_forms.py b/tests/forms_tests/tests/test_forms.py
+index 0fe0749..396f461 100644
+--- a/tests/forms_tests/tests/test_forms.py
++++ b/tests/forms_tests/tests/test_forms.py
+@@ -3099,6 +3099,8 @@ Good luck picking a username that doesn&#x27;t already exist.</p>
+         self.assertEqual('+61.287654321 ext. 123 (label: )', f.clean(['+61', '287654321', '123']))
+         with self.assertRaisesMessage(ValidationError, "'Enter a complete value.', 'Enter an extension.'"):
+             f.clean(['', '', '', 'Home'])
++        with self.assertRaisesMessage(ValidationError, "'Enter a complete value.', 'Enter an extension.'"):
++            f.clean(['', '', '', ''])
+         with self.assertRaisesMessage(ValidationError, "'Enter a valid country code.'"):
+             f.clean(['61', '287654321', '123', 'Home'])
+ 

@@ -1,0 +1,49 @@
+{
+  "run_id": "2026-08-20-223342-lcb__arc195_c-superpowers-v2.0",
+  "task_id": "lcb__arc195_c",
+  "configuration_id": "superpowers-v2.0",
+  "wall_clock_seconds": 334.17,
+  "tool_calls": [
+    "view_file",
+    "view_file",
+    "list_dir",
+    "view_file",
+    "write_to_file",
+    "run_command",
+    "write_to_file",
+    "write_to_file",
+    "write_to_file",
+    "write_to_file",
+    "write_to_file",
+    "run_command",
+    "write_to_file",
+    "run_command",
+    "write_to_file",
+    "run_command",
+    "write_to_file",
+    "run_command",
+    "write_to_file",
+    "write_to_file",
+    "run_command",
+    "run_command",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "view_file": 3,
+    "list_dir": 1,
+    "write_to_file": 11,
+    "run_command": 8
+  },
+  "time_to_first_edit": 113.072,
+  "num_turns": 1,
+  "duration_seconds": 304.5510623,
+  "status": "ERROR",
+  "usage": {
+    "input_tokens": 238716,
+    "output_tokens": 71499,
+    "thinking_tokens": 51040,
+    "cache_read_tokens": 1662483,
+    "total_tokens": 310215
+  },
+  "error": null
+}

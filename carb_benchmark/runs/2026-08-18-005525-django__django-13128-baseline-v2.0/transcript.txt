@@ -1,0 +1,11 @@
+I have resolved the issue where temporal subtraction required `ExpressionWrapper` to infer `output_field`.
+
+### Cause
+When subtracting two temporal fields (e.g. `F('end') - F('start')`), `CombinedExpression` previously fell back to `Expression._resolve_output_field()`, which inferred that the expression's `output_field` matched the operand types (e.g., `DateTimeField`), instead of resolving to a `DurationField`. When combining that expression with another duration (e.g., `+ Value(timedelta, output_field=DurationField())`), Django attempted to compare `DateTimeField` with `DurationField` and raised `FieldError: Expression contains mixed types: DateTimeField, DurationField. You must set output_field.`
+
+### Solution
+- Added `_resolve_output_field()` to [`CombinedExpression`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13128/django/db/models/expressions.py#L476-L489) in [`django/db/models/expressions.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13128/django/db/models/expressions.py):
+  1. Subtraction between two temporal fields (`DateField`, `DateTimeField`, or `TimeField`) now resolves to `fields.DurationField()`.
+  2. Addition or subtraction between a temporal field and a `DurationField` resolves to the temporal field.
+  3. Addition between a `DurationField` and a temporal field resolves to the temporal field.
+- Updated tests in [`tests/expressions/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-13128/tests/expressions/tests.py#L1493-L1620) to verify temporal subtraction and chained duration arithmetic without requiring `ExpressionWrapper`.

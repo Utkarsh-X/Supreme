@@ -1,0 +1,66 @@
+diff --git a/main.py b/main.py
+index c86f6c8..9657b9e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,60 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    H = int(input_data[0])
++    W = int(input_data[1])
++    rows = input_data[2:]
++    
++    N = 1 << W
++    cnt = [0] * N
++    for s in rows:
++        cnt[int(s, 2)] += 1
++
++    def comb(n, k):
++        if k < 0 or k > n:
++            return 0
++        return math.comb(n, k)
++
++    fg_table = [0] * (W + 1)
++    for p in range(W + 1):
++        val = 0
++        for k in range(W + 1):
++            g_k = min(k, W - k)
++            inner = 0
++            for j in range(k + 1):
++                inner += ((-1) ** j) * comb(p, j) * comb(W - p, k - j)
++            val += g_k * inner
++        fg_table[p] = val
++
++    pc = [0] * N
++    for i in range(1, N):
++        pc[i] = pc[i >> 1] + (i & 1)
++
++    fg = [fg_table[pc[i]] for i in range(N)]
++
++    def fwht(a):
++        n = len(a)
++        h = 1
++        while h < n:
++            for i in range(0, n, h * 2):
++                for j in range(i, i + h):
++                    x = a[j]
++                    y = a[j + h]
++                    a[j] = x + y
++                    a[j + h] = x - y
++            h *= 2
++
++    fwht(cnt)
++    for i in range(N):
++        cnt[i] *= fg[i]
++    fwht(cnt)
++
++    ans = min(cnt) // N
++    print(ans)
++
++if __name__ == '__main__':
++    main()

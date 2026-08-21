@@ -1,0 +1,76 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ee67537 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,70 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    X = int(input_data[1])
++    
++    U = [0] * N
++    D = [0] * N
++    
++    total_sum = 0
++    max_H = 2 * 10**9 + 7
++    
++    idx = 2
++    for i in range(N):
++        u = int(input_data[idx])
++        d = int(input_data[idx + 1])
++        idx += 2
++        U[i] = u
++        D[i] = d
++        s = u + d
++        total_sum += s
++        if s < max_H:
++            max_H = s
++            
++    def check(H):
++        cur_l = H - D[0]
++        if cur_l < 0:
++            cur_l = 0
++        cur_r = U[0]
++        if cur_r > H:
++            cur_r = H
++        if cur_l > cur_r:
++            return False
++        
++        for i in range(1, N):
++            l = H - D[i]
++            if l < 0:
++                l = 0
++            r = U[i]
++            if r > H:
++                r = H
++            
++            cl = cur_l - X
++            cr = cur_r + X
++            cur_l = l if l > cl else cl
++            cur_r = r if r < cr else cr
++            if cur_l > cur_r:
++                return False
++        return True
++
++    low = 0
++    high = max_H
++    best_H = 0
++    while low <= high:
++        mid = (low + high) // 2
++        if check(mid):
++            best_H = mid
++            low = mid + 1
++        else:
++            high = mid - 1
++            
++    ans = total_sum - N * best_H
++    print(ans)
++
++if __name__ == '__main__':
++    main()

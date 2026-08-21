@@ -1,0 +1,26 @@
+### Cause
+When an attribute (or `@property`) on a subclass of `SkyCoord` attempts to access a non-existent attribute (e.g. `self.random_attr`), Python's attribute lookup executes the property getter, which raises `AttributeError: 'custom_coord' object has no attribute 'random_attr'`. Python's object model (`object.__getattribute__`) catches `AttributeError` raised inside property getters and falls back to calling `self.__getattr__('prop')`. 
+
+Previously, `SkyCoord.__getattr__` ended by explicitly raising `AttributeError(f"'{self.__class__.__name__}' object has no attribute '{attr}'")`. When invoked for `'prop'`, it overwrote the underlying `AttributeError` raised inside `prop`'s getter and reported `AttributeError: 'custom_coord' object has no attribute 'prop'`.
+
+### Solution
+Updated `SkyCoord.__getattr__` in [sky_coordinate.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L897-L898) to delegate failed lookups to `return self.__getattribute__(attr)` (matching the pattern used by `BaseCoordinateFrame.__getattr__`). 
+
+When an attribute lookup fails, calling `self.__getattribute__(attr)` allows Python to properly re-raise/propagate the original `AttributeError` from property getters (or raise standard `AttributeError` for non-existent attributes) with the full and correct error message and traceback.
+
+### Verification
+- Added `test_subclass_attribute_error` in [test_sky_coord.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/tests/test_sky_coord.py#L2169-L2178).
+- Verified that accessing `c.prop` on a `SkyCoord` subclass now correctly raises `AttributeError: 'custom_coord' object has no attribute 'random_attr'`.
+### Cause
+When an attribute (or `@property`) on a subclass of `SkyCoord` attempts to access a non-existent attribute (e.g. `self.random_attr`), Python's attribute lookup executes the property getter, which raises `AttributeError: 'custom_coord' object has no attribute 'random_attr'`. Python's object model (`object.__getattribute__`) catches `AttributeError` raised inside property getters and falls back to calling `self.__getattr__('prop')`. 
+
+Previously, `SkyCoord.__getattr__` ended by explicitly raising `AttributeError(f"'{self.__class__.__name__}' object has no attribute '{attr}'")`. When invoked for `'prop'`, it overwrote the underlying `AttributeError` raised inside `prop`'s getter and reported `AttributeError: 'custom_coord' object has no attribute 'prop'`.
+
+### Solution
+Updated `SkyCoord.__getattr__` in [sky_coordinate.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/sky_coordinate.py#L897-L898) to delegate failed lookups to `return self.__getattribute__(attr)` (matching the pattern used by `BaseCoordinateFrame.__getattr__`). 
+
+When an attribute lookup fails, calling `self.__getattribute__(attr)` allows Python to properly re-raise/propagate the original `AttributeError` from property getters (or raise standard `AttributeError` for non-existent attributes) with the full and correct error message and traceback.
+
+### Verification
+- Added `test_subclass_attribute_error` in [test_sky_coord.py](file:///E:/RofU/Supreme/carb_workspaces/astropy__astropy-14096/astropy/coordinates/tests/test_sky_coord.py#L2169-L2178).
+- Verified that accessing `c.prop` on a `SkyCoord` subclass now correctly raises `AttributeError: 'custom_coord' object has no attribute 'random_attr'`.

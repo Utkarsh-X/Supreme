@@ -1,0 +1,80 @@
+diff --git a/main.py b/main.py
+index c86f6c8..944c10c 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,74 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++# Increase recursion depth just in case
++sys.setrecursionlimit(300000)
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    # Fast graph construction
++    adj = [[] for _ in range(N + 1)]
++    ptr = 2
++    for _ in range(M):
++        u = int(input_data[ptr])
++        v = int(input_data[ptr + 1])
++        ptr += 2
++        adj[u].append(v)
++        adj[v].append(u)
++    
++    if N % 2 == 1:
++        if M % 2 == 1:
++            print("Aoki")
++        else:
++            print("Takahashi")
++        return
++    
++    # 2-coloring and component sizes for even N
++    color = [-1] * (N + 1)
++    comps = []
++    
++    for i in range(1, N + 1):
++        if color[i] == -1:
++            color[i] = 0
++            q = [i]
++            c0 = 0
++            c1 = 0
++            head = 0
++            while head < len(q):
++                u = q[head]
++                head += 1
++                if color[u] == 0:
++                    c0 += 1
++                else:
++                    c1 += 1
++                for v in adj[u]:
++                    if color[v] == -1:
++                        color[v] = 1 - color[u]
++                        q.append(v)
++            comps.append((c0, c1))
++    
++    sum_ab = 0
++    O = 0
++    has_big_odd = False
++    
++    for a, b in comps:
++        sum_ab += a * b
++        sz = a + b
++        if sz % 2 == 1:
++            O += 1
++            if sz >= 3:
++                has_big_odd = True
++    
++    val = (sum_ab - M + (O // 2)) % 2
++    if val == 1 or has_big_odd:
++        print("Aoki")
++    else:
++        print("Takahashi")
++
++if __name__ == '__main__':
++    main()

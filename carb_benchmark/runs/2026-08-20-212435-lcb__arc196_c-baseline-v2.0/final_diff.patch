@@ -1,0 +1,180 @@
+diff --git a/main.py b/main.py
+index c86f6c8..69ab797 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,174 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++# Increase recursion depth for CDQ divide and conquer
++sys.setrecursionlimit(300000)
++
++MOD = 998244353
++G = 3
++
++MAX_LOG = 19
++MAX_N = 1 << MAX_LOG
++
++w_powers = [1] * MAX_N
++inv_w_powers = [1] * MAX_N
++
++w1 = pow(G, (MOD - 1) // MAX_N, MOD)
++inv_w1 = pow(w1, MOD - 2, MOD)
++
++curr = 1
++curr_inv = 1
++for i in range(MAX_N):
++    w_powers[i] = curr
++    inv_w_powers[i] = curr_inv
++    curr = (curr * w1) % MOD
++    curr_inv = (curr_inv * inv_w1) % MOD
++
++rev_table = {}
++for log_n in range(1, MAX_LOG + 1):
++    n = 1 << log_n
++    rev = [0] * n
++    for i in range(n):
++        rev[i] = (rev[i >> 1] >> 1) | ((i & 1) << (log_n - 1))
++    rev_table[n] = rev
++
++def ntt_ultra(a, invert):
++    n = len(a)
++    rev = rev_table[n]
++    for i in range(n):
++        r = rev[i]
++        if i < r:
++            a[i], a[r] = a[r], a[i]
++
++    len_step = 2
++    step_shift = MAX_N // 2
++    roots = inv_w_powers if invert else w_powers
++    
++    while len_step <= n:
++        wlen_half = len_step >> 1
++        blocks = n // len_step
++        if blocks >= 16:
++            for k in range(wlen_half):
++                w = roots[k * step_shift]
++                s1 = a[k : n : len_step]
++                s2 = a[k + wlen_half : n : len_step]
++                
++                a[k : n : len_step] = [(x + y * w) % MOD for x, y in zip(s1, s2)]
++                a[k + wlen_half : n : len_step] = [(x - y * w) % MOD for x, y in zip(s1, s2)]
++        else:
++            for i in range(0, n, len_step):
++                for k in range(wlen_half):
++                    w = roots[k * step_shift]
++                    u = a[i + k]
++                    v = (a[i + k + wlen_half] * w) % MOD
++                    a[i + k] = u + v if u + v < MOD else u + v - MOD
++                    a[i + k + wlen_half] = u - v if u - v >= 0 else u - v + MOD
++                
++        len_step <<= 1
++        step_shift >>= 1
++
++    if invert:
++        n_inv = pow(n, MOD - 2, MOD)
++        for i in range(n):
++            a[i] = (a[i] * n_inv) % MOD
++
++def multiply(a, b):
++    need = len(a) + len(b) - 1
++    n = 1
++    while n < need:
++        n <<= 1
++    fa = a + [0] * (n - len(a))
++    fb = b + [0] * (n - len(b))
++    ntt_ultra(fa, False)
++    ntt_ultra(fb, False)
++    for i in range(n):
++        fa[i] = (fa[i] * fb[i]) % MOD
++    ntt_ultra(fa, True)
++    return fa[:need]
++
++def solve(N, S, CUTOFF=1024):
++    if S[0] == 'W' or S[-1] == 'B':
++        return 0
++        
++    w = [0] * (N + 1)
++    curr_w = 0
++    curr_b = 0
++    for ch in S:
++        if ch == 'W':
++            curr_w += 1
++        else:
++            w[curr_b] = curr_w
++            curr_b += 1
++    w[N] = N
++
++    MAX = 2 * N + 5
++    fact = [1] * MAX
++    inv = [1] * MAX
++    for i in range(1, MAX):
++        fact[i] = (fact[i - 1] * i) % MOD
++    inv[MAX - 1] = pow(fact[MAX - 1], MOD - 2, MOD)
++    for i in range(MAX - 2, -1, -1):
++        inv[i] = (inv[i + 1] * (i + 1)) % MOD
++
++    A = [0] * (N + 1)
++    S_val = [0] * (N + 1)
++
++    def cdq(L, R):
++        if R - L <= CUTOFF:
++            for b in range(L, R + 1):
++                if b > 0:
++                    hb = w[b] - b
++                    if hb < 0:
++                        A[b] = 0
++                    else:
++                        wb = w[b]
++                        A[b] = (fact[wb] - S_val[b]) * inv[hb] % MOD
++                if A[b] != 0:
++                    Ab = A[b]
++                    wb_sub = w[b + 1 : R + 1]
++                    s_sub = S_val[b + 1 : R + 1]
++                    S_val[b + 1 : R + 1] = [(s + Ab * fact[wb_next - b]) % MOD for s, wb_next in zip(s_sub, wb_sub)]
++            return
++
++        mid = (L + R) // 2
++        cdq(L, mid)
++        
++        p_first = -1
++        p_last = -1
++        for idx in range(L, mid + 1):
++            if A[idx] != 0:
++                if p_first == -1:
++                    p_first = idx
++                p_last = idx
++                
++        if p_first != -1:
++            P = A[p_first : p_last + 1]
++            y_min = max(0, w[mid + 1] - p_last)
++            y_max = w[R] - p_first
++            Q = fact[y_min : y_max + 1]
++            R_poly = multiply(P, Q)
++            
++            wb_sub = w[mid + 1 : R + 1]
++            s_sub = S_val[mid + 1 : R + 1]
++            shift = p_first + y_min
++            len_R = len(R_poly)
++            S_val[mid + 1 : R + 1] = [
++                (s + R_poly[wb - shift]) % MOD if 0 <= wb - shift < len_R else s
++                for s, wb in zip(s_sub, wb_sub)
++            ]
++
++        cdq(mid + 1, R)
++
++    cdq(0, N)
++    return A[N] % MOD
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    S = input_data[1]
++    ans = solve(N, S)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

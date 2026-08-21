@@ -1,0 +1,45 @@
+diff --git a/main.py b/main.py
+index c86f6c8..a981054 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,39 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from bisect import bisect_left, bisect_right
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    Q = int(input_data[1])
++    
++    A = [int(x) for x in input_data[2:N + 2]]
++    
++    queries_at = [[] for _ in range(N + 1)]
++    ptr = N + 2
++    for i in range(Q):
++        r = int(input_data[ptr])
++        x = int(input_data[ptr + 1])
++        ptr += 2
++        queries_at[r].append((x, i))
++    
++    ans = [0] * Q
++    dp = []
++    
++    for r in range(1, N + 1):
++        val = A[r - 1]
++        idx = bisect_left(dp, val)
++        if idx == len(dp):
++            dp.append(val)
++        else:
++            dp[idx] = val
++        
++        for x, q_idx in queries_at[r]:
++            ans[q_idx] = bisect_right(dp, x)
++    
++    print('\n'.join(map(str, ans)))
++
++if __name__ == '__main__':
++    main()

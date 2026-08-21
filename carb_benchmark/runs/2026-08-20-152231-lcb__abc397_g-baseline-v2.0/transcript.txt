@@ -1,0 +1,30 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_g/main.py).
+
+### Method Explanation
+1. **Duality & Integer Potentials**: For a given distance target $D \ge 0$, the condition that every path from vertex $1$ to vertex $N$ has distance at least $D$ under binary edge weights $x_e \in \{0, 1\}$ is equivalent to the existence of an integer potential function $d: V \to \{0, 1, \dots, D\}$ satisfying:
+   - $d_1 = 0$
+   - $d_N = D$
+   - $d_v - d_u \le 1$ for all directed edges $(u, v) \in E$.
+
+2. **Min-Cut Construction**: Finding the minimum number of edges $x_e=1$ needed to achieve shortest path distance $\ge D$ can be formulated as a Minimum Cut problem on a layered graph:
+   - Create $D$ copies $(v, k)$ for each vertex $v \in V$ ($k=1, \dots, D$).
+   - Add $\infty$-capacity edges $(v, k+1) \to (v, k)$ to enforce consistent potential indicators.
+   - Set source $S$ and sink $T$ connections for boundary conditions ($d_1 = 0$, $d_N = D$).
+   - For each edge $(u, v) \in E$, add unit-capacity edges $(v, k) \to (u, k)$ for $1 \le k \le D$ (cost paid when $d_v = d_u + 1$) and $\infty$-capacity edges $(v, k+1) \to (u, k)$ for $1 \le k \le D-1$ (prohibiting $d_v - d_u \ge 2$).
+
+3. **Maximizing $D$**: We iterate $D$ from $N-1$ down to $0$ and use Dinic's Algorithm to compute the min-cut value $f(D)$. The largest $D$ such that $f(D) \le K$ is the maximum achievable shortest path distance.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_g/main.py).
+
+### Method Explanation
+1. **Duality & Integer Potentials**: For a given distance target $D \ge 0$, the condition that every path from vertex $1$ to vertex $N$ has distance at least $D$ under binary edge weights $x_e \in \{0, 1\}$ is equivalent to the existence of an integer potential function $d: V \to \{0, 1, \dots, D\}$ satisfying:
+   - $d_1 = 0$
+   - $d_N = D$
+   - $d_v - d_u \le 1$ for all directed edges $(u, v) \in E$.
+
+2. **Min-Cut Construction**: Finding the minimum number of edges $x_e=1$ needed to achieve shortest path distance $\ge D$ can be formulated as a Minimum Cut problem on a layered graph:
+   - Create $D$ copies $(v, k)$ for each vertex $v \in V$ ($k=1, \dots, D$).
+   - Add $\infty$-capacity edges $(v, k+1) \to (v, k)$ to enforce consistent potential indicators.
+   - Set source $S$ and sink $T$ connections for boundary conditions ($d_1 = 0$, $d_N = D$).
+   - For each edge $(u, v) \in E$, add unit-capacity edges $(v, k) \to (u, k)$ for $1 \le k \le D$ (cost paid when $d_v = d_u + 1$) and $\infty$-capacity edges $(v, k+1) \to (u, k)$ for $1 \le k \le D-1$ (prohibiting $d_v - d_u \ge 2$).
+
+3. **Maximizing $D$**: We iterate $D$ from $N-1$ down to $0$ and use Dinic's Algorithm to compute the min-cut value $f(D)$. The largest $D$ such that $f(D) \le K$ is the maximum achievable shortest path distance.

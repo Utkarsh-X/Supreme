@@ -1,0 +1,92 @@
+diff --git a/django/utils/autoreload.py b/django/utils/autoreload.py
+index b8efb9f..57ff28c 100644
+--- a/django/utils/autoreload.py
++++ b/django/utils/autoreload.py
+@@ -216,14 +216,12 @@ def get_child_arguments():
+     executable is reported to not have the .exe extension which can cause bugs
+     on reloading.
+     """
+-    import django.__main__
+-    django_main_path = Path(django.__main__.__file__)
++    import __main__
+     py_script = Path(sys.argv[0])
+ 
+     args = [sys.executable] + ['-W%s' % o for o in sys.warnoptions]
+-    if py_script == django_main_path:
+-        # The server was started with `python -m django runserver`.
+-        args += ['-m', 'django']
++    if getattr(__main__, '__spec__', None) is not None and __main__.__spec__.parent:
++        args += ['-m', __main__.__spec__.parent]
+         args += sys.argv[1:]
+     elif not py_script.exists():
+         # sys.argv[0] may not exist for several reasons on Windows.
+diff --git a/tests/utils_tests/test_autoreload.py b/tests/utils_tests/test_autoreload.py
+index b9f2db7..6cdb69f 100644
+--- a/tests/utils_tests/test_autoreload.py
++++ b/tests/utils_tests/test_autoreload.py
+@@ -16,7 +16,6 @@ from unittest import mock, skip, skipIf
+ 
+ import pytz
+ 
+-import django.__main__
+ from django.apps.registry import Apps
+ from django.test import SimpleTestCase
+ from django.test.utils import extend_sys_path
+@@ -156,14 +155,22 @@ class TestIterModulesAndFiles(SimpleTestCase):
+                 )
+ 
+ 
++@mock.patch('__main__.__spec__', None)
+ class TestChildArguments(SimpleTestCase):
+-    @mock.patch('sys.argv', [django.__main__.__file__, 'runserver'])
++    @mock.patch('sys.argv', ['__main__.py', 'runserver'])
+     @mock.patch('sys.warnoptions', [])
+     def test_run_as_module(self):
+-        self.assertEqual(
+-            autoreload.get_child_arguments(),
+-            [sys.executable, '-m', 'django', 'runserver']
+-        )
++        for spec_parent, expected in (
++            ('django', [sys.executable, '-m', 'django', 'runserver']),
++            ('other_package', [sys.executable, '-m', 'other_package', 'runserver']),
++            ('other_package.submodule', [sys.executable, '-m', 'other_package.submodule', 'runserver']),
++        ):
++            with self.subTest(spec_parent=spec_parent):
++                with mock.patch('__main__.__spec__', types.SimpleNamespace(parent=spec_parent)):
++                    self.assertEqual(
++                        autoreload.get_child_arguments(),
++                        expected,
++                    )
+ 
+     @mock.patch('sys.argv', [__file__, 'runserver'])
+     @mock.patch('sys.warnoptions', ['error'])
+@@ -421,6 +428,7 @@ class RestartWithReloaderTests(SimpleTestCase):
+             mock.patch('django.utils.autoreload.sys.argv', argv),
+             mock.patch('django.utils.autoreload.sys.executable', self.executable),
+             mock.patch('django.utils.autoreload.sys.warnoptions', ['all']),
++            mock.patch('__main__.__spec__', None),
+         ]
+         for p in patches:
+             p.start()
+@@ -446,11 +454,20 @@ class RestartWithReloaderTests(SimpleTestCase):
+         main = '/usr/lib/pythonX.Y/site-packages/django/__main__.py'
+         argv = [main, 'runserver']
+         mock_call = self.patch_autoreload(argv)
+-        with mock.patch('django.__main__.__file__', main):
++        with mock.patch('__main__.__spec__', types.SimpleNamespace(parent='django')):
+             autoreload.restart_with_reloader()
+             self.assertEqual(mock_call.call_count, 1)
+             self.assertEqual(mock_call.call_args[0][0], [self.executable, '-Wall', '-m', 'django'] + argv[1:])
+ 
++    def test_python_m_other_package(self):
++        main = '/usr/lib/pythonX.Y/site-packages/other_package/__main__.py'
++        argv = [main, 'runserver']
++        mock_call = self.patch_autoreload(argv)
++        with mock.patch('__main__.__spec__', types.SimpleNamespace(parent='other_package')):
++            autoreload.restart_with_reloader()
++            self.assertEqual(mock_call.call_count, 1)
++            self.assertEqual(mock_call.call_args[0][0], [self.executable, '-Wall', '-m', 'other_package'] + argv[1:])
++
+ 
+ class ReloaderTests(SimpleTestCase):
+     RELOADER_CLS = None

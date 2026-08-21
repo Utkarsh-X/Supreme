@@ -1,0 +1,149 @@
+diff --git a/sympy/assumptions/sathandlers.py b/sympy/assumptions/sathandlers.py
+index 61d62d0..6723e56 100644
+--- a/sympy/assumptions/sathandlers.py
++++ b/sympy/assumptions/sathandlers.py
+@@ -1,6 +1,10 @@
+ from __future__ import print_function, division
+ 
+-from collections import MutableMapping, defaultdict
++try:
++    from collections.abc import MutableMapping
++except ImportError:
++    from collections import MutableMapping
++from collections import defaultdict
+ 
+ from sympy.core import (Add, Mul, Pow, Integer, Number, NumberSymbol,)
+ from sympy.core.numbers import ImaginaryUnit
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index d4ca323..099b074 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,6 +1,10 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++try:
++    from collections.abc import Mapping
++except ImportError:
++    from collections import Mapping
++from collections import defaultdict
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+diff --git a/sympy/core/compatibility.py b/sympy/core/compatibility.py
+index 1f1ec06..9383f89 100644
+--- a/sympy/core/compatibility.py
++++ b/sympy/core/compatibility.py
+@@ -6,6 +6,14 @@
+ from __future__ import print_function, division
+ 
+ import operator
++import collections
++try:
++    import collections.abc as collections_abc
++    for name in ['Mapping', 'MutableMapping', 'Iterable', 'MutableSet', 'Callable', 'Sequence', 'Set']:
++        if not hasattr(collections, name) and hasattr(collections_abc, name):
++            setattr(collections, name, getattr(collections_abc, name))
++except ImportError:
++    pass
+ from collections import defaultdict
+ from sympy.external import import_module
+ 
+diff --git a/sympy/functions/special/tests/test_zeta_functions.py b/sympy/functions/special/tests/test_zeta_functions.py
+index 3911dad..33aaa11 100644
+--- a/sympy/functions/special/tests/test_zeta_functions.py
++++ b/sympy/functions/special/tests/test_zeta_functions.py
+@@ -127,8 +127,11 @@ def test_polylog_expansion():
+     assert polylog(s, 0) == 0
+     assert polylog(s, 1) == zeta(s)
+     assert polylog(s, -1) == -dirichlet_eta(s)
++    assert polylog(2, S.Half) == pi**2/12 - log(2)**2/2
++    assert polylog(2, 2) == pi**2/4 - I*pi*log(2)
++    assert polylog(3, S.Half) == S(7)/8*zeta(3) - pi**2*log(2)/12 + log(2)**3/6
+ 
+-    assert myexpand(polylog(1, z), -log(1 + exp_polar(-I*pi)*z))
++    assert myexpand(polylog(1, z), -log(1 - z))
+     assert myexpand(polylog(0, z), z/(1 - z))
+     assert myexpand(polylog(-1, z), z**2/(1 - z)**2 + z/(1 - z))
+     assert myexpand(polylog(-5, z), None)
+diff --git a/sympy/functions/special/zeta_functions.py b/sympy/functions/special/zeta_functions.py
+index b8e2b66..48e1c71 100644
+--- a/sympy/functions/special/zeta_functions.py
++++ b/sympy/functions/special/zeta_functions.py
+@@ -253,7 +253,7 @@ class polylog(Function):
+     >>> from sympy import expand_func
+     >>> from sympy.abc import z
+     >>> expand_func(polylog(1, z))
+-    -log(z*exp_polar(-I*pi) + 1)
++    -log(1 - z)
+     >>> expand_func(polylog(0, z))
+     z/(-z + 1)
+ 
+@@ -271,12 +271,21 @@ class polylog(Function):
+ 
+     @classmethod
+     def eval(cls, s, z):
++        from sympy import I
+         if z == 1:
+             return zeta(s)
+         elif z == -1:
+             return -dirichlet_eta(s)
+         elif z == 0:
+             return 0
++        elif s == 2:
++            if z == S.Half:
++                return pi**2/12 - log(2)**2/2
++            elif z == 2:
++                return pi**2/4 - I*pi*log(2)
++        elif s == 3:
++            if z == S.Half:
++                return S(7)/8*zeta(3) - pi**2*log(2)/12 + log(2)**3/6
+ 
+     def fdiff(self, argindex=1):
+         s, z = self.args
+@@ -288,10 +297,10 @@ def _eval_rewrite_as_lerchphi(self, s, z):
+         return z*lerchphi(z, s, 1)
+ 
+     def _eval_expand_func(self, **hints):
+-        from sympy import log, expand_mul, Dummy, exp_polar, I
++        from sympy import log, expand_mul, Dummy
+         s, z = self.args
+         if s == 1:
+-            return -log(1 + exp_polar(-I*pi)*z)
++            return -log(1 - z)
+         if s.is_Integer and s <= 0:
+             u = Dummy('u')
+             start = u/(1 - u)
+diff --git a/sympy/plotting/plot.py b/sympy/plotting/plot.py
+index b3b0237..70b11b0 100644
+--- a/sympy/plotting/plot.py
++++ b/sympy/plotting/plot.py
+@@ -25,7 +25,10 @@
+ from __future__ import print_function, division
+ 
+ import inspect
+-from collections import Callable
++try:
++    from collections.abc import Callable
++except ImportError:
++    from collections import Callable
+ import warnings
+ import sys
+ 
+diff --git a/sympy/utilities/tests/test_wester.py b/sympy/utilities/tests/test_wester.py
+index 8b54cbc..bd1792a 100644
+--- a/sympy/utilities/tests/test_wester.py
++++ b/sympy/utilities/tests/test_wester.py
+@@ -1946,12 +1946,9 @@ def test_R17():
+                - 2.8469909700078206) < 1e-15
+ 
+ 
+-@XFAIL
+ def test_R18():
+     k = symbols('k', integer=True, positive=True)
+     Sm = Sum(1/(2**k*k**2), (k, 1, oo))
+-    # returns polylog(2, 1/2),  particular value for 1/2 is not known.
+-    # https://github.com/sympy/sympy/issues/7132
+     T = Sm.doit()
+     assert T.simplify() == -log(2)**2/2 + pi**2/12
+ 

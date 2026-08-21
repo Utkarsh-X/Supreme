@@ -1,0 +1,16 @@
+I have fixed the issue where `SelectDateWidget.value_from_datadict` would crash with an `OverflowError` when provided with large integer values that exceed the range of C long in Python's `datetime.date` constructor.
+
+### Root Cause
+When user-controlled input values for year, month, or day exceed `sys.maxsize`, `int(y)` creates a large Python integer. Calling `datetime.date(int(y), int(m), int(d))` then raises an `OverflowError` in CPython. Previously, `SelectDateWidget.value_from_datadict` only caught `ValueError`, allowing `OverflowError` to bubble up and crash the view with an HTTP 500 status.
+
+### Fix
+- Updated [widgets.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/django/forms/widgets.py#L1157-L1164) to catch `(ValueError, OverflowError)` when constructing `datetime.date`. In both cases, a pseudo-ISO string representation is returned so form validation can handle it gracefully.
+- Added test coverage in [test_selectdatewidget.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/tests/forms_tests/widget_tests/test_selectdatewidget.py#L603-L623) to verify that `SelectDateWidget.value_from_datadict` correctly handles overflow inputs.
+I have fixed the issue where `SelectDateWidget.value_from_datadict` would crash with an `OverflowError` when provided with large integer values that exceed the range of C long in Python's `datetime.date` constructor.
+
+### Root Cause
+When user-controlled input values for year, month, or day exceed `sys.maxsize`, `int(y)` creates a large Python integer. Calling `datetime.date(int(y), int(m), int(d))` then raises an `OverflowError` in CPython. Previously, `SelectDateWidget.value_from_datadict` only caught `ValueError`, allowing `OverflowError` to bubble up and crash the view with an HTTP 500 status.
+
+### Fix
+- Updated [widgets.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/django/forms/widgets.py#L1157-L1164) to catch `(ValueError, OverflowError)` when constructing `datetime.date`. In both cases, a pseudo-ISO string representation is returned so form validation can handle it gracefully.
+- Added test coverage in [test_selectdatewidget.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/tests/forms_tests/widget_tests/test_selectdatewidget.py#L603-L623) to verify that `SelectDateWidget.value_from_datadict` correctly handles overflow inputs.

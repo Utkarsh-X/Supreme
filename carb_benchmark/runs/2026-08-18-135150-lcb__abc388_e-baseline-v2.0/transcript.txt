@@ -1,0 +1,26 @@
+An optimal $O(N)$ two-pointers solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_e/main.py).
+
+### Method Explanation
+
+At most $\lfloor N / 2 \rfloor$ kagamimochi pairs can be formed. Any set of $K$ valid pairs can be mapped such that the top mochi come from the smaller half $A[0 \dots \lfloor N/2 \rfloor - 1]$ and the bottom mochi come from the larger half $A[\lfloor N/2 \rfloor \dots N - 1]$.
+
+We use a two-pointer approach:
+- `i` points to the candidate top mochi starting at index `0` and ending before `N // 2`.
+- `j` points to the candidate bottom mochi starting at index `N // 2`.
+- If $2 \cdot A[i] \le A[j]$, we form a pair $(A[i], A[j])$ and increment both `i` and `j`.
+- If $2 \cdot A[i] > A[j]$, the element $A[j]$ is too small to be a bottom mochi for $A[i]$ or any larger top element $A[i']$ ($i' > i$), so we increment `j`.
+
+This greedy strategy runs in $O(N)$ time and optimal $O(1)$ auxiliary memory.
+An optimal $O(N)$ two-pointers solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_e/main.py).
+
+### Method Explanation
+
+At most $\lfloor N / 2 \rfloor$ kagamimochi pairs can be formed. Any set of $K$ valid pairs can be mapped such that the top mochi come from the smaller half $A[0 \dots \lfloor N/2 \rfloor - 1]$ and the bottom mochi come from the larger half $A[\lfloor N/2 \rfloor \dots N - 1]$.
+
+We use a two-pointer approach:
+- `i` points to the candidate top mochi starting at index `0` and ending before `N // 2`.
+- `j` points to the candidate bottom mochi starting at index `N // 2`.
+- If $2 \cdot A[i] \le A[j]$, we form a pair $(A[i], A[j])$ and increment both `i` and `j`.
+- If $2 \cdot A[i] > A[j]$, the element $A[j]$ is too small to be a bottom mochi for $A[i]$ or any larger top element $A[i']$ ($i' > i$), so we increment `j`.
+
+This greedy strategy runs in $O(N)$ time and optimal $O(1)$ auxiliary memory.

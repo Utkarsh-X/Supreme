@@ -1,0 +1,48 @@
+diff --git a/django/core/management/base.py b/django/core/management/base.py
+index e6cbf8c..14c0355 100644
+--- a/django/core/management/base.py
++++ b/django/core/management/base.py
+@@ -150,6 +150,10 @@ class OutputWrapper(TextIOBase):
+         style_func = style_func or self.style_func
+         self._out.write(style_func(msg))
+ 
++    def flush(self):
++        if hasattr(self._out, 'flush'):
++            self._out.flush()
++
+ 
+ class BaseCommand:
+     """
+diff --git a/tests/user_commands/tests.py b/tests/user_commands/tests.py
+index e4aeca2..5fc923e 100644
+--- a/tests/user_commands/tests.py
++++ b/tests/user_commands/tests.py
+@@ -8,6 +8,7 @@ from django.apps import apps
+ from django.core import management
+ from django.core.checks import Tags
+ from django.core.management import BaseCommand, CommandError, find_commands
++from django.core.management.base import OutputWrapper
+ from django.core.management.utils import (
+     find_command, get_random_secret_key, is_ignored_path,
+     normalize_path_patterns, popen_wrapper,
+@@ -31,6 +32,20 @@ from .management.commands import dance
+     ],
+ )
+ class CommandTests(SimpleTestCase):
++    def test_outputwrapper_flush(self):
++        out = mock.MagicMock()
++        buf = OutputWrapper(out)
++        buf.flush()
++        out.flush.assert_called_once()
++
++    def test_outputwrapper_flush_no_flush(self):
++        class CustomStream:
++            pass
++
++        out = CustomStream()
++        buf = OutputWrapper(out)
++        buf.flush()
++
+     def test_command(self):
+         out = StringIO()
+         management.call_command('dance', stdout=out)

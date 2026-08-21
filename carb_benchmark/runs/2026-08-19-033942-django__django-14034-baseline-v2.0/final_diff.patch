@@ -1,0 +1,69 @@
+diff --git a/django/forms/fields.py b/django/forms/fields.py
+index 65d6a9e..d58d902 100644
+--- a/django/forms/fields.py
++++ b/django/forms/fields.py
+@@ -1022,11 +1022,17 @@ class MultiValueField(Field):
+         if self.disabled and not isinstance(value, list):
+             value = self.widget.decompress(value)
+         if not value or isinstance(value, (list, tuple)):
+-            if not value or not [v for v in value if v not in self.empty_values]:
++            if not value:
+                 if self.required:
+                     raise ValidationError(self.error_messages['required'], code='required')
+                 else:
+                     return self.compress([])
++            else:
++                if not [v for v in value if v not in self.empty_values]:
++                    if self.required:
++                        raise ValidationError(self.error_messages['required'], code='required')
++                    elif self.require_all_fields:
++                        return self.compress([])
+         else:
+             raise ValidationError(self.error_messages['invalid'], code='invalid')
+         for i, field in enumerate(self.fields):
+diff --git a/tests/forms_tests/field_tests/test_multivaluefield.py b/tests/forms_tests/field_tests/test_multivaluefield.py
+index 29287d0..9de92ae 100644
+--- a/tests/forms_tests/field_tests/test_multivaluefield.py
++++ b/tests/forms_tests/field_tests/test_multivaluefield.py
+@@ -172,3 +172,28 @@ class MultiValueFieldTest(SimpleTestCase):
+         })
+         form.is_valid()
+         self.assertEqual(form.cleaned_data['field1'], 'some text,JP,2007-04-25 06:24:00')
++
++    def test_clean_require_all_fields_false(self):
++        class MF(MultiValueField):
++            def compress(self, data_list):
++                return data_list
++
++        class SubfieldForm(Form):
++            mf = MF(
++                fields=(
++                    CharField(required=False),
++                    CharField(required=True),
++                ),
++                require_all_fields=False,
++                required=False,
++                widget=MultiWidget(widgets=[TextInput, TextInput]),
++            )
++
++        form = SubfieldForm({'mf_0': '', 'mf_1': ''})
++        self.assertIs(form.is_valid(), False)
++        form = SubfieldForm({'mf_0': 'xxx', 'mf_1': ''})
++        self.assertIs(form.is_valid(), False)
++        form = SubfieldForm({'mf_0': '', 'mf_1': 'yyy'})
++        self.assertIs(form.is_valid(), True)
++        self.assertEqual(form.cleaned_data['mf'], ['', 'yyy'])
++
+diff --git a/tests/forms_tests/tests/test_forms.py b/tests/forms_tests/tests/test_forms.py
+index 0fe0749..77a6810 100644
+--- a/tests/forms_tests/tests/test_forms.py
++++ b/tests/forms_tests/tests/test_forms.py
+@@ -3097,6 +3097,8 @@ Good luck picking a username that doesn&#x27;t already exist.</p>
+         with self.assertRaisesMessage(ValidationError, "'Enter a complete value.'"):
+             f.clean(['+61'])
+         self.assertEqual('+61.287654321 ext. 123 (label: )', f.clean(['+61', '287654321', '123']))
++        with self.assertRaisesMessage(ValidationError, "'Enter a complete value.', 'Enter an extension.'"):
++            f.clean(['', '', '', ''])
+         with self.assertRaisesMessage(ValidationError, "'Enter a complete value.', 'Enter an extension.'"):
+             f.clean(['', '', '', 'Home'])
+         with self.assertRaisesMessage(ValidationError, "'Enter a valid country code.'"):

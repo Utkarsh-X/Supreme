@@ -1,0 +1,52 @@
+I have implemented the solution to find the length of the longest V-shaped diagonal segment in `main.py`.
+
+### Solution Overview
+
+1. **Diagonal Directions & 90-Degree Clockwise Turns**:
+   The 4 diagonal directions in clockwise order are defined as:
+   - Index 0: Up-Right `(-1, 1)`
+   - Index 1: Down-Right `(1, 1)`
+   - Index 2: Down-Left `(1, -1)`
+   - Index 3: Up-Left `(-1, -1)`
+   Turning 90 degrees clockwise from direction index `d` transitions to direction `(d + 1) % 4`.
+
+2. **Precomputing Straight Alternating Sequences (`dp`)**:
+   We define `dp[r][c][d]` as the length of the valid alternating sequence `(2, 0, 2, 0...)` starting at cell `(r, c)` in direction `d`.
+   - If `grid[r][c]` is `0` or `2`, its next expected value is `2 - grid[r][c]`.
+   - If the neighbor in direction `d` matches `2 - grid[r][c]`, `dp[r][c][d] = 1 + dp[nr][nc][d]`.
+   - Otherwise, `dp[r][c][d] = 1`.
+
+3. **Finding Longest V-Shaped Segment**:
+   - Iterate over all starting cells `(r0, c0)` where `grid[r0][c0] == 1`.
+   - For each starting direction `d \in \{0, 1, 2, 3\}$:
+     - Check the straight path along `d` (0 turns).
+     - Walk step-by-step along direction `d` ($k=1, 2, \dots$) while values match the required sequence `2, 0, 2, 0...`. At each step `k`, consider taking a 90-degree clockwise turn into `d_next = (d + 1) % 4` and look up the suffix length in `dp[nr_turn][nc_turn][d_next]`.
+
+### Verification
+The solution was tested against all public test cases, edge cases (single-element grids, grids with no `1`s, and custom directional rotations), and benchmarked on a maximum matrix size ($500 \times 500$).
+I have implemented the solution to find the length of the longest V-shaped diagonal segment in `main.py`.
+
+### Solution Overview
+
+1. **Diagonal Directions & 90-Degree Clockwise Turns**:
+   The 4 diagonal directions in clockwise order are defined as:
+   - Index 0: Up-Right `(-1, 1)`
+   - Index 1: Down-Right `(1, 1)`
+   - Index 2: Down-Left `(1, -1)`
+   - Index 3: Up-Left `(-1, -1)`
+   Turning 90 degrees clockwise from direction index `d` transitions to direction `(d + 1) % 4`.
+
+2. **Precomputing Straight Alternating Sequences (`dp`)**:
+   We define `dp[r][c][d]` as the length of the valid alternating sequence `(2, 0, 2, 0...)` starting at cell `(r, c)` in direction `d`.
+   - If `grid[r][c]` is `0` or `2`, its next expected value is `2 - grid[r][c]`.
+   - If the neighbor in direction `d` matches `2 - grid[r][c]`, `dp[r][c][d] = 1 + dp[nr][nc][d]`.
+   - Otherwise, `dp[r][c][d] = 1`.
+
+3. **Finding Longest V-Shaped Segment**:
+   - Iterate over all starting cells `(r0, c0)` where `grid[r0][c0] == 1`.
+   - For each starting direction `d \in \{0, 1, 2, 3\}$:
+     - Check the straight path along `d` (0 turns).
+     - Walk step-by-step along direction `d` ($k=1, 2, \dots$) while values match the required sequence `2, 0, 2, 0...`. At each step `k`, consider taking a 90-degree clockwise turn into `d_next = (d + 1) % 4` and look up the suffix length in `dp[nr_turn][nc_turn][d_next]`.
+
+### Verification
+The solution was tested against all public test cases, edge cases (single-element grids, grids with no `1`s, and custom directional rotations), and benchmarked on a maximum matrix size ($500 \times 500$).

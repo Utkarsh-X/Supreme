@@ -1,0 +1,75 @@
+diff --git a/main.py b/main.py
+index c86f6c8..9052060 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,69 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    T = int(input_data[0])
++    idx = 1
++    out = []
++    
++    for _ in range(T):
++        N = int(input_data[idx])
++        idx += 1
++        A = input_data[idx:idx+N]
++        idx += N
++        
++        runs = []
++        for x in A:
++            val = int(x)
++            if not runs or runs[-1][0] != val:
++                runs.append([val, 1])
++            else:
++                runs[-1][1] += 1
++                
++        k = len(runs)
++        dp = {(): 0}
++        
++        for i in range(k):
++            v_i, c_i = runs[i]
++            next_dp = {}
++            
++            for state, cost in dp.items():
++                # Option 1: Create NEW group
++                new_state = []
++                for val, w in state:
++                    if val != v_i:
++                        if w + c_i <= 2:
++                            new_state.append((val, w + c_i))
++                new_state.append((v_i, 0))
++                new_state = tuple(new_state)
++                new_cost = cost + 1
++                if new_state not in next_dp or new_cost < next_dp[new_state]:
++                    next_dp[new_state] = new_cost
++                    
++                # Option 2: Join existing group with val == v_i
++                for g_idx, (val, w) in enumerate(state):
++                    if val == v_i and w <= 2:
++                        swap_cost = c_i * w
++                        joined_state = []
++                        for j, (h_val, h_w) in enumerate(state):
++                            if j < g_idx:
++                                if h_w + c_i <= 2:
++                                    joined_state.append((h_val, h_w + c_i))
++                            else:
++                                joined_state.append((h_val, h_w))
++                        joined_state = tuple(joined_state)
++                        joined_cost = cost + swap_cost
++                        if joined_state not in next_dp or joined_cost < next_dp[joined_state]:
++                            next_dp[joined_state] = joined_cost
++                            
++            dp = next_dp
++            
++        out.append(str(min(dp.values())))
++        
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    main()

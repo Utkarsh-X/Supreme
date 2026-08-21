@@ -1,0 +1,26 @@
+run_id: 2026-08-19-025422-sphinx-doc__sphinx-10466-baseline-v2.0
+task_id: sphinx-doc__sphinx-10466
+configuration_id: baseline-v2.0
+status: FAILURE
+started_at: '2026-08-19T02:54:22.185214'
+finished_at: '2026-08-19T02:54:35.958260'
+model:
+  provider: Gemini
+  identifier: gemini-3.6-flash-high
+  temperature: 0.0
+environment:
+  os: Windows-10-10.0.26200-SP0
+  python_version: 3.11.9
+  ide: Antigravity IDE Agent
+  isolation_mode: non_adversarial_cooperative
+provenance_hashes:
+  configuration_hash: f1595fc216dc0fa5025449cfe56b20f520c004aad0174b1d534975f656c16d20
+  prompt_hash: null
+  snapshot_hash: null
+artifacts:
+  transcript_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-025422-sphinx-doc__sphinx-10466-baseline-v2.0\transcript.txt
+  diff_file: E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-025422-sphinx-doc__sphinx-10466-baseline-v2.0\final_diff.patch
+  evaluator_output: null
+resource_metrics:
+  tool_iterations: 0
+  wall_clock_seconds: 13.77

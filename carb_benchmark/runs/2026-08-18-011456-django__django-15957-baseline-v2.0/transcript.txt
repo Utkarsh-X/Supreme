@@ -1,0 +1,22 @@
+### Summary of Changes
+
+1. **Validation for Sliced QuerySets in `Prefetch`**:
+   - Updated [`Prefetch.__init__`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/django/db/models/query.py#L2142-L2165) in `django/db/models/query.py` to check `queryset.query.is_sliced`.
+   - If a sliced QuerySet is passed into `Prefetch`, it raises a `ValueError("Cannot filter a query once a slice has been taken.")` during initialization.
+
+2. **Documentation**:
+   - Updated [`docs/ref/models/querysets.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/docs/ref/models/querysets.txt#L4007-L4016) under the `Prefetch` section to explicitly state that custom querysets passed to `Prefetch` cannot use sliced querysets, `raw()`, `values()`, or `values_list()`.
+
+3. **Tests**:
+   - Added unit test `test_sliced_queryset` in [`tests/prefetch_related/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/tests/prefetch_related/tests.py#L1007-L1011) to ensure `Prefetch` raises `ValueError` when passed a sliced queryset.
+### Summary of Changes
+
+1. **Validation for Sliced QuerySets in `Prefetch`**:
+   - Updated [`Prefetch.__init__`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/django/db/models/query.py#L2142-L2165) in `django/db/models/query.py` to check `queryset.query.is_sliced`.
+   - If a sliced QuerySet is passed into `Prefetch`, it raises a `ValueError("Cannot filter a query once a slice has been taken.")` during initialization.
+
+2. **Documentation**:
+   - Updated [`docs/ref/models/querysets.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/docs/ref/models/querysets.txt#L4007-L4016) under the `Prefetch` section to explicitly state that custom querysets passed to `Prefetch` cannot use sliced querysets, `raw()`, `values()`, or `values_list()`.
+
+3. **Tests**:
+   - Added unit test `test_sliced_queryset` in [`tests/prefetch_related/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/tests/prefetch_related/tests.py#L1007-L1011) to ensure `Prefetch` raises `ValueError` when passed a sliced queryset.

@@ -1,0 +1,75 @@
+diff --git a/lib/matplotlib/__init__.py b/lib/matplotlib/__init__.py
+index c268a56..abe1087 100644
+--- a/lib/matplotlib/__init__.py
++++ b/lib/matplotlib/__init__.py
+@@ -1095,6 +1095,9 @@ def rc_context(rc=None, fname=None):
+             rcParams.update(rc)
+         yield
+     finally:
++        if (orig.get("backend") is rcsetup._auto_backend_sentinel
++                and dict.__getitem__(rcParams, "backend") is not rcsetup._auto_backend_sentinel):
++            orig["backend"] = dict.__getitem__(rcParams, "backend")
+         dict.update(rcParams, orig)  # Revert to the original rcs.
+ 
+ 
+diff --git a/lib/matplotlib/tests/test_rcparams.py b/lib/matplotlib/tests/test_rcparams.py
+index 99856b3..02f0923 100644
+--- a/lib/matplotlib/tests/test_rcparams.py
++++ b/lib/matplotlib/tests/test_rcparams.py
+@@ -508,6 +508,15 @@ def test_rcparams_reset_after_fail():
+         assert mpl.rcParams['text.usetex'] is False
+ 
+ 
++def test_rc_context_backend_figure():
++    with mpl.rc_context():
++        fig = plt.figure()
++    assert plt._pylab_helpers.Gcf.figs
++    mpl.get_backend()
++    assert plt._pylab_helpers.Gcf.figs
++    plt.close(fig)
++
++
+ @pytest.mark.skipif(sys.platform != "linux", reason="Linux only")
+ def test_backend_fallback_headless(tmpdir):
+     env = {**os.environ,
+diff --git a/lib/matplotlib/transforms.py b/lib/matplotlib/transforms.py
+index 1471d4f..1005b55 100644
+--- a/lib/matplotlib/transforms.py
++++ b/lib/matplotlib/transforms.py
+@@ -47,7 +47,35 @@ from numpy.linalg import inv
+ 
+ from matplotlib import _api
+ from matplotlib._path import (
+-    affine_transform, count_bboxes_overlapping_bbox, update_path_extents)
++    affine_transform, count_bboxes_overlapping_bbox)
++try:
++    from matplotlib._path import update_path_extents
++except ImportError:
++    def update_path_extents(path, transform, bbox_points, minpos, ignore):
++        if transform is not None:
++            path = transform.transform_path(path)
++        extents = path.get_extents()
++        if ignore:
++            new_points = extents.get_points()
++        else:
++            new_points = np.array([
++                [min(bbox_points[0, 0], extents.x0), min(bbox_points[0, 1], extents.y0)],
++                [max(bbox_points[1, 0], extents.x1), max(bbox_points[1, 1], extents.y1)]
++            ])
++        new_minpos = np.copy(minpos)
++        v = path.vertices
++        if len(v):
++            vx = v[:, 0]
++            vy = v[:, 1]
++            pos_x = vx[vx > 0]
++            pos_y = vy[vy > 0]
++            if len(pos_x):
++                new_minpos[0] = min(new_minpos[0], pos_x.min())
++            if len(pos_y):
++                new_minpos[1] = min(new_minpos[1], pos_y.min())
++        changed = not np.array_equal(new_points, bbox_points) or not np.array_equal(new_minpos, minpos)
++        return new_points, new_minpos, changed
++
+ from .path import Path
+ 
+ DEBUG = False

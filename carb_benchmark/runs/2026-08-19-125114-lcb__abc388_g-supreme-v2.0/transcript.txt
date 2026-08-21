@@ -1,0 +1,34 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_g/main.py).
+
+### Method Explanation
+1. **Greedy Matching Condition**: For any range $A[L..R]$ (0-indexed $l..r$) of size $M = r - l + 1$, to form $K$ simultaneous kagamimochi pairs ($1 \le K \le \lfloor M / 2 \rfloor$), the optimal strategy is to pair the $i$-th smallest element $A[l + i]$ with the $i$-th smallest element in the top half $A[r - K + 1 + i]$ for all $0 \le i < K$.
+2. **Mathematical Reformulation**:
+   - Let $p(i)$ be the smallest index $j$ such that $A[j] \ge 2 \cdot A[i]$.
+   - The condition $A[r - K + 1 + i] \ge 2 \cdot A[l + i]$ is equivalent to $r - K + 1 + i \ge p(l + i)$, which simplifies to $f(l + i) \le r - l - K + 1$, where $f(i) = p(i) - i$.
+   - Thus, $K$ pairs can be formed if and only if $\max_{0 \le i < K} f(l + i) \le r - l - K + 1$.
+3. **Data Structures & Complexity**:
+   - $p(i)$ is precomputed in $O(N)$ using two pointers since $A$ is sorted.
+   - We construct a **Sparse Table** over array $f$ to perform Range Maximum Queries (RMQ) in $O(1)$ time.
+   - For each query $(L, R)$, we binary search $K \in [0, \lfloor M / 2 \rfloor]$ and check the RMQ condition in $O(1)$ time.
+   - **Total Time Complexity**: $O(N \log N + Q \log N)$, easily executing well under 2.0 seconds for $N, Q = 2 \times 10^5$.
+   - **Space Complexity**: $O(N \log N)$ for the Sparse Table.
+
+### Verification
+The solution was tested against all sample cases provided in the problem description, producing exact matching outputs.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_g/main.py).
+
+### Method Explanation
+1. **Greedy Matching Condition**: For any range $A[L..R]$ (0-indexed $l..r$) of size $M = r - l + 1$, to form $K$ simultaneous kagamimochi pairs ($1 \le K \le \lfloor M / 2 \rfloor$), the optimal strategy is to pair the $i$-th smallest element $A[l + i]$ with the $i$-th smallest element in the top half $A[r - K + 1 + i]$ for all $0 \le i < K$.
+2. **Mathematical Reformulation**:
+   - Let $p(i)$ be the smallest index $j$ such that $A[j] \ge 2 \cdot A[i]$.
+   - The condition $A[r - K + 1 + i] \ge 2 \cdot A[l + i]$ is equivalent to $r - K + 1 + i \ge p(l + i)$, which simplifies to $f(l + i) \le r - l - K + 1$, where $f(i) = p(i) - i$.
+   - Thus, $K$ pairs can be formed if and only if $\max_{0 \le i < K} f(l + i) \le r - l - K + 1$.
+3. **Data Structures & Complexity**:
+   - $p(i)$ is precomputed in $O(N)$ using two pointers since $A$ is sorted.
+   - We construct a **Sparse Table** over array $f$ to perform Range Maximum Queries (RMQ) in $O(1)$ time.
+   - For each query $(L, R)$, we binary search $K \in [0, \lfloor M / 2 \rfloor]$ and check the RMQ condition in $O(1)$ time.
+   - **Total Time Complexity**: $O(N \log N + Q \log N)$, easily executing well under 2.0 seconds for $N, Q = 2 \times 10^5$.
+   - **Space Complexity**: $O(N \log N)$ for the Sparse Table.
+
+### Verification
+The solution was tested against all sample cases provided in the problem description, producing exact matching outputs.

@@ -1,0 +1,16 @@
+I have resolved the issue where the "Save as new" (`show_save_as_new`) button in Django Admin could be displayed to users without `add` permission.
+
+### Cause
+"Save as new" creates a new object instance (an add operation) based on existing form data. When posted, `ModelAdmin._changeform_view()` validates that `has_add_permission(request)` is True, raising `PermissionDenied` (403) if the user lacks add permission. However, the `submit_row` template tag in [admin_modify.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16527/django/contrib/admin/templatetags/admin_modify.py#L102-L106) was previously checking `has_change_permission`, `change`, and `save_as`, but omitted `has_add_permission`.
+
+### Solution
+1. **Added Permission Check**: Added `and has_add_permission` to `show_save_as_new` in [submit_row](file:///E:/RofU/Supreme/carb_workspaces/django__django-16527/django/contrib/admin/templatetags/admin_modify.py#L102-L106).
+2. **Unit Test**: Added `test_show_save_as_new_add_permission` in [tests/admin_views/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16527/tests/admin_views/tests.py#L1865-L1879) to verify `show_save_as_new` context variable is `False` when the user has `change` permission but lacks `add` permission, and `True` when both `add` and `change` permissions are present.
+I have resolved the issue where the "Save as new" (`show_save_as_new`) button in Django Admin could be displayed to users without `add` permission.
+
+### Cause
+"Save as new" creates a new object instance (an add operation) based on existing form data. When posted, `ModelAdmin._changeform_view()` validates that `has_add_permission(request)` is True, raising `PermissionDenied` (403) if the user lacks add permission. However, the `submit_row` template tag in [admin_modify.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16527/django/contrib/admin/templatetags/admin_modify.py#L102-L106) was previously checking `has_change_permission`, `change`, and `save_as`, but omitted `has_add_permission`.
+
+### Solution
+1. **Added Permission Check**: Added `and has_add_permission` to `show_save_as_new` in [submit_row](file:///E:/RofU/Supreme/carb_workspaces/django__django-16527/django/contrib/admin/templatetags/admin_modify.py#L102-L106).
+2. **Unit Test**: Added `test_show_save_as_new_add_permission` in [tests/admin_views/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16527/tests/admin_views/tests.py#L1865-L1879) to verify `show_save_as_new` context variable is `False` when the user has `change` permission but lacks `add` permission, and `True` when both `add` and `change` permissions are present.

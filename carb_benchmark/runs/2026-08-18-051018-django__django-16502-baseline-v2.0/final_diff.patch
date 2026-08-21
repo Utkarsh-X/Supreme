@@ -1,0 +1,71 @@
+diff --git a/django/core/servers/basehttp.py b/django/core/servers/basehttp.py
+index fef5532..f6085b8 100644
+--- a/django/core/servers/basehttp.py
++++ b/django/core/servers/basehttp.py
+@@ -143,6 +143,19 @@ class ServerHandler(simple_server.ServerHandler):
+         if self.headers.get("Connection") == "close":
+             self.request_handler.close_connection = True
+ 
++    def finish_response(self):
++        if self.environ.get("REQUEST_METHOD") == "HEAD":
++            try:
++                self.finish_content()
++            except Exception:
++                if hasattr(self.result, "close"):
++                    self.result.close()
++                raise
++            else:
++                self.close()
++        else:
++            super().finish_response()
++
+     def close(self):
+         self.get_stdin().read()
+         super().close()
+diff --git a/tests/servers/test_basehttp.py b/tests/servers/test_basehttp.py
+index a837505..8e6c15e 100644
+--- a/tests/servers/test_basehttp.py
++++ b/tests/servers/test_basehttp.py
+@@ -106,6 +106,42 @@ class WSGIRequestHandlerTestCase(SimpleTestCase):
+ 
+         self.assertEqual(body, b"HTTP_SOME_HEADER:good")
+ 
++    def test_head_strips_body(self):
++        def test_app(environ, start_response):
++            start_response(
++                "200 OK",
++                [("Content-Length", "12"), ("Content-Type", "text/plain")],
++            )
++            return [b"Hello World!"]
++
++        rfile = BytesIO()
++        rfile.write(b"HEAD / HTTP/1.0\r\n\r\n")
++        rfile.seek(0)
++
++        class UnclosableBytesIO(BytesIO):
++            def close(self):
++                pass
++
++        wfile = UnclosableBytesIO()
++
++        def makefile(mode, *a, **kw):
++            if mode == "rb":
++                return rfile
++            elif mode == "wb":
++                return wfile
++
++        request = Stub(makefile=makefile)
++        server = Stub(base_environ={}, get_app=lambda: test_app)
++
++        with self.assertLogs("django.server", "INFO"):
++            WSGIRequestHandler(request, "192.168.0.2", server)
++
++        wfile.seek(0)
++        output = wfile.read()
++        self.assertTrue(output.startswith(b"HTTP/1.1 200 OK"))
++        self.assertIn(b"Content-Length: 12", output)
++        self.assertTrue(output.endswith(b"\r\n\r\n"))
++
+ 
+ class WSGIServerTestCase(SimpleTestCase):
+     request_factory = RequestFactory()

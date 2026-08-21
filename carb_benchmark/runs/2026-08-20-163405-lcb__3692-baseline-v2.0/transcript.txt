@@ -1,0 +1,18 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3692/main.py) to find the shortest substring in `s` that matches the pattern `p` containing exactly two `*` characters.
+
+### Summary of Approach
+1. **Pattern Decomposition**: We split `p` by `*` into three substrings `p0`, `p1`, `p2`.
+2. **Occurrence Matching**: We locate all overlapping start indices for `p0`, `p1`, and `p2` in `s` using the linear-time **Z-algorithm** (`O(|pat| + |text|)`).
+3. **Optimal Substring Search**:
+   - If `p1` is non-empty, for each match position `k` of `p1`, we locate the largest match position `i` of `p0` such that `i <= k - len(p0)` (using binary search via `bisect_right`) and the smallest match position `m` of `p2` such that `m >= k + len(p1)` (using `bisect_left`).
+   - If `p1` is empty (e.g. `p0**p2`), we find matching pairs `(i, m)` of `p0` and `p2` satisfying `i + len(p0) <= m`.
+4. **Result**: The length of the matching substring is `(m + len(p2)) - i`. We find the minimum valid length across all candidate occurrences, returning `-1` if no match exists.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3692/main.py) to find the shortest substring in `s` that matches the pattern `p` containing exactly two `*` characters.
+
+### Summary of Approach
+1. **Pattern Decomposition**: We split `p` by `*` into three substrings `p0`, `p1`, `p2`.
+2. **Occurrence Matching**: We locate all overlapping start indices for `p0`, `p1`, and `p2` in `s` using the linear-time **Z-algorithm** (`O(|pat| + |text|)`).
+3. **Optimal Substring Search**:
+   - If `p1` is non-empty, for each match position `k` of `p1`, we locate the largest match position `i` of `p0` such that `i <= k - len(p0)` (using binary search via `bisect_right`) and the smallest match position `m` of `p2` such that `m >= k + len(p1)` (using `bisect_left`).
+   - If `p1` is empty (e.g. `p0**p2`), we find matching pairs `(i, m)` of `p0` and `p2` satisfying `i + len(p0) <= m`.
+4. **Result**: The length of the matching substring is `(m + len(p2)) - i`. We find the minimum valid length across all candidate occurrences, returning `-1` if no match exists.

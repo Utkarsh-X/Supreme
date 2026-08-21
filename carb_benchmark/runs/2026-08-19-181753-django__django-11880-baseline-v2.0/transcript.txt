@@ -1,0 +1,22 @@
+I have fixed the issue where `Field.__deepcopy__` did not copy the `error_messages` dictionary.
+
+### Root Cause
+In [Field.__deepcopy__](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/django/forms/fields.py#L198-L204), `copy.copy(self)` created a shallow copy of the field object. While `widget` and `validators` were explicitly deep-copied / duplicated, `error_messages` was left referencing the original dictionary instance from `self.error_messages`. Consequently, form instances sharing fields deep-copied from `base_fields` shared the exact same `error_messages` dictionary instance, causing modifications in one form field instance to affect all other form field instances and `base_fields`.
+
+### Fix
+1. Updated `Field.__deepcopy__` in [django/forms/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/django/forms/fields.py#L203) to deep-copy `self.error_messages`:
+   ```python
+   result.error_messages = copy.deepcopy(self.error_messages, memo)
+   ```
+2. Added unit tests in [tests/forms_tests/field_tests/test_base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/tests/forms_tests/field_tests/test_base.py#L37-L51) verifying that deep-copied field instances and form instances maintain independent `error_messages` dictionaries.
+I have fixed the issue where `Field.__deepcopy__` did not copy the `error_messages` dictionary.
+
+### Root Cause
+In [Field.__deepcopy__](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/django/forms/fields.py#L198-L204), `copy.copy(self)` created a shallow copy of the field object. While `widget` and `validators` were explicitly deep-copied / duplicated, `error_messages` was left referencing the original dictionary instance from `self.error_messages`. Consequently, form instances sharing fields deep-copied from `base_fields` shared the exact same `error_messages` dictionary instance, causing modifications in one form field instance to affect all other form field instances and `base_fields`.
+
+### Fix
+1. Updated `Field.__deepcopy__` in [django/forms/fields.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/django/forms/fields.py#L203) to deep-copy `self.error_messages`:
+   ```python
+   result.error_messages = copy.deepcopy(self.error_messages, memo)
+   ```
+2. Added unit tests in [tests/forms_tests/field_tests/test_base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11880/tests/forms_tests/field_tests/test_base.py#L37-L51) verifying that deep-copied field instances and form instances maintain independent `error_messages` dictionaries.

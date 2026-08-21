@@ -1,0 +1,20 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3717/main.py).
+
+### Method Explanation
+1. **Sliding Window Median Costs**:
+   - For a subarray of size $x$, the cost to make all elements equal is minimized by setting all elements to their median.
+   - We use two balanced heaps (`left` max-heap and `right` min-heap) with lazy deletion to maintain the median and calculate the sum of absolute differences in $O(N \log N)$ total time across all $N - x + 1$ sliding windows.
+2. **Dynamic Programming**:
+   - Let `dp[j][i]` be the minimum operations required to form `j` non-overlapping equal subarrays of size `x` within the prefix `nums[0...i-1]`.
+   - Recurrence relation: `dp[j][i] = min(dp[j][i-1], dp[j-1][i-x] + costs[i-x])`.
+   - With $k \le 15$ and $N \le 10^5$, DP computation takes $O(k \cdot N)$ time and $O(N)$ space.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3717/main.py).
+
+### Method Explanation
+1. **Sliding Window Median Costs**:
+   - For a subarray of size $x$, the cost to make all elements equal is minimized by setting all elements to their median.
+   - We use two balanced heaps (`left` max-heap and `right` min-heap) with lazy deletion to maintain the median and calculate the sum of absolute differences in $O(N \log N)$ total time across all $N - x + 1$ sliding windows.
+2. **Dynamic Programming**:
+   - Let `dp[j][i]` be the minimum operations required to form `j` non-overlapping equal subarrays of size `x` within the prefix `nums[0...i-1]`.
+   - Recurrence relation: `dp[j][i] = min(dp[j][i-1], dp[j-1][i-x] + costs[i-x])`.
+   - With $k \le 15$ and $N \le 10^5$, DP computation takes $O(k \cdot N)$ time and $O(N)$ space.

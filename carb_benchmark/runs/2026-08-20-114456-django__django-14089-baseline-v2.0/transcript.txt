@@ -1,0 +1,10 @@
+I have implemented support for calling `reversed()` on `OrderedSet`.
+
+### Changes Made
+1. **[OrderedSet](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L5-L39)**: Added `__reversed__()` method to `OrderedSet` in [django/utils/datastructures.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L28-L29), returning `reversed(self.dict)`.
+2. **[OrderedSetTests](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/tests/utils_tests/test_datastructures.py#L15-L60)**: Added `test_reversed` test case in [tests/utils_tests/test_datastructures.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/tests/utils_tests/test_datastructures.py#L58-L60) to verify iterating in reverse order.
+I have implemented support for calling `reversed()` on `OrderedSet`.
+
+### Changes Made
+1. **[OrderedSet](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L5-L39)**: Added `__reversed__()` method to `OrderedSet` in [django/utils/datastructures.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/django/utils/datastructures.py#L28-L29), returning `reversed(self.dict)`.
+2. **[OrderedSetTests](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/tests/utils_tests/test_datastructures.py#L15-L60)**: Added `test_reversed` test case in [tests/utils_tests/test_datastructures.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14089/tests/utils_tests/test_datastructures.py#L58-L60) to verify iterating in reverse order.

@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-08-19-012108-lcb__abc396_e-baseline-v2.0",
+  "task_id": "lcb__abc396_e",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 56.79,
+  "tool_calls": [
+    "list_dir",
+    "view_file",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "view_file",
+    "replace_file_content",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "list_dir": 1,
+    "view_file": 2,
+    "run_command": 6,
+    "replace_file_content": 1
+  },
+  "time_to_first_edit": 50.701,
+  "num_turns": 1,
+  "duration_seconds": 44.3084747,
+  "status": "SUCCESS",
+  "usage": {
+    "input_tokens": 50945,
+    "output_tokens": 11731,
+    "thinking_tokens": 8771,
+    "cache_read_tokens": 236199,
+    "total_tokens": 62676
+  },
+  "error": null
+}

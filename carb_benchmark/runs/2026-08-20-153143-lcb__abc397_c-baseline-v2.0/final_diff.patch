@@ -1,0 +1,46 @@
+diff --git a/main.py b/main.py
+index c86f6c8..9ff9973 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,40 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    n = int(input_data[0])
++    a = [int(x) for x in input_data[1:n+1]]
++    
++    pref = [0] * n
++    seen = [False] * (n + 1)
++    cnt = 0
++    for i in range(n):
++        v = a[i]
++        if not seen[v]:
++            seen[v] = True
++            cnt += 1
++        pref[i] = cnt
++        
++    suff = [0] * n
++    seen = [False] * (n + 1)
++    cnt = 0
++    for i in range(n - 1, -1, -1):
++        v = a[i]
++        if not seen[v]:
++            seen[v] = True
++            cnt += 1
++        suff[i] = cnt
++        
++    max_val = 0
++    for i in range(n - 1):
++        val = pref[i] + suff[i + 1]
++        if val > max_val:
++            max_val = val
++            
++    print(max_val)
++
++if __name__ == '__main__':
++    main()

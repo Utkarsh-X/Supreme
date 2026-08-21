@@ -1,0 +1,68 @@
+diff --git a/main.py b/main.py
+index c86f6c8..1c5a7d2 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,62 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    S = input_data[2]
++    
++    MOD = 998244353
++    num_states = 1 << N
++    
++    transitions = []
++    for mask in range(num_states):
++        dp = [0] * (N + 1)
++        for i in range(N):
++            if (mask >> i) & 1:
++                dp[i + 1] = dp[i] + 1
++            else:
++                dp[i + 1] = dp[i]
++        
++        freq = {}
++        for c_ord in range(26):
++            c = chr(ord('a') + c_ord)
++            new_dp = [0] * (N + 1)
++            for i in range(1, N + 1):
++                if S[i - 1] == c:
++                    new_dp[i] = dp[i - 1] + 1
++                else:
++                    new_dp[i] = max(dp[i], new_dp[i - 1])
++            
++            nmask = 0
++            for i in range(N):
++                if new_dp[i + 1] - new_dp[i] == 1:
++                    nmask |= (1 << i)
++            freq[nmask] = freq.get(nmask, 0) + 1
++        
++        transitions.append(list(freq.items()))
++    
++    dp_table = [0] * num_states
++    dp_table[0] = 1
++    
++    for _ in range(M):
++        next_dp = [0] * num_states
++        for state in range(num_states):
++            cnt = dp_table[state]
++            if not cnt:
++                continue
++            for nmask, f in transitions[state]:
++                next_dp[nmask] = (next_dp[nmask] + cnt * f) % MOD
++        dp_table = next_dp
++    
++    ans = [0] * (N + 1)
++    for mask in range(num_states):
++        k = bin(mask).count('1')
++        ans[k] = (ans[k] + dp_table[mask]) % MOD
++    
++    print(*ans)
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,99 @@
+diff --git a/main.py b/main.py
+index c86f6c8..bcadd19 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,93 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    p = int(input_data[1])
++    
++    idx = 2
++    A = []
++    for _ in range(N):
++        row = [int(input_data[idx + j]) for j in range(N)]
++        A.append(row)
++        idx += N
++        
++    zeros = set()
++    for r in range(N):
++        for c in range(N):
++            if A[r][c] == 0:
++                zeros.add((r, c))
++                
++    K = len(zeros)
++    
++    if p == 2:
++        M = [[A[r][c] if A[r][c] != 0 else 1 for c in range(N)] for r in range(N)]
++        res = [[0] * N for _ in range(N)]
++        for i in range(N):
++            M_i = M[i]
++            res_i = res[i]
++            for k in range(N):
++                m_ik = M_i[k]
++                if m_ik:
++                    M_k = M[k]
++                    for j in range(N):
++                        res_i[j] ^= (m_ik & M_k[j])
++        for row in res:
++            print(*(x % 2 for x in row))
++        return
++
++    sign = ((-1) ** K) % p
++    
++    A_fixed = [[A[r][c] if (r, c) not in zeros else 0 for c in range(N)] for r in range(N)]
++    
++    def mat_mul(X, Y_T):
++        res = [[0] * N for _ in range(N)]
++        for i in range(N):
++            X_i = X[i]
++            res_i = res[i]
++            for j in range(N):
++                Y_j = Y_T[j]
++                s = 0
++                for k in range(N):
++                    s += X_i[k] * Y_j[k]
++                res_i[j] = s % p
++        return res
++
++    def mat_pow(M, pow_val):
++        res = [[1 if i == j else 0 for j in range(N)] for i in range(N)]
++        base = M
++        e = pow_val
++        while e > 0:
++            if e % 2 == 1:
++                res = mat_mul(res, list(zip(*base)))
++            base = mat_mul(base, list(zip(*base)))
++            e //= 2
++        return res
++
++    A_p = mat_pow(A_fixed, p)
++    res = [[(A_p[i][j] * sign) % p for j in range(N)] for i in range(N)]
++    
++    self_loop_zeros = [u for u in range(N) if (u, u) in zeros]
++    
++    for u0 in self_loop_zeros:
++        for i in range(N):
++            if (i, u0) not in zeros:
++                res[i][u0] = (res[i][u0] + sign * A_fixed[i][u0]) % p
++                
++        for j in range(N):
++            if (u0, j) not in zeros:
++                res[u0][j] = (res[u0][j] + sign * A_fixed[u0][j]) % p
++
++    if p == 3:
++        for (u0, v0) in zeros:
++            if (v0, u0) not in zeros:
++                res[u0][v0] = (res[u0][v0] + sign * A_fixed[v0][u0]) % p
++
++    for row in res:
++        print(*row)
++
++if __name__ == '__main__':
++    main()

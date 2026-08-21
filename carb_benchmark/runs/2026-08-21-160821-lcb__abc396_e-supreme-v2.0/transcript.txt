@@ -1,0 +1,28 @@
+I have implemented the solution for **AtCoder ABC 396 E - Min-Max XOR** in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_e/main.py).
+
+### Method Explanation
+1. **Bitwise Independence**: The constraints $A_{X_i} \oplus A_{Y_i} = Z_i$ operate bitwise independently. Minimizing the overall sum $\sum_{i=1}^N A_i$ is equivalent to independently minimizing the sum of the $k$-th bits across all elements for each bit position $k \in [0, 29]$.
+2. **Connected Components & Consistency**:
+   - The constraints define an undirected weighted graph where nodes are variables $1 \ldots N$ and edges carry XOR weight $Z_i$.
+   - In each connected component, fixing the value of a reference root variable $A_r$ uniquely determines $A_u = A_r \oplus C_u$ for all nodes $u$ in that component, where $C_u$ is the XOR sum along paths from $r$ to $u$.
+   - If any cycle in the graph has a non-zero XOR sum, no valid sequence exists, so we print `-1`.
+3. **Optimal Root Value Selection**:
+   - For each connected component of size $S$, we determine the $k$-th bit of $A_r$ by counting how many nodes in the component have the $k$-th bit of $C_u$ set to `1`.
+   - If more than $\lfloor S / 2 \rfloor$ nodes have `1` at the $k$-th bit, setting the $k$-th bit of $A_r$ to `1` flips them to `0`, which minimizes the number of `1`s (and thus the total sum). Otherwise, we set it to `0`.
+4. **Complexity**:
+   - **Time Complexity**: $\mathcal{O}(N + M + 30N)$ which executes in $<0.2$s.
+   - **Space Complexity**: $\mathcal{O}(N + M)$ for adjacency list and BFS structures.
+I have implemented the solution for **AtCoder ABC 396 E - Min-Max XOR** in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_e/main.py).
+
+### Method Explanation
+1. **Bitwise Independence**: The constraints $A_{X_i} \oplus A_{Y_i} = Z_i$ operate bitwise independently. Minimizing the overall sum $\sum_{i=1}^N A_i$ is equivalent to independently minimizing the sum of the $k$-th bits across all elements for each bit position $k \in [0, 29]$.
+2. **Connected Components & Consistency**:
+   - The constraints define an undirected weighted graph where nodes are variables $1 \ldots N$ and edges carry XOR weight $Z_i$.
+   - In each connected component, fixing the value of a reference root variable $A_r$ uniquely determines $A_u = A_r \oplus C_u$ for all nodes $u$ in that component, where $C_u$ is the XOR sum along paths from $r$ to $u$.
+   - If any cycle in the graph has a non-zero XOR sum, no valid sequence exists, so we print `-1`.
+3. **Optimal Root Value Selection**:
+   - For each connected component of size $S$, we determine the $k$-th bit of $A_r$ by counting how many nodes in the component have the $k$-th bit of $C_u$ set to `1`.
+   - If more than $\lfloor S / 2 \rfloor$ nodes have `1` at the $k$-th bit, setting the $k$-th bit of $A_r$ to `1` flips them to `0`, which minimizes the number of `1`s (and thus the total sum). Otherwise, we set it to `0`.
+4. **Complexity**:
+   - **Time Complexity**: $\mathcal{O}(N + M + 30N)$ which executes in $<0.2$s.
+   - **Space Complexity**: $\mathcal{O}(N + M)$ for adjacency list and BFS structures.

@@ -1,0 +1,125 @@
+diff --git a/main.py b/main.py
+index c86f6c8..583a13c 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,119 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import deque
++
++sys.setrecursionlimit(2000)
++
++class Dinic:
++    def __init__(self, n):
++        self.n = n
++        self.graph = [[] for _ in range(n)]
++
++    def add_edge(self, u, v, cap):
++        e1 = [v, cap, len(self.graph[v])]
++        e2 = [u, 0, len(self.graph[u])]
++        self.graph[u].append(e1)
++        self.graph[v].append(e2)
++
++    def bfs(self, s, t):
++        self.level = [-1] * self.n
++        self.level[s] = 0
++        q = deque([s])
++        while q:
++            u = q.popleft()
++            for v, cap, rev in self.graph[u]:
++                if cap > 0 and self.level[v] < 0:
++                    self.level[v] = self.level[u] + 1
++                    q.append(v)
++        return self.level[t] >= 0
++
++    def dfs(self, u, t, flow, ptr):
++        if u == t or flow == 0:
++            return flow
++        for i in range(ptr[u], len(self.graph[u])):
++            ptr[u] = i
++            v, cap, rev = self.graph[u][i]
++            if self.level[v] == self.level[u] + 1 and cap > 0:
++                pushed = self.dfs(v, t, min(flow, cap), ptr)
++                if pushed > 0:
++                    self.graph[u][i][1] -= pushed
++                    self.graph[v][rev][1] += pushed
++                    return pushed
++        return 0
++
++    def max_flow(self, s, t):
++        flow = 0
++        INF = 10**9
++        while self.bfs(s, t):
++            ptr = [0] * self.n
++            while True:
++                pushed = self.dfs(s, t, INF, ptr)
++                if pushed == 0:
++                    break
++                flow += pushed
++                if flow >= INF:
++                    return INF
++        return flow
++
++def check(N, M, K, edges, D):
++    if D == 0:
++        return True
++    
++    S = 0
++    T = N * D + 1
++    num_nodes = T + 1
++    
++    dinic = Dinic(num_nodes)
++    INF = 10**9
++    
++    def node_id(v, i):
++        return (v - 1) * D + i
++
++    # Boundary conditions:
++    # d_N >= D => N_D in S
++    dinic.add_edge(S, node_id(N, D), INF)
++    # d_1 <= 0 => 1_1 in T
++    dinic.add_edge(node_id(1, 1), T, INF)
++
++    # Monotonicity edges:
++    # v_{i+1} in S => v_i in S
++    for v in range(1, N + 1):
++        for i in range(1, D):
++            dinic.add_edge(node_id(v, i + 1), node_id(v, i), INF)
++
++    # Graph edges:
++    # For each directed edge u -> v:
++    # 1. Cost 1 if v_i in S and u_i in T
++    # 2. Infinite capacity edge if v_{i+1} in S and u_i in T (to enforce d_v - d_u <= 1)
++    for u, v in edges:
++        for i in range(1, D + 1):
++            dinic.add_edge(node_id(v, i), node_id(u, i), 1)
++        for i in range(1, D):
++            dinic.add_edge(node_id(v, i + 1), node_id(u, i), INF)
++
++    min_cut = dinic.max_flow(S, T)
++    return min_cut <= K
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    K = int(input_data[2])
++    
++    edges = []
++    idx = 3
++    for _ in range(M):
++        u = int(input_data[idx])
++        v = int(input_data[idx+1])
++        edges.append((u, v))
++        idx += 2
++        
++    max_possible_D = min(N - 1, K)
++    for D in range(max_possible_D, -1, -1):
++        if check(N, M, K, edges, D):
++            print(D)
++            return
++
++if __name__ == '__main__':
++    main()

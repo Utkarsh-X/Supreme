@@ -1,0 +1,38 @@
+### Cause of the Bug
+
+When Matplotlib is initialized, `rcParams['backend']` is set to `rcsetup._auto_backend_sentinel` until a backend is resolved on first use.
+
+When `rc_context` enters before any backend has been resolved, it saves a copy of `rcParams` (`orig = rcParams.copy()`), where `orig['backend']` holds `_auto_backend_sentinel`.
+
+Inside the `rc_context` block, creating a figure (e.g. `plt.figure()`) triggers backend resolution, which loads the appropriate backend module and updates `rcParams['backend']` to a concrete backend (e.g., `'QtAgg'` or `'TkAgg'`).
+
+When `rc_context` exits, its `finally` block executes `dict.update(rcParams, orig)`. Because `dict.update` directly modifies the underlying `dict`, it bypassed `RcParams.__setitem__`'s guard against setting `_auto_backend_sentinel` over an existing backend parameter. This reverted `rcParams['backend']` back to `_auto_backend_sentinel`, even though a figure had already been created under the resolved backend.
+
+Subsequent calls to `get_backend()` (or reading `rcParams['backend']`) observed `_auto_backend_sentinel` and invoked `plt.switch_backend(_auto_backend_sentinel)`. Because `plt.switch_backend()` closes all existing figures (`close("all")`), all open figures in `Gcf.figs` were destroyed.
+
+---
+
+### Solution
+
+In [`lib/matplotlib/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py#L1095-L1105) (`rc_context`) and [`lib/matplotlib/pyplot.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/pyplot.py#L688-L694) (`_xkcd`), we ensure that `_auto_backend_sentinel` in `orig` does not overwrite a concrete, resolved backend when reverting `rcParams` upon context exit.
+
+A regression test [`test_rc_context_backend`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/tests/test_rcparams.py#L588-L596) has been added to `lib/matplotlib/tests/test_rcparams.py`.
+### Cause of the Bug
+
+When Matplotlib is initialized, `rcParams['backend']` is set to `rcsetup._auto_backend_sentinel` until a backend is resolved on first use.
+
+When `rc_context` enters before any backend has been resolved, it saves a copy of `rcParams` (`orig = rcParams.copy()`), where `orig['backend']` holds `_auto_backend_sentinel`.
+
+Inside the `rc_context` block, creating a figure (e.g. `plt.figure()`) triggers backend resolution, which loads the appropriate backend module and updates `rcParams['backend']` to a concrete backend (e.g., `'QtAgg'` or `'TkAgg'`).
+
+When `rc_context` exits, its `finally` block executes `dict.update(rcParams, orig)`. Because `dict.update` directly modifies the underlying `dict`, it bypassed `RcParams.__setitem__`'s guard against setting `_auto_backend_sentinel` over an existing backend parameter. This reverted `rcParams['backend']` back to `_auto_backend_sentinel`, even though a figure had already been created under the resolved backend.
+
+Subsequent calls to `get_backend()` (or reading `rcParams['backend']`) observed `_auto_backend_sentinel` and invoked `plt.switch_backend(_auto_backend_sentinel)`. Because `plt.switch_backend()` closes all existing figures (`close("all")`), all open figures in `Gcf.figs` were destroyed.
+
+---
+
+### Solution
+
+In [`lib/matplotlib/__init__.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/__init__.py#L1095-L1105) (`rc_context`) and [`lib/matplotlib/pyplot.py`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/pyplot.py#L688-L694) (`_xkcd`), we ensure that `_auto_backend_sentinel` in `orig` does not overwrite a concrete, resolved backend when reverting `rcParams` upon context exit.
+
+A regression test [`test_rc_context_backend`](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23299/lib/matplotlib/tests/test_rcparams.py#L588-L596) has been added to `lib/matplotlib/tests/test_rcparams.py`.

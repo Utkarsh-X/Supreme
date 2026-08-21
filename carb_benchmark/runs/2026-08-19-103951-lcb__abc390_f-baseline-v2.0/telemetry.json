@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-08-19-103951-lcb__abc390_f-baseline-v2.0",
+  "task_id": "lcb__abc390_f",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 64.9,
+  "tool_calls": [
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "write_to_file",
+    "run_command",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "run_command": 6,
+    "write_to_file": 1
+  },
+  "time_to_first_edit": 49.219,
+  "num_turns": 1,
+  "duration_seconds": 53.2655592,
+  "status": "SUCCESS",
+  "usage": {
+    "input_tokens": 43027,
+    "output_tokens": 16383,
+    "thinking_tokens": 13122,
+    "cache_read_tokens": 175234,
+    "total_tokens": 59410
+  },
+  "error": null
+}

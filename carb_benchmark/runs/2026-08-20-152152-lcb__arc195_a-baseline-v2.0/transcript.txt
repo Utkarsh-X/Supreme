@@ -1,0 +1,36 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_a/main.py).
+
+### Method Explanation
+
+To determine if there are at least two distinct matching subsequences of $A$ equal to $B$:
+1. **Leftmost Greedy Subsequence Matching ($L$)**:
+   Compute the smallest (earliest) indices $(L_1, L_2, \dots, L_M)$ such that $A_{L_k} = B_k$ and $L_1 < L_2 < \dots < L_M$.
+   If $B$ cannot be formed as a subsequence of $A$, then 0 matching subsequences exist, so the answer is `No`.
+
+2. **Rightmost Greedy Subsequence Matching ($R$)**:
+   Compute the largest (latest) indices $(R_1, R_2, \dots, R_M)$ such that $A_{R_k} = B_k$ and $R_1 < R_2 < \dots < R_M$.
+
+3. **Comparison**:
+   - For any valid matching subsequence index tuple $I = (i_1, \dots, i_M)$, it must satisfy $L_k \le i_k \le R_k$ for all $1 \le k \le M$.
+   - If $L \neq R$, then $L$ and $R$ are two distinct valid matching index tuples, so at least two matching subsequences exist $\rightarrow$ Output `Yes`.
+   - If $L = R$, then $L_k \le i_k \le R_k \implies i_k = L_k$ for all $k$, which means $L$ is the unique matching subsequence $\rightarrow$ Output `No`.
+
+This runs in $O(N + M)$ time and $O(N + M)$ memory, which easily fits within the limits.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_a/main.py).
+
+### Method Explanation
+
+To determine if there are at least two distinct matching subsequences of $A$ equal to $B$:
+1. **Leftmost Greedy Subsequence Matching ($L$)**:
+   Compute the smallest (earliest) indices $(L_1, L_2, \dots, L_M)$ such that $A_{L_k} = B_k$ and $L_1 < L_2 < \dots < L_M$.
+   If $B$ cannot be formed as a subsequence of $A$, then 0 matching subsequences exist, so the answer is `No`.
+
+2. **Rightmost Greedy Subsequence Matching ($R$)**:
+   Compute the largest (latest) indices $(R_1, R_2, \dots, R_M)$ such that $A_{R_k} = B_k$ and $R_1 < R_2 < \dots < R_M$.
+
+3. **Comparison**:
+   - For any valid matching subsequence index tuple $I = (i_1, \dots, i_M)$, it must satisfy $L_k \le i_k \le R_k$ for all $1 \le k \le M$.
+   - If $L \neq R$, then $L$ and $R$ are two distinct valid matching index tuples, so at least two matching subsequences exist $\rightarrow$ Output `Yes`.
+   - If $L = R$, then $L_k \le i_k \le R_k \implies i_k = L_k$ for all $k$, which means $L$ is the unique matching subsequence $\rightarrow$ Output `No`.
+
+This runs in $O(N + M)$ time and $O(N + M)$ memory, which easily fits within the limits.

@@ -1,0 +1,75 @@
+diff --git a/main.py b/main.py
+index c86f6c8..94ac108 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,69 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    s = input_data[1]
++    MOD = 998244353
++
++    # Boolean 2x2 matrices for allowed transition subsets on (y_i, y_{i+1})
++    matrices = {
++        'U': ((False, True), (False, False)),
++        'D': ((False, False), (True, False)),
++        'S': ((True, False), (False, True)),
++        'US': ((True, True), (False, True)),
++        'DS': ((True, False), (True, True))
++    }
++
++    def mat_mult(A, B):
++        return (
++            ( (A[0][0] and B[0][0]) or (A[0][1] and B[1][0]),
++              (A[0][0] and B[0][1]) or (A[0][1] and B[1][1]) ),
++            ( (A[1][0] and B[0][0]) or (A[1][1] and B[1][0]),
++              (A[1][0] and B[0][1]) or (A[1][1] and B[1][1]) )
++        )
++
++    def mat_to_int(M):
++        return (int(M[0][0]) << 3) | (int(M[0][1]) << 2) | (int(M[1][0]) << 1) | int(M[1][1])
++
++    def int_to_mat(mask):
++        return (
++            (bool(mask & 8), bool(mask & 4)),
++            (bool(mask & 2), bool(mask & 1))
++        )
++
++    src_0 = [[] for _ in range(16)]
++    src_1 = [[] for _ in range(16)]
++
++    for m_idx in range(16):
++        M = int_to_mat(m_idx)
++        for opt in ['U', 'D', 'S']:
++            res = mat_mult(matrices[opt], M)
++            src_0[mat_to_int(res)].append(m_idx)
++        for opt in ['U', 'D', 'US', 'DS']:
++            res = mat_mult(matrices[opt], M)
++            src_1[mat_to_int(res)].append(m_idx)
++
++    dp = [0] * 16
++    dp[9] = 1  # Mask 9 = Identity matrix (M[0][0]=1, M[1][1]=1)
++
++    for char in s:
++        nxt = [0] * 16
++        srcs_list = src_1 if char == '1' else src_0
++        for dst in range(16):
++            srcs = srcs_list[dst]
++            if srcs:
++                val = 0
++                for src in srcs:
++                    val += dp[src]
++                nxt[dst] = val % MOD
++        dp = nxt
++
++    # A matrix mask is valid if M[0][0]=1 or M[1][1]=1 (bits 8 or 1)
++    ans = sum(dp[m] for m in range(16) if (m & 8) or (m & 1)) % MOD
++    print(ans)
++
++if __name__ == '__main__':
++    main()

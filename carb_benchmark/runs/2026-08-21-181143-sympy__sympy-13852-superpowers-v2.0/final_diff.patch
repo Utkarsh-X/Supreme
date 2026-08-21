@@ -1,0 +1,224 @@
+diff --git a/sympy/assumptions/sathandlers.py b/sympy/assumptions/sathandlers.py
+index 61d62d0..6bf1519 100644
+--- a/sympy/assumptions/sathandlers.py
++++ b/sympy/assumptions/sathandlers.py
+@@ -1,6 +1,7 @@
+ from __future__ import print_function, division
+ 
+-from collections import MutableMapping, defaultdict
++from collections import defaultdict
++from sympy.core.compatibility import MutableMapping
+ 
+ from sympy.core import (Add, Mul, Pow, Integer, Number, NumberSymbol,)
+ from sympy.core.numbers import ImaginaryUnit
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index d4ca323..e9eb7a1 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,6 +1,7 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++from collections import defaultdict
++from sympy.core.compatibility import Mapping
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+diff --git a/sympy/core/compatibility.py b/sympy/core/compatibility.py
+index 1f1ec06..fb437bb 100644
+--- a/sympy/core/compatibility.py
++++ b/sympy/core/compatibility.py
+@@ -71,6 +71,11 @@ class Foo(with_metaclass(Meta, Bar)):
+     long = int
+     int_info = sys.int_info
+ 
++    try:
++        from collections.abc import Mapping, MutableMapping, Callable, MutableSet, Iterable, Set
++    except ImportError:
++        from collections import Mapping, MutableMapping, Callable, MutableSet, Iterable, Set
++
+     # String / unicode compatibility
+     unicode = str
+     unichr = chr
+diff --git a/sympy/core/containers.py b/sympy/core/containers.py
+index 15abd93..65e0dc1 100644
+--- a/sympy/core/containers.py
++++ b/sympy/core/containers.py
+@@ -268,7 +268,10 @@ def _sorted_args(self):
+         return tuple(sorted(self.args, key=default_sort_key))
+ 
+ 
+-class OrderedSet(collections.MutableSet):
++from sympy.core.compatibility import MutableSet
++
++
++class OrderedSet(MutableSet):
+     def __init__(self, iterable=None):
+         if iterable:
+             self.map = collections.OrderedDict((item, None) for item in iterable)
+diff --git a/sympy/core/function.py b/sympy/core/function.py
+index d46ec5e..e8d66d0 100644
+--- a/sympy/core/function.py
++++ b/sympy/core/function.py
+@@ -1243,7 +1243,8 @@ def __new__(cls, expr, *variables, **assumptions):
+             if unhandled_non_symbol:
+                 obj = None
+             else:
+-                if isinstance(v, (collections.Iterable, Tuple, MatrixCommon, NDimArray)):
++                from sympy.core.compatibility import Iterable
++                if isinstance(v, (Iterable, Tuple, MatrixCommon, NDimArray)):
+                     deriv_fun = derive_by_array
+                     is_symbol = True
+                 else:
+diff --git a/sympy/functions/special/tests/test_zeta_functions.py b/sympy/functions/special/tests/test_zeta_functions.py
+index 3911dad..3f3ff91 100644
+--- a/sympy/functions/special/tests/test_zeta_functions.py
++++ b/sympy/functions/special/tests/test_zeta_functions.py
+@@ -128,7 +128,10 @@ def test_polylog_expansion():
+     assert polylog(s, 1) == zeta(s)
+     assert polylog(s, -1) == -dirichlet_eta(s)
+ 
+-    assert myexpand(polylog(1, z), -log(1 + exp_polar(-I*pi)*z))
++    assert polylog(2, S.Half) == pi**2/12 - log(2)**2/2
++    assert expand_func(polylog(2, S.Half)) == pi**2/12 - log(2)**2/2
++
++    assert myexpand(polylog(1, z), -log(1 - z))
+     assert myexpand(polylog(0, z), z/(1 - z))
+     assert myexpand(polylog(-1, z), z**2/(1 - z)**2 + z/(1 - z))
+     assert myexpand(polylog(-5, z), None)
+diff --git a/sympy/functions/special/zeta_functions.py b/sympy/functions/special/zeta_functions.py
+index b8e2b66..3104360 100644
+--- a/sympy/functions/special/zeta_functions.py
++++ b/sympy/functions/special/zeta_functions.py
+@@ -253,7 +253,7 @@ class polylog(Function):
+     >>> from sympy import expand_func
+     >>> from sympy.abc import z
+     >>> expand_func(polylog(1, z))
+-    -log(z*exp_polar(-I*pi) + 1)
++    -log(1 - z)
+     >>> expand_func(polylog(0, z))
+     z/(-z + 1)
+ 
+@@ -277,6 +277,8 @@ def eval(cls, s, z):
+             return -dirichlet_eta(s)
+         elif z == 0:
+             return 0
++        elif s == 2 and z == S.Half:
++            return pi**2/12 - log(2)**2/2
+ 
+     def fdiff(self, argindex=1):
+         s, z = self.args
+@@ -288,10 +290,10 @@ def _eval_rewrite_as_lerchphi(self, s, z):
+         return z*lerchphi(z, s, 1)
+ 
+     def _eval_expand_func(self, **hints):
+-        from sympy import log, expand_mul, Dummy, exp_polar, I
++        from sympy import log, expand_mul, Dummy
+         s, z = self.args
+         if s == 1:
+-            return -log(1 + exp_polar(-I*pi)*z)
++            return -log(1 - z)
+         if s.is_Integer and s <= 0:
+             u = Dummy('u')
+             start = u/(1 - u)
+diff --git a/sympy/matrices/common.py b/sympy/matrices/common.py
+index ea6b83c..8f8a930 100644
+--- a/sympy/matrices/common.py
++++ b/sympy/matrices/common.py
+@@ -15,7 +15,7 @@
+ from sympy.core.singleton import S
+ from sympy.core.sympify import sympify
+ from sympy.core.compatibility import is_sequence, default_sort_key, range, \
+-    NotIterable
++    NotIterable, Iterable
+ 
+ from sympy.simplify import simplify as _simplify, signsimp, nsimplify
+ from sympy.utilities.iterables import flatten
+@@ -2023,7 +2023,7 @@ def __mul__(self, other):
+             return MatrixArithmetic._eval_matrix_mul(self, other)
+ 
+         # if 'other' is not iterable then scalar multiplication.
+-        if not isinstance(other, collections.Iterable):
++        if not isinstance(other, Iterable):
+             try:
+                 return self._eval_scalar_mul(other)
+             except TypeError:
+@@ -2095,7 +2095,7 @@ def __rmul__(self, other):
+             return MatrixArithmetic._eval_matrix_rmul(self, other)
+ 
+         # if 'other' is not iterable then scalar multiplication.
+-        if not isinstance(other, collections.Iterable):
++        if not isinstance(other, Iterable):
+             try:
+                 return self._eval_scalar_rmul(other)
+             except TypeError:
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 44b37f9..7dfe082 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -2045,7 +2045,8 @@ def _handle_creation_inputs(cls, *args, **kwargs):
+                                  "Both dimensions must be positive".format(rows, cols))
+ 
+             # Matrix(2, 2, lambda i, j: i+j)
+-            if len(args) == 3 and isinstance(args[2], collections.Callable):
++            from sympy.core.compatibility import Callable
++            if len(args) == 3 and isinstance(args[2], Callable):
+                 op = args[2]
+                 flat_list = []
+                 for i in range(rows):
+diff --git a/sympy/matrices/sparse.py b/sympy/matrices/sparse.py
+index 7701cbc..8751fd2 100644
+--- a/sympy/matrices/sparse.py
++++ b/sympy/matrices/sparse.py
+@@ -53,7 +53,8 @@ def __new__(cls, *args, **kwargs):
+             self.rows = as_int(args[0])
+             self.cols = as_int(args[1])
+ 
+-            if isinstance(args[2], collections.Callable):
++            from sympy.core.compatibility import Callable
++            if isinstance(args[2], Callable):
+                 op = args[2]
+                 for i in range(self.rows):
+                     for j in range(self.cols):
+diff --git a/sympy/plotting/plot.py b/sympy/plotting/plot.py
+index b3b0237..bb2cf1c 100644
+--- a/sympy/plotting/plot.py
++++ b/sympy/plotting/plot.py
+@@ -25,7 +25,7 @@
+ from __future__ import print_function, division
+ 
+ import inspect
+-from collections import Callable
++from sympy.core.compatibility import Callable
+ import warnings
+ import sys
+ 
+diff --git a/sympy/simplify/hyperexpand.py b/sympy/simplify/hyperexpand.py
+index 8cd3f06..aa025dd 100644
+--- a/sympy/simplify/hyperexpand.py
++++ b/sympy/simplify/hyperexpand.py
+@@ -1787,7 +1787,7 @@ def try_lerchphi(func):
+             n = dep.exp
+             dep = dep.base
+         if dep == t:
+-            a == 0
++            a = 0
+         elif dep.is_Add:
+             a, tmp = dep.as_independent(t)
+             b = 1
+diff --git a/sympy/utilities/tests/test_wester.py b/sympy/utilities/tests/test_wester.py
+index 8b54cbc..41cef62 100644
+--- a/sympy/utilities/tests/test_wester.py
++++ b/sympy/utilities/tests/test_wester.py
+@@ -1946,11 +1946,9 @@ def test_R17():
+                - 2.8469909700078206) < 1e-15
+ 
+ 
+-@XFAIL
+ def test_R18():
+     k = symbols('k', integer=True, positive=True)
+     Sm = Sum(1/(2**k*k**2), (k, 1, oo))
+-    # returns polylog(2, 1/2),  particular value for 1/2 is not known.
+     # https://github.com/sympy/sympy/issues/7132
+     T = Sm.doit()
+     assert T.simplify() == -log(2)**2/2 + pi**2/12

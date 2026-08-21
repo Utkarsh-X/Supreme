@@ -1,0 +1,42 @@
+{
+  "run_id": "2026-08-19-113615-lcb__abc399_e-superpowers-v2.0",
+  "task_id": "lcb__abc399_e",
+  "configuration_id": "superpowers-v2.0",
+  "wall_clock_seconds": 416.0,
+  "tool_calls": [
+    "view_file",
+    "grep_search",
+    "view_file",
+    "list_dir",
+    "view_file",
+    "run_command",
+    "run_command",
+    "run_command",
+    "write_to_file",
+    "write_to_file",
+    "run_command",
+    "run_command",
+    "manage_task",
+    "view_file"
+  ],
+  "tool_call_counts": {
+    "view_file": 4,
+    "grep_search": 1,
+    "list_dir": 1,
+    "run_command": 5,
+    "write_to_file": 2,
+    "manage_task": 1
+  },
+  "time_to_first_edit": 314.97,
+  "num_turns": 1,
+  "duration_seconds": 397.4237268,
+  "status": "ERROR",
+  "usage": {
+    "input_tokens": 136923,
+    "output_tokens": 25298,
+    "thinking_tokens": 20269,
+    "cache_read_tokens": 587692,
+    "total_tokens": 162221
+  },
+  "error": null
+}

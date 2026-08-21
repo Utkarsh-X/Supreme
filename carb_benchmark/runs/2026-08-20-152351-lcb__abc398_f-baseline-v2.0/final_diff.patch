@@ -1,0 +1,33 @@
+diff --git a/main.py b/main.py
+index c86f6c8..3fbf2d7 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,27 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    S = input_data[0]
++    
++    rev_S = S[::-1]
++    T = rev_S + '#' + S
++    n = len(T)
++    
++    pi = [0] * n
++    j = 0
++    for i in range(1, n):
++        while j > 0 and T[i] != T[j]:
++            j = pi[j - 1]
++        if T[i] == T[j]:
++            j += 1
++        pi[i] = j
++    
++    pal_len = pi[-1]
++    A = S[:len(S) - pal_len]
++    print(S + A[::-1])
++
++if __name__ == '__main__':
++    main()

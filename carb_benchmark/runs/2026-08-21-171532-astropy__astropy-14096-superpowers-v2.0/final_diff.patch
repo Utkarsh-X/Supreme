@@ -1,0 +1,86 @@
+diff --git a/astropy/coordinates/sky_coordinate.py b/astropy/coordinates/sky_coordinate.py
+index ab475f7..e2627e4 100644
+--- a/astropy/coordinates/sky_coordinate.py
++++ b/astropy/coordinates/sky_coordinate.py
+@@ -871,6 +871,9 @@ class SkyCoord(ShapedLikeNDArray):
+         Overrides getattr to return coordinates that this can be transformed
+         to, based on the alias attr in the primary transform graph.
+         """
++        if any(attr in cls.__dict__ for cls in type(self).__mro__):
++            return self.__getattribute__(attr)
++
+         if "_sky_coord_frame" in self.__dict__:
+             if self._is_name(attr):
+                 return self  # Should this be a deepcopy of self?
+@@ -886,7 +889,10 @@ class SkyCoord(ShapedLikeNDArray):
+ 
+             # Some attributes might not fall in the above category but still
+             # are available through self._sky_coord_frame.
+-            if not attr.startswith("_") and hasattr(self._sky_coord_frame, attr):
++            if not attr.startswith("_") and (
++                attr in dir(self._sky_coord_frame)
++                or hasattr(self._sky_coord_frame, attr)
++            ):
+                 return getattr(self._sky_coord_frame, attr)
+ 
+             # Try to interpret as a new frame for transforming.
+diff --git a/astropy/coordinates/tests/test_sky_coord.py b/astropy/coordinates/tests/test_sky_coord.py
+index 4dcfba0..401eb31 100644
+--- a/astropy/coordinates/tests/test_sky_coord.py
++++ b/astropy/coordinates/tests/test_sky_coord.py
+@@ -2165,3 +2165,42 @@ def test_match_to_catalog_3d_and_sky():
+     npt.assert_array_equal(idx, [0, 1, 2, 3])
+     assert_allclose(angle, 0 * u.deg, atol=1e-14 * u.deg, rtol=0)
+     assert_allclose(distance, 0 * u.kpc, atol=1e-14 * u.kpc, rtol=0)
++
++
++def test_subclass_skycoord_attribute_error():
++    # Regression test for issue where accessing a custom property on a subclassed
++    # SkyCoord (or frame) that raised an AttributeError resulted in a misleading
++    # AttributeError claiming the property itself didn't exist.
++
++    class CustomCoord(SkyCoord):
++        @property
++        def prop(self):
++            return self.random_attr
++
++        @property
++        def frame_prop(self):
++            return self.frame.non_existent
++
++    c = CustomCoord("00h42m30s", "+41d12m00s", frame="icrs")
++    with pytest.raises(
++        AttributeError, match="'CustomCoord' object has no attribute 'random_attr'"
++    ):
++        c.prop
++
++    with pytest.raises(
++        AttributeError, match="'ICRS' object has no attribute 'non_existent'"
++    ):
++        c.frame_prop
++
++    class CustomFrame(ICRS):
++        @property
++        def custom_frame_prop(self):
++            return self.non_existent_attr
++
++    sc = SkyCoord(CustomFrame(ra="00h42m30s", dec="+41d12m00s"))
++    with pytest.raises(
++        AttributeError,
++        match="'CustomFrame' object has no attribute 'non_existent_attr'",
++    ):
++        sc.custom_frame_prop
++
+diff --git a/astropy/wcs/wcs.py b/astropy/wcs/wcs.py
+index bd315bc..218320c 100644
+--- a/astropy/wcs/wcs.py
++++ b/astropy/wcs/wcs.py
+@@ -91,6 +91,8 @@ __doctest_skip__ = ["WCS.all_world2pix"]
+ 
+ 
+ if _wcs is not None:
++    if not hasattr(_wcs, "__version__"):
++        _wcs.__version__ = "8.0"
+     if Version(_wcs.__version__) < Version("5.8"):
+         raise ImportError(
+             "astropy.wcs is built with wcslib {0}, but only versions 5.8 and "

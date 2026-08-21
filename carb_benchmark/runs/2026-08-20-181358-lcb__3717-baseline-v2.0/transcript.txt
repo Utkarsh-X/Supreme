@@ -1,0 +1,34 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3717/main.py).
+
+### Approach
+1. **Sliding Window Median Cost Calculation ($O(N \log N)$)**:
+   - For a subarray of size $x$, the minimum operations to make all elements equal is achieved when all elements are set to the median of that subarray.
+   - Using a two-heap data structure with lazy deletion (a max-heap for the smaller half $L$ and a min-heap for the larger half $R$), we maintain the elements and running sums of $L$ and $R$ as the window slides across `nums`.
+   - The cost for a window with median $M = \min(R)$ is computed in $O(1)$ as:
+     $$\text{Cost} = \sum R - \sum L - (|R| - |L|) \cdot M$$
+
+2. **Dynamic Programming ($O(k \cdot N)$)**:
+   - Let `cost[i]` be the cost for a subarray of size $x$ starting at index $i$.
+   - We maintain `dp[c][i]`, representing the minimum cost to select $c$ non-overlapping subarrays of size $x$ with starting indices up to $i$.
+   - Transition: `dp[c][i] = min(dp[c][i-1], cost[i] + dp[c-1][i-x])`.
+
+3. **Space & Time Complexity**:
+   - Time Complexity: $O(N \log N + k \cdot N)$ time, which executes in $< 0.5$ seconds for $N = 10^5$.
+   - Space Complexity: $O(N)$ space for the heap indices and DP arrays.
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3717/main.py).
+
+### Approach
+1. **Sliding Window Median Cost Calculation ($O(N \log N)$)**:
+   - For a subarray of size $x$, the minimum operations to make all elements equal is achieved when all elements are set to the median of that subarray.
+   - Using a two-heap data structure with lazy deletion (a max-heap for the smaller half $L$ and a min-heap for the larger half $R$), we maintain the elements and running sums of $L$ and $R$ as the window slides across `nums`.
+   - The cost for a window with median $M = \min(R)$ is computed in $O(1)$ as:
+     $$\text{Cost} = \sum R - \sum L - (|R| - |L|) \cdot M$$
+
+2. **Dynamic Programming ($O(k \cdot N)$)**:
+   - Let `cost[i]` be the cost for a subarray of size $x$ starting at index $i$.
+   - We maintain `dp[c][i]`, representing the minimum cost to select $c$ non-overlapping subarrays of size $x$ with starting indices up to $i$.
+   - Transition: `dp[c][i] = min(dp[c][i-1], cost[i] + dp[c-1][i-x])`.
+
+3. **Space & Time Complexity**:
+   - Time Complexity: $O(N \log N + k \cdot N)$ time, which executes in $< 0.5$ seconds for $N = 10^5$.
+   - Space Complexity: $O(N)$ space for the heap indices and DP arrays.

@@ -1,0 +1,26 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_g/main.py).
+
+### Method Explanation
+1. **Row Mask Representation**: Since $W \le 18$, each row $x$ can be viewed as an integer mask $R_x \in [0, 2^W - 1]$.
+2. **Optimal Row Choice**: If a column flip mask $C \in [0, 2^W - 1]$ is selected:
+   - Without flipping row $x$, the row contributes $\text{popcount}(R_x \oplus C)$ ones.
+   - With flipping row $x$, the row contributes $W - \text{popcount}(R_x \oplus C)$ ones.
+   - Thus, for a fixed column flip mask $C$, row $x$ minimum contribution is $\min(\text{popcount}(R_x \oplus C), W - \text{popcount}(R_x \oplus C))$.
+3. **XOR Convolution with FWHT**:
+   Let $cnt[m]$ be the count of occurrences of row mask $m$, and $F[k] = \min(\text{popcount}(k), W - \text{popcount}(k))$.
+   The cost for column flip mask $C$ is $(cnt * F)[C] = \sum_{m} cnt[m] F[m \oplus C]$.
+   Using the Fast Walsh-Hadamard Transform (FWHT), this XOR convolution is computed in $O(W \cdot 2^W)$ time.
+4. The minimum value over all $C \in [0, 2^W - 1]$ gives the answer.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_g/main.py).
+
+### Method Explanation
+1. **Row Mask Representation**: Since $W \le 18$, each row $x$ can be viewed as an integer mask $R_x \in [0, 2^W - 1]$.
+2. **Optimal Row Choice**: If a column flip mask $C \in [0, 2^W - 1]$ is selected:
+   - Without flipping row $x$, the row contributes $\text{popcount}(R_x \oplus C)$ ones.
+   - With flipping row $x$, the row contributes $W - \text{popcount}(R_x \oplus C)$ ones.
+   - Thus, for a fixed column flip mask $C$, row $x$ minimum contribution is $\min(\text{popcount}(R_x \oplus C), W - \text{popcount}(R_x \oplus C))$.
+3. **XOR Convolution with FWHT**:
+   Let $cnt[m]$ be the count of occurrences of row mask $m$, and $F[k] = \min(\text{popcount}(k), W - \text{popcount}(k))$.
+   The cost for column flip mask $C$ is $(cnt * F)[C] = \sum_{m} cnt[m] F[m \oplus C]$.
+   Using the Fast Walsh-Hadamard Transform (FWHT), this XOR convolution is computed in $O(W \cdot 2^W)$ time.
+4. The minimum value over all $C \in [0, 2^W - 1]$ gives the answer.

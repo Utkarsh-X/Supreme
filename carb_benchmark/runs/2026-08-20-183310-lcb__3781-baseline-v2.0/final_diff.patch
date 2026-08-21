@@ -1,0 +1,94 @@
+diff --git a/main.py b/main.py
+index c86f6c8..b63fb9b 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,88 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++
++def solve():
++    input_data = sys.stdin.read().strip()
++    if not input_data:
++        return
++    
++    first_bracket = input_data.find('[')
++    last_bracket = input_data.rfind(']')
++    
++    side = int(input_data[:first_bracket].strip())
++    points_str = input_data[first_bracket:last_bracket+1]
++    k = int(input_data[last_bracket+1:].strip())
++    
++    points = json.loads(points_str)
++    
++    # Map points to 1D perimeter positions
++    # Perimeter length L = 4 * side
++    d_list = []
++    for x, y in points:
++        if y == 0:
++            d = x
++        elif x == side:
++            d = side + y
++        elif y == side:
++            d = 3 * side - x
++        elif x == 0:
++            d = 4 * side - y
++        else:
++            # Should not happen according to problem statement (points on boundary)
++            d = 0
++        d_list.append(d)
++        
++    d_list.sort()
++    N = len(d_list)
++    
++    # Duplicate array for circular representation
++    L = 4 * side
++    d_extended = d_list + [x + L for x in d_list]
++    
++    def check(D):
++        target_diff = L - D
++        
++        # Compute nxt array using two pointers
++        nxt = [2 * N] * (2 * N + 1)
++        r = 0
++        for i in range(2 * N):
++            target = d_extended[i] + D
++            while r < 2 * N and d_extended[r] < target:
++                r += 1
++            nxt[i] = r
++            
++        # Binary lifting table
++        # Since k <= 25, k - 1 <= 24 < 32 = 2^5
++        up = [nxt]
++        curr_up = nxt
++        for b in range(1, 5):
++            next_up = [curr_up[curr_up[i]] for i in range(2 * N + 1)]
++            up.append(next_up)
++            curr_up = next_up
++            
++        bits = [b for b in range(5) if ((k - 1) >> b) & 1]
++        
++        for i in range(N):
++            curr = i
++            for b in bits:
++                curr = up[b][curr]
++            if curr < 2 * N and d_extended[curr] - d_extended[i] <= target_diff:
++                return True
++        return False
++
++    low = 1
++    high = (4 * side) // k
++    ans = 1
++    
++    while low <= high:
++        mid = (low + high) // 2
++        if check(mid):
++            ans = mid
++            low = mid + 1
++        else:
++            high = mid - 1
++            
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

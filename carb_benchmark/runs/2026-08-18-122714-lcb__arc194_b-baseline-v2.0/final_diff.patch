@@ -1,0 +1,40 @@
+diff --git a/main.py b/main.py
+index c86f6c8..43f9df4 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,34 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    P = [int(x) for x in input_data[1:N+1]]
++    
++    tree = [0] * (N + 1)
++    
++    def query(idx):
++        s = 0
++        while idx > 0:
++            s += tree[idx]
++            idx -= idx & (-idx)
++        return s
++
++    def add(idx, val):
++        while idx <= N:
++            tree[idx] += val
++            idx += idx & (-idx)
++    
++    total_cost = 0
++    for i in range(1, N + 1):
++        val = P[i - 1]
++        c = (i - 1) - query(val)
++        total_cost += c * i - c * (c + 1) // 2
++        add(val, 1)
++        
++    print(total_cost)
++
++if __name__ == '__main__':
++    main()

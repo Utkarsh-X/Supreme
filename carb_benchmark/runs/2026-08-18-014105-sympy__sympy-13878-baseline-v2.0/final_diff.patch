@@ -1,0 +1,454 @@
+diff --git a/sympy/assumptions/sathandlers.py b/sympy/assumptions/sathandlers.py
+index 61d62d0..6723e56 100644
+--- a/sympy/assumptions/sathandlers.py
++++ b/sympy/assumptions/sathandlers.py
+@@ -1,6 +1,10 @@
+ from __future__ import print_function, division
+ 
+-from collections import MutableMapping, defaultdict
++try:
++    from collections.abc import MutableMapping
++except ImportError:
++    from collections import MutableMapping
++from collections import defaultdict
+ 
+ from sympy.core import (Add, Mul, Pow, Integer, Number, NumberSymbol,)
+ from sympy.core.numbers import ImaginaryUnit
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index d4ca323..099b074 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,6 +1,10 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++try:
++    from collections.abc import Mapping
++except ImportError:
++    from collections import Mapping
++from collections import defaultdict
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+diff --git a/sympy/core/compatibility.py b/sympy/core/compatibility.py
+index 1f1ec06..03ac053 100644
+--- a/sympy/core/compatibility.py
++++ b/sympy/core/compatibility.py
+@@ -7,6 +7,10 @@
+ 
+ import operator
+ from collections import defaultdict
++try:
++    from collections.abc import Iterable, Mapping, MutableMapping, MutableSet, Callable
++except ImportError:
++    from collections import Iterable, Mapping, MutableMapping, MutableSet, Callable
+ from sympy.external import import_module
+ 
+ """
+diff --git a/sympy/core/containers.py b/sympy/core/containers.py
+index 15abd93..db25b47 100644
+--- a/sympy/core/containers.py
++++ b/sympy/core/containers.py
+@@ -14,6 +14,10 @@
+ from sympy.utilities.iterables import iterable
+ 
+ import collections
++try:
++    from collections.abc import MutableSet
++except ImportError:
++    from collections import MutableSet
+ 
+ 
+ class Tuple(Basic):
+@@ -268,7 +272,7 @@ def _sorted_args(self):
+         return tuple(sorted(self.args, key=default_sort_key))
+ 
+ 
+-class OrderedSet(collections.MutableSet):
++class OrderedSet(MutableSet):
+     def __init__(self, iterable=None):
+         if iterable:
+             self.map = collections.OrderedDict((item, None) for item in iterable)
+diff --git a/sympy/core/function.py b/sympy/core/function.py
+index 01ac21e..d8f351d 100644
+--- a/sympy/core/function.py
++++ b/sympy/core/function.py
+@@ -35,7 +35,7 @@
+ from .assumptions import ManagedProperties, _assume_defined
+ from .basic import Basic
+ from .cache import cacheit
+-from .compatibility import iterable, is_sequence, as_int, ordered
++from .compatibility import iterable, is_sequence, as_int, ordered, Iterable
+ from .decorators import _sympifyit
+ from .expr import Expr, AtomicExpr
+ from .numbers import Rational, Float
+@@ -1238,7 +1238,7 @@ def __new__(cls, expr, *variables, **kwargs):
+             if unhandled_non_symbol:
+                 obj = None
+             else:
+-                if isinstance(v, (collections.Iterable, Tuple, MatrixCommon, NDimArray)):
++                if isinstance(v, (Iterable, Tuple, MatrixCommon, NDimArray)):
+                     deriv_fun = derive_by_array
+                     is_symbol = True
+                 else:
+diff --git a/sympy/matrices/common.py b/sympy/matrices/common.py
+index 54c418e..649d054 100644
+--- a/sympy/matrices/common.py
++++ b/sympy/matrices/common.py
+@@ -20,7 +20,7 @@
+ from sympy.simplify import simplify as _simplify, signsimp, nsimplify
+ from sympy.utilities.iterables import flatten
+ from sympy.functions import Abs
+-from sympy.core.compatibility import reduce, as_int, string_types
++from sympy.core.compatibility import reduce, as_int, string_types, Callable, Iterable
+ from sympy.assumptions.refine import refine
+ from sympy.core.decorators import call_highest_priority
+ 
+@@ -2023,7 +2023,7 @@ def __mul__(self, other):
+             return MatrixArithmetic._eval_matrix_mul(self, other)
+ 
+         # if 'other' is not iterable then scalar multiplication.
+-        if not isinstance(other, collections.Iterable):
++        if not isinstance(other, Iterable):
+             try:
+                 return self._eval_scalar_mul(other)
+             except TypeError:
+@@ -2095,7 +2095,7 @@ def __rmul__(self, other):
+             return MatrixArithmetic._eval_matrix_rmul(self, other)
+ 
+         # if 'other' is not iterable then scalar multiplication.
+-        if not isinstance(other, collections.Iterable):
++        if not isinstance(other, Iterable):
+             try:
+                 return self._eval_scalar_rmul(other)
+             except TypeError:
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 91611b8..93ac85c 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -16,7 +16,7 @@
+ from sympy.polys import PurePoly, roots, cancel, gcd
+ from sympy.printing import sstr
+ from sympy.simplify import simplify as _simplify, signsimp, nsimplify
+-from sympy.core.compatibility import reduce, as_int, string_types
++from sympy.core.compatibility import reduce, as_int, string_types, Callable
+ 
+ from sympy.utilities.iterables import flatten, numbered_symbols
+ from sympy.core.decorators import call_highest_priority
+@@ -2045,7 +2045,7 @@ def _handle_creation_inputs(cls, *args, **kwargs):
+                                  "Both dimensions must be positive".format(rows, cols))
+ 
+             # Matrix(2, 2, lambda i, j: i+j)
+-            if len(args) == 3 and isinstance(args[2], collections.Callable):
++            if len(args) == 3 and isinstance(args[2], Callable):
+                 op = args[2]
+                 flat_list = []
+                 for i in range(rows):
+diff --git a/sympy/matrices/sparse.py b/sympy/matrices/sparse.py
+index 7701cbc..2c671dc 100644
+--- a/sympy/matrices/sparse.py
++++ b/sympy/matrices/sparse.py
+@@ -5,7 +5,7 @@
+ 
+ from sympy.core.containers import Dict
+ from sympy.core.expr import Expr
+-from sympy.core.compatibility import is_sequence, as_int, range
++from sympy.core.compatibility import is_sequence, as_int, range, Callable
+ from sympy.core.logic import fuzzy_and
+ from sympy.core.singleton import S
+ from sympy.functions import Abs
+@@ -53,7 +53,7 @@ def __new__(cls, *args, **kwargs):
+             self.rows = as_int(args[0])
+             self.cols = as_int(args[1])
+ 
+-            if isinstance(args[2], collections.Callable):
++            if isinstance(args[2], Callable):
+                 op = args[2]
+                 for i in range(self.rows):
+                     for j in range(self.cols):
+diff --git a/sympy/plotting/plot.py b/sympy/plotting/plot.py
+index b3b0237..70b11b0 100644
+--- a/sympy/plotting/plot.py
++++ b/sympy/plotting/plot.py
+@@ -25,7 +25,10 @@
+ from __future__ import print_function, division
+ 
+ import inspect
+-from collections import Callable
++try:
++    from collections.abc import Callable
++except ImportError:
++    from collections import Callable
+ import warnings
+ import sys
+ 
+diff --git a/sympy/stats/crv_types.py b/sympy/stats/crv_types.py
+index fff7da8..ab8f4eb 100644
+--- a/sympy/stats/crv_types.py
++++ b/sympy/stats/crv_types.py
+@@ -47,7 +47,8 @@
+ 
+ from sympy import (log, sqrt, pi, S, Dummy, Interval, sympify, gamma,
+                    Piecewise, And, Eq, binomial, factorial, Sum, floor, Abs,
+-                   Lambda, Basic, lowergamma, erf, erfc, I)
++                   Lambda, Basic, lowergamma, uppergamma, erf, erfc, I, asin,
++                   atan, hyper)
+ from sympy import beta as beta_fn
+ from sympy import cos, exp, besseli
+ from sympy.stats.crv import (SingleContinuousPSpace, SingleContinuousDistribution,
+@@ -153,6 +154,14 @@ class ArcsinDistribution(SingleContinuousDistribution):
+     def pdf(self, x):
+         return 1/(pi*sqrt((x - self.a)*(self.b - x)))
+ 
++    def _cdf(self, x):
++        a, b = self.a, self.b
++        return Piecewise(
++            (S.Zero, x < a),
++            (2*asin(sqrt((x - a)/(b - a)))/pi, x <= b),
++            (S.One, True)
++        )
++
+ def Arcsin(name, a=0, b=1):
+     r"""
+     Create a Continuous Random Variable with an arcsin distribution.
+@@ -423,6 +432,9 @@ class CauchyDistribution(SingleContinuousDistribution):
+     def pdf(self, x):
+         return 1/(pi*self.gamma*(1 + ((x - self.x0)/self.gamma)**2))
+ 
++    def _cdf(self, x):
++        return S.Half + atan((x - self.x0)/self.gamma)/pi
++
+ 
+ def Cauchy(name, x0, gamma):
+     r"""
+@@ -481,6 +493,13 @@ class ChiDistribution(SingleContinuousDistribution):
+     def pdf(self, x):
+         return 2**(1 - self.k/2)*x**(self.k - 1)*exp(-x**2/2)/gamma(self.k/2)
+ 
++    def _cdf(self, x):
++        k = self.k
++        return Piecewise(
++            (lowergamma(k/2, x**2/2)/gamma(k/2), x >= 0),
++            (S.Zero, True)
++        )
++
+ 
+ def Chi(name, k):
+     r"""
+@@ -670,6 +689,13 @@ def pdf(self, x):
+         p, a, b = self.p, self.a, self.b
+         return a*p/x*((x/b)**(a*p)/(((x/b)**a + 1)**(p + 1)))
+ 
++    def _cdf(self, x):
++        p, a, b = self.p, self.a, self.b
++        return Piecewise(
++            ((1 + (x/b)**(-a))**(-p), x > 0),
++            (S.Zero, True)
++        )
++
+ 
+ def Dagum(name, p, a, b):
+     r"""
+@@ -786,7 +812,7 @@ def Erlang(name, k, l):
+     .. [2] http://mathworld.wolfram.com/ErlangDistribution.html
+     """
+ 
+-    return rv(name, GammaDistribution, (k, 1/l))
++    return rv(name, GammaDistribution, (k, S.One/l))
+ 
+ #-------------------------------------------------------------------------------
+ # Exponential distribution -----------------------------------------------------
+@@ -1042,6 +1068,13 @@ def pdf(self, x):
+         a, s, m = self.a, self.s, self.m
+         return a/s * ((x-m)/s)**(-1-a) * exp(-((x-m)/s)**(-a))
+ 
++    def _cdf(self, x):
++        a, s, m = self.a, self.s, self.m
++        return Piecewise(
++            (exp(-((x - m)/s)**(-a)), x > m),
++            (S.Zero, True)
++        )
++
+ def Frechet(name, a, s=1, m=0):
+     r"""
+     Create a continuous random variable with a Frechet distribution.
+@@ -1111,6 +1144,13 @@ def pdf(self, x):
+     def sample(self):
+         return random.gammavariate(self.k, self.theta)
+ 
++    def _cdf(self, x):
++        k, theta = self.k, self.theta
++        return Piecewise(
++            (lowergamma(k, x/theta)/gamma(k), x >= 0),
++            (S.Zero, True)
++        )
++
+ 
+ def Gamma(name, k, theta):
+     r"""
+@@ -1200,6 +1240,13 @@ def pdf(self, x):
+         a, b = self.a, self.b
+         return b**a/gamma(a) * x**(-a-1) * exp(-b/x)
+ 
++    def _cdf(self, x):
++        a, b = self.a, self.b
++        return Piecewise(
++            (uppergamma(a, b/x)/gamma(a), x > 0),
++            (S.Zero, True)
++        )
++
+ def GammaInverse(name, a, b):
+     r"""
+     Create a continuous random variable with an inverse Gamma distribution.
+@@ -1264,6 +1311,10 @@ def pdf(self, x):
+         beta, mu = self.beta, self.mu
+         return (1/beta)*exp(-((x-mu)/beta)+exp(-((x-mu)/beta)))
+ 
++    def _cdf(self, x):
++        beta, mu = self.beta, self.mu
++        return exp(-exp(-(x - mu)/beta))
++
+ def Gumbel(name, beta, mu):
+     r"""
+     Create a Continuous Random Variable with Gumbel distribution.
+@@ -1385,6 +1436,14 @@ def pdf(self, x):
+         a, b = self.a, self.b
+         return a * b * x**(a-1) * (1-x**a)**(b-1)
+ 
++    def _cdf(self, x):
++        a, b = self.a, self.b
++        return Piecewise(
++            (S.Zero, x < 0),
++            (S.One - (1 - x**a)**b, x <= 1),
++            (S.One, True)
++        )
++
+ def Kumaraswamy(name, a, b):
+     r"""
+     Create a Continuous Random Variable with a Kumaraswamy distribution.
+@@ -1445,6 +1504,13 @@ def pdf(self, x):
+         mu, b = self.mu, self.b
+         return 1/(2*b)*exp(-Abs(x - mu)/b)
+ 
++    def _cdf(self, x):
++        mu, b = self.mu, self.b
++        return Piecewise(
++            (S.Half * exp((x - mu)/b), x <= mu),
++            (S.One - S.Half * exp(-(x - mu)/b), True)
++        )
++
+ 
+ def Laplace(name, mu, b):
+     r"""
+@@ -1501,6 +1567,10 @@ def pdf(self, x):
+         mu, s = self.mu, self.s
+         return exp(-(x - mu)/s)/(s*(1 + exp(-(x - mu)/s))**2)
+ 
++    def _cdf(self, x):
++        mu, s = self.mu, self.s
++        return 1 / (1 + exp(-(x - mu)/s))
++
+ 
+ def Logistic(name, mu, s):
+     r"""
+@@ -1711,6 +1781,13 @@ def pdf(self, x):
+         mu, omega = self.mu, self.omega
+         return 2*mu**mu/(gamma(mu)*omega**mu)*x**(2*mu - 1)*exp(-mu/omega*x**2)
+ 
++    def _cdf(self, x):
++        mu, omega = self.mu, self.omega
++        return Piecewise(
++            (lowergamma(mu, mu/omega * x**2)/gamma(mu), x > 0),
++            (S.Zero, True)
++        )
++
+ 
+ def Nakagami(name, mu, omega):
+     r"""
+@@ -2102,6 +2179,13 @@ def pdf(self, x):
+         sigma = self.sigma
+         return x/sigma**2*exp(-x**2/(2*sigma**2))
+ 
++    def _cdf(self, x):
++        sigma = self.sigma
++        return Piecewise(
++            (S.One - exp(-x**2/(2*sigma**2)), x >= 0),
++            (S.Zero, True)
++        )
++
+ 
+ def Rayleigh(name, sigma):
+     r"""
+@@ -2227,6 +2311,10 @@ def pdf(self, x):
+         nu = self.nu
+         return 1/(sqrt(nu)*beta_fn(S(1)/2, nu/2))*(1 + x**2/nu)**(-(nu + 1)/2)
+ 
++    def _cdf(self, x):
++        nu = self.nu
++        return S.Half + x * hyper([S(1)/2, (nu + 1)/2], [S(3)/2], -x**2/nu) / (sqrt(nu) * beta_fn(S(1)/2, nu/2))
++
+ 
+ def StudentT(name, nu):
+     r"""
+@@ -2554,6 +2642,15 @@ def pdf(self, x):
+         return 1/factorial(
+             n - 1)*Sum((-1)**k*binomial(n, k)*(x - k)**(n - 1), (k, 0, floor(x)))
+ 
++    def _cdf(self, x):
++        n = self.n
++        k = Dummy("k")
++        return Piecewise(
++            (S.Zero, x < 0),
++            (1/factorial(n) * Sum((-1)**k * binomial(n, k) * (x - k)**n, (k, 0, floor(x))), x <= n),
++            (S.One, True)
++        )
++
+ 
+ 
+ def UniformSum(name, n):
+@@ -2702,6 +2799,13 @@ def pdf(self, x):
+     def sample(self):
+         return random.weibullvariate(self.alpha, self.beta)
+ 
++    def _cdf(self, x):
++        alpha, beta = self.alpha, self.beta
++        return Piecewise(
++            (S.One - exp(-(x/alpha)**beta), x >= 0),
++            (S.Zero, True)
++        )
++
+ 
+ def Weibull(name, alpha, beta):
+     r"""
+diff --git a/sympy/stats/tests/test_continuous_rv.py b/sympy/stats/tests/test_continuous_rv.py
+index b831f29..e6835db 100644
+--- a/sympy/stats/tests/test_continuous_rv.py
++++ b/sympy/stats/tests/test_continuous_rv.py
+@@ -15,7 +15,7 @@
+ from sympy import (Symbol, Abs, exp, S, N, pi, simplify, Interval, erf, erfc,
+                    Eq, log, lowergamma, Sum, symbols, sqrt, And, gamma, beta,
+                    Piecewise, Integral, sin, cos, besseli, factorial, binomial,
+-                   floor, expand_func, Rational, I)
++                   floor, expand_func, Rational, I, asin, uppergamma, hyper)
+ 
+ 
+ from sympy.stats.crv_types import NormalDistribution
+@@ -730,3 +730,18 @@ def test_issue_13324():
+     X = Uniform('X', 0, 1)
+     assert E(X, X > Rational(1,2)) == Rational(3,4)
+     assert E(X, X > 0) == Rational(1,2)
++
++
++def test_cdf_precomputed_more():
++    assert cdf(Arcsin("x", 0, 3))(1) == 2*asin(sqrt(S(1)/3))/pi
++    assert cdf(Dagum("x", S(1)/3, S(1)/5, 2))(3) == (1 + (S(3)/2)**(-S(1)/5))**(-S(1)/3)
++    assert cdf(Erlang("x", 1, 1))(1) == 1 - exp(-1)
++    assert cdf(Frechet("x", S(4)/3, 1, 2))(3) == exp(-1)
++    assert cdf(Gamma("x", 0.1, 2))(3) == lowergamma(0.1, S(3)/2)/gamma(0.1)
++    assert cdf(GammaInverse("x", S(5)/7, 2))(3) == uppergamma(S(5)/7, S(2)/3)/gamma(S(5)/7)
++    assert cdf(Kumaraswamy("x", S(1)/123, 5))(S(1)/3) == 1 - (1 - (S(1)/3)**(S(1)/123))**5
++    assert cdf(Laplace("x", 2, 3))(5) == 1 - exp(-1)/2
++    assert cdf(Logistic("x", 1, 0.1))(2) == 1 / (1 + exp(-10.0))
++    assert cdf(Nakagami("x", S(7)/3, 1))(2) == lowergamma(S(7)/3, S(28)/3)/gamma(S(7)/3)
++    assert cdf(StudentT("x", 10))(2) == S.Half + 2*hyper([S(1)/2, S(11)/2], [S(3)/2], -S(2)/5)/(sqrt(10)*beta(S(1)/2, 5))
++    assert cdf(UniformSum("x", 5))(2).doit() == S(9)/40

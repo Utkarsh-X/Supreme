@@ -1,0 +1,10 @@
+I have updated built-in validators in [django/core/validators.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/django/core/validators.py) to pass `params={'value': value}` (or include `'value': value` in existing `params` dictionaries) when raising `ValidationError`.
+
+### Summary of Changes
+1. **[django/core/validators.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/django/core/validators.py)**:
+   - Added `params={'value': value}` to `ValidationError` calls across built-in validators: `RegexValidator`, `URLValidator`, `EmailValidator`, `validate_ipv4_address`, `validate_ipv6_address`, `validate_ipv46_address`, `DecimalValidator`, `FileExtensionValidator`, and `ProhibitNullCharactersValidator`.
+   - Built-in validator functions/instances derived from `RegexValidator` (`validate_integer`, `validate_slug`, `validate_unicode_slug`, `int_list_validator`, `validate_comma_separated_integer_list`) automatically inherit this capability.
+   - `BaseValidator` subclasses (`MaxValueValidator`, `MinValueValidator`, `MinLengthValidator`, `MaxLengthValidator`) already include `'value': value`.
+
+2. **[tests/validators/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13212/tests/validators/tests.py)**:
+   - Added `test_value_in_validation_error` to verify that `ValidationError` exceptions raised by built-in validators include `value` in `params` and support custom error messages formatted with `%(value)s`.

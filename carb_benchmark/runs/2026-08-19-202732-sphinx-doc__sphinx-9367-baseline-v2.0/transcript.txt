@@ -1,0 +1,16 @@
+I have resolved the issue where 1-element tuples were rendered as `(1)` instead of `(1,)`.
+
+### Summary of Changes
+1. **`sphinx/pycode/ast.py`**:
+   - Updated `_UnparseVisitor.visit_Tuple` to check if `len(node.elts) == 1` and append a trailing comma (rendering `(1,)`).
+   - Updated `_UnparseVisitor.visit_Subscript` to preserve trailing commas for 1-element tuple index/slice expressions.
+2. **`tests/test_pycode_ast.py`**:
+   - Added test case `("(1,)", "(1,)")` for single-element tuples.
+I have resolved the issue where 1-element tuples were rendered as `(1)` instead of `(1,)`.
+
+### Summary of Changes
+1. **`sphinx/pycode/ast.py`**:
+   - Updated `_UnparseVisitor.visit_Tuple` to check if `len(node.elts) == 1` and append a trailing comma (rendering `(1,)`).
+   - Updated `_UnparseVisitor.visit_Subscript` to preserve trailing commas for 1-element tuple index/slice expressions.
+2. **`tests/test_pycode_ast.py`**:
+   - Added test case `("(1,)", "(1,)")` for single-element tuples.

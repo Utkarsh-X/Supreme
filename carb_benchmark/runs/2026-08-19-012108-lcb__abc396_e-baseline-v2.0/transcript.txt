@@ -1,0 +1,30 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_e/main.py).
+
+### Method Explanation
+1. **Graph Construction & Consistency Check**:
+   - The problem constraints $A_{X_i} \oplus A_{Y_i} = Z_i$ form an undirected graph where nodes are elements $A_i$ and edges represent XOR difference conditions $Z_i$.
+   - For each connected component $C$, we select an arbitrary root node $r \in C$ and set $V_r = 0$. Using BFS, we determine relative XOR offsets $V_u$ for each node $u \in C$ relative to $r$, such that $A_u = A_r \oplus V_u$.
+   - If any cycle in the component violates the condition $V_u \oplus V_v = Z_i$, then no consistent sequence $A$ can exist, and we output `-1`.
+
+2. **Bitwise Independent Sum Minimization**:
+   - Because XOR operations are bitwise independent across position $k \in [0, 29]$, minimizing $\sum_{u \in C} A_u$ is equivalent to minimizing the count of set bits at each bit position $k$ independently.
+   - For each bit position $k$, we count how many nodes in component $C$ have the $k$-th bit set in $V_u$. If the count of set bits exceeds $|C| / 2$, setting the $k$-th bit of $A_r$ to `1` flips all $k$-th bits in the component, resulting in fewer total set bits for position $k$.
+   - After constructing the optimal $A_r$, we compute $A_u = A_r \oplus V_u$ for all $u \in C$.
+
+### Verification
+The solution was tested against all public samples as well as 1,000 randomized stress test cases against a brute-force solver, passing all tests.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc396_e/main.py).
+
+### Method Explanation
+1. **Graph Construction & Consistency Check**:
+   - The problem constraints $A_{X_i} \oplus A_{Y_i} = Z_i$ form an undirected graph where nodes are elements $A_i$ and edges represent XOR difference conditions $Z_i$.
+   - For each connected component $C$, we select an arbitrary root node $r \in C$ and set $V_r = 0$. Using BFS, we determine relative XOR offsets $V_u$ for each node $u \in C$ relative to $r$, such that $A_u = A_r \oplus V_u$.
+   - If any cycle in the component violates the condition $V_u \oplus V_v = Z_i$, then no consistent sequence $A$ can exist, and we output `-1`.
+
+2. **Bitwise Independent Sum Minimization**:
+   - Because XOR operations are bitwise independent across position $k \in [0, 29]$, minimizing $\sum_{u \in C} A_u$ is equivalent to minimizing the count of set bits at each bit position $k$ independently.
+   - For each bit position $k$, we count how many nodes in component $C$ have the $k$-th bit set in $V_u$. If the count of set bits exceeds $|C| / 2$, setting the $k$-th bit of $A_r$ to `1` flips all $k$-th bits in the component, resulting in fewer total set bits for position $k$.
+   - After constructing the optimal $A_r$, we compute $A_u = A_r \oplus V_u$ for all $u \in C$.
+
+### Verification
+The solution was tested against all public samples as well as 1,000 randomized stress test cases against a brute-force solver, passing all tests.

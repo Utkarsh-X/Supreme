@@ -1,0 +1,101 @@
+diff --git a/main.py b/main.py
+index c86f6c8..8e8048a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,95 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++
++def get_ways(n, pos, candidate_parity, unused_odds_count, unused_evens_count):
++    if candidate_parity == 1:
++        avail_odd = unused_odds_count - 1
++        avail_even = unused_evens_count
++    else:
++        avail_odd = unused_odds_count
++        avail_even = unused_evens_count - 1
++        
++    if avail_odd < 0 or avail_even < 0:
++        return 0
++        
++    rem = n - 1 - pos
++    if rem == 0:
++        needed_odd = 0
++        needed_even = 0
++    else:
++        first_p = 1 - candidate_parity
++        if rem % 2 == 0:
++            needed_odd = rem // 2
++            needed_even = rem // 2
++        else:
++            if first_p == 1:
++                needed_odd = (rem + 1) // 2
++                needed_even = rem // 2
++            else:
++                needed_even = (rem + 1) // 2
++                needed_odd = rem // 2
++                
++    if avail_odd == needed_odd and avail_even == needed_even:
++        return math.factorial(avail_odd) * math.factorial(avail_even)
++    else:
++        return 0
++
++def solve(n, k):
++    unused_odds = list(range(1, n + 1, 2))
++    unused_evens = list(range(2, n + 1, 2))
++    ans = []
++    
++    for pos in range(n):
++        if pos == 0:
++            picked = False
++            for x in range(1, n + 1):
++                c_parity = x % 2
++                w = get_ways(n, pos, c_parity, len(unused_odds), len(unused_evens))
++                if w > 0:
++                    if k > w:
++                        k -= w
++                    else:
++                        ans.append(x)
++                        if c_parity == 1:
++                            unused_odds.remove(x)
++                        else:
++                            unused_evens.remove(x)
++                        picked = True
++                        break
++            if not picked:
++                return []
++        else:
++            req_parity = 1 - (ans[-1] % 2)
++            if req_parity == 1:
++                candidates = unused_odds
++            else:
++                candidates = unused_evens
++                
++            if not candidates:
++                return []
++                
++            w = get_ways(n, pos, req_parity, len(unused_odds), len(unused_evens))
++            if w == 0:
++                return []
++                
++            idx = (k - 1) // w
++            if idx >= len(candidates):
++                return []
++                
++            x = candidates.pop(idx)
++            ans.append(x)
++            k = (k - 1) % w + 1
++
++    return ans
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    n = int(input_data[0])
++    k = int(input_data[1])
++    result = solve(n, k)
++    print(result)
++
++if __name__ == '__main__':
++    main()

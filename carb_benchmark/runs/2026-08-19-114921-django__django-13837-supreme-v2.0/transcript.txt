@@ -1,0 +1,40 @@
+I have updated `django.utils.autoreload.get_child_arguments` to support autoreloading when launched as `python -m <pkg_name> runserver` for any package (not just `django`).
+
+### Summary of Changes
+
+1. **[django/utils/autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/django/utils/autoreload.py#L213-L230)**:
+   - Modified `get_child_arguments()` to import `__main__` and check `__main__.__spec__ is not None and __main__.__spec__.parent`.
+   - When Python is launched via `-m <package>`, Python populates `__main__.__spec__.parent` with `<package>`.
+   - Replaced hardcoded `django.__main__` path check with `-m __main__.__spec__.parent` so custom entrypoint packages (e.g. `python -m custom_pkg runserver`) are properly detected and reloaded as `python -m custom_pkg ...`.
+
+2. **[tests/utils_tests/test_autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/tests/utils_tests/test_autoreload.py#L156-L220)**:
+   - Added unit test `test_run_as_non_django_module` in `TestChildArguments` to verify package-agnostic `-m` handling.
+   - Updated existing test cases to mock `__main__.__spec__` appropriately and removed unused `django.__main__` import.
+
+### Verification
+
+Ran the test suite `utils_tests.test_autoreload`:
+```bash
+python tests/runtests.py --settings=test_sqlite utils_tests.test_autoreload
+```
+All 78 tests in `utils_tests.test_autoreload` passed cleanly.
+I have updated `django.utils.autoreload.get_child_arguments` to support autoreloading when launched as `python -m <pkg_name> runserver` for any package (not just `django`).
+
+### Summary of Changes
+
+1. **[django/utils/autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/django/utils/autoreload.py#L213-L230)**:
+   - Modified `get_child_arguments()` to import `__main__` and check `__main__.__spec__ is not None and __main__.__spec__.parent`.
+   - When Python is launched via `-m <package>`, Python populates `__main__.__spec__.parent` with `<package>`.
+   - Replaced hardcoded `django.__main__` path check with `-m __main__.__spec__.parent` so custom entrypoint packages (e.g. `python -m custom_pkg runserver`) are properly detected and reloaded as `python -m custom_pkg ...`.
+
+2. **[tests/utils_tests/test_autoreload.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13837/tests/utils_tests/test_autoreload.py#L156-L220)**:
+   - Added unit test `test_run_as_non_django_module` in `TestChildArguments` to verify package-agnostic `-m` handling.
+   - Updated existing test cases to mock `__main__.__spec__` appropriately and removed unused `django.__main__` import.
+
+### Verification
+
+Ran the test suite `utils_tests.test_autoreload`:
+```bash
+python tests/runtests.py --settings=test_sqlite utils_tests.test_autoreload
+```
+All 78 tests in `utils_tests.test_autoreload` passed cleanly.

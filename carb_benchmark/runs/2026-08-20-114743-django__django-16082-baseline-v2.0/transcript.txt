@@ -1,0 +1,16 @@
+I have resolved the issue where `output_field` was not correctly inferred when combining numeric expressions of different types (such as `DecimalField` and `IntegerField`) with the `%` / `MOD` operator.
+
+### Cause
+In `django/db/models/expressions.py`, `_connector_combinations` defines type resolution rules for `CombinedExpression`. While `Combinable.MOD` was included in the rules for operands of the same type, it was omitted from the connector list for numeric operations with operands of different types (`IntegerField` and `DecimalField`, `IntegerField` and `FloatField`, etc.).
+
+### Fix
+1. Updated `_connector_combinations` in [django/db/models/expressions.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/django/db/models/expressions.py#L524-L538) to include `Combinable.MOD` in the list of connectors for numeric operations with operands of different types.
+2. Updated tests in [tests/expressions/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/tests/expressions/tests.py#L2416-L2430) to verify output field resolution for `Combinable.MOD` with mixed numeric operand types.
+I have resolved the issue where `output_field` was not correctly inferred when combining numeric expressions of different types (such as `DecimalField` and `IntegerField`) with the `%` / `MOD` operator.
+
+### Cause
+In `django/db/models/expressions.py`, `_connector_combinations` defines type resolution rules for `CombinedExpression`. While `Combinable.MOD` was included in the rules for operands of the same type, it was omitted from the connector list for numeric operations with operands of different types (`IntegerField` and `DecimalField`, `IntegerField` and `FloatField`, etc.).
+
+### Fix
+1. Updated `_connector_combinations` in [django/db/models/expressions.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/django/db/models/expressions.py#L524-L538) to include `Combinable.MOD` in the list of connectors for numeric operations with operands of different types.
+2. Updated tests in [tests/expressions/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16082/tests/expressions/tests.py#L2416-L2430) to verify output field resolution for `Combinable.MOD` with mixed numeric operand types.

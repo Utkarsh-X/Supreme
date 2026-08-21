@@ -1,0 +1,38 @@
+I have updated `BaseConstraint` and its subclasses (`CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint`) to accept a customizable `violation_error_code` parameter.
+
+### Summary of Changes
+
+1. **`django/db/models/constraints.py`**:
+   - Added `violation_error_code = None` as a default attribute on [BaseConstraint](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/django/db/models/constraints.py#L22).
+   - Updated `BaseConstraint.__init__` to accept `violation_error_code=None` and set `self.violation_error_code`.
+   - Updated `BaseConstraint.deconstruct()` to include `violation_error_code` in `kwargs` if it is not `None`.
+   - Updated `CheckConstraint` and `UniqueConstraint` `__init__`, `__repr__`, `__eq__`, and `validate()` methods to pass and set `code=self.violation_error_code` when raising `ValidationError`.
+
+2. **`django/contrib/postgres/constraints.py`**:
+   - Updated `ExclusionConstraint` `__init__`, `__repr__`, `__eq__`, and `validate()` methods to pass `violation_error_code` to `super().__init__` and set `code=self.violation_error_code` when raising `ValidationError`.
+
+3. **Documentation**:
+   - Added documentation for `violation_error_code` parameter and attribute in [docs/ref/models/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [docs/ref/contrib/postgres/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note entry in [docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).
+
+4. **Tests**:
+   - Added unit test cases for `BaseConstraint`, `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` in [tests/constraints/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [tests/postgres_tests/test_constraints.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py).
+I have updated `BaseConstraint` and its subclasses (`CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint`) to accept a customizable `violation_error_code` parameter.
+
+### Summary of Changes
+
+1. **`django/db/models/constraints.py`**:
+   - Added `violation_error_code = None` as a default attribute on [BaseConstraint](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/django/db/models/constraints.py#L22).
+   - Updated `BaseConstraint.__init__` to accept `violation_error_code=None` and set `self.violation_error_code`.
+   - Updated `BaseConstraint.deconstruct()` to include `violation_error_code` in `kwargs` if it is not `None`.
+   - Updated `CheckConstraint` and `UniqueConstraint` `__init__`, `__repr__`, `__eq__`, and `validate()` methods to pass and set `code=self.violation_error_code` when raising `ValidationError`.
+
+2. **`django/contrib/postgres/constraints.py`**:
+   - Updated `ExclusionConstraint` `__init__`, `__repr__`, `__eq__`, and `validate()` methods to pass `violation_error_code` to `super().__init__` and set `code=self.violation_error_code` when raising `ValidationError`.
+
+3. **Documentation**:
+   - Added documentation for `violation_error_code` parameter and attribute in [docs/ref/models/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [docs/ref/contrib/postgres/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note entry in [docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).
+
+4. **Tests**:
+   - Added unit test cases for `BaseConstraint`, `CheckConstraint`, `UniqueConstraint`, and `ExclusionConstraint` in [tests/constraints/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [tests/postgres_tests/test_constraints.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py).

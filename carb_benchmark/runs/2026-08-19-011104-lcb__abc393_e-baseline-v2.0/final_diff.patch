@@ -1,0 +1,36 @@
+diff --git a/main.py b/main.py
+index c86f6c8..85597bc 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,30 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    K = int(input_data[1])
++    A = [int(x) for x in input_data[2:]]
++    
++    M = max(A)
++    
++    freq = [0] * (M + 1)
++    for x in A:
++        freq[x] += 1
++        
++    cnt = [0] * (M + 1)
++    for g in range(1, M + 1):
++        cnt[g] = sum(freq[g::g])
++        
++    ans = [0] * (M + 1)
++    for g in range(1, M + 1):
++        if cnt[g] >= K:
++            ans[g::g] = [g] * (M // g)
++            
++    sys.stdout.write('\n'.join(str(ans[x]) for x in A) + '\n')
++
++if __name__ == '__main__':
++    main()

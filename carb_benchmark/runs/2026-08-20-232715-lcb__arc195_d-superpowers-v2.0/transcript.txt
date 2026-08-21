@@ -1,0 +1,38 @@
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_d/main.py).
+
+### Method Explanation
+
+1. **Problem Analysis & Mathematical Equivalence:**
+   - Any sequence of operations can be mapped to partitioning the elements into monochromatic deletion groups $G_1, G_2, \ldots, G_M$ deleted in order.
+   - The total cost is equal to the number of deletion groups $M$ plus the number of element inversions (pairs of original indices $i < j$ where element $j$ is deleted before element $i$).
+   - Consecutive identical elements can be compressed into Run-Length Encoded (RLE) blocks $(v_k, L_k)$.
+
+2. **Linear-Time DP State Space Reduction:**
+   - For each block $k$, we choose either Choice 1 (start a new deletion group, cost +1) or Choice 2 (join an existing group of value $V_k$).
+   - Joining an existing group born at index $b$ pays $L_k \times \text{cum\_L}[b]$ inversions, where $\text{cum\_L}[b]$ is the accumulated length of subsequent Choice 1 blocks.
+   - Any group with $\text{cum\_L}[b] \geq 2$ will never be joined by Choice 2 in an optimal solution because Choice 1 (cost 1) is strictly cheaper.
+   - This proves that at any point during the left-to-right scan, at most **2 groups** can be alive (one with $\text{cum\_L} = 0$ and one with $\text{cum\_L} = 1$).
+
+3. **Algorithm:**
+   - Compress the array into RLE blocks.
+   - Maintain a DP state mapping $(v_0, v_1) \to \text{min\_cost}$, where $v_0$ is the active value with $\text{cum\_L} = 0$ and $v_1$ is the active value with $\text{cum\_L} = 1$.
+   - Process each RLE block with $O(1)$ state transitions per step, achieving $O(N)$ time complexity overall.
+An optimal solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_d/main.py).
+
+### Method Explanation
+
+1. **Problem Analysis & Mathematical Equivalence:**
+   - Any sequence of operations can be mapped to partitioning the elements into monochromatic deletion groups $G_1, G_2, \ldots, G_M$ deleted in order.
+   - The total cost is equal to the number of deletion groups $M$ plus the number of element inversions (pairs of original indices $i < j$ where element $j$ is deleted before element $i$).
+   - Consecutive identical elements can be compressed into Run-Length Encoded (RLE) blocks $(v_k, L_k)$.
+
+2. **Linear-Time DP State Space Reduction:**
+   - For each block $k$, we choose either Choice 1 (start a new deletion group, cost +1) or Choice 2 (join an existing group of value $V_k$).
+   - Joining an existing group born at index $b$ pays $L_k \times \text{cum\_L}[b]$ inversions, where $\text{cum\_L}[b]$ is the accumulated length of subsequent Choice 1 blocks.
+   - Any group with $\text{cum\_L}[b] \geq 2$ will never be joined by Choice 2 in an optimal solution because Choice 1 (cost 1) is strictly cheaper.
+   - This proves that at any point during the left-to-right scan, at most **2 groups** can be alive (one with $\text{cum\_L} = 0$ and one with $\text{cum\_L} = 1$).
+
+3. **Algorithm:**
+   - Compress the array into RLE blocks.
+   - Maintain a DP state mapping $(v_0, v_1) \to \text{min\_cost}$, where $v_0$ is the active value with $\text{cum\_L} = 0$ and $v_1$ is the active value with $\text{cum\_L} = 1$.
+   - Process each RLE block with $O(1)$ state transitions per step, achieving $O(N)$ time complexity overall.

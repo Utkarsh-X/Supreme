@@ -1,0 +1,44 @@
+diff --git a/main.py b/main.py
+index c86f6c8..e5b20e6 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,38 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    adj = [[] for _ in range(N + 1)]
++    idx = 2
++    for _ in range(M):
++        u = int(input_data[idx])
++        v = int(input_data[idx+1])
++        w = int(input_data[idx+2])
++        idx += 3
++        adj[u].append((v, w))
++        adj[v].append((u, w))
++        
++    min_xor = float('inf')
++    
++    def dfs(u, mask, current_xor):
++        nonlocal min_xor
++        if u == N:
++            if current_xor < min_xor:
++                min_xor = current_xor
++            return
++        
++        for v, w in adj[u]:
++            if not (mask & (1 << v)):
++                dfs(v, mask | (1 << v), current_xor ^ w)
++                
++    dfs(1, 1 << 1, 0)
++    print(min_xor)
++
++if __name__ == '__main__':
++    main()

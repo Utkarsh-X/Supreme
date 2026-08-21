@@ -1,0 +1,38 @@
+I have solved the problem and implemented the complete solution in `main.py`.
+
+### Analysis & Solution Overview
+
+1. **Graph Condition for Strong Connectivity:**
+   - The graph initially has forward edges $1 \to 2 \to \dots \to 2N$.
+   - A pairing of White vertices ($u$) and Black vertices ($v$) adds directed edges $u \to v$.
+   - The graph is strongly connected if and only if for every cut $k \in \{1, 2, \dots, 2N-1\}$, there is at least one back-edge crossing cut $k$ from right to left (i.e. $u > k \ge v$).
+
+2. **Mathematical Reduction:**
+   - Let $w_b$ be the total number of White vertices appearing before the $(b+1)$-th Black vertex in string $S$.
+   - The number of valid pairings ending at cut $2N$ such that all cuts $k \in \{1, \dots, 2N-1\}$ are covered satisfies a recurrence relation for array $A[0 \dots N]$:
+     $$A[b] = \left( w_b! - \sum_{b'=0}^{b-1} A[b'] (w_b - b')! \right) \cdot (w_b - b)!^{-1} \pmod{998244353}$$
+     when $w_b \ge b$, and $A[b] = 0$ when $w_b < b$.
+   - The final answer is $A[N]$.
+
+3. **Divide-and-Conquer NTT (CDQ NTT) Optimization:**
+   - The summation $\sum_{b'=0}^{b-1} A[b'] (w_b - b')!$ is calculated using Divide-and-Conquer NTT (CDQ NTT) with range trimming and NTT butterfly vectorization.
+   - This reduces the overall time complexity to $O(N \log^2 N)$, easily solving $N = 200,000$ in sub-second runtime.
+I have solved the problem and implemented the complete solution in `main.py`.
+
+### Analysis & Solution Overview
+
+1. **Graph Condition for Strong Connectivity:**
+   - The graph initially has forward edges $1 \to 2 \to \dots \to 2N$.
+   - A pairing of White vertices ($u$) and Black vertices ($v$) adds directed edges $u \to v$.
+   - The graph is strongly connected if and only if for every cut $k \in \{1, 2, \dots, 2N-1\}$, there is at least one back-edge crossing cut $k$ from right to left (i.e. $u > k \ge v$).
+
+2. **Mathematical Reduction:**
+   - Let $w_b$ be the total number of White vertices appearing before the $(b+1)$-th Black vertex in string $S$.
+   - The number of valid pairings ending at cut $2N$ such that all cuts $k \in \{1, \dots, 2N-1\}$ are covered satisfies a recurrence relation for array $A[0 \dots N]$:
+     $$A[b] = \left( w_b! - \sum_{b'=0}^{b-1} A[b'] (w_b - b')! \right) \cdot (w_b - b)!^{-1} \pmod{998244353}$$
+     when $w_b \ge b$, and $A[b] = 0$ when $w_b < b$.
+   - The final answer is $A[N]$.
+
+3. **Divide-and-Conquer NTT (CDQ NTT) Optimization:**
+   - The summation $\sum_{b'=0}^{b-1} A[b'] (w_b - b')!$ is calculated using Divide-and-Conquer NTT (CDQ NTT) with range trimming and NTT butterfly vectorization.
+   - This reduces the overall time complexity to $O(N \log^2 N)$, easily solving $N = 200,000$ in sub-second runtime.

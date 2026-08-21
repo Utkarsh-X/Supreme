@@ -1,0 +1,56 @@
+diff --git a/main.py b/main.py
+index c86f6c8..a6b7c4b 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,50 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    P = [int(x) for x in input_data[2:2+N]]
++    
++    P.sort()
++    
++    P_min = P[0]
++    high = 2 * math.isqrt(M * P_min) + 2 * P_min + 1
++    low = 0
++    ans_X = 0
++    
++    while low <= high:
++        mid = (low + high) // 2
++        cost = 0
++        for p in P:
++            if p > mid:
++                break
++            k = (mid // p + 1) // 2
++            cost += k * k * p
++            if cost > M:
++                break
++        
++        if cost <= M:
++            ans_X = mid
++            low = mid + 1
++        else:
++            high = mid - 1
++            
++    total_cost = 0
++    total_units = 0
++    for p in P:
++        if p > ans_X:
++            break
++        k = (ans_X // p + 1) // 2
++        total_cost += k * k * p
++        total_units += k
++        
++    rem_budget = M - total_cost
++    ans = total_units + (rem_budget // (ans_X + 1))
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

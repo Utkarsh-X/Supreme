@@ -1,0 +1,36 @@
+I have completed the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3770/main.py).
+
+### Method Explanation
+1. **Fixed Character Construction (`'T'` conditions)**:
+   - Any index $i$ with `str1[i] == 'T'` forces `word[i + j] == str2[j]` for $j \in [0, m - 1]$.
+   - If any index is forced to have two different characters by overlapping `'T'` conditions, no solution exists, so we return `""`.
+
+2. **Window Analysis (`'F'` conditions)**:
+   - For each index $i$ with `str1[i] == 'F'`, the substring `word[i .. i + m - 1]` must not equal `str2`.
+   - If a window is already broken by fixed characters (i.e. some fixed position in the window differs from `str2`), the `'F'` condition is automatically satisfied.
+   - If a window has all its positions fixed by `'T'` and matching `str2`, it can never be broken, so we return `""`.
+   - Otherwise, the window is unbroken and we identify its last unfixed index $L_i$.
+
+3. **Greedy Construction**:
+   - We construct `word` from left to right ($p = 0, 1, \dots, N - 1$).
+   - At position $p$, if the character is already fixed by a `'T'` condition, we assign that character (returning `""` if it violates any active window ending its unfixed range at $p$).
+   - If position $p$ is unfixed, we select the lexicographically smallest lowercase character `'a'..'z'` that is not forbidden by any active unbroken window for which $p$ is the last unfixed position.
+   - As characters are set, any active `'F'` window that experiences a mismatch with `str2` is marked as broken.
+I have completed the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3770/main.py).
+
+### Method Explanation
+1. **Fixed Character Construction (`'T'` conditions)**:
+   - Any index $i$ with `str1[i] == 'T'` forces `word[i + j] == str2[j]` for $j \in [0, m - 1]$.
+   - If any index is forced to have two different characters by overlapping `'T'` conditions, no solution exists, so we return `""`.
+
+2. **Window Analysis (`'F'` conditions)**:
+   - For each index $i$ with `str1[i] == 'F'`, the substring `word[i .. i + m - 1]` must not equal `str2`.
+   - If a window is already broken by fixed characters (i.e. some fixed position in the window differs from `str2`), the `'F'` condition is automatically satisfied.
+   - If a window has all its positions fixed by `'T'` and matching `str2`, it can never be broken, so we return `""`.
+   - Otherwise, the window is unbroken and we identify its last unfixed index $L_i$.
+
+3. **Greedy Construction**:
+   - We construct `word` from left to right ($p = 0, 1, \dots, N - 1$).
+   - At position $p$, if the character is already fixed by a `'T'` condition, we assign that character (returning `""` if it violates any active window ending its unfixed range at $p$).
+   - If position $p$ is unfixed, we select the lexicographically smallest lowercase character `'a'..'z'` that is not forbidden by any active unbroken window for which $p$ is the last unfixed position.
+   - As characters are set, any active `'F'` window that experiences a mismatch with `str2` is marked as broken.

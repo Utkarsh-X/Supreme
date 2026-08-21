@@ -1,0 +1,10 @@
+### Root Cause
+In [sympy/core/sympify.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L510-L517), `hit = kern in s` was incorrectly placed outside the `if ' ' in s:` block. When an expression contains parentheses but does not produce any spaces after string transformations (such as `"(2*x)/(x-1)"`), the `if ' ' in s:` block is skipped, leaving `kern` undefined when `hit = kern in s` is evaluated and raising an `UnboundLocalError`.
+
+### Solution
+Indented `hit = kern in s` inside the `if ' ' in s:` block in [sympy/core/sympify.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L510-L517) so `kern` is only evaluated when created, while `hit` defaults to `False` otherwise.
+### Root Cause
+In [sympy/core/sympify.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L510-L517), `hit = kern in s` was incorrectly placed outside the `if ' ' in s:` block. When an expression contains parentheses but does not produce any spaces after string transformations (such as `"(2*x)/(x-1)"`), the `if ' ' in s:` block is skipped, leaving `kern` undefined when `hit = kern in s` is evaluated and raising an `UnboundLocalError`.
+
+### Solution
+Indented `hit = kern in s` inside the `if ' ' in s:` block in [sympy/core/sympify.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-19637/sympy/core/sympify.py#L510-L517) so `kern` is only evaluated when created, while `hit` defaults to `False` otherwise.

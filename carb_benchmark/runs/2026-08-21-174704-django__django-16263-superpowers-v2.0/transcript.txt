@@ -1,0 +1,44 @@
+I have completed the implementation to strip unused annotations from `count()` queries in Django.
+
+### Summary of Changes
+
+1. **`django/db/models/sql/query.py`**:
+   - Added `Query.get_referenced_base_annotations()`, which inspects expression trees in `where`, `order_by` (if active), `group_by`, `distinct_fields`, `extra`, and `annotation_select_mask`, computing the transitive closure of referenced annotation aliases.
+   - Added `Query.get_annotation_table_aliases(annotation)` to identify all table joins referenced by an annotation (including subquery external column references).
+   - Updated `Query.get_count(using)` to:
+     - Clear ordering when allowed (`obj.clear_ordering(force=False)`).
+     - Identify all unreferenced annotations.
+     - Decrement reference counts on table join aliases used by stripped annotations (`obj.unref_alias(...)`).
+     - Remove unused annotations from `obj.annotations` and `obj.annotation_select_mask`.
+     - Invalidate `_annotation_select_cache`.
+
+2. **`tests/annotations/tests.py`**:
+   - Added unit tests verifying:
+     - Unused annotations and their associated joins are stripped from `count()` queries (e.g. `Book.objects.annotate(Count('authors')).count()` produces `SELECT COUNT(*) FROM book` without unnecessary `JOIN`s or `GROUP BY` subqueries).
+     - Annotations used in filters are retained.
+     - Chains of referenced annotations (where annotation `b` depends on annotation `a` and `b` is used in a filter) are retained properly while unreferenced annotations are stripped.
+
+3. **Verification**:
+   - Ran test suites across `annotations`, `queries`, `aggregation`, `expressions`, `defer`, and `select_related` (905 tests total, all passed cleanly).
+I have completed the implementation to strip unused annotations from `count()` queries in Django.
+
+### Summary of Changes
+
+1. **`django/db/models/sql/query.py`**:
+   - Added `Query.get_referenced_base_annotations()`, which inspects expression trees in `where`, `order_by` (if active), `group_by`, `distinct_fields`, `extra`, and `annotation_select_mask`, computing the transitive closure of referenced annotation aliases.
+   - Added `Query.get_annotation_table_aliases(annotation)` to identify all table joins referenced by an annotation (including subquery external column references).
+   - Updated `Query.get_count(using)` to:
+     - Clear ordering when allowed (`obj.clear_ordering(force=False)`).
+     - Identify all unreferenced annotations.
+     - Decrement reference counts on table join aliases used by stripped annotations (`obj.unref_alias(...)`).
+     - Remove unused annotations from `obj.annotations` and `obj.annotation_select_mask`.
+     - Invalidate `_annotation_select_cache`.
+
+2. **`tests/annotations/tests.py`**:
+   - Added unit tests verifying:
+     - Unused annotations and their associated joins are stripped from `count()` queries (e.g. `Book.objects.annotate(Count('authors')).count()` produces `SELECT COUNT(*) FROM book` without unnecessary `JOIN`s or `GROUP BY` subqueries).
+     - Annotations used in filters are retained.
+     - Chains of referenced annotations (where annotation `b` depends on annotation `a` and `b` is used in a filter) are retained properly while unreferenced annotations are stripped.
+
+3. **Verification**:
+   - Ran test suites across `annotations`, `queries`, `aggregation`, `expressions`, `defer`, and `select_related` (905 tests total, all passed cleanly).

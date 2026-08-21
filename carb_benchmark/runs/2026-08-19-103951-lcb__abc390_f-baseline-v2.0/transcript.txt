@@ -1,0 +1,44 @@
+An optimal $O(N)$ Python 3 solution has been implemented in `main.py`.
+
+### Method Explanation
+
+1. **Operation Properties**:
+   For any subarray $A[L..R]$, let $S(L,R)$ be the set of distinct values in $A[L..R]$. An operation consists of selecting a range $[l, r]$ such that every integer from $l$ to $r$ is present on the blackboard and removing all of them. Each operation can remove elements from at most one maximal contiguous block of values in $S(L,R)$, and every maximal contiguous block $[a, b]$ in $S(L,R)$ can be removed in a single operation. Thus, $f(L,R)$ is equal to the number of maximal contiguous blocks of integers in $S(L,R)$.
+
+2. **Counting via Component Starts**:
+   The number of maximal contiguous blocks in a subset $S$ is equal to the number of elements $x \in S$ such that $(x-1) \notin S$.
+   Thus:
+   $$\sum_{1 \le L \le R \le N} f(L, R) = \sum_{x=1}^N \sum_{1 \le L \le R \le N} \mathbb{I}(x \in S(L, R) \text{ and } x-1 \notin S(L, R))$$
+
+3. **Inclusion-Exclusion**:
+   For a fixed $x$:
+   - Let $E(x-1)$ be the set of intervals $[L, R]$ containing no occurrence of $x-1$.
+   - Let $E(x-1) \cap E(x)$ be the set of intervals $[L, R]$ containing no occurrence of either $x-1$ or $x$.
+
+   The number of intervals $[L, R]$ containing $x$ but not $x-1$ is given by:
+   $$|E(x-1)| - |E(x-1) \cap E(x)|$$
+
+4. **Efficient Computation**:
+   For each $x$, the values $|E(x-1)|$ and $|E(x-1) \cap E(x)|$ can be computed by finding the gaps between occurrences of $x-1$ (and $x$). Since the total number of elements across all list occurrences is $N$, merging the occurrence lists of $x-1$ and $x$ for all $x \in \{1, \dots, N\}$ takes $O(N)$ time in total.
+An optimal $O(N)$ Python 3 solution has been implemented in `main.py`.
+
+### Method Explanation
+
+1. **Operation Properties**:
+   For any subarray $A[L..R]$, let $S(L,R)$ be the set of distinct values in $A[L..R]$. An operation consists of selecting a range $[l, r]$ such that every integer from $l$ to $r$ is present on the blackboard and removing all of them. Each operation can remove elements from at most one maximal contiguous block of values in $S(L,R)$, and every maximal contiguous block $[a, b]$ in $S(L,R)$ can be removed in a single operation. Thus, $f(L,R)$ is equal to the number of maximal contiguous blocks of integers in $S(L,R)$.
+
+2. **Counting via Component Starts**:
+   The number of maximal contiguous blocks in a subset $S$ is equal to the number of elements $x \in S$ such that $(x-1) \notin S$.
+   Thus:
+   $$\sum_{1 \le L \le R \le N} f(L, R) = \sum_{x=1}^N \sum_{1 \le L \le R \le N} \mathbb{I}(x \in S(L, R) \text{ and } x-1 \notin S(L, R))$$
+
+3. **Inclusion-Exclusion**:
+   For a fixed $x$:
+   - Let $E(x-1)$ be the set of intervals $[L, R]$ containing no occurrence of $x-1$.
+   - Let $E(x-1) \cap E(x)$ be the set of intervals $[L, R]$ containing no occurrence of either $x-1$ or $x$.
+
+   The number of intervals $[L, R]$ containing $x$ but not $x-1$ is given by:
+   $$|E(x-1)| - |E(x-1) \cap E(x)|$$
+
+4. **Efficient Computation**:
+   For each $x$, the values $|E(x-1)|$ and $|E(x-1) \cap E(x)|$ can be computed by finding the gaps between occurrences of $x-1$ (and $x$). Since the total number of elements across all list occurrences is $N$, merging the occurrence lists of $x-1$ and $x$ for all $x \in \{1, \dots, N\}$ takes $O(N)$ time in total.

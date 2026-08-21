@@ -1,0 +1,79 @@
+diff --git a/main.py b/main.py
+index c86f6c8..06ac2d4 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,73 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    W, H, L, R, D, U = map(int, input_data)
++
++    MOD = 998244353
++    MAX_N = W + H + 10
++
++    fact = [1] * (MAX_N + 1)
++    inv = [1] * (MAX_N + 1)
++    for i in range(1, MAX_N + 1):
++        fact[i] = (fact[i - 1] * i) % MOD
++    inv[MAX_N] = pow(fact[MAX_N], MOD - 2, MOD)
++    for i in range(MAX_N - 1, -1, -1):
++        inv[i] = (inv[i + 1] * (i + 1)) % MOD
++
++    def nCr_mod(n, r):
++        if r < 0 or r > n:
++            return 0
++        return fact[n] * inv[r] % MOD * inv[n - r] % MOD
++
++    def count_rect_paths_mod(x_min, x_max, y_min, y_max):
++        if x_min > x_max or y_min > y_max:
++            return 0
++        w = x_max - x_min
++        h = y_max - y_min
++        ans = (nCr_mod(w + h + 4, w + 2) - (w + 3) - (h + 1) * (w + 2)) % MOD
++        return ans
++
++    S_left = count_rect_paths_mod(0, L - 1, 0, H)
++    S_right = count_rect_paths_mod(R + 1, W, 0, H)
++    S_bottom = count_rect_paths_mod(0, W, 0, D - 1)
++    S_top = count_rect_paths_mod(0, W, U + 1, H)
++
++    S_LB = count_rect_paths_mod(0, L - 1, 0, D - 1)
++    S_LT = count_rect_paths_mod(0, L - 1, U + 1, H)
++    S_RB = count_rect_paths_mod(R + 1, W, 0, D - 1)
++    S_RT = count_rect_paths_mod(R + 1, W, U + 1, H)
++
++    union_rects = (S_left + S_right + S_bottom + S_top - S_LB - S_LT - S_RB - S_RT) % MOD
++
++    above_ext = 0
++    if L - 1 >= 0 and U + 1 <= H:
++        inv_U1 = inv[U + 1]
++        inv_HU = inv[H - U]
++        W_H_U_1 = W + H - U + 1
++        L_H_U = L + H - U
++        U_2 = U + 2
++        for xm in range(0, L):
++            A = (fact[xm + U_2] * inv[xm + 1] % MOD * inv_U1 - 1)
++            B = (fact[W_H_U_1 - xm] * inv[W - xm + 1] - fact[L_H_U - xm] * inv[L - xm]) % MOD * inv_HU % MOD
++            above_ext = (above_ext + A * B) % MOD
++
++    right_ext = 0
++    if D - 1 >= 0 and R + 1 <= W:
++        inv_R1 = inv[R + 1]
++        inv_WR = inv[W - R]
++        H_W_R_1 = H + W - R + 1
++        D_W_R = D + W - R
++        R_2 = R + 2
++        for ym in range(0, D):
++            AR = (fact[ym + R_2] * inv[ym + 1] % MOD * inv_R1 - 1)
++            BR = (fact[H_W_R_1 - ym] * inv[H - ym + 1] - fact[D_W_R - ym] * inv[D - ym]) % MOD * inv_WR % MOD
++            right_ext = (right_ext + AR * BR) % MOD
++
++    ans = (union_rects + above_ext + right_ext) % MOD
++    print(ans)
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,22 @@
+I have resolved the issue where `MultiValueField` ignored required subfields when `required=False` and `require_all_fields=False`.
+
+### Root Cause
+In `MultiValueField.clean(value)`, when `value` was a list of empty values (e.g. `['', '']`), the check `if not value or not [v for v in value if v not in self.empty_values]:` returned `self.compress([])` immediately if `self.required` was `False`. This bypassed individual subfield validation, ignoring any subfield defined with `required=True` when `require_all_fields=False`.
+
+### Fix
+Updated `MultiValueField.clean` in `django/forms/fields.py` so that when `value` is a list of empty values and `self.required` is `False`, `clean()` only returns `self.compress([])` early if `require_all_fields=True` or if no individual subfield is required (`not any(field.required for field in self.fields)`). Otherwise, execution proceeds to the subfield validation loop, raising the appropriate `incomplete` validation error for required subfields.
+
+### Verification
+Ran the `MultiValueField` test suite:
+- `python tests/runtests.py forms_tests.field_tests.test_multivaluefield forms_tests.tests.test_forms` (134 tests passed cleanly).
+I have resolved the issue where `MultiValueField` ignored required subfields when `required=False` and `require_all_fields=False`.
+
+### Root Cause
+In `MultiValueField.clean(value)`, when `value` was a list of empty values (e.g. `['', '']`), the check `if not value or not [v for v in value if v not in self.empty_values]:` returned `self.compress([])` immediately if `self.required` was `False`. This bypassed individual subfield validation, ignoring any subfield defined with `required=True` when `require_all_fields=False`.
+
+### Fix
+Updated `MultiValueField.clean` in `django/forms/fields.py` so that when `value` is a list of empty values and `self.required` is `False`, `clean()` only returns `self.compress([])` early if `require_all_fields=True` or if no individual subfield is required (`not any(field.required for field in self.fields)`). Otherwise, execution proceeds to the subfield validation loop, raising the appropriate `incomplete` validation error for required subfields.
+
+### Verification
+Ran the `MultiValueField` test suite:
+- `python tests/runtests.py forms_tests.field_tests.test_multivaluefield forms_tests.tests.test_forms` (134 tests passed cleanly).

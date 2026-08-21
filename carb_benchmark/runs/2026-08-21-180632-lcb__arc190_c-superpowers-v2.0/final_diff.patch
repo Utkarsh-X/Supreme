@@ -1,0 +1,139 @@
+diff --git a/main.py b/main.py
+index c86f6c8..3545966 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,133 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    H_orig = int(next(iterator))
++    W_orig = int(next(iterator))
++    
++    MOD = 998244353
++    
++    A_orig = []
++    for _ in range(H_orig):
++        row = [int(next(iterator)) for _ in range(W_orig)]
++        A_orig.append(row)
++        
++    Q = int(next(iterator))
++    sh = int(next(iterator))
++    sw = int(next(iterator))
++    
++    queries_orig = []
++    for _ in range(Q):
++        d = next(iterator)
++        a = int(next(iterator))
++        queries_orig.append((d, a))
++        
++    if H_orig > W_orig:
++        # Transpose:
++        # Transposed grid has size H_eff = W_orig, W_eff = H_orig
++        # Column c of transposed grid is row c of original grid!
++        H, W = W_orig, H_orig
++        A_cols = [row[:] for row in A_orig]
++        r_curr, c_curr = sw - 1, sh - 1
++        
++        dir_map = {'U': 'L', 'D': 'R', 'L': 'U', 'R': 'D'}
++        queries = [(dir_map[d], a) for d, a in queries_orig]
++    else:
++        H, W = H_orig, W_orig
++        # A_cols[c][r] is value at row r, column c
++        A_cols = [[A_orig[r][c] for r in range(H)] for c in range(W)]
++        r_curr, c_curr = sh - 1, sw - 1
++        queries = queries_orig
++
++    # alpha[w] is for paths before column w (0 <= w <= W)
++    # beta[w] is for paths from column w onwards (0 <= w <= W)
++    alpha = [[0] * H for _ in range(W + 1)]
++    beta = [[0] * H for _ in range(W + 1)]
++    
++    # Base cases
++    alpha[0][0] = 1
++    for w in range(W):
++        A_c = A_cols[w]
++        alpha_w = alpha[w]
++        alpha_next = alpha[w + 1]
++        alpha_next[0] = (A_c[0] * alpha_w[0]) % MOD
++        for j in range(1, H):
++            alpha_next[j] = (A_c[j] * (alpha_w[j] + alpha_next[j - 1])) % MOD
++            
++    beta[W][H - 1] = 1
++    for w in range(W - 1, -1, -1):
++        A_c = A_cols[w]
++        beta_next = beta[w + 1]
++        beta_curr = beta[w]
++        beta_curr[H - 1] = (A_c[H - 1] * beta_next[H - 1]) % MOD
++        for i in range(H - 2, -1, -1):
++            beta_curr[i] = (A_c[i] * (beta_next[i] + beta_curr[i + 1])) % MOD
++
++    Ans = alpha[W][H - 1]
++    
++    out = []
++    c_prev = c_curr
++    
++    for d, a in queries:
++        if d == 'U':
++            r_curr -= 1
++        elif d == 'D':
++            r_curr += 1
++        elif d == 'L':
++            c_curr -= 1
++        elif d == 'R':
++            c_curr += 1
++            
++        if c_curr == c_prev + 1:
++            # Moved right: update alpha[c_curr] from alpha[c_prev] using column c_prev
++            A_c_prev = A_cols[c_prev]
++            alpha_w = alpha[c_prev]
++            alpha_next = alpha[c_curr]
++            alpha_next[0] = (A_c_prev[0] * alpha_w[0]) % MOD
++            for j in range(1, H):
++                alpha_next[j] = (A_c_prev[j] * (alpha_w[j] + alpha_next[j - 1])) % MOD
++        elif c_curr == c_prev - 1:
++            # Moved left: update beta[c_prev] from beta[c_prev + 1] using column c_prev
++            A_c_prev = A_cols[c_prev]
++            beta_next = beta[c_prev + 1]
++            beta_curr = beta[c_prev]
++            beta_curr[H - 1] = (A_c_prev[H - 1] * beta_next[H - 1]) % MOD
++            for i in range(H - 2, -1, -1):
++                beta_curr[i] = (A_c_prev[i] * (beta_next[i] + beta_curr[i + 1])) % MOD
++
++        # Compute sum_beta_u and sum_v_alpha directly
++        A_c = A_cols[c_curr]
++        old_val = A_c[r_curr]
++        delta_a = (a - old_val) % MOD
++        
++        beta_c_plus_1 = beta[c_curr + 1]
++        alpha_c = alpha[c_curr]
++        
++        u_val = 1
++        sum_beta_u = beta_c_plus_1[r_curr]
++        for j in range(r_curr + 1, H):
++            u_val = (u_val * A_c[j]) % MOD
++            sum_beta_u += beta_c_plus_1[j] * u_val
++            
++        v_val = delta_a
++        sum_v_alpha = delta_a * alpha_c[r_curr]
++        for k in range(r_curr - 1, -1, -1):
++            v_val = (v_val * A_c[k]) % MOD
++            sum_v_alpha += v_val * alpha_c[k]
++            
++        delta_ans = ((sum_beta_u % MOD) * (sum_v_alpha % MOD)) % MOD
++        Ans = (Ans + delta_ans) % MOD
++        out.append(Ans)
++        
++        # Update grid value
++        A_c[r_curr] = a
++        c_prev = c_curr
++
++    sys.stdout.write('\n'.join(map(str, out)) + '\n')
++
++if __name__ == '__main__':
++    main()

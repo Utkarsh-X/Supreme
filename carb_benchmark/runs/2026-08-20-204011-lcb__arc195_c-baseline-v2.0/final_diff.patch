@@ -1,0 +1,123 @@
+diff --git a/main.py b/main.py
+index c86f6c8..8b8adcf 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,117 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    T = int(input_data[0])
++    idx = 1
++    
++    out = []
++    OFFSET = 500000000
++    
++    for _ in range(T):
++        R = int(input_data[idx])
++        B = int(input_data[idx+1])
++        idx += 2
++        
++        if R % 2 != 0:
++            out.append("No")
++            continue
++            
++        if R == 0:
++            if B % 2 != 0:
++                out.append("No")
++                continue
++            out.append("Yes")
++            k = B // 2
++            if B == 2:
++                raw_path = [(0, 0), (1, 1)]
++            else:
++                raw_path = []
++                for i in range(k):
++                    raw_path.append((i, i))
++                raw_path.append((k, k - 2))
++                for j in range(1, k):
++                    raw_path.append((k - j, k - 2 - j))
++            for r, c in raw_path:
++                out.append(f"B {r + OFFSET} {c + OFFSET}")
++        elif B == 0:
++            out.append("Yes")
++            m = R // 2
++            raw_path = []
++            for i in range(m):
++                raw_path.append((i, 0))
++            for i in range(m):
++                raw_path.append((m - 1 - i, 1))
++            for r, c in raw_path:
++                out.append(f"R {r + OFFSET} {c + OFFSET}")
++        elif B % 2 == 0:
++            out.append("Yes")
++            k = B // 2
++            m = R // 2
++            b_pts = []
++            for i in range(k + 1):
++                b_pts.append((i, i))
++            for j in range(k):
++                b_pts.append((k - 1 - j, k + 1 - j))
++            
++            if m == 1:
++                r_pts = [(0, 2), (0, 1)]
++            else:
++                r_pts = [(0, 2)]
++                for r in range(0, -m, -1):
++                    if r == 0:
++                        r_pts.append((0, 1))
++                    else:
++                        r_pts.append((r, 1))
++                for r in range(-(m - 1), 0):
++                    r_pts.append((r, 0))
++            
++            raw_path = b_pts[:-1] + r_pts
++            for i in range(B):
++                r, c = raw_path[i]
++                out.append(f"B {r + OFFSET} {c + OFFSET}")
++            for i in range(B, B + R):
++                r, c = raw_path[i]
++                out.append(f"R {r + OFFSET} {c + OFFSET}")
++        else:
++            # R >= 2 even, B >= 1 odd
++            out.append("Yes")
++            k = B // 2
++            m = R // 2
++            if B == 1:
++                b_pts = [(0, 0), (1, 1)]
++            else:
++                b_pts = [(0, 0)]
++                for i in range(k + 1):
++                    b_pts.append((1 + i, -1 + i))
++                b_pts.append((k, k))
++                for j in range(1, k):
++                    b_pts.append((k - j, k - j))
++            
++            if m == 1:
++                r_pts = [(1, 1), (0, 1)]
++            else:
++                r_pts = [(1, 1)]
++                for r in range(0, -m, -1):
++                    if r == 0:
++                        r_pts.append((0, 1))
++                    else:
++                        r_pts.append((r, 1))
++                for r in range(-(m - 1), 0):
++                    r_pts.append((r, 0))
++            
++            raw_path = b_pts[:-1] + r_pts
++            for i in range(B):
++                r, c = raw_path[i]
++                out.append(f"B {r + OFFSET} {c + OFFSET}")
++            for i in range(B, B + R):
++                r, c = raw_path[i]
++                out.append(f"R {r + OFFSET} {c + OFFSET}")
++
++    sys.stdout.write("\n".join(out) + "\n")
++
++if __name__ == '__main__':
++    solve()

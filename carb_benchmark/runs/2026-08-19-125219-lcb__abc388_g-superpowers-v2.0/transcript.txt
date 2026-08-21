@@ -1,0 +1,36 @@
+The task has been solved and implemented in `main.py`.
+
+### Solution Summary
+- **Mathematical Equivalence & Greedy Strategy**:
+  For a range of mochi $A[l \dots r]$ of size $M = r - l + 1$, to form $K$ kagamimochi ($K \le \lfloor M / 2 \rfloor$), the optimal strategy is to pair the $K$ smallest mochi $A[l + i]$ with the $K$ largest mochi $A[r - K + 1 + i]$ for $i = 0, \dots, K-1$.
+  The condition $2 \cdot A[l + i] \le A[r - K + 1 + i]$ holds for all $0 \le i \le K - 1$ if and only if:
+  $$\max_{0 \le i \le K - 1} B[l + i] \le M - K$$
+  where $B[i] = P[i] - i$, and $P[i]$ is the smallest index $j$ such that $A[j] \ge 2 \cdot A[i]$ (computed via binary search `bisect_left`).
+
+- **Efficiency**:
+  - Precomputation of $P$ and array $B$: $O(N \log N)$
+  - Sparse Table construction over $B$ for Range Maximum Queries (RMQ): $O(N \log N)$ time and space
+  - $O(1)$ RMQ per query + Binary Search over $K \in [0, \lfloor M / 2 \rfloor]$: $O(\log N)$ per query
+  - Total Time Complexity: $O((N + Q) \log N)$, easily executing well under the time limit.
+
+- **Verification**:
+  - Verified against public Sample 1 and Sample 2 inputs.
+  - Verified performance with a maximum constraint stress test ($N = 200,000$, $Q = 200,000$).
+The task has been solved and implemented in `main.py`.
+
+### Solution Summary
+- **Mathematical Equivalence & Greedy Strategy**:
+  For a range of mochi $A[l \dots r]$ of size $M = r - l + 1$, to form $K$ kagamimochi ($K \le \lfloor M / 2 \rfloor$), the optimal strategy is to pair the $K$ smallest mochi $A[l + i]$ with the $K$ largest mochi $A[r - K + 1 + i]$ for $i = 0, \dots, K-1$.
+  The condition $2 \cdot A[l + i] \le A[r - K + 1 + i]$ holds for all $0 \le i \le K - 1$ if and only if:
+  $$\max_{0 \le i \le K - 1} B[l + i] \le M - K$$
+  where $B[i] = P[i] - i$, and $P[i]$ is the smallest index $j$ such that $A[j] \ge 2 \cdot A[i]$ (computed via binary search `bisect_left`).
+
+- **Efficiency**:
+  - Precomputation of $P$ and array $B$: $O(N \log N)$
+  - Sparse Table construction over $B$ for Range Maximum Queries (RMQ): $O(N \log N)$ time and space
+  - $O(1)$ RMQ per query + Binary Search over $K \in [0, \lfloor M / 2 \rfloor]$: $O(\log N)$ per query
+  - Total Time Complexity: $O((N + Q) \log N)$, easily executing well under the time limit.
+
+- **Verification**:
+  - Verified against public Sample 1 and Sample 2 inputs.
+  - Verified performance with a maximum constraint stress test ($N = 200,000$, $Q = 200,000$).

@@ -1,0 +1,550 @@
+diff --git a/sympy/assumptions/sathandlers.py b/sympy/assumptions/sathandlers.py
+index 61d62d0..6723e56 100644
+--- a/sympy/assumptions/sathandlers.py
++++ b/sympy/assumptions/sathandlers.py
+@@ -1,6 +1,10 @@
+ from __future__ import print_function, division
+ 
+-from collections import MutableMapping, defaultdict
++try:
++    from collections.abc import MutableMapping
++except ImportError:
++    from collections import MutableMapping
++from collections import defaultdict
+ 
+ from sympy.core import (Add, Mul, Pow, Integer, Number, NumberSymbol,)
+ from sympy.core.numbers import ImaginaryUnit
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+index bdfebf2..4a189a4 100644
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -1,6 +1,10 @@
+ """Base class for all the objects in SymPy"""
+ from __future__ import print_function, division
+-from collections import Mapping, defaultdict
++try:
++    from collections.abc import Mapping
++except ImportError:
++    from collections import Mapping
++from collections import defaultdict
+ from itertools import chain
+ 
+ from .assumptions import BasicMeta, ManagedProperties
+diff --git a/sympy/core/containers.py b/sympy/core/containers.py
+index 15abd93..db25b47 100644
+--- a/sympy/core/containers.py
++++ b/sympy/core/containers.py
+@@ -14,6 +14,10 @@
+ from sympy.utilities.iterables import iterable
+ 
+ import collections
++try:
++    from collections.abc import MutableSet
++except ImportError:
++    from collections import MutableSet
+ 
+ 
+ class Tuple(Basic):
+@@ -268,7 +272,7 @@ def _sorted_args(self):
+         return tuple(sorted(self.args, key=default_sort_key))
+ 
+ 
+-class OrderedSet(collections.MutableSet):
++class OrderedSet(MutableSet):
+     def __init__(self, iterable=None):
+         if iterable:
+             self.map = collections.OrderedDict((item, None) for item in iterable)
+diff --git a/sympy/core/expr.py b/sympy/core/expr.py
+index 421e6cd..a318e30 100644
+--- a/sympy/core/expr.py
++++ b/sympy/core/expr.py
+@@ -9,7 +9,11 @@
+ from .compatibility import reduce, as_int, default_sort_key, range
+ from mpmath.libmp import mpf_log, prec_to_dps
+ 
+-from collections import defaultdict, Iterable
++from collections import defaultdict
++try:
++    from collections.abc import Iterable
++except ImportError:
++    from collections import Iterable
+ 
+ class Expr(Basic, EvalfMixin):
+     """
+diff --git a/sympy/core/function.py b/sympy/core/function.py
+index 3f7374f..e284256 100644
+--- a/sympy/core/function.py
++++ b/sympy/core/function.py
+@@ -81,6 +81,8 @@ def _coeff_isneg(a):
+ 
+     if a.is_Mul:
+         a = a.args[0]
++    elif a.is_MatMul:
++        a = a.as_coeff_matrices()[0]
+     return a.is_Number and a.is_negative
+ 
+ 
+@@ -1242,7 +1244,7 @@ def __new__(cls, expr, *variables, **kwargs):
+             elif (count < 0) == True:
+                 obj = None
+             else:
+-                if isinstance(v, (collections.Iterable, Tuple, MatrixCommon, NDimArray)):
++                if iterable(v) or isinstance(v, (Tuple, MatrixCommon, NDimArray)):
+                     # Treat derivatives by arrays/matrices as much as symbols.
+                     is_symbol = True
+                 if not is_symbol:
+diff --git a/sympy/matrices/common.py b/sympy/matrices/common.py
+index 54c418e..f5a45ed 100644
+--- a/sympy/matrices/common.py
++++ b/sympy/matrices/common.py
+@@ -7,6 +7,10 @@
+ from __future__ import print_function, division
+ 
+ import collections
++try:
++    from collections.abc import Iterable
++except ImportError:
++    from collections import Iterable
+ from sympy.core.add import Add
+ from sympy.core.basic import Basic, Atom
+ from sympy.core.expr import Expr
+@@ -2023,7 +2027,7 @@ def __mul__(self, other):
+             return MatrixArithmetic._eval_matrix_mul(self, other)
+ 
+         # if 'other' is not iterable then scalar multiplication.
+-        if not isinstance(other, collections.Iterable):
++        if not isinstance(other, Iterable):
+             try:
+                 return self._eval_scalar_mul(other)
+             except TypeError:
+@@ -2095,7 +2099,7 @@ def __rmul__(self, other):
+             return MatrixArithmetic._eval_matrix_rmul(self, other)
+ 
+         # if 'other' is not iterable then scalar multiplication.
+-        if not isinstance(other, collections.Iterable):
++        if not isinstance(other, Iterable):
+             try:
+                 return self._eval_scalar_rmul(other)
+             except TypeError:
+diff --git a/sympy/matrices/expressions/matadd.py b/sympy/matrices/expressions/matadd.py
+index bef8e1e..ea104ea 100644
+--- a/sympy/matrices/expressions/matadd.py
++++ b/sympy/matrices/expressions/matadd.py
+@@ -61,6 +61,9 @@ def doit(self, **kwargs):
+             args = self.args
+         return canonicalize(MatAdd(*args))
+ 
++    def as_ordered_terms(self, order=None, data=False):
++        return list(self.args)
++
+ 
+ def validate(*args):
+     if not all(arg.is_Matrix for arg in args):
+diff --git a/sympy/matrices/matrices.py b/sympy/matrices/matrices.py
+index 7b50fd7..4adb026 100644
+--- a/sympy/matrices/matrices.py
++++ b/sympy/matrices/matrices.py
+@@ -2071,7 +2071,7 @@ def _handle_creation_inputs(cls, *args, **kwargs):
+                                  "Both dimensions must be positive".format(rows, cols))
+ 
+             # Matrix(2, 2, lambda i, j: i+j)
+-            if len(args) == 3 and isinstance(args[2], collections.Callable):
++            if len(args) == 3 and callable(args[2]):
+                 op = args[2]
+                 flat_list = []
+                 for i in range(rows):
+diff --git a/sympy/matrices/sparse.py b/sympy/matrices/sparse.py
+index 7701cbc..8e577c8 100644
+--- a/sympy/matrices/sparse.py
++++ b/sympy/matrices/sparse.py
+@@ -53,7 +53,7 @@ def __new__(cls, *args, **kwargs):
+             self.rows = as_int(args[0])
+             self.cols = as_int(args[1])
+ 
+-            if isinstance(args[2], collections.Callable):
++            if callable(args[2]):
+                 op = args[2]
+                 for i in range(self.rows):
+                     for j in range(self.cols):
+diff --git a/sympy/physics/quantum/matrixutils.py b/sympy/physics/quantum/matrixutils.py
+index 2bf954a..e5c61f8 100644
+--- a/sympy/physics/quantum/matrixutils.py
++++ b/sympy/physics/quantum/matrixutils.py
+@@ -40,8 +40,9 @@ class scipy_sparse_matrix(object):
+     sparse = None
+ else:
+     sparse = scipy.sparse
+-    # Try to find spmatrix.
+-    if hasattr(sparse, 'base'):
++    if hasattr(sparse, 'spmatrix'):
++        scipy_sparse_matrix = sparse.spmatrix
++    elif hasattr(sparse, 'base'):
+         # Newer versions have it under scipy.sparse.base.
+         scipy_sparse_matrix = sparse.base.spmatrix
+     elif hasattr(sparse, 'sparse'):
+diff --git a/sympy/plotting/plot.py b/sympy/plotting/plot.py
+index 18c6f7a..e1e4e13 100644
+--- a/sympy/plotting/plot.py
++++ b/sympy/plotting/plot.py
+@@ -25,7 +25,10 @@
+ from __future__ import print_function, division
+ 
+ import inspect
+-from collections import Callable
++try:
++    from collections.abc import Callable
++except ImportError:
++    from collections import Callable
+ import warnings
+ import sys
+ 
+diff --git a/sympy/printing/conventions.py b/sympy/printing/conventions.py
+index f744682..6c67e29 100644
+--- a/sympy/printing/conventions.py
++++ b/sympy/printing/conventions.py
+@@ -6,6 +6,10 @@
+ 
+ import re
+ import collections
++try:
++    from collections.abc import Iterable
++except ImportError:
++    from collections import Iterable
+ 
+ 
+ _name_with_digits_p = re.compile(r'^([a-zA-Z]+)([0-9]+)$')
+@@ -77,7 +81,7 @@ def requires_partial(expr):
+     get the context of the expression.
+     """
+ 
+-    if not isinstance(expr.free_symbols, collections.Iterable):
++    if not isinstance(expr.free_symbols, Iterable):
+         return len(set(expr.variables)) > 1
+ 
+     return sum(not s.is_integer for s in expr.free_symbols) > 1
+diff --git a/sympy/printing/latex.py b/sympy/printing/latex.py
+index 8253b2f..6a02fbe 100644
+--- a/sympy/printing/latex.py
++++ b/sympy/printing/latex.py
+@@ -311,7 +311,15 @@ def _print_Add(self, expr, order=None):
+                 pass
+             elif _coeff_isneg(term):
+                 tex += " - "
+-                term = -term
++                if term.is_MatMul:
++                    from sympy.matrices.expressions.matmul import MatMul
++                    coeff, matrices = term.as_coeff_matrices()
++                    if coeff == -1:
++                        term = MatMul(*matrices) if len(matrices) > 1 else matrices[0]
++                    else:
++                        term = MatMul(-coeff, *matrices)
++                else:
++                    term = -term
+             else:
+                 tex += " + "
+             term_tex = self._print(term)
+@@ -1477,9 +1485,7 @@ def _print_Adjoint(self, expr):
+             return r"%s^\dagger" % self._print(mat)
+ 
+     def _print_MatAdd(self, expr):
+-        terms = list(expr.args)
+-        tex = " + ".join(map(self._print, terms))
+-        return tex
++        return self._print_Add(expr)
+ 
+     def _print_MatMul(self, expr):
+         from sympy import Add, MatAdd, HadamardProduct
+@@ -1488,7 +1494,14 @@ def parens(x):
+             if isinstance(x, (Add, MatAdd, HadamardProduct)):
+                 return r"\left(%s\right)" % self._print(x)
+             return self._print(x)
+-        return ' '.join(map(parens, expr.args))
++
++        if _coeff_isneg(expr):
++            if expr.args[0] == -1:
++                return '- ' + ' '.join(map(parens, expr.args[1:]))
++            else:
++                return '- ' + ' '.join(map(parens, (-expr.args[0],) + expr.args[1:]))
++        else:
++            return ' '.join(map(parens, expr.args))
+ 
+     def _print_Mod(self, expr, exp=None):
+         if exp is not None:
+diff --git a/sympy/printing/precedence.py b/sympy/printing/precedence.py
+index 2d65b08..7ba1262 100644
+--- a/sympy/printing/precedence.py
++++ b/sympy/printing/precedence.py
+@@ -102,6 +102,7 @@ def precedence_UnevaluatedExpr(item):
+ PRECEDENCE_FUNCTIONS = {
+     "Integer": precedence_Integer,
+     "Mul": precedence_Mul,
++    "MatMul": precedence_Mul,
+     "Rational": precedence_Rational,
+     "Float": precedence_Float,
+     "PolyElement": precedence_PolyElement,
+diff --git a/sympy/printing/pretty/pretty.py b/sympy/printing/pretty/pretty.py
+index db24f4c..1eb5287 100644
+--- a/sympy/printing/pretty/pretty.py
++++ b/sympy/printing/pretty/pretty.py
+@@ -819,7 +819,7 @@ def _print_BlockMatrix(self, B):
+         return self._print(B.blocks)
+ 
+     def _print_MatAdd(self, expr):
+-        return self._print_seq(expr.args, None, None, ' + ')
++        return self._print_Add(expr)
+ 
+     def _print_MatMul(self, expr):
+         args = list(expr.args)
+@@ -1437,9 +1437,17 @@ def pretty_negative(pform, index):
+             return prettyForm(binding=prettyForm.NEG, *p)
+ 
+         for i, term in enumerate(terms):
+-            if term.is_Mul and _coeff_isneg(term):
+-                coeff, other = term.as_coeff_mul(rational=False)
+-                pform = self._print(Mul(-coeff, *other, evaluate=False))
++            if (term.is_Mul or term.is_MatMul) and _coeff_isneg(term):
++                if term.is_MatMul:
++                    from sympy.matrices.expressions.matmul import MatMul
++                    coeff, matrices = term.as_coeff_matrices()
++                    if coeff == -1:
++                        pform = self._print(MatMul(*matrices) if len(matrices) > 1 else matrices[0])
++                    else:
++                        pform = self._print(MatMul(-coeff, *matrices))
++                else:
++                    coeff, other = term.as_coeff_mul(rational=False)
++                    pform = self._print(Mul(-coeff, *other, evaluate=False))
+                 pforms.append(pretty_negative(pform, i))
+             elif term.is_Rational and term.q > 1:
+                 pforms.append(None)
+diff --git a/sympy/printing/str.py b/sympy/printing/str.py
+index 0baefe0..6a45900 100644
+--- a/sympy/printing/str.py
++++ b/sympy/printing/str.py
+@@ -304,16 +304,26 @@ def _print_Mul(self, expr):
+             return sign + '*'.join(a_str) + "/(%s)" % '*'.join(b_str)
+ 
+     def _print_MatMul(self, expr):
+-        return '*'.join([self.parenthesize(arg, precedence(expr))
+-            for arg in expr.args])
++        c, matrices = expr.as_coeff_matrices()
++        if c < 0:
++            sign = "-"
++            if -c == 1:
++                args = matrices
++            else:
++                args = [-c] + matrices
++        else:
++            sign = ""
++            args = expr.args
++
++        return sign + '*'.join([self.parenthesize(arg, precedence(expr))
++            for arg in args])
+ 
+     def _print_HadamardProduct(self, expr):
+         return '.*'.join([self.parenthesize(arg, precedence(expr))
+             for arg in expr.args])
+ 
+     def _print_MatAdd(self, expr):
+-        return ' + '.join([self.parenthesize(arg, precedence(expr))
+-            for arg in expr.args])
++        return self._print_Add(expr)
+ 
+     def _print_NaN(self, expr):
+         return 'nan'
+diff --git a/sympy/printing/tests/test_latex.py b/sympy/printing/tests/test_latex.py
+index 0f07d5e..398de64 100644
+--- a/sympy/printing/tests/test_latex.py
++++ b/sympy/printing/tests/test_latex.py
+@@ -1194,9 +1194,9 @@ def test_matAdd():
+     C = MatrixSymbol('C', 5, 5)
+     B = MatrixSymbol('B', 5, 5)
+     l = LatexPrinter()
+-    assert l._print_MatAdd(C - 2*B) in ['-2 B + C', 'C -2 B']
++    assert l._print_MatAdd(C - 2*B) in ['-2 B + C', '- 2 B + C', 'C - 2 B', 'C -2 B']
+     assert l._print_MatAdd(C + 2*B) in ['2 B + C', 'C + 2 B']
+-    assert l._print_MatAdd(B - 2*C) in ['B -2 C', '-2 C + B']
++    assert l._print_MatAdd(B - 2*C) in ['B - 2 C', 'B -2 C', '-2 C + B', '- 2 C + B']
+     assert l._print_MatAdd(B + 2*C) in ['B + 2 C', '2 C + B']
+ 
+ 
+@@ -1209,13 +1209,13 @@ def test_matMul():
+     l = LatexPrinter()
+     assert l._print_MatMul(2*A) == '2 A'
+     assert l._print_MatMul(2*x*A) == '2 x A'
+-    assert l._print_MatMul(-2*A) == '-2 A'
++    assert l._print_MatMul(-2*A) in ['-2 A', '- 2 A']
+     assert l._print_MatMul(1.5*A) == '1.5 A'
+     assert l._print_MatMul(sqrt(2)*A) == r'\sqrt{2} A'
+     assert l._print_MatMul(-sqrt(2)*A) == r'- \sqrt{2} A'
+     assert l._print_MatMul(2*sqrt(2)*x*A) == r'2 \sqrt{2} x A'
+     assert l._print_MatMul(-2*A*(A + 2*B)) in [r'-2 A \left(A + 2 B\right)',
+-        r'-2 A \left(2 B + A\right)']
++        r'-2 A \left(2 B + A\right)', r'- 2 A \left(A + 2 B\right)', r'- 2 A \left(2 B + A\right)']
+ 
+ 
+ def test_latex_MatrixSlice():
+@@ -1710,7 +1710,7 @@ def test_MatrixElement_printing():
+     assert latex(3 * A[0, 0]) == r"3 A_{0, 0}"
+ 
+     F = C[0, 0].subs(C, A - B)
+-    assert latex(F) == r"\left(-1 B + A\right)_{0, 0}"
++    assert latex(F) in [r"\left(- B + A\right)_{0, 0}", r"\left(A - B\right)_{0, 0}", r"\left(-1 B + A\right)_{0, 0}"]
+ 
+ 
+ def test_Quaternion_latex_printing():
+diff --git a/sympy/printing/tests/test_str.py b/sympy/printing/tests/test_str.py
+index 884c09d..5fcd1da 100644
+--- a/sympy/printing/tests/test_str.py
++++ b/sympy/printing/tests/test_str.py
+@@ -742,8 +742,10 @@ def test_issue_6387():
+ 
+ def test_MatMul_MatAdd():
+     from sympy import MatrixSymbol
+-    assert str(2*(MatrixSymbol("X", 2, 2) + MatrixSymbol("Y", 2, 2))) == \
+-        "2*(X + Y)"
++    X = MatrixSymbol("X", 2, 2)
++    Y = MatrixSymbol("Y", 2, 2)
++    assert str(2*(X + Y)) == "2*(X + Y)"
++    assert str(X - X*Y - Y) == "-Y - X*Y + X"
+ 
+ def test_MatrixSlice():
+     from sympy.matrices.expressions import MatrixSymbol
+@@ -784,4 +786,4 @@ def test_MatrixElement_printing():
+     assert(str(3 * A[0, 0]) == "3*A[0, 0]")
+ 
+     F = C[0, 0].subs(C, A - B)
+-    assert str(F) == "((-1)*B + A)[0, 0]"
++    assert str(F) in ["(-B + A)[0, 0]", "(A - B)[0, 0]", "((-1)*B + A)[0, 0]"]
+diff --git a/sympy/tensor/array/ndim_array.py b/sympy/tensor/array/ndim_array.py
+index 6c1216e..f7b67db 100644
+--- a/sympy/tensor/array/ndim_array.py
++++ b/sympy/tensor/array/ndim_array.py
+@@ -1,5 +1,8 @@
+-from __future__ import print_function, division
+ import collections
++try:
++    from collections.abc import Iterable
++except ImportError:
++    from collections import Iterable
+ 
+ from sympy import Basic
+ from sympy.core.compatibility import SYMPY_INTS
+@@ -104,13 +107,13 @@ def _check_symbolic_index(self, index):
+ 
+     def _setter_iterable_check(self, value):
+         from sympy.matrices.matrices import MatrixBase
+-        if isinstance(value, (collections.Iterable, MatrixBase, NDimArray)):
++        if isinstance(value, (Iterable, MatrixBase, NDimArray)):
+             raise NotImplementedError
+ 
+     @classmethod
+     def _scan_iterable_shape(cls, iterable):
+         def f(pointer):
+-            if not isinstance(pointer, collections.Iterable):
++            if not isinstance(pointer, Iterable):
+                 return [pointer], ()
+ 
+             result = []
+@@ -135,7 +138,7 @@ def _handle_ndarray_creation_inputs(cls, iterable=None, shape=None, **kwargs):
+             shape = iterable.shape
+             iterable = list(iterable)
+         # Construct N-dim array from an iterable (numpy arrays included):
+-        elif shape is None and isinstance(iterable, collections.Iterable):
++        elif shape is None and isinstance(iterable, Iterable):
+             iterable, shape = cls._scan_iterable_shape(iterable)
+ 
+         # Construct N-dim array from a Matrix:
+@@ -245,7 +248,7 @@ def _eval_derivative(self, arg):
+         from sympy import derive_by_array
+         from sympy import Derivative, Tuple
+         from sympy.matrices.common import MatrixCommon
+-        if isinstance(arg, (collections.Iterable, Tuple, MatrixCommon, NDimArray)):
++        if isinstance(arg, (Iterable, Tuple, MatrixCommon, NDimArray)):
+             return derive_by_array(self, arg)
+         else:
+             return self.applyfunc(lambda x: x.diff(arg))
+@@ -342,7 +345,7 @@ def __sub__(self, other):
+     def __mul__(self, other):
+         from sympy.matrices.matrices import MatrixBase
+ 
+-        if isinstance(other, (collections.Iterable,NDimArray, MatrixBase)):
++        if isinstance(other, (Iterable,NDimArray, MatrixBase)):
+             raise ValueError("scalar expected, use tensorproduct(...) for tensorial product")
+         other = sympify(other)
+         result_list = [i*other for i in self]
+@@ -351,7 +354,7 @@ def __mul__(self, other):
+     def __rmul__(self, other):
+         from sympy.matrices.matrices import MatrixBase
+ 
+-        if isinstance(other, (collections.Iterable,NDimArray, MatrixBase)):
++        if isinstance(other, (Iterable,NDimArray, MatrixBase)):
+             raise ValueError("scalar expected, use tensorproduct(...) for tensorial product")
+         other = sympify(other)
+         result_list = [other*i for i in self]
+@@ -360,7 +363,7 @@ def __rmul__(self, other):
+     def __div__(self, other):
+         from sympy.matrices.matrices import MatrixBase
+ 
+-        if isinstance(other, (collections.Iterable,NDimArray, MatrixBase)):
++        if isinstance(other, (Iterable,NDimArray, MatrixBase)):
+             raise ValueError("scalar expected")
+         other = sympify(other)
+         result_list = [i/other for i in self]
+diff --git a/sympy/tensor/functions.py b/sympy/tensor/functions.py
+index 4b97543..2983f28 100644
+--- a/sympy/tensor/functions.py
++++ b/sympy/tensor/functions.py
+@@ -1,4 +1,8 @@
+ import collections
++try:
++    from collections.abc import Iterable
++except ImportError:
++    from collections import Iterable
+ from sympy.core.evaluate import global_evaluate
+ from sympy import Expr, S, Mul, sympify
+ 
+@@ -25,7 +29,7 @@ def __new__(cls, *args, **kwargs):
+         other = []
+         scalar = S.One
+         for arg in args:
+-            if isinstance(arg, (collections.Iterable, MatrixBase, NDimArray)):
++            if isinstance(arg, (Iterable, MatrixBase, NDimArray)):
+                 arrays.append(Array(arg))
+             elif isinstance(arg, (MatrixExpr,)):
+                 other.append(arg)
+diff --git a/sympy/tensor/indexed.py b/sympy/tensor/indexed.py
+index 3752d24..b808d4f 100644
+--- a/sympy/tensor/indexed.py
++++ b/sympy/tensor/indexed.py
+@@ -105,9 +105,11 @@
+ #      - Idx with stepsize != 1
+ #      - Idx with step determined by function call
+ 
+-from __future__ import print_function, division
+-
+ import collections
++try:
++    from collections.abc import Iterable
++except ImportError:
++    from collections import Iterable
+ 
+ from sympy.core.sympify import _sympify
+ from sympy.functions.special.tensor_functions import KroneckerDelta
+@@ -152,7 +154,7 @@ def __new__(cls, base, *args, **kw_args):
+             raise TypeError(filldedent("""
+                 Indexed expects string, Symbol, or IndexedBase as base."""))
+         args = list(map(sympify, args))
+-        if isinstance(base, (NDimArray, collections.Iterable, Tuple, MatrixBase)) and all([i.is_number for i in args]):
++        if isinstance(base, (NDimArray, Iterable, Tuple, MatrixBase)) and all([i.is_number for i in args]):
+             if len(args) == 1:
+                 return base[args[0]]
+             else:
+@@ -384,7 +386,7 @@ def __new__(cls, label, shape=None, **kw_args):
+             pass
+         elif isinstance(label, (MatrixBase, NDimArray)):
+             return label
+-        elif isinstance(label, collections.Iterable):
++        elif isinstance(label, Iterable):
+             return _sympify(label)
+         else:
+             label = _sympify(label)

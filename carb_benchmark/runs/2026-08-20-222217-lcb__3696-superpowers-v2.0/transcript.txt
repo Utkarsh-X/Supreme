@@ -1,0 +1,22 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3696/main.py).
+
+### Summary of Approach
+We need to count all substrings of $s$ that are divisible by their last non-zero digit $d \in \{1, 2, \dots, 9\}$. Substrings ending in `'0'` are ignored as zero is not a non-zero digit.
+
+We process the string $s$ from left to right in $O(|s|)$ time by utilizing specific mathematical properties of divisibility for each digit $d$:
+- **$d = 1, 2, 5$**: Any integer ending in $1, 2,$ or $5$ is always divisible by $1, 2,$ or $5$ respectively. Thus, if $s[j] \in \{1, 2, 5\}$, all $j+1$ substrings ending at index $j$ are valid.
+- **$d = 3, 6, 9$**: Divisibility by $3$ or $9$ depends on whether the sum of digits is divisible by $3$ or $9$ respectively. Since $10^k \equiv 1 \pmod 3$ and $10^k \equiv 1 \pmod 9$, we track prefix sums modulo $3$ and $9$. Note that a number ending in $6$ is even, so divisibility by $6$ reduces to divisibility by $3$.
+- **$d = 4$**: Divisibility by $4$ depends only on the last 2 digits. A substring ending in $4$ of length $1$ is always divisible by $4$. Substrings of length $\ge 2$ ending in $4$ are divisible by $4$ iff the second-to-last digit is even.
+- **$d = 8$**: Divisibility by $8$ depends only on the last 3 digits, which we check directly in constant time.
+- **$d = 7$**: We maintain a compact 7-state DP modulo $7$.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3696/main.py).
+
+### Summary of Approach
+We need to count all substrings of $s$ that are divisible by their last non-zero digit $d \in \{1, 2, \dots, 9\}$. Substrings ending in `'0'` are ignored as zero is not a non-zero digit.
+
+We process the string $s$ from left to right in $O(|s|)$ time by utilizing specific mathematical properties of divisibility for each digit $d$:
+- **$d = 1, 2, 5$**: Any integer ending in $1, 2,$ or $5$ is always divisible by $1, 2,$ or $5$ respectively. Thus, if $s[j] \in \{1, 2, 5\}$, all $j+1$ substrings ending at index $j$ are valid.
+- **$d = 3, 6, 9$**: Divisibility by $3$ or $9$ depends on whether the sum of digits is divisible by $3$ or $9$ respectively. Since $10^k \equiv 1 \pmod 3$ and $10^k \equiv 1 \pmod 9$, we track prefix sums modulo $3$ and $9$. Note that a number ending in $6$ is even, so divisibility by $6$ reduces to divisibility by $3$.
+- **$d = 4$**: Divisibility by $4$ depends only on the last 2 digits. A substring ending in $4$ of length $1$ is always divisible by $4$. Substrings of length $\ge 2$ ending in $4$ are divisible by $4$ iff the second-to-last digit is even.
+- **$d = 8$**: Divisibility by $8$ depends only on the last 3 digits, which we check directly in constant time.
+- **$d = 7$**: We maintain a compact 7-state DP modulo $7$.

@@ -1,0 +1,40 @@
+diff --git a/main.py b/main.py
+index c86f6c8..321a796 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,34 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++    
++    expire = [0] * (N + 1)
++    current_active = 0
++    ans = [0] * N
++    
++    for j in range(1, N + 1):
++        current_active -= expire[j - 1]
++        G_j = current_active
++        S_j = A[j - 1] + G_j
++        E_j = j + S_j
++        
++        rem = E_j - N
++        if rem > 0:
++            ans[j - 1] = rem
++        else:
++            ans[j - 1] = 0
++            
++        if E_j > j:
++            current_active += 1
++            if E_j < N:
++                expire[E_j] += 1
++
++    sys.stdout.write(" ".join(map(str, ans)) + "\n")
++
++if __name__ == '__main__':
++    main()

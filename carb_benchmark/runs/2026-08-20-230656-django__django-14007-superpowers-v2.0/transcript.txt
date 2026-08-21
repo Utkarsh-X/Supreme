@@ -1,0 +1,28 @@
+### Root Cause Identification
+When executing `INSERT` queries, `SQLInsertCompiler.execute_sql()` retrieved values for `returning_fields` (such as primary keys returned from database insertion or `db_returning_fields`) but returned the raw database column values without running them through database converters (such as field `from_db_value` hooks or database backend converters). As a result, inserted model instances received unconverted raw values (e.g., plain integers instead of wrapped objects for custom auto-fields).
+
+### Solution Summary
+1. Modified [execute_sql](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/django/db/models/sql/compiler.py#L1403-L1426) in `SQLInsertCompiler` (`django/db/models/sql/compiler.py`) to obtain field expressions via `field.get_col(table_name)` for each field in `self.returning_fields`.
+2. Evaluated database and field converters using `self.get_converters(cols)` and applied them to the returned rows with `self.apply_converters(rows, converters)` prior to returning from `execute_sql`.
+3. Added unit tests in [models.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/models.py#L25-L48) and [tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/tests.py#L37-L44) under `tests/from_db_value/` verifying that `from_db_value` is called for returning fields on model `.create()` and `.bulk_create()`.
+
+### Verification Evidence
+Ran Django's test suite for `from_db_value`, `queries`, `bulk_create`, `custom_pk`, `model_fields`, and `basic`:
+```powershell
+$env:PYTHONPATH="E:\RofU\Supreme\carb_workspaces\django__django-14007"; python tests/runtests.py from_db_value queries bulk_create custom_pk model_fields basic --settings=test_sqlite
+```
+Result: All tests passed cleanly (933 tests ran, 0 failures).
+### Root Cause Identification
+When executing `INSERT` queries, `SQLInsertCompiler.execute_sql()` retrieved values for `returning_fields` (such as primary keys returned from database insertion or `db_returning_fields`) but returned the raw database column values without running them through database converters (such as field `from_db_value` hooks or database backend converters). As a result, inserted model instances received unconverted raw values (e.g., plain integers instead of wrapped objects for custom auto-fields).
+
+### Solution Summary
+1. Modified [execute_sql](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/django/db/models/sql/compiler.py#L1403-L1426) in `SQLInsertCompiler` (`django/db/models/sql/compiler.py`) to obtain field expressions via `field.get_col(table_name)` for each field in `self.returning_fields`.
+2. Evaluated database and field converters using `self.get_converters(cols)` and applied them to the returned rows with `self.apply_converters(rows, converters)` prior to returning from `execute_sql`.
+3. Added unit tests in [models.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/models.py#L25-L48) and [tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14007/tests/from_db_value/tests.py#L37-L44) under `tests/from_db_value/` verifying that `from_db_value` is called for returning fields on model `.create()` and `.bulk_create()`.
+
+### Verification Evidence
+Ran Django's test suite for `from_db_value`, `queries`, `bulk_create`, `custom_pk`, `model_fields`, and `basic`:
+```powershell
+$env:PYTHONPATH="E:\RofU\Supreme\carb_workspaces\django__django-14007"; python tests/runtests.py from_db_value queries bulk_create custom_pk model_fields basic --settings=test_sqlite
+```
+Result: All tests passed cleanly (933 tests ran, 0 failures).

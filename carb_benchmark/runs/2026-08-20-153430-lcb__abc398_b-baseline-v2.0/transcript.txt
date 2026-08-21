@@ -1,0 +1,60 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_b/main.py).
+
+### Method Explanation
+To determine if five cards out of seven can form a full house:
+1. A 5-card set forms a full house if it contains 3 cards of one value $x$ and 2 cards of another value $y$ ($x \neq y$).
+2. We can check all $\binom{7}{5} = 21$ combinations of 5 cards.
+3. For each 5-card combination, we check if the counts of distinct card values are `[2, 3]`. If any combination satisfies this condition, we output `Yes`; otherwise, if no such combination exists, we output `No`.
+
+### Code Summary
+```python
+import sys
+from collections import Counter
+from itertools import combinations
+
+def solve():
+    input_data = sys.stdin.read().split()
+    if not input_data:
+        return
+    A = list(map(int, input_data))
+    
+    for comb in combinations(A, 5):
+        counts = sorted(Counter(comb).values())
+        if counts == [2, 3]:
+            print("Yes")
+            return
+    print("No")
+
+if __name__ == "__main__":
+    solve()
+```
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_b/main.py).
+
+### Method Explanation
+To determine if five cards out of seven can form a full house:
+1. A 5-card set forms a full house if it contains 3 cards of one value $x$ and 2 cards of another value $y$ ($x \neq y$).
+2. We can check all $\binom{7}{5} = 21$ combinations of 5 cards.
+3. For each 5-card combination, we check if the counts of distinct card values are `[2, 3]`. If any combination satisfies this condition, we output `Yes`; otherwise, if no such combination exists, we output `No`.
+
+### Code Summary
+```python
+import sys
+from collections import Counter
+from itertools import combinations
+
+def solve():
+    input_data = sys.stdin.read().split()
+    if not input_data:
+        return
+    A = list(map(int, input_data))
+    
+    for comb in combinations(A, 5):
+        counts = sorted(Counter(comb).values())
+        if counts == [2, 3]:
+            print("Yes")
+            return
+    print("No")
+
+if __name__ == "__main__":
+    solve()
+```

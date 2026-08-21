@@ -1,0 +1,102 @@
+diff --git a/django/forms/models.py b/django/forms/models.py
+index dafc11f..ee41518 100644
+--- a/django/forms/models.py
++++ b/django/forms/models.py
+@@ -13,7 +13,7 @@ from django.forms.forms import BaseForm, DeclarativeFieldsMetaclass
+ from django.forms.formsets import BaseFormSet, formset_factory
+ from django.forms.utils import ErrorList
+ from django.forms.widgets import (
+-    HiddenInput, MultipleHiddenInput, SelectMultiple,
++    HiddenInput, MultipleHiddenInput, RadioSelect, SelectMultiple,
+ )
+ from django.utils.text import capfirst, get_text_list
+ from django.utils.translation import gettext, gettext_lazy as _
+@@ -1185,10 +1185,7 @@ class ModelChoiceField(ChoiceField):
+                  required=True, widget=None, label=None, initial=None,
+                  help_text='', to_field_name=None, limit_choices_to=None,
+                  **kwargs):
+-        if required and (initial is not None):
+-            self.empty_label = None
+-        else:
+-            self.empty_label = empty_label
++        self.empty_label = empty_label
+ 
+         # Call Field instead of ChoiceField __init__() because we don't need
+         # ChoiceField.__init__().
+@@ -1200,6 +1197,16 @@ class ModelChoiceField(ChoiceField):
+         self.limit_choices_to = limit_choices_to   # limit the queryset later.
+         self.to_field_name = to_field_name
+ 
++    @property
++    def empty_label(self):
++        if self.required and (self.initial is not None or isinstance(self.widget, RadioSelect)):
++            return None
++        return self._empty_label
++
++    @empty_label.setter
++    def empty_label(self, value):
++        self._empty_label = value
++
+     def get_limit_choices_to(self):
+         """
+         Return ``limit_choices_to`` for this form field.
+diff --git a/docs/ref/forms/fields.txt b/docs/ref/forms/fields.txt
+index d2a0550..45ef9c6 100644
+--- a/docs/ref/forms/fields.txt
++++ b/docs/ref/forms/fields.txt
+@@ -1187,8 +1187,8 @@ generating choices. See :ref:`iterating-relationship-choices` for details.
+             field2 = forms.ModelChoiceField(queryset=..., empty_label=None)
+ 
+         Note that if a ``ModelChoiceField`` is required and has a default
+-        initial value, no empty choice is created (regardless of the value
+-        of ``empty_label``).
++        initial value or widget is :class:`~django.forms.RadioSelect`, no empty
++        choice is created (regardless of the value of ``empty_label``).
+ 
+     .. attribute:: to_field_name
+ 
+diff --git a/tests/model_forms/test_modelchoicefield.py b/tests/model_forms/test_modelchoicefield.py
+index 4a2ef30..8cd3e93 100644
+--- a/tests/model_forms/test_modelchoicefield.py
++++ b/tests/model_forms/test_modelchoicefield.py
+@@ -353,3 +353,40 @@ class ModelChoiceFieldTests(TestCase):
+         )
+         with self.assertNumQueries(2):
+             template.render(Context({'form': CategoriesForm()}))
++
++    def test_radioselect_empty_label(self):
++        f = forms.ModelChoiceField(Category.objects.all(), widget=forms.RadioSelect)
++        self.assertIsNone(f.empty_label)
++        self.assertEqual(list(f.choices), [
++            (self.c1.pk, 'Entertainment'),
++            (self.c2.pk, 'A test'),
++            (self.c3.pk, 'Third'),
++        ])
++        f_optional = forms.ModelChoiceField(Category.objects.all(), widget=forms.RadioSelect, required=False)
++        self.assertEqual(f_optional.empty_label, '---------')
++        self.assertEqual(list(f_optional.choices), [
++            ('', '---------'),
++            (self.c1.pk, 'Entertainment'),
++            (self.c2.pk, 'A test'),
++            (self.c3.pk, 'Third'),
++        ])
++        f_custom = forms.ModelChoiceField(
++            Category.objects.all(), widget=forms.RadioSelect, empty_label='Custom',
++        )
++        self.assertIsNone(f_custom.empty_label)
++
++    def test_modelform_radioselect_required_foreignkey(self):
++        w1 = Writer.objects.create(name='Writer 1')
++        class ArticleForm(forms.ModelForm):
++            class Meta:
++                model = Article
++                fields = ['writer']
++                widgets = {'writer': forms.RadioSelect()}
++
++        form = ArticleForm()
++        self.assertHTMLEqual(
++            str(form['writer']),
++            '<ul id="id_writer">'
++            '<li><label for="id_writer_0"><input type="radio" name="writer" value="%d" id="id_writer_0" required> Writer 1</label></li>'
++            '</ul>' % w1.pk
++        )

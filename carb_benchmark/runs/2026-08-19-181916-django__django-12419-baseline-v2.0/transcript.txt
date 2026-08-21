@@ -1,0 +1,14 @@
+I have updated the default `SECURE_REFERRER_POLICY` setting to `'same-origin'`.
+
+### Summary of Changes:
+1. **Global Settings** ([django/conf/global_settings.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/django/conf/global_settings.py#L634-L643)): Changed `SECURE_REFERRER_POLICY` default value from `None` to `'same-origin'`.
+2. **Middleware Tests** ([tests/middleware/test_security.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/middleware/test_security.py#L226-L232)): Added `test_referrer_policy_default` to ensure `SecurityMiddleware` includes the `Referrer-Policy: same-origin` header by default.
+3. **Security Checks Tests** ([tests/check_framework/test_security.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/check_framework/test_security.py#L528-L542)): Updated `test_with_referrer_policy` to verify that default settings trigger no system check warnings.
+4. **Documentation** ([docs/ref/settings.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/ref/settings.txt#L2391-L2407) and [docs/releases/3.1.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/releases/3.1.txt#L285-L295)): Updated the default value and added release notes for Django 3.1 detailing the new default and backwards incompatibility considerations.
+I have updated the default `SECURE_REFERRER_POLICY` setting to `'same-origin'`.
+
+### Summary of Changes:
+1. **Global Settings** ([django/conf/global_settings.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/django/conf/global_settings.py#L634-L643)): Changed `SECURE_REFERRER_POLICY` default value from `None` to `'same-origin'`.
+2. **Middleware Tests** ([tests/middleware/test_security.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/middleware/test_security.py#L226-L232)): Added `test_referrer_policy_default` to ensure `SecurityMiddleware` includes the `Referrer-Policy: same-origin` header by default.
+3. **Security Checks Tests** ([tests/check_framework/test_security.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/tests/check_framework/test_security.py#L528-L542)): Updated `test_with_referrer_policy` to verify that default settings trigger no system check warnings.
+4. **Documentation** ([docs/ref/settings.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/ref/settings.txt#L2391-L2407) and [docs/releases/3.1.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-12419/docs/releases/3.1.txt#L285-L295)): Updated the default value and added release notes for Django 3.1 detailing the new default and backwards incompatibility considerations.

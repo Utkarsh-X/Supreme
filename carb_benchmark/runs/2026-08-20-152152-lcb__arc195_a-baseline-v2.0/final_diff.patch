@@ -1,0 +1,48 @@
+diff --git a/main.py b/main.py
+index c86f6c8..c9ff938 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,42 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    A = [int(x) for x in input_data[2:2+N]]
++    B = [int(x) for x in input_data[2+N:2+N+M]]
++    
++    # Leftmost greedy matching
++    L = [-1] * M
++    ptr_B = 0
++    for i in range(N):
++        if ptr_B < M and A[i] == B[ptr_B]:
++            L[ptr_B] = i
++            ptr_B += 1
++            
++    # If B is not a subsequence of A
++    if ptr_B < M:
++        print("No")
++        return
++        
++    # Rightmost greedy matching
++    R = [-1] * M
++    ptr_B = M - 1
++    for i in range(N - 1, -1, -1):
++        if ptr_B >= 0 and A[i] == B[ptr_B]:
++            R[ptr_B] = i
++            ptr_B -= 1
++            
++    # If L and R differ, there are at least two distinct matching subsequences
++    if L != R:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,34 @@
+I have implemented the optimal solution for the problem in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc191_a/main.py).
+
+### Method Explanation
+1. **Mathematical Structure**:
+   - In any sequence of operations, the final character at a replaced position in $S$ is determined by the last operation that modifies that position.
+   - The final operation $M$ places $T[M]$ at some position in $S$, so $T[M]$ is guaranteed to survive in the final string.
+   - Any subsequence of $T[1 \dots M-1]$ can be chosen to survive alongside $T[M]$. Because positions in $T$ containing different digit values ('1' through '9') are disjoint, selecting $c_d$ occurrences of digit $d$ from $T[1 \dots M-1]$ is possible if and only if $c_d \le \text{count of digit } d \text{ in } T[1 \dots M-1]$.
+   - When placed into $S$, the selected T-digits are placed in descending order to maximize the resulting integer lexicographically.
+
+2. **Greedy Strategy**:
+   - We count the occurrences of each digit $1 \dots 9$ in $T[1 \dots M-1]$ and include 1 mandatory copy of $T[M]$.
+   - As we iterate through $S$ from left to right ($i = 1 \dots N$), at each position we greedily choose the largest available T-digit $d > S[i]$. If no such T-digit exists, we retain $S[i]$.
+   - If $T[M]$ has not been consumed by the end of the loop, we replace the last character of $S$ with $T[M]$.
+
+3. **Complexity**:
+   - Time Complexity: $\mathcal{O}(N + M)$
+   - Space Complexity: $\mathcal{O}(N + M)$
+I have implemented the optimal solution for the problem in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc191_a/main.py).
+
+### Method Explanation
+1. **Mathematical Structure**:
+   - In any sequence of operations, the final character at a replaced position in $S$ is determined by the last operation that modifies that position.
+   - The final operation $M$ places $T[M]$ at some position in $S$, so $T[M]$ is guaranteed to survive in the final string.
+   - Any subsequence of $T[1 \dots M-1]$ can be chosen to survive alongside $T[M]$. Because positions in $T$ containing different digit values ('1' through '9') are disjoint, selecting $c_d$ occurrences of digit $d$ from $T[1 \dots M-1]$ is possible if and only if $c_d \le \text{count of digit } d \text{ in } T[1 \dots M-1]$.
+   - When placed into $S$, the selected T-digits are placed in descending order to maximize the resulting integer lexicographically.
+
+2. **Greedy Strategy**:
+   - We count the occurrences of each digit $1 \dots 9$ in $T[1 \dots M-1]$ and include 1 mandatory copy of $T[M]$.
+   - As we iterate through $S$ from left to right ($i = 1 \dots N$), at each position we greedily choose the largest available T-digit $d > S[i]$. If no such T-digit exists, we retain $S[i]$.
+   - If $T[M]$ has not been consumed by the end of the loop, we replace the last character of $S$ with $T[M]$.
+
+3. **Complexity**:
+   - Time Complexity: $\mathcal{O}(N + M)$
+   - Space Complexity: $\mathcal{O}(N + M)$

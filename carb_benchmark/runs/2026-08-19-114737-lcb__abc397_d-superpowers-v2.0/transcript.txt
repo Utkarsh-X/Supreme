@@ -1,0 +1,40 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_d/main.py).
+
+### Method Explanation
+1. **Mathematical Reduction**:
+   Given $x^3 - y^3 = N$ for positive integers $x > y \ge 1$:
+   Let $d = x - y \ge 1$. Factoring $x^3 - y^3$:
+   $$N = (x - y)(x^2 + xy + y^2) = d(3y^2 + 3dy + d^2)$$
+   Since $y \ge 1$, $3y^2 + 3dy + d^2 > d^2$, which implies $N > d^3$ and $d < N^{1/3} \le 10^6$.
+
+2. **Algorithm**:
+   - Compute the upper bound for $d$, $\lfloor (N-1)^{1/3} \rfloor \le 999999$.
+   - Iterate through candidate values of $d \in [1, \lfloor (N-1)^{1/3} \rfloor]$.
+   - If $d$ divides $N$, let $K = N / d$. The equation $3y^2 + 3dy + (d^2 - K) = 0$ is a quadratic in $y$.
+   - Discriminant $D = 12K - 3d^2$. If $D$ is a non-negative perfect square $s^2$, and $s - 3d > 0$ is divisible by $6$, we obtain an integer solution $y = \frac{s - 3d}{6}$ and $x = y + d$.
+   - If no valid pair $(x, y)$ is found, output `-1`.
+
+### Verification
+- Tested against all sample test cases (including $N = 397$, $N = 1$, and $N = 39977273855577088$).
+- Benchmarked worst-case inputs up to $N = 10^{18}$ (~0.08 seconds execution time).
+- Verified correctness using random generated test cases.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_d/main.py).
+
+### Method Explanation
+1. **Mathematical Reduction**:
+   Given $x^3 - y^3 = N$ for positive integers $x > y \ge 1$:
+   Let $d = x - y \ge 1$. Factoring $x^3 - y^3$:
+   $$N = (x - y)(x^2 + xy + y^2) = d(3y^2 + 3dy + d^2)$$
+   Since $y \ge 1$, $3y^2 + 3dy + d^2 > d^2$, which implies $N > d^3$ and $d < N^{1/3} \le 10^6$.
+
+2. **Algorithm**:
+   - Compute the upper bound for $d$, $\lfloor (N-1)^{1/3} \rfloor \le 999999$.
+   - Iterate through candidate values of $d \in [1, \lfloor (N-1)^{1/3} \rfloor]$.
+   - If $d$ divides $N$, let $K = N / d$. The equation $3y^2 + 3dy + (d^2 - K) = 0$ is a quadratic in $y$.
+   - Discriminant $D = 12K - 3d^2$. If $D$ is a non-negative perfect square $s^2$, and $s - 3d > 0$ is divisible by $6$, we obtain an integer solution $y = \frac{s - 3d}{6}$ and $x = y + d$.
+   - If no valid pair $(x, y)$ is found, output `-1`.
+
+### Verification
+- Tested against all sample test cases (including $N = 397$, $N = 1$, and $N = 39977273855577088$).
+- Benchmarked worst-case inputs up to $N = 10^{18}$ (~0.08 seconds execution time).
+- Verified correctness using random generated test cases.

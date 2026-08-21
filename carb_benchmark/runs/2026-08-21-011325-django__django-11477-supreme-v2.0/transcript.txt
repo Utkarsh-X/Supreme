@@ -1,0 +1,30 @@
+I have completed the task and verified the fix.
+
+### Root Cause
+When a URL pattern contains optional named or positional regex capture groups that are not present in the URL being resolved, `RegexPattern.match()` returned `None` as the value for those uncaptured groups in `match.groupdict()` and `match.groups()`. Consequently:
+1. `resolve()` populated `ResolverMatch.kwargs` (and `args`) with `None` values for missing optional parameters (e.g. `{'optional': None}`).
+2. When `translate_url()` subsequently called `reverse(to_be_reversed, args=match.args, kwargs=match.kwargs)` to reverse the URL in the target language, `reverse()` either failed (`NoReverseMatch`) or formatted `None` into the string `'None'` (e.g. `/nl/with-arguments/regular-argument/None.html`), resulting in `translate_url()` returning an incorrect or untranslated URL.
+
+### Solution
+1. **`django/urls/resolvers.py`**: Updated [RegexPattern.match()](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/resolvers.py#L150-L160) to filter out `None` values from `kwargs` (`{k: v for k, v in match.groupdict().items() if v is not None}`) and `args` (`tuple(x for x in match.groups() if x is not None)`).
+2. **`django/urls/base.py`**: Updated [translate_url()](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L160-L180) to strip any `None` values from `match.args` and `match.kwargs` prior to calling `reverse()`.
+3. **Tests**: Added tests in [tests/i18n/patterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L152-L170), [tests/urlpatterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/urlpatterns/tests.py#L54-L70), and [tests/urlpatterns_reverse/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/urlpatterns_reverse/tests.py#L180-L185) covering `translate_url()`, `resolve()`, and `reverse()` with missing optional parameters.
+
+### Verification
+Ran test suites for `i18n.patterns.tests`, `urlpatterns`, and `urlpatterns_reverse`:
+- 160/160 tests passed cleanly.
+I have completed the task and verified the fix.
+
+### Root Cause
+When a URL pattern contains optional named or positional regex capture groups that are not present in the URL being resolved, `RegexPattern.match()` returned `None` as the value for those uncaptured groups in `match.groupdict()` and `match.groups()`. Consequently:
+1. `resolve()` populated `ResolverMatch.kwargs` (and `args`) with `None` values for missing optional parameters (e.g. `{'optional': None}`).
+2. When `translate_url()` subsequently called `reverse(to_be_reversed, args=match.args, kwargs=match.kwargs)` to reverse the URL in the target language, `reverse()` either failed (`NoReverseMatch`) or formatted `None` into the string `'None'` (e.g. `/nl/with-arguments/regular-argument/None.html`), resulting in `translate_url()` returning an incorrect or untranslated URL.
+
+### Solution
+1. **`django/urls/resolvers.py`**: Updated [RegexPattern.match()](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/resolvers.py#L150-L160) to filter out `None` values from `kwargs` (`{k: v for k, v in match.groupdict().items() if v is not None}`) and `args` (`tuple(x for x in match.groups() if x is not None)`).
+2. **`django/urls/base.py`**: Updated [translate_url()](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/django/urls/base.py#L160-L180) to strip any `None` values from `match.args` and `match.kwargs` prior to calling `reverse()`.
+3. **Tests**: Added tests in [tests/i18n/patterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/i18n/patterns/tests.py#L152-L170), [tests/urlpatterns/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/urlpatterns/tests.py#L54-L70), and [tests/urlpatterns_reverse/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11477/tests/urlpatterns_reverse/tests.py#L180-L185) covering `translate_url()`, `resolve()`, and `reverse()` with missing optional parameters.
+
+### Verification
+Ran test suites for `i18n.patterns.tests`, `urlpatterns`, and `urlpatterns_reverse`:
+- 160/160 tests passed cleanly.

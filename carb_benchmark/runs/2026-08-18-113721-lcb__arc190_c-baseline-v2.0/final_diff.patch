@@ -1,0 +1,128 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ac467df 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,122 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    ptr = 0
++    H = int(input_data[ptr]); ptr += 1
++    W = int(input_data[ptr]); ptr += 1
++    
++    MOD = 998244353
++    
++    raw_A = []
++    for r in range(H):
++        row = [int(x) for x in input_data[ptr:ptr+W]]
++        ptr += W
++        raw_A.append(row)
++        
++    Q = int(input_data[ptr]); ptr += 1
++    sh = int(input_data[ptr]) - 1; ptr += 1
++    sw = int(input_data[ptr]) - 1; ptr += 1
++    
++    queries = []
++    for _ in range(Q):
++        d = input_data[ptr]; ptr += 1
++        a = int(input_data[ptr]); ptr += 1
++        queries.append((d, a))
++        
++    # Transpose if H > W so that H <= min(H, W) <= 447
++    if H > W:
++        A = [[raw_A[r][c] for r in range(H)] for c in range(W)]
++        H, W = W, H
++        sh, sw = sw, sh
++        dir_map = {'U': 'L', 'D': 'R', 'L': 'U', 'R': 'D'}
++        queries = [(dir_map[d], a) for d, a in queries]
++    else:
++        A = raw_A
++
++    # Precompute L and R tables
++    # L[w] is an H-element list for w in 0..W
++    # R[w] is an H-element list for w in 0..W
++    L = [[0] * H for _ in range(W + 1)]
++    R = [[0] * H for _ in range(W + 1)]
++    
++    L[0][0] = 1
++    
++    for w in range(W):
++        L_prev = L[w]
++        L_curr = L[w+1]
++        col_A = [A[r][w] for r in range(H)]
++        
++        acc = 0
++        for r in range(H):
++            acc = (col_A[r] * (L_prev[r] + acc)) % MOD
++            L_curr[r] = acc
++            
++    R[W][H-1] = 1
++    for w in range(W - 1, -1, -1):
++        R_next = R[w+1]
++        R_curr = R[w]
++        col_A = [A[r][w] for r in range(H)]
++        
++        acc = 0
++        for r in range(H - 1, -1, -1):
++            acc = (col_A[r] * (R_next[r] + acc)) % MOD
++            R_curr[r] = acc
++            
++    curr_h, curr_w = sh, sw
++    out = []
++    
++    for d, a in queries:
++        prev_w = curr_w
++        if d == 'U':
++            curr_h -= 1
++        elif d == 'D':
++            curr_h += 1
++        elif d == 'L':
++            curr_w -= 1
++        elif d == 'R':
++            curr_w += 1
++            
++        if curr_w == prev_w + 1:
++            col_prev = [A[r][prev_w] for r in range(H)]
++            L_prev = L[prev_w]
++            L_target = L[curr_w]
++            acc = 0
++            for r in range(H):
++                acc = (col_prev[r] * (L_prev[r] + acc)) % MOD
++                L_target[r] = acc
++                
++        elif curr_w == prev_w - 1:
++            col_prev = [A[r][prev_w] for r in range(H)]
++            R_next = R[prev_w + 1]
++            R_target = R[prev_w]
++            acc = 0
++            for r in range(H - 1, -1, -1):
++                acc = (col_prev[r] * (R_next[r] + acc)) % MOD
++                R_target[r] = acc
++
++        A[curr_h][curr_w] = a
++        
++        col_curr = [A[r][curr_w] for r in range(H)]
++        L_curr = L[curr_w]
++        R_curr = R[curr_w + 1]
++        
++        v = [0] * H
++        acc = 0
++        for r in range(H):
++            acc = (col_curr[r] * (L_curr[r] + acc)) % MOD
++            v[r] = acc
++            
++        S = 0
++        for r in range(H):
++            S = (S + R_curr[r] * v[r]) % MOD
++            
++        out.append(str(S))
++        
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    solve()

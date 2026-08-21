@@ -1,0 +1,90 @@
+diff --git a/main.py b/main.py
+index c86f6c8..64dbf8d 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,84 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import re
++
++def main():
++    input_data = sys.stdin.read()
++    if not input_data.strip():
++        return
++    
++    tokens = list(map(int, re.findall(r'\d+', input_data)))
++    if not tokens:
++        return
++    
++    k = tokens[-1]
++    nums = tokens[:-1]
++    n = len(nums)
++    
++    if n == 0:
++        print(0)
++        return
++
++    pref = [0] * (n + 1)
++    for i in range(n):
++        pref[i + 1] = pref[i] + nums[i]
++
++    next_greater = [n] * n
++    stack = []
++    for i in range(n - 1, -1, -1):
++        val = nums[i]
++        while stack and nums[stack[-1]] < val:
++            stack.pop()
++        if stack:
++            next_greater[i] = stack[-1]
++        stack.append(i)
++
++    cost_jump = [0] * (n + 1)
++    for i in range(n):
++        cost_jump[i] = (next_greater[i] - i) * nums[i]
++
++    LOG = 18
++    up = [[n] * (n + 1) for _ in range(LOG)]
++    sum_up = [[0] * (n + 1) for _ in range(LOG)]
++
++    up_0 = up[0]
++    sum_up_0 = sum_up[0]
++    for i in range(n):
++        up_0[i] = next_greater[i]
++        sum_up_0[i] = cost_jump[i]
++
++    for k_step in range(1, LOG):
++        up_k = up[k_step]
++        up_prev = up[k_step - 1]
++        sum_k = sum_up[k_step]
++        sum_prev = sum_up[k_step - 1]
++        for i in range(n + 1):
++            p = up_prev[i]
++            up_k[i] = up_prev[p]
++            sum_k[i] = sum_prev[i] + sum_prev[p]
++
++    def get_cost(L, R):
++        curr = L
++        total_S = 0
++        _up = up
++        _sum_up = sum_up
++        for step in range(LOG - 1, -1, -1):
++            up_step = _up[step]
++            if up_step[curr] <= R:
++                total_S += _sum_up[step][curr]
++                curr = up_step[curr]
++        total_S += (R - curr + 1) * nums[curr]
++        return total_S - (pref[R + 1] - pref[L])
++
++    ans = 0
++    R = 0
++    for L in range(n):
++        if R < L:
++            R = L
++        while R < n and get_cost(L, R) <= k:
++            R += 1
++        ans += (R - L)
++
++    print(ans)
++
++if __name__ == '__main__':
++    main()

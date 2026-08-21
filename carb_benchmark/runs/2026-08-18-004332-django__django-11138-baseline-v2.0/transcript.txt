@@ -1,0 +1,27 @@
+I have identified and fixed the issue where the database connection's `TIME_ZONE` setting was ignored when generating SQL for datetime expressions (such as date lookups `__date`, `Extract`, and `Trunc`) on MySQL, SQLite, and Oracle.
+
+### Cause of the Issue
+When `USE_TZ` is `True` and a database backend does not support timezones natively (MySQL, SQLite, Oracle), Django saves datetime values as naive timestamps in the connection's timezone (`connection.timezone_name`, specified via `DATABASES['<alias>']['TIME_ZONE']` or defaulting to `'UTC'`).
+
+However, SQL datetime conversion methods across backends previously assumed the source timezone of stored datetime values was always `'UTC'` (or `0:00` offset), leading to incorrect SQL queries and missing/invalid conversions when database-specific `TIME_ZONE` was set:
+1. **MySQL**: `_convert_field_to_tz` hardcoded `'UTC'` as the source timezone in `CONVERT_TZ(field_name, 'UTC', tzname)`.
+2. **Oracle**: `_convert_field_to_tz` hardcoded `'0:00'` as the source timezone in `FROM_TZ(field_name, '0:00') AT TIME ZONE tzname`.
+3. **SQLite**: `_sqlite_datetime_parse` parsed datetime strings into UTC before converting to `tzname`.
+
+Additionally, when the database timezone matched the target target timezone (`connection.timezone_name == tzname`), unnecessary timezone conversion SQL (like `CONVERT_TZ`) was executed, failing on MySQL if timezone tables were not populated.
+
+### Changes Made
+1. **MySQL** ([`django/db/backends/mysql/operations.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11138/django/db/backends/mysql/operations.py#L71-L79)):
+   - Updated `_convert_field_to_tz` to use `self.connection.timezone_name` as the source timezone instead of hardcoded `'UTC'`.
+   - Bypassed `CONVERT_TZ` when `self.connection.timezone_name == tzname`.
+
+2. **Oracle** ([`django/db/backends/oracle/operations.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11138/django/db/backends/oracle/operations.py#L97-L109)):
+   - Updated `_convert_field_to_tz` to pass `self.connection.timezone_name` to `FROM_TZ` instead of hardcoded `'0:00'`.
+   - Bypassed `FROM_TZ` / `AT TIME ZONE` when `self.connection.timezone_name == tzname`.
+
+3. **SQLite** ([`django/db/backends/sqlite3/operations.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11138/django/db/backends/sqlite3/operations.py#L90-L117), [`django/db/backends/sqlite3/base.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11138/django/db/backends/sqlite3/base.py#L198-L205)):
+   - Updated `datetime_cast_date_sql`, `datetime_cast_time_sql`, `datetime_extract_sql`, and `datetime_trunc_sql` to pass `self.connection.timezone_name` as the source timezone to SQLite functions.
+   - Updated SQLite custom Python functions (`_sqlite_datetime_parse`, `_sqlite_datetime_extract`, etc.) to parse stored naive datetimes in `conn_tzname` before converting to target `tzname`.
+
+4. **Tests** ([`tests/timezones/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-11138/tests/timezones/tests.py#L582-L625)):
+   - Added unit test suite `DatabaseTimeZoneTests` verifying datetime date lookups, extracts, and truncations when database connection `TIME_ZONE` is set.

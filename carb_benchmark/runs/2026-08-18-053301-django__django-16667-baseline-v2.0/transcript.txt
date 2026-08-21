@@ -1,0 +1,16 @@
+I have investigated and fixed the issue where `SelectDateWidget` crashes with an `OverflowError` when user-supplied input contains large integers.
+
+### Root Cause
+In `SelectDateWidget.value_from_datadict` ([django/forms/widgets.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/django/forms/widgets.py#L1158-L1163)), `datetime.date(int(y), int(m), int(d))` was called inside a `try...except ValueError:` block. When integers exceeding the range of C long (or Python C extension limits) were passed for year, month, or day, CPython's `datetime.date` constructor raised an `OverflowError` rather than a `ValueError`. Because `OverflowError` was uncaught, it resulted in an unhandled exception (HTTP 500).
+
+### Solution
+1. Updated `SelectDateWidget.value_from_datadict` in `django/forms/widgets.py` to catch `(ValueError, OverflowError)` when instantiating `datetime.date`.
+2. Added unit tests in `tests/forms_tests/widget_tests/test_selectdatewidget.py` to verify that large inputs for date parts return the fallback formatted string and fail validation gracefully rather than crashing.
+I have investigated and fixed the issue where `SelectDateWidget` crashes with an `OverflowError` when user-supplied input contains large integers.
+
+### Root Cause
+In `SelectDateWidget.value_from_datadict` ([django/forms/widgets.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16667/django/forms/widgets.py#L1158-L1163)), `datetime.date(int(y), int(m), int(d))` was called inside a `try...except ValueError:` block. When integers exceeding the range of C long (or Python C extension limits) were passed for year, month, or day, CPython's `datetime.date` constructor raised an `OverflowError` rather than a `ValueError`. Because `OverflowError` was uncaught, it resulted in an unhandled exception (HTTP 500).
+
+### Solution
+1. Updated `SelectDateWidget.value_from_datadict` in `django/forms/widgets.py` to catch `(ValueError, OverflowError)` when instantiating `datetime.date`.
+2. Added unit tests in `tests/forms_tests/widget_tests/test_selectdatewidget.py` to verify that large inputs for date parts return the fallback formatted string and fail validation gracefully rather than crashing.

@@ -1,0 +1,42 @@
+diff --git a/doc/whats_new/v0.22.rst b/doc/whats_new/v0.22.rst
+index 6e2c7cc..946e8d2 100644
+--- a/doc/whats_new/v0.22.rst
++++ b/doc/whats_new/v0.22.rst
+@@ -121,7 +121,12 @@ Changelog
+   remove constant features due to numerical instability, by using range
+   rather than variance in this case.
+   :pr:`13704` by `Roddy MacSween <rlms>`.
+-  
++
++:mod:`sklearn.utils`
++....................
++
++- |Enhancement| :func:`sklearn.show_versions` now includes ``joblib`` version.
++  :pr:`14141` by :user:`Antigravity <antigravity>`.
+ Miscellaneous
+ .............
+ 
+diff --git a/sklearn/utils/_show_versions.py b/sklearn/utils/_show_versions.py
+index e5d3141..ecba9ec 100644
+--- a/sklearn/utils/_show_versions.py
++++ b/sklearn/utils/_show_versions.py
+@@ -48,6 +48,7 @@ def _get_deps_info():
+         "Cython",
+         "pandas",
+         "matplotlib",
++        "joblib",
+     ]
+ 
+     def get_version(module):
+diff --git a/sklearn/utils/tests/test_show_versions.py b/sklearn/utils/tests/test_show_versions.py
+index 31153c9..b8ad843 100644
+--- a/sklearn/utils/tests/test_show_versions.py
++++ b/sklearn/utils/tests/test_show_versions.py
+@@ -23,6 +23,7 @@ def test_get_deps_info():
+     assert 'Cython' in deps_info
+     assert 'pandas' in deps_info
+     assert 'matplotlib' in deps_info
++    assert 'joblib' in deps_info
+ 
+ 
+ def test_show_versions_with_blas(capsys):

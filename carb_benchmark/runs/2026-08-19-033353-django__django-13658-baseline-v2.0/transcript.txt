@@ -1,0 +1,22 @@
+I have resolved the issue by updating `ManagementUtility.execute()` to pass `prog=self.prog_name` when instantiating `CommandParser`.
+
+### Changes Made
+1. **[django/core/management/\_\_init\_\_.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13658/django/core/management/__init__.py#L347-L352)**
+   - Updated `ManagementUtility.execute()` so `CommandParser` receives `prog=self.prog_name` instead of relying on `ArgumentParser`'s default `sys.argv[0]`.
+
+2. **[tests/user_commands/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13658/tests/user_commands/tests.py#L73-L77)**
+   - Added unit test `test_management_utility_prog_name` verifying that `ManagementUtility.execute()` works as expected using `self.prog_name` when `sys.argv[0]` is `None` or differs from `argv[0]`.
+
+### Verification
+- Executed `python tests/runtests.py user_commands.tests.CommandTests.test_management_utility_prog_name` which passes cleanly.
+I have resolved the issue by updating `ManagementUtility.execute()` to pass `prog=self.prog_name` when instantiating `CommandParser`.
+
+### Changes Made
+1. **[django/core/management/\_\_init\_\_.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13658/django/core/management/__init__.py#L347-L352)**
+   - Updated `ManagementUtility.execute()` so `CommandParser` receives `prog=self.prog_name` instead of relying on `ArgumentParser`'s default `sys.argv[0]`.
+
+2. **[tests/user_commands/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13658/tests/user_commands/tests.py#L73-L77)**
+   - Added unit test `test_management_utility_prog_name` verifying that `ManagementUtility.execute()` works as expected using `self.prog_name` when `sys.argv[0]` is `None` or differs from `argv[0]`.
+
+### Verification
+- Executed `python tests/runtests.py user_commands.tests.CommandTests.test_management_utility_prog_name` which passes cleanly.

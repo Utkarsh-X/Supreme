@@ -1,0 +1,32 @@
+Wait for log notification from task-54. output will arrive in context.
+### Summary of Cause & Fix
+
+#### **Root Cause**
+1. `_coeff_isneg(a)` in [`sympy/core/function.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/core/function.py#L82) only checked `if a.is_Mul:`, which returned `False` for `MatMul` instances (such as `-B` which is `MatMul(-1, B)` or `-A*B` which is `MatMul(-1, A, B)`). As a result, negative coefficients in matrix products were not identified as negative terms.
+2. `MatAdd` did not define `as_ordered_terms()`, so printer helpers like `_as_ordered_terms()` treated `MatAdd` as a single opaque term rather than a list of terms.
+3. Printers (`StrPrinter`, `LatexPrinter`, `PrettyPrinter`) implemented `_print_MatAdd` by naively joining arguments with ` + ` instead of applying subtraction formatting rules (` - `) for terms with negative coefficients. `_print_MatMul` also printed `-1` as `(-1)*` or `-1 ` instead of formatting negative signs attached to matrix factors.
+
+#### **Changes Made**
+1. **[`sympy/core/function.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/core/function.py#L82)**: Updated `_coeff_isneg` to check `if a.is_Mul or a.is_MatMul:`.
+2. **[`sympy/matrices/expressions/matadd.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/matrices/expressions/matadd.py#L46)**: Added `as_ordered_terms(self, order=None, data=False)` to `MatAdd` so terms can be properly extracted and formatted in printers.
+3. **[`sympy/printing/precedence.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/precedence.py#L105)**: Added `"MatMul": precedence_Mul` to `PRECEDENCE_FUNCTIONS`.
+4. **Printers ([`str.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/str.py#L307), [`latex.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/latex.py#L314), [`pretty.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/pretty/pretty.py#L1440))**:
+   - Updated `_print_MatMul` in `str.py` and `latex.py` to extract negative coefficients and format leading minus signs.
+   - Redirected `_print_MatAdd` in `str.py`, `latex.py`, and `pretty.py` to `_print_Add`, which now handles `MatMul` terms with negative coefficients and formats subtractions cleanly (`-B - A*B + A`).
+5. **Tests**: Added tests for `str`, `latex`, `pretty`, and `upretty` matrix subtraction printing across test modules.
+Wait for log notification from task-54. output will arrive in context.
+### Summary of Cause & Fix
+
+#### **Root Cause**
+1. `_coeff_isneg(a)` in [`sympy/core/function.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/core/function.py#L82) only checked `if a.is_Mul:`, which returned `False` for `MatMul` instances (such as `-B` which is `MatMul(-1, B)` or `-A*B` which is `MatMul(-1, A, B)`). As a result, negative coefficients in matrix products were not identified as negative terms.
+2. `MatAdd` did not define `as_ordered_terms()`, so printer helpers like `_as_ordered_terms()` treated `MatAdd` as a single opaque term rather than a list of terms.
+3. Printers (`StrPrinter`, `LatexPrinter`, `PrettyPrinter`) implemented `_print_MatAdd` by naively joining arguments with ` + ` instead of applying subtraction formatting rules (` - `) for terms with negative coefficients. `_print_MatMul` also printed `-1` as `(-1)*` or `-1 ` instead of formatting negative signs attached to matrix factors.
+
+#### **Changes Made**
+1. **[`sympy/core/function.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/core/function.py#L82)**: Updated `_coeff_isneg` to check `if a.is_Mul or a.is_MatMul:`.
+2. **[`sympy/matrices/expressions/matadd.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/matrices/expressions/matadd.py#L46)**: Added `as_ordered_terms(self, order=None, data=False)` to `MatAdd` so terms can be properly extracted and formatted in printers.
+3. **[`sympy/printing/precedence.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/precedence.py#L105)**: Added `"MatMul": precedence_Mul` to `PRECEDENCE_FUNCTIONS`.
+4. **Printers ([`str.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/str.py#L307), [`latex.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/latex.py#L314), [`pretty.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14248/sympy/printing/pretty/pretty.py#L1440))**:
+   - Updated `_print_MatMul` in `str.py` and `latex.py` to extract negative coefficients and format leading minus signs.
+   - Redirected `_print_MatAdd` in `str.py`, `latex.py`, and `pretty.py` to `_print_Add`, which now handles `MatMul` terms with negative coefficients and formats subtractions cleanly (`-B - A*B + A`).
+5. **Tests**: Added tests for `str`, `latex`, `pretty`, and `upretty` matrix subtraction printing across test modules.

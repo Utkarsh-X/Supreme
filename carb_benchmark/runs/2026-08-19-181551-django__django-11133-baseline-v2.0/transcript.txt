@@ -1,0 +1,20 @@
+I have resolved the issue where `HttpResponse` did not correctly handle `memoryview` objects.
+
+### Root Cause
+1. `HttpResponseBase.make_bytes(value)` handled `bytes` and `str` explicitly, but fell back to `str(value).encode()` for other types. For a `memoryview` instance, `str(value)` produced string representations such as `<memory at 0x...>` instead of byte content.
+2. `HttpResponse.content.setter` checked `hasattr(value, '__iter__') and not isinstance(value, (bytes, str))`. Because a `memoryview` object is iterable in Python (yielding integer byte values) and was not an instance of `(bytes, str)`, it was treated as an iterator of response chunks. Iterating over `memoryview` yielded individual byte integers, producing stringified integers in the response content.
+
+### Solution
+- Updated `make_bytes()` in [HttpResponseBase](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L223-L237) to handle `memoryview` objects alongside `bytes` using `bytes(value)`.
+- Updated `HttpResponse.content.setter` in [HttpResponse](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L309-L322) to exclude `memoryview` from being treated as a chunk iterator alongside `bytes` and `str`.
+- Added unit tests in [test_memoryview_content](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/tests/responses/tests.py#L158-L164) covering initializing `HttpResponse` with a `memoryview`, updating `.content` with a `memoryview`, and `.write()` with a `memoryview`.
+I have resolved the issue where `HttpResponse` did not correctly handle `memoryview` objects.
+
+### Root Cause
+1. `HttpResponseBase.make_bytes(value)` handled `bytes` and `str` explicitly, but fell back to `str(value).encode()` for other types. For a `memoryview` instance, `str(value)` produced string representations such as `<memory at 0x...>` instead of byte content.
+2. `HttpResponse.content.setter` checked `hasattr(value, '__iter__') and not isinstance(value, (bytes, str))`. Because a `memoryview` object is iterable in Python (yielding integer byte values) and was not an instance of `(bytes, str)`, it was treated as an iterator of response chunks. Iterating over `memoryview` yielded individual byte integers, producing stringified integers in the response content.
+
+### Solution
+- Updated `make_bytes()` in [HttpResponseBase](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L223-L237) to handle `memoryview` objects alongside `bytes` using `bytes(value)`.
+- Updated `HttpResponse.content.setter` in [HttpResponse](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/django/http/response.py#L309-L322) to exclude `memoryview` from being treated as a chunk iterator alongside `bytes` and `str`.
+- Added unit tests in [test_memoryview_content](file:///E:/RofU/Supreme/carb_workspaces/django__django-11133/tests/responses/tests.py#L158-L164) covering initializing `HttpResponse` with a `memoryview`, updating `.content` with a `memoryview`, and `.write()` with a `memoryview`.

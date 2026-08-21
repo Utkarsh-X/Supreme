@@ -1,0 +1,86 @@
+diff --git a/main.py b/main.py
+index c86f6c8..bc8071e 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,80 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import Counter
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    n = int(input_data[0])
++    s = input_data[1]
++
++    MOD = 998244353
++
++    # Parse VPS into tree structure
++    # Dummy root is node 0
++    children = [[]]
++    stack = [0]
++
++    for c in s:
++        if c == '(':
++            new_node = len(children)
++            children.append([])
++            children[stack[-1]].append(new_node)
++            stack.append(new_node)
++        else:
++            stack.pop()
++
++    num_nodes = len(children)
++
++    # Precompute factorials and inverse factorials modulo 998244353
++    MAXF = num_nodes + 10
++    fact = [1] * MAXF
++    inv = [1] * MAXF
++    for i in range(1, MAXF):
++        fact[i] = (fact[i - 1] * i) % MOD
++    inv[MAXF - 1] = pow(fact[MAXF - 1], MOD - 2, MOD)
++    for i in range(MAXF - 2, -1, -1):
++        inv[i] = (inv[i + 1] * (i + 1)) % MOD
++
++    # Bottom-up DP (post-order traversal since nodes 0..num_nodes-1 are in topological order)
++    class_map = {}
++    class_id = [0] * num_nodes
++    size = [0] * num_nodes
++
++    for u in range(num_nodes - 1, -1, -1):
++        ch_list = children[u]
++        k = len(ch_list)
++        if k == 0:
++            key = ()
++            if key not in class_map:
++                class_map[key] = len(class_map)
++            class_id[u] = class_map[key]
++            size[u] = 1
++        else:
++            counts = Counter(class_id[v] for v in ch_list)
++            key = tuple(sorted(counts.items()))
++            if key not in class_map:
++                class_map[key] = len(class_map)
++            class_id[u] = class_map[key]
++
++            # Compute size[u] = k! * product_j ( (size_j^count_j) / count_j! )
++            cur_sz = fact[k]
++            # Map class_id -> representative child v
++            rep_map = {}
++            for v in ch_list:
++                cid = class_id[v]
++                if cid not in rep_map:
++                    rep_map[cid] = v
++
++            for v_class_id, count in counts.items():
++                v_rep = rep_map[v_class_id]
++                v_sz = size[v_rep]
++                term = (pow(v_sz, count, MOD) * inv[count]) % MOD
++                cur_sz = (cur_sz * term) % MOD
++
++            size[u] = cur_sz
++
++    print(size[0])
++
++if __name__ == '__main__':
++    main()

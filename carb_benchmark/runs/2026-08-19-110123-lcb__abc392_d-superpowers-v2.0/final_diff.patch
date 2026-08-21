@@ -1,0 +1,58 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ef9c8a6 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,52 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import defaultdict
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    idx = 1
++    
++    K = []
++    # val_to_dice[v] will store a list of (die_index, count_of_v_on_die)
++    val_to_dice = defaultdict(list)
++    
++    for i in range(N):
++        ki = int(input_data[idx])
++        idx += 1
++        K.append(ki)
++        
++        # Count frequency of each face value for die i
++        counts = defaultdict(int)
++        for _ in range(ki):
++            v = int(input_data[idx])
++            idx += 1
++            counts[v] += 1
++            
++        for v, cnt in counts.items():
++            val_to_dice[v].append((i, cnt))
++            
++    # same_count[i][j] stores sum_{v} (c_{i,v} * c_{j,v})
++    same_count = [[0] * N for _ in range(N)]
++    
++    for v, dice_list in val_to_dice.items():
++        m = len(dice_list)
++        for p in range(m):
++            i, cnt_i = dice_list[p]
++            for q in range(p + 1, m):
++                j, cnt_j = dice_list[q]
++                same_count[i][j] += cnt_i * cnt_j
++                
++    max_prob = 0.0
++    for i in range(N):
++        for j in range(i + 1, N):
++            prob = same_count[i][j] / (K[i] * K[j])
++            if prob > max_prob:
++                max_prob = prob
++                
++    print(f"{max_prob:.15f}")
++
++if __name__ == '__main__':
++    main()

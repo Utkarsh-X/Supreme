@@ -1,0 +1,67 @@
+diff --git a/django/db/models/query.py b/django/db/models/query.py
+index 1544beb..59bd046 100644
+--- a/django/db/models/query.py
++++ b/django/db/models/query.py
+@@ -931,7 +931,13 @@ class QuerySet:
+         # Clear limits and ordering so they can be reapplied
+         clone.query.clear_ordering(True)
+         clone.query.clear_limits()
+-        clone.query.combined_queries = (self.query,) + tuple(qs.query for qs in other_qs)
++        parts = []
++        for qs in (self,) + other_qs:
++            q = qs.query.clone()
++            if not (q.low_mark or q.high_mark) and not q.order_by:
++                q.clear_ordering(True)
++            parts.append(q)
++        clone.query.combined_queries = tuple(parts)
+         clone.query.combinator = combinator
+         clone.query.combinator_all = all
+         return clone
+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
+index 08d7faf..9620997 100644
+--- a/django/db/models/sql/query.py
++++ b/django/db/models/sql/query.py
+@@ -328,6 +328,8 @@ class Query(BaseExpression):
+             obj.subq_aliases = self.subq_aliases.copy()
+         obj.used_aliases = self.used_aliases.copy()
+         obj._filtered_relations = self._filtered_relations.copy()
++        if self.combined_queries:
++            obj.combined_queries = tuple(c.clone() for c in self.combined_queries)
+         # Clear the cached_property
+         try:
+             del obj.base_table
+diff --git a/tests/queries/test_qs_combinators.py b/tests/queries/test_qs_combinators.py
+index 227972e..7359c84 100644
+--- a/tests/queries/test_qs_combinators.py
++++ b/tests/queries/test_qs_combinators.py
+@@ -2,7 +2,7 @@ from django.db.models import Exists, F, IntegerField, OuterRef, Value
+ from django.db.utils import DatabaseError, NotSupportedError
+ from django.test import TestCase, skipIfDBFeature, skipUnlessDBFeature
+ 
+-from .models import Number, ReservedName
++from .models import Number, ReservedName, Tag, Valid
+ 
+ 
+ @skipUnlessDBFeature('supports_select_union')
+@@ -228,3 +228,21 @@ class QuerySetSetOperationTests(TestCase):
+         qs1 = Number.objects.all()
+         qs2 = Number.objects.intersection(Number.objects.filter(num__gt=1))
+         self.assertEqual(qs1.difference(qs2).count(), 2)
++
++    def test_union_with_meta_ordering(self):
++        Tag.objects.create(name='a')
++        Tag.objects.create(name='b')
++        qs1 = Tag.objects.filter(name='a')
++        qs2 = Tag.objects.filter(name='b')
++        self.assertEqual(len(list(qs1.union(qs2))), 2)
++
++    def test_union_order_with_re_evaluation(self):
++        ReservedName.objects.create(name='a', order=2)
++        ReservedName.objects.create(name='b', order=1)
++        qs = ReservedName.objects.filter(order=1).union(
++            ReservedName.objects.filter(order=2)
++        ).order_by('order')
++        self.assertEqual([r.order for r in qs], [1, 2])
++        self.assertEqual(list(qs.order_by().values_list('pk', flat=True)), [1, 2])
++        self.assertEqual([r.order for r in qs], [1, 2])
++

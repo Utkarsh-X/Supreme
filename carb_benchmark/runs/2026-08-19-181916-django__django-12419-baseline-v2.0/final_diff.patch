@@ -1,0 +1,107 @@
+diff --git a/django/conf/global_settings.py b/django/conf/global_settings.py
+index 09c9b95..8bb59a4 100644
+--- a/django/conf/global_settings.py
++++ b/django/conf/global_settings.py
+@@ -637,6 +637,6 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+ SECURE_HSTS_PRELOAD = False
+ SECURE_HSTS_SECONDS = 0
+ SECURE_REDIRECT_EXEMPT = []
+-SECURE_REFERRER_POLICY = None
++SECURE_REFERRER_POLICY = 'same-origin'
+ SECURE_SSL_HOST = None
+ SECURE_SSL_REDIRECT = False
+diff --git a/docs/ref/settings.txt b/docs/ref/settings.txt
+index b4a5bdc..74dfeaf 100644
+--- a/docs/ref/settings.txt
++++ b/docs/ref/settings.txt
+@@ -2395,11 +2395,16 @@ from URL paths, so patterns shouldn't include them, e.g.
+ 
+ .. versionadded:: 3.0
+ 
+-Default: ``None``
++Default: ``'same-origin'``
++
++If set to a non-``None`` value, the
++:class:`~django.middleware.security.SecurityMiddleware` sets the
++:ref:`referrer-policy` header on all responses that do not already have it to
++the value provided.
++
++.. versionchanged:: 3.1
+ 
+-If configured, the :class:`~django.middleware.security.SecurityMiddleware` sets
+-the :ref:`referrer-policy` header on all responses that do not already have it
+-to the value provided.
++    In older versions, the default value was ``None``.
+ 
+ .. setting:: SECURE_SSL_HOST
+ 
+diff --git a/docs/releases/3.1.txt b/docs/releases/3.1.txt
+index 4a16515..16ee4d6 100644
+--- a/docs/releases/3.1.txt
++++ b/docs/releases/3.1.txt
+@@ -285,6 +285,14 @@ Requests and Responses
+ * The new :meth:`.HttpRequest.accepts` method returns whether the request
+   accepts the given MIME type according to the ``Accept`` HTTP header.
+ 
++Security
++~~~~~~~~
++
++* :setting:`SECURE_REFERRER_POLICY` now defaults to ``'same-origin'``. With this
++  enabled, :class:`~django.middleware.security.SecurityMiddleware` sets the
++  :ref:`Referrer-Policy <referrer-policy>` header on all responses that do not
++  already have it.
++
+ Serialization
+ ~~~~~~~~~~~~~
+ 
+@@ -379,6 +387,18 @@ Dropped support for MariaDB 10.1
+ Upstream support for MariaDB 10.1 ends in October 2020. Django 3.1 supports
+ MariaDB 10.2 and higher.
+ 
++SECURE_REFERRER_POLICY default is changed to 'same-origin'
++----------------------------------------------------------
++
++:setting:`SECURE_REFERRER_POLICY` now defaults to ``'same-origin'``. With this
++enabled, :class:`~django.middleware.security.SecurityMiddleware` sets the
++:ref:`Referrer-Policy <referrer-policy>` header on responses.
++
++If your application requires sending referrer information to third-party sites
++when navigating cross-origin, you should explicitly set
++:setting:`SECURE_REFERRER_POLICY` to your desired policy (e.g.
++``'no-referrer-when-downgrade'`` or ``None`` to disable sending the header).
++
+ Miscellaneous
+ -------------
+ 
+diff --git a/tests/check_framework/test_security.py b/tests/check_framework/test_security.py
+index 4c1869d..8a41834 100644
+--- a/tests/check_framework/test_security.py
++++ b/tests/check_framework/test_security.py
+@@ -528,7 +528,9 @@ class CheckReferrerPolicyTest(SimpleTestCase):
+ 
+     @override_settings(MIDDLEWARE=['django.middleware.security.SecurityMiddleware'])
+     def test_with_referrer_policy(self):
++        self.assertEqual(self.func(None), [])
+         tests = (
++            'same-origin',
+             'strict-origin',
+             'strict-origin,origin',
+             'strict-origin, origin',
+diff --git a/tests/middleware/test_security.py b/tests/middleware/test_security.py
+index 07b72fc..18acc00 100644
+--- a/tests/middleware/test_security.py
++++ b/tests/middleware/test_security.py
+@@ -223,6 +223,13 @@ class SecurityMiddlewareTest(SimpleTestCase):
+         ret = self.process_request("get", "/some/url")
+         self.assertIsNone(ret)
+ 
++    def test_referrer_policy_default(self):
++        """
++        By default, the middleware adds a "Referrer-Policy: same-origin" header
++        to the response.
++        """
++        self.assertEqual(self.process_response()['Referrer-Policy'], 'same-origin')
++
+     @override_settings(SECURE_REFERRER_POLICY=None)
+     def test_referrer_policy_off(self):
+         """

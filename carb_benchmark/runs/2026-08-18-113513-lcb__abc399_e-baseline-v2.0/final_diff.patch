@@ -1,0 +1,81 @@
+diff --git a/main.py b/main.py
+index c86f6c8..7449328 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,75 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import defaultdict, deque
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    S = input_data[1]
++    T = input_data[2]
++
++    # 1. Check consistency of mapping
++    mapping = {}
++    for s_char, t_char in zip(S, T):
++        if s_char in mapping:
++            if mapping[s_char] != t_char:
++                print(-1)
++                return
++        else:
++            mapping[s_char] = t_char
++
++    # 2. Check 26 distinct characters impossible case
++    v_s = set(S)
++    v_t = set(T)
++    if len(v_s) == 26 and len(v_t) == 26 and S != T:
++        print(-1)
++        return
++
++    # 3. Build graph
++    adj = defaultdict(list)
++    out_deg = defaultdict(int)
++    edges_count = 0
++
++    for s_char in v_s:
++        t_char = mapping[s_char]
++        if s_char != t_char:
++            edges_count += 1
++            out_deg[s_char] += 1
++            adj[s_char].append(t_char)
++            adj[t_char].append(s_char)
++
++    if edges_count == 0:
++        print(0)
++        return
++
++    # 4. Find connected components and check for cycles
++    visited = set()
++    extra_ops = 0
++
++    for u in list(adj.keys()):
++        if u not in visited:
++            component = []
++            queue = deque([u])
++            visited.add(u)
++            while queue:
++                curr = queue.popleft()
++                component.append(curr)
++                for nxt in adj[curr]:
++                    if nxt not in visited:
++                        visited.add(nxt)
++                        queue.append(nxt)
++
++            has_cycle = True
++            for node in component:
++                if out_deg[node] == 0:
++                    has_cycle = False
++                    break
++
++            if has_cycle:
++                extra_ops += 1
++
++    print(edges_count + extra_ops)
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,40 @@
+... sending message to system ...
+<system_notification>
+Task task-65 updated state to exited with status 0. Output logged to file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_6tr_9z2m\.gemini\antigravity-cli\brain\2910f0dc-459a-4260-a336-0107ba574c1d\.system_generated\tasks\task-65.log.
+</system_notification>
+
+I have fixed the issue where `ModelForm` with `RadioSelect` widget for foreign key fields (or `ModelChoiceField`) presented a blank option even when `blank=False` (or `required=True`).
+
+### Root Cause
+In [ModelChoiceField](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py#L1174), `self.empty_label` was set to `empty_label` ("---------") whenever `initial` was `None`, regardless of the field's widget type. For `<select>` widgets, an empty label option is necessary when no initial value is selected to force the user to make a choice. However, for `RadioSelect` widgets, radio buttons have an inherent unselected state, and rendering a blank `("", "---------")` option caused Django to render the blank choice radio button as `checked="checked"` when the form was rendered without initial data.
+
+### Fix
+Updated [`ModelChoiceField.__init__`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py#L1184-L1202) to evaluate `self.widget` and set `self.empty_label = None` when `self.required` is `True` and `self.widget` is an instance of `RadioSelect`.
+
+### Verification
+Added unit tests in [test_modelchoicefield.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/tests/model_forms/test_modelchoicefield.py#L357-L395) covering:
+- `ModelChoiceField` with `RadioSelect` when `required=True` (verifying `empty_label` is `None` and choices do not contain `""`).
+- `ModelChoiceField` with `RadioSelect` when `required=False` (verifying `empty_label` is preserved).
+- `ModelForm` with `ForeignKey(..., blank=False)` and `widgets={'field_name': RadioSelect}` (verifying rendered widget output contains no checked radio input).
+
+All test suites (`model_forms`, `forms_tests`, `admin_widgets`, `modeladmin`) passed without any errors or regressions.
+... sending message to system ...
+<system_notification>
+Task task-65 updated state to exited with status 0. Output logged to file: C:\Users\Utkarsh\AppData\Local\Temp\carb_v2_clean_run_6tr_9z2m\.gemini\antigravity-cli\brain\2910f0dc-459a-4260-a336-0107ba574c1d\.system_generated\tasks\task-65.log.
+</system_notification>
+
+I have fixed the issue where `ModelForm` with `RadioSelect` widget for foreign key fields (or `ModelChoiceField`) presented a blank option even when `blank=False` (or `required=True`).
+
+### Root Cause
+In [ModelChoiceField](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py#L1174), `self.empty_label` was set to `empty_label` ("---------") whenever `initial` was `None`, regardless of the field's widget type. For `<select>` widgets, an empty label option is necessary when no initial value is selected to force the user to make a choice. However, for `RadioSelect` widgets, radio buttons have an inherent unselected state, and rendering a blank `("", "---------")` option caused Django to render the blank choice radio button as `checked="checked"` when the form was rendered without initial data.
+
+### Fix
+Updated [`ModelChoiceField.__init__`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py#L1184-L1202) to evaluate `self.widget` and set `self.empty_label = None` when `self.required` is `True` and `self.widget` is an instance of `RadioSelect`.
+
+### Verification
+Added unit tests in [test_modelchoicefield.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/tests/model_forms/test_modelchoicefield.py#L357-L395) covering:
+- `ModelChoiceField` with `RadioSelect` when `required=True` (verifying `empty_label` is `None` and choices do not contain `""`).
+- `ModelChoiceField` with `RadioSelect` when `required=False` (verifying `empty_label` is preserved).
+- `ModelForm` with `ForeignKey(..., blank=False)` and `widgets={'field_name': RadioSelect}` (verifying rendered widget output contains no checked radio input).
+
+All test suites (`model_forms`, `forms_tests`, `admin_widgets`, `modeladmin`) passed without any errors or regressions.

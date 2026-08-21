@@ -1,0 +1,48 @@
+An $O(N)$ solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc192_a/main.py).
+
+### Method Explanation
+
+1. **Operation Pattern Analysis**:
+   - Each operation requires the middle character of the triple to be `'R'`. 
+   - Operation 1 (`ARC` at $i, i+1, i+2$) replaces $A_i, A_{i+1}$ with $1$.
+   - Operation 2 (`CRA` at $i, i+1, i+2$) replaces $A_i, A_{i+1}$ with $1$.
+   - Because the middle character of any operation must be `'R'`, while the first/last characters must be `'A'` or `'C'`, two operations cannot be performed at adjacent indices ($OP_i + OP_{i+1} \le 1$).
+
+2. **Coverage Conditions**:
+   - If $A_i = 0$, then at least one operation covering index $i$ must be executed. The operations that cover index $i$ are at $i-1$ and $i$. Thus $OP_{i-1} + OP_i \ge 1$ for any index $i$ where $A_i = 0$.
+   - Combined with $OP_{i-1} + OP_i \le 1$, this implies that for every $i$ where $A_i = 0$, $OP_{i-1} \neq OP_i$ (a transition $0 \to 0$ in $OP$ is forbidden at $A_i = 0$).
+   - At indices where $A_i = 1$, transitions $0 \to 0$ in $OP$ are allowed.
+
+3. **String Realizability & $N \pmod 4$ Special Case**:
+   - Operations at distance 2 (e.g. $i, i+2, i+4, \dots$) can be satisfied by alternating `ARC` and `CRA`.
+   - If $OP$ is not strictly alternating around the entire circular array (i.e. contains at least one $0 \to 0$ transition), the operation dependency graph breaks into open paths which can always be satisfied by a valid string $S$.
+   - If $OP$ is strictly alternating around the entire circular array (possible only when $N$ is even), it wraps around without conflict if and only if $N/2$ is even ($N \equiv 0 \pmod 4$). For $N \equiv 2 \pmod 4$, a strictly alternating operation pattern cannot be formed by any string $S$.
+
+4. **Dynamic Programming**:
+   - We use a state DP over the $N$ circular steps to track reachable states $OP_i \in \{0, 1\}$ and the maximum count of $0 \to 0$ transitions (`max_zz`).
+   - For $N \equiv 2 \pmod 4$, a valid path must achieve `max_zz > 0`.
+   - The algorithm runs in $O(N)$ time and $O(1)$ auxiliary space.
+An $O(N)$ solution in Python 3 has been written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc192_a/main.py).
+
+### Method Explanation
+
+1. **Operation Pattern Analysis**:
+   - Each operation requires the middle character of the triple to be `'R'`. 
+   - Operation 1 (`ARC` at $i, i+1, i+2$) replaces $A_i, A_{i+1}$ with $1$.
+   - Operation 2 (`CRA` at $i, i+1, i+2$) replaces $A_i, A_{i+1}$ with $1$.
+   - Because the middle character of any operation must be `'R'`, while the first/last characters must be `'A'` or `'C'`, two operations cannot be performed at adjacent indices ($OP_i + OP_{i+1} \le 1$).
+
+2. **Coverage Conditions**:
+   - If $A_i = 0$, then at least one operation covering index $i$ must be executed. The operations that cover index $i$ are at $i-1$ and $i$. Thus $OP_{i-1} + OP_i \ge 1$ for any index $i$ where $A_i = 0$.
+   - Combined with $OP_{i-1} + OP_i \le 1$, this implies that for every $i$ where $A_i = 0$, $OP_{i-1} \neq OP_i$ (a transition $0 \to 0$ in $OP$ is forbidden at $A_i = 0$).
+   - At indices where $A_i = 1$, transitions $0 \to 0$ in $OP$ are allowed.
+
+3. **String Realizability & $N \pmod 4$ Special Case**:
+   - Operations at distance 2 (e.g. $i, i+2, i+4, \dots$) can be satisfied by alternating `ARC` and `CRA`.
+   - If $OP$ is not strictly alternating around the entire circular array (i.e. contains at least one $0 \to 0$ transition), the operation dependency graph breaks into open paths which can always be satisfied by a valid string $S$.
+   - If $OP$ is strictly alternating around the entire circular array (possible only when $N$ is even), it wraps around without conflict if and only if $N/2$ is even ($N \equiv 0 \pmod 4$). For $N \equiv 2 \pmod 4$, a strictly alternating operation pattern cannot be formed by any string $S$.
+
+4. **Dynamic Programming**:
+   - We use a state DP over the $N$ circular steps to track reachable states $OP_i \in \{0, 1\}$ and the maximum count of $0 \to 0$ transitions (`max_zz`).
+   - For $N \equiv 2 \pmod 4$, a valid path must achieve `max_zz > 0`.
+   - The algorithm runs in $O(N)$ time and $O(1)$ auxiliary space.

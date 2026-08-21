@@ -1,0 +1,26 @@
+### Summary of Fix
+
+#### Root Cause
+In Multi-Table Inheritance (MTI), `ModelBase.__new__` collects `parent_links` for parents by iterating through `OneToOneField` instances on the child model. Previously, when multiple `OneToOneField` fields pointed to the same parent model (e.g. `document_ptr` with `parent_link=True` and `origin` with `parent_link=False`), `parent_links[parent_key] = field` was executed unconditionally for every `OneToOneField`. 
+
+If a non-parent link `OneToOneField` (like `origin`) was declared after the explicit parent link (`document_ptr`), `origin` would overwrite `document_ptr` in `parent_links`. Consequently, `Picking._meta.parents[Document]` was assigned `origin`, causing `_prepare()` to fail with `ImproperlyConfigured: Add parent_link=True to appname.Picking.origin.`.
+
+#### Solution
+Updated `parent_links` population in `django/db/models/base.py` (`ModelBase.__new__`) so that if a link for a parent key is already present in `parent_links`, a subsequent `OneToOneField` will only replace it if that subsequent field has `parent_link=True`.
+
+#### Verification
+- Added `test_multiple_onetoone_parent_link_order` to `tests/model_inheritance/tests.py` testing both declaration orderings.
+- Ran test suites for `model_inheritance`, `model_inheritance_regress`, `invalid_models_tests`, `model_meta`, `migrations`, and `schema`. All tests passed cleanly.
+### Summary of Fix
+
+#### Root Cause
+In Multi-Table Inheritance (MTI), `ModelBase.__new__` collects `parent_links` for parents by iterating through `OneToOneField` instances on the child model. Previously, when multiple `OneToOneField` fields pointed to the same parent model (e.g. `document_ptr` with `parent_link=True` and `origin` with `parent_link=False`), `parent_links[parent_key] = field` was executed unconditionally for every `OneToOneField`. 
+
+If a non-parent link `OneToOneField` (like `origin`) was declared after the explicit parent link (`document_ptr`), `origin` would overwrite `document_ptr` in `parent_links`. Consequently, `Picking._meta.parents[Document]` was assigned `origin`, causing `_prepare()` to fail with `ImproperlyConfigured: Add parent_link=True to appname.Picking.origin.`.
+
+#### Solution
+Updated `parent_links` population in `django/db/models/base.py` (`ModelBase.__new__`) so that if a link for a parent key is already present in `parent_links`, a subsequent `OneToOneField` will only replace it if that subsequent field has `parent_link=True`.
+
+#### Verification
+- Added `test_multiple_onetoone_parent_link_order` to `tests/model_inheritance/tests.py` testing both declaration orderings.
+- Ran test suites for `model_inheritance`, `model_inheritance_regress`, `invalid_models_tests`, `model_meta`, `migrations`, and `schema`. All tests passed cleanly.

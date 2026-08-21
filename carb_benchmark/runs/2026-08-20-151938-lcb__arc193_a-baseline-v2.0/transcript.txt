@@ -1,0 +1,38 @@
+I have created the Python solution in `main.py` to solve the problem efficiently.
+
+### Algorithm Explanation
+
+The problem asks for the minimum weight path between $s$ and $t$ in a graph $G$ where an edge exists between vertex $i$ and vertex $j$ iff their intervals $[L_i, R_i]$ and $[L_j, R_j]$ are disjoint ($R_i < L_j$ or $R_j < L_i$).
+
+1. **Path Length Bound**:
+   - **Length 1 (Direct Edge $s \to t$)**: Exists iff $R_s < L_t$ or $R_t < L_s$. Weight: $W_s + W_t$.
+   - **Length 2 ($s \to k \to t$)**: Intermediate vertex $k$ must be disjoint from both $s$ and $t$.
+     - $k$ can be completely to the left of both ($R_k < \min(L_s, L_t)$) or completely to the right of both ($L_k > \max(R_s, R_t)$).
+   - **Length 3 ($s \to k_1 \to k_2 \to t$)**:
+     - $k_1$ is to the left of $s$ ($R_{k_1} < L_s$) and $k_2$ is to the right of $t$ ($L_{k_2} > R_t$). If $s$ and $t$ intersect ($L_s \le R_t$), then $R_{k_1} < L_s \le R_t < L_{k_2} \implies R_{k_1} < L_{k_2}$, so $k_1$ and $k_2$ are automatically disjoint!
+     - Symmetrically, $k_1$ is to the right of $s$ ($L_{k_1} > R_s$) and $k_2$ is to the left of $t$ ($R_{k_2} < L_t$).
+   - Any path of length $\ge 4$ can be shortcut to a path of length $\le 3$ with equal or lower total weight because intermediate nodes would satisfy the disjointness conditions for a shorter path.
+
+2. **$O(N + Q)$ Time Complexity**:
+   - We precompute prefix minimums of vertex weights indexed by interval right-endpoint $R_i$, `pref_min_R[x] = min { W_u | R_u <= x }`.
+   - We precompute suffix minimums of vertex weights indexed by interval left-endpoint $L_i$, `suff_min_L[x] = min { W_u | L_u >= x }`.
+   - Each query is then answered in $O(1)$ time by evaluating the constant number of path candidates using these range minimums.
+I have created the Python solution in `main.py` to solve the problem efficiently.
+
+### Algorithm Explanation
+
+The problem asks for the minimum weight path between $s$ and $t$ in a graph $G$ where an edge exists between vertex $i$ and vertex $j$ iff their intervals $[L_i, R_i]$ and $[L_j, R_j]$ are disjoint ($R_i < L_j$ or $R_j < L_i$).
+
+1. **Path Length Bound**:
+   - **Length 1 (Direct Edge $s \to t$)**: Exists iff $R_s < L_t$ or $R_t < L_s$. Weight: $W_s + W_t$.
+   - **Length 2 ($s \to k \to t$)**: Intermediate vertex $k$ must be disjoint from both $s$ and $t$.
+     - $k$ can be completely to the left of both ($R_k < \min(L_s, L_t)$) or completely to the right of both ($L_k > \max(R_s, R_t)$).
+   - **Length 3 ($s \to k_1 \to k_2 \to t$)**:
+     - $k_1$ is to the left of $s$ ($R_{k_1} < L_s$) and $k_2$ is to the right of $t$ ($L_{k_2} > R_t$). If $s$ and $t$ intersect ($L_s \le R_t$), then $R_{k_1} < L_s \le R_t < L_{k_2} \implies R_{k_1} < L_{k_2}$, so $k_1$ and $k_2$ are automatically disjoint!
+     - Symmetrically, $k_1$ is to the right of $s$ ($L_{k_1} > R_s$) and $k_2$ is to the left of $t$ ($R_{k_2} < L_t$).
+   - Any path of length $\ge 4$ can be shortcut to a path of length $\le 3$ with equal or lower total weight because intermediate nodes would satisfy the disjointness conditions for a shorter path.
+
+2. **$O(N + Q)$ Time Complexity**:
+   - We precompute prefix minimums of vertex weights indexed by interval right-endpoint $R_i$, `pref_min_R[x] = min { W_u | R_u <= x }`.
+   - We precompute suffix minimums of vertex weights indexed by interval left-endpoint $L_i$, `suff_min_L[x] = min { W_u | L_u >= x }`.
+   - Each query is then answered in $O(1)$ time by evaluating the constant number of path candidates using these range minimums.

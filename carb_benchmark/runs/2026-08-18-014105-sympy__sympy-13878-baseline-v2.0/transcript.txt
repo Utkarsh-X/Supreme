@@ -1,0 +1,60 @@
+I have precomputed the CDFs by adding `_cdf` methods to the continuous distributions in `sympy/stats/crv_types.py` where integration does not perform well.
+
+### Precomputed Distributions & Closed-Form CDF Formulas:
+
+1. **Arcsin** (`ArcsinDistribution`):
+   $$\text{CDF}(x) = \frac{2}{\pi} \arcsin\left(\sqrt{\frac{x - a}{b - a}}\right) \quad (a \le x \le b)$$
+2. **Dagum** (`DagumDistribution`):
+   $$\text{CDF}(x) = \left(1 + \left(\frac{x}{b}\right)^{-a}\right)^{-p} \quad (x > 0)$$
+3. **Gamma & Erlang** (`GammaDistribution`):
+   $$\text{CDF}(x) = \frac{\gamma(k, x/\theta)}{\Gamma(k)} \quad (x \ge 0)$$
+4. **Frechet** (`FrechetDistribution`):
+   $$\text{CDF}(x) = \exp\left(-\left(\frac{x-m}{s}\right)^{-a}\right) \quad (x > m)$$
+5. **GammaInverse** (`GammaInverseDistribution`):
+   $$\text{CDF}(x) = \frac{\Gamma(a, b/x)}{\Gamma(a)} \quad (x > 0)$$
+6. **Kumaraswamy** (`KumaraswamyDistribution`):
+   $$\text{CDF}(x) = 1 - (1 - x^a)^b \quad (0 \le x \le 1)$$
+7. **Laplace** (`LaplaceDistribution`):
+   $$\text{CDF}(x) = \begin{cases} \frac{1}{2} e^{\frac{x-\mu}{b}} & x \le \mu \\ 1 - \frac{1}{2} e^{-\frac{x-\mu}{b}} & x > \mu \end{cases}$$
+8. **Logistic** (`LogisticDistribution`):
+   $$\text{CDF}(x) = \frac{1}{1 + e^{-\frac{x-\mu}{s}}}$$
+9. **Nakagami** (`NakagamiDistribution`):
+   $$\text{CDF}(x) = \frac{\gamma(\mu, \frac{\mu}{\omega} x^2)}{\Gamma(\mu)} \quad (x > 0)$$
+10. **StudentT** (`StudentTDistribution`):
+    $$\text{CDF}(x) = \frac{1}{2} + \frac{x \, {}_2F_1\left(\frac{1}{2}, \frac{\nu+1}{2}; \frac{3}{2}; -\frac{x^2}{\nu}\right)}{\sqrt{\nu} \text{B}\left(\frac{1}{2}, \frac{\nu}{2}\right)}$$
+11. **UniformSum** (`UniformSumDistribution`):
+    $$\text{CDF}(x) = \frac{1}{n!} \sum_{k=0}^{\lfloor x \rfloor} (-1)^k \binom{n}{k} (x-k)^n \quad (0 \le x \le n)$$
+12. **Cauchy, Chi, Gumbel, Rayleigh, Weibull**: Also equipped with direct precomputed `_cdf` methods.
+
+### Verification
+Added test cases in [`test_continuous_rv.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13878/sympy/stats/tests/test_continuous_rv.py#L734-L748) covering all requested example cases, verifying that `cdf` evaluates symbolically and accurately without hanging or defaulting to floating point numbers. All continuous RV tests pass cleanly.
+I have precomputed the CDFs by adding `_cdf` methods to the continuous distributions in `sympy/stats/crv_types.py` where integration does not perform well.
+
+### Precomputed Distributions & Closed-Form CDF Formulas:
+
+1. **Arcsin** (`ArcsinDistribution`):
+   $$\text{CDF}(x) = \frac{2}{\pi} \arcsin\left(\sqrt{\frac{x - a}{b - a}}\right) \quad (a \le x \le b)$$
+2. **Dagum** (`DagumDistribution`):
+   $$\text{CDF}(x) = \left(1 + \left(\frac{x}{b}\right)^{-a}\right)^{-p} \quad (x > 0)$$
+3. **Gamma & Erlang** (`GammaDistribution`):
+   $$\text{CDF}(x) = \frac{\gamma(k, x/\theta)}{\Gamma(k)} \quad (x \ge 0)$$
+4. **Frechet** (`FrechetDistribution`):
+   $$\text{CDF}(x) = \exp\left(-\left(\frac{x-m}{s}\right)^{-a}\right) \quad (x > m)$$
+5. **GammaInverse** (`GammaInverseDistribution`):
+   $$\text{CDF}(x) = \frac{\Gamma(a, b/x)}{\Gamma(a)} \quad (x > 0)$$
+6. **Kumaraswamy** (`KumaraswamyDistribution`):
+   $$\text{CDF}(x) = 1 - (1 - x^a)^b \quad (0 \le x \le 1)$$
+7. **Laplace** (`LaplaceDistribution`):
+   $$\text{CDF}(x) = \begin{cases} \frac{1}{2} e^{\frac{x-\mu}{b}} & x \le \mu \\ 1 - \frac{1}{2} e^{-\frac{x-\mu}{b}} & x > \mu \end{cases}$$
+8. **Logistic** (`LogisticDistribution`):
+   $$\text{CDF}(x) = \frac{1}{1 + e^{-\frac{x-\mu}{s}}}$$
+9. **Nakagami** (`NakagamiDistribution`):
+   $$\text{CDF}(x) = \frac{\gamma(\mu, \frac{\mu}{\omega} x^2)}{\Gamma(\mu)} \quad (x > 0)$$
+10. **StudentT** (`StudentTDistribution`):
+    $$\text{CDF}(x) = \frac{1}{2} + \frac{x \, {}_2F_1\left(\frac{1}{2}, \frac{\nu+1}{2}; \frac{3}{2}; -\frac{x^2}{\nu}\right)}{\sqrt{\nu} \text{B}\left(\frac{1}{2}, \frac{\nu}{2}\right)}$$
+11. **UniformSum** (`UniformSumDistribution`):
+    $$\text{CDF}(x) = \frac{1}{n!} \sum_{k=0}^{\lfloor x \rfloor} (-1)^k \binom{n}{k} (x-k)^n \quad (0 \le x \le n)$$
+12. **Cauchy, Chi, Gumbel, Rayleigh, Weibull**: Also equipped with direct precomputed `_cdf` methods.
+
+### Verification
+Added test cases in [`test_continuous_rv.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-13878/sympy/stats/tests/test_continuous_rv.py#L734-L748) covering all requested example cases, verifying that `cdf` evaluates symbolically and accurately without hanging or defaulting to floating point numbers. All continuous RV tests pass cleanly.

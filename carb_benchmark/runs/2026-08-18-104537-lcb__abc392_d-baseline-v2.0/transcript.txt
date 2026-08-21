@@ -1,0 +1,16 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_d/main.py).
+
+### Method Explanation
+
+For two chosen dice $i$ and $j$ ($i \neq j$), let $C_i(x)$ be the frequency of number $x$ appearing on the faces of die $i$. The probability that die $i$ and die $j$ show the same number $x$ when rolled is:
+$$\text{Prob}(i, j) = \frac{1}{K_i K_j} \sum_{x} C_i(x) C_j(x)$$
+
+Since $N \le 100$, we can iterate over all pairs of dice $(i, j)$ where $1 \le i < j \le N$. For each pair, we efficiently calculate $\sum_x C_i(x) C_j(x)$ by iterating over the unique face values of whichever die has fewer unique numbers and looking up their frequencies in the other die's dictionary. The overall time complexity is $O(N \cdot \sum K_i)$, which easily finishes in under 0.2 seconds even for max constraints.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_d/main.py).
+
+### Method Explanation
+
+For two chosen dice $i$ and $j$ ($i \neq j$), let $C_i(x)$ be the frequency of number $x$ appearing on the faces of die $i$. The probability that die $i$ and die $j$ show the same number $x$ when rolled is:
+$$\text{Prob}(i, j) = \frac{1}{K_i K_j} \sum_{x} C_i(x) C_j(x)$$
+
+Since $N \le 100$, we can iterate over all pairs of dice $(i, j)$ where $1 \le i < j \le N$. For each pair, we efficiently calculate $\sum_x C_i(x) C_j(x)$ by iterating over the unique face values of whichever die has fewer unique numbers and looking up their frequencies in the other die's dictionary. The overall time complexity is $O(N \cdot \sum K_i)$, which easily finishes in under 0.2 seconds even for max constraints.

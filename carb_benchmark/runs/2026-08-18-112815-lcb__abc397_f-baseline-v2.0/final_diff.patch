@@ -1,0 +1,112 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ab3ecb7 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,106 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++
++    # Compute L array: L[i] = number of distinct elements in A[0...i-1] (1-indexed: A[1...i])
++    L = [0] * (N + 1)
++    seen = [False] * (N + 1)
++    cnt = 0
++    for i in range(1, N + 1):
++        x = A[i - 1]
++        if not seen[x]:
++            seen[x] = True
++            cnt += 1
++        L[i] = cnt
++
++    # Compute R array: R[j] = number of distinct elements in A[j...N-1] (1-indexed: A[j+1...N])
++    R = [0] * (N + 1)
++    seen = [False] * (N + 1)
++    cnt = 0
++    for j in range(N, 0, -1):
++        R[j] = cnt
++        x = A[j - 1]
++        if not seen[x]:
++            seen[x] = True
++            cnt += 1
++
++    M = 1
++    while M < N + 2:
++        M *= 2
++
++    tree = [-10**9] * (2 * M)
++    tag = [0] * (2 * M)
++    prev = [0] * (N + 1)
++
++    ans_max = 0
++    for j in range(1, N):
++        aj = A[j - 1]
++        p = prev[aj]
++        prev[aj] = j
++        
++        # Activate index j-1 with value L[j-1] + 1
++        if j - 1 >= 1:
++            v = L[j - 1] + 1
++            u = (j - 1) + M - 1
++            tag_sum = 0
++            curr = u >> 1
++            while curr:
++                tag_sum += tag[curr]
++                curr >>= 1
++            diff = v - tag_sum
++            tag[u] = diff
++            tree[u] = diff
++            curr = u >> 1
++            while curr:
++                t2c = 2 * curr
++                tree[curr] = (tree[t2c] if tree[t2c] > tree[t2c + 1] else tree[t2c + 1]) + tag[curr]
++                curr >>= 1
++
++        # Range update on [ql, qr] = [max(1, p), j-2]
++        ql = p if p > 1 else 1
++        qr = j - 2
++        if ql <= qr:
++            cl = ql + M - 1
++            cr = qr + M - 1
++            l0 = cl
++            r0 = cr
++            while cl <= cr:
++                if cl & 1:
++                    tree[cl] += 1
++                    tag[cl] += 1
++                    cl += 1
++                if not (cr & 1):
++                    tree[cr] += 1
++                    tag[cr] += 1
++                    cr -= 1
++                cl >>= 1
++                cr >>= 1
++            
++            p1 = l0 >> 1
++            p2 = r0 >> 1
++            while p1 != p2:
++                t2c1 = 2 * p1
++                tree[p1] = (tree[t2c1] if tree[t2c1] > tree[t2c1 + 1] else tree[t2c1 + 1]) + tag[p1]
++                t2c2 = 2 * p2
++                tree[p2] = (tree[t2c2] if tree[t2c2] > tree[t2c2 + 1] else tree[t2c2 + 1]) + tag[p2]
++                p1 >>= 1
++                p2 >>= 1
++            while p1:
++                t2c1 = 2 * p1
++                tree[p1] = (tree[t2c1] if tree[t2c1] > tree[t2c1 + 1] else tree[t2c1 + 1]) + tag[p1]
++                p1 >>= 1
++
++        if j >= 2:
++            res = tree[1] + R[j]
++            if res > ans_max:
++                ans_max = res
++
++    print(ans_max)
++
++if __name__ == '__main__':
++    main()

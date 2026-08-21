@@ -1,0 +1,10 @@
+I have updated the PostgreSQL `DatabaseClient` so that additional parameters passed to `dbshell` are placed before the database name argument in the `psql` command.
+
+### Changes Made:
+1. **[django/db/backends/postgresql/client.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/django/db/backends/postgresql/client.py#L35-L37)**: Updated `DatabaseClient.settings_to_cmd_args_env()` to extend `args` with `parameters` prior to appending `dbname`.
+2. **[tests/dbshell/test_postgresql.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/tests/dbshell/test_postgresql.py#L154-L158)**: Updated `test_parameters` to verify options passed to `psql` are placed before `dbname`.
+I have updated the PostgreSQL `DatabaseClient` so that additional parameters passed to `dbshell` are placed before the database name argument in the `psql` command.
+
+### Changes Made:
+1. **[django/db/backends/postgresql/client.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/django/db/backends/postgresql/client.py#L35-L37)**: Updated `DatabaseClient.settings_to_cmd_args_env()` to extend `args` with `parameters` prior to appending `dbname`.
+2. **[tests/dbshell/test_postgresql.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-15851/tests/dbshell/test_postgresql.py#L154-L158)**: Updated `test_parameters` to verify options passed to `psql` are placed before `dbname`.

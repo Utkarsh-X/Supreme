@@ -1,0 +1,44 @@
+An optimal Python 3 solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_e/main.py).
+
+### Problem Analysis & Algorithm Design
+
+1. **Mapping Consistency**:
+   - Each character $c$ present in $S$ must map to a unique target character $T[i]$ at all positions $i$ where $S[i] = c$.
+   - If a character $c$ in $S$ maps to two different characters in $T$, it is impossible to satisfy the condition, so output `-1`.
+
+2. **26-Alphabet Constraint**:
+   - If $T$ contains all 26 lowercase English letters and $S \neq T$, any replacement operation reduces the distinct characters in $S$ to at most 25, making it impossible to form $T$. Output `-1`.
+
+3. **Functional Graph Modeling**:
+   - We construct a functional graph with directed edges $u \to target[u]$ for every $u \in S$ where $u \neq target[u]$.
+   - Each non-self edge corresponds to a necessary character replacement operation.
+   - For components containing cycles of length $\ge 2$:
+     - A cycle is **pure** if no node outside the cycle points into any node of the cycle. Each pure cycle requires 1 extra operation (using a free character as a temporary buffer).
+     - A cycle with an incoming edge from outside the cycle (**non-pure**) can be broken using the incoming edge's node without any extra operation.
+   - Minimum operations required = `total_edges + num_pure_cycles`.
+
+### Verification
+
+The solution was executed and verified against all public test cases and edge cases (including 26-character permutations, trees, and multi-component graphs).
+An optimal Python 3 solution has been implemented in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_e/main.py).
+
+### Problem Analysis & Algorithm Design
+
+1. **Mapping Consistency**:
+   - Each character $c$ present in $S$ must map to a unique target character $T[i]$ at all positions $i$ where $S[i] = c$.
+   - If a character $c$ in $S$ maps to two different characters in $T$, it is impossible to satisfy the condition, so output `-1`.
+
+2. **26-Alphabet Constraint**:
+   - If $T$ contains all 26 lowercase English letters and $S \neq T$, any replacement operation reduces the distinct characters in $S$ to at most 25, making it impossible to form $T$. Output `-1`.
+
+3. **Functional Graph Modeling**:
+   - We construct a functional graph with directed edges $u \to target[u]$ for every $u \in S$ where $u \neq target[u]$.
+   - Each non-self edge corresponds to a necessary character replacement operation.
+   - For components containing cycles of length $\ge 2$:
+     - A cycle is **pure** if no node outside the cycle points into any node of the cycle. Each pure cycle requires 1 extra operation (using a free character as a temporary buffer).
+     - A cycle with an incoming edge from outside the cycle (**non-pure**) can be broken using the incoming edge's node without any extra operation.
+   - Minimum operations required = `total_edges + num_pure_cycles`.
+
+### Verification
+
+The solution was executed and verified against all public test cases and edge cases (including 26-character permutations, trees, and multi-component graphs).

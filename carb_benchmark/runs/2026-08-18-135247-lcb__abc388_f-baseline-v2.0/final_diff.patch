@@ -1,0 +1,104 @@
+diff --git a/main.py b/main.py
+index c86f6c8..8d9db07 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,98 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++        
++    N = int(input_data[0])
++    M = int(input_data[1])
++    A = int(input_data[2])
++    B = int(input_data[3])
++    
++    intervals = []
++    idx = 4
++    for _ in range(M):
++        intervals.append((int(input_data[idx]), int(input_data[idx+1])))
++        idx += 2
++        
++    # If any bad interval has length >= B, we can never jump across it
++    for l, r in intervals:
++        if r - l + 1 >= B:
++            print("No")
++            return
++            
++    if A == B:
++        if (N - 1) % A != 0:
++            print("No")
++            return
++        for l, r in intervals:
++            rem = (l - 1) % A
++            first = l if rem == 0 else l + (A - rem)
++            if first <= r:
++                print("No")
++                return
++        print("Yes")
++        return
++        
++    # A < B
++    full_mask = (1 << B) - 1
++    window_mask = (1 << (B - A + 1)) - 1
++    
++    def step_dp(dp, is_bad):
++        if is_bad:
++            return (dp << 1) & full_mask
++        valid = (dp >> (A - 1)) & window_mask
++        new_bit = 1 if valid > 0 else 0
++        return ((dp << 1) & full_mask) | new_bit
++        
++    curr = 1
++    dp = 1
++    
++    for l, r in intervals:
++        # Good region from curr to l - 1
++        target = l - 1
++        while curr < target:
++            if dp == 0:
++                print("No")
++                return
++            if dp == full_mask:
++                curr = target
++                break
++            curr += 1
++            dp = step_dp(dp, is_bad=False)
++            
++        if dp == 0:
++            print("No")
++            return
++            
++        # Bad region from l to r
++        for j in range(l, r + 1):
++            curr += 1
++            dp = step_dp(dp, is_bad=True)
++            
++    # Final good region from curr to N - 1
++    target = N - 1
++    while curr < target:
++        if dp == 0:
++            print("No")
++            return
++        if dp == full_mask:
++            curr = target
++            break
++        curr += 1
++        dp = step_dp(dp, is_bad=False)
++        
++    if dp == 0:
++        print("No")
++        return
++        
++    # Check reachability of N from curr (which is N - 1)
++    valid = (dp >> (A - 1)) & window_mask
++    if valid > 0:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == '__main__':
++    main()

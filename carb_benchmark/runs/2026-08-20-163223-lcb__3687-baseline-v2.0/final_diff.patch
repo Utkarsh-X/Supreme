@@ -1,0 +1,99 @@
+diff --git a/main.py b/main.py
+index c86f6c8..d05eeb1 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,93 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import ast
++
++def solve(edges, nums):
++    n = len(nums)
++    if n == 0:
++        return [0, 0]
++        
++    adj = [[] for _ in range(n)]
++    for u, v, w in edges:
++        adj[u].append((v, w))
++        adj[v].append((u, w))
++        
++    max_val = max(nums) if nums else 0
++    last_pos = [-1] * (max_val + 1)
++    path_prefix_dist = []
++    
++    max_len = 0
++    min_nodes = 1
++    
++    # Stack elements:
++    # Enter node: (0, u, parent, depth, cur_dist, min_start_idx)
++    # Exit node:  (1, u, old_last)
++    stack = [(0, 0, -1, 0, 0, 0)]
++    
++    while stack:
++        item = stack.pop()
++        if item[0] == 0:
++            _, u, parent, depth, cur_dist, min_start_idx = item
++            old_last = last_pos[nums[u]]
++            min_start_idx = max(min_start_idx, old_last + 1)
++            last_pos[nums[u]] = depth
++            path_prefix_dist.append(cur_dist)
++            
++            length = cur_dist - path_prefix_dist[min_start_idx]
++            num_nodes = depth - min_start_idx + 1
++            
++            if length > max_len:
++                max_len = length
++                min_nodes = num_nodes
++            elif length == max_len:
++                if num_nodes < min_nodes:
++                    min_nodes = num_nodes
++                    
++            stack.append((1, u, old_last))
++            
++            for v, w in adj[u]:
++                if v != parent:
++                    stack.append((0, v, u, depth + 1, cur_dist + w, min_start_idx))
++        else:
++            _, u, old_last = item
++            last_pos[nums[u]] = old_last
++            path_prefix_dist.pop()
++            
++    return [max_len, min_nodes]
++
++def main():
++    raw_input = sys.stdin.read().strip()
++    if not raw_input:
++        return
++        
++    objs = []
++    decoder = json.JSONDecoder()
++    s = raw_input
++    while s:
++        s = s.lstrip()
++        if not s:
++            break
++        try:
++            obj, idx = decoder.raw_decode(s)
++            objs.append(obj)
++            s = s[idx:]
++        except Exception:
++            break
++            
++    if len(objs) >= 2:
++        edges, nums = objs[0], objs[1]
++    else:
++        lines = [line.strip() for line in raw_input.splitlines() if line.strip()]
++        parsed_items = []
++        for line in lines:
++            try:
++                parsed_items.append(ast.literal_eval(line))
++            except Exception:
++                pass
++        edges, nums = parsed_items[0], parsed_items[1]
++        
++    result = solve(edges, nums)
++    print(json.dumps(result))
++
++if __name__ == '__main__':
++    main()

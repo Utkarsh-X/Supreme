@@ -1,0 +1,44 @@
+### Summary of Work
+
+#### Issue
+When rotating `SECRET_KEY` and setting the old key in `SECRET_KEY_FALLBACKS`, user sessions were invalidated and logged out because session auth hashes (`HASH_SESSION_KEY`) were verified solely against `user.get_session_auth_hash()` using the current `SECRET_KEY`.
+
+#### Cause
+`AbstractBaseUser.get_session_auth_hash()` called `salted_hmac` without passing a `secret` argument, causing it to fall back strictly to `settings.SECRET_KEY`. Neither `get_user()` nor `login()` checked `SECRET_KEY_FALLBACKS` when validating user session hashes.
+
+#### Fix
+1. **Added `secret` Parameter to `get_session_auth_hash`**:
+   Updated [django/contrib/auth/base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L135-L145) to accept `secret=None` and pass it to `salted_hmac`.
+2. **Added `get_session_auth_fallback_hashes`**:
+   Added [get_session_auth_fallback_hashes](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L147-L157) on `AbstractBaseUser` to generate hashes for all secrets listed in `settings.SECRET_KEY_FALLBACKS`.
+3. **Session Verification with Fallback Hashes**:
+   Updated `_get_session_auth_hashes(user)`, [get_user](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L209-L216), and [login](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L113-L121) in `django/contrib/auth/__init__.py` to validate session hashes against both the primary hash and any fallback hashes.
+4. **Documentation & Release Notes**:
+   Updated release notes ([docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/releases/5.0.txt#L71-L74)), customizing guide ([docs/topics/auth/customizing.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/topics/auth/customizing.txt#L725-L730)), and API reference ([docs/ref/contrib/auth.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/ref/contrib/auth.txt#L695-L700)).
+5. **Tests**:
+   Added tests in [test_auth_backends.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_auth_backends.py#L938-L1006) and [test_models.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_models.py#L240-L260) to verify key fallback matching, invalid hash rejection, session preservation, and compatibility with custom user models.
+
+#### Verification
+All 611 tests in `auth_tests` ran and passed cleanly.
+### Summary of Work
+
+#### Issue
+When rotating `SECRET_KEY` and setting the old key in `SECRET_KEY_FALLBACKS`, user sessions were invalidated and logged out because session auth hashes (`HASH_SESSION_KEY`) were verified solely against `user.get_session_auth_hash()` using the current `SECRET_KEY`.
+
+#### Cause
+`AbstractBaseUser.get_session_auth_hash()` called `salted_hmac` without passing a `secret` argument, causing it to fall back strictly to `settings.SECRET_KEY`. Neither `get_user()` nor `login()` checked `SECRET_KEY_FALLBACKS` when validating user session hashes.
+
+#### Fix
+1. **Added `secret` Parameter to `get_session_auth_hash`**:
+   Updated [django/contrib/auth/base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L135-L145) to accept `secret=None` and pass it to `salted_hmac`.
+2. **Added `get_session_auth_fallback_hashes`**:
+   Added [get_session_auth_fallback_hashes](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L147-L157) on `AbstractBaseUser` to generate hashes for all secrets listed in `settings.SECRET_KEY_FALLBACKS`.
+3. **Session Verification with Fallback Hashes**:
+   Updated `_get_session_auth_hashes(user)`, [get_user](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L209-L216), and [login](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L113-L121) in `django/contrib/auth/__init__.py` to validate session hashes against both the primary hash and any fallback hashes.
+4. **Documentation & Release Notes**:
+   Updated release notes ([docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/releases/5.0.txt#L71-L74)), customizing guide ([docs/topics/auth/customizing.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/topics/auth/customizing.txt#L725-L730)), and API reference ([docs/ref/contrib/auth.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/ref/contrib/auth.txt#L695-L700)).
+5. **Tests**:
+   Added tests in [test_auth_backends.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_auth_backends.py#L938-L1006) and [test_models.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_models.py#L240-L260) to verify key fallback matching, invalid hash rejection, session preservation, and compatibility with custom user models.
+
+#### Verification
+All 611 tests in `auth_tests` ran and passed cleanly.

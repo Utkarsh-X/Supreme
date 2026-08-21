@@ -1,0 +1,92 @@
+diff --git a/main.py b/main.py
+index c86f6c8..d42e64f 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,86 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import math
++import heapq
++import json
++import re
++
++def solve():
++    content = sys.stdin.read().strip()
++    if not content:
++        return
++
++    # Parse inputs
++    arrays = []
++    matches = re.findall(r'\[[0-9\s,]*\]', content)
++    for m in matches:
++        try:
++            arr = json.loads(m)
++            arrays.append(arr)
++        except Exception:
++            pass
++
++    if len(arrays) >= 2:
++        nums, target = arrays[0], arrays[1]
++    else:
++        lines = [line.strip() for line in content.splitlines() if line.strip()]
++        parsed_lines = []
++        for line in lines:
++            nums_in_line = [int(x) for x in re.findall(r'-?\d+', line)]
++            if nums_in_line:
++                parsed_lines.append(nums_in_line)
++        if len(parsed_lines) >= 2:
++            nums, target = parsed_lines[0], parsed_lines[1]
++        else:
++            return
++
++    m = len(target)
++    N = len(nums)
++
++    # 1. Precalculate LCM for all non-empty submasks
++    lcm_val = [0] * (1 << m)
++    for mask in range(1, 1 << m):
++        elements = [target[i] for i in range(m) if (mask & (1 << i))]
++        lcm_val[mask] = math.lcm(*elements)
++
++    # 2. Select candidate indices from nums (top m best for each submask)
++    candidate_indices = set()
++    for mask in range(1, 1 << m):
++        L = lcm_val[mask]
++        # Get top m elements with smallest (L - (x % L)) % L
++        best_indices = heapq.nsmallest(
++            m,
++            range(N),
++            key=lambda i: (L - (nums[i] % L)) % L
++        )
++        candidate_indices.update(best_indices)
++
++    filtered_nums = [nums[i] for i in candidate_indices]
++
++    # 3. Bitmask DP over filtered_nums
++    dp = [float('inf')] * (1 << m)
++    dp[0] = 0
++
++    for x in filtered_nums:
++        cost = [0] * (1 << m)
++        for mask in range(1, 1 << m):
++            L = lcm_val[mask]
++            cost[mask] = (L - (x % L)) % L
++
++        next_dp = list(dp)
++        full_mask = (1 << m) - 1
++        for mask in range(1 << m):
++            if dp[mask] == float('inf'):
++                continue
++            rem = full_mask ^ mask
++            sub = rem
++            while sub > 0:
++                new_cost = dp[mask] + cost[sub]
++                if new_cost < next_dp[mask | sub]:
++                    next_dp[mask | sub] = new_cost
++                sub = (sub - 1) & rem
++        dp = next_dp
++
++    print(dp[(1 << m) - 1])
++
++if __name__ == '__main__':
++    solve()

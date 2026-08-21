@@ -1,0 +1,50 @@
+### Cause of the Issue
+
+When multiplying block matrices containing `ZeroMatrix` blocks (e.g. `b = BlockMatrix([[a, z], [z, z]])`), `BlockMatrix._blockmul` multiplies the underlying matrix of block expressions (`self.blocks * other.blocks`). During matrix multiplication, adding zero blocks like `a*z + z*z` invoked standard core `Add(ZeroMatrix(2, 2), ZeroMatrix(2, 2))`.
+
+When `Add` evaluated matrix expressions, `matexpr.py`'s `get_postprocessor(Add)` converted `Add(ZeroMatrix(2, 2), ZeroMatrix(2, 2))` into `MatAdd(0, ZeroMatrix(2, 2), ZeroMatrix(2, 2)).doit(deep=False)`.
+
+Because `nonmatrices` was empty (`[]`), `cls._from_args([])` evaluated to `S.Zero` (scalar `0`), prepending `0` as the first argument to `MatAdd`. When `MatAdd.doit()` ran canonicalization rules, `rm_id` recognized all 3 arguments (`0`, `ZeroMatrix(2, 2)`, `ZeroMatrix(2, 2)`) as additive identity elements. When all elements in `rm_id` are identity elements, `rm_id` kept the first argument (`expr.args[0]`), which was `S.Zero` (scalar `0`), converting the zero matrix block into a scalar `Zero` number object (`0`).
+
+Subsequent block multiplications failed with `AttributeError: 'Zero' object has no attribute 'cols'` because `BlockMatrix` expected block elements to be matrix expressions with `.cols` and `.rows` attributes.
+
+---
+
+### Solution
+
+In [`sympy/matrices/expressions/matexpr.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-17630/sympy/matrices/expressions/matexpr.py#L627-L633), we updated `get_postprocessor` so that when `nonmatrices` is empty, scalar identities like `S.Zero` (for `Add`) or `S.One` (for `Mul`) are not prepended to `mat_class`.
+
+```python
+        if nonmatrices:
+            return mat_class(cls._from_args(nonmatrices), *matrices).doit(deep=False)
+        return mat_class(*matrices).doit(deep=False)
+```
+
+With this change:
+1. `Add(ZeroMatrix(2, 2), ZeroMatrix(2, 2))` correctly simplifies to `ZeroMatrix(2, 2)`.
+2. Multi-step block multiplication (e.g. `b._blockmul(b)._blockmul(b)` and `block_collapse(b * b * b)`) preserves `ZeroMatrix` blocks without throwing `AttributeError`.
+### Cause of the Issue
+
+When multiplying block matrices containing `ZeroMatrix` blocks (e.g. `b = BlockMatrix([[a, z], [z, z]])`), `BlockMatrix._blockmul` multiplies the underlying matrix of block expressions (`self.blocks * other.blocks`). During matrix multiplication, adding zero blocks like `a*z + z*z` invoked standard core `Add(ZeroMatrix(2, 2), ZeroMatrix(2, 2))`.
+
+When `Add` evaluated matrix expressions, `matexpr.py`'s `get_postprocessor(Add)` converted `Add(ZeroMatrix(2, 2), ZeroMatrix(2, 2))` into `MatAdd(0, ZeroMatrix(2, 2), ZeroMatrix(2, 2)).doit(deep=False)`.
+
+Because `nonmatrices` was empty (`[]`), `cls._from_args([])` evaluated to `S.Zero` (scalar `0`), prepending `0` as the first argument to `MatAdd`. When `MatAdd.doit()` ran canonicalization rules, `rm_id` recognized all 3 arguments (`0`, `ZeroMatrix(2, 2)`, `ZeroMatrix(2, 2)`) as additive identity elements. When all elements in `rm_id` are identity elements, `rm_id` kept the first argument (`expr.args[0]`), which was `S.Zero` (scalar `0`), converting the zero matrix block into a scalar `Zero` number object (`0`).
+
+Subsequent block multiplications failed with `AttributeError: 'Zero' object has no attribute 'cols'` because `BlockMatrix` expected block elements to be matrix expressions with `.cols` and `.rows` attributes.
+
+---
+
+### Solution
+
+In [`sympy/matrices/expressions/matexpr.py`](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-17630/sympy/matrices/expressions/matexpr.py#L627-L633), we updated `get_postprocessor` so that when `nonmatrices` is empty, scalar identities like `S.Zero` (for `Add`) or `S.One` (for `Mul`) are not prepended to `mat_class`.
+
+```python
+        if nonmatrices:
+            return mat_class(cls._from_args(nonmatrices), *matrices).doit(deep=False)
+        return mat_class(*matrices).doit(deep=False)
+```
+
+With this change:
+1. `Add(ZeroMatrix(2, 2), ZeroMatrix(2, 2))` correctly simplifies to `ZeroMatrix(2, 2)`.
+2. Multi-step block multiplication (e.g. `b._blockmul(b)._blockmul(b)` and `block_collapse(b * b * b)`) preserves `ZeroMatrix` blocks without throwing `AttributeError`.

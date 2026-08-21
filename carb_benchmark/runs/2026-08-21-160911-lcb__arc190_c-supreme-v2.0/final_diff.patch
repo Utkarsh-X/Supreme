@@ -1,0 +1,172 @@
+diff --git a/main.py b/main.py
+index c86f6c8..2c35550 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,166 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++
++    ptr = 0
++    H = int(input_data[ptr]); ptr += 1
++    W = int(input_data[ptr]); ptr += 1
++
++    A = []
++    for _ in range(H):
++        row = [int(x) for x in input_data[ptr:ptr + W]]
++        ptr += W
++        A.append(row)
++
++    Q = int(input_data[ptr]); ptr += 1
++    sh = int(input_data[ptr]); ptr += 1
++    sw = int(input_data[ptr]); ptr += 1
++
++    queries = []
++    for _ in range(Q):
++        d = input_data[ptr]; ptr += 1
++        a = int(input_data[ptr]); ptr += 1
++        queries.append((d, a))
++
++    if W > H:
++        H, W = W, H
++        sh, sw = sw, sh
++        A_trans = [[0] * W for _ in range(H)]
++        for r in range(W):
++            for c in range(H):
++                A_trans[c][r] = A[r][c]
++        A = A_trans
++
++        queries_trans = []
++        dir_map = {'U': 'L', 'D': 'R', 'L': 'U', 'R': 'D'}
++        for d, val in queries:
++            queries_trans.append((dir_map[d], val))
++        queries = queries_trans
++
++    MOD = 998244353
++    r, c = sh - 1, sw - 1
++
++    x = [[0] * W for _ in range(H)]
++    y = [[0] * W for _ in range(H)]
++
++    prev = 0
++    for j in range(W):
++        if j == 0: prev = A[0][0] % MOD
++        else: prev = prev * A[0][j] % MOD
++        x[0][j] = prev
++
++    for i in range(1, H):
++        row_A = A[i]
++        prev = 0
++        x_prev = x[i - 1]
++        x_curr = x[i]
++        for j in range(W):
++            prev = (x_prev[j] + prev) % MOD * row_A[j] % MOD
++            x_curr[j] = prev
++
++    succ = 0
++    for j in range(W - 1, -1, -1):
++        if j == W - 1: succ = A[H - 1][W - 1] % MOD
++        else: succ = succ * A[H - 1][j] % MOD
++        y[H - 1][j] = succ
++
++    for i in range(H - 2, -1, -1):
++        row_A = A[i]
++        succ = 0
++        y_next = y[i + 1]
++        y_curr = y[i]
++        for j in range(W - 1, -1, -1):
++            succ = (y_next[j] + succ) % MOD * row_A[j] % MOD
++            y_curr[j] = succ
++
++    S = x[H - 1][W - 1]
++    out = []
++
++    curr_r = r
++
++    for d, val in queries:
++        if d == 'U': r -= 1
++        elif d == 'D': r += 1
++        elif d == 'L': c -= 1
++        elif d == 'R': c += 1
++
++        row_A = A[r]
++        x_curr = x[r]
++        y_curr = y[r]
++
++        if r != curr_r:
++            curr_r = r
++            if c > 0:
++                prev = 0
++                if r == 0:
++                    for j in range(c):
++                        if j == 0: prev = row_A[0]
++                        else: prev = prev * row_A[j] % MOD
++                        x_curr[j] = prev
++                else:
++                    x_prev = x[r - 1]
++                    for j in range(c):
++                        prev = (x_prev[j] + prev) % MOD * row_A[j] % MOD
++                        x_curr[j] = prev
++
++            if c < W - 1:
++                succ = 0
++                if r == H - 1:
++                    for j in range(W - 1, c, -1):
++                        if j == W - 1: succ = row_A[W - 1]
++                        else: succ = succ * row_A[j] % MOD
++                        y_curr[j] = succ
++                else:
++                    y_next = y[r + 1]
++                    for j in range(W - 1, c, -1):
++                        succ = (y_next[j] + succ) % MOD * row_A[j] % MOD
++                        y_curr[j] = succ
++
++        old_val = row_A[c]
++        val = val % MOD
++        row_A[c] = val
++
++        up_L = x[r - 1][c] if r > 0 else 0
++        left_L = x_curr[c - 1] if c > 0 else 0
++        L_prime = (up_L + left_L) % MOD if (r, c) != (0, 0) else 1
++
++        down_R = y[r + 1][c] if r < H - 1 else 0
++        right_R = y_curr[c + 1] if c < W - 1 else 0
++        R_prime = (down_R + right_R) % MOD if (r, c) != (H - 1, W - 1) else 1
++
++        diff = (val - old_val) % MOD
++        delta = L_prime * diff % MOD * R_prime % MOD
++        S = (S + delta) % MOD
++        out.append(str(S))
++
++        prev = x_curr[c - 1] if c > 0 else 0
++        if r == 0:
++            for j in range(c, W):
++                if j == 0: prev = row_A[0]
++                else: prev = prev * row_A[j] % MOD
++                x_curr[j] = prev
++        else:
++            x_prev = x[r - 1]
++            for j in range(c, W):
++                prev = (x_prev[j] + prev) % MOD * row_A[j] % MOD
++                x_curr[j] = prev
++
++        succ = y_curr[c + 1] if c < W - 1 else 0
++        if r == H - 1:
++            for j in range(c, -1, -1):
++                if j == W - 1: succ = row_A[W - 1]
++                else: succ = succ * row_A[j] % MOD
++                y_curr[j] = succ
++        else:
++            y_next = y[r + 1]
++            for j in range(c, -1, -1):
++                succ = (y_next[j] + succ) % MOD * row_A[j] % MOD
++                y_curr[j] = succ
++
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,79 @@
+diff --git a/main.py b/main.py
+index c86f6c8..bf9503a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,73 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    S = input_data[1]
++    T = input_data[2]
++
++    f = {}
++    for i in range(N):
++        if S[i] in f:
++            if f[S[i]] != T[i]:
++                print(-1)
++                return
++        else:
++            f[S[i]] = T[i]
++
++    if S == T:
++        print(0)
++        return
++
++    if len(set(T)) == 26:
++        print(-1)
++        return
++
++    nodes = set(S) | set(T)
++    parent = {c: c for c in nodes}
++
++    def find(i):
++        if parent[i] == i:
++            return i
++        parent[i] = find(parent[i])
++        return parent[i]
++
++    def union(i, j):
++        root_i = find(i)
++        root_j = find(j)
++        if root_i != root_j:
++            parent[root_i] = root_j
++
++    in_deg = {c: 0 for c in nodes}
++    out_deg = {c: 0 for c in nodes}
++
++    for c in set(S):
++        target = f[c]
++        union(c, target)
++        out_deg[c] = 1
++        in_deg[target] += 1
++
++    comps = {}
++    for c in nodes:
++        r = find(c)
++        if r not in comps:
++            comps[r] = []
++        comps[r].append(c)
++
++    E_non_self = 0
++    for c in set(S):
++        if f[c] != c:
++            E_non_self += 1
++
++    C_pure = 0
++    for r, comp in comps.items():
++        if len(comp) >= 2:
++            if all(in_deg[c] == 1 and out_deg[c] == 1 for c in comp):
++                C_pure += 1
++
++    print(E_non_self + C_pure)
++
++if __name__ == '__main__':
++    solve()

@@ -1,0 +1,22 @@
+I have solved the problem and written the Python 3 program to [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_d/main.py).
+
+### Solution Explanation
+1. **Probability Calculation**:
+   For die $i$ with $K_i$ faces, we calculate the probability of rolling each value $x$ as $P(i, x) = \frac{\text{count}(x)}{K_i}$.
+   When choosing two distinct dice $i$ and $j$, the probability that both dice show the same face value is:
+   $$P(i, j) = \sum_{x} P(i, x) \cdot P(j, x)$$
+2. **Optimization**:
+   Since $N \le 100$, we iterate through all distinct pairs of dice $(i, j)$ with $1 \le i < j \le N$. For each pair, we iterate over the probability distribution of the die with fewer unique face values to quickly calculate the dot product.
+3. **Verification**:
+   The solution has been tested against the provided sample inputs as well as maximum constraint stress test cases ($N=100, \sum K_i = 10^5$), running in $\sim 0.23$ seconds.
+I have solved the problem and written the Python 3 program to [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_d/main.py).
+
+### Solution Explanation
+1. **Probability Calculation**:
+   For die $i$ with $K_i$ faces, we calculate the probability of rolling each value $x$ as $P(i, x) = \frac{\text{count}(x)}{K_i}$.
+   When choosing two distinct dice $i$ and $j$, the probability that both dice show the same face value is:
+   $$P(i, j) = \sum_{x} P(i, x) \cdot P(j, x)$$
+2. **Optimization**:
+   Since $N \le 100$, we iterate through all distinct pairs of dice $(i, j)$ with $1 \le i < j \le N$. For each pair, we iterate over the probability distribution of the die with fewer unique face values to quickly calculate the dot product.
+3. **Verification**:
+   The solution has been tested against the provided sample inputs as well as maximum constraint stress test cases ($N=100, \sum K_i = 10^5$), running in $\sim 0.23$ seconds.

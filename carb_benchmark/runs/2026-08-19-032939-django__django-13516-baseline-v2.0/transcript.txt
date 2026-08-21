@@ -1,0 +1,16 @@
+I have resolved the issue where calling `flush()` on `self.stdout` or `self.stderr` inside management commands did not flush the underlying stream.
+
+### Root Cause
+[OutputWrapper](file:///E:/RofU/Supreme/carb_workspaces/django__django-13516/django/core/management/base.py#L120) inherits from `io.TextIOBase` (which inherits from `io.IOBase`). Because `IOBase` defines a default `flush()` method that does nothing, calls to `self.stdout.flush()` resolved to `IOBase.flush()` on the class hierarchy rather than triggering `OutputWrapper.__getattr__()`. As a result, `self._out.flush()` on the wrapped stream was never called.
+
+### Changes Made
+1. **[django/core/management/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13516/django/core/management/base.py#L153-L156)**: Added an explicit `flush(self)` method to `OutputWrapper` that checks for and delegates to `self._out.flush()`.
+2. **[tests/user_commands/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13516/tests/user_commands/tests.py#L35-L46)**: Added unit tests verifying `OutputWrapper.flush()` calls `flush()` on wrapped streams and handles custom streams without a `flush()` method gracefully.
+I have resolved the issue where calling `flush()` on `self.stdout` or `self.stderr` inside management commands did not flush the underlying stream.
+
+### Root Cause
+[OutputWrapper](file:///E:/RofU/Supreme/carb_workspaces/django__django-13516/django/core/management/base.py#L120) inherits from `io.TextIOBase` (which inherits from `io.IOBase`). Because `IOBase` defines a default `flush()` method that does nothing, calls to `self.stdout.flush()` resolved to `IOBase.flush()` on the class hierarchy rather than triggering `OutputWrapper.__getattr__()`. As a result, `self._out.flush()` on the wrapped stream was never called.
+
+### Changes Made
+1. **[django/core/management/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13516/django/core/management/base.py#L153-L156)**: Added an explicit `flush(self)` method to `OutputWrapper` that checks for and delegates to `self._out.flush()`.
+2. **[tests/user_commands/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-13516/tests/user_commands/tests.py#L35-L46)**: Added unit tests verifying `OutputWrapper.flush()` calls `flush()` on wrapped streams and handles custom streams without a `flush()` method gracefully.

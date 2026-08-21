@@ -1,0 +1,113 @@
+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
+index 9735ce1..ac91055 100644
+--- a/django/db/models/sql/query.py
++++ b/django/db/models/sql/query.py
+@@ -545,11 +545,108 @@ class Query(BaseExpression):
+ 
+         return dict(zip(outer_query.annotation_select, result))
+ 
++    def _get_used_annotation_aliases(self):
++        """
++        Return the set of annotation aliases that are referenced in the query
++        (where, order_by, group_by, annotation_select_mask, distinct_fields).
++        """
++        ann_keys = set(self.annotations.keys())
++        if not ann_keys:
++            return set()
++
++        ann_identity_map = {id(v): k for k, v in self.annotations.items()}
++        ann_values_map = {v: k for k, v in self.annotations.items()}
++
++        def _get_expr_refs(expr):
++            refs = set()
++            if expr is None:
++                return refs
++
++            if isinstance(expr, Ref):
++                if expr.refs in ann_keys:
++                    refs.add(expr.refs)
++            elif isinstance(expr, F):
++                name_base = expr.name.split(LOOKUP_SEP)[0]
++                if name_base in ann_keys:
++                    refs.add(name_base)
++            elif isinstance(expr, str):
++                clean_name = expr.lstrip("-+").split(LOOKUP_SEP)[0]
++                if clean_name in ann_keys:
++                    refs.add(clean_name)
++
++            if id(expr) in ann_identity_map:
++                refs.add(ann_identity_map[id(expr)])
++            else:
++                try:
++                    if expr in ann_values_map:
++                        refs.add(ann_values_map[expr])
++                except TypeError:
++                    pass
++
++            if hasattr(expr, "get_source_expressions"):
++                for src in expr.get_source_expressions():
++                    refs.update(_get_expr_refs(src))
++
++            return refs
++
++        referenced = set()
++
++        if self.where:
++            referenced.update(_get_expr_refs(self.where))
++
++        for o in self.order_by:
++            referenced.update(_get_expr_refs(o))
++        for o in self.extra_order_by:
++            referenced.update(_get_expr_refs(o))
++
++        if isinstance(self.group_by, (tuple, list)):
++            for g in self.group_by:
++                referenced.update(_get_expr_refs(g))
++
++        if self.annotation_select_mask is not None:
++            referenced.update(self.annotation_select_mask & ann_keys)
++
++        if self.distinct_fields:
++            for d in self.distinct_fields:
++                referenced.update(_get_expr_refs(d))
++
++        visited = set()
++        to_visit = list(referenced)
++        while to_visit:
++            alias = to_visit.pop()
++            if alias in visited or alias not in self.annotations:
++                continue
++            visited.add(alias)
++            ann_expr = self.annotations[alias]
++            deps = _get_expr_refs(ann_expr)
++            for dep in deps:
++                if dep not in referenced:
++                    referenced.add(dep)
++                    to_visit.append(dep)
++
++        return referenced
++
+     def get_count(self, using):
+         """
+         Perform a COUNT() query using the current filter constraints.
+         """
+         obj = self.clone()
++        obj.clear_ordering(force=False)
++        if obj.annotations:
++            used_aliases = obj._get_used_annotation_aliases()
++            unused_aliases = set(obj.annotations.keys()) - used_aliases
++            if unused_aliases:
++                seen_cols = set()
++                for alias in unused_aliases:
++                    ann_expr = obj.annotations[alias]
++                    for col in obj._gen_cols([ann_expr], include_external=True):
++                        if col not in seen_cols:
++                            seen_cols.add(col)
++                            obj.unref_alias(col.alias)
++                    del obj.annotations[alias]
++                    if obj.annotation_select_mask is not None:
++                        obj.annotation_select_mask.discard(alias)
++                obj._annotation_select_cache = None
+         obj.add_annotation(Count("*"), alias="__count", is_summary=True)
+         return obj.get_aggregation(using, ["__count"])["__count"]
+ 

@@ -1,0 +1,35 @@
+diff --git a/main.py b/main.py
+index c86f6c8..510d119 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,29 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N+1]]
++    
++    if N == 1:
++        print("Fennec")
++    elif N == 2:
++        print("Snuke")
++    elif N == 3:
++        num_odd = sum(1 for x in A if x % 2 != 0)
++        if num_odd == 0:
++            print("Snuke")
++        else:
++            print("Fennec")
++    else:
++        num_odd = sum(1 for x in A if x % 2 != 0)
++        if num_odd % 2 == 0:
++            print("Snuke")
++        else:
++            print("Fennec")
++
++if __name__ == "__main__":
++    main()

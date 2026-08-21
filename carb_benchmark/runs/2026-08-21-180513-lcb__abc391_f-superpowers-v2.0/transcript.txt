@@ -1,0 +1,24 @@
+I have implemented the solution for finding the $K$-th largest value of $A_i B_j + B_j C_k + C_k A_i$ in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_f/main.py).
+
+### Method Explanation
+1. **Sorting**: Sort arrays $A$, $B$, and $C$ in descending order. Since $A_i, B_j, C_k \ge 1$, the function $V(i, j, k) = A_i B_j + B_j C_k + C_k A_i$ is monotonically non-increasing in each coordinate index $i, j, k$.
+2. **Best-First Search (Priority Queue)**: Start with the state $(0, 0, 0)$ which achieves the maximum possible value $V(0, 0, 0)$. Use a max-heap (`heapq` with negated values) to greedily extract the current maximum element.
+3. **Transitions**: From state $(i, j, k)$, transitions to $(i+1, j, k)$, $(i, j+1, k)$, and $(i, j, k+1)$ (if within bounds) are explored and pushed into the max-heap, using a set to ensure states are visited at most once.
+4. The $K$-th popped value from the max-heap gives the answer.
+
+### Verification
+- Passed all provided sample test cases.
+- Validated accuracy against a brute-force implementation over 50 randomized test cases.
+- Benchmarked execution time on maximum constraints ($N = 2 \cdot 10^5, K = 5 \cdot 10^5$) achieving $\approx 0.65\text{ seconds}$.
+I have implemented the solution for finding the $K$-th largest value of $A_i B_j + B_j C_k + C_k A_i$ in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc391_f/main.py).
+
+### Method Explanation
+1. **Sorting**: Sort arrays $A$, $B$, and $C$ in descending order. Since $A_i, B_j, C_k \ge 1$, the function $V(i, j, k) = A_i B_j + B_j C_k + C_k A_i$ is monotonically non-increasing in each coordinate index $i, j, k$.
+2. **Best-First Search (Priority Queue)**: Start with the state $(0, 0, 0)$ which achieves the maximum possible value $V(0, 0, 0)$. Use a max-heap (`heapq` with negated values) to greedily extract the current maximum element.
+3. **Transitions**: From state $(i, j, k)$, transitions to $(i+1, j, k)$, $(i, j+1, k)$, and $(i, j, k+1)$ (if within bounds) are explored and pushed into the max-heap, using a set to ensure states are visited at most once.
+4. The $K$-th popped value from the max-heap gives the answer.
+
+### Verification
+- Passed all provided sample test cases.
+- Validated accuracy against a brute-force implementation over 50 randomized test cases.
+- Benchmarked execution time on maximum constraints ($N = 2 \cdot 10^5, K = 5 \cdot 10^5$) achieving $\approx 0.65\text{ seconds}$.

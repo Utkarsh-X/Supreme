@@ -1,0 +1,169 @@
+diff --git a/main.py b/main.py
+index c86f6c8..794bae1 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,163 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    T_str = next(iterator, None)
++    if T_str is None:
++        return
++    
++    T = int(T_str)
++    out = []
++    
++    for _ in range(T):
++        N = int(next(iterator))
++        K = int(next(iterator))
++        two_K = 2 * K
++        
++        X = [0] * N
++        Y = [0] * N
++        Z = [0] * N
++        items = [None] * N
++        
++        for i in range(N):
++            x = int(next(iterator))
++            y = int(next(iterator))
++            z = int(next(iterator))
++            X[i] = x
++            Y[i] = y
++            Z[i] = z
++            
++            m = x
++            b = 1
++            if y > m:
++                m = y
++                b = 2
++            if z > m:
++                m = z
++                b = 3
++            items[i] = (m, b, i)
++            
++        items.sort(key=lambda item: item[0], reverse=True)
++        
++        init_loc = [0] * N
++        init_c = [0, 0, 0, 0] # 0, X, Y, Z
++        top_val = 0
++        for idx in range(two_K):
++            m, b, i = items[idx]
++            init_loc[i] = b
++            init_c[b] += 1
++            top_val += m
++            
++        # If init_c is already all even, answer is top_val
++        if init_c[1] % 2 == 0 and init_c[2] % 2 == 0 and init_c[3] % 2 == 0:
++            out.append(str(top_val))
++            continue
++            
++        # Candidate even tuples within distance <= 3 of init_c
++        candidates = []
++        for ex in range(0, two_K + 1, 2):
++            for ey in range(0, two_K + 1 - ex, 2):
++                ez = two_K - ex - ey
++                d = (abs(ex - init_c[1]) + abs(ey - init_c[2]) + abs(ez - init_c[3])) // 2
++                if d <= 3:
++                    candidates.append((ex, ey, ez))
++                    
++        def get_val(i, b):
++            if b == 0: return 0
++            if b == 1: return X[i]
++            if b == 2: return Y[i]
++            if b == 3: return Z[i]
++
++        best_overall_val = -1
++
++        for ex, ey, ez in candidates:
++            target_c = [N, ex, ey, ez]
++            loc = list(init_loc)
++            counts = list(init_c)
++            cur_val = top_val
++            
++            while True:
++                deficits = [b for b in (1, 2, 3) if counts[b] < target_c[b]]
++                if not deficits:
++                    break
++                    
++                surpluses = [a for a in (1, 2, 3) if counts[a] > target_c[a]]
++                
++                best_edge_item = {}
++                best_edge_gain = {}
++                for u in range(4):
++                    for w in range(4):
++                        if u == w: continue
++                        best_i = -1
++                        best_g = -10**18
++                        for i in range(N):
++                            if loc[i] == u:
++                                g = get_val(i, w) - get_val(i, u)
++                                if g > best_g:
++                                    best_g = g
++                                    best_i = i
++                        best_edge_item[(u, w)] = best_i
++                        best_edge_gain[(u, w)] = best_g
++
++                best_gain = -10**18
++                best_path = None
++                
++                # Path length 1: u -> v
++                for u in surpluses:
++                    for v in deficits:
++                        g = best_edge_gain[(u, v)]
++                        if g > best_gain:
++                            best_gain = g
++                            best_path = [(best_edge_item[(u, v)], u, v)]
++                            
++                # Path length 2: u -> w -> v
++                for u in surpluses:
++                    for w in range(4):
++                        if w == u: continue
++                        for v in deficits:
++                            if v == w: continue
++                            g1 = best_edge_gain[(u, w)]
++                            g2 = best_edge_gain[(w, v)]
++                            if g1 + g2 > best_gain:
++                                best_gain = g1 + g2
++                                best_path = [(best_edge_item[(u, w)], u, w), (best_edge_item[(w, v)], w, v)]
++
++                # Path length 3: u -> w1 -> w2 -> v
++                for u in surpluses:
++                    for w1 in range(4):
++                        if w1 == u: continue
++                        for w2 in range(4):
++                            if w2 == w1 or w2 == u: continue
++                            for v in deficits:
++                                if v == w2 or v == w1: continue
++                                g1 = best_edge_gain[(u, w1)]
++                                g2 = best_edge_gain[(w1, w2)]
++                                g3 = best_edge_gain[(w2, v)]
++                                if g1 + g2 + g3 > best_gain:
++                                    best_gain = g1 + g2 + g3
++                                    best_path = [
++                                        (best_edge_item[(u, w1)], u, w1),
++                                        (best_edge_item[(w1, w2)], w1, w2),
++                                        (best_edge_item[(w2, v)], w2, v)
++                                    ]
++
++                for item, old_b, new_b in best_path:
++                    loc[item] = new_b
++                    counts[old_b] -= 1
++                    counts[new_b] += 1
++                cur_val += best_gain
++
++            if cur_val > best_overall_val:
++                best_overall_val = cur_val
++
++        out.append(str(best_overall_val))
++
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    solve()
++

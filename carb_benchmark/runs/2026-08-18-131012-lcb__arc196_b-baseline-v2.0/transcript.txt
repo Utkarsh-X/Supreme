@@ -1,0 +1,46 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc196_b/main.py).
+
+### Method Explanation
+
+1. **Grid Edges & Local Validity Constraints**:
+   Assign binary variables $x_{i,j} \in \{0, 1\}$ for each horizontal boundary on the torus grid, and $y_{i,j} \in \{0, 1\}$ for each vertical boundary on the torus grid.
+   - For a **Type A** tile at $(i,j)$, the surrounding edge differences must satisfy:
+     $$x_{i,j} \oplus x_{(i-1)\%H, j} = 1 \quad \text{and} \quad y_{i,j} \oplus y_{i, (j-1)\%W} = 1$$
+   - For a **Type B** tile at $(i,j)$, the surrounding edge differences must satisfy:
+     $$x_{i,j} \oplus x_{(i-1)\%H, j} = 0, \quad y_{i,j} \oplus y_{i, (j-1)\%W} = 0, \quad \text{and} \quad y_{i,j} \oplus x_{i,j} = 1$$
+
+2. **Parity Necessary Condition & Variable Reduction**:
+   - For each column $j$, the number of 'A' tiles must be even. Otherwise, 0 placements exist.
+   - For each row $i$, the number of 'A' tiles must be even. Otherwise, 0 placements exist.
+   - When parities are even, $x_{i,j}$ and $y_{i,j}$ are uniquely determined by column variables $C_j = x_{0,j}$ and row variables $R_i = y_{i,0}$:
+     $$x_{i,j} = C_j \oplus P^x_{i,j}, \qquad y_{i,j} = R_i \oplus P^y_{i,j}$$
+
+3. **Bipartite Linear System over $\mathbb{F}_2$**:
+   Each Type B tile at $(i,j)$ induces a constraint:
+   $$R_i \oplus C_j = 1 \oplus P^x_{i,j} \oplus P^y_{i,j}$$
+   This defines a bipartite graph with $H$ row nodes and $W$ column nodes. 
+   - A DFS/BFS checks if the graph has consistent 2-coloring assignments.
+   - If consistent, the number of valid placements is $2^K \pmod{998244353}$, where $K$ is the number of connected components in the bipartite graph; otherwise 0.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc196_b/main.py).
+
+### Method Explanation
+
+1. **Grid Edges & Local Validity Constraints**:
+   Assign binary variables $x_{i,j} \in \{0, 1\}$ for each horizontal boundary on the torus grid, and $y_{i,j} \in \{0, 1\}$ for each vertical boundary on the torus grid.
+   - For a **Type A** tile at $(i,j)$, the surrounding edge differences must satisfy:
+     $$x_{i,j} \oplus x_{(i-1)\%H, j} = 1 \quad \text{and} \quad y_{i,j} \oplus y_{i, (j-1)\%W} = 1$$
+   - For a **Type B** tile at $(i,j)$, the surrounding edge differences must satisfy:
+     $$x_{i,j} \oplus x_{(i-1)\%H, j} = 0, \quad y_{i,j} \oplus y_{i, (j-1)\%W} = 0, \quad \text{and} \quad y_{i,j} \oplus x_{i,j} = 1$$
+
+2. **Parity Necessary Condition & Variable Reduction**:
+   - For each column $j$, the number of 'A' tiles must be even. Otherwise, 0 placements exist.
+   - For each row $i$, the number of 'A' tiles must be even. Otherwise, 0 placements exist.
+   - When parities are even, $x_{i,j}$ and $y_{i,j}$ are uniquely determined by column variables $C_j = x_{0,j}$ and row variables $R_i = y_{i,0}$:
+     $$x_{i,j} = C_j \oplus P^x_{i,j}, \qquad y_{i,j} = R_i \oplus P^y_{i,j}$$
+
+3. **Bipartite Linear System over $\mathbb{F}_2$**:
+   Each Type B tile at $(i,j)$ induces a constraint:
+   $$R_i \oplus C_j = 1 \oplus P^x_{i,j} \oplus P^y_{i,j}$$
+   This defines a bipartite graph with $H$ row nodes and $W$ column nodes. 
+   - A DFS/BFS checks if the graph has consistent 2-coloring assignments.
+   - If consistent, the number of valid placements is $2^K \pmod{998244353}$, where $K$ is the number of connected components in the bipartite graph; otherwise 0.

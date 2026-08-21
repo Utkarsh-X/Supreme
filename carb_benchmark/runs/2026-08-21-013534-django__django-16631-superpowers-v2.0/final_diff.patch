@@ -1,0 +1,163 @@
+diff --git a/django/contrib/auth/__init__.py b/django/contrib/auth/__init__.py
+index 155330c..b46f921 100644
+--- a/django/contrib/auth/__init__.py
++++ b/django/contrib/auth/__init__.py
+@@ -109,6 +109,14 @@ def login(request, user, backend=None):
+             and not constant_time_compare(
+                 request.session.get(HASH_SESSION_KEY, ""), session_auth_hash
+             )
++            and not any(
++                constant_time_compare(
++                    request.session.get(HASH_SESSION_KEY, ""), fallback_auth_hash
++                )
++                for fallback_auth_hash in getattr(
++                    user, "get_session_auth_fallback_hashes", lambda: ()
++                )()
++            )
+         ):
+             # To avoid reusing another user's session, create a new, empty
+             # session if the existing session corresponds to a different
+@@ -202,6 +210,15 @@ def get_user(request):
+                 session_hash_verified = session_hash and constant_time_compare(
+                     session_hash, user.get_session_auth_hash()
+                 )
++                if (
++                    not session_hash_verified
++                    and session_hash
++                    and hasattr(user, "get_session_auth_fallback_hashes")
++                ):
++                    for fallback_auth_hash in user.get_session_auth_fallback_hashes():
++                        if constant_time_compare(session_hash, fallback_auth_hash):
++                            session_hash_verified = True
++                            break
+                 if not session_hash_verified:
+                     request.session.flush()
+                     user = None
+diff --git a/django/contrib/auth/base_user.py b/django/contrib/auth/base_user.py
+index 5ee30bf..ef27a3f 100644
+--- a/django/contrib/auth/base_user.py
++++ b/django/contrib/auth/base_user.py
+@@ -5,6 +5,7 @@ not in INSTALLED_APPS.
+ import unicodedata
+ import warnings
+ 
++from django.conf import settings
+ from django.contrib.auth import password_validation
+ from django.contrib.auth.hashers import (
+     check_password,
+@@ -131,7 +132,7 @@ class AbstractBaseUser(models.Model):
+         """
+         return is_password_usable(self.password)
+ 
+-    def get_session_auth_hash(self):
++    def get_session_auth_hash(self, secret=None):
+         """
+         Return an HMAC of the password field.
+         """
+@@ -139,9 +140,14 @@ class AbstractBaseUser(models.Model):
+         return salted_hmac(
+             key_salt,
+             self.password,
++            secret=secret,
+             algorithm="sha256",
+         ).hexdigest()
+ 
++    def get_session_auth_fallback_hashes(self):
++        for secret in settings.SECRET_KEY_FALLBACKS:
++            yield self.get_session_auth_hash(secret=secret)
++
+     @classmethod
+     def get_email_field_name(cls):
+         try:
+diff --git a/tests/auth_tests/test_basic.py b/tests/auth_tests/test_basic.py
+index 4b491e5..e164931 100644
+--- a/tests/auth_tests/test_basic.py
++++ b/tests/auth_tests/test_basic.py
+@@ -138,3 +138,40 @@ class TestGetUser(TestCase):
+         user = get_user(request)
+         self.assertIsInstance(user, User)
+         self.assertEqual(user.username, created_user.username)
++
++    @override_settings(
++        SECRET_KEY="new-secret",
++        SECRET_KEY_FALLBACKS=["old-secret"],
++    )
++    def test_get_user_secret_key_fallbacks(self):
++        created_user = User.objects.create_user(
++            "testuser", "test@example.com", "testpw"
++        )
++        old_session_auth_hash = created_user.get_session_auth_hash("old-secret")
++        self.client.login(username="testuser", password="testpw")
++        session = self.client.session
++        session["_auth_user_hash"] = old_session_auth_hash
++        session.save()
++
++        request = HttpRequest()
++        request.session = self.client.session
++        user = get_user(request)
++        self.assertIsInstance(user, User)
++        self.assertEqual(user.username, created_user.username)
++
++    @override_settings(
++        SECRET_KEY="new-secret",
++        SECRET_KEY_FALLBACKS=["old-secret-1", "old-secret-2"],
++    )
++    def test_get_session_auth_fallback_hashes(self):
++        user = User.objects.create_user(
++            "testuser", "test@example.com", "testpw"
++        )
++        fallback_hashes = list(user.get_session_auth_fallback_hashes())
++        self.assertEqual(
++            fallback_hashes,
++            [
++                user.get_session_auth_hash("old-secret-1"),
++                user.get_session_auth_hash("old-secret-2"),
++            ],
++        )
+diff --git a/tests/auth_tests/test_views.py b/tests/auth_tests/test_views.py
+index d15a166..b3a2c6b 100644
+--- a/tests/auth_tests/test_views.py
++++ b/tests/auth_tests/test_views.py
+@@ -8,7 +8,12 @@ from urllib.parse import quote, urljoin
+ from django.apps import apps
+ from django.conf import settings
+ from django.contrib.admin.models import LogEntry
+-from django.contrib.auth import BACKEND_SESSION_KEY, REDIRECT_FIELD_NAME, SESSION_KEY
++from django.contrib.auth import (
++    BACKEND_SESSION_KEY,
++    HASH_SESSION_KEY,
++    REDIRECT_FIELD_NAME,
++    SESSION_KEY,
++)
+ from django.contrib.auth.forms import (
+     AuthenticationForm,
+     PasswordChangeForm,
+@@ -875,6 +880,28 @@ class LoginTest(AuthViewsTestCase):
+         self.login()
+         self.assertNotEqual(original_session_key, self.client.session.session_key)
+ 
++    @override_settings(
++        SECRET_KEY="new-secret",
++        SECRET_KEY_FALLBACKS=["old-secret"],
++    )
++    def test_login_secret_key_fallbacks(self):
++        user = User.objects.get(username="testclient")
++        old_hash = user.get_session_auth_hash("old-secret")
++        engine = import_module(settings.SESSION_ENGINE)
++        session = engine.SessionStore()
++        session[SESSION_KEY] = user.id
++        session[HASH_SESSION_KEY] = old_hash
++        session.save()
++        original_session_key = session.session_key
++        self.client.cookies[settings.SESSION_COOKIE_NAME] = original_session_key
++
++        self.login()
++        self.assertEqual(original_session_key, self.client.session.session_key)
++        self.assertEqual(
++            self.client.session[HASH_SESSION_KEY],
++            user.get_session_auth_hash("new-secret"),
++        )
++
+     def test_login_get_default_redirect_url(self):
+         response = self.login(url="/login/get_default_redirect_url/")
+         self.assertRedirects(response, "/custom/", fetch_redirect_response=False)

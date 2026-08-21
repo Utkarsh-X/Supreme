@@ -1,0 +1,36 @@
+I have addressed the issue where `SECRET_KEY_FALLBACKS` was not used to verify user session authentication hashes upon key rotation.
+
+### Root Cause
+When verifying session authentication hashes during `get_user()` or `login()`, Django checked `request.session[HASH_SESSION_KEY]` against `user.get_session_auth_hash()`. However, `AbstractBaseUser.get_session_auth_hash()` generated hashes using only `settings.SECRET_KEY`. When `SECRET_KEY` was rotated, existing session hashes created with the old secret key failed comparison against the new key and caused active user sessions to be flushed.
+
+### Changes Made
+1. **[base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L135-L157)**:
+   - Added an optional `secret=None` parameter to `AbstractBaseUser.get_session_auth_hash(secret=None)`.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes()` method to yield session auth hashes generated with keys listed in `settings.SECRET_KEY_FALLBACKS`.
+2. **[auth/__init__.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L57-L61)**:
+   - Updated session hash verification in `get_user()` and `login()` to validate against fallback hashes from `_get_session_auth_hashes(user)`.
+3. **Documentation & Release Notes**:
+   - Documented `get_session_auth_fallback_hashes()` in [`customizing.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/topics/auth/customizing.txt#L725-L731) and [`ref/contrib/auth.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/ref/contrib/auth.txt#L695-L700).
+4. **Tests**:
+   - Added unit tests in [`test_auth_backends.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_auth_backends.py#L938-L1000) verifying `get_user`, `login`, and fallback hash generation when `SECRET_KEY_FALLBACKS` is set.
+
+### Verification
+- Executed the full `auth_tests` suite (611 tests), `sessions_tests`, and `signing` test suites with all tests passing cleanly.
+I have addressed the issue where `SECRET_KEY_FALLBACKS` was not used to verify user session authentication hashes upon key rotation.
+
+### Root Cause
+When verifying session authentication hashes during `get_user()` or `login()`, Django checked `request.session[HASH_SESSION_KEY]` against `user.get_session_auth_hash()`. However, `AbstractBaseUser.get_session_auth_hash()` generated hashes using only `settings.SECRET_KEY`. When `SECRET_KEY` was rotated, existing session hashes created with the old secret key failed comparison against the new key and caused active user sessions to be flushed.
+
+### Changes Made
+1. **[base_user.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/base_user.py#L135-L157)**:
+   - Added an optional `secret=None` parameter to `AbstractBaseUser.get_session_auth_hash(secret=None)`.
+   - Added `AbstractBaseUser.get_session_auth_fallback_hashes()` method to yield session auth hashes generated with keys listed in `settings.SECRET_KEY_FALLBACKS`.
+2. **[auth/__init__.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/django/contrib/auth/__init__.py#L57-L61)**:
+   - Updated session hash verification in `get_user()` and `login()` to validate against fallback hashes from `_get_session_auth_hashes(user)`.
+3. **Documentation & Release Notes**:
+   - Documented `get_session_auth_fallback_hashes()` in [`customizing.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/topics/auth/customizing.txt#L725-L731) and [`ref/contrib/auth.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/docs/ref/contrib/auth.txt#L695-L700).
+4. **Tests**:
+   - Added unit tests in [`test_auth_backends.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16631/tests/auth_tests/test_auth_backends.py#L938-L1000) verifying `get_user`, `login`, and fallback hash generation when `SECRET_KEY_FALLBACKS` is set.
+
+### Verification
+- Executed the full `auth_tests` suite (611 tests), `sessions_tests`, and `signing` test suites with all tests passing cleanly.

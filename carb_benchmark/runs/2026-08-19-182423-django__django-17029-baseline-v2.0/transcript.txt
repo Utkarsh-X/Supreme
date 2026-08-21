@@ -1,0 +1,12 @@
+I have launched `pip install -e .` in the background to ensure Python imports the current Django workspace during tests. I will proceed once it completes.
+I have fixed the issue where `Apps.clear_cache()` did not clear the `get_swappable_settings_name` cache.
+
+### Summary of Changes
+1. **[django/apps/registry.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/django/apps/registry.py#L370-L385)**: Added `self.get_swappable_settings_name.cache_clear()` inside `Apps.clear_cache()` so that calls to `clear_cache()` reset the `get_swappable_settings_name` LRU cache alongside `get_models`.
+2. **[tests/apps/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/tests/apps/tests.py#L488-L493)**: Added a unit test `test_clear_cache` to verify that `apps.clear_cache()` clears the internal `get_swappable_settings_name` cache.
+I have launched `pip install -e .` in the background to ensure Python imports the current Django workspace during tests. I will proceed once it completes.
+I have fixed the issue where `Apps.clear_cache()` did not clear the `get_swappable_settings_name` cache.
+
+### Summary of Changes
+1. **[django/apps/registry.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/django/apps/registry.py#L370-L385)**: Added `self.get_swappable_settings_name.cache_clear()` inside `Apps.clear_cache()` so that calls to `clear_cache()` reset the `get_swappable_settings_name` LRU cache alongside `get_models`.
+2. **[tests/apps/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-17029/tests/apps/tests.py#L488-L493)**: Added a unit test `test_clear_cache` to verify that `apps.clear_cache()` clears the internal `get_swappable_settings_name` cache.

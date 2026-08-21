@@ -1,0 +1,38 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_c/main.py).
+
+### Method Explanation
+
+1. **Operation Decomposition**:
+   - Elements with $A_i = 0, B_i = 0$ should never be flipped.
+   - Elements with $A_i = 1, B_i = 0$ ($U$) must be flipped $1 \to 0$ exactly once.
+   - Elements with $A_i = 0, B_i = 1$ ($V$) must be flipped $0 \to 1$ exactly once.
+   - Elements with $A_i = 1, B_i = 1$ ($W$) can either stay $1$ for the entire process (flipped 0 times) or be flipped twice ($1 \to 0$ in Phase 1, then $0 \to 1$ in Phase 2).
+
+2. **Phase Ordering & Selection**:
+   - To minimize cost, all $1 \to 0$ operations should occur in **Phase 1** (sorted in descending order of $C_i$ to remove larger costs early).
+   - All $0 \to 1$ operations should occur in **Phase 2** (sorted in ascending order of $C_i$ to delay larger costs).
+   - If we select $w$ elements of $W$ to be flipped twice ($W_2$), it is always optimal to choose the $w$ largest elements of $W$.
+
+3. **Efficient Maintenance with Binary Indexed Trees (BIT)**:
+   - For a fixed $w \in [0, |W|]$, the set of 1-to-0 flips is $P = U \cup W_2$ and 0-to-1 flips is $Q = V \cup W_2$.
+   - As $w$ increases, we incrementally add the next largest element of $W$ into $P$ and $Q$.
+   - Using Binary Indexed Trees (Fenwick Trees), we maintain the rank-weighted sums of elements in $O(\log N)$ per insertion, allowing us to find the minimum cost across all $w \in [0, |W|]$ in $O(N \log N)$ total time.
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_c/main.py).
+
+### Method Explanation
+
+1. **Operation Decomposition**:
+   - Elements with $A_i = 0, B_i = 0$ should never be flipped.
+   - Elements with $A_i = 1, B_i = 0$ ($U$) must be flipped $1 \to 0$ exactly once.
+   - Elements with $A_i = 0, B_i = 1$ ($V$) must be flipped $0 \to 1$ exactly once.
+   - Elements with $A_i = 1, B_i = 1$ ($W$) can either stay $1$ for the entire process (flipped 0 times) or be flipped twice ($1 \to 0$ in Phase 1, then $0 \to 1$ in Phase 2).
+
+2. **Phase Ordering & Selection**:
+   - To minimize cost, all $1 \to 0$ operations should occur in **Phase 1** (sorted in descending order of $C_i$ to remove larger costs early).
+   - All $0 \to 1$ operations should occur in **Phase 2** (sorted in ascending order of $C_i$ to delay larger costs).
+   - If we select $w$ elements of $W$ to be flipped twice ($W_2$), it is always optimal to choose the $w$ largest elements of $W$.
+
+3. **Efficient Maintenance with Binary Indexed Trees (BIT)**:
+   - For a fixed $w \in [0, |W|]$, the set of 1-to-0 flips is $P = U \cup W_2$ and 0-to-1 flips is $Q = V \cup W_2$.
+   - As $w$ increases, we incrementally add the next largest element of $W$ into $P$ and $Q$.
+   - Using Binary Indexed Trees (Fenwick Trees), we maintain the rank-weighted sums of elements in $O(\log N)$ per insertion, allowing us to find the minimum cost across all $w \in [0, |W|]$ in $O(N \log N)$ total time.

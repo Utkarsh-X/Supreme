@@ -1,0 +1,16 @@
+I have updated [django/forms/models.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py) so that `ModelChoiceField` does not present a blank option (`empty_label = None`) when the field is required (`blank=False` on the model) and rendered with a `RadioSelect` widget (or subclass).
+
+### Root Cause
+`ModelChoiceField` previously only set `self.empty_label = None` when `required=True` AND an `initial` value was supplied. When `initial` was `None`, it defaulted `empty_label` to `"---------"` to prevent standard `<select>` dropdowns from auto-selecting the first item. However, when using `RadioSelect`, radio buttons have an inherent unfilled state. Displaying a `"---------"` radio option for a required field resulted in an invalid blank radio option being rendered and pre-selected (`checked="checked"`).
+
+### Solution
+1. In [ModelChoiceField.__init__](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py#L1184-L1205), initialized `Field.__init__` first and set `self.empty_label = None` when `self.required` is `True` and `isinstance(self.widget, RadioSelect)`.
+2. Added unit test cases to [tests/model_forms/test_modelchoicefield.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/tests/model_forms/test_modelchoicefield.py#L356-L375) verifying that `RadioSelect` widgets with `required=True` do not include an empty choice, whereas optional fields (`required=False`) continue to present the empty choice option.
+I have updated [django/forms/models.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py) so that `ModelChoiceField` does not present a blank option (`empty_label = None`) when the field is required (`blank=False` on the model) and rendered with a `RadioSelect` widget (or subclass).
+
+### Root Cause
+`ModelChoiceField` previously only set `self.empty_label = None` when `required=True` AND an `initial` value was supplied. When `initial` was `None`, it defaulted `empty_label` to `"---------"` to prevent standard `<select>` dropdowns from auto-selecting the first item. However, when using `RadioSelect`, radio buttons have an inherent unfilled state. Displaying a `"---------"` radio option for a required field resulted in an invalid blank radio option being rendered and pre-selected (`checked="checked"`).
+
+### Solution
+1. In [ModelChoiceField.__init__](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/django/forms/models.py#L1184-L1205), initialized `Field.__init__` first and set `self.empty_label = None` when `self.required` is `True` and `isinstance(self.widget, RadioSelect)`.
+2. Added unit test cases to [tests/model_forms/test_modelchoicefield.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12406/tests/model_forms/test_modelchoicefield.py#L356-L375) verifying that `RadioSelect` widgets with `required=True` do not include an empty choice, whereas optional fields (`required=False`) continue to present the empty choice option.

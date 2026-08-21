@@ -1,0 +1,32 @@
+The issue occurred because Python's built-in `sum(iterable, start=0)` uses integer `0` as the default starting value. When evaluating `sum([vector, ...])`, Python executes `0 + vector`, which calls `vector.__radd__(0)` (`Vector.__add__(vector, 0)`). 
+
+Previously, `Vector.__add__` (and `Dyadic.__add__` as well as `BasisDependentAdd` / `BasisDependentZero` in `sympy.vector`) strictly expected another `Vector` or `Dyadic` object and raised a `TypeError: A Vector must be supplied` when added to scalar `0`.
+
+### Changes Made
+1. **`sympy/physics/vector/vector.py`**:
+   - Added support for adding scalar `0` in `Vector.__add__`, returning `self`.
+
+2. **`sympy/physics/vector/dyadic.py`**:
+   - Added support for adding scalar `0` in `Dyadic.__add__`, returning `self`.
+
+3. **`sympy/vector/basisdependent.py`**:
+   - Updated `BasisDependentAdd.__new__` and `BasisDependentZero` (`__add__`, `__radd__`, `__sub__`, `__rsub__`) to handle scalar `0` appropriately.
+
+4. **Tests**:
+   - Added tests for `0` addition/subtraction and `sum([N.x, 0 * N.x])` / `sum([N.x])` in [test_vector.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/tests/test_vector.py#L58-L68), [test_dyadic.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/tests/test_dyadic.py#L12-L21), and [test_vector.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/vector/tests/test_vector.py#L53-L62).
+The issue occurred because Python's built-in `sum(iterable, start=0)` uses integer `0` as the default starting value. When evaluating `sum([vector, ...])`, Python executes `0 + vector`, which calls `vector.__radd__(0)` (`Vector.__add__(vector, 0)`). 
+
+Previously, `Vector.__add__` (and `Dyadic.__add__` as well as `BasisDependentAdd` / `BasisDependentZero` in `sympy.vector`) strictly expected another `Vector` or `Dyadic` object and raised a `TypeError: A Vector must be supplied` when added to scalar `0`.
+
+### Changes Made
+1. **`sympy/physics/vector/vector.py`**:
+   - Added support for adding scalar `0` in `Vector.__add__`, returning `self`.
+
+2. **`sympy/physics/vector/dyadic.py`**:
+   - Added support for adding scalar `0` in `Dyadic.__add__`, returning `self`.
+
+3. **`sympy/vector/basisdependent.py`**:
+   - Updated `BasisDependentAdd.__new__` and `BasisDependentZero` (`__add__`, `__radd__`, `__sub__`, `__rsub__`) to handle scalar `0` appropriately.
+
+4. **Tests**:
+   - Added tests for `0` addition/subtraction and `sum([N.x, 0 * N.x])` / `sum([N.x])` in [test_vector.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/tests/test_vector.py#L58-L68), [test_dyadic.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/physics/vector/tests/test_dyadic.py#L12-L21), and [test_vector.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-14711/sympy/vector/tests/test_vector.py#L53-L62).

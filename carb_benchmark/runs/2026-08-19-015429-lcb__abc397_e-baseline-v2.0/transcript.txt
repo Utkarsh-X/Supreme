@@ -1,0 +1,34 @@
+I have solved the problem and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+
+Decomposing a tree of $NK$ vertices into $N$ vertex-disjoint paths of size $K$ using edges of the tree is equivalent to removing $N - 1$ edges from the tree such that every remaining connected component is a path of size $K$.
+
+Because any edge cut isolates a subtree component permanently from the rest of the tree, any decision to cut or keep an edge is uniquely forced:
+1. We root the tree arbitrarily (e.g., at vertex 1) and process nodes bottom-up (in post-order / reverse BFS order).
+2. For each node $u$, we accumulate the sizes and degree constraints of attached subtrees from its children.
+3. If a child subtree reaches size $K$, the edge connecting it to $u$ MUST be cut (since it cannot absorb any more vertices).
+4. If a child subtree has size $< K$, the edge connecting it to $u$ CANNOT be cut (otherwise that component would be isolated with size $< K$).
+5. Each component must also satisfy the path structure requirement:
+   - For a node $u$ with `size[u] == K`, its degree within the component cannot exceed 2.
+   - For a node $u$ with `size[u] < K`, its degree towards its children in the component cannot exceed 1 (since it will also connect to its parent, making its degree at most 2).
+   - If `size[u] > K`, then no valid decomposition exists.
+
+This bottom-up linear time $O(NK)$ algorithm uniquely determines whether such a path decomposition exists.
+I have solved the problem and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+
+Decomposing a tree of $NK$ vertices into $N$ vertex-disjoint paths of size $K$ using edges of the tree is equivalent to removing $N - 1$ edges from the tree such that every remaining connected component is a path of size $K$.
+
+Because any edge cut isolates a subtree component permanently from the rest of the tree, any decision to cut or keep an edge is uniquely forced:
+1. We root the tree arbitrarily (e.g., at vertex 1) and process nodes bottom-up (in post-order / reverse BFS order).
+2. For each node $u$, we accumulate the sizes and degree constraints of attached subtrees from its children.
+3. If a child subtree reaches size $K$, the edge connecting it to $u$ MUST be cut (since it cannot absorb any more vertices).
+4. If a child subtree has size $< K$, the edge connecting it to $u$ CANNOT be cut (otherwise that component would be isolated with size $< K$).
+5. Each component must also satisfy the path structure requirement:
+   - For a node $u$ with `size[u] == K`, its degree within the component cannot exceed 2.
+   - For a node $u$ with `size[u] < K`, its degree towards its children in the component cannot exceed 1 (since it will also connect to its parent, making its degree at most 2).
+   - If `size[u] > K`, then no valid decomposition exists.
+
+This bottom-up linear time $O(NK)$ algorithm uniquely determines whether such a path decomposition exists.

@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-08-20-115510-sympy__sympy-16886-baseline-v2.0",
+  "task_id": "sympy__sympy-16886",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 42.32,
+  "tool_calls": [
+    "grep_search",
+    "view_file",
+    "grep_search",
+    "view_file",
+    "run_command",
+    "replace_file_content",
+    "view_file",
+    "replace_file_content",
+    "run_command",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "grep_search": 2,
+    "view_file": 3,
+    "run_command": 3,
+    "replace_file_content": 2
+  },
+  "time_to_first_edit": 30.407,
+  "num_turns": 1,
+  "duration_seconds": 30.5923011,
+  "status": "SUCCESS",
+  "usage": {
+    "input_tokens": 47989,
+    "output_tokens": 2680,
+    "thinking_tokens": 946,
+    "cache_read_tokens": 174788,
+    "total_tokens": 50669
+  },
+  "error": null
+}

@@ -1,0 +1,20 @@
+I have implemented the Python solution for the missing integers problem in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_b/main.py).
+
+### Method Explanation
+1. Read input numbers from `sys.stdin`.
+2. Construct a set `A` containing all elements present in the input array.
+3. Filter numbers in the range $[1, N]$ that are not in set `A`.
+4. Output the count of missing numbers $C$ on the first line, followed by the space-separated missing numbers in ascending order on the second line (if $C > 0$).
+
+### Verification
+The solution was executed against all public sample test cases and passed cleanly with exact outputs.
+I have implemented the Python solution for the missing integers problem in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc392_b/main.py).
+
+### Method Explanation
+1. Read input numbers from `sys.stdin`.
+2. Construct a set `A` containing all elements present in the input array.
+3. Filter numbers in the range $[1, N]$ that are not in set `A`.
+4. Output the count of missing numbers $C$ on the first line, followed by the space-separated missing numbers in ascending order on the second line (if $C > 0$).
+
+### Verification
+The solution was executed against all public sample test cases and passed cleanly with exact outputs.

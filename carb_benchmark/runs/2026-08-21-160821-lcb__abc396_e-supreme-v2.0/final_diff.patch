@@ -1,0 +1,81 @@
+diff --git a/main.py b/main.py
+index c86f6c8..34742e4 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,75 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    M = int(next(iterator))
++    
++    adj = [[] for _ in range(N + 1)]
++    
++    for _ in range(M):
++        u = int(next(iterator))
++        v = int(next(iterator))
++        w = int(next(iterator))
++        if u == v:
++            if w != 0:
++                print(-1)
++                return
++            continue
++        adj[u].append((v, w))
++        adj[v].append((u, w))
++        
++    visited = [False] * (N + 1)
++    C = [0] * (N + 1)
++    A = [0] * (N + 1)
++    
++    for i in range(1, N + 1):
++        if not visited[i]:
++            comp = [i]
++            visited[i] = True
++            C[i] = 0
++            
++            ptr = 0
++            possible = True
++            while ptr < len(comp):
++                curr = comp[ptr]
++                ptr += 1
++                for nxt, w in adj[curr]:
++                    if not visited[nxt]:
++                        visited[nxt] = True
++                        C[nxt] = C[curr] ^ w
++                        comp.append(nxt)
++                    else:
++                        if C[nxt] != (C[curr] ^ w):
++                            possible = False
++                            break
++                if not possible:
++                    break
++            
++            if not possible:
++                print(-1)
++                return
++            
++            # Compute optimal a_r for root `i`
++            S = len(comp)
++            a_r = 0
++            for k in range(30):
++                mask = 1 << k
++                cnt = 0
++                for u in comp:
++                    if C[u] & mask:
++                        cnt += 1
++                if cnt * 2 > S:
++                    a_r |= mask
++            
++            for u in comp:
++                A[u] = a_r ^ C[u]
++                
++    print(*(A[1:]))
++
++if __name__ == '__main__':
++    solve()

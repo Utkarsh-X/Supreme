@@ -1,0 +1,64 @@
+diff --git a/main.py b/main.py
+index c86f6c8..672004c 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,58 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    T = int(input_data[0])
++    idx = 1
++    out = []
++    
++    for _ in range(T):
++        N = int(input_data[idx])
++        A = input_data[idx+1]
++        B = input_data[idx+2]
++        idx += 3
++        
++        a = [i + 1 for i, ch in enumerate(A) if ch == '1']
++        b = [i + 1 for i, ch in enumerate(B) if ch == '1']
++        
++        m = len(a)
++        k = len(b)
++        
++        if m < k:
++            out.append("-1")
++            continue
++            
++        g = [a[i+1] - a[i] for i in range(m - 1)]
++        h = [b[i+1] - b[i] for i in range(k - 1)]
++        
++        possible = True
++        ptr = 0
++        len_g = len(g)
++        
++        for req in h:
++            while ptr < len_g and g[ptr] < req:
++                ptr += 1
++            if ptr == len_g:
++                possible = False
++                break
++            ptr += 1
++            
++        if not possible:
++            out.append("-1")
++            continue
++            
++        d_m = a[-1] - b[-1]
++        neg_d1 = b[0] - a[0]
++        diff_span = (a[-1] - a[0]) - (b[-1] - b[0])
++        ceil_half_span = (diff_span + 1) // 2
++        
++        ans = max(d_m, neg_d1, ceil_half_span)
++        out.append(str(ans))
++        
++    print('\n'.join(out))
++
++if __name__ == '__main__':
++    solve()

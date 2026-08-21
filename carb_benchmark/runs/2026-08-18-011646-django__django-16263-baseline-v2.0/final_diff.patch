@@ -1,0 +1,208 @@
+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
+index 9735ce1..a8f55be 100644
+--- a/django/db/models/sql/query.py
++++ b/django/db/models/sql/query.py
+@@ -545,17 +545,140 @@ class Query(BaseExpression):
+ 
+         return dict(zip(outer_query.annotation_select, result))
+ 
++    def _get_referenced_annotation_aliases(self):
++        """
++        Return the set of annotation aliases that are referenced by filters,
++        ordering, grouping, distinct_fields, select, extra, or other
++        referenced annotations.
++        """
++        if not self.annotations:
++            return set()
++
++        candidate_aliases = set(self.annotations.keys())
++        candidate_aliases.discard("__count")
++
++        if not candidate_aliases:
++            return set()
++
++        referenced = set()
++
++        if self.annotation_select_mask is not None:
++            referenced.update(candidate_aliases & self.annotation_select_mask)
++
++        def collect_refs(expr):
++            stack = [expr]
++            while stack:
++                curr = stack.pop()
++                if curr is None:
++                    continue
++
++                if isinstance(curr, str):
++                    name = curr.lstrip("-").split(LOOKUP_SEP)[0]
++                    if name in candidate_aliases:
++                        referenced.add(name)
++                    continue
++
++                if isinstance(curr, Ref):
++                    if curr.refs in candidate_aliases:
++                        referenced.add(curr.refs)
++                elif isinstance(curr, F):
++                    name = curr.name.split(LOOKUP_SEP)[0]
++                    if name in candidate_aliases:
++                        referenced.add(name)
++                else:
++                    for alias in candidate_aliases:
++                        if curr is self.annotations[alias]:
++                            referenced.add(alias)
++                        else:
++                            try:
++                                if curr == self.annotations[alias]:
++                                    referenced.add(alias)
++                            except Exception:
++                                pass
++
++                if hasattr(curr, "get_source_expressions"):
++                    try:
++                        for child in curr.get_source_expressions():
++                            if child is not None:
++                                stack.append(child)
++                    except Exception:
++                        pass
++                elif hasattr(curr, "children"):
++                    for child in curr.children:
++                        if child is not None:
++                            stack.append(child)
++
++        if self.where:
++            collect_refs(self.where)
++
++        if self.order_by:
++            for item in self.order_by:
++                collect_refs(item)
++
++        if isinstance(self.group_by, (tuple, list)):
++            for item in self.group_by:
++                collect_refs(item)
++
++        if self.distinct_fields:
++            for item in self.distinct_fields:
++                collect_refs(item)
++
++        if self.select:
++            for item in self.select:
++                collect_refs(item)
++
++        if self.extra:
++            for item in self.extra.values():
++                collect_refs(item)
++        if self.extra_order_by:
++            for item in self.extra_order_by:
++                collect_refs(item)
++
++        if self.combined_queries:
++            for combined_query in self.combined_queries:
++                collect_refs(combined_query.where)
++
++        while True:
++            added = False
++            for alias in list(referenced):
++                ann = self.annotations.get(alias)
++                if ann is not None:
++                    before_len = len(referenced)
++                    collect_refs(ann)
++                    if len(referenced) > before_len:
++                        added = True
++            if not added:
++                break
++
++        return referenced
++
++
+     def get_count(self, using):
+         """
+         Perform a COUNT() query using the current filter constraints.
+         """
+         obj = self.clone()
+         obj.add_annotation(Count("*"), alias="__count", is_summary=True)
++        if obj.annotations:
++            obj.clear_ordering(force=False)
++            referenced_aliases = obj._get_referenced_annotation_aliases()
++            for alias, annotation in list(obj.annotations.items()):
++                if alias not in referenced_aliases and alias != "__count":
++                    for col_alias in obj._gen_col_aliases([annotation]):
++                        curr = col_alias
++                        while curr and curr in obj.alias_map and obj.alias_map[curr].join_type:
++                            obj.unref_alias(curr)
++                            curr = obj.alias_map[curr].parent_alias
++                    del obj.annotations[alias]
++                    if obj.annotation_select_mask is not None:
++                        obj.annotation_select_mask.discard(alias)
++            obj._annotation_select_cache = None
+         return obj.get_aggregation(using, ["__count"])["__count"]
+ 
+     def has_filters(self):
+         return self.where
+ 
++
+     def exists(self, limit=True):
+         q = self.clone()
+         if not (q.distinct and q.is_sliced):
+@@ -1903,7 +2026,8 @@ class Query(BaseExpression):
+ 
+     @classmethod
+     def _gen_col_aliases(cls, exprs):
+-        yield from (expr.alias for expr in cls._gen_cols(exprs))
++        yield from (expr.alias for expr in cls._gen_cols(exprs, include_external=True))
++
+ 
+     def resolve_ref(self, name, allow_joins=True, reuse=None, summarize=False):
+         annotation = self.annotations.get(name)
+diff --git a/tests/annotations/tests.py b/tests/annotations/tests.py
+index d05af55..9e1c907 100644
+--- a/tests/annotations/tests.py
++++ b/tests/annotations/tests.py
+@@ -1410,3 +1410,48 @@ class AliasTests(TestCase):
+         )
+         with self.assertRaisesMessage(ValueError, msg):
+             Book.objects.alias(**{crafted_alias: Value(1)})
++
++    def test_count_strip_unused_annotations(self):
++        qs = Book.objects.annotate(n_authors=Count("authors"))
++        with self.assertNumQueries(1) as ctx:
++            self.assertEqual(qs.count(), 4)
++        sql = ctx.captured_queries[0]["sql"]
++        self.assertNotIn("n_authors", sql)
++        self.assertNotIn("JOIN", sql)
++        self.assertNotIn("GROUP BY", sql)
++
++    def test_count_strip_unused_annotations_multiple(self):
++        qs = Book.objects.annotate(
++            n_authors=Count("authors"),
++            n_pages=Sum("pages"),
++        )
++        with self.assertNumQueries(1) as ctx:
++            self.assertEqual(qs.count(), 4)
++        sql = ctx.captured_queries[0]["sql"]
++        self.assertNotIn("n_authors", sql)
++        self.assertNotIn("n_pages", sql)
++        self.assertNotIn("JOIN", sql)
++        self.assertNotIn("GROUP BY", sql)
++
++    def test_count_keep_referenced_annotations_in_where(self):
++        qs = Book.objects.annotate(
++            n_authors=Count("authors"),
++            n_pages=Sum("pages"),
++        ).filter(n_authors__gt=1)
++        with self.assertNumQueries(1) as ctx:
++            self.assertEqual(qs.count(), 2)
++        sql = ctx.captured_queries[0]["sql"]
++        self.assertIn("n_authors", sql)
++        self.assertNotIn("n_pages", sql)
++
++    def test_count_keep_transitive_annotations(self):
++        qs = Book.objects.annotate(
++            n_authors=Count("authors"),
++            n_authors_plus_one=F("n_authors") + 1,
++            n_pages=Sum("pages"),
++        ).filter(n_authors_plus_one__gt=2)
++        with self.assertNumQueries(1) as ctx:
++            self.assertEqual(qs.count(), 2)
++        sql = ctx.captured_queries[0]["sql"]
++        self.assertIn("n_authors", sql)
++        self.assertNotIn("n_pages", sql)

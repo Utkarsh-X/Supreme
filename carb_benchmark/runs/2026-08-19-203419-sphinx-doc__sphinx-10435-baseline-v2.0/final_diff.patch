@@ -1,0 +1,56 @@
+diff --git a/sphinx/writers/latex.py b/sphinx/writers/latex.py
+index e0c7d56..b529da8 100644
+--- a/sphinx/writers/latex.py
++++ b/sphinx/writers/latex.py
+@@ -1709,12 +1709,13 @@ class LaTeXTranslator(SphinxTranslator):
+             node.astext(), lang, opts=opts, location=node)
+         # TODO: Use nowrap option once LaTeX formatter supports it
+         # https://github.com/pygments/pygments/pull/1343
+-        hlcode = hlcode.replace(r'\begin{Verbatim}[commandchars=\\\{\}]',
+-                                r'\sphinxcode{\sphinxupquote{')
++        hlcode = hlcode.replace(r'\begin{Verbatim}[commandchars=\\\{\}]', '')
+         # get consistent trailer
+-        hlcode = hlcode.rstrip()[:-14]  # strip \end{Verbatim}
+-        self.body.append(hlcode)
+-        self.body.append('}}')
++        hlcode = hlcode.rstrip()
++        if hlcode.endswith(r'\end{Verbatim}'):
++            hlcode = hlcode[:-14]
++        hlcode = hlcode.strip('\r\n')
++        self.body.append(r'\sphinxcode{\sphinxupquote{' + hlcode + '}}')
+         raise nodes.SkipNode
+ 
+     def depart_literal(self, node: Element) -> None:
+diff --git a/tests/test_build_latex.py b/tests/test_build_latex.py
+index dd0db8a..4113743 100644
+--- a/tests/test_build_latex.py
++++ b/tests/test_build_latex.py
+@@ -1607,23 +1607,10 @@ def test_latex_code_role(app):
+     app.build()
+     content = (app.outdir / 'python.tex').read_text()
+ 
+-    common_content = (
+-        r'\PYG{k}{def} '
+-        r'\PYG{n+nf}{foo}'
+-        r'\PYG{p}{(}'
+-        r'\PYG{l+m+mi}{1} '
+-        r'\PYG{o}{+} '
+-        r'\PYG{l+m+mi}{2} '
+-        r'\PYG{o}{+} '
+-        r'\PYG{k+kc}{None} '
+-        r'\PYG{o}{+} '
+-        r'\PYG{l+s+s2}{\PYGZdq{}}'
+-        r'\PYG{l+s+s2}{abc}'
+-        r'\PYG{l+s+s2}{\PYGZdq{}}'
+-        r'\PYG{p}{)}'
+-        r'\PYG{p}{:} '
+-        r'\PYG{k}{pass}')
+-    assert (r'Inline \sphinxcode{\sphinxupquote{' + '\n' +
+-            common_content + '\n}} code block') in content
++    from sphinx.highlighting import PygmentsBridge
++    common_content = PygmentsBridge('latex').highlight_block(
++        'def foo(1 + 2 + None + "abc"): pass', 'python'
++    ).splitlines()[1]
++    assert (r'Inline \sphinxcode{\sphinxupquote{' + common_content + '}} code block') in content
+     assert (r'\begin{sphinxVerbatim}[commandchars=\\\{\}]' +
+             '\n' + common_content + '\n' + r'\end{sphinxVerbatim}') in content

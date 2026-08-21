@@ -1,0 +1,73 @@
+diff --git a/main.py b/main.py
+index c86f6c8..944eeab 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,67 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    M = int(next(iterator))
++    
++    adj = [[] for _ in range(N + 1)]
++    for _ in range(M):
++        u = int(next(iterator))
++        v = int(next(iterator))
++        z = int(next(iterator))
++        adj[u].append((v, z))
++        adj[v].append((u, z))
++        
++    A0 = [-1] * (N + 1)
++    ans = [0] * (N + 1)
++    
++    for i in range(1, N + 1):
++        if A0[i] != -1:
++            continue
++        
++        A0[i] = 0
++        queue = [i]
++        
++        head = 0
++        is_possible = True
++        while head < len(queue):
++            u = queue[head]
++            head += 1
++            
++            for v, z in adj[u]:
++                if A0[v] == -1:
++                    A0[v] = A0[u] ^ z
++                    queue.append(v)
++                elif (A0[u] ^ A0[v]) != z:
++                    is_possible = False
++                    break
++            if not is_possible:
++                break
++                
++        if not is_possible:
++            print("-1")
++            return
++            
++        L = len(queue)
++        d = 0
++        for k in range(30):
++            shift = 1 << k
++            cnt = 0
++            for v in queue:
++                if A0[v] & shift:
++                    cnt += 1
++            if cnt * 2 > L:
++                d |= shift
++                
++        for v in queue:
++            ans[v] = A0[v] ^ d
++            
++    print(" ".join(map(str, ans[1:])))
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,44 @@
+diff --git a/main.py b/main.py
+index c86f6c8..e38adbe 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,38 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input = sys.stdin.read
++    data = input().split()
++    if not data:
++        return
++    
++    N = int(data[0])
++    X = int(data[1])
++    Y = int(data[2])
++    S = data[3]
++    T = data[4]
++
++    pos0_S = [i for i, c in enumerate(S) if c == '0']
++    pos0_T = [i for i, c in enumerate(T) if c == '0']
++
++    if len(pos0_S) != len(pos0_T):
++        print("No")
++        return
++
++    pos1_S = [i for i, c in enumerate(S) if c == '1']
++    pos1_T = [i for i, c in enumerate(T) if c == '1']
++
++    for p1, p2 in zip(pos0_S, pos0_T):
++        if (p2 - p1) % Y != 0:
++            print("No")
++            return
++
++    for p1, p2 in zip(pos1_S, pos1_T):
++        if (p2 - p1) % X != 0:
++            print("No")
++            return
++
++    print("Yes")
++
++if __name__ == '__main__':
++    solve()

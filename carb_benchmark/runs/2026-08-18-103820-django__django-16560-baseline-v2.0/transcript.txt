@@ -1,0 +1,40 @@
+I have updated Django's constraint classes to support customizing the error `code` attribute on `ValidationError` raised during constraint validation.
+
+### Summary of Changes
+
+1. **`django.db.models.constraints`**:
+   - Added `violation_error_code = None` class attribute to [BaseConstraint](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/django/db/models/constraints.py#L22).
+   - Updated `BaseConstraint.__init__`, `CheckConstraint.__init__`, and `UniqueConstraint.__init__` to accept `violation_error_code=None`.
+   - Updated `BaseConstraint.deconstruct()` to include `violation_error_code` in keyword arguments when set.
+   - Updated `__repr__` and `__eq__` on `CheckConstraint` and `UniqueConstraint` to compare and display `violation_error_code`.
+   - Updated `validate()` in `CheckConstraint` and `UniqueConstraint` to pass `code=self.violation_error_code` when raising `ValidationError`.
+
+2. **`django.contrib.postgres.constraints`**:
+   - Updated `ExclusionConstraint.__init__` to accept `violation_error_code=None`.
+   - Updated `ExclusionConstraint`'s `deconstruct()`, `__eq__`, and `__repr__` for `violation_error_code`.
+   - Updated `ExclusionConstraint.validate()` to pass `code=self.violation_error_code` when raising `ValidationError`.
+
+3. **Tests & Documentation**:
+   - Added unit tests in [tests/constraints/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [tests/postgres_tests/test_constraints.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py).
+   - Documented `violation_error_code` in [docs/ref/models/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [docs/ref/contrib/postgres/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note entry to [docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).
+I have updated Django's constraint classes to support customizing the error `code` attribute on `ValidationError` raised during constraint validation.
+
+### Summary of Changes
+
+1. **`django.db.models.constraints`**:
+   - Added `violation_error_code = None` class attribute to [BaseConstraint](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/django/db/models/constraints.py#L22).
+   - Updated `BaseConstraint.__init__`, `CheckConstraint.__init__`, and `UniqueConstraint.__init__` to accept `violation_error_code=None`.
+   - Updated `BaseConstraint.deconstruct()` to include `violation_error_code` in keyword arguments when set.
+   - Updated `__repr__` and `__eq__` on `CheckConstraint` and `UniqueConstraint` to compare and display `violation_error_code`.
+   - Updated `validate()` in `CheckConstraint` and `UniqueConstraint` to pass `code=self.violation_error_code` when raising `ValidationError`.
+
+2. **`django.contrib.postgres.constraints`**:
+   - Updated `ExclusionConstraint.__init__` to accept `violation_error_code=None`.
+   - Updated `ExclusionConstraint`'s `deconstruct()`, `__eq__`, and `__repr__` for `violation_error_code`.
+   - Updated `ExclusionConstraint.validate()` to pass `code=self.violation_error_code` when raising `ValidationError`.
+
+3. **Tests & Documentation**:
+   - Added unit tests in [tests/constraints/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [tests/postgres_tests/test_constraints.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py).
+   - Documented `violation_error_code` in [docs/ref/models/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [docs/ref/contrib/postgres/constraints.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note entry to [docs/releases/5.0.txt](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).

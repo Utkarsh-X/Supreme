@@ -1,0 +1,53 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ada0c56 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,47 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import heapq
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    K = int(input_data[1])
++    
++    A = [int(x) for x in input_data[2:2+N]]
++    B = [int(x) for x in input_data[2+N:2+2*N]]
++    C = [int(x) for x in input_data[2+2*N:2+3*N]]
++    
++    A.sort(reverse=True)
++    B.sort(reverse=True)
++    C.sort(reverse=True)
++    
++    N = min(N, K)
++    A = A[:N]
++    B = B[:N]
++    C = C[:N]
++    
++    # Priority queue storing (-value, i, j, k)
++    # The search space (i, j, k) is traversed as a directed spanning tree rooted at (0, 0, 0).
++    heap = [(-(A[0]*B[0] + B[0]*C[0] + C[0]*A[0]), 0, 0, 0)]
++    
++    ans = 0
++    for _ in range(K):
++        neg_val, i, j, k = heapq.heappop(heap)
++        ans = -neg_val
++        
++        if j == 0 and k == 0 and i + 1 < N:
++            v = A[i+1]*B[0] + B[0]*C[0] + C[0]*A[i+1]
++            heapq.heappush(heap, (-v, i+1, 0, 0))
++        if k == 0 and j + 1 < N:
++            v = A[i]*B[j+1] + B[j+1]*C[0] + C[0]*A[i]
++            heapq.heappush(heap, (-v, i, j+1, 0))
++        if k + 1 < N:
++            v = A[i]*B[j] + B[j]*C[k+1] + C[k+1]*A[i]
++            heapq.heappush(heap, (-v, i, j, k+1))
++            
++    print(ans)
++
++if __name__ == '__main__':
++    main()

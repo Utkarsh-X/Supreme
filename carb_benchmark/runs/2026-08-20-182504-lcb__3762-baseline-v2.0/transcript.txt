@@ -1,0 +1,34 @@
+I have solved the problem and written the solution to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3762/main.py).
+
+### Approach
+1. **Binary Search on the Minimum Score**:
+   - The minimum element score $V$ after at most $m$ moves is monotonic: if a score $V$ is achievable in $\le m$ moves, any target $< V$ is also achievable.
+   - We binary search for the maximum value $V \in [1, \max(points) \times m]$. If $m < n$, index $n-1$ cannot be reached, so the minimum score remains `0`.
+
+2. **Greedy Move Validation (`check(V)`)**:
+   - For a target minimum score $V$, each index $i$ requires $k_i = \lceil V / points[i] \rceil$ visits.
+   - We traverse left-to-right starting at position `-1` (initial move to `0`).
+   - For index $i \in [0, n-3]$: if index $i$ still needs $rem$ visits, we bounce between index $i$ and $i+1$ $rem$ times and then move to index $i+1$, adding $2 \times rem + 1$ moves and granting $rem + 1$ visits to index $i+1$.
+   - For the final pair of indices $(n-2, n-1)$: index $n-2$ is satisfied by bouncing $rem$ times between $n-2$ and $n-1$. If index $n-1$ still requires remaining visits `rem_last`, we move to $n-1$ and bounce as needed in $2 \times rem\_last - 1$ moves.
+
+### Verification
+- Verified on public test cases (`4` for Example 1, `2` for Example 2).
+- Validated accuracy with 500 randomized stress tests against a brute-force solver.
+- Verified performance on maximum constraints ($n = 5 \cdot 10^4, m = 10^9$) executing in $<0.35$s.
+I have solved the problem and written the solution to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3762/main.py).
+
+### Approach
+1. **Binary Search on the Minimum Score**:
+   - The minimum element score $V$ after at most $m$ moves is monotonic: if a score $V$ is achievable in $\le m$ moves, any target $< V$ is also achievable.
+   - We binary search for the maximum value $V \in [1, \max(points) \times m]$. If $m < n$, index $n-1$ cannot be reached, so the minimum score remains `0`.
+
+2. **Greedy Move Validation (`check(V)`)**:
+   - For a target minimum score $V$, each index $i$ requires $k_i = \lceil V / points[i] \rceil$ visits.
+   - We traverse left-to-right starting at position `-1` (initial move to `0`).
+   - For index $i \in [0, n-3]$: if index $i$ still needs $rem$ visits, we bounce between index $i$ and $i+1$ $rem$ times and then move to index $i+1$, adding $2 \times rem + 1$ moves and granting $rem + 1$ visits to index $i+1$.
+   - For the final pair of indices $(n-2, n-1)$: index $n-2$ is satisfied by bouncing $rem$ times between $n-2$ and $n-1$. If index $n-1$ still requires remaining visits `rem_last`, we move to $n-1$ and bounce as needed in $2 \times rem\_last - 1$ moves.
+
+### Verification
+- Verified on public test cases (`4` for Example 1, `2` for Example 2).
+- Validated accuracy with 500 randomized stress tests against a brute-force solver.
+- Verified performance on maximum constraints ($n = 5 \cdot 10^4, m = 10^9$) executing in $<0.35$s.

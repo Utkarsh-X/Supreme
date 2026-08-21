@@ -1,0 +1,128 @@
+diff --git a/main.py b/main.py
+index c86f6c8..ef4c8cd 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,122 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from bisect import bisect_left, bisect_right
++
++def get_z_array(s):
++    n = len(s)
++    z = [0] * n
++    l, r = 0, 0
++    for i in range(1, n):
++        if i <= r:
++            z[i] = min(r - i + 1, z[i - l])
++        while i + z[i] < n and s[z[i]] == s[i + z[i]]:
++            z[i] += 1
++        if i + z[i] - 1 > r:
++            l = i
++            r = i + z[i] - 1
++    return z
++
++def find_all_occurrences(pat, text):
++    if not pat:
++        return list(range(len(text) + 1))
++    m = len(pat)
++    concat = pat + "#" + text
++    z = get_z_array(concat)
++    res = []
++    for i in range(m + 1, len(concat)):
++        if z[i] >= m:
++            res.append(i - (m + 1))
++    return res
++
++def solve():
++    raw_input = sys.stdin.read().split()
++    if not raw_input:
++        return
++    
++    def clean_str(token):
++        token = token.strip()
++        if (token.startswith('"') and token.endswith('"')) or (token.startswith("'") and token.endswith("'")):
++            token = token[1:-1]
++        return token
++
++    s = clean_str(raw_input[0])
++    p = clean_str(raw_input[1])
++    
++    p0, p1, p2 = p.split('*')
++    
++    pos0 = find_all_occurrences(p0, s)
++    pos1 = find_all_occurrences(p1, s)
++    pos2 = find_all_occurrences(p2, s)
++    
++    ans = float('inf')
++    
++    if not p1:  # p1 is empty: pattern is p0**p2
++        if not p0 and not p2:
++            print(0)
++            return
++        elif not p0: # **p2
++            if pos2:
++                print(len(p2))
++            else:
++                print(-1)
++            return
++        elif not p2: # p0**
++            if pos0:
++                print(len(p0))
++            else:
++                print(-1)
++            return
++        else: # p0**p2
++            len_p0 = len(p0)
++            len_p2 = len(p2)
++            for m in pos2:
++                target = m - len_p0
++                idx = bisect_right(pos0, target)
++                if idx > 0:
++                    i = pos0[idx - 1]
++                    ans = min(ans, m + len_p2 - i)
++            if ans != float('inf'):
++                print(ans)
++            else:
++                print(-1)
++            return
++    else:  # p1 is non-empty
++        if not pos1:
++            print(-1)
++            return
++            
++        len_p0 = len(p0)
++        len_p1 = len(p1)
++        len_p2 = len(p2)
++        
++        for k in pos1:
++            # find largest i in pos0 such that i <= k - len_p0
++            if not p0:
++                best_i = k
++            else:
++                target_i = k - len_p0
++                idx_i = bisect_right(pos0, target_i)
++                if idx_i > 0:
++                    best_i = pos0[idx_i - 1]
++                else:
++                    continue
++            
++            # find smallest m in pos2 such that m >= k + len_p1
++            if not p2:
++                best_m = k + len_p1
++            else:
++                target_m = k + len_p1
++                idx_m = bisect_left(pos2, target_m)
++                if idx_m < len(pos2):
++                    best_m = pos2[idx_m]
++                else:
++                    continue
++            
++            ans = min(ans, best_m + len_p2 - best_i)
++            
++        if ans != float('inf'):
++            print(ans)
++        else:
++            print(-1)
++
++if __name__ == '__main__':
++    solve()

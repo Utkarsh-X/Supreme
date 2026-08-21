@@ -1,0 +1,115 @@
+diff --git a/main.py b/main.py
+index c86f6c8..09c9319 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,109 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    
++    MOD = 998244353
++    G = 3
++
++    # 1. Precompute factorials and combined coefficients
++    fact = [1] * (N + 1)
++    for i in range(1, N + 1):
++        fact[i] = fact[i - 1] * i % MOD
++        
++    coeff = [fact[k] * fact[N - 1 - k] % MOD for k in range(N)]
++
++    # 2. Smallest power of 2 M > N
++    M = 1
++    while M <= N:
++        M <<= 1
++        
++    # Bit-reversal array for INTT
++    rev = [0] * M
++    for i in range(M):
++        rev[i] = (rev[i >> 1] >> 1) | ((i & 1) * (M >> 1))
++        
++    # Precompute roots for INTT
++    w_inv = pow(pow(G, (MOD - 1) // M, MOD), MOD - 2, MOD)
++    inv_roots = [1] * (M // 2)
++    for i in range(1, M // 2):
++        inv_roots[i] = inv_roots[i - 1] * w_inv % MOD
++
++    # Precompute roots of unity for evaluation
++    w_M = pow(G, (MOD - 1) // M, MOD)
++    omegas = [1] * M
++    for k in range(1, M):
++        omegas[k] = omegas[k - 1] * w_M % MOD
++
++    # 3. Count digit lengths and sums of numbers with d digits in [1, N]
++    c = [0] * 7
++    X = [0] * 7
++    cur = 1
++    for d in range(1, 7):
++        nxt = cur * 10
++        low = cur
++        high = min(N, nxt - 1)
++        if low <= high:
++            c[d] = high - low + 1
++            X[d] = (low + high) * c[d] // 2 % MOD
++        cur = nxt
++
++    # 4. Evaluate P(t) at M-th roots of unity
++    P_eval = [1] * M
++    for d in range(1, 7):
++        if c[d] == 0:
++            continue
++        val = pow(10, d, MOD)
++        cnt = c[d]
++        term = [pow(1 + val * w, cnt, MOD) for w in omegas]
++        P_eval = [p * t % MOD for p, t in zip(P_eval, term)]
++
++    # 5. INTT to obtain E_0, E_1, ..., E_N (coefficients of P(t))
++    for i in range(M):
++        if i < rev[i]:
++            P_eval[i], P_eval[rev[i]] = P_eval[rev[i]], P_eval[i]
++
++    len_ = 2
++    while len_ <= M:
++        half = len_ >> 1
++        step = M // len_
++        cur_roots = [inv_roots[k * step] for k in range(half)]
++        for k in range(half):
++            w = cur_roots[k]
++            idx1 = k
++            idx2 = k + half
++            for _ in range(M // len_):
++                u = P_eval[idx1]
++                v = P_eval[idx2] * w % MOD
++                P_eval[idx1] = u + v if u + v < MOD else u + v - MOD
++                P_eval[idx2] = u - v if u - v >= 0 else u - v + MOD
++                idx1 += len_
++                idx2 += len_
++        len_ <<= 1
++
++    M_inv = pow(M, MOD - 2, MOD)
++    E = [P_eval[i] * M_inv % MOD for i in range(N + 1)]
++
++    # 6. Compute total sum
++    ans = 0
++    e = [0] * N
++    for d in range(1, 7):
++        if c[d] == 0:
++            continue
++        w = pow(10, d, MOD)
++        
++        # Coefficients of P(t) / (1 + w t)
++        e[0] = E[0]
++        for k in range(1, N):
++            e[k] = (E[k] - w * e[k - 1]) % MOD
++            
++        V_d = sum(co * ek % MOD for co, ek in zip(coeff, e)) % MOD
++        ans = (ans + X[d] * V_d) % MOD
++
++    print(ans)
++
++if __name__ == '__main__':
++    main()

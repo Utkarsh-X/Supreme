@@ -1,0 +1,40 @@
+The solution to decompose a tree into $N$ paths of length $K$ has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+
+1. **Active Edges Identification**:
+   - For any edge $e$ in the tree, cutting $e$ splits the tree into two connected components.
+   - If the size of one component is $S$, the size of the other component is $NK - S$.
+   - A path of length $K$ (containing $K$ vertices) that crosses $e$ consumes $r \in \{1, \dots, K-1\}$ vertices from one side and $K-r$ vertices from the other side.
+   - Therefore, an edge $e$ **must be used** in the path decomposition if and only if $S \not\equiv 0 \pmod K$ (an **active edge**).
+   - If $S \equiv 0 \pmod K$, no path in the decomposition can cross $e$ (an **inactive edge**).
+
+2. **Degree Constraint**:
+   - Since paths are vertex-disjoint and every edge in the path decomposition must be active, the active edges form the path decomposition itself.
+   - For a valid path decomposition to exist, every vertex can be incident to at most 2 active edges.
+   - Thus, the condition for a tree to be decomposable into $N$ paths of length $K$ is that **the maximum degree in the subgraph of active edges is at most 2**.
+
+3. **Algorithm**:
+   - Root the tree at vertex 1 and compute subtree sizes $S_u$ for all vertices $u$ using a BFS topological order.
+   - For each node $u \neq 1$, if $S_u \not\equiv 0 \pmod K$, edge $(u, \text{parent}[u])$ is active, so increment the active degrees of both $u$ and $\text{parent}[u]$.
+   - Output `Yes` if the maximum active degree is $\le 2$, otherwise `No`.
+The solution to decompose a tree into $N$ paths of length $K$ has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc397_e/main.py).
+
+### Method Explanation
+
+1. **Active Edges Identification**:
+   - For any edge $e$ in the tree, cutting $e$ splits the tree into two connected components.
+   - If the size of one component is $S$, the size of the other component is $NK - S$.
+   - A path of length $K$ (containing $K$ vertices) that crosses $e$ consumes $r \in \{1, \dots, K-1\}$ vertices from one side and $K-r$ vertices from the other side.
+   - Therefore, an edge $e$ **must be used** in the path decomposition if and only if $S \not\equiv 0 \pmod K$ (an **active edge**).
+   - If $S \equiv 0 \pmod K$, no path in the decomposition can cross $e$ (an **inactive edge**).
+
+2. **Degree Constraint**:
+   - Since paths are vertex-disjoint and every edge in the path decomposition must be active, the active edges form the path decomposition itself.
+   - For a valid path decomposition to exist, every vertex can be incident to at most 2 active edges.
+   - Thus, the condition for a tree to be decomposable into $N$ paths of length $K$ is that **the maximum degree in the subgraph of active edges is at most 2**.
+
+3. **Algorithm**:
+   - Root the tree at vertex 1 and compute subtree sizes $S_u$ for all vertices $u$ using a BFS topological order.
+   - For each node $u \neq 1$, if $S_u \not\equiv 0 \pmod K$, edge $(u, \text{parent}[u])$ is active, so increment the active degrees of both $u$ and $\text{parent}[u]$.
+   - Output `Yes` if the maximum active degree is $\le 2$, otherwise `No`.

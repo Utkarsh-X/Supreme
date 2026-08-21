@@ -1,0 +1,37 @@
+diff --git a/django/db/models/base.py b/django/db/models/base.py
+index 8ea6c05..57528d1 100644
+--- a/django/db/models/base.py
++++ b/django/db/models/base.py
+@@ -204,7 +204,9 @@ class ModelBase(type):
+             for field in base._meta.local_fields:
+                 if isinstance(field, OneToOneField):
+                     related = resolve_relation(new_class, field.remote_field.model)
+-                    parent_links[make_model_tuple(related)] = field
++                    parent_type = make_model_tuple(related)
++                    if parent_type not in parent_links or field.remote_field.parent_link:
++                        parent_links[parent_type] = field
+ 
+         # Track fields inherited from base models.
+         inherited_attributes = set()
+diff --git a/tests/model_inheritance/tests.py b/tests/model_inheritance/tests.py
+index 5eef0f5..cc55f2e 100644
+--- a/tests/model_inheritance/tests.py
++++ b/tests/model_inheritance/tests.py
+@@ -174,6 +174,17 @@ class ModelInheritanceTests(TestCase):
+ 
+         self.assertIs(C._meta.parents[A], C._meta.get_field('a'))
+ 
++    @isolate_apps('model_inheritance')
++    def test_multiple_onetoone_to_parent(self):
++        class Document(models.Model):
++            pass
++
++        class Picking(Document):
++            document_ptr = models.OneToOneField(Document, on_delete=models.CASCADE, parent_link=True, related_name='+')
++            origin = models.OneToOneField(Document, related_name='picking', on_delete=models.PROTECT)
++
++        self.assertIs(Picking._meta.parents[Document], Picking._meta.get_field('document_ptr'))
++
+     @isolate_apps('model_inheritance')
+     def test_init_subclass(self):
+         saved_kwargs = {}

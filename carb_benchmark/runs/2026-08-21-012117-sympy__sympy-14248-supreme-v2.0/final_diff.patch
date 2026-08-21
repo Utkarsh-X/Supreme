@@ -1,0 +1,160 @@
+diff --git a/sympy/__init__.py b/sympy/__init__.py
+index 21936f6..bf49cf1 100644
+--- a/sympy/__init__.py
++++ b/sympy/__init__.py
+@@ -15,6 +15,15 @@
+ from __future__ import absolute_import, print_function
+ del absolute_import, print_function
+ 
++import collections
++try:
++    import collections.abc as _collections_abc
++    for _name in ('Mapping', 'MutableMapping', 'Callable', 'Iterable', 'MutableSet', 'Sequence'):
++        if not hasattr(collections, _name):
++            setattr(collections, _name, getattr(_collections_abc, _name))
++except ImportError:
++    pass
++
+ try:
+     import mpmath
+ except ImportError:
+diff --git a/sympy/core/expr.py b/sympy/core/expr.py
+index 421e6cd..c73d451 100644
+--- a/sympy/core/expr.py
++++ b/sympy/core/expr.py
+@@ -1012,7 +1012,12 @@ def as_terms(self):
+ 
+         gens, terms = set([]), []
+ 
+-        for term in Add.make_args(self):
++        if self.is_Add or getattr(self, 'is_MatAdd', False):
++            args = self.args
++        else:
++            args = (self,)
++
++        for term in args:
+             coeff, _term = term.as_coeff_Mul()
+ 
+             coeff = complex(coeff)
+diff --git a/sympy/core/function.py b/sympy/core/function.py
+index 3f7374f..e6e5f92 100644
+--- a/sympy/core/function.py
++++ b/sympy/core/function.py
+@@ -79,7 +79,7 @@ def _coeff_isneg(a):
+ 
+     """
+ 
+-    if a.is_Mul:
++    if a.is_Mul or getattr(a, 'is_MatMul', False):
+         a = a.args[0]
+     return a.is_Number and a.is_negative
+ 
+diff --git a/sympy/matrices/expressions/matadd.py b/sympy/matrices/expressions/matadd.py
+index bef8e1e..ea104ea 100644
+--- a/sympy/matrices/expressions/matadd.py
++++ b/sympy/matrices/expressions/matadd.py
+@@ -61,6 +61,9 @@ def doit(self, **kwargs):
+             args = self.args
+         return canonicalize(MatAdd(*args))
+ 
++    def as_ordered_terms(self, order=None, data=False):
++        return list(self.args)
++
+ 
+ def validate(*args):
+     if not all(arg.is_Matrix for arg in args):
+diff --git a/sympy/printing/latex.py b/sympy/printing/latex.py
+index 8253b2f..ab60e7a 100644
+--- a/sympy/printing/latex.py
++++ b/sympy/printing/latex.py
+@@ -1477,9 +1477,7 @@ def _print_Adjoint(self, expr):
+             return r"%s^\dagger" % self._print(mat)
+ 
+     def _print_MatAdd(self, expr):
+-        terms = list(expr.args)
+-        tex = " + ".join(map(self._print, terms))
+-        return tex
++        return self._print_Add(expr)
+ 
+     def _print_MatMul(self, expr):
+         from sympy import Add, MatAdd, HadamardProduct
+@@ -1488,7 +1486,14 @@ def parens(x):
+             if isinstance(x, (Add, MatAdd, HadamardProduct)):
+                 return r"\left(%s\right)" % self._print(x)
+             return self._print(x)
+-        return ' '.join(map(parens, expr.args))
++
++        if _coeff_isneg(expr):
++            if expr.args[0] == -1:
++                return "- " + ' '.join(map(parens, expr.args[1:]))
++            else:
++                return "- " + ' '.join(map(parens, (-expr.args[0],) + expr.args[1:]))
++        else:
++            return ' '.join(map(parens, expr.args))
+ 
+     def _print_Mod(self, expr, exp=None):
+         if exp is not None:
+diff --git a/sympy/printing/pretty/pretty.py b/sympy/printing/pretty/pretty.py
+index db24f4c..98ef381 100644
+--- a/sympy/printing/pretty/pretty.py
++++ b/sympy/printing/pretty/pretty.py
+@@ -819,7 +819,7 @@ def _print_BlockMatrix(self, B):
+         return self._print(B.blocks)
+ 
+     def _print_MatAdd(self, expr):
+-        return self._print_seq(expr.args, None, None, ' + ')
++        return self._print_Add(expr)
+ 
+     def _print_MatMul(self, expr):
+         args = list(expr.args)
+@@ -1437,9 +1437,13 @@ def pretty_negative(pform, index):
+             return prettyForm(binding=prettyForm.NEG, *p)
+ 
+         for i, term in enumerate(terms):
+-            if term.is_Mul and _coeff_isneg(term):
+-                coeff, other = term.as_coeff_mul(rational=False)
+-                pform = self._print(Mul(-coeff, *other, evaluate=False))
++            if (term.is_Mul or getattr(term, 'is_MatMul', False)) and _coeff_isneg(term):
++                if getattr(term, 'is_MatMul', False):
++                    coeff, mmul = term.as_coeff_mmul()
++                    pform = self._print(-coeff * mmul)
++                else:
++                    coeff, other = term.as_coeff_mul(rational=False)
++                    pform = self._print(Mul(-coeff, *other, evaluate=False))
+                 pforms.append(pretty_negative(pform, i))
+             elif term.is_Rational and term.q > 1:
+                 pforms.append(None)
+diff --git a/sympy/printing/str.py b/sympy/printing/str.py
+index 0baefe0..3d1539d 100644
+--- a/sympy/printing/str.py
++++ b/sympy/printing/str.py
+@@ -304,16 +304,25 @@ def _print_Mul(self, expr):
+             return sign + '*'.join(a_str) + "/(%s)" % '*'.join(b_str)
+ 
+     def _print_MatMul(self, expr):
+-        return '*'.join([self.parenthesize(arg, precedence(expr))
+-            for arg in expr.args])
++        c, m = expr.as_coeff_mmul()
++        if _coeff_isneg(c):
++            expr = _keep_coeff(-c, m)
++            sign = "-"
++        else:
++            sign = ""
++
++        if isinstance(expr, MatMul):
++            return sign + '*'.join([self.parenthesize(arg, precedence(expr))
++                for arg in expr.args])
++        else:
++            return sign + self.parenthesize(expr, precedence(expr))
+ 
+     def _print_HadamardProduct(self, expr):
+         return '.*'.join([self.parenthesize(arg, precedence(expr))
+             for arg in expr.args])
+ 
+     def _print_MatAdd(self, expr):
+-        return ' + '.join([self.parenthesize(arg, precedence(expr))
+-            for arg in expr.args])
++        return self._print_Add(expr)
+ 
+     def _print_NaN(self, expr):
+         return 'nan'

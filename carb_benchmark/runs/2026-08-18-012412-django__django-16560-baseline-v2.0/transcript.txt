@@ -1,0 +1,44 @@
+Added `violation_error_code` attribute to `BaseConstraint` and its subclasses (`CheckConstraint`, `UniqueConstraint`, `ExclusionConstraint`) to allow customizing the `code` attribute of `ValidationError` raised by `validate()`.
+
+### Summary of Changes
+
+1. **`django/db/models/constraints.py`**:
+   - Added `violation_error_code` class attribute (defaulting to `None`) and `violation_error_code=None` parameter in `BaseConstraint.__init__`.
+   - Updated `deconstruct()`, `clone()`, `__eq__()`, and `__repr__()` across `BaseConstraint`, `CheckConstraint`, and `UniqueConstraint` to handle `violation_error_code`.
+   - Updated `CheckConstraint.validate()` and `UniqueConstraint.validate()` to pass `code=self.violation_error_code` when instantiating `ValidationError`.
+
+2. **`django/contrib/postgres/constraints.py`**:
+   - Added `violation_error_code=None` parameter in `ExclusionConstraint.__init__` and passed it to `super().__init__()`.
+   - Updated `__eq__()`, `__repr__()`, and `validate()` to support `violation_error_code`.
+
+3. **`django/core/exceptions.py`**:
+   - Updated `ValidationError.__init__` so that passing an explicit `code` argument when wrapping or re-raising an existing `ValidationError` overrides the wrapped error's code instead of ignoring the new `code`.
+
+4. **Documentation**:
+   - Documented `violation_error_code` in [`docs/ref/models/constraints.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [`docs/ref/contrib/postgres/constraints.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note in [`docs/releases/5.0.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).
+
+5. **Tests**:
+   - Added unit tests in [`tests/constraints/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [`tests/postgres_tests/test_constraints.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py) testing default/custom `violation_error_code`, `deconstruct()`, `clone()`, `repr`, equality, and error code assertions on `ValidationError` raised during `validate()`.
+Added `violation_error_code` attribute to `BaseConstraint` and its subclasses (`CheckConstraint`, `UniqueConstraint`, `ExclusionConstraint`) to allow customizing the `code` attribute of `ValidationError` raised by `validate()`.
+
+### Summary of Changes
+
+1. **`django/db/models/constraints.py`**:
+   - Added `violation_error_code` class attribute (defaulting to `None`) and `violation_error_code=None` parameter in `BaseConstraint.__init__`.
+   - Updated `deconstruct()`, `clone()`, `__eq__()`, and `__repr__()` across `BaseConstraint`, `CheckConstraint`, and `UniqueConstraint` to handle `violation_error_code`.
+   - Updated `CheckConstraint.validate()` and `UniqueConstraint.validate()` to pass `code=self.violation_error_code` when instantiating `ValidationError`.
+
+2. **`django/contrib/postgres/constraints.py`**:
+   - Added `violation_error_code=None` parameter in `ExclusionConstraint.__init__` and passed it to `super().__init__()`.
+   - Updated `__eq__()`, `__repr__()`, and `validate()` to support `violation_error_code`.
+
+3. **`django/core/exceptions.py`**:
+   - Updated `ValidationError.__init__` so that passing an explicit `code` argument when wrapping or re-raising an existing `ValidationError` overrides the wrapped error's code instead of ignoring the new `code`.
+
+4. **Documentation**:
+   - Documented `violation_error_code` in [`docs/ref/models/constraints.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/models/constraints.txt) and [`docs/ref/contrib/postgres/constraints.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/ref/contrib/postgres/constraints.txt).
+   - Added release note in [`docs/releases/5.0.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/docs/releases/5.0.txt).
+
+5. **Tests**:
+   - Added unit tests in [`tests/constraints/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/constraints/tests.py) and [`tests/postgres_tests/test_constraints.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-16560/tests/postgres_tests/test_constraints.py) testing default/custom `violation_error_code`, `deconstruct()`, `clone()`, `repr`, equality, and error code assertions on `ValidationError` raised during `validate()`.

@@ -1,0 +1,16 @@
+I have fixed the issue where `_pytest.capture.EncodedFile` incorrectly reported a binary mode string containing `'b'`.
+
+### Root Cause
+`EncodedFile` acts as a text stream wrapper around a binary buffer (`self.buffer`). When accessing `.mode` on `EncodedFile`, attribute access was delegated to `self.buffer.mode` via `__getattr__`, which returned binary mode strings (e.g. `'rb+'` or `'wb+'`). Libraries like `youtube-dl` check for `'b'` in `.mode` to determine whether to write `bytes` or `str`. Because `'b'` was present, `youtube-dl` attempted to write `bytes` to `EncodedFile`, which raised `TypeError: write() argument must be str, not bytes`.
+
+### Changes Made
+1. **Added `mode` property to `EncodedFile`** in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L450-L457): Strips `'b'` from `self.buffer.mode` if present, ensuring it advertises text mode (e.g., `'r+'` or `'w+'`).
+2. **Added Unit Tests** in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L1464-L1490): Added `test_encodedfile_mode` and `test_safe_text_dupfile_mode` to verify that `EncodedFile` and `safe_text_dupfile` do not advertise binary modes.
+I have fixed the issue where `_pytest.capture.EncodedFile` incorrectly reported a binary mode string containing `'b'`.
+
+### Root Cause
+`EncodedFile` acts as a text stream wrapper around a binary buffer (`self.buffer`). When accessing `.mode` on `EncodedFile`, attribute access was delegated to `self.buffer.mode` via `__getattr__`, which returned binary mode strings (e.g. `'rb+'` or `'wb+'`). Libraries like `youtube-dl` check for `'b'` in `.mode` to determine whether to write `bytes` or `str`. Because `'b'` was present, `youtube-dl` attempted to write `bytes` to `EncodedFile`, which raised `TypeError: write() argument must be str, not bytes`.
+
+### Changes Made
+1. **Added `mode` property to `EncodedFile`** in [`src/_pytest/capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/src/_pytest/capture.py#L450-L457): Strips `'b'` from `self.buffer.mode` if present, ensuring it advertises text mode (e.g., `'r+'` or `'w+'`).
+2. **Added Unit Tests** in [`testing/test_capture.py`](file:///E:/RofU/Supreme/carb_workspaces/pytest-dev__pytest-5262/testing/test_capture.py#L1464-L1490): Added `test_encodedfile_mode` and `test_safe_text_dupfile_mode` to verify that `EncodedFile` and `safe_text_dupfile` do not advertise binary modes.

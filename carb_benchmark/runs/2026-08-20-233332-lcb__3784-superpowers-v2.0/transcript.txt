@@ -1,0 +1,50 @@
+I have implemented the complete solution in `main.py` ([main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3784/main.py)).
+
+### Summary of Approach
+
+1. **Problem Formulation**:
+   For any array of strings, the length of the longest common prefix among any $k$ strings is equivalent to the maximum depth of a node $u$ in the Trie of strings such that the prefix count of $u$ in the array is at least $k$.
+
+2. **Removal Analysis**:
+   When string `words[i]` is removed, the count of a node $u$ in the Trie:
+   - Decreases by 1 if $u$ is on the prefix path of `words[i]`. Thus, it has count $\ge k$ in the remaining array if and only if its full count in the complete Trie was $\ge k + 1$.
+   - Remains unchanged if $u$ is not on the prefix path of `words[i]`. Thus, it has count $\ge k$ in the remaining array if and only if its full count in the complete Trie was $\ge k$.
+
+3. **Algorithm & Trie DP**:
+   - **Trie Construction**: Insert all words into a Trie, tracking `depth` and prefix `count`.
+   - **Subtree DP (`max_in`)**: Compute bottom-up via reverse BFS order the maximum depth of nodes with count $\ge k$ in each subtree ($S = \{ u \mid \text{count}(u) \ge k \}$).
+   - **Rerooting / Tree DP (`ancestor_off` & `max_off_path`)**: Compute top-down via BFS order the max depth of nodes in $S$ outside the path to each node.
+   - **Per-Word Query**: For each `words[i]`, iterate down its path to find:
+     - `term1`: Deepest node on the path with count $\ge k+1$.
+     - `term2`: Maximum depth of nodes in $S$ off the path (obtained from `max_off_path` at the deepest node in $S$ on `words[i]`'s path).
+     - Result for `words[i]` is $\max(\text{term1}, \text{term2})$.
+
+4. **Complexity & Verification**:
+   - **Time Complexity**: $\mathcal{O}(\sum |\text{words}[i]|)$ using non-recursive iterative BFS traversals.
+   - **Space Complexity**: $\mathcal{O}(\sum |\text{words}[i]|)$ with lightweight `__slots__` nodes.
+   - **Verification**: Verified against example test cases, custom edge cases, and large scale performance benchmarks ($N = 10^5$, string lengths up to $10^4$), completing in $< 0.09$ seconds.
+I have implemented the complete solution in `main.py` ([main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3784/main.py)).
+
+### Summary of Approach
+
+1. **Problem Formulation**:
+   For any array of strings, the length of the longest common prefix among any $k$ strings is equivalent to the maximum depth of a node $u$ in the Trie of strings such that the prefix count of $u$ in the array is at least $k$.
+
+2. **Removal Analysis**:
+   When string `words[i]` is removed, the count of a node $u$ in the Trie:
+   - Decreases by 1 if $u$ is on the prefix path of `words[i]`. Thus, it has count $\ge k$ in the remaining array if and only if its full count in the complete Trie was $\ge k + 1$.
+   - Remains unchanged if $u$ is not on the prefix path of `words[i]`. Thus, it has count $\ge k$ in the remaining array if and only if its full count in the complete Trie was $\ge k$.
+
+3. **Algorithm & Trie DP**:
+   - **Trie Construction**: Insert all words into a Trie, tracking `depth` and prefix `count`.
+   - **Subtree DP (`max_in`)**: Compute bottom-up via reverse BFS order the maximum depth of nodes with count $\ge k$ in each subtree ($S = \{ u \mid \text{count}(u) \ge k \}$).
+   - **Rerooting / Tree DP (`ancestor_off` & `max_off_path`)**: Compute top-down via BFS order the max depth of nodes in $S$ outside the path to each node.
+   - **Per-Word Query**: For each `words[i]`, iterate down its path to find:
+     - `term1`: Deepest node on the path with count $\ge k+1$.
+     - `term2`: Maximum depth of nodes in $S$ off the path (obtained from `max_off_path` at the deepest node in $S$ on `words[i]`'s path).
+     - Result for `words[i]` is $\max(\text{term1}, \text{term2})$.
+
+4. **Complexity & Verification**:
+   - **Time Complexity**: $\mathcal{O}(\sum |\text{words}[i]|)$ using non-recursive iterative BFS traversals.
+   - **Space Complexity**: $\mathcal{O}(\sum |\text{words}[i]|)$ with lightweight `__slots__` nodes.
+   - **Verification**: Verified against example test cases, custom edge cases, and large scale performance benchmarks ($N = 10^5$, string lengths up to $10^4$), completing in $< 0.09$ seconds.

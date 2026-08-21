@@ -1,0 +1,16 @@
+I have resolved the issue where offset dash linestyles had no effect on `Patch` objects.
+
+### Cause
+In [patches.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23412/lib/matplotlib/patches.py#L586-L592), `Patch.draw()` previously wrapped the drawing call in a context manager `cbook._setattr_cm(self, _dash_pattern=(0, self._dash_pattern[1]))`, which forcefully reset the dash pattern offset to `0` whenever a patch was drawn.
+
+### Solution
+1. Removed `_setattr_cm` in `Patch.draw()` in [patches.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23412/lib/matplotlib/patches.py#L586-L592) so that `Patch` objects preserve the dash offset specified in `linestyle=(offset, (on, off))` when configuring the graphics context.
+2. Added unit test `test_patch_linestyle_dash_offset` to [test_patches.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23412/lib/matplotlib/tests/test_patches.py#L814-L821) to verify that `gc.set_dashes` is called with the expected dash offset during patch rendering.
+I have resolved the issue where offset dash linestyles had no effect on `Patch` objects.
+
+### Cause
+In [patches.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23412/lib/matplotlib/patches.py#L586-L592), `Patch.draw()` previously wrapped the drawing call in a context manager `cbook._setattr_cm(self, _dash_pattern=(0, self._dash_pattern[1]))`, which forcefully reset the dash pattern offset to `0` whenever a patch was drawn.
+
+### Solution
+1. Removed `_setattr_cm` in `Patch.draw()` in [patches.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23412/lib/matplotlib/patches.py#L586-L592) so that `Patch` objects preserve the dash offset specified in `linestyle=(offset, (on, off))` when configuring the graphics context.
+2. Added unit test `test_patch_linestyle_dash_offset` to [test_patches.py](file:///E:/RofU/Supreme/carb_workspaces/matplotlib__matplotlib-23412/lib/matplotlib/tests/test_patches.py#L814-L821) to verify that `gc.set_dashes` is called with the expected dash offset during patch rendering.

@@ -1,0 +1,14 @@
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc387_b/main.py).
+
+### Method Explanation
+1. We iterate over all cells in the 9-by-9 multiplication table where row $i \in [1, 9]$ and column $j \in [1, 9]$.
+2. For each cell, we calculate the product $i \times j$.
+3. If $i \times j \neq X$, we add the value to our running total.
+4. Finally, we output the total sum.
+I have implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc387_b/main.py).
+
+### Method Explanation
+1. We iterate over all cells in the 9-by-9 multiplication table where row $i \in [1, 9]$ and column $j \in [1, 9]$.
+2. For each cell, we calculate the product $i \times j$.
+3. If $i \times j \neq X$, we add the value to our running total.
+4. Finally, we output the total sum.

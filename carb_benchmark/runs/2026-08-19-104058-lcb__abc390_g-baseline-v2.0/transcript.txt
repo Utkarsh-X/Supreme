@@ -1,0 +1,34 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_g/main.py).
+
+### Method Summary
+
+1. **Decomposition by Length Groups**:
+   Numbers $x \in \{1, \ldots, N\}$ are grouped by their digit length $L = \text{length}(x) \in \{1, 2, 3, 4, 5, 6\}$.
+   For any element $x$ of length $L$, the distribution of powers of 10 contributed by other elements depends only on $L$.
+   Thus, for each length $L$, every element of length $L$ shares the same expected multiplier $\mathcal{M}_L$ across all $N!$ permutations of $(1, \dots, N)$.
+
+2. **Generating Function and NTT**:
+   The multiplier sum $\mathcal{M}_L$ for a fixed element of length $L$ is derived from the elementary symmetric polynomials of the remaining $N-1$ element weights $10^{d(y)}$.
+   We form the generating polynomial $P(y) = \prod_{j=1}^6 (1 + 10^j y)^{C_j}$ (where $C_j$ is the count of elements with length $j$).
+   Polynomial multiplication of the active factors is computed using Number Theoretic Transform (NTT) modulo $998244353$.
+
+3. **Synthetic Division and Answer Summation**:
+   For each length $L$, dividing $P(y)$ by $(1 + 10^L y)$ yields the coefficients $b_k$ of the remaining $N-1$ elements in $O(N)$ time. $\mathcal{M}_L = \sum_{k=0}^{N-1} (N-1-k)! \, k! \, b_k \pmod{998244353}$.
+   The final result is $\sum_{L=1}^6 S_L \cdot \mathcal{M}_L \pmod{998244353}$, where $S_L$ is the sum of integers in $\{1, \dots, N\}$ having length $L$.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_g/main.py).
+
+### Method Summary
+
+1. **Decomposition by Length Groups**:
+   Numbers $x \in \{1, \ldots, N\}$ are grouped by their digit length $L = \text{length}(x) \in \{1, 2, 3, 4, 5, 6\}$.
+   For any element $x$ of length $L$, the distribution of powers of 10 contributed by other elements depends only on $L$.
+   Thus, for each length $L$, every element of length $L$ shares the same expected multiplier $\mathcal{M}_L$ across all $N!$ permutations of $(1, \dots, N)$.
+
+2. **Generating Function and NTT**:
+   The multiplier sum $\mathcal{M}_L$ for a fixed element of length $L$ is derived from the elementary symmetric polynomials of the remaining $N-1$ element weights $10^{d(y)}$.
+   We form the generating polynomial $P(y) = \prod_{j=1}^6 (1 + 10^j y)^{C_j}$ (where $C_j$ is the count of elements with length $j$).
+   Polynomial multiplication of the active factors is computed using Number Theoretic Transform (NTT) modulo $998244353$.
+
+3. **Synthetic Division and Answer Summation**:
+   For each length $L$, dividing $P(y)$ by $(1 + 10^L y)$ yields the coefficients $b_k$ of the remaining $N-1$ elements in $O(N)$ time. $\mathcal{M}_L = \sum_{k=0}^{N-1} (N-1-k)! \, k! \, b_k \pmod{998244353}$.
+   The final result is $\sum_{L=1}^6 S_L \cdot \mathcal{M}_L \pmod{998244353}$, where $S_L$ is the sum of integers in $\{1, \dots, N\}$ having length $L$.

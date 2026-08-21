@@ -1,0 +1,40 @@
+{
+  "run_id": "2026-08-20-195135-lcb__arc192_e-baseline-v2.0",
+  "task_id": "lcb__arc192_e",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 116.76,
+  "tool_calls": [
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "run_command",
+    "write_to_file",
+    "write_to_file",
+    "run_command",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "run_command": 14,
+    "write_to_file": 2
+  },
+  "time_to_first_edit": 105.032,
+  "num_turns": 1,
+  "duration_seconds": 98.848077,
+  "status": "ERROR",
+  "usage": {
+    "input_tokens": 128713,
+    "output_tokens": 38934,
+    "thinking_tokens": 25011,
+    "cache_read_tokens": 607731,
+    "total_tokens": 167647
+  },
+  "error": null
+}

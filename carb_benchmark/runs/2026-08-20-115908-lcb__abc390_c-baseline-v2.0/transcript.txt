@@ -1,0 +1,20 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_c/main.py) and verified it against all sample test cases.
+
+### Method Summary
+
+1. **Find Bounding Box of Existing Black Cells (`#`)**:
+   Since all existing black cells must be part of any valid rectangle of black cells, any valid rectangle must fully enclose the minimal bounding box $[min\_r, max\_r] \times [min\_c, max\_c]$ spanned by all existing `#` cells.
+
+2. **Check Validity**:
+   - If any cell within this bounding box is already painted white (`.`), it is impossible to form a black rectangle enclosing all existing `#` cells, so we print `No`.
+   - Otherwise, if no cell within the bounding box is white (`.`), we can paint all `?` inside the bounding box black (`#`) and all `?` outside white (`.`), forming a valid rectangle of black cells, so we print `Yes`.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc390_c/main.py) and verified it against all sample test cases.
+
+### Method Summary
+
+1. **Find Bounding Box of Existing Black Cells (`#`)**:
+   Since all existing black cells must be part of any valid rectangle of black cells, any valid rectangle must fully enclose the minimal bounding box $[min\_r, max\_r] \times [min\_c, max\_c]$ spanned by all existing `#` cells.
+
+2. **Check Validity**:
+   - If any cell within this bounding box is already painted white (`.`), it is impossible to form a black rectangle enclosing all existing `#` cells, so we print `No`.
+   - Otherwise, if no cell within the bounding box is white (`.`), we can paint all `?` inside the bounding box black (`#`) and all `?` outside white (`.`), forming a valid rectangle of black cells, so we print `Yes`.

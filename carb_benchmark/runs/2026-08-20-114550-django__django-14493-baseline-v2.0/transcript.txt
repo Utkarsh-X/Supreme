@@ -1,0 +1,16 @@
+I have resolved the issue where `ManifestStaticFilesStorage` crashed with `UnboundLocalError` when `max_post_process_passes = 0`.
+
+### Cause
+In [django/contrib/staticfiles/storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264), the `substitutions` variable was initialized inside the `for i in range(self.max_post_process_passes):` loop. If `max_post_process_passes` was set to `0`, the loop was skipped completely, causing `if substitutions:` after the loop to raise an `UnboundLocalError`.
+
+### Solution
+1. Initialized `substitutions = False` before the `for i in range(self.max_post_process_passes):` loop in [django/contrib/staticfiles/storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264).
+2. Added unit test `test_post_process_max_post_process_passes_zero` in [tests/staticfiles_tests/test_storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/tests/staticfiles_tests/test_storage.py#L220).
+I have resolved the issue where `ManifestStaticFilesStorage` crashed with `UnboundLocalError` when `max_post_process_passes = 0`.
+
+### Cause
+In [django/contrib/staticfiles/storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264), the `substitutions` variable was initialized inside the `for i in range(self.max_post_process_passes):` loop. If `max_post_process_passes` was set to `0`, the loop was skipped completely, causing `if substitutions:` after the loop to raise an `UnboundLocalError`.
+
+### Solution
+1. Initialized `substitutions = False` before the `for i in range(self.max_post_process_passes):` loop in [django/contrib/staticfiles/storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/django/contrib/staticfiles/storage.py#L264).
+2. Added unit test `test_post_process_max_post_process_passes_zero` in [tests/staticfiles_tests/test_storage.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-14493/tests/staticfiles_tests/test_storage.py#L220).

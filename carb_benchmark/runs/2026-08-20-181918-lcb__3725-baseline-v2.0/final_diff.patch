@@ -1,0 +1,104 @@
+diff --git a/main.py b/main.py
+index c86f6c8..69395d0 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,98 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import re
++import json
++import ast
++
++def T(S):
++    if S < 0:
++        return 0
++    return (S + 1) * (S + 2) // 2
++
++def count_pairs(a, b, M):
++    if M < 0 or a < 0 or b < 0:
++        return 0
++    return T(M) - T(M - a - 1) - T(M - b - 1) + T(M - a - b - 2)
++
++def solve_max(nums, k):
++    n = len(nums)
++    M = k - 1
++    
++    # Left strictly greater: nearest index to left with nums[L] > nums[i]
++    L = [-1] * n
++    stack = []
++    for i in range(n):
++        while stack and nums[stack[-1]] <= nums[i]:
++            stack.pop()
++        if stack:
++            L[i] = stack[-1]
++        stack.append(i)
++        
++    # Right greater than or equal: nearest index to right with nums[R] >= nums[i]
++    R = [n] * n
++    stack = []
++    for i in range(n - 1, -1, -1):
++        while stack and nums[stack[-1]] < nums[i]:
++            stack.pop()
++        if stack:
++            R[i] = stack[-1]
++        stack.append(i)
++        
++    total_max = 0
++    for i in range(n):
++        a = i - L[i] - 1
++        b = R[i] - i - 1
++        cnt = count_pairs(a, b, M)
++        total_max += cnt * nums[i]
++        
++    return total_max
++
++def solve(nums, k):
++    max_sum = solve_max(nums, k)
++    min_sum = solve_max([-x for x in nums], k)
++    return max_sum - min_sum
++
++def parse_input():
++    raw_input = sys.stdin.read().strip()
++    if not raw_input:
++        return [], 0
++    
++    first_bracket = raw_input.find('[')
++    last_bracket = raw_input.rfind(']')
++    
++    if first_bracket != -1 and last_bracket != -1 and first_bracket < last_bracket:
++        array_str = raw_input[first_bracket:last_bracket+1]
++        try:
++            nums = json.loads(array_str)
++        except Exception:
++            try:
++                nums = ast.literal_eval(array_str)
++            except Exception:
++                nums = [int(x) for x in re.findall(r'-?\d+', array_str)]
++        
++        rest_str = raw_input[:first_bracket] + raw_input[last_bracket+1:]
++        k_matches = re.findall(r'-?\d+', rest_str)
++        if k_matches:
++            k = int(k_matches[-1])
++        else:
++            k = 1
++        return nums, k
++
++    all_ints = [int(x) for x in re.findall(r'-?\d+', raw_input)]
++    if len(all_ints) >= 2:
++        N_cand, k_cand = all_ints[0], all_ints[1]
++        if N_cand == len(all_ints) - 2 and N_cand > 0:
++            return all_ints[2:], k_cand
++        else:
++            return all_ints[:-1], all_ints[-1]
++            
++    return [], 0
++
++def main():
++    nums, k = parse_input()
++    if not nums or k <= 0:
++        return
++    ans = solve(nums, k)
++    print(ans)
++
++if __name__ == "__main__":
++    main()

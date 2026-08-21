@@ -1,0 +1,52 @@
+diff --git a/lib/matplotlib/__init__.py b/lib/matplotlib/__init__.py
+index c268a56..abe1087 100644
+--- a/lib/matplotlib/__init__.py
++++ b/lib/matplotlib/__init__.py
+@@ -1095,6 +1095,9 @@ def rc_context(rc=None, fname=None):
+             rcParams.update(rc)
+         yield
+     finally:
++        if (orig.get("backend") is rcsetup._auto_backend_sentinel
++                and dict.__getitem__(rcParams, "backend") is not rcsetup._auto_backend_sentinel):
++            orig["backend"] = dict.__getitem__(rcParams, "backend")
+         dict.update(rcParams, orig)  # Revert to the original rcs.
+ 
+ 
+diff --git a/lib/matplotlib/pyplot.py b/lib/matplotlib/pyplot.py
+index e3c66ea..0e241fa 100644
+--- a/lib/matplotlib/pyplot.py
++++ b/lib/matplotlib/pyplot.py
+@@ -688,6 +688,9 @@ class _xkcd:
+         return self
+ 
+     def __exit__(self, *args):
++        if (self._orig.get("backend") is rcsetup._auto_backend_sentinel
++                and dict.__getitem__(rcParams, "backend") is not rcsetup._auto_backend_sentinel):
++            self._orig["backend"] = dict.__getitem__(rcParams, "backend")
+         dict.update(rcParams, self._orig)
+ 
+ 
+diff --git a/lib/matplotlib/tests/test_rcparams.py b/lib/matplotlib/tests/test_rcparams.py
+index 99856b3..7ca9de1 100644
+--- a/lib/matplotlib/tests/test_rcparams.py
++++ b/lib/matplotlib/tests/test_rcparams.py
+@@ -584,3 +584,19 @@ def test_deprecation(monkeypatch):
+     # Note that the warning suppression actually arises from the
+     # iteration over the updater rcParams being protected by
+     # suppress_matplotlib_deprecation_warning, rather than any explicit check.
++
++
++def test_rc_context_backend_resolution(tmpdir):
++    env = {**os.environ, "MPLBACKEND": "", "MPLCONFIGDIR": str(tmpdir),
++           "PYTHONPATH": os.path.pathsep.join(sys.path)}
++    subprocess.check_call(
++        [sys.executable, "-c",
++         "import matplotlib.pyplot as plt\n"
++         "from matplotlib import get_backend, rc_context\n"
++         "with rc_context():\n"
++         "    fig = plt.figure()\n"
++         "get_backend()\n"
++         "assert len(plt._pylab_helpers.Gcf.figs) == 1\n"
++        ],
++        env=env)
++

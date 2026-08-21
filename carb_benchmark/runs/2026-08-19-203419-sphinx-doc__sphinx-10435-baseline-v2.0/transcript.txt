@@ -1,0 +1,36 @@
+### Summary of Changes
+
+#### Cause of Bug
+When rendering inline highlighted code for LaTeX (e.g., using `:code:` or custom roles with syntax highlighting enabled), Pygments' `highlight_block` wraps the output in a display block environment:
+```latex
+\begin{Verbatim}[commandchars=\\\{\}]
+<highlighted_code>
+\end{Verbatim}
+```
+In [LaTeXTranslator.visit_literal](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1695-L1718), `\begin{Verbatim}[commandchars=\\\{\}]` was replaced with `\sphinxcode{\sphinxupquote{` and `\end{Verbatim}` was stripped without removing the leading newline after `\sphinxupquote{` and trailing newline before `}}`. In TeX syntax, newlines following macros or before closing braces in normal category code state are tokenized as space characters, which inserted unwanted whitespace at the beginning and end of inline code in PDF output.
+
+#### Fix
+Updated [visit_literal](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1695-L1718) in `sphinx/writers/latex.py` to strip the leading and trailing newlines introduced by Pygments' `Verbatim` block wrapper before enclosing the highlighted code within `\sphinxcode{\sphinxupquote{...}}`.
+
+Updated [test_latex_code_role](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1605-L1620) in `tests/test_build_latex.py` to assert that inline highlighted code generates `\sphinxcode{\sphinxupquote{...}}` without unwanted internal newlines.
+
+#### Verification
+All LaTeX build tests (`tests/test_build_latex.py`) and markup tests (`tests/test_markup.py`) passed cleanly.
+### Summary of Changes
+
+#### Cause of Bug
+When rendering inline highlighted code for LaTeX (e.g., using `:code:` or custom roles with syntax highlighting enabled), Pygments' `highlight_block` wraps the output in a display block environment:
+```latex
+\begin{Verbatim}[commandchars=\\\{\}]
+<highlighted_code>
+\end{Verbatim}
+```
+In [LaTeXTranslator.visit_literal](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1695-L1718), `\begin{Verbatim}[commandchars=\\\{\}]` was replaced with `\sphinxcode{\sphinxupquote{` and `\end{Verbatim}` was stripped without removing the leading newline after `\sphinxupquote{` and trailing newline before `}}`. In TeX syntax, newlines following macros or before closing braces in normal category code state are tokenized as space characters, which inserted unwanted whitespace at the beginning and end of inline code in PDF output.
+
+#### Fix
+Updated [visit_literal](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/sphinx/writers/latex.py#L1695-L1718) in `sphinx/writers/latex.py` to strip the leading and trailing newlines introduced by Pygments' `Verbatim` block wrapper before enclosing the highlighted code within `\sphinxcode{\sphinxupquote{...}}`.
+
+Updated [test_latex_code_role](file:///E:/RofU/Supreme/carb_workspaces/sphinx-doc__sphinx-10435/tests/test_build_latex.py#L1605-L1620) in `tests/test_build_latex.py` to assert that inline highlighted code generates `\sphinxcode{\sphinxupquote{...}}` without unwanted internal newlines.
+
+#### Verification
+All LaTeX build tests (`tests/test_build_latex.py`) and markup tests (`tests/test_markup.py`) passed cleanly.

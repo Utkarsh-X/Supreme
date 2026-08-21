@@ -1,0 +1,16 @@
+I have resolved the issue where `runserver` returned a response body for HTTP HEAD requests.
+
+### Root Cause
+When response body stripping was removed from Django in favor of web servers handling body removal for HEAD requests, Django's development WSGI server (`django.core.servers.basehttp.ServerHandler`) was not updated. As a result, `ServerHandler` was inheriting `wsgiref.handlers.BaseHandler.finish_response()`, which unconditionally iterates over `self.result` and writes the body data to the socket stream regardless of the HTTP request method.
+
+### Fix Summary
+1. **[basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/django/core/servers/basehttp.py#L146-L157)**: Overrode `finish_response()` in `ServerHandler`. When `REQUEST_METHOD` is `"HEAD"`, `finish_response()` invokes `self.finish_content()` to transmit headers and `self.close()` to clean up response iterables without writing response body bytes to the client output stream.
+2. **[test_basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/tests/servers/test_basehttp.py#L109-L143)**: Added unit test `test_head_strips_body` in `WSGIRequestHandlerTestCase` to verify that HEAD requests return response headers (such as `Content-Length`) without any response body.
+I have resolved the issue where `runserver` returned a response body for HTTP HEAD requests.
+
+### Root Cause
+When response body stripping was removed from Django in favor of web servers handling body removal for HEAD requests, Django's development WSGI server (`django.core.servers.basehttp.ServerHandler`) was not updated. As a result, `ServerHandler` was inheriting `wsgiref.handlers.BaseHandler.finish_response()`, which unconditionally iterates over `self.result` and writes the body data to the socket stream regardless of the HTTP request method.
+
+### Fix Summary
+1. **[basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/django/core/servers/basehttp.py#L146-L157)**: Overrode `finish_response()` in `ServerHandler`. When `REQUEST_METHOD` is `"HEAD"`, `finish_response()` invokes `self.finish_content()` to transmit headers and `self.close()` to clean up response iterables without writing response body bytes to the client output stream.
+2. **[test_basehttp.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-16502/tests/servers/test_basehttp.py#L109-L143)**: Added unit test `test_head_strips_body` in `WSGIRequestHandlerTestCase` to verify that HEAD requests return response headers (such as `Content-Length`) without any response body.

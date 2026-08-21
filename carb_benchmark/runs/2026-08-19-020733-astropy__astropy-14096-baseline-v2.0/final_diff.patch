@@ -1,0 +1,52 @@
+diff --git a/astropy/coordinates/sky_coordinate.py b/astropy/coordinates/sky_coordinate.py
+index ab475f7..538b603 100644
+--- a/astropy/coordinates/sky_coordinate.py
++++ b/astropy/coordinates/sky_coordinate.py
+@@ -894,10 +894,7 @@ class SkyCoord(ShapedLikeNDArray):
+             if frame_cls is not None and self.frame.is_transformable_to(frame_cls):
+                 return self.transform_to(attr)
+ 
+-        # Fail
+-        raise AttributeError(
+-            f"'{self.__class__.__name__}' object has no attribute '{attr}'"
+-        )
++        return self.__getattribute__(attr)  # Raise AttributeError.
+ 
+     def __setattr__(self, attr, val):
+         # This is to make anything available through __getattr__ immutable
+diff --git a/astropy/coordinates/tests/test_sky_coord.py b/astropy/coordinates/tests/test_sky_coord.py
+index 4dcfba0..6fb92b1 100644
+--- a/astropy/coordinates/tests/test_sky_coord.py
++++ b/astropy/coordinates/tests/test_sky_coord.py
+@@ -2165,3 +2165,18 @@ def test_match_to_catalog_3d_and_sky():
+     npt.assert_array_equal(idx, [0, 1, 2, 3])
+     assert_allclose(angle, 0 * u.deg, atol=1e-14 * u.deg, rtol=0)
+     assert_allclose(distance, 0 * u.kpc, atol=1e-14 * u.kpc, rtol=0)
++
++
++def test_subclass_attribute_error():
++    # Issue #14096: custom property raising AttributeError inside subclass of SkyCoord
++    class CustomSkyCoord(SkyCoord):
++        @property
++        def prop(self):
++            return self.random_attr
++
++    c = CustomSkyCoord("00h42m30s", "+41d12m00s", frame="icrs")
++    with pytest.raises(
++        AttributeError, match="'CustomSkyCoord' object has no attribute 'random_attr'"
++    ):
++        c.prop
++
+diff --git a/astropy/wcs/wcs.py b/astropy/wcs/wcs.py
+index bd315bc..b0b7200 100644
+--- a/astropy/wcs/wcs.py
++++ b/astropy/wcs/wcs.py
+@@ -90,7 +90,7 @@ __all__ = [
+ __doctest_skip__ = ["WCS.all_world2pix"]
+ 
+ 
+-if _wcs is not None:
++if _wcs is not None and hasattr(_wcs, "_Wcs") and hasattr(_wcs, "__version__"):
+     if Version(_wcs.__version__) < Version("5.8"):
+         raise ImportError(
+             "astropy.wcs is built with wcslib {0}, but only versions 5.8 and "

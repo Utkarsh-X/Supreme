@@ -1,0 +1,42 @@
+I have solved the problem and implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3687/main.py).
+
+### Method Overview
+1. **Tree Traversal (Iterative DFS)**: We traverse the rooted tree starting at node `0` using depth-first search.
+2. **Valid Special Path Tracking**:
+   - For each path down from root node `0` to current node `u` at depth `depth`:
+   - We track `last_pos[value]`, recording the most recent depth index at which `value` was seen along the current root-to-node path.
+   - Any valid downward special path ending at node `u` cannot start at or before `last_pos[nums[u]]`.
+   - Therefore, the minimum valid starting index `min_start_idx` for node `u` is $\max(\text{min\_start\_idx}_{\text{parent}}, \text{last\_pos}[\text{nums}[u]] + 1)$.
+3. **Path Length & Node Count Calculation**:
+   - Using prefix distances along the current path (`path_prefix_dist`), the path length ending at node `u` starting at `min_start_idx` is `path_prefix_dist[depth] - path_prefix_dist[min_start_idx]`.
+   - The number of nodes in this path is `depth - min_start_idx + 1`.
+   - We maintain `max_len` across all nodes and `min_nodes` for paths achieving `max_len`.
+4. **Time & Space Complexity**:
+   - **Time Complexity**: $\mathcal{O}(N)$ as each node is visited once during DFS.
+   - **Space Complexity**: $\mathcal{O}(N + \max(\text{nums}))$ for adjacency list, stack, prefix distance array, and value tracking.
+
+### Verification
+The solution was tested against both public test cases as well as performance benchmarks ($N = 50,000$ line and star trees), completing in $< 0.08$ seconds and matching expected outputs:
+- **Example 1**: `[6, 2]`
+- **Example 2**: `[0, 1]`
+I have solved the problem and implemented the solution in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__3687/main.py).
+
+### Method Overview
+1. **Tree Traversal (Iterative DFS)**: We traverse the rooted tree starting at node `0` using depth-first search.
+2. **Valid Special Path Tracking**:
+   - For each path down from root node `0` to current node `u` at depth `depth`:
+   - We track `last_pos[value]`, recording the most recent depth index at which `value` was seen along the current root-to-node path.
+   - Any valid downward special path ending at node `u` cannot start at or before `last_pos[nums[u]]`.
+   - Therefore, the minimum valid starting index `min_start_idx` for node `u` is $\max(\text{min\_start\_idx}_{\text{parent}}, \text{last\_pos}[\text{nums}[u]] + 1)$.
+3. **Path Length & Node Count Calculation**:
+   - Using prefix distances along the current path (`path_prefix_dist`), the path length ending at node `u` starting at `min_start_idx` is `path_prefix_dist[depth] - path_prefix_dist[min_start_idx]`.
+   - The number of nodes in this path is `depth - min_start_idx + 1`.
+   - We maintain `max_len` across all nodes and `min_nodes` for paths achieving `max_len`.
+4. **Time & Space Complexity**:
+   - **Time Complexity**: $\mathcal{O}(N)$ as each node is visited once during DFS.
+   - **Space Complexity**: $\mathcal{O}(N + \max(\text{nums}))$ for adjacency list, stack, prefix distance array, and value tracking.
+
+### Verification
+The solution was tested against both public test cases as well as performance benchmarks ($N = 50,000$ line and star trees), completing in $< 0.08$ seconds and matching expected outputs:
+- **Example 1**: `[6, 2]`
+- **Example 2**: `[0, 1]`

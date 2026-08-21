@@ -1,0 +1,44 @@
+I have solved the problem and written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_g/main.py).
+
+### Method Explanation
+The game is played on a bipartite graph $G$ where each move connects two vertices without creating an odd cycle (maintaining graph bipartiteness).
+
+1. **Connected Component Analysis**:
+   We partition the graph into connected components $C_1, C_2, \ldots, C_k$ and find their unique 2-colorings. For each component $i$, let $(w_i, b_i)$ be the sizes of its two color classes.
+   - A component is **odd** if its size $w_i + b_i$ is odd.
+   - A component is **even** if its size $w_i + b_i$ is even.
+
+2. **Game Parity Analysis**:
+   - **Case 1: $N$ is odd**:
+     In any maximal bipartite graph on an odd number of vertices $N$, the color classes $(W, B)$ satisfy $W + B = N$, so one of $W, B$ must be even and the other odd. Thus $W \times B$ is always even. The total number of moves in the game is always $W \times B - M \equiv M \pmod 2$.
+     Hence, Aoki wins if $M \equiv 1 \pmod 2$, and Takahashi wins if $M \equiv 0 \pmod 2$.
+
+   - **Case 2: $N$ is even**:
+     Let $O$ be the number of odd components (note that $O$ is always even).
+     - **If $O = 0$ (all components have even size)**:
+       Merging even components preserves the parity of color sizes. The final color class size parity is fixed, so total moves remaining is congruent to $(\sum_{C_i \text{ even}} w_i - M) \pmod 2$. Aoki wins if this value is $1 \pmod 2$, otherwise Takahashi wins.
+     - **If $O > 0$**:
+       - If at least one odd component has $w_i \ge 1$ and $b_i \ge 1$ (not all vertices on one side), Aoki can strategically choose color alignments during merges and force a win. Thus, **Aoki always wins**.
+       - If all odd components are "pure" (all vertices in the component share the same color, i.e., $\min(w_i, b_i) = 0$), then option choices during odd component merges are constrained. The game length parity is fixed by $(R + O/2) \pmod 2$, where $R = \sum_{C_i \text{ even}} (w_i \times b_i) - M$. Aoki wins if $(R + O/2) \equiv 1 \pmod 2$, otherwise Takahashi wins.
+I have solved the problem and written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_g/main.py).
+
+### Method Explanation
+The game is played on a bipartite graph $G$ where each move connects two vertices without creating an odd cycle (maintaining graph bipartiteness).
+
+1. **Connected Component Analysis**:
+   We partition the graph into connected components $C_1, C_2, \ldots, C_k$ and find their unique 2-colorings. For each component $i$, let $(w_i, b_i)$ be the sizes of its two color classes.
+   - A component is **odd** if its size $w_i + b_i$ is odd.
+   - A component is **even** if its size $w_i + b_i$ is even.
+
+2. **Game Parity Analysis**:
+   - **Case 1: $N$ is odd**:
+     In any maximal bipartite graph on an odd number of vertices $N$, the color classes $(W, B)$ satisfy $W + B = N$, so one of $W, B$ must be even and the other odd. Thus $W \times B$ is always even. The total number of moves in the game is always $W \times B - M \equiv M \pmod 2$.
+     Hence, Aoki wins if $M \equiv 1 \pmod 2$, and Takahashi wins if $M \equiv 0 \pmod 2$.
+
+   - **Case 2: $N$ is even**:
+     Let $O$ be the number of odd components (note that $O$ is always even).
+     - **If $O = 0$ (all components have even size)**:
+       Merging even components preserves the parity of color sizes. The final color class size parity is fixed, so total moves remaining is congruent to $(\sum_{C_i \text{ even}} w_i - M) \pmod 2$. Aoki wins if this value is $1 \pmod 2$, otherwise Takahashi wins.
+     - **If $O > 0$**:
+       - If at least one odd component has $w_i \ge 1$ and $b_i \ge 1$ (not all vertices on one side), Aoki can strategically choose color alignments during merges and force a win. Thus, **Aoki always wins**.
+       - If all odd components are "pure" (all vertices in the component share the same color, i.e., $\min(w_i, b_i) = 0$), then option choices during odd component merges are constrained. The game length parity is fixed by $(R + O/2) \pmod 2$, where $R = \sum_{C_i \text{ even}} (w_i \times b_i) - M$. Aoki wins if $(R + O/2) \equiv 1 \pmod 2$, otherwise Takahashi wins.

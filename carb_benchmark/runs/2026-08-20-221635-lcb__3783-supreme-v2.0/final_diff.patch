@@ -1,0 +1,75 @@
+diff --git a/main.py b/main.py
+index c86f6c8..04c872a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,69 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve(n: int, k: int):
++    fact = [1] * (n + 1)
++    for i in range(1, n + 1):
++        fact[i] = fact[i - 1] * i
++
++    unused = list(range(1, n + 1))
++    total_odd = (n + 1) // 2
++    total_even = n // 2
++    ans = []
++
++    for i in range(n):
++        rem_len = n - 1 - i
++        found = False
++        for x in unused:
++            if i > 0 and (x % 2) == (ans[-1] % 2):
++                continue
++            
++            rem_odd = total_odd - (1 if x % 2 == 1 else 0)
++            rem_even = total_even - (1 if x % 2 == 0 else 0)
++            target_p = 1 - (x % 2)
++            
++            if rem_len == 0:
++                req_odd, req_even = 0, 0
++            elif rem_len % 2 == 0:
++                req_odd, req_even = rem_len // 2, rem_len // 2
++            else:
++                if target_p == 1:
++                    req_odd = (rem_len + 1) // 2
++                    req_even = rem_len // 2
++                else:
++                    req_odd = rem_len // 2
++                    req_even = (rem_len + 1) // 2
++            
++            if rem_odd == req_odd and rem_even == req_even:
++                cnt = fact[rem_odd] * fact[rem_even]
++            else:
++                cnt = 0
++            
++            if k <= cnt:
++                ans.append(x)
++                unused.remove(x)
++                if x % 2 == 1:
++                    total_odd -= 1
++                else:
++                    total_even -= 1
++                found = True
++                break
++            else:
++                k -= cnt
++        
++        if not found:
++            return []
++            
++    return ans
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    n = int(input_data[0])
++    k = int(input_data[1])
++    
++    ans = solve(n, k)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

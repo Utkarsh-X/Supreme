@@ -1,0 +1,87 @@
+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
+index caa0366..f251564 100644
+--- a/django/db/models/fields/__init__.py
++++ b/django/db/models/fields/__init__.py
+@@ -21,7 +21,9 @@ from django.utils.dateparse import (
+     parse_date, parse_datetime, parse_duration, parse_time,
+ )
+ from django.utils.duration import duration_microseconds, duration_string
+-from django.utils.functional import Promise, cached_property
++from django.utils.functional import (
++    Promise, SimpleLazyObject, cached_property, empty,
++)
+ from django.utils.ipv6 import clean_ipv6_address
+ from django.utils.itercompat import is_iterable
+ from django.utils.text import capfirst
+@@ -804,6 +806,10 @@ class Field(RegisterLookupMixin):
+         """Perform preliminary non-db specific value checks and conversions."""
+         if isinstance(value, Promise):
+             value = value._proxy____cast()
++        elif isinstance(value, SimpleLazyObject):
++            if value._wrapped is empty:
++                value._setup()
++            value = value._wrapped
+         return value
+ 
+     def get_db_prep_value(self, value, connection, prepared=False):
+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
+index 9fe0c9a..feaa02e 100644
+--- a/django/db/models/sql/query.py
++++ b/django/db/models/sql/query.py
+@@ -30,6 +30,7 @@ from django.db.models.lookups import Lookup
+ from django.db.models.query_utils import (
+     Q, check_rel_lookup_compatibility, refs_expression,
+ )
++from django.utils.functional import SimpleLazyObject, empty
+ from django.db.models.sql.constants import (
+     INNER, LOUTER, ORDER_DIR, ORDER_PATTERN, SINGLE,
+ )
+@@ -233,7 +234,7 @@ class Query(BaseExpression):
+     @property
+     def output_field(self):
+         if len(self.select) == 1:
+-            return self.select[0].field
++            return getattr(self.select[0], 'target', self.select[0].field)
+         elif len(self.annotation_select) == 1:
+             return next(iter(self.annotation_select.values())).output_field
+ 
+@@ -1060,6 +1061,10 @@ class Query(BaseExpression):
+         return sql, params
+ 
+     def resolve_lookup_value(self, value, can_reuse, allow_joins):
++        if isinstance(value, SimpleLazyObject):
++            if value._wrapped is empty:
++                value._setup()
++            value = value._wrapped
+         if hasattr(value, 'resolve_expression'):
+             value = value.resolve_expression(
+                 self, reuse=can_reuse, allow_joins=allow_joins,
+diff --git a/tests/expressions/tests.py b/tests/expressions/tests.py
+index 0fac464..38f62e0 100644
+--- a/tests/expressions/tests.py
++++ b/tests/expressions/tests.py
+@@ -21,6 +21,7 @@ from django.db.models.sql import constants
+ from django.db.models.sql.datastructures import Join
+ from django.test import SimpleTestCase, TestCase, skipUnlessDBFeature
+ from django.test.utils import Approximate, isolate_apps
++from django.utils.functional import SimpleLazyObject
+ 
+ from .models import (
+     UUID, UUIDPK, Company, Employee, Experiment, Number, RemoteEmployee,
+@@ -576,6 +577,16 @@ class BasicExpressionsTests(TestCase):
+         # This exercises the double OuterRef form with AutoField as pk.
+         self.assertCountEqual(outer, [first, second])
+ 
++    def test_nested_subquery_outer_ref_simple_lazy_object(self):
++        ceo = Employee.objects.create(firstname='CEO', lastname='Jones', salary=100)
++        company = Company.objects.create(name='Example', num_employees=10, num_chairs=10, ceo=ceo)
++        inner = Company.objects.filter(pk=OuterRef('pk')).annotate(
++            ceo_user=Subquery(Company.objects.filter(pk=OuterRef('pk')).values('ceo'))
++        ).values('ceo_user')
++        lazy_ceo = SimpleLazyObject(lambda: ceo)
++        qs = Company.objects.annotate(ceo_user=Subquery(inner)).filter(ceo_user=lazy_ceo)
++        self.assertSequenceEqual(qs, [company])
++
+     def test_annotations_within_subquery(self):
+         Company.objects.filter(num_employees__lt=50).update(ceo=Employee.objects.get(firstname='Frank'))
+         inner = Company.objects.filter(

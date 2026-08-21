@@ -1,0 +1,151 @@
+diff --git a/main.py b/main.py
+index c86f6c8..d492b8a 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,145 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++ABS_DIFF = [[abs(a - c) for c in range(26)] for a in range(26)]
++
++def solve(caption: str) -> str:
++    N = len(caption)
++    if N < 3:
++        return ""
++    
++    A = [ord(c) - 97 for c in caption]
++    
++    dp = [float('inf')] * (N + 1)
++    dp[N] = 0
++    node = [None] * (N + 1)
++    memo = {}
++    
++    def compare_candidates(c1, L1, nxt1, c2, L2, nxt2):
++        if c1 != c2:
++            return -1 if c1 < c2 else 1
++        
++        c1_cur, rem1, nxt1_cur = c1, L1, nxt1
++        c2_cur, rem2, nxt2_cur = c2, L2, nxt2
++        
++        visited = []
++        res = None
++        
++        while True:
++            state = (c1_cur, rem1, nxt1_cur, c2_cur, rem2, nxt2_cur)
++            if state in memo:
++                res = memo[state]
++                break
++            
++            if c1_cur != c2_cur:
++                res = -1 if c1_cur < c2_cur else 1
++                break
++            
++            visited.append(state)
++            
++            m = rem1 if rem1 < rem2 else rem2
++            rem1 -= m
++            rem2 -= m
++            
++            if rem1 == 0:
++                if nxt1_cur == N:
++                    c1_cur = None
++                else:
++                    c1_cur, rem1, nxt1_cur = node[nxt1_cur]
++            
++            if rem2 == 0:
++                if nxt2_cur == N:
++                    c2_cur = None
++                else:
++                    c2_cur, rem2, nxt2_cur = node[nxt2_cur]
++            
++            if c1_cur is None and c2_cur is None:
++                res = 0
++                break
++            if c1_cur is None:
++                res = -1
++                break
++            if c2_cur is None:
++                res = 1
++                break
++
++        for s in visited:
++            memo[s] = res
++        return res
++
++    for i in range(N - 3, -1, -1):
++        d0 = ABS_DIFF[A[i]]
++        d1 = ABS_DIFF[A[i+1]]
++        d2 = ABS_DIFF[A[i+2]]
++        
++        min_cost = float('inf')
++        best_c, best_L, best_nxt = None, None, None
++        
++        # L = 3
++        if dp[i+3] != float('inf'):
++            rem_dp3 = dp[i+3]
++            for c in range(26):
++                cost = d0[c] + d1[c] + d2[c] + rem_dp3
++                if cost < min_cost:
++                    min_cost = cost
++                    best_c, best_L, best_nxt = c, 3, i + 3
++                elif cost == min_cost:
++                    if compare_candidates(c, 3, i + 3, best_c, best_L, best_nxt) < 0:
++                        best_c, best_L, best_nxt = c, 3, i + 3
++        
++        # L = 4
++        if i + 4 <= N and dp[i+4] != float('inf'):
++            d3 = ABS_DIFF[A[i+3]]
++            rem_dp4 = dp[i+4]
++            for c in range(26):
++                cost = d0[c] + d1[c] + d2[c] + d3[c] + rem_dp4
++                if cost < min_cost:
++                    min_cost = cost
++                    best_c, best_L, best_nxt = c, 4, i + 4
++                elif cost == min_cost:
++                    if compare_candidates(c, 4, i + 4, best_c, best_L, best_nxt) < 0:
++                        best_c, best_L, best_nxt = c, 4, i + 4
++                    
++        # L = 5
++        if i + 5 <= N and dp[i+5] != float('inf'):
++            d3 = ABS_DIFF[A[i+3]]
++            d4 = ABS_DIFF[A[i+4]]
++            rem_dp5 = dp[i+5]
++            for c in range(26):
++                cost = d0[c] + d1[c] + d2[c] + d3[c] + d4[c] + rem_dp5
++                if cost < min_cost:
++                    min_cost = cost
++                    best_c, best_L, best_nxt = c, 5, i + 5
++                elif cost == min_cost:
++                    if compare_candidates(c, 5, i + 5, best_c, best_L, best_nxt) < 0:
++                        best_c, best_L, best_nxt = c, 5, i + 5
++                        
++        dp[i] = min_cost
++        node[i] = (best_c, best_L, best_nxt)
++
++    if dp[0] == float('inf'):
++        return ""
++
++    res_chars = []
++    curr = 0
++    while curr < N:
++        c, L, nxt = node[curr]
++        res_chars.append(chr(97 + c) * L)
++        curr = nxt
++        
++    return ''.join(res_chars)
++
++def main():
++    input_data = sys.stdin.read().strip()
++    if not input_data:
++        print("")
++        return
++    if input_data.startswith('"') and input_data.endswith('"') and len(input_data) >= 2:
++        caption = input_data[1:-1]
++    else:
++        caption = input_data
++    
++    ans = solve(caption)
++    print(ans)
++
++if __name__ == '__main__':
++    main()

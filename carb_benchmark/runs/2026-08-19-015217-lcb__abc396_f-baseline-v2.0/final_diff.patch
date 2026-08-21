@@ -1,0 +1,63 @@
+diff --git a/main.py b/main.py
+index c86f6c8..7edcbf1 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,57 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def solve():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    M = int(input_data[1])
++    A = [int(x) for x in input_data[2:2+N]]
++    
++    # Calculate initial inversion number of A (for k = 0)
++    # Using Fenwick Tree (Binary Indexed Tree)
++    # Values A[i] are in [0, M-1]
++    bit = [0] * (M + 1)
++    
++    def add(idx, val):
++        while idx <= M:
++            bit[idx] += val
++            idx += idx & (-idx)
++            
++    def query(idx):
++        s = 0
++        while idx > 0:
++            s += bit[idx]
++            idx -= idx & (-idx)
++        return s
++        
++    initial_inversions = 0
++    for i, x in enumerate(A):
++        # x is 0-indexed value (0 <= x < M)
++        # In BIT, value x maps to 1-based index x + 1
++        # Elements processed so far: i
++        # Elements <= x seen so far: query(x + 1)
++        # Elements > x seen so far: i - query(x + 1)
++        initial_inversions += i - query(x + 1)
++        add(x + 1, 1)
++        
++    # Precompute deltas for each value v in [0, M-1]
++    # For each index i where A[i] = v:
++    # When v wraps around from M-1 to 0 (transitioning k -> k+1 where M - 1 - k = v),
++    # the change in inversions is (2 * i - N + 1).
++    delta_v = [0] * M
++    for i, x in enumerate(A):
++        delta_v[x] += 2 * i - N + 1
++        
++    ans = [0] * M
++    curr_inv = initial_inversions
++    for k in range(M):
++        ans[k] = curr_inv
++        # transition from k to k+1:
++        # elements equal to M - 1 - k wrap around
++        curr_inv += delta_v[M - 1 - k]
++        
++    sys.stdout.write('\n'.join(map(str, ans)) + '\n')
++
++if __name__ == '__main__':
++    solve()

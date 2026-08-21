@@ -1,0 +1,163 @@
+diff --git a/main.py b/main.py
+index c86f6c8..43f59ac 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,157 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import heapq
++
++MOD = 998244353
++G = 3
++
++MAX_BIT = 19
++MAX_LEN = 1 << MAX_BIT
++
++roots = [1] * MAX_LEN
++iroots = [1] * MAX_LEN
++
++w = pow(G, (MOD - 1) // MAX_LEN, MOD)
++iw = pow(w, MOD - 2, MOD)
++
++roots[0] = 1
++iroots[0] = 1
++for i in range(1, MAX_LEN):
++    roots[i] = (roots[i-1] * w) % MOD
++    iroots[i] = (iroots[i-1] * iw) % MOD
++
++def ntt_dif(a):
++    n = len(a)
++    length = n
++    while length >= 2:
++        half = length // 2
++        step_len = MAX_LEN // length
++        w_table = roots[::step_len]
++        for k in range(half):
++            w_k = w_table[k]
++            for i in range(k, n, length):
++                i_half = i + half
++                u = a[i]
++                v = a[i_half]
++                a[i] = (u + v) % MOD
++                a[i_half] = (u - v) * w_k % MOD
++        length >>= 1
++
++def ntt_dit_inv(a):
++    n = len(a)
++    length = 2
++    while length <= n:
++        half = length // 2
++        step_len = MAX_LEN // length
++        w_table = iroots[::step_len]
++        for k in range(half):
++            w_k = w_table[k]
++            for i in range(k, n, length):
++                i_half = i + half
++                u = a[i]
++                v = a[i_half] * w_k % MOD
++                a[i] = (u + v) % MOD
++                a[i_half] = (u - v) % MOD
++        length <<= 1
++    n_inv = pow(n, MOD - 2, MOD)
++    for i in range(n):
++        a[i] = (a[i] * n_inv) % MOD
++
++def multiply_polys(poly1, poly2):
++    n1 = len(poly1)
++    n2 = len(poly2)
++    final_len = n1 + n2 - 1
++    sz = 1
++    while sz < final_len:
++        sz <<= 1
++    
++    a = poly1 + [0] * (sz - n1)
++    b = poly2 + [0] * (sz - n2)
++    
++    ntt_dif(a)
++    ntt_dif(b)
++    for i in range(sz):
++        a[i] = (a[i] * b[i]) % MOD
++    ntt_dit_inv(a)
++    
++    return a[:final_len]
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++
++    fact = [1] * (N + 1)
++    inv_fact = [1] * (N + 1)
++    for i in range(1, N + 1):
++        fact[i] = (fact[i-1] * i) % MOD
++    inv_fact[N] = pow(fact[N], MOD - 2, MOD)
++    for i in range(N - 1, -1, -1):
++        inv_fact[i] = (inv_fact[i+1] * (i + 1)) % MOD
++        
++    inv = [1] * (N + 2)
++    inv[1] = 1
++    for i in range(2, N + 2):
++        inv[i] = MOD - (MOD // i) * inv[MOD % i] % MOD
++
++    def nCr(n, r):
++        if r < 0 or r > n:
++            return 0
++        return fact[n] * inv_fact[r] % MOD * inv_fact[n - r] % MOD
++
++    c = [0] * 7
++    S = [0] * 7
++    
++    for d in range(1, 7):
++        low = 10**(d - 1)
++        high = min(N, 10**d - 1)
++        if low <= high:
++            c[d] = high - low + 1
++            cnt = high - low + 1
++            sum_val = (low + high) * cnt // 2
++            S[d] = sum_val % MOD
++
++    heap = []
++    for d in range(1, 7):
++        if c[d] > 0:
++            a_d = (pow(10, d, MOD) - 1) % MOD
++            poly = [0] * (c[d] + 1)
++            pow_a = 1
++            for j in range(c[d] + 1):
++                poly[j] = nCr(c[d], j) * pow_a % MOD
++                pow_a = (pow_a * a_d) % MOD
++            heapq.heappush(heap, (len(poly), poly))
++
++    if not heap:
++        print(0)
++        return
++
++    while len(heap) > 1:
++        _, p1 = heapq.heappop(heap)
++        _, p2 = heapq.heappop(heap)
++        res = multiply_polys(p1, p2)
++        heapq.heappush(heap, (len(res), res))
++
++    Q_all = heap[0][1]
++
++    total_ans = 0
++    for d in range(1, 7):
++        if c[d] == 0:
++            continue
++        a_d = (pow(10, d, MOD) - 1) % MOD
++        q = [0] * N
++        q[0] = Q_all[0]
++        for j in range(1, N):
++            q[j] = (Q_all[j] - a_d * q[j-1]) % MOD
++
++        sum_q = 0
++        for j in range(N):
++            sum_q = (sum_q + q[j] * inv[j + 1]) % MOD
++        
++        W_d = (fact[N] * sum_q) % MOD
++        total_ans = (total_ans + W_d * S[d]) % MOD
++
++    print(total_ans)
++
++if __name__ == '__main__':
++    main()

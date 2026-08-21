@@ -1,0 +1,22 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_f/main.py).
+
+### Approach
+Let $S_i$ denote the prefix sum sequence modulo $998244353$ ($S_0 = 0$, $S_i = \sum_{j=1}^i A_j \bmod 998244353$).
+The sum of subarray $A[l..r]$ is $(S_r - S_l) \bmod 998244353$. Using the binomial expansion:
+$$ (S_r - S_l)^K = \sum_{j=0}^K \binom{K}{j} (-1)^{K-j} S_r^j S_l^{K-j} $$
+
+Summing over all $1 \le l \le r \le N$:
+$$ \sum_{r=1}^N \sum_{j=0}^K \binom{K}{j} (-1)^{K-j} S_r^j \left( \sum_{l=0}^{r-1} S_l^{K-j} \right) \pmod{998244353} $$
+
+Since $K \le 10$, as we iterate $r$ from $1$ to $N$, we can maintain the prefix power counts `cnt[m]` $= \sum_{l=0}^{r-1} S_l^m \pmod{998244353}$ for $0 \le m \le K$. This allows us to compute the total answer in $O(N \cdot K)$ time complexity and $O(K)$ space.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_f/main.py).
+
+### Approach
+Let $S_i$ denote the prefix sum sequence modulo $998244353$ ($S_0 = 0$, $S_i = \sum_{j=1}^i A_j \bmod 998244353$).
+The sum of subarray $A[l..r]$ is $(S_r - S_l) \bmod 998244353$. Using the binomial expansion:
+$$ (S_r - S_l)^K = \sum_{j=0}^K \binom{K}{j} (-1)^{K-j} S_r^j S_l^{K-j} $$
+
+Summing over all $1 \le l \le r \le N$:
+$$ \sum_{r=1}^N \sum_{j=0}^K \binom{K}{j} (-1)^{K-j} S_r^j \left( \sum_{l=0}^{r-1} S_l^{K-j} \right) \pmod{998244353} $$
+
+Since $K \le 10$, as we iterate $r$ from $1$ to $N$, we can maintain the prefix power counts `cnt[m]` $= \sum_{l=0}^{r-1} S_l^m \pmod{998244353}$ for $0 \le m \le K$. This allows us to compute the total answer in $O(N \cdot K)$ time complexity and $O(K)$ space.

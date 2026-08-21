@@ -1,0 +1,16 @@
+I have fixed the issue where calling `.delete()` on instances of models without dependencies did not set their primary key attribute to `None`.
+
+### Cause of the Issue
+When `Collector.delete()` is called for a single instance with no dependencies, Django uses a fast-delete optimization path (`self.can_fast_delete(instance)`). This fast path executed `DeleteQuery(model).delete_batch([instance.pk], self.using)` and immediately returned, omitting the step that resets the primary key (`setattr(instance, model._meta.pk.attname, None)`), which was only executed in the standard deletion path.
+
+### Solution
+1. Updated [Collector.delete](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/django/db/models/deletion.py#L275-L281) in `django/db/models/deletion.py` to call `setattr(instance, model._meta.pk.attname, None)` prior to returning from the fast-delete branch.
+2. Added unit test `test_fast_delete_instance_set_pk_none` to [tests/delete/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/tests/delete/tests.py#L526-L529) to ensure instance PKs are set to `None` after fast deletion.
+I have fixed the issue where calling `.delete()` on instances of models without dependencies did not set their primary key attribute to `None`.
+
+### Cause of the Issue
+When `Collector.delete()` is called for a single instance with no dependencies, Django uses a fast-delete optimization path (`self.can_fast_delete(instance)`). This fast path executed `DeleteQuery(model).delete_batch([instance.pk], self.using)` and immediately returned, omitting the step that resets the primary key (`setattr(instance, model._meta.pk.attname, None)`), which was only executed in the standard deletion path.
+
+### Solution
+1. Updated [Collector.delete](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/django/db/models/deletion.py#L275-L281) in `django/db/models/deletion.py` to call `setattr(instance, model._meta.pk.attname, None)` prior to returning from the fast-delete branch.
+2. Added unit test `test_fast_delete_instance_set_pk_none` to [tests/delete/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-11179/tests/delete/tests.py#L526-L529) to ensure instance PKs are set to `None` after fast deletion.

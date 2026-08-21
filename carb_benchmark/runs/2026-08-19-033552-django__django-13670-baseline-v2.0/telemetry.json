@@ -1,0 +1,42 @@
+{
+  "run_id": "2026-08-19-033552-django__django-13670-baseline-v2.0",
+  "task_id": "django__django-13670",
+  "configuration_id": "baseline-v2.0",
+  "wall_clock_seconds": 54.49,
+  "tool_calls": [
+    "find_by_name",
+    "grep_search",
+    "view_file",
+    "view_file",
+    "view_file",
+    "run_command",
+    "run_command",
+    "grep_search",
+    "grep_search",
+    "replace_file_content",
+    "view_file",
+    "replace_file_content",
+    "run_command",
+    "run_command",
+    "run_command"
+  ],
+  "tool_call_counts": {
+    "find_by_name": 1,
+    "grep_search": 3,
+    "view_file": 4,
+    "run_command": 5,
+    "replace_file_content": 2
+  },
+  "time_to_first_edit": 37.974,
+  "num_turns": 1,
+  "duration_seconds": 44.1182752,
+  "status": "SUCCESS",
+  "usage": {
+    "input_tokens": 83675,
+    "output_tokens": 8214,
+    "thinking_tokens": 6065,
+    "cache_read_tokens": 358131,
+    "total_tokens": 91889
+  },
+  "error": null
+}

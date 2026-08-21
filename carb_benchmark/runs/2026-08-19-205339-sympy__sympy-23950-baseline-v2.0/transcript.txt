@@ -1,0 +1,114 @@
+<notification>
+Task '86a11db9-9019-41ee-993d-44a0900fd55c/task-67' completed with exit code 0. Output:
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: E:\RofU\Supreme\carb_workspaces/sympy__sympy-23950
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collected 172 items
+
+sympy\sets\tests\test_conditionset.py ................                  [  9%]
+sympy\sets\tests\test_contains.py ......                                 [ 12%]
+sympy\sets\tests\test_discretetypes.py .                                [ 13%]
+sympy\sets\tests\test_fancysets.py .........................             [ 27%]
+sympy\sets\tests\test_kind.py ......                                     [ 31%]
+sympy\sets\tests\test_ordinals.py .......                                [ 35%]
+sympy\sets\tests\test_powerset.py ....                                   [ 37%]
+sympy\sets\tests\test_sets.py .......................................... [ 62%]
+...................                                                       [ 73%]
+sympy\functions\elementary\tests\test_piecewise.py ....................  [ 84%]
+...........................                                               [100%]
+
+============================ 172 passed in 13.06s =============================
+}
+<notification>
+Task '86a11db9-9019-41ee-993d-44a0900fd55c/task-99' completed with exit code 0. Output:
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: E:\RofU/Supreme/carb_workspaces/sympy__sympy-23950
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collected 54 items
+
+sympy\sets\tests\test_contains.py ......                                 [ 11%]
+sympy\functions\elementary\tests\test_piecewise.py ....................  [ 48%]
+...........................                                               [100%]
+
+============================== 54 passed in 5.37s ==============================
+}
+I have fixed the issue where `Contains.as_set()` raised `NotImplementedError` or returned invalid set types instead of evaluating to the set of values for which the `Contains` expression is true.
+
+### Summary of Changes
+
+1. **`sympy/sets/contains.py`** ([contains.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-23950/sympy/sets/contains.py#L47-L52)):
+   - Replaced `as_set` raising `NotImplementedError()` with `_eval_as_set(self)`.
+   - When the first argument `expr` is a `Symbol` not contained in the free symbols of set `s`, `Contains(x, s).as_set()` returns `s`.
+   - For other expressions (e.g. `Contains(x + 1, Interval(0, 5))`), it evaluates `s.as_relational(expr).as_set()`.
+
+2. **`sympy/sets/tests/test_contains.py`** ([test_contains.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-23950/sympy/sets/tests/test_contains.py#L41-L49)):
+   - Added unit test cases for `Contains.as_set()` covering single symbols, intervals, integers, and compound expressions.
+<notification>
+Task '86a11db9-9019-41ee-993d-44a0900fd55c/task-67' completed with exit code 0. Output:
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: E:\RofU\Supreme\carb_workspaces/sympy__sympy-23950
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collected 172 items
+
+sympy\sets\tests\test_conditionset.py ................                  [  9%]
+sympy\sets\tests\test_contains.py ......                                 [ 12%]
+sympy\sets\tests\test_discretetypes.py .                                [ 13%]
+sympy\sets\tests\test_fancysets.py .........................             [ 27%]
+sympy\sets\tests\test_kind.py ......                                     [ 31%]
+sympy\sets\tests\test_ordinals.py .......                                [ 35%]
+sympy\sets\tests\test_powerset.py ....                                   [ 37%]
+sympy\sets\tests\test_sets.py .......................................... [ 62%]
+...................                                                       [ 73%]
+sympy\functions\elementary\tests\test_piecewise.py ....................  [ 84%]
+...........................                                               [100%]
+
+============================ 172 passed in 13.06s =============================
+}
+<notification>
+Task '86a11db9-9019-41ee-993d-44a0900fd55c/task-99' completed with exit code 0. Output:
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.0.2, pluggy-1.6.0
+architecture: 64-bit
+cache:        yes
+ground types: python 
+
+rootdir: E:\RofU/Supreme/carb_workspaces/sympy__sympy-23950
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collected 54 items
+
+sympy\sets\tests\test_contains.py ......                                 [ 11%]
+sympy\functions\elementary\tests\test_piecewise.py ....................  [ 48%]
+...........................                                               [100%]
+
+============================== 54 passed in 5.37s ==============================
+}
+I have fixed the issue where `Contains.as_set()` raised `NotImplementedError` or returned invalid set types instead of evaluating to the set of values for which the `Contains` expression is true.
+
+### Summary of Changes
+
+1. **`sympy/sets/contains.py`** ([contains.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-23950/sympy/sets/contains.py#L47-L52)):
+   - Replaced `as_set` raising `NotImplementedError()` with `_eval_as_set(self)`.
+   - When the first argument `expr` is a `Symbol` not contained in the free symbols of set `s`, `Contains(x, s).as_set()` returns `s`.
+   - For other expressions (e.g. `Contains(x + 1, Interval(0, 5))`), it evaluates `s.as_relational(expr).as_set()`.
+
+2. **`sympy/sets/tests/test_contains.py`** ([test_contains.py](file:///E:/RofU/Supreme/carb_workspaces/sympy__sympy-23950/sympy/sets/tests/test_contains.py#L41-L49)):
+   - Added unit test cases for `Contains.as_set()` covering single symbols, intervals, integers, and compound expressions.

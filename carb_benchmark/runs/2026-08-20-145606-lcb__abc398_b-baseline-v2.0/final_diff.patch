@@ -1,0 +1,22 @@
+diff --git a/main.py b/main.py
+index c86f6c8..6271dea 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,16 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import Counter
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    A = [int(x) for x in input_data]
++    counts = sorted(Counter(A).values(), reverse=True)
++    if len(counts) >= 2 and counts[0] >= 3 and counts[1] >= 2:
++        print("Yes")
++    else:
++        print("No")
++
++if __name__ == "__main__":
++    main()

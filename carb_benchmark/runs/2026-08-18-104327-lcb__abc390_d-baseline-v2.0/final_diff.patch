@@ -1,0 +1,46 @@
+diff --git a/main.py b/main.py
+index c86f6c8..4e1cca0 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,40 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    A = [int(x) for x in input_data[1:N + 1]]
++
++    ans = set()
++    add_ans = ans.add
++    group_sums = [0] * N
++
++    def dfs(idx, num_groups, current_xor):
++        if idx == N - 1:
++            a_last = A[N - 1]
++            for g in range(num_groups):
++                s = group_sums[g]
++                add_ans(current_xor ^ s ^ (s + a_last))
++            add_ans(current_xor ^ a_last)
++            return
++
++        a = A[idx]
++        for g in range(num_groups):
++            old_s = group_sums[g]
++            new_s = old_s + a
++            group_sums[g] = new_s
++            dfs(idx + 1, num_groups, current_xor ^ old_s ^ new_s)
++            group_sums[g] = old_s
++
++        group_sums[num_groups] = a
++        dfs(idx + 1, num_groups + 1, current_xor ^ a)
++
++    group_sums[0] = A[0]
++    dfs(1, 1, A[0])
++
++    print(len(ans))
++
++if __name__ == '__main__':
++    main()

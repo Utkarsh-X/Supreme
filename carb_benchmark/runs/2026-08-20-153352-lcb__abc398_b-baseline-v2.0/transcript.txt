@@ -1,0 +1,16 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_b/main.py).
+
+### Approach
+1. Read the 7 card integers from standard input.
+2. Generate all combinations of 5 cards out of the 7 cards using `itertools.combinations`.
+3. For each 5-card combination, count the frequencies of card values using `collections.Counter`.
+4. If the sorted frequency values for any combination equal `[2, 3]`, it forms a valid full house (3 cards of one value and 2 cards of another distinct value). Output `Yes`.
+5. If no 5-card combination forms a full house, output `No`.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc398_b/main.py).
+
+### Approach
+1. Read the 7 card integers from standard input.
+2. Generate all combinations of 5 cards out of the 7 cards using `itertools.combinations`.
+3. For each 5-card combination, count the frequencies of card values using `collections.Counter`.
+4. If the sorted frequency values for any combination equal `[2, 3]`, it forms a valid full house (3 cards of one value and 2 cards of another distinct value). Output `Yes`.
+5. If no 5-card combination forms a full house, output `No`.

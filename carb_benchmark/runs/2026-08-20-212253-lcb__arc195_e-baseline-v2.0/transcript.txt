@@ -1,0 +1,44 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_e/main.py).
+
+### Method Explanation
+
+The problem asks for the sum of distances between $u$ and $v$ over all $(N-1)!$ valid sequences $P$. By linearity of expectation, the answer for a query $(u, v)$ (with $u < v$) is:
+$$\text{Total Sum} = (N-1)! \times \sum_{k=2}^N A_k \cdot P(\text{edge } (k, P_k) \text{ is on the path between } u \text{ and } v)$$
+
+An edge $(k, P_k)$ is on the unique path between $u$ and $v$ if and only if $k \in \text{Anc}(u) \oplus k \in \text{Anc}(v)$ (where $\text{Anc}(x)$ includes $x$ itself).
+Analyzing the random recursive tree structure yields exact probabilities for $P_k = P(k \in \text{Anc}(u) \oplus k \in \text{Anc}(v))$ across 5 cases for $k \in [2, N]$:
+
+1. **$k > v$**: $P_k = 0$
+2. **$k = v$**: $P_k = 1$
+3. **$u < k < v$**: $P_k = \frac{1}{k}$
+4. **$k = u$**: $P_k = \frac{u-1}{u}$
+5. **$k < u$**: $P_k = \frac{2(k-1)}{k(k+1)}$
+
+Using prefix sums $S_1[u] = \sum_{k=2}^{u-1} A_k \frac{2(k-1)}{k(k+1)}$ and $S_2[x] = \sum_{k=2}^x \frac{A_k}{k}$, each query $(u, v)$ can be computed in $O(1)$ time:
+$$\mathbb{E}[\text{dist}(u, v)] = S_1[u] + A_u \frac{u-1}{u} + (S_2[v-1] - S_2[u]) + A_v \pmod{998244353}$$
+
+### Complexity
+- **Time Complexity:** $O(N + Q)$ total time ($O(N)$ precomputation + $O(1)$ per query).
+- **Space Complexity:** $O(N)$ auxiliary memory for prefix sums and linear modular inverses.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_e/main.py).
+
+### Method Explanation
+
+The problem asks for the sum of distances between $u$ and $v$ over all $(N-1)!$ valid sequences $P$. By linearity of expectation, the answer for a query $(u, v)$ (with $u < v$) is:
+$$\text{Total Sum} = (N-1)! \times \sum_{k=2}^N A_k \cdot P(\text{edge } (k, P_k) \text{ is on the path between } u \text{ and } v)$$
+
+An edge $(k, P_k)$ is on the unique path between $u$ and $v$ if and only if $k \in \text{Anc}(u) \oplus k \in \text{Anc}(v)$ (where $\text{Anc}(x)$ includes $x$ itself).
+Analyzing the random recursive tree structure yields exact probabilities for $P_k = P(k \in \text{Anc}(u) \oplus k \in \text{Anc}(v))$ across 5 cases for $k \in [2, N]$:
+
+1. **$k > v$**: $P_k = 0$
+2. **$k = v$**: $P_k = 1$
+3. **$u < k < v$**: $P_k = \frac{1}{k}$
+4. **$k = u$**: $P_k = \frac{u-1}{u}$
+5. **$k < u$**: $P_k = \frac{2(k-1)}{k(k+1)}$
+
+Using prefix sums $S_1[u] = \sum_{k=2}^{u-1} A_k \frac{2(k-1)}{k(k+1)}$ and $S_2[x] = \sum_{k=2}^x \frac{A_k}{k}$, each query $(u, v)$ can be computed in $O(1)$ time:
+$$\mathbb{E}[\text{dist}(u, v)] = S_1[u] + A_u \frac{u-1}{u} + (S_2[v-1] - S_2[u]) + A_v \pmod{998244353}$$
+
+### Complexity
+- **Time Complexity:** $O(N + Q)$ total time ($O(N)$ precomputation + $O(1)$ per query).
+- **Space Complexity:** $O(N)$ auxiliary memory for prefix sums and linear modular inverses.

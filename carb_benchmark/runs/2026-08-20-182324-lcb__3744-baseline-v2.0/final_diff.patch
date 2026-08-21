@@ -1,0 +1,81 @@
+diff --git a/main.py b/main.py
+index c86f6c8..526c2a6 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,75 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import ast
++import re
++
++# Precompute 4^p and cumulative sum of full intervals
++POW4 = [1]
++for _ in range(20):
++    POW4.append(POW4[-1] * 4)
++
++PRE = [0] * 21
++for i in range(20):
++    PRE[i + 1] = PRE[i] + (i + 1) * (3 * POW4[i])
++
++def F(N):
++    if N <= 0:
++        return 0
++    p = (N.bit_length() - 1) // 2
++    return PRE[p] + (p + 1) * (N - POW4[p] + 1)
++
++def parse_queries(raw_input):
++    text = raw_input.strip()
++    if not text:
++        return []
++    
++    if 'queries' in text and '=' in text:
++        text = text.split('=', 1)[1].strip()
++    
++    if 'Input:' in text:
++        text = text.split('Input:', 1)[1].strip()
++        if 'queries' in text and '=' in text:
++            text = text.split('=', 1)[1].strip()
++            
++    try:
++        data = json.loads(text)
++        if isinstance(data, list):
++            return data
++    except Exception:
++        pass
++
++    try:
++        data = ast.literal_eval(text)
++        if isinstance(data, list):
++            return data
++    except Exception:
++        pass
++    
++    pairs = re.findall(r'\[\s*(\d+)\s*,\s*(\d+)\s*\]', text)
++    if pairs:
++        return [[int(a), int(b)] for a, b in pairs]
++        
++    nums = [int(x) for x in re.findall(r'\d+', text)]
++    if len(nums) >= 2:
++        if len(nums) % 2 == 0:
++            return [[nums[i], nums[i+1]] for i in range(0, len(nums), 2)]
++        elif len(nums) - 1 == 2 * nums[0]:
++            return [[nums[i], nums[i+1]] for i in range(1, len(nums), 2)]
++        else:
++            return [[nums[i], nums[i+1]] for i in range(0, len(nums) - 1, 2)]
++
++    return []
++
++def main():
++    raw_input = sys.stdin.read()
++    queries = parse_queries(raw_input)
++    
++    total_ops = 0
++    for l, r in queries:
++        S = F(r) - F(l - 1)
++        total_ops += (S + 1) // 2
++        
++    print(total_ops)
++
++if __name__ == '__main__':
++    main()

@@ -1,0 +1,63 @@
+diff --git a/main.py b/main.py
+index c86f6c8..f71e3de 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,57 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++
++    iterator = iter(input_data)
++    num_test_cases = int(next(iterator))
++
++    out = []
++    for _ in range(num_test_cases):
++        n = int(next(iterator))
++        rle = []
++        prev_x = -1
++        for _ in range(n):
++            x = int(next(iterator))
++            if x == prev_x:
++                rle[-1][1] += 1
++            else:
++                rle.append([x, 1])
++                prev_x = x
++
++        dp = {(None, None): 0}
++        for val, length in rle:
++            next_dp = {}
++            for (v0, v1), cost in dp.items():
++                # Choice 1: Start a new group for val
++                new_v0_c1 = val
++                new_v1_c1 = v0 if (length == 1 and v0 != val) else None
++                c1_cost = cost + 1
++                st1 = (new_v0_c1, new_v1_c1)
++                if st1 not in next_dp or c1_cost < next_dp[st1]:
++                    next_dp[st1] = c1_cost
++
++                # Choice 2 at v0 (cost 0)
++                if val == v0:
++                    st2_0 = (v0, None)
++                    c2_0_cost = cost
++                    if st2_0 not in next_dp or c2_0_cost < next_dp[st2_0]:
++                        next_dp[st2_0] = c2_0_cost
++
++                # Choice 2 at v1 (cost 1, requires length == 1)
++                elif val == v1 and length == 1:
++                    st2_1 = (v0, v1)
++                    c2_1_cost = cost + 1
++                    if st2_1 not in next_dp or c2_1_cost < next_dp[st2_1]:
++                        next_dp[st2_1] = c2_1_cost
++
++            dp = next_dp
++
++        out.append(str(min(dp.values())))
++
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    main()

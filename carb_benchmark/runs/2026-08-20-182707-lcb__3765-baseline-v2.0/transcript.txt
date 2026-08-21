@@ -1,0 +1,44 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3765/main.py).
+
+### Method Explanation
+
+1. **Problem Formulation & Dynamic Programming**:
+   Let $P[j] = \sum_{g=0}^j \text{nums}[g]$ be the prefix sums of `nums` and $C[j] = \sum_{g=0}^j \text{cost}[g]$ be the prefix sums of `cost`.
+   For the $i$-th subarray ending at index $j$ and starting after index $p$ (where $p = -1$ for the first subarray), the cost of this subarray is:
+   $$\text{Cost} = (P[j] + k \cdot i) \cdot (C[j] - C[p])$$
+   Let `dp[i][j]` denote the minimum cost to partition the prefix `nums[0..j]` into $i$ subarrays.
+   The transition is:
+   $$\text{dp}[i][j] = (P[j] + k \cdot i) \cdot C[j] + \min_{i-2 \le p < j} \{ \text{dp}[i-1][p] - (P[j] + k \cdot i) \cdot C[p] \}$$
+
+2. **Convex Hull Trick Optimization**:
+   For a fixed $i$, as $j$ increases:
+   - The query point $x_j = P[j] + k \cdot i$ is strictly increasing.
+   - The slope $m_p = -C[p]$ associated with candidate $p$ is strictly decreasing.
+   - The intercept is $c_p = \text{dp}[i-1][p]$.
+   This structure maps directly to the **Convex Hull Trick (CHT)**. By maintaining a deque of lines $(m_p, c_p)$, each state `dp[i][j]` can be computed in amortized $O(1)$ time per state, reducing the overall time complexity from $O(N^3)$ to $O(N^2)$.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N^2)$ where $N \le 1000$, executing in $< 0.3$ seconds.
+- **Space Complexity**: $\mathcal{O}(N)$ memory by keeping only the previous DP row.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__3765/main.py).
+
+### Method Explanation
+
+1. **Problem Formulation & Dynamic Programming**:
+   Let $P[j] = \sum_{g=0}^j \text{nums}[g]$ be the prefix sums of `nums` and $C[j] = \sum_{g=0}^j \text{cost}[g]$ be the prefix sums of `cost`.
+   For the $i$-th subarray ending at index $j$ and starting after index $p$ (where $p = -1$ for the first subarray), the cost of this subarray is:
+   $$\text{Cost} = (P[j] + k \cdot i) \cdot (C[j] - C[p])$$
+   Let `dp[i][j]` denote the minimum cost to partition the prefix `nums[0..j]` into $i$ subarrays.
+   The transition is:
+   $$\text{dp}[i][j] = (P[j] + k \cdot i) \cdot C[j] + \min_{i-2 \le p < j} \{ \text{dp}[i-1][p] - (P[j] + k \cdot i) \cdot C[p] \}$$
+
+2. **Convex Hull Trick Optimization**:
+   For a fixed $i$, as $j$ increases:
+   - The query point $x_j = P[j] + k \cdot i$ is strictly increasing.
+   - The slope $m_p = -C[p]$ associated with candidate $p$ is strictly decreasing.
+   - The intercept is $c_p = \text{dp}[i-1][p]$.
+   This structure maps directly to the **Convex Hull Trick (CHT)**. By maintaining a deque of lines $(m_p, c_p)$, each state `dp[i][j]` can be computed in amortized $O(1)$ time per state, reducing the overall time complexity from $O(N^3)$ to $O(N^2)$.
+
+### Complexity
+- **Time Complexity**: $\mathcal{O}(N^2)$ where $N \le 1000$, executing in $< 0.3$ seconds.
+- **Space Complexity**: $\mathcal{O}(N)$ memory by keeping only the previous DP row.

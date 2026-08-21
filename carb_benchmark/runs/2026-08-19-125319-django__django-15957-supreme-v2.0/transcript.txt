@@ -1,0 +1,30 @@
+### Summary of Changes
+
+1. **Validation for Sliced QuerySets in `Prefetch`**:
+   - Updated [`Prefetch.__init__`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/django/db/models/query.py#L2145-L2158) in `django/db/models/query.py` to check `queryset.query.is_sliced`.
+   - If a sliced queryset is provided to `Prefetch`, it immediately raises `ValueError("Cannot filter a query once a slice has been taken.")` upon instantiation instead of failing later during evaluation.
+
+2. **Documentation Update**:
+   - Updated [`docs/ref/models/querysets.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/docs/ref/models/querysets.txt#L4010-L4015) to explicitly state that the `queryset` argument to `Prefetch()` cannot be a sliced queryset, or use `raw()`, `values()`, or `values_list()`.
+
+3. **Regression Test**:
+   - Added `test_sliced_queryset` in [`tests/prefetch_related/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/tests/prefetch_related/tests.py#L1007-L1012) to verify `ValueError` is raised when passing a sliced queryset to `Prefetch`.
+
+### Verification
+
+All 110 tests in `prefetch_related` passed cleanly.
+### Summary of Changes
+
+1. **Validation for Sliced QuerySets in `Prefetch`**:
+   - Updated [`Prefetch.__init__`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/django/db/models/query.py#L2145-L2158) in `django/db/models/query.py` to check `queryset.query.is_sliced`.
+   - If a sliced queryset is provided to `Prefetch`, it immediately raises `ValueError("Cannot filter a query once a slice has been taken.")` upon instantiation instead of failing later during evaluation.
+
+2. **Documentation Update**:
+   - Updated [`docs/ref/models/querysets.txt`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/docs/ref/models/querysets.txt#L4010-L4015) to explicitly state that the `queryset` argument to `Prefetch()` cannot be a sliced queryset, or use `raw()`, `values()`, or `values_list()`.
+
+3. **Regression Test**:
+   - Added `test_sliced_queryset` in [`tests/prefetch_related/tests.py`](file:///E:/RofU/Supreme/carb_workspaces/django__django-15957/tests/prefetch_related/tests.py#L1007-L1012) to verify `ValueError` is raised when passing a sliced queryset to `Prefetch`.
+
+### Verification
+
+All 110 tests in `prefetch_related` passed cleanly.

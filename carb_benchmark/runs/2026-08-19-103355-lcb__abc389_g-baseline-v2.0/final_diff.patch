@@ -1,0 +1,174 @@
+diff --git a/main.py b/main.py
+index c86f6c8..d5b5402 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,168 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    N = int(input_data[0])
++    P = int(input_data[1])
++
++    K = N // 2
++    MOD = P
++
++    MAX_EDGES = N * (N - 1) // 2 + 5
++
++    # Precompute factorials and inverse factorials modulo P
++    fact = [1] * MAX_EDGES
++    inv_fact = [1] * MAX_EDGES
++    for i in range(1, MAX_EDGES):
++        fact[i] = (fact[i - 1] * i) % MOD
++    inv_fact[MAX_EDGES - 1] = pow(fact[MAX_EDGES - 1], MOD - 2, MOD)
++    for i in range(MAX_EDGES - 2, -1, -1):
++        inv_fact[i] = (inv_fact[i + 1] * (i + 1)) % MOD
++
++    # Precompute combinations binom[n][k] modulo P
++    binom = [[0] * MAX_EDGES for _ in range(MAX_EDGES)]
++    for i in range(MAX_EDGES):
++        binom[i][0] = 1
++        for j in range(1, i + 1):
++            binom[i][j] = (binom[i - 1][j - 1] + binom[i - 1][j]) % MOD
++
++    def poly_mul_raw(p1, p2):
++        l1, l2 = len(p1), len(p2)
++        res = [0] * (l1 + l2 - 1)
++        for i, a in enumerate(p1):
++            if not a:
++                continue
++            for j, b in enumerate(p2):
++                if not b:
++                    continue
++                res[i + j] += a * b
++        return [x % MOD for x in res]
++
++    # Precompute Q_{a,b}(x) polynomial for a in 1..K, b in 1..K
++    # Q_{a,b}(x) = 1/b! * ((1+x)^a - 1)^b * (1+x)^(b*(b-1)/2)
++    Q_tuples = {}
++    for a in range(1, K + 1):
++        for b in range(1, K + 1):
++            deg_p1 = a * b
++            p1 = [0] * (deg_p1 + 1)
++            for k in range(deg_p1 + 1):
++                s = 0
++                for j in range(b + 1):
++                    term = (binom[b][j] * binom[a * j][k]) % MOD
++                    if (b - j) % 2 == 1:
++                        s = (s - term) % MOD
++                    else:
++                        s = (s + term) % MOD
++                p1[k] = s
++
++            num_edges = b * (b - 1) // 2
++            p2 = [binom[num_edges][k] for k in range(num_edges + 1)]
++            q = poly_mul_raw(p1, p2)
++            invb = inv_fact[b]
++            q = [(c * invb) % MOD for c in q]
++            while q and q[-1] == 0:
++                q.pop()
++            Q_tuples[(a, b)] = [(j, val) for j, val in enumerate(q) if val]
++
++    # DP state: dp[(s_odd, s_even, last_size, parity)] = list of coefficients
++    # s_odd: sum of sizes of odd layers
++    # s_even: sum of sizes of even layers (excluding L0)
++    # last_size: size of the most recently added layer
++    # parity: 0 if ready for odd layer, 1 if ready for even layer
++    dp = {}
++    dp[(0, 0, 1, 0)] = [1]
++
++    for s_tot in range(N):
++        # Pull transitions for layer sum s_tot
++        # 1. New odd layer b added from (s_odd, s_even, a, 0)
++        for s_odd in range(K):
++            for s_even in range(K):
++                if s_odd + s_even >= s_tot:
++                    continue
++                b = s_tot - (s_odd + s_even)
++                if b < 1 or s_odd + b > K:
++                    continue
++
++                nst = (s_odd + b, s_even, b, 1)
++                res = []
++                for a in range(1, K + 1):
++                    pst = (s_odd, s_even, a, 0)
++                    if pst not in dp:
++                        continue
++                    p_cur = dp[pst]
++                    nz1 = [(i, val) for i, val in enumerate(p_cur) if val]
++                    if not nz1:
++                        continue
++                    q_nz = Q_tuples[(a, b)]
++                    max_len = nz1[-1][0] + q_nz[-1][0] + 1
++                    if len(res) < max_len:
++                        res.extend([0] * (max_len - len(res)))
++                    for i, val1 in nz1:
++                        for j, val2 in q_nz:
++                            res[i + j] += val1 * val2
++                if res:
++                    res = [x % MOD for x in res]
++                    while res and res[-1] == 0:
++                        res.pop()
++                    dp[nst] = res
++
++        # 2. New even layer b added from (s_odd, s_even, a, 1)
++        for s_odd in range(1, K + 1):
++            for s_even in range(K - 1):
++                if s_odd + s_even >= s_tot:
++                    continue
++                b = s_tot - (s_odd + s_even)
++                if b < 1 or s_even + b > K - 1:
++                    continue
++
++                nst = (s_odd, s_even + b, b, 0)
++                res = []
++                for a in range(1, K + 1):
++                    pst = (s_odd, s_even, a, 1)
++                    if pst not in dp:
++                        continue
++                    p_cur = dp[pst]
++                    nz1 = [(i, val) for i, val in enumerate(p_cur) if val]
++                    if not nz1:
++                        continue
++                    q_nz = Q_tuples[(a, b)]
++                    max_len = nz1[-1][0] + q_nz[-1][0] + 1
++                    if len(res) < max_len:
++                        res.extend([0] * (max_len - len(res)))
++                    for i, val1 in nz1:
++                        for j, val2 in q_nz:
++                            res[i + j] += val1 * val2
++                if res:
++                    res = [x % MOD for x in res]
++                    while res and res[-1] == 0:
++                        res.pop()
++                    dp[nst] = res
++
++    # Accumulate result from states with s_odd == K and s_even == K - 1
++    final_poly = []
++    for st in dp:
++        if st[0] == K and st[1] == K - 1:
++            p = dp[st]
++            if len(p) > len(final_poly):
++                final_poly.extend([0] * (len(p) - len(final_poly)))
++            for i in range(len(p)):
++                final_poly[i] = (final_poly[i] + p[i]) % MOD
++
++    # Multiply by (N - 1)! for labeled vertex partitions
++    fact_n1 = fact[N - 1]
++    final_poly = [(c * fact_n1) % MOD for c in final_poly]
++
++    max_M = N * (N - 1) // 2
++    ans = []
++    for M in range(N - 1, max_M + 1):
++        if M < len(final_poly):
++            ans.append(final_poly[M])
++        else:
++            ans.append(0)
++
++    print(" ".join(map(str, ans)))
++
++if __name__ == "__main__":
++    main()

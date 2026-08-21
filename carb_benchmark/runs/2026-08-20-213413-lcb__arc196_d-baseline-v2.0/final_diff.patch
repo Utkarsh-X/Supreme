@@ -1,0 +1,279 @@
+diff --git a/main.py b/main.py
+index c86f6c8..5c808fe 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,273 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++
++# Increase recursion depth for CDQ divide and conquer
++sys.setrecursionlimit(300000)
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    iterator = iter(input_data)
++    N = int(next(iterator))
++    M = int(next(iterator))
++    Q = int(next(iterator))
++    
++    right_L = []
++    right_R = []
++    right_idx = []
++    
++    left_L = []
++    left_R = []
++    left_idx = []
++    
++    people_L = [0] * (M + 1)
++    people_R = [0] * (M + 1)
++    
++    for i in range(1, M + 1):
++        S = int(next(iterator))
++        T = int(next(iterator))
++        a = S if S < T else T
++        b = T if S < T else S
++        L = a - 1
++        R = b - 1
++        people_L[i] = L
++        people_R[i] = R
++        if S < T:
++            right_L.append(L)
++            right_R.append(R)
++            right_idx.append(i)
++        else:
++            left_L.append(L)
++            left_R.append(R)
++            left_idx.append(i)
++            
++    limit = [0] * (M + 1)
++    
++    # 1. Check Condition 1 & 2 conflicts (same L or same R)
++    last_L = {}
++    last_R = {}
++    for i in range(1, M + 1):
++        L = people_L[i]
++        R = people_R[i]
++        if L in last_L:
++            if last_L[L] > limit[i]:
++                limit[i] = last_L[L]
++        if R in last_R:
++            if last_R[R] > limit[i]:
++                limit[i] = last_R[R]
++        last_L[L] = i
++        last_R[R] = i
++        
++    # Segment Tree setup
++    SIZE = 1
++    while SIZE <= N + 2:
++        SIZE <<= 1
++    tree = [0] * (2 * SIZE)
++    
++    # Type A CDQ: finds max p < q s.t. Lp < Lq < Rp < Rq
++    def cdq_A(L_arr, R_arr, idx_arr):
++        n = len(L_arr)
++        if n <= 1:
++            return
++        
++        arr_i = list(range(n))
++        temp_i = [0] * n
++        
++        def solve(l, r):
++            if l >= r:
++                return
++            mid = (l + r) >> 1
++            solve(l, mid)
++            solve(mid + 1, r)
++            
++            ptr = l
++            history = []
++            for j in range(mid + 1, r + 1):
++                cur_j = arr_i[j]
++                Lq = L_arr[cur_j]
++                Rq = R_arr[cur_j]
++                q_idx = idx_arr[cur_j]
++                
++                while ptr <= mid:
++                    cur_p = arr_i[ptr]
++                    if L_arr[cur_p] >= Lq:
++                        break
++                    
++                    pos = R_arr[cur_p] + SIZE
++                    history.append(pos)
++                    val = idx_arr[cur_p]
++                    if val > tree[pos]:
++                        tree[pos] = val
++                    pos >>= 1
++                    while pos > 0:
++                        v1 = tree[2 * pos]
++                        v2 = tree[2 * pos + 1]
++                        tree[pos] = v1 if v1 > v2 else v2
++                        pos >>= 1
++                    ptr += 1
++                    
++                ql = Lq + 1
++                qr = Rq - 1
++                if ql <= qr:
++                    res = 0
++                    l_idx = ql + SIZE
++                    r_idx = qr + SIZE
++                    while l_idx <= r_idx:
++                        if l_idx & 1:
++                            if tree[l_idx] > res:
++                                res = tree[l_idx]
++                            l_idx += 1
++                        if not (r_idx & 1):
++                            if tree[r_idx] > res:
++                                res = tree[r_idx]
++                            r_idx -= 1
++                        l_idx >>= 1
++                        r_idx >>= 1
++                    if res > limit[q_idx]:
++                        limit[q_idx] = res
++                        
++            for pos in history:
++                while pos > 0 and tree[pos] != 0:
++                    tree[pos] = 0
++                    pos >>= 1
++                    
++            # Merge indices by L ascending
++            i1, i2, k = l, mid + 1, l
++            while i1 <= mid and i2 <= r:
++                if L_arr[arr_i[i1]] <= L_arr[arr_i[i2]]:
++                    temp_i[k] = arr_i[i1]
++                    i1 += 1
++                else:
++                    temp_i[k] = arr_i[i2]
++                    i2 += 1
++                k += 1
++            while i1 <= mid:
++                temp_i[k] = arr_i[i1]
++                i1 += 1
++                k += 1
++            while i2 <= r:
++                temp_i[k] = arr_i[i2]
++                i2 += 1
++                k += 1
++            for i in range(l, r + 1):
++                arr_i[i] = temp_i[i]
++
++        solve(0, n - 1)
++
++    # Type B CDQ: finds max p < q s.t. Lq < Lp < Rq < Rp
++    def cdq_B(L_arr, R_arr, idx_arr):
++        n = len(L_arr)
++        if n <= 1:
++            return
++        
++        arr_i = list(range(n))
++        temp_i = [0] * n
++        
++        def solve(l, r):
++            if l >= r:
++                return
++            mid = (l + r) >> 1
++            solve(l, mid)
++            solve(mid + 1, r)
++            
++            ptr = l
++            history = []
++            for j in range(mid + 1, r + 1):
++                cur_j = arr_i[j]
++                Lq = L_arr[cur_j]
++                Rq = R_arr[cur_j]
++                q_idx = idx_arr[cur_j]
++                
++                while ptr <= mid:
++                    cur_p = arr_i[ptr]
++                    if R_arr[cur_p] <= Rq:
++                        break
++                    
++                    pos = L_arr[cur_p] + SIZE
++                    history.append(pos)
++                    val = idx_arr[cur_p]
++                    if val > tree[pos]:
++                        tree[pos] = val
++                    pos >>= 1
++                    while pos > 0:
++                        v1 = tree[2 * pos]
++                        v2 = tree[2 * pos + 1]
++                        tree[pos] = v1 if v1 > v2 else v2
++                        pos >>= 1
++                    ptr += 1
++                    
++                ql = Lq + 1
++                qr = Rq - 1
++                if ql <= qr:
++                    res = 0
++                    l_idx = ql + SIZE
++                    r_idx = qr + SIZE
++                    while l_idx <= r_idx:
++                        if l_idx & 1:
++                            if tree[l_idx] > res:
++                                res = tree[l_idx]
++                            l_idx += 1
++                        if not (r_idx & 1):
++                            if tree[r_idx] > res:
++                                res = tree[r_idx]
++                            r_idx -= 1
++                        l_idx >>= 1
++                        r_idx >>= 1
++                    if res > limit[q_idx]:
++                        limit[q_idx] = res
++                        
++            for pos in history:
++                while pos > 0 and tree[pos] != 0:
++                    tree[pos] = 0
++                    pos >>= 1
++                    
++            # Merge indices by R descending
++            i1, i2, k = l, mid + 1, l
++            while i1 <= mid and i2 <= r:
++                if R_arr[arr_i[i1]] >= R_arr[arr_i[i2]]:
++                    temp_i[k] = arr_i[i1]
++                    i1 += 1
++                else:
++                    temp_i[k] = arr_i[i2]
++                    i2 += 1
++                k += 1
++            while i1 <= mid:
++                temp_i[k] = arr_i[i1]
++                i1 += 1
++                k += 1
++            while i2 <= r:
++                temp_i[k] = arr_i[i2]
++                i2 += 1
++                k += 1
++            for i in range(l, r + 1):
++                arr_i[i] = temp_i[i]
++
++        solve(0, n - 1)
++
++    cdq_A(right_L, right_R, right_idx)
++    cdq_B(right_L, right_R, right_idx)
++    cdq_A(left_L, left_R, left_idx)
++    cdq_B(left_L, left_R, left_idx)
++
++    # Compute R_max for each L using two pointers
++    R_max = [0] * (M + 2)
++    R_ptr = 1
++    for L_ptr in range(1, M + 1):
++        while R_ptr + 1 <= M and limit[R_ptr + 1] < L_ptr:
++            R_ptr += 1
++        R_max[L_ptr] = R_ptr
++        
++    out = []
++    for _ in range(Q):
++        l = int(next(iterator))
++        r = int(next(iterator))
++        if r <= R_max[l]:
++            out.append('Yes')
++        else:
++            out.append('No')
++            
++    sys.stdout.write('\n'.join(out) + '\n')
++
++if __name__ == '__main__':
++    main()

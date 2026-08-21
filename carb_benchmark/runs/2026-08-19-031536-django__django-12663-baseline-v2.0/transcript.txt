@@ -1,0 +1,30 @@
+I have identified and resolved the issue where filtering with a `SimpleLazyObject` in a queryset containing subquery annotations failed with a `TypeError`.
+
+### Root Cause
+1. **Lazy Object Resolution in Queries**: `Query.resolve_lookup_value()` checked `hasattr(value, 'resolve_expression')`. When `value` was a `SimpleLazyObject`, accessing `'resolve_expression'` triggered `SimpleLazyObject._setup()`, evaluating the underlying object. However, `resolve_lookup_value()` still returned the `SimpleLazyObject` wrapper object itself rather than unwrapping its evaluated `_wrapped` instance.
+2. **Field Value Preparation**: `Field.get_prep_value()` only handled lazy translation promises (`isinstance(value, Promise)`) and did not unwrap `SimpleLazyObject` instances, leading to `int(SimpleLazyObject)` calls in field preparation (such as `IntegerField` / `AutoField`), which raised `TypeError`.
+3. **Subquery Output Field Resolution**: `Query.output_field` returned `self.select[0].field` (which resolved to `target_field` `AutoField`), losing reference to relational target fields (e.g. `ForeignKey`) when single columns were selected in subqueries.
+
+### Solution
+1. **`django/db/models/sql/query.py`**:
+   - In [`Query.resolve_lookup_value()`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/django/db/models/sql/query.py#L1061-L1070), unwrapped `SimpleLazyObject` instances to their underlying evaluated `_wrapped` object before proceeding with expression resolution and lookup processing.
+   - In [`Query.output_field`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/django/db/models/sql/query.py#L234-L240), updated `output_field` resolution when `len(self.select) == 1` to prefer `self.select[0].target` if present so relational fields (`ForeignKey`) retain their output type information.
+2. **`django/db/models/fields/__init__.py`**:
+   - In [`Field.get_prep_value()`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/django/db/models/fields/__init__.py#L803-L813), added unwrapping for `SimpleLazyObject` instances prior to field-level validation and conversion.
+3. **`tests/expressions/tests.py`**:
+   - Added unit test [`test_nested_subquery_outer_ref_simple_lazy_object`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/tests/expressions/tests.py#L580-L588) covering `SimpleLazyObject` within nested subqueries with outer references.
+I have identified and resolved the issue where filtering with a `SimpleLazyObject` in a queryset containing subquery annotations failed with a `TypeError`.
+
+### Root Cause
+1. **Lazy Object Resolution in Queries**: `Query.resolve_lookup_value()` checked `hasattr(value, 'resolve_expression')`. When `value` was a `SimpleLazyObject`, accessing `'resolve_expression'` triggered `SimpleLazyObject._setup()`, evaluating the underlying object. However, `resolve_lookup_value()` still returned the `SimpleLazyObject` wrapper object itself rather than unwrapping its evaluated `_wrapped` instance.
+2. **Field Value Preparation**: `Field.get_prep_value()` only handled lazy translation promises (`isinstance(value, Promise)`) and did not unwrap `SimpleLazyObject` instances, leading to `int(SimpleLazyObject)` calls in field preparation (such as `IntegerField` / `AutoField`), which raised `TypeError`.
+3. **Subquery Output Field Resolution**: `Query.output_field` returned `self.select[0].field` (which resolved to `target_field` `AutoField`), losing reference to relational target fields (e.g. `ForeignKey`) when single columns were selected in subqueries.
+
+### Solution
+1. **`django/db/models/sql/query.py`**:
+   - In [`Query.resolve_lookup_value()`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/django/db/models/sql/query.py#L1061-L1070), unwrapped `SimpleLazyObject` instances to their underlying evaluated `_wrapped` object before proceeding with expression resolution and lookup processing.
+   - In [`Query.output_field`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/django/db/models/sql/query.py#L234-L240), updated `output_field` resolution when `len(self.select) == 1` to prefer `self.select[0].target` if present so relational fields (`ForeignKey`) retain their output type information.
+2. **`django/db/models/fields/__init__.py`**:
+   - In [`Field.get_prep_value()`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/django/db/models/fields/__init__.py#L803-L813), added unwrapping for `SimpleLazyObject` instances prior to field-level validation and conversion.
+3. **`tests/expressions/tests.py`**:
+   - Added unit test [`test_nested_subquery_outer_ref_simple_lazy_object`](file:///E:/RofU/Supreme/carb_workspaces/django__django-12663/tests/expressions/tests.py#L580-L588) covering `SimpleLazyObject` within nested subqueries with outer references.

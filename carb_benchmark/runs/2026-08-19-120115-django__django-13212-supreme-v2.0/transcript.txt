@@ -1,0 +1,34 @@
+I have updated Django's built-in validators to include the provided input value in the `params` dictionary when raising `ValidationError`.
+
+### Changes Made
+1. **`django/core/validators.py`**:
+   - `RegexValidator`: Passed `params={'value': value}` to `ValidationError`.
+   - `URLValidator`: Ensured all raised `ValidationError` instances include `params={'value': value}`.
+   - `EmailValidator`: Passed `params={'value': value}` to `ValidationError`.
+   - `validate_ipv4_address`, `validate_ipv6_address`, `validate_ipv46_address`: Added `params={'value': value}` to `ValidationError`.
+   - `DecimalValidator`: Included `'value': value` in `ValidationError.params`.
+   - `FileExtensionValidator`: Added `'value': value` to `ValidationError.params`.
+   - `ProhibitNullCharactersValidator`: Passed `params={'value': value}` to `ValidationError`.
+
+2. **`django/contrib/postgres/validators.py`**:
+   - `KeysValidator`: Added `'value': value` to `ValidationError.params`.
+
+3. **`tests/validators/tests.py`**:
+   - Added unit tests (`test_validators_value_in_params` and `test_validator_custom_message_value_placeholder`) to verify that `cm.exception.params['value']` contains the validated value and custom error messages using `%(value)s` placeholders render as expected.
+I have updated Django's built-in validators to include the provided input value in the `params` dictionary when raising `ValidationError`.
+
+### Changes Made
+1. **`django/core/validators.py`**:
+   - `RegexValidator`: Passed `params={'value': value}` to `ValidationError`.
+   - `URLValidator`: Ensured all raised `ValidationError` instances include `params={'value': value}`.
+   - `EmailValidator`: Passed `params={'value': value}` to `ValidationError`.
+   - `validate_ipv4_address`, `validate_ipv6_address`, `validate_ipv46_address`: Added `params={'value': value}` to `ValidationError`.
+   - `DecimalValidator`: Included `'value': value` in `ValidationError.params`.
+   - `FileExtensionValidator`: Added `'value': value` to `ValidationError.params`.
+   - `ProhibitNullCharactersValidator`: Passed `params={'value': value}` to `ValidationError`.
+
+2. **`django/contrib/postgres/validators.py`**:
+   - `KeysValidator`: Added `'value': value` to `ValidationError.params`.
+
+3. **`tests/validators/tests.py`**:
+   - Added unit tests (`test_validators_value_in_params` and `test_validator_custom_message_value_placeholder`) to verify that `cm.exception.params['value']` contains the validated value and custom error messages using `%(value)s` placeholders render as expected.

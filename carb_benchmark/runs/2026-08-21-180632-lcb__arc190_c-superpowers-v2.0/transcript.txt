@@ -1,0 +1,36 @@
+I have solved the problem and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc190_c/main.py).
+
+### Method Explanation
+1. **Grid Transposition & Dimensions**:
+   Since $H \cdot W \le 200,000$, $\min(H, W) \le \sqrt{200,000} \approx 447$. If $H > W$, we transpose the grid (swapping $H$ and $W$, mapping directions $\text{U}\leftrightarrow\text{L}$ and $\text{D}\leftrightarrow\text{R}$). Thus, we can guarantee that the effective height $H \le 447$.
+
+2. **Rank-1 Update & Path DP**:
+   Let $\alpha_w[h]$ be the sum of path products from $(1,1)$ to $(h+1, w)$ (paths before entering column $w$), and $\beta_{w+1}[h]$ be the sum of path products from $(h+1, w+1)$ to $(H, W)$ (paths after leaving column $w$).
+   
+   Updating a single cell $A_{r, c}$ changes the matrix transition of column $c$ by a **rank-1 matrix** $u v^T$. The change in the total path sum is given by:
+   $$\Delta \text{Ans} = (\beta_{c+1}^T u) \cdot (v^T \alpha_c) \pmod{998244353}$$
+
+3. **Adjacent Movements**:
+   Takahashi moves step by step to adjacent cells. When Takahashi moves between columns ($c \to c \pm 1$), only a single column's DP vector ($\alpha$ or $\beta$) needs to be updated in $O(H)$ time using the previous column's values.
+
+4. **Complexity**:
+   - **Time Complexity**: $O(HW + Q \cdot \min(H, W))$, which executes in $\approx 8.9 \times 10^7$ basic arithmetic operations in total across all $Q$ queries.
+   - **Space Complexity**: $O(HW)$ to store the DP vectors $\alpha$ and $\beta$.
+I have solved the problem and implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc190_c/main.py).
+
+### Method Explanation
+1. **Grid Transposition & Dimensions**:
+   Since $H \cdot W \le 200,000$, $\min(H, W) \le \sqrt{200,000} \approx 447$. If $H > W$, we transpose the grid (swapping $H$ and $W$, mapping directions $\text{U}\leftrightarrow\text{L}$ and $\text{D}\leftrightarrow\text{R}$). Thus, we can guarantee that the effective height $H \le 447$.
+
+2. **Rank-1 Update & Path DP**:
+   Let $\alpha_w[h]$ be the sum of path products from $(1,1)$ to $(h+1, w)$ (paths before entering column $w$), and $\beta_{w+1}[h]$ be the sum of path products from $(h+1, w+1)$ to $(H, W)$ (paths after leaving column $w$).
+   
+   Updating a single cell $A_{r, c}$ changes the matrix transition of column $c$ by a **rank-1 matrix** $u v^T$. The change in the total path sum is given by:
+   $$\Delta \text{Ans} = (\beta_{c+1}^T u) \cdot (v^T \alpha_c) \pmod{998244353}$$
+
+3. **Adjacent Movements**:
+   Takahashi moves step by step to adjacent cells. When Takahashi moves between columns ($c \to c \pm 1$), only a single column's DP vector ($\alpha$ or $\beta$) needs to be updated in $O(H)$ time using the previous column's values.
+
+4. **Complexity**:
+   - **Time Complexity**: $O(HW + Q \cdot \min(H, W))$, which executes in $\approx 8.9 \times 10^7$ basic arithmetic operations in total across all $Q$ queries.
+   - **Space Complexity**: $O(HW)$ to store the DP vectors $\alpha$ and $\beta$.

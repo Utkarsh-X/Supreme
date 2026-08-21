@@ -1,0 +1,83 @@
+diff --git a/main.py b/main.py
+index c86f6c8..b7c8c12 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,77 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++from collections import deque
++
++def main():
++    input_data = sys.stdin.read().split()
++    if not input_data:
++        return
++    
++    N = int(input_data[0])
++    M = int(input_data[1])
++    
++    if N % 2 == 1:
++        if M % 2 == 1:
++            print("Aoki")
++        else:
++            print("Takahashi")
++        return
++
++    # N is even
++    adj = [[] for _ in range(N + 1)]
++    idx = 2
++    for _ in range(M):
++        u = int(input_data[idx])
++        v = int(input_data[idx + 1])
++        adj[u].append(v)
++        adj[v].append(u)
++        idx += 2
++        
++    color = [-1] * (N + 1)
++    
++    K_odd = 0
++    all_odd_size_1 = True
++    sum_b_even = 0
++    sum_b_all = 0
++    
++    for i in range(1, N + 1):
++        if color[i] == -1:
++            color[i] = 0
++            q = deque([i])
++            comp_size = 0
++            b_count = 0
++            
++            while q:
++                curr = q.popleft()
++                comp_size += 1
++                if color[curr] == 0:
++                    b_count += 1
++                
++                for nxt in adj[curr]:
++                    if color[nxt] == -1:
++                        color[nxt] = 1 - color[curr]
++                        q.append(nxt)
++            
++            sum_b_all += b_count
++            if comp_size % 2 == 1:
++                K_odd += 1
++                if comp_size > 1:
++                    all_odd_size_1 = False
++            else:
++                sum_b_even += b_count
++
++    if K_odd == 0:
++        if (sum_b_all - M) % 2 == 1:
++            print("Aoki")
++        else:
++            print("Takahashi")
++    else: # K_odd >= 2
++        if all_odd_size_1:
++            if (sum_b_even + K_odd // 2 - M) % 2 == 1:
++                print("Aoki")
++            else:
++                print("Takahashi")
++        else:
++            print("Aoki")
++
++if __name__ == '__main__':
++    main()

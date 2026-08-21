@@ -1,0 +1,48 @@
+diff --git a/django/contrib/contenttypes/fields.py b/django/contrib/contenttypes/fields.py
+index ed98ecb..6098b71 100644
+--- a/django/contrib/contenttypes/fields.py
++++ b/django/contrib/contenttypes/fields.py
+@@ -202,7 +202,7 @@ class GenericForeignKey(FieldCacheMixin):
+             else:
+                 model = self.get_content_type(id=ct_id,
+                                               using=obj._state.db).model_class()
+-                return (model._meta.pk.get_prep_value(getattr(obj, self.fk_field)),
++                return (model._meta.pk.to_python(getattr(obj, self.fk_field)),
+                         model)
+ 
+         return (
+diff --git a/tests/prefetch_related/test_uuid.py b/tests/prefetch_related/test_uuid.py
+index 11a2474..0740843 100644
+--- a/tests/prefetch_related/test_uuid.py
++++ b/tests/prefetch_related/test_uuid.py
+@@ -1,6 +1,6 @@
+ from django.test import TestCase
+ 
+-from .models import Flea, House, Person, Pet, Room
++from .models import Bookmark, Comment, Flea, House, Person, Pet, Room, TaggedItem
+ 
+ 
+ class UUIDPrefetchRelated(TestCase):
+@@ -53,6 +53,22 @@ class UUIDPrefetchRelated(TestCase):
+             [pet.id]
+         )
+ 
++    def test_prefetch_gfk_to_uuid_pk(self):
++        pet = Pet.objects.create(name='Fifi')
++        comment = Comment.objects.create(comment='Great pet!', content_object=pet)
++        bookmark = Bookmark.objects.create(url='https://www.djangoproject.com/')
++        tagged_item = TaggedItem.objects.create(tag='django', content_object=bookmark, favorite=pet)
++
++        with self.assertNumQueries(2):
++            fetched_comment = Comment.objects.prefetch_related('content_object').get(pk=comment.pk)
++        with self.assertNumQueries(0):
++            self.assertEqual(fetched_comment.content_object, pet)
++
++        with self.assertNumQueries(2):
++            fetched_tagged_item = TaggedItem.objects.prefetch_related('favorite').get(pk=tagged_item.pk)
++        with self.assertNumQueries(0):
++            self.assertEqual(fetched_tagged_item.favorite, pet)
++
+ 
+ class UUIDPrefetchRelatedLookups(TestCase):
+ 

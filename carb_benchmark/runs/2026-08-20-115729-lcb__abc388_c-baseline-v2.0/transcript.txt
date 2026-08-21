@@ -1,0 +1,18 @@
+I have written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_c/main.py).
+
+### Method Explanation
+
+To count the total number of valid kagamimochi pairs $(i, j)$ such that $A_i \le A_j / 2$:
+1. Since the array $A$ is given in non-decreasing order, for a fixed bottom mochi at index $j$ (size $A_j$), any top mochi at index $i$ must satisfy $A_i \le \lfloor A_j / 2 \rfloor$.
+2. Because $A_i \le A_j / 2 < A_j$ for positive integers, any index $i$ satisfying $A_i \le A_j / 2$ naturally satisfies $i < j$.
+3. We can maintain a single pointer $i$ that advances as $j$ increases. For each $j$, we advance $i$ while $A_i \le \lfloor A_j / 2 \rfloor$. At that point, exactly $i$ elements (indices $0, 1, \dots, i-1$) can serve as top mochi for bottom mochi $j$. We add $i$ to our cumulative total.
+4. This two-pointer approach runs in $O(N)$ time and $O(N)$ space.
+I have written the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc388_c/main.py).
+
+### Method Explanation
+
+To count the total number of valid kagamimochi pairs $(i, j)$ such that $A_i \le A_j / 2$:
+1. Since the array $A$ is given in non-decreasing order, for a fixed bottom mochi at index $j$ (size $A_j$), any top mochi at index $i$ must satisfy $A_i \le \lfloor A_j / 2 \rfloor$.
+2. Because $A_i \le A_j / 2 < A_j$ for positive integers, any index $i$ satisfying $A_i \le A_j / 2$ naturally satisfies $i < j$.
+3. We can maintain a single pointer $i$ that advances as $j$ increases. For each $j$, we advance $i$ while $A_i \le \lfloor A_j / 2 \rfloor$. At that point, exactly $i$ elements (indices $0, 1, \dots, i-1$) can serve as top mochi for bottom mochi $j$. We add $i$ to our cumulative total.
+4. This two-pointer approach runs in $O(N)$ time and $O(N)$ space.

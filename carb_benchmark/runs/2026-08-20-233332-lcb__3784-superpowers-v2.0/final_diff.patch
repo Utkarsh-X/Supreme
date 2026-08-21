@@ -1,0 +1,137 @@
+diff --git a/main.py b/main.py
+index c86f6c8..9d12b08 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,131 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++
++class Node:
++    __slots__ = ('children', 'count', 'depth', 'max_in', 'ancestor_off', 'max_off_path')
++    def __init__(self, depth):
++        self.children = {}
++        self.count = 0
++        self.depth = depth
++        self.max_in = -1
++        self.ancestor_off = -1
++        self.max_off_path = -1
++
++def solve():
++    input_data = sys.stdin.read()
++    if not input_data.strip():
++        return
++    
++    decoder = json.JSONDecoder()
++    idx = 0
++    tokens = []
++    content = input_data
++    while idx < len(content):
++        while idx < len(content) and content[idx].isspace():
++            idx += 1
++        if idx >= len(content):
++            break
++        obj, end_idx = decoder.raw_decode(content, idx)
++        tokens.append(obj)
++        idx = end_idx
++        
++    if len(tokens) < 2:
++        return
++        
++    words = tokens[0]
++    k = tokens[1]
++    
++    n = len(words)
++    if n - 1 < k:
++        print(json.dumps([0] * n))
++        return
++        
++    root = Node(0)
++    
++    # 1. Build Trie
++    for w in words:
++        curr = root
++        curr.count += 1
++        for ch in w:
++            if ch not in curr.children:
++                curr.children[ch] = Node(curr.depth + 1)
++            curr = curr.children[ch]
++            curr.count += 1
++            
++    # 2. Collect nodes in BFS order
++    order = [root]
++    for curr in order:
++        for child in curr.children.values():
++            order.append(child)
++            
++    # 3. Compute max_in bottom-up (reversed BFS order)
++    for curr in reversed(order):
++        if curr.count >= k:
++            m_in = curr.depth
++            for child in curr.children.values():
++                if child.count >= k:
++                    if child.max_in > m_in:
++                        m_in = child.max_in
++            curr.max_in = m_in
++        else:
++            curr.max_in = -1
++            
++    # 4. Compute ancestor_off and max_off_path top-down (BFS order)
++    root.ancestor_off = -1
++    
++    for curr in order:
++        if curr.count >= k:
++            children_S = [c for c in curr.children.values() if c.count >= k]
++            max_child_in = -1
++            for c in children_S:
++                if c.max_in > max_child_in:
++                    max_child_in = c.max_in
++            curr.max_off_path = curr.ancestor_off if curr.ancestor_off > max_child_in else max_child_in
++            
++            m = len(children_S)
++            if m > 0:
++                pref = [-1] * m
++                suff = [-1] * m
++                
++                run = -1
++                for i in range(m):
++                    pref[i] = run
++                    if children_S[i].max_in > run:
++                        run = children_S[i].max_in
++                        
++                run = -1
++                for i in range(m - 1, -1, -1):
++                    suff[i] = run
++                    if children_S[i].max_in > run:
++                        run = children_S[i].max_in
++                        
++                anc_off = curr.ancestor_off
++                for i in range(m):
++                    c = children_S[i]
++                    other_max = pref[i] if pref[i] > suff[i] else suff[i]
++                    c.ancestor_off = anc_off if anc_off > other_max else other_max
++
++    # 5. Compute answer for each word
++    ans = [0] * n
++    k_plus_1 = k + 1
++    for idx, w in enumerate(words):
++        curr = root
++        term1 = 0
++        term2 = root.max_off_path
++        
++        for ch in w:
++            curr = curr.children[ch]
++            if curr.count >= k_plus_1:
++                term1 = curr.depth
++            if curr.count >= k:
++                term2 = curr.max_off_path
++            else:
++                break
++                
++        res = term1 if term1 > term2 else term2
++        ans[idx] = res if res > 0 else 0
++        
++    print(json.dumps(ans))
++
++if __name__ == '__main__':
++    solve()

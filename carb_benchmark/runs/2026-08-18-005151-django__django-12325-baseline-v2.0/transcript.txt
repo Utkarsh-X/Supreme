@@ -1,0 +1,20 @@
+### Cause of the Issue
+During model creation in [base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/django/db/models/base.py), Django collects `OneToOneField` instances targeting parent models into a `parent_links` dictionary.
+
+Previously, `parent_links[make_model_tuple(related)] = field` unconditionally assigned every `OneToOneField` pointing to a parent model to `parent_links`. If a subclass declared multiple `OneToOneField`s referencing the same parent model (e.g., `document_ptr` with `parent_link=True` and `origin` with `parent_link=False` default):
+- If `document_ptr` was declared **before** `origin`, `origin` would overwrite `document_ptr` in `parent_links`. When model setup ran `_prepare()`, Django tried to promote `origin` as the parent link PK and raised `ImproperlyConfigured: Add parent_link=True to appname.Picking.origin.`
+- If `document_ptr` was declared **after** `origin`, `document_ptr` would overwrite `origin` in `parent_links`, so setup succeeded.
+
+### Solution
+In [django/db/models/base.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/django/db/models/base.py#L204-L209), we updated `parent_links` collection so that fields explicitly marked with `parent_link=True` take precedence over non-parent link `OneToOneField`s, and non-parent link fields do not overwrite an existing parent link field:
+
+```python
+for field in base._meta.local_fields:
+    if isinstance(field, OneToOneField):
+        related = resolve_relation(new_class, field.remote_field.model)
+        parent_key = make_model_tuple(related)
+        if parent_key not in parent_links or field.remote_field.parent_link:
+            parent_links[parent_key] = field
+```
+
+A unit test `test_multiple_onetoone_to_parent` has been added to [tests/model_inheritance/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12325/tests/model_inheritance/tests.py#L178-L211) to verify both field declaration orders.

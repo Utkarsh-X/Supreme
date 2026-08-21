@@ -1,0 +1,28 @@
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_d/main.py).
+
+### Method Explanation
+The problem requires finding the minimum total operations (swaps + prefix deletions of identical elements) to empty sequence $A$.
+
+1. **Run-Length Compression & Dynamic Programming**:
+   - First, contiguous identical elements in $A$ are compressed into runs $(v_i, c_i)$, where $v_i$ is the value and $c_i$ is the length of the run.
+   - Any valid elimination corresponds to partitioning the runs into deletion groups. Each group of identical elements is deleted in 1 operation.
+   - When a run joins an existing group created earlier, it pays a swap cost equal to $c_i \times \text{weight\_above}(g)$, where $\text{weight\_above}(g)$ is the total count of elements in runs created after group $g$ that were assigned a group ID strictly greater than $g$'s ID.
+
+2. **State Space Pruning**:
+   - If $\text{weight\_above}(g) > 2$, joining group $g$ incurs a swap cost $\ge 3$, which can never outperform creating a new group. Thus, groups with $\text{weight\_above}(g) > 2$ become permanently dead and are pruned.
+   - At any step during DP, the number of active states is bounded by a tiny constant ($\le 8$), and each state contains at most 3 active groups.
+   - Consequently, the DP processes each test case in $O(K)$ time, easily running well within the time limits for $\sum N \le 2 \times 10^5$.
+I have implemented the solution in [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc195_d/main.py).
+
+### Method Explanation
+The problem requires finding the minimum total operations (swaps + prefix deletions of identical elements) to empty sequence $A$.
+
+1. **Run-Length Compression & Dynamic Programming**:
+   - First, contiguous identical elements in $A$ are compressed into runs $(v_i, c_i)$, where $v_i$ is the value and $c_i$ is the length of the run.
+   - Any valid elimination corresponds to partitioning the runs into deletion groups. Each group of identical elements is deleted in 1 operation.
+   - When a run joins an existing group created earlier, it pays a swap cost equal to $c_i \times \text{weight\_above}(g)$, where $\text{weight\_above}(g)$ is the total count of elements in runs created after group $g$ that were assigned a group ID strictly greater than $g$'s ID.
+
+2. **State Space Pruning**:
+   - If $\text{weight\_above}(g) > 2$, joining group $g$ incurs a swap cost $\ge 3$, which can never outperform creating a new group. Thus, groups with $\text{weight\_above}(g) > 2$ become permanently dead and are pruned.
+   - At any step during DP, the number of active states is bounded by a tiny constant ($\le 8$), and each state contains at most 3 active groups.
+   - Consequently, the DP processes each test case in $O(K)$ time, easily running well within the time limits for $\sum N \le 2 \times 10^5$.

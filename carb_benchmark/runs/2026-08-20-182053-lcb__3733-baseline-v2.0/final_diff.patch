@@ -1,0 +1,120 @@
+diff --git a/main.py b/main.py
+index c86f6c8..964824d 100644
+--- a/main.py
++++ b/main.py
+@@ -1 +1,114 @@
+-# Write your solution here. Read from stdin, print the answer to stdout.
++import sys
++import json
++import ast
++
++def solve():
++    input_text = sys.stdin.read().strip()
++    if not input_text:
++        return
++
++    if '=' in input_text:
++        input_text = input_text.split('=', 1)[1].strip()
++
++    try:
++        grid = json.loads(input_text)
++    except Exception:
++        try:
++            grid = ast.literal_eval(input_text)
++        except Exception:
++            return
++
++    if not grid or not grid[0]:
++        print(0)
++        return
++
++    n = len(grid)
++    m = len(grid[0])
++
++    # Directions:
++    # 0: Up-Right (-1, 1)
++    # 1: Down-Right (1, 1)
++    # 2: Down-Left (1, -1)
++    # 3: Up-Left (-1, -1)
++    # Clockwise 90° turn maps direction d to (d + 1) % 4
++    DIRS = [(-1, 1), (1, 1), (1, -1), (-1, -1)]
++
++    # memo[d][v_idx][r][c] stores the max length of alternating sequence (2, 0, 2, 0...) or (0, 2, 0, 2...)
++    # starting at (r, c) moving in direction d.
++    # v_idx = 0 for sequence starting with 0
++    # v_idx = 1 for sequence starting with 2
++    memo = [[[ [0] * m for _ in range(n) ] for _ in range(2)] for _ in range(4)]
++
++    for d in range(4):
++        dr, dc = DIRS[d]
++        r_range = range(n) if dr == -1 else range(n - 1, -1, -1)
++        c_range = range(m - 1, -1, -1) if dc == 1 else range(m)
++        memo_d0 = memo[d][0]
++        memo_d1 = memo[d][1]
++
++        for r in r_range:
++            grid_r = grid[r]
++            memo_d0_r = memo_d0[r]
++            memo_d1_r = memo_d1[r]
++            nr = r + dr
++            in_r_bounds = (0 <= nr < n)
++
++            for c in c_range:
++                nc = c + dc
++                in_c_bounds = in_r_bounds and (0 <= nc < m)
++                val = grid_r[c]
++
++                if val == 0:
++                    memo_d0_r[c] = 1 + memo_d1[nr][nc] if in_c_bounds else 1
++                elif val == 2:
++                    memo_d1_r[c] = 1 + memo_d0[nr][nc] if in_c_bounds else 1
++
++    ans = 0
++
++    for r in range(n):
++        grid_r = grid[r]
++        for c in range(m):
++            if grid_r[c] == 1:
++                if ans < 1:
++                    ans = 1
++
++                for d0 in range(4):
++                    dr0, dc0 = DIRS[d0]
++                    d1 = (d0 + 1) % 4
++                    dr1, dc1 = DIRS[d1]
++                    memo_d1 = memo[d1]
++
++                    curr_r, curr_c = r, c
++                    L1 = 1
++
++                    while True:
++                        # Target value index for second leg (cell L1 + 1):
++                        # cell 2 -> val 2 (v_idx = 1) if L1 is odd
++                        # cell 3 -> val 0 (v_idx = 0) if L1 is even
++                        target_v_idx = 1 if (L1 & 1) else 0
++
++                        next_r, next_c = curr_r + dr1, curr_c + dc1
++                        if 0 <= next_r < n and 0 <= next_c < m:
++                            L2 = memo_d1[target_v_idx][next_r][next_c]
++                        else:
++                            L2 = 0
++
++                        if L1 + L2 > ans:
++                            ans = L1 + L2
++
++                        # Step forward along first leg
++                        curr_r += dr0
++                        curr_c += dc0
++                        L1 += 1
++
++                        expected_first_leg_v = 2 if (L1 % 2 == 0) else 0
++
++                        if not (0 <= curr_r < n and 0 <= curr_c < m):
++                            break
++                        if grid[curr_r][curr_c] != expected_first_leg_v:
++                            break
++
++    print(ans)
++
++if __name__ == '__main__':
++    solve()

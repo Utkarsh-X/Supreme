@@ -1,0 +1,32 @@
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_e/main.py).
+
+### Method Explanation
+
+1. **Mapping Consistency Check**:
+   First, we verify if the mapping from $S[i] \to T[i]$ is well-defined. If any character in $S$ maps to two different characters in $T$, it is impossible to transform $S$ into $T$, so we output `-1`.
+
+2. **26-Character Constraint Check**:
+   If both $S$ and $T$ contain all 26 distinct lowercase English letters and $S \neq T$, any single replace operation reduces the number of distinct characters in $S$ to at most 25, making it impossible to reach $T$ (which requires 26 distinct characters). In this case, we output `-1`.
+
+3. **Functional Graph Transformation**:
+   For each distinct character $u \in S$ that needs to change (i.e. $u \neq f(u)$), we add a directed edge $u \to f(u)$.
+   - Each non-self-loop edge represents 1 character operation.
+   - In a functional graph where each node has out-degree $\le 1$, each weakly connected component has at most 1 directed cycle.
+   - If a component contains a directed cycle of length $> 1$, resolving cyclic dependencies requires 1 temporary intermediate character, adding 1 extra operation for that component.
+   - The total minimum number of operations is $|E| + (\text{number of components containing a directed cycle of length } > 1)$.
+An optimal Python 3 solution has been implemented in [`main.py`](file:///E:/RofU/Supreme/carb_workspaces/lcb__abc399_e/main.py).
+
+### Method Explanation
+
+1. **Mapping Consistency Check**:
+   First, we verify if the mapping from $S[i] \to T[i]$ is well-defined. If any character in $S$ maps to two different characters in $T$, it is impossible to transform $S$ into $T$, so we output `-1`.
+
+2. **26-Character Constraint Check**:
+   If both $S$ and $T$ contain all 26 distinct lowercase English letters and $S \neq T$, any single replace operation reduces the number of distinct characters in $S$ to at most 25, making it impossible to reach $T$ (which requires 26 distinct characters). In this case, we output `-1`.
+
+3. **Functional Graph Transformation**:
+   For each distinct character $u \in S$ that needs to change (i.e. $u \neq f(u)$), we add a directed edge $u \to f(u)$.
+   - Each non-self-loop edge represents 1 character operation.
+   - In a functional graph where each node has out-degree $\le 1$, each weakly connected component has at most 1 directed cycle.
+   - If a component contains a directed cycle of length $> 1$, resolving cyclic dependencies requires 1 temporary intermediate character, adding 1 extra operation for that component.
+   - The total minimum number of operations is $|E| + (\text{number of components containing a directed cycle of length } > 1)$.

@@ -1,0 +1,44 @@
+### Cause of the Performance Regression
+
+When `Model.objects.all().delete()` is executed, `SQLDeleteCompiler.single_alias` determines whether the delete operation applies to a single table (yielding `DELETE FROM <table>`) or across multiple joined tables (requiring a subquery fallback `DELETE FROM <table> WHERE id IN (...)`).
+
+`single_alias` evaluates:
+```python
+sum(self.query.alias_refcount[t] > 0 for t in self.query.alias_map) == 1
+```
+
+For queries like `Model.objects.all()`, no filters or joins are applied, so `self.query.get_initial_alias()` was never called prior to checking `single_alias`. As a result:
+- `self.query.alias_map` was empty (`{}`).
+- `single_alias` returned `0 == 1` (`False`).
+- `SQLDeleteCompiler.as_sql()` erroneously treated the single-table delete as a multi-table delete, generating `DELETE FROM <table> WHERE <table>.<id> IN (SELECT <table>.<id> FROM <table>)`.
+
+### Solution
+
+In [django/db/models/sql/compiler.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/django/db/models/sql/compiler.py#L1407-L1412), `SQLDeleteCompiler.single_alias` now calls `self.query.get_initial_alias()` before checking table reference counts. This ensures the base table alias is added to `alias_map` and referenced in `alias_refcount`, allowing `single_alias` to correctly evaluate to `True` for simple model deletions.
+
+### Changes Made
+
+1. **[django/db/models/sql/compiler.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/django/db/models/sql/compiler.py#L1407-L1412)**: Updated `SQLDeleteCompiler.single_alias` to call `self.query.get_initial_alias()`.
+2. **[tests/delete/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/tests/delete/tests.py#L707-L713)**: Added `test_fast_delete_all_sql` to verify that `Model.objects.all().delete()` generates `DELETE FROM <table>` without a subquery.
+### Cause of the Performance Regression
+
+When `Model.objects.all().delete()` is executed, `SQLDeleteCompiler.single_alias` determines whether the delete operation applies to a single table (yielding `DELETE FROM <table>`) or across multiple joined tables (requiring a subquery fallback `DELETE FROM <table> WHERE id IN (...)`).
+
+`single_alias` evaluates:
+```python
+sum(self.query.alias_refcount[t] > 0 for t in self.query.alias_map) == 1
+```
+
+For queries like `Model.objects.all()`, no filters or joins are applied, so `self.query.get_initial_alias()` was never called prior to checking `single_alias`. As a result:
+- `self.query.alias_map` was empty (`{}`).
+- `single_alias` returned `0 == 1` (`False`).
+- `SQLDeleteCompiler.as_sql()` erroneously treated the single-table delete as a multi-table delete, generating `DELETE FROM <table> WHERE <table>.<id> IN (SELECT <table>.<id> FROM <table>)`.
+
+### Solution
+
+In [django/db/models/sql/compiler.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/django/db/models/sql/compiler.py#L1407-L1412), `SQLDeleteCompiler.single_alias` now calls `self.query.get_initial_alias()` before checking table reference counts. This ensures the base table alias is added to `alias_map` and referenced in `alias_refcount`, allowing `single_alias` to correctly evaluate to `True` for simple model deletions.
+
+### Changes Made
+
+1. **[django/db/models/sql/compiler.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/django/db/models/sql/compiler.py#L1407-L1412)**: Updated `SQLDeleteCompiler.single_alias` to call `self.query.get_initial_alias()`.
+2. **[tests/delete/tests.py](file:///E:/RofU/Supreme/carb_workspaces/django__django-12965/tests/delete/tests.py#L707-L713)**: Added `test_fast_delete_all_sql` to verify that `Model.objects.all().delete()` generates `DELETE FROM <table>` without a subquery.

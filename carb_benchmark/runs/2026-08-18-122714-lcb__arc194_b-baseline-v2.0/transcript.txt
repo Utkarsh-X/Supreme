@@ -1,0 +1,32 @@
+The minimum total cost required to sort the permutation $P$ in ascending order is computed and written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_b/main.py).
+
+### Method Explanation
+
+1. **Analysis of Swap Costs**:
+   - Any swap of adjacent elements $P_k$ and $P_{k+1}$ costs $k$.
+   - In any sequence of adjacent swaps that sorts $P$ using the minimal number of swaps (equal to the number of inversions), every pair of inverted elements $(u, v)$ with initial indices $pos(u) < pos(v)$ and $u > v$ swaps exactly once.
+   - During this swap, element $v$ moves left from position $k+1$ to position $k$, at a cost of $k$. Notice that $k$ is the destination position of the left-moving element $v$.
+   - For an element $x$ initially at 1-indexed position $i$, let $c(x)$ be the number of elements to the left of $x$ that are greater than $x$. Element $x$ must move left past all $c(x)$ elements.
+   - The minimal cost for the $c(x)$ left-moves of element $x$ is achieved when $x$ moves left at positions $i-1, i-2, \ldots, i-c(x)$.
+   - Summing the cost of these left-moves for element $x$ gives:
+     $$\text{cost}(x) = \sum_{k=1}^{c(x)} (i - k) = c(x) \cdot i - \frac{c(x)(c(x) + 1)}{2}$$
+
+2. **Algorithm**:
+   - Using a Binary Indexed Tree (Fenwick Tree), we iterate through $P$ from left to right to compute $c(P_i)$ for each element in $O(\log N)$ time.
+   - We sum $\text{cost}(P_i)$ over all $i = 1, \ldots, N$, yielding an $O(N \log N)$ total solution.
+The minimum total cost required to sort the permutation $P$ in ascending order is computed and written to [main.py](file:///E:/RofU/Supreme/carb_workspaces/lcb__arc194_b/main.py).
+
+### Method Explanation
+
+1. **Analysis of Swap Costs**:
+   - Any swap of adjacent elements $P_k$ and $P_{k+1}$ costs $k$.
+   - In any sequence of adjacent swaps that sorts $P$ using the minimal number of swaps (equal to the number of inversions), every pair of inverted elements $(u, v)$ with initial indices $pos(u) < pos(v)$ and $u > v$ swaps exactly once.
+   - During this swap, element $v$ moves left from position $k+1$ to position $k$, at a cost of $k$. Notice that $k$ is the destination position of the left-moving element $v$.
+   - For an element $x$ initially at 1-indexed position $i$, let $c(x)$ be the number of elements to the left of $x$ that are greater than $x$. Element $x$ must move left past all $c(x)$ elements.
+   - The minimal cost for the $c(x)$ left-moves of element $x$ is achieved when $x$ moves left at positions $i-1, i-2, \ldots, i-c(x)$.
+   - Summing the cost of these left-moves for element $x$ gives:
+     $$\text{cost}(x) = \sum_{k=1}^{c(x)} (i - k) = c(x) \cdot i - \frac{c(x)(c(x) + 1)}{2}$$
+
+2. **Algorithm**:
+   - Using a Binary Indexed Tree (Fenwick Tree), we iterate through $P$ from left to right to compute $c(P_i)$ for each element in $O(\log N)$ time.
+   - We sum $\text{cost}(P_i)$ over all $i = 1, \ldots, N$, yielding an $O(N \log N)$ total solution.

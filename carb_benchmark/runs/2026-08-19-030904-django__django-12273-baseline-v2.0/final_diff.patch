@@ -1,0 +1,149 @@
+diff --git a/django/db/models/base.py b/django/db/models/base.py
+index 844c01e..d324053 100644
+--- a/django/db/models/base.py
++++ b/django/db/models/base.py
+@@ -569,6 +569,9 @@ class Model(metaclass=ModelBase):
+         return getattr(self, meta.pk.attname)
+ 
+     def _set_pk_val(self, value):
++        for parent in self._meta.parents:
++            if parent._meta.pk:
++                setattr(self, parent._meta.pk.attname, value)
+         return setattr(self, self._meta.pk.attname, value)
+ 
+     pk = property(_get_pk_val, _set_pk_val)
+@@ -804,9 +807,16 @@ class Model(metaclass=ModelBase):
+         inserted = False
+         for parent, field in meta.parents.items():
+             # Make sure the link fields are synced between parent and self.
+-            if (field and getattr(self, parent._meta.pk.attname) is None and
+-                    getattr(self, field.attname) is not None):
+-                setattr(self, parent._meta.pk.attname, getattr(self, field.attname))
++            if field:
++                if (getattr(self, parent._meta.pk.attname) is None and
++                        getattr(self, field.attname) is not None):
++                    if self._state.adding:
++                        setattr(self, parent._meta.pk.attname, getattr(self, field.attname))
++                    else:
++                        setattr(self, field.attname, None)
++                elif (getattr(self, parent._meta.pk.attname) is not None and
++                        getattr(self, field.attname) is None):
++                    setattr(self, parent._meta.pk.attname, None)
+             parent_inserted = self._save_parents(cls=parent, using=using, update_fields=update_fields)
+             updated = self._save_table(
+                 cls=parent, using=using, update_fields=update_fields,
+diff --git a/tests/model_inheritance/models.py b/tests/model_inheritance/models.py
+index a4f9cfe..d6544f9 100644
+--- a/tests/model_inheritance/models.py
++++ b/tests/model_inheritance/models.py
+@@ -194,3 +194,13 @@ class Child(Parent):
+ 
+ class GrandChild(Child):
+     pass
++
++
++class Item(models.Model):
++    uid = models.AutoField(primary_key=True, editable=False)
++    f = models.BooleanField(default=False)
++
++
++class Derived(Item):
++    pass
++
+diff --git a/tests/model_inheritance/tests.py b/tests/model_inheritance/tests.py
+index 5eef0f5..11cadfc 100644
+--- a/tests/model_inheritance/tests.py
++++ b/tests/model_inheritance/tests.py
+@@ -6,9 +6,9 @@ from django.test import SimpleTestCase, TestCase
+ from django.test.utils import CaptureQueriesContext, isolate_apps
+ 
+ from .models import (
+-    Base, Chef, CommonInfo, GrandChild, GrandParent, ItalianRestaurant,
+-    MixinModel, ParkingLot, Place, Post, Restaurant, Student, SubBase,
+-    Supplier, Title, Worker,
++    Base, Chef, CommonInfo, Derived, GrandChild, GrandParent, Item,
++    ItalianRestaurant, MixinModel, ParkingLot, Place, Post, Restaurant, Student,
++    SubBase, Supplier, Title, Worker,
+ )
+ 
+ 
+@@ -460,6 +460,79 @@ class ModelInheritanceDataTests(TestCase):
+             attrgetter("name")
+         )
+ 
++    def test_reset_pk(self):
++        # Child model with custom AutoField pk (Item / Derived)
++        derived = Derived.objects.create(f=True)
++        item = Item.objects.get(pk=derived.pk)
++        obj1 = item.derived
++        obj1.uid = None
++        obj1.f = False
++        obj1.save()
++        self.assertNotEqual(obj1.pk, derived.pk)
++        self.assertEqual(Derived.objects.count(), 2)
++        original_item = Item.objects.get(pk=derived.pk)
++        self.assertTrue(original_item.f)
++
++        # Setting pk = None on child model with custom AutoField pk
++        obj2 = Item.objects.get(pk=derived.pk).derived
++        obj2.pk = None
++        obj2.f = False
++        obj2.save()
++        self.assertNotEqual(obj2.pk, derived.pk)
++        self.assertEqual(Derived.objects.count(), 3)
++
++        # Standard child model (Restaurant / Place)
++        initial_restaurant_count = Restaurant.objects.count()
++        r = Restaurant.objects.create(name="Taco Bell", address="Main St")
++        r_pk = r.pk
++
++        # Resetting pk = None
++        r1 = Restaurant.objects.get(pk=r_pk)
++        r1.pk = None
++        r1.save()
++        self.assertNotEqual(r1.pk, r_pk)
++        self.assertEqual(Restaurant.objects.count(), initial_restaurant_count + 2)
++
++        # Resetting parent pk field (id = None)
++        r2 = Restaurant.objects.get(pk=r_pk)
++        r2.id = None
++        r2.save()
++        self.assertNotEqual(r2.pk, r_pk)
++        self.assertEqual(Restaurant.objects.count(), initial_restaurant_count + 3)
++
++        # Resetting parent link attname (place_ptr_id = None)
++        r3 = Restaurant.objects.get(pk=r_pk)
++        r3.place_ptr_id = None
++        r3.save()
++        self.assertNotEqual(r3.pk, r_pk)
++        self.assertEqual(Restaurant.objects.count(), initial_restaurant_count + 4)
++
++        # Multi-level inheritance (GrandChild)
++        gc = GrandChild.objects.create(
++            first_name="Grand",
++            last_name="Child",
++            email="grandchild@example.com",
++        )
++        gc_pk = gc.pk
++
++        gc1 = GrandChild.objects.get(pk=gc_pk)
++        gc1.pk = None
++        gc1.first_name = "Grand1"
++        gc1.email = "grandchild1@example.com"
++        gc1.save()
++        self.assertNotEqual(gc1.pk, gc_pk)
++        self.assertEqual(GrandChild.objects.count(), 2)
++
++        gc2 = GrandChild.objects.get(pk=gc_pk)
++        gc2.id = None
++        gc2.first_name = "Grand2"
++        gc2.email = "grandchild2@example.com"
++        gc2.save()
++        self.assertNotEqual(gc2.pk, gc_pk)
++        self.assertEqual(GrandChild.objects.count(), 3)
++
++
++
+ 
+ @isolate_apps('model_inheritance', 'model_inheritance.tests')
+ class InheritanceSameModelNameTests(SimpleTestCase):
