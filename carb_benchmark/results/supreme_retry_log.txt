@@ -1,0 +1,45 @@
+tasks: 13 | configs: ['supreme-v2.0']
+
+[1/13] django__django-16631::supreme-v2.0 (00:59:45)
+  -> FAILURE
+
+[2/13] django__django-11477::supreme-v2.0 (01:14:19)
+  -> SUCCESS
+
+[3/13] sympy__sympy-14248::supreme-v2.0 (01:25:13)
+  -> FAILURE
+
+[4/13] django__django-12406::supreme-v2.0 (01:34:06)
+  -> FAILURE
+
+[5/13] sympy__sympy-13852::supreme-v2.0 (01:35:10)
+  -> FAILURE
+
+[6/13] django__django-14007::supreme-v2.0 (01:36:11)
+  -> FAILURE
+
+===== BATCH COMPLETE =====
+total: 13 | passed: 2 | failed: 11 | skipped: 7
+
+--- remaining failures ---
+django__django-16631::supreme-v2.0: FAILURE
+sympy__sympy-14248::supreme-v2.0: FAILURE
+django__django-12406::supreme-v2.0: FAILURE
+sympy__sympy-13852::supreme-v2.0: FAILURE
+django__django-14007::supreme-v2.0: FAILURE
+ FAILURE
+
+===== BATCH COMPLETE =====
+total: 13 | passed: 2 | failed: 11 | skipped: 2
+
+--- remaining failures ---
+django__django-16631::supreme-v2.0: FAILURE
+sympy__sympy-14248::supreme-v2.0: FAILURE
+django__django-12406::supreme-v2.0: FAILURE
+sympy__sympy-13852::supreme-v2.0: FAILURE
+django__django-14007::supreme-v2.0: FAILURE
+django__django-14034::supreme-v2.0: FAILURE
+lcb__arc190_c::supreme-v2.0: FAILURE
+astropy__astropy-14096::supreme-v2.0: FAILURE
+django__django-12325::supreme-v2.0: FAILURE
+lcb__abc396_e::supreme-v2.0: FAILURE

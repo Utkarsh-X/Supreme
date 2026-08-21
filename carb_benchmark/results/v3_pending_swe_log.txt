@@ -1,0 +1,513 @@
+V3 calibration: 17 tasks | config=baseline-v2.0 | 93 already recorded
+[1/17] django__django-11211: incomplete (reset: rate-limited artifact) -> re-run
+[1/17] django__django-11211: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-11211
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-030234-django__django-11211-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030234-django__django-11211-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-030234-django__django-11211-baseline-v2.0
+Status     : SUCCESS
+Duration   : 136.88s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030234-django__django-11211-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-030234-django__django-11211-baseline-v2.0
+Status          : SUCCESS
+Duration        : 134.94s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-11211)
+Diff            : 2 files, 13 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030234-django__django-11211-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030234-django__django-11211-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-030234-django__django-11211-baseline-v2.0\evaluator.json
+    -> PASS (137.6s wall, 13 lines) 2026-08-19-030234-django__django-11211-baseline-v2.0
+[2/17] django__django-11477: incomplete (reset: rate-limited artifact) -> re-run
+[2/17] django__django-11477: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-11477
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-030452-django__django-11477-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030452-django__django-11477-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-030452-django__django-11477-baseline-v2.0
+Status     : FAILURE
+Duration   : 129.65s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030452-django__django-11477-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-030452-django__django-11477-baseline-v2.0
+Status          : FAILURE
+Duration        : 127.55s
+Tests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py django__django-11477)
+Diff            : 3 files, 10 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030452-django__django-11477-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030452-django__django-11477-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-030452-django__django-11477-baseline-v2.0\evaluator.json
+    -> FAIL (130.3s wall, 10 lines) 2026-08-19-030452-django__django-11477-baseline-v2.0
+[3/17] django__django-11848: incomplete (reset: rate-limited artifact) -> re-run
+[3/17] django__django-11848: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-11848
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-030702-django__django-11848-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030702-django__django-11848-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-030702-django__django-11848-baseline-v2.0
+Status     : SUCCESS
+Duration   : 121.24s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030702-django__django-11848-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-030702-django__django-11848-baseline-v2.0
+Status          : SUCCESS
+Duration        : 119.2s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-11848)
+Diff            : 2 files, 38 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030702-django__django-11848-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030702-django__django-11848-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-030702-django__django-11848-baseline-v2.0\evaluator.json
+    -> PASS (121.9s wall, 38 lines) 2026-08-19-030702-django__django-11848-baseline-v2.0
+[4/17] django__django-12273: incomplete (reset: rate-limited artifact) -> re-run
+[4/17] django__django-12273: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-12273
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-030904-django__django-12273-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030904-django__django-12273-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-030904-django__django-12273-baseline-v2.0
+Status     : SUCCESS
+Duration   : 224.04s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030904-django__django-12273-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-030904-django__django-12273-baseline-v2.0
+Status          : SUCCESS
+Duration        : 221.9s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-12273)
+Diff            : 3 files, 105 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030904-django__django-12273-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-030904-django__django-12273-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-030904-django__django-12273-baseline-v2.0\evaluator.json
+    -> PASS (224.8s wall, 105 lines) 2026-08-19-030904-django__django-12273-baseline-v2.0
+[5/17] django__django-12406: incomplete (reset: rate-limited artifact) -> re-run
+[5/17] django__django-12406: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-12406
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-031249-django__django-12406-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031249-django__django-12406-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-031249-django__django-12406-baseline-v2.0
+Status     : FAILURE
+Duration   : 166.54s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031249-django__django-12406-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-031249-django__django-12406-baseline-v2.0
+Status          : FAILURE
+Duration        : 164.34s
+Tests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py django__django-12406)
+Diff            : 3 files, 58 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031249-django__django-12406-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031249-django__django-12406-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-031249-django__django-12406-baseline-v2.0\evaluator.json
+    -> FAIL (167.2s wall, 58 lines) 2026-08-19-031249-django__django-12406-baseline-v2.0
+[6/17] django__django-12663: incomplete (reset: rate-limited artifact) -> re-run
+[6/17] django__django-12663: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-12663
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-031536-django__django-12663-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031536-django__django-12663-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-031536-django__django-12663-baseline-v2.0
+Status     : SUCCESS
+Duration   : 690.02s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031536-django__django-12663-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-031536-django__django-12663-baseline-v2.0
+Status          : SUCCESS
+Duration        : 687.71s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-12663)
+Diff            : 3 files, 26 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031536-django__django-12663-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-031536-django__django-12663-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-031536-django__django-12663-baseline-v2.0\evaluator.json
+    -> PASS (690.7s wall, 26 lines) 2026-08-19-031536-django__django-12663-baseline-v2.0
+[7/17] django__django-13279: incomplete (reset: rate-limited artifact) -> re-run
+[7/17] django__django-13279: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-13279
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-032707-django__django-13279-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032707-django__django-13279-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-032707-django__django-13279-baseline-v2.0
+Status     : SUCCESS
+Duration   : 150.73s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032707-django__django-13279-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-032707-django__django-13279-baseline-v2.0
+Status          : SUCCESS
+Duration        : 148.48s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-13279)
+Diff            : 2 files, 25 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032707-django__django-13279-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032707-django__django-13279-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-032707-django__django-13279-baseline-v2.0\evaluator.json
+    -> PASS (151.5s wall, 25 lines) 2026-08-19-032707-django__django-13279-baseline-v2.0
+[8/17] django__django-13516: incomplete (reset: rate-limited artifact) -> re-run
+[8/17] django__django-13516: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-13516
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-032939-django__django-13516-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032939-django__django-13516-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-032939-django__django-13516-baseline-v2.0
+Status     : SUCCESS
+Duration   : 150.3s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032939-django__django-13516-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-032939-django__django-13516-baseline-v2.0
+Status          : SUCCESS
+Duration        : 148.25s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-13516)
+Diff            : 2 files, 19 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032939-django__django-13516-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-032939-django__django-13516-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-032939-django__django-13516-baseline-v2.0\evaluator.json
+    -> PASS (151.0s wall, 19 lines) 2026-08-19-032939-django__django-13516-baseline-v2.0
+[9/17] django__django-13568: incomplete (reset: rate-limited artifact) -> re-run
+[9/17] django__django-13568: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-13568
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-033210-django__django-13568-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033210-django__django-13568-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-033210-django__django-13568-baseline-v2.0
+Status     : SUCCESS
+Duration   : 103.14s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033210-django__django-13568-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-033210-django__django-13568-baseline-v2.0
+Status          : SUCCESS
+Duration        : 101.24s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-13568)
+Diff            : 2 files, 47 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033210-django__django-13568-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033210-django__django-13568-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-033210-django__django-13568-baseline-v2.0\evaluator.json
+    -> PASS (103.8s wall, 47 lines) 2026-08-19-033210-django__django-13568-baseline-v2.0
+[10/17] django__django-13658: incomplete (reset: rate-limited artifact) -> re-run
+[10/17] django__django-13658: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-13658
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-033353-django__django-13658-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033353-django__django-13658-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-033353-django__django-13658-baseline-v2.0
+Status     : SUCCESS
+Duration   : 118.2s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033353-django__django-13658-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-033353-django__django-13658-baseline-v2.0
+Status          : SUCCESS
+Duration        : 116.17s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-13658)
+Diff            : 2 files, 13 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033353-django__django-13658-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033353-django__django-13658-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-033353-django__django-13658-baseline-v2.0\evaluator.json
+    -> PASS (118.9s wall, 13 lines) 2026-08-19-033353-django__django-13658-baseline-v2.0
+[11/17] django__django-13670: incomplete (reset: rate-limited artifact) -> re-run
+[11/17] django__django-13670: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-13670
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-033552-django__django-13670-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033552-django__django-13670-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-033552-django__django-13670-baseline-v2.0
+Status     : SUCCESS
+Duration   : 59.71s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033552-django__django-13670-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-033552-django__django-13670-baseline-v2.0
+Status          : SUCCESS
+Duration        : 54.49s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-13670)
+Diff            : 2 files, 14 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033552-django__django-13670-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033552-django__django-13670-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-033552-django__django-13670-baseline-v2.0\evaluator.json
+    -> PASS (60.4s wall, 14 lines) 2026-08-19-033552-django__django-13670-baseline-v2.0
+[12/17] django__django-13964: incomplete (reset: rate-limited artifact) -> re-run
+[12/17] django__django-13964: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-13964
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-033653-django__django-13964-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033653-django__django-13964-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-033653-django__django-13964-baseline-v2.0
+Status     : SUCCESS
+Duration   : 168.72s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033653-django__django-13964-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-033653-django__django-13964-baseline-v2.0
+Status          : SUCCESS
+Duration        : 166.53s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py django__django-13964)
+Diff            : 3 files, 47 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033653-django__django-13964-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033653-django__django-13964-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-033653-django__django-13964-baseline-v2.0\evaluator.json
+    -> PASS (169.4s wall, 47 lines) 2026-08-19-033653-django__django-13964-baseline-v2.0
+[13/17] django__django-14034: incomplete (reset: rate-limited artifact) -> re-run
+[13/17] django__django-14034: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | django__django-14034
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-033942-django__django-14034-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033942-django__django-14034-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-033942-django__django-14034-baseline-v2.0
+Status     : FAILURE
+Duration   : 150.01s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033942-django__django-14034-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-033942-django__django-14034-baseline-v2.0
+Status          : FAILURE
+Duration        : 148.07s
+Tests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py django__django-14034)
+Diff            : 3 files, 35 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033942-django__django-14034-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-033942-django__django-14034-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-033942-django__django-14034-baseline-v2.0\evaluator.json
+    -> FAIL (150.7s wall, 35 lines) 2026-08-19-033942-django__django-14034-baseline-v2.0
+[14/17] sphinx-doc__sphinx-10466: incomplete (reset: rate-limited artifact) -> re-run
+[14/17] sphinx-doc__sphinx-10466: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | sphinx-doc__sphinx-10466
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0
+Status     : SUCCESS
+Duration   : 517.61s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0
+Status          : SUCCESS
+Duration        : 515.05s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-10466)
+Diff            : 2 files, 41 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0\evaluator.json
+    -> PASS (517.9s wall, 41 lines) 2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0
+[15/17] sympy__sympy-19346: incomplete (reset: rate-limited artifact) -> re-run
+[15/17] sympy__sympy-19346: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | sympy__sympy-19346
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-035050-sympy__sympy-19346-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035050-sympy__sympy-19346-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-035050-sympy__sympy-19346-baseline-v2.0
+Status     : SUCCESS
+Duration   : 111.24s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035050-sympy__sympy-19346-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-035050-sympy__sympy-19346-baseline-v2.0
+Status          : SUCCESS
+Duration        : 102.69s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-19346)
+Diff            : 2 files, 41 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035050-sympy__sympy-19346-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035050-sympy__sympy-19346-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-035050-sympy__sympy-19346-baseline-v2.0\evaluator.json
+    -> PASS (111.5s wall, 41 lines) 2026-08-19-035050-sympy__sympy-19346-baseline-v2.0
+[16/17] sympy__sympy-24213: incomplete (reset: rate-limited artifact) -> re-run
+[16/17] sympy__sympy-24213: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | sympy__sympy-24213
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-035242-sympy__sympy-24213-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035242-sympy__sympy-24213-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-035242-sympy__sympy-24213-baseline-v2.0
+Status     : SUCCESS
+Duration   : 146.9s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035242-sympy__sympy-24213-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-035242-sympy__sympy-24213-baseline-v2.0
+Status          : SUCCESS
+Duration        : 139.38s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-24213)
+Diff            : 2 files, 21 lines
+Markers (const) : ['Supreme']
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035242-sympy__sympy-24213-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035242-sympy__sympy-24213-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-035242-sympy__sympy-24213-baseline-v2.0\evaluator.json
+    -> PASS (147.2s wall, 21 lines) 2026-08-19-035242-sympy__sympy-24213-baseline-v2.0
+[17/17] lcb__abc397_d: incomplete (reset: rate-limited artifact) -> re-run
+[17/17] lcb__abc397_d: running baseline...
+==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__abc397_d
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-19-035509-lcb__abc397_d-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035509-lcb__abc397_d-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-19-035509-lcb__abc397_d-baseline-v2.0
+Status     : FAILURE
+Duration   : 57.08s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035509-lcb__abc397_d-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-19-035509-lcb__abc397_d-baseline-v2.0
+Status          : FAILURE
+Duration        : 54.07s
+Tests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc397_d)
+Diff            : 1 files, 40 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035509-lcb__abc397_d-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-19-035509-lcb__abc397_d-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-19-035509-lcb__abc397_d-baseline-v2.0\evaluator.json
+    -> FAIL (57.3s wall, 40 lines) 2026-08-19-035509-lcb__abc397_d-baseline-v2.0
+
+Done. recorded=93 passed=59 failed=34 baseline pass rate=63.4% (of graded)

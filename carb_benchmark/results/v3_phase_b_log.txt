@@ -1,0 +1,232 @@
+tasks: 29 | configs: ['supreme-v2.0', 'superpowers-v2.0']
+
+[1/58] lcb__abc392_d::supreme-v2.0 (10:59:03)
+  -> FAILURE
+
+[2/58] lcb__abc392_d::superpowers-v2.0 (11:01:22)
+  -> FAILURE
+
+[3/58] django__django-16667::supreme-v2.0 (11:03:50)
+  -> FAILURE
+
+[4/58] django__django-16667::superpowers-v2.0 (11:07:23)
+  -> FAILURE
+
+[5/58] django__django-16263::supreme-v2.0 (11:11:55)
+  -> FAILURE
+
+[6/58] django__django-16263::superpowers-v2.0 (11:32:58)
+  -> FAILURE
+
+[7/58] lcb__abc399_e::supreme-v2.0 (11:33:01)
+  -> SUCCESS
+
+[8/58] lcb__abc399_e::superpowers-v2.0 (11:36:15)
+  -> SUCCESS
+
+[9/58] lcb__abc397_d::supreme-v2.0 (11:43:17)
+  -> FAILURE
+
+[10/58] lcb__abc397_d::superpowers-v2.0 (11:47:36)
+  -> FAILURE
+
+[11/58] django__django-13837::supreme-v2.0 (11:49:20)
+  -> FAILURE
+
+[12/58] django__django-13837::superpowers-v2.0 (11:55:13)
+  -> FAILURE
+
+[13/58] django__django-13212::supreme-v2.0 (12:01:14)
+  -> FAILURE
+
+[14/58] django__django-13212::superpowers-v2.0 (12:04:35)
+  -> FAILURE
+
+[15/58] django__django-16560::supreme-v2.0 (12:08:14)
+  -> FAILURE
+
+[16/58] django__django-16560::superpowers-v2.0 (12:36:36)
+  -> FAILURE
+
+[17/58] django__django-16502::supreme-v2.0 (12:47:04)
+  -> FAILURE
+
+[18/58] django__django-16502::superpowers-v2.0 (12:47:07)
+  -> FAILURE
+
+[19/58] lcb__abc388_g::supreme-v2.0 (12:51:14)
+  -> SUCCESS
+
+[20/58] lcb__abc388_g::superpowers-v2.0 (12:52:18)
+  -> SUCCESS
+
+[21/58] django__django-15957::supreme-v2.0 (12:53:18)
+  -> FAILURE
+
+[22/58] django__django-15957::superpowers-v2.0 (12:55:34)
+  -> FAILURE
+
+[23/58] lcb__arc192_b::supreme-v2.0 (12:57:46)
+  -> FAILURE
+
+[24/58] lcb__arc192_b::superpowers-v2.0 (13:00:04)
+  -> FAILURE
+
+[25/58] lcb__abc392_f::supreme-v2.0 (13:02:29)
+  -> FAILURE
+
+[26/58] lcb__abc392_f::superpowers-v2.0 (13:03:21)
+  -> FAILURE
+
+[27/58] sympy__sympy-16597::supreme-v2.0 (13:03:24)
+  -> FAILURE
+
+[28/58] sympy__sympy-16597::superpowers-v2.0 (13:10:47)
+  -> FAILURE
+
+[29/58] lcb__abc390_g::supreme-v2.0 (13:10:50)
+  -> SUCCESS
+
+[30/58] lcb__abc390_g::superpowers-v2.0 (13:51:21)
+  -> SUCCESS
+
+[31/58] sympy__sympy-13878::supreme-v2.0 (13:54:22)
+  -> FAILURE
+
+[32/58] sympy__sympy-13878::superpowers-v2.0 (13:56:42)
+  -> FAILURE
+
+[33/58] django__django-10554::supreme-v2.0 (13:56:43)
+  -> FAILURE
+
+[34/58] django__django-10554::superpowers-v2.0 (13:56:44)
+  -> FAILURE
+
+[35/58] django__django-16631::supreme-v2.0 (13:56:46)
+  -> FAILURE
+
+[36/58] django__django-16631::superpowers-v2.0 (13:56:47)
+  -> FAILURE
+
+[37/58] django__django-11477::supreme-v2.0 (13:56:49)
+  -> FAILURE
+
+[38/58] django__django-11477::superpowers-v2.0 (13:56:50)
+  -> FAILURE
+
+[39/58] lcb__abc391_f::supreme-v2.0 (13:56:52)
+  -> FAILURE
+
+[40/58] lcb__abc391_f::superpowers-v2.0 (13:56:55)
+  -> FAILURE
+
+[41/58] sympy__sympy-14248::supreme-v2.0 (13:56:58)
+  -> FAILURE
+
+[42/58] sympy__sympy-14248::superpowers-v2.0 (13:56:59)
+  -> FAILURE
+
+[43/58] django__django-12406::supreme-v2.0 (13:57:00)
+  -> FAILURE
+
+[44/58] django__django-12406::superpowers-v2.0 (13:57:02)
+  -> FAILURE
+
+[45/58] sympy__sympy-13852::supreme-v2.0 (13:57:04)
+  -> FAILURE
+
+[46/58] sympy__sympy-13852::superpowers-v2.0 (13:57:05)
+  -> FAILURE
+
+[47/58] django__django-14007::supreme-v2.0 (13:57:06)
+  -> FAILURE
+
+[48/58] django__django-14007::superpowers-v2.0 (13:57:07)
+  -> FAILURE
+
+[49/58] django__django-14034::supreme-v2.0 (13:57:10)
+  -> FAILURE
+
+[50/58] django__django-14034::superpowers-v2.0 (13:58:12)
+  -> FAILURE
+
+[51/58] lcb__arc190_c::supreme-v2.0 (13:58:15)
+  -> FAILURE
+
+[52/58] lcb__arc190_c::superpowers-v2.0 (13:59:18)
+  -> FAILURE
+
+[53/58] astropy__astropy-14096::supreme-v2.0 (14:00:21)
+  -> FAILURE
+
+[54/58] astropy__astropy-14096::superpowers-v2.0 (14:01:50)
+  -> FAILURE
+
+[55/58] django__django-12325::supreme-v2.0 (14:03:04)
+  -> FAILURE
+
+[56/58] django__django-12325::superpowers-v2.0 (14:04:15)
+  -> FAILURE
+
+[57/58] lcb__abc396_e::supreme-v2.0 (14:05:20)
+  -> FAILURE
+
+[58/58] lcb__abc396_e::superpowers-v2.0 (14:06:27)
+  -> FAILURE
+
+===== BATCH COMPLETE =====
+total: 58 | passed: 6 | failed: 52 | skipped: 0
+
+--- remaining failures ---
+lcb__abc392_d::supreme-v2.0: FAILURE
+lcb__abc392_d::superpowers-v2.0: FAILURE
+django__django-16667::supreme-v2.0: FAILURE
+django__django-16667::superpowers-v2.0: FAILURE
+django__django-16263::supreme-v2.0: FAILURE
+django__django-16263::superpowers-v2.0: FAILURE
+lcb__abc397_d::supreme-v2.0: FAILURE
+lcb__abc397_d::superpowers-v2.0: FAILURE
+django__django-13837::supreme-v2.0: FAILURE
+django__django-13837::superpowers-v2.0: FAILURE
+django__django-13212::supreme-v2.0: FAILURE
+django__django-13212::superpowers-v2.0: FAILURE
+django__django-16560::supreme-v2.0: FAILURE
+django__django-16560::superpowers-v2.0: FAILURE
+django__django-16502::supreme-v2.0: FAILURE
+django__django-16502::superpowers-v2.0: FAILURE
+django__django-15957::supreme-v2.0: FAILURE
+django__django-15957::superpowers-v2.0: FAILURE
+lcb__arc192_b::supreme-v2.0: FAILURE
+lcb__arc192_b::superpowers-v2.0: FAILURE
+lcb__abc392_f::supreme-v2.0: FAILURE
+lcb__abc392_f::superpowers-v2.0: FAILURE
+sympy__sympy-16597::supreme-v2.0: FAILURE
+sympy__sympy-16597::superpowers-v2.0: FAILURE
+sympy__sympy-13878::supreme-v2.0: FAILURE
+sympy__sympy-13878::superpowers-v2.0: FAILURE
+django__django-10554::supreme-v2.0: FAILURE
+django__django-10554::superpowers-v2.0: FAILURE
+django__django-16631::supreme-v2.0: FAILURE
+django__django-16631::superpowers-v2.0: FAILURE
+django__django-11477::supreme-v2.0: FAILURE
+django__django-11477::superpowers-v2.0: FAILURE
+lcb__abc391_f::supreme-v2.0: FAILURE
+lcb__abc391_f::superpowers-v2.0: FAILURE
+sympy__sympy-14248::supreme-v2.0: FAILURE
+sympy__sympy-14248::superpowers-v2.0: FAILURE
+django__django-12406::supreme-v2.0: FAILURE
+django__django-12406::superpowers-v2.0: FAILURE
+sympy__sympy-13852::supreme-v2.0: FAILURE
+sympy__sympy-13852::superpowers-v2.0: FAILURE
+django__django-14007::supreme-v2.0: FAILURE
+django__django-14007::superpowers-v2.0: FAILURE
+django__django-14034::supreme-v2.0: FAILURE
+django__django-14034::superpowers-v2.0: FAILURE
+lcb__arc190_c::supreme-v2.0: FAILURE
+lcb__arc190_c::superpowers-v2.0: FAILURE
+astropy__astropy-14096::supreme-v2.0: FAILURE
+astropy__astropy-14096::superpowers-v2.0: FAILURE
+django__django-12325::supreme-v2.0: FAILURE
+django__django-12325::superpowers-v2.0: FAILURE
+lcb__abc396_e::supreme-v2.0: FAILURE
+lcb__abc396_e::superpowers-v2.0: FAILURE

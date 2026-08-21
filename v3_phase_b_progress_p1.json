@@ -1,0 +1,75 @@
+{
+ "summary": {
+  "total": 38,
+  "passed": 9,
+  "failed": 29,
+  "skipped": 25
+ },
+ "runs": {
+  "lcb__arc195_c::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 22:33:42",
+   "tail": "eme-v2.0\nStatus          : FAILURE\nDuration        : 1049.46s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_c)\nDiff            : 1 files, 112 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-221612-lcb__arc195_c-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-221612-lcb__arc195_c-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-221612-lcb__arc195_c-supreme-v2.0\\evaluator.json\n"
+  },
+  "lcb__arc195_c::superpowers-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 22:39:17",
+   "tail": "tatus          : FAILURE\nDuration        : 334.17s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_c)\nDiff            : 1 files, 89 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-223342-lcb__arc195_c-superpowers-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-223342-lcb__arc195_c-superpowers-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-223342-lcb__arc195_c-superpowers-v2.0\\evaluator.json\n"
+  },
+  "django__django-16502::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 22:46:27",
+   "tail": " FAILURE\nDuration        : 426.87s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py django__django-16502)\nDiff            : 2 files, 52 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-223917-django__django-16502-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-223917-django__django-16502-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-223917-django__django-16502-supreme-v2.0\\evaluator.json\n"
+  },
+  "django__django-16263::superpowers-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 22:47:29",
+   "tail": "jango__django-16263-superpowers-v2.0\nStatus          : FAILURE\nDuration        : 60.87s\nTests           : FAIL (None)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-224628-django__django-16263-superpowers-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-224628-django__django-16263-superpowers-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-224628-django__django-16263-superpowers-v2.0\\evaluator.json\n"
+  },
+  "lcb__abc398_g::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 22:55:55",
+   "tail": "preme-v2.0\nStatus          : FAILURE\nDuration        : 502.79s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc398_g)\nDiff            : 1 files, 75 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-224729-lcb__abc398_g-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-224729-lcb__abc398_g-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-224729-lcb__abc398_g-supreme-v2.0\\evaluator.json\n"
+  },
+  "lcb__abc398_g::superpowers-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 23:05:31",
+   "tail": "tatus          : FAILURE\nDuration        : 572.59s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc398_g)\nDiff            : 1 files, 78 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-225555-lcb__abc398_g-superpowers-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-225555-lcb__abc398_g-superpowers-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-225555-lcb__abc398_g-superpowers-v2.0\\evaluator.json\n"
+  },
+  "lcb__abc400_g::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 23:10:22",
+   "tail": "reme-v2.0\nStatus          : FAILURE\nDuration        : 284.29s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc400_g)\nDiff            : 1 files, 164 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-230532-lcb__abc400_g-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-230532-lcb__abc400_g-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-230532-lcb__abc400_g-supreme-v2.0\\evaluator.json\n"
+  },
+  "lcb__abc400_g::superpowers-v2.0": {
+   "status": "SUCCESS",
+   "time": "2026-08-20 23:21:09",
+   "tail": "atus          : SUCCESS\nDuration        : 641.89s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc400_g)\nDiff            : 1 files, 112 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-231022-lcb__abc400_g-superpowers-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-231022-lcb__abc400_g-superpowers-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-231022-lcb__abc400_g-superpowers-v2.0\\evaluator.json\n"
+  },
+  "lcb__abc396_e::superpowers-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 23:22:49",
+   "tail": "Status          : FAILURE\nDuration        : 95.82s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc396_e)\nDiff            : 1 files, 68 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-232109-lcb__abc396_e-superpowers-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-232109-lcb__abc396_e-superpowers-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-232109-lcb__abc396_e-superpowers-v2.0\\evaluator.json\n"
+  },
+  "lcb__arc195_d::supreme-v2.0": {
+   "status": "SUCCESS",
+   "time": "2026-08-20 23:27:15",
+   "tail": "preme-v2.0\nStatus          : SUCCESS\nDuration        : 264.32s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_d)\nDiff            : 1 files, 70 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-232250-lcb__arc195_d-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-232250-lcb__arc195_d-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-232250-lcb__arc195_d-supreme-v2.0\\evaluator.json\n"
+  },
+  "lcb__arc195_d::superpowers-v2.0": {
+   "status": "SUCCESS",
+   "time": "2026-08-20 23:31:50",
+   "tail": "tatus          : SUCCESS\nDuration        : 274.55s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_d)\nDiff            : 1 files, 58 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-232715-lcb__arc195_d-superpowers-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-232715-lcb__arc195_d-superpowers-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-232715-lcb__arc195_d-superpowers-v2.0\\evaluator.json\n"
+  },
+  "lcb__3784::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 23:33:32",
+   "tail": "150-lcb__3784-supreme-v2.0\nStatus          : FAILURE\nDuration        : 98.96s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__3784)\nDiff            : 1 files, 116 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-233150-lcb__3784-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-233150-lcb__3784-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-233150-lcb__3784-supreme-v2.0\\evaluator.json\n"
+  },
+  "lcb__3784::superpowers-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-20 23:35:44",
+   "tail": "erpowers-v2.0\nStatus          : FAILURE\nDuration        : 128.61s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__3784)\nDiff            : 1 files, 132 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-233332-lcb__3784-superpowers-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-20-233332-lcb__3784-superpowers-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-20-233332-lcb__3784-superpowers-v2.0\\evaluator.json\n"
+  }
+ }
+}

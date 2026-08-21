@@ -1,0 +1,9 @@
+{
+ "summary": {
+  "total": 50,
+  "passed": 46,
+  "failed": 4,
+  "skipped": 50
+ },
+ "runs": {}
+}

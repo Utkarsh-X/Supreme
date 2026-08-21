@@ -1,0 +1,50 @@
+{
+ "summary": {
+  "total": 13,
+  "passed": 1,
+  "failed": 12,
+  "skipped": 5
+ },
+ "runs": {
+  "django__django-10554::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-21 00:56:13",
+   "tail": " FAILURE\nDuration        : 529.46s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py django__django-10554)\nDiff            : 3 files, 30 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-004719-django__django-10554-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-004719-django__django-10554-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-004719-django__django-10554-supreme-v2.0\\evaluator.json\n"
+  },
+  "django__django-16631::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-21 01:07:40",
+   "tail": "8-21-005613-django__django-16631-supreme-v2.0\nStatus          : FAILURE\nDuration        : 686.15s\nTests           : FAIL (None)\nDiff            : 6 files, 122 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-005613-django__django-16631-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-005613-django__django-16631-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-005613-django__django-16631-supreme-v2.0\\evaluator.json\n"
+  },
+  "django__django-11477::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-21 01:17:38",
+   "tail": "\nDuration        : 595.37s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py django__django-11477)\nDiff            : 3 files, 9 lines\nMarkers (const) : ['Supreme']\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-010740-django__django-11477-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-010740-django__django-11477-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-010740-django__django-11477-supreme-v2.0\\evaluator.json\n"
+  },
+  "lcb__abc391_f::supreme-v2.0": {
+   "status": "SUCCESS",
+   "time": "2026-08-21 01:19:52",
+   "tail": "upreme-v2.0\nStatus          : SUCCESS\nDuration        : 128.3s\nTests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc391_f)\nDiff            : 1 files, 48 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-011738-lcb__abc391_f-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-011738-lcb__abc391_f-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-011738-lcb__abc391_f-supreme-v2.0\\evaluator.json\n"
+  },
+  "sympy__sympy-14248::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-21 01:33:34",
+   "tail": " : 2026-08-21-011953-sympy__sympy-14248-supreme-v2.0\nStatus          : FAILURE\nDuration        : 820.83s\nTests           : FAIL (None)\nDiff            : 7 files, 63 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-011953-sympy__sympy-14248-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-011953-sympy__sympy-14248-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-011953-sympy__sympy-14248-supreme-v2.0\\evaluator.json\n"
+  },
+  "django__django-12406::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-21 01:34:38",
+   "tail": "  : FAILURE\nDuration        : 63.0s\nTests           : FAIL (python ../../carb_benchmark/scripts/eval_swe.py django__django-12406)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-013334-django__django-12406-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-013334-django__django-12406-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-013334-django__django-12406-supreme-v2.0\\evaluator.json\n"
+  },
+  "sympy__sympy-13852::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-21 01:35:39",
+   "tail": "    : 2026-08-21-013438-sympy__sympy-13852-supreme-v2.0\nStatus          : FAILURE\nDuration        : 60.8s\nTests           : FAIL (None)\nDiff            : 0 files, 0 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-013438-sympy__sympy-13852-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-013438-sympy__sympy-13852-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-013438-sympy__sympy-13852-supreme-v2.0\\evaluator.json\n"
+  },
+  "django__django-14007::supreme-v2.0": {
+   "status": "FAILURE",
+   "time": "2026-08-21 01:43:58",
+   "tail": "-08-21-013540-django__django-14007-supreme-v2.0\nStatus          : FAILURE\nDuration        : 498.1s\nTests           : FAIL (None)\nDiff            : 3 files, 58 lines\nMarkers (const) : []\nMarkers (full)  : []\nMarkers (super) : []\nTranscript      : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-013540-django__django-14007-supreme-v2.0\\transcript.txt\nDiff file       : E:\\RofU\\Supreme\\carb_benchmark\\runs\\2026-08-21-013540-django__django-14007-supreme-v2.0\\final_diff.patch\nEvaluator       : E:\\RofU\\Supreme\\carb_benchmark\\evaluations\\2026-08-21-013540-django__django-14007-supreme-v2.0\\evaluator.json\n"
+  }
+ }
+}

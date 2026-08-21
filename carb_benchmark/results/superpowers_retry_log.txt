@@ -1,0 +1,48 @@
+tasks: 14 | configs: ['superpowers-v2.0']
+
+[1/14] matplotlib__matplotlib-23299::superpowers-v2.0 (00:59:45)
+  -> FAILURE
+
+[2/14] sympy__sympy-13878::superpowers-v2.0 (01:18:43)
+  -> FAILURE
+
+[3/14] django__django-11477::superpowers-v2.0 (01:42:56)
+  -> FAILURE
+
+[4/14] lcb__abc391_f::superpowers-v2.0 (01:42:58)
+  -> FAILURE
+
+[5/14] sympy__sympy-14248::superpowers-v2.0 (01:43:01)
+  -> FAIL  -> FAILURE
+
+===== BATCH COMPLETE =====
+total: 14 | passed: 0 | failed: 14 | skipped: 9
+
+--- remaining failures ---
+matplotlib__matplotlib-23299::superpowers-v2.0: FAILURE
+sympy__sympy-13878::superpowers-v2.0: FAILURE
+django__django-10554::superpowers-v2.0: FAILURE
+django__django-16631::superpowers-v2.0: FAILURE
+django__django-11477::superpowers-v2.0: FAILURE
+/14] lcb__3770::superpowers-v2.0 (01:43:21)
+  -> FAILURE
+
+[12/14] django__django-16263::superpowers-v2.0 (01:43:25)
+  -> FAILURE
+
+===== BATCH COMPLETE =====
+total: 14 | passed: 0 | failed: 14 | skipped: 2
+
+--- remaining failures ---
+matplotlib__matplotlib-23299::superpowers-v2.0: FAILURE
+sympy__sympy-13878::superpowers-v2.0: FAILURE
+django__django-11477::superpowers-v2.0: FAILURE
+lcb__abc391_f::superpowers-v2.0: FAILURE
+sympy__sympy-14248::superpowers-v2.0: FAILURE
+django__django-12406::superpowers-v2.0: FAILURE
+sympy__sympy-13852::superpowers-v2.0: FAILURE
+lcb__arc190_c::superpowers-v2.0: FAILURE
+astropy__astropy-14096::superpowers-v2.0: FAILURE
+django__django-12325::superpowers-v2.0: FAILURE
+lcb__3770::superpowers-v2.0: FAILURE
+django__django-16263::superpowers-v2.0: FAILURE

@@ -1,0 +1,254 @@
+{
+  "total_tasks": 39,
+  "baseline": {
+    "pass": 0,
+    "fail": 39,
+    "pending": 0
+  },
+  "supreme": {
+    "pass": 9,
+    "fail": 30,
+    "pending": 0
+  },
+  "superpowers": {
+    "pass": 7,
+    "fail": 32,
+    "pending": 0
+  },
+  "matrix": [
+    {
+      "task_id": "astropy__astropy-14096",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "SUCCESS"
+    },
+    {
+      "task_id": "django__django-10554",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-11477",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-12325",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-12406",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-13212",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-13837",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-14007",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-14034",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-15957",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-16263",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-16502",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-16560",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-16631",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "django__django-16667",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__3687",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__3696",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__3701",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__3770",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__3783",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__3784",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__abc388_g",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "SUCCESS"
+    },
+    {
+      "task_id": "lcb__abc390_g",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "SUCCESS"
+    },
+    {
+      "task_id": "lcb__abc391_f",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "SUCCESS"
+    },
+    {
+      "task_id": "lcb__abc392_d",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__abc392_f",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__abc396_e",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__abc397_d",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__abc398_g",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__abc399_e",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "SUCCESS"
+    },
+    {
+      "task_id": "lcb__abc400_g",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "SUCCESS"
+    },
+    {
+      "task_id": "lcb__arc190_c",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__arc192_b",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__arc195_c",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "lcb__arc195_d",
+      "baseline": "FAILURE",
+      "supreme": "SUCCESS",
+      "superpowers": "SUCCESS"
+    },
+    {
+      "task_id": "sympy__sympy-13852",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "sympy__sympy-13878",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "sympy__sympy-14248",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    },
+    {
+      "task_id": "sympy__sympy-16597",
+      "baseline": "FAILURE",
+      "supreme": "FAILURE",
+      "superpowers": "FAILURE"
+    }
+  ]
+}

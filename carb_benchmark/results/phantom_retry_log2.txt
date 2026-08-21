@@ -1,0 +1,339 @@
+Phantom retry: 12 targets | 12 to run
+[1/12] lcb__arc191_d: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc191_d
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-194632-lcb__arc191_d-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194632-lcb__arc191_d-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-194632-lcb__arc191_d-baseline-v2.0
+Status     : SUCCESS
+Duration   : 199.97s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194632-lcb__arc191_d-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-194632-lcb__arc191_d-baseline-v2.0
+Status          : SUCCESS
+Duration        : 191.71s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc191_d)
+Diff            : 1 files, 176 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194632-lcb__arc191_d-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194632-lcb__arc191_d-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-194632-lcb__arc191_d-baseline-v2.0\evaluator.json
+PASS (200.2s, 176 lines)
+[2/12] lcb__arc192_d: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc192_d
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-194952-lcb__arc192_d-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194952-lcb__arc192_d-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-194952-lcb__arc192_d-baseline-v2.0
+Status     : SUCCESS
+Duration   : 102.6s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194952-lcb__arc192_d-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-194952-lcb__arc192_d-baseline-v2.0
+Status          : SUCCESS
+Duration        : 97.55s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc192_d)
+Diff            : 1 files, 97 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194952-lcb__arc192_d-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-194952-lcb__arc192_d-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-194952-lcb__arc192_d-baseline-v2.0\evaluator.json
+PASS (102.8s, 97 lines)
+[3/12] lcb__arc192_e: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc192_e
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-195135-lcb__arc192_e-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195135-lcb__arc192_e-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-195135-lcb__arc192_e-baseline-v2.0
+Status     : SUCCESS
+Duration   : 121.17s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195135-lcb__arc192_e-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-195135-lcb__arc192_e-baseline-v2.0
+Status          : SUCCESS
+Duration        : 116.76s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc192_e)
+Diff            : 1 files, 74 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195135-lcb__arc192_e-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195135-lcb__arc192_e-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-195135-lcb__arc192_e-baseline-v2.0\evaluator.json
+PASS (121.4s, 74 lines)
+[4/12] lcb__arc193_d: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc193_d
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-195337-lcb__arc193_d-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195337-lcb__arc193_d-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-195337-lcb__arc193_d-baseline-v2.0
+Status     : SUCCESS
+Duration   : 98.36s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195337-lcb__arc193_d-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-195337-lcb__arc193_d-baseline-v2.0
+Status          : SUCCESS
+Duration        : 97.96s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc193_d)
+Diff            : 1 files, 59 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195337-lcb__arc193_d-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195337-lcb__arc193_d-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-195337-lcb__arc193_d-baseline-v2.0\evaluator.json
+PASS (98.6s, 59 lines)
+[5/12] lcb__arc194_c: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc194_c
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-195515-lcb__arc194_c-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195515-lcb__arc194_c-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-195515-lcb__arc194_c-baseline-v2.0
+Status     : SUCCESS
+Duration   : 103.96s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195515-lcb__arc194_c-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-195515-lcb__arc194_c-baseline-v2.0
+Status          : SUCCESS
+Duration        : 97.88s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc194_c)
+Diff            : 1 files, 115 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195515-lcb__arc194_c-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195515-lcb__arc194_c-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-195515-lcb__arc194_c-baseline-v2.0\evaluator.json
+PASS (104.2s, 115 lines)
+[6/12] lcb__arc194_d: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc194_d
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-195700-lcb__arc194_d-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195700-lcb__arc194_d-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-195700-lcb__arc194_d-baseline-v2.0
+Status     : SUCCESS
+Duration   : 2403.01s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195700-lcb__arc194_d-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-195700-lcb__arc194_d-baseline-v2.0
+Status          : SUCCESS
+Duration        : 2400.23s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc194_d)
+Diff            : 1 files, 81 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195700-lcb__arc194_d-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-195700-lcb__arc194_d-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-195700-lcb__arc194_d-baseline-v2.0\evaluator.json
+PASS (2403.2s, 81 lines)
+[7/12] lcb__arc194_e: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc194_e
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-203703-lcb__arc194_e-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-203703-lcb__arc194_e-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-203703-lcb__arc194_e-baseline-v2.0
+Status     : SUCCESS
+Duration   : 188.48s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-203703-lcb__arc194_e-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-203703-lcb__arc194_e-baseline-v2.0
+Status          : SUCCESS
+Duration        : 186.02s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc194_e)
+Diff            : 1 files, 39 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-203703-lcb__arc194_e-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-203703-lcb__arc194_e-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-203703-lcb__arc194_e-baseline-v2.0\evaluator.json
+PASS (188.7s, 39 lines)
+[8/12] lcb__arc195_c: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc195_c
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-204011-lcb__arc195_c-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204011-lcb__arc195_c-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-204011-lcb__arc195_c-baseline-v2.0
+Status     : FAILURE
+Duration   : 155.12s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204011-lcb__arc195_c-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-204011-lcb__arc195_c-baseline-v2.0
+Status          : FAILURE
+Duration        : 154.59s
+Tests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_c)
+Diff            : 1 files, 118 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204011-lcb__arc195_c-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204011-lcb__arc195_c-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-204011-lcb__arc195_c-baseline-v2.0\evaluator.json
+FAIL (155.3s, 118 lines)
+[9/12] lcb__arc195_d: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc195_d
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-204247-lcb__arc195_d-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204247-lcb__arc195_d-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-204247-lcb__arc195_d-baseline-v2.0
+Status     : FAILURE
+Duration   : 2405.59s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204247-lcb__arc195_d-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-204247-lcb__arc195_d-baseline-v2.0
+Status          : FAILURE
+Duration        : 2400.35s
+Tests           : FAIL (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_d)
+Diff            : 1 files, 138 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204247-lcb__arc195_d-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-204247-lcb__arc195_d-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-204247-lcb__arc195_d-baseline-v2.0\evaluator.json
+FAIL (2405.8s, 138 lines)
+[10/12] lcb__arc195_e: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc195_e
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-212253-lcb__arc195_e-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212253-lcb__arc195_e-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-212253-lcb__arc195_e-baseline-v2.0
+Status     : SUCCESS
+Duration   : 102.16s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212253-lcb__arc195_e-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-212253-lcb__arc195_e-baseline-v2.0
+Status          : SUCCESS
+Duration        : 98.98s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_e)
+Diff            : 1 files, 54 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212253-lcb__arc195_e-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212253-lcb__arc195_e-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-212253-lcb__arc195_e-baseline-v2.0\evaluator.json
+PASS (102.3s, 54 lines)
+[11/12] lcb__arc196_c: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc196_c
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-212435-lcb__arc196_c-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212435-lcb__arc196_c-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-212435-lcb__arc196_c-baseline-v2.0
+Status     : SUCCESS
+Duration   : 577.81s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212435-lcb__arc196_c-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-212435-lcb__arc196_c-baseline-v2.0
+Status          : SUCCESS
+Duration        : 562.93s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc196_c)
+Diff            : 1 files, 175 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212435-lcb__arc196_c-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-212435-lcb__arc196_c-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-212435-lcb__arc196_c-baseline-v2.0\evaluator.json
+PASS (578.0s, 175 lines)
+[12/12] lcb__arc196_d: running... ==============================================================================
+  CARB-v2 BENCHMARK RUN — baseline-v2.0 | lcb__arc196_d
+  Model: gemini-3.6-flash-high | Engine: agy.exe | Isolated env: YES (both configs)
+==============================================================================
+=== Programmatic Run Session Initialized ===
+Run ID        : 2026-08-20-213413-lcb__arc196_d-baseline-v2.0
+Manifest Path : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-213413-lcb__arc196_d-baseline-v2.0\run_manifest.yaml
+Config Hash   : f1595fc216dc
+Prompt Hash   : N/A
+=== Programmatic Run Session Finalized ===
+Run ID     : 2026-08-20-213413-lcb__arc196_d-baseline-v2.0
+Status     : SUCCESS
+Duration   : 428.56s
+Manifest   : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-213413-lcb__arc196_d-baseline-v2.0\run_manifest.yaml
+
+----- RESULT -----
+Run ID          : 2026-08-20-213413-lcb__arc196_d-baseline-v2.0
+Status          : SUCCESS
+Duration        : 424.89s
+Tests           : PASS (python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc196_d)
+Diff            : 1 files, 274 lines
+Markers (const) : []
+Markers (full)  : []
+Markers (super) : []
+Transcript      : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-213413-lcb__arc196_d-baseline-v2.0\transcript.txt
+Diff file       : E:\RofU\Supreme\carb_benchmark\runs\2026-08-20-213413-lcb__arc196_d-baseline-v2.0\final_diff.patch
+Evaluator       : E:\RofU\Supreme\carb_benchmark\evaluations\2026-08-20-213413-lcb__arc196_d-baseline-v2.0\evaluator.json
+PASS (428.8s, 274 lines)
+
+Done. Total graded: 181 | PASS: 135 | FAIL: 46

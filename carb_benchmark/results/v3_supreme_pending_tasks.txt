@@ -1,0 +1,7 @@
+astropy__astropy-14096
+django__django-12325
+django__django-12406
+django__django-14034
+lcb__abc396_e
+lcb__arc190_c
+sympy__sympy-13852
