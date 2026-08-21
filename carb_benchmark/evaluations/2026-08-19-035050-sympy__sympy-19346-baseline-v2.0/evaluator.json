@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-19-035050-sympy__sympy-19346-baseline-v2.0",
+  "task_id": "sympy__sympy-19346",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 102.69,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 35,
+    "tool_call_counts": {
+      "find_by_name": 1,
+      "view_file": 12,
+      "grep_search": 9,
+      "run_command": 8,
+      "manage_task": 2,
+      "replace_file_content": 3
+    },
+    "time_to_first_edit_seconds": 69.527,
+    "num_turns": 1,
+    "duration_seconds_reported": 91.1671402,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 166212,
+      "output_tokens": 16060,
+      "thinking_tokens": 11489,
+      "cache_read_tokens": 1363183,
+      "total_tokens": 182272
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-19346",
+  "test_output_tail": "# EVAL rc=0 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-7.4.4, pluggy-1.6.0\narchitecture: 64-bit\ncache:        yes\nground types: python \n\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-19346\nconfigfile: pytest.ini\ncollected 1 item\n\nsympy\\printing\\tests\\test_repr.py .                                      [100%]\n\n============================== warnings summary ===============================\n..\\..\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\mpmath\\ctx_mp.py:35\n  E:\\RofU\\Supreme\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\mpmath\\ctx_mp.py:35: DeprecationWarning: mpnumeric is deprecated\n    warnings.warn(f\"{name} is deprecated\", DeprecationWarning)\n\n..\\..\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\mpmath\\rational.py:4\n..\\..\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\mpmath\\rational.py:4\n..\\..\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\mpmath\\rational.py:4\n  E:\\RofU\\Supreme\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\mpmath\\rational.py:4: DeprecationWarning: the rational private module is deprecated\n    warnings.warn(\"the rational private module is deprecated\",\n\n..\\..\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\_pytest\\config\\__init__.py:1373\n  E:\\RofU\\Supreme\\carb_benchmark\\venvs\\sympy_py3.9\\lib\\site-packages\\_pytest\\config\\__init__.py:1373: PytestConfigWarning: Unknown config option: doctestplus\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sympy/printing/tests/test_repr.py::test_dict\n======================== 1 passed, 5 warnings in 0.09s ========================\n\nPASS: sympy__sympy-19346 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "sympy/printing/repr.py",
+      "sympy/printing/tests/test_repr.py"
+    ],
+    "lines_added": 41,
+    "lines_deleted": 0,
+    "total_lines_changed": 41,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

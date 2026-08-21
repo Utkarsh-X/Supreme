@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-20-233332-lcb__3784-superpowers-v2.0",
+  "task_id": "lcb__3784",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 128.61,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 15,
+    "tool_call_counts": {
+      "view_file": 5,
+      "list_dir": 1,
+      "write_to_file": 4,
+      "run_command": 5
+    },
+    "time_to_first_edit_seconds": 72.627,
+    "num_turns": 1,
+    "duration_seconds_reported": 117.3280853,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 111423,
+      "output_tokens": 33498,
+      "thinking_tokens": 28671,
+      "cache_read_tokens": 685668,
+      "total_tokens": 144921
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3784",
+  "test_output_tail": "0, 0, 0, 0]' expected='[0,0,0,0,0,0]'\n  FAIL #29: wrong_answer got='[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0' expected='[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0'\n  FAIL #30: wrong_answer got='[0, 1, 0, 1, 1, 0, 0, 1]' expected='[0,1,0,1,1,0,0,1]'\n  FAIL #31: wrong_answer got='[5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5]' expected='[5,5,5,5,4,5,5,5,5,5,5,5]'\n  FAIL #32: wrong_answer got='[9984, 9984]' expected='[9984,9984]'\n  FAIL #33: wrong_answer got='[10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,' expected='[10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,1'\n  FAIL #34: wrong_answer got='[4, 4, 4, 4, 4, 4, 4]' expected='[4,4,4,4,4,4,4]'\n  FAIL #36: wrong_answer got='[0, 0, 0]' expected='[0,0,0]'\n  FAIL #37: wrong_answer got='[9983, 9983, 9983, 9983, 9981, 9981, 9981, 9981]' expected='[9983,9983,9983,9983,9981,9981,9981,9981]'\n  FAIL #39: wrong_answer got='[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]' expected='[0,0,0,0,0,0,0,0,0,0,0]'\n  FAIL #40: wrong_answer got='[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2' expected='[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 131,
+    "lines_deleted": 1,
+    "total_lines_changed": 132,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

@@ -1,0 +1,58 @@
+{
+  "run_id": "2026-08-19-031536-django__django-12663-baseline-v2.0",
+  "task_id": "django__django-12663",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 687.71,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 116,
+    "tool_call_counts": {
+      "grep_search": 25,
+      "run_command": 41,
+      "view_file": 33,
+      "find_by_name": 1,
+      "search_web": 4,
+      "replace_file_content": 9,
+      "manage_task": 3
+    },
+    "time_to_first_edit_seconds": 505.07,
+    "num_turns": 1,
+    "duration_seconds_reported": 675.0935264,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 506477,
+      "output_tokens": 102014,
+      "thinking_tokens": 79259,
+      "cache_read_tokens": 11695343,
+      "total_tokens": 608491
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-12663",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-12663\\django'\nImporting application expressions\nSkipping setup of unused database(s): other.\nOperations to perform:\n  Synchronize unmigrated apps: auth, contenttypes, expressions, messages, sessions, staticfiles\n  Apply all migrations: admin, sites\nSynchronizing apps without migrations:\n  Creating tables...\n    Creating table django_content_type\n    Creating table auth_permission\n    Creating table auth_group\n    Creating table auth_user\n    Creating table django_session\n    Creating table expressions_manager\n    Creating table expressions_employee\n    Creating table expressions_remoteemployee\n    Creating table expressions_company\n    Creating table expressions_number\n    Creating table expressions_ExPeRiMeNt\n    Creating table expressions_result\n    Creating table expressions_time\n    Creating table expressions_simulationrun\n    Creating table expressions_uuidpk\n    Creating table expressions_uuid\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\ntest_subquery_filter_by_lazy (expressions.tests.BasicExpressionsTests) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.005s\n\nOK\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nPASS: django__django-12663 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "django/db/models/fields/__init__.py",
+      "django/db/models/sql/query.py",
+      "tests/expressions/tests.py"
+    ],
+    "lines_added": 24,
+    "lines_deleted": 2,
+    "total_lines_changed": 26,
+    "hunks_count": 7
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

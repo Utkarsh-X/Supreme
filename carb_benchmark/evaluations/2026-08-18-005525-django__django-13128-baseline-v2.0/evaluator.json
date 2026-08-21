@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-08-18-005525-django__django-13128-baseline-v2.0",
+  "task_id": "django__django-13128",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 183.54,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-13128",
+  "test_output_tail": "perform:\n  Synchronize unmigrated apps: auth, contenttypes, expressions, messages, sessions, staticfiles\n  Apply all migrations: admin, sites\nSynchronizing apps without migrations:\n  Creating tables...\n    Creating table django_content_type\n    Creating table auth_permission\n    Creating table auth_group\n    Creating table auth_user\n    Creating table django_session\n    Creating table expressions_manager\n    Creating table expressions_employee\n    Creating table expressions_remoteemployee\n    Creating table expressions_company\n    Creating table expressions_number\n    Creating table expressions_ExPeRiMeNt\n    Creating table expressions_result\n    Creating table expressions_time\n    Creating table expressions_simulationrun\n    Creating table expressions_uuidpk\n    Creating table expressions_uuid\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\ntest_date_case_subtraction (expressions.tests.FTimeDeltaTests) ... ok\ntest_date_subquery_subtraction (expressions.tests.FTimeDeltaTests) ... ok\ntest_date_subtraction (expressions.tests.FTimeDeltaTests) ... ok\ntest_datetime_subquery_subtraction (expressions.tests.FTimeDeltaTests) ... ok\ntest_datetime_subtraction_microseconds (expressions.tests.FTimeDeltaTests) ... ok\ntest_time_subquery_subtraction (expressions.tests.FTimeDeltaTests) ... ok\ntest_time_subtraction (expressions.tests.FTimeDeltaTests) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.010s\n\nOK\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nPASS: django__django-13128 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/db/models/expressions.py",
+      "tests/expressions/tests.py"
+    ],
+    "lines_added": 42,
+    "lines_deleted": 44,
+    "total_lines_changed": 86,
+    "hunks_count": 8
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only)"
+}

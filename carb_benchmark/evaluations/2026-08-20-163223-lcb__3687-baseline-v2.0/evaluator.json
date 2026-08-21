@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-20-163223-lcb__3687-baseline-v2.0",
+  "task_id": "lcb__3687",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 97.77,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 20,
+    "tool_call_counts": {
+      "list_dir": 1,
+      "view_file": 2,
+      "run_command": 16,
+      "write_to_file": 1
+    },
+    "time_to_first_edit_seconds": 91.055,
+    "num_turns": 1,
+    "duration_seconds_reported": 86.4448474,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 97683,
+      "output_tokens": 26650,
+      "thinking_tokens": 18186,
+      "cache_read_tokens": 573861,
+      "total_tokens": 124333
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3687",
+  "test_output_tail": "ot='[147478, 297]' expected='[147478,297]'\n  FAIL #8: wrong_answer got='[106519, 214]' expected='[106519,214]'\n  FAIL #9: wrong_answer got='[1, 2]' expected='[1,2]'\n  FAIL #10: wrong_answer got='[3227, 5]' expected='[3227,5]'\n  FAIL #11: wrong_answer got='[15, 3]' expected='[15,3]'\n  FAIL #12: wrong_answer got='[1, 2]' expected='[1,2]'\n  FAIL #13: wrong_answer got='[3, 2]' expected='[3,2]'\n  FAIL #14: wrong_answer got='[2, 2]' expected='[2,2]'\n  FAIL #15: wrong_answer got='[8, 2]' expected='[8,2]'\n  FAIL #16: wrong_answer got='[2, 2]' expected='[2,2]'\n  FAIL #17: wrong_answer got='[8, 2]' expected='[8,2]'\n  FAIL #18: wrong_answer got='[8, 2]' expected='[8,2]'\n  FAIL #19: wrong_answer got='[5, 2]' expected='[5,2]'\n  FAIL #20: wrong_answer got='[31130, 54]' expected='[31130,54]'\n  FAIL #21: wrong_answer got='[99140, 198]' expected='[99140,198]'\n  FAIL #22: wrong_answer got='[7, 2]' expected='[7,2]'\n  FAIL #23: wrong_answer got='[27274, 49]' expected='[27274,49]'\n  FAIL #24: wrong_answer got='[4, 2]' expected='[4,2]'\n  FAIL #25: wrong_answer got='[2, 2]' expected='[2,2]'\n  FAIL #26: wrong_answer got='[49999000, 50000]' expected='[49999000,50000]'\n  FAIL #27: wrong_answer got='[12461140, 25000]' expected='[12461140,25000]'\n  FAIL #28: wrong_answer got='[44379, 88]' expected='[44379,88]'\n  FAIL #29: wrong_answer got='[10, 2]' expected='[10,2]'\n  FAIL #30: wrong_answer got='[7, 2]' expected='[7,2]'\n  FAIL #31: wrong_answer got='[9, 2]' expected='[9,2]'\n  FAIL #32: wrong_answer got='[91848, 173]' expected='[91848,173]'\n  FAIL #33: wrong_answer got='[5, 2]' expected='[5,2]'\n  FAIL #34: wrong_answer got='[7, 2]' expected='[7,2]'\n  FAIL #35: wrong_answer got='[5838, 10]' expected='[5838,10]'\n  FAIL #36: wrong_answer got='[8, 2]' expected='[8,2]'\n  FAIL #37: wrong_answer got='[2, 2]' expected='[2,2]'\n  FAIL #38: wrong_answer got='[56727, 113]' expected='[56727,113]'\n  FAIL #39: wrong_answer got='[10, 2]' expected='[10,2]'\n  FAIL #40: wrong_answer got='[0, 1]' expected='[0,1]'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 93,
+    "lines_deleted": 1,
+    "total_lines_changed": 94,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "phantom retry (re-run crashed tasks)"
+}

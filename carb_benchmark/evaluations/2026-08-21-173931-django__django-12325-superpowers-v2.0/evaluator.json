@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-21-173931-django__django-12325-superpowers-v2.0",
+  "task_id": "django__django-12325",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 209.74,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 33,
+    "tool_call_counts": {
+      "view_file": 15,
+      "grep_search": 7,
+      "run_command": 8,
+      "find_by_name": 1,
+      "replace_file_content": 2
+    },
+    "time_to_first_edit_seconds": 147.352,
+    "num_turns": 1,
+    "duration_seconds_reported": 195.960393,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 228925,
+      "output_tokens": 21541,
+      "thinking_tokens": 17386,
+      "cache_read_tokens": 2158461,
+      "total_tokens": 250466
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-12325",
+  "test_output_tail": "invalid_models_tests.test_relative_fields.ComplexClashTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\tests\\invalid_models_tests\\test_relative_fields.py\", line 1298, in test_clash_parent_link\n    class Child(Parent):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\django\\db\\models\\base.py\", line 322, in __new__\n    new_class._prepare()\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\django\\db\\models\\base.py\", line 335, in _prepare\n    opts._prepare(cls)\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\django\\db\\models\\options.py\", line 255, in _prepare\n    raise ImproperlyConfigured(\ndjango.core.exceptions.ImproperlyConfigured: Add parent_link=True to invalid_models_tests.Child.other_parent.\n\n======================================================================\nERROR: test_onetoone_with_parent_model (invalid_models_tests.test_models.OtherModelTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\tests\\invalid_models_tests\\test_models.py\", line 1012, in test_onetoone_with_parent_model\n    class ParkingLot(Place):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\django\\db\\models\\base.py\", line 322, in __new__\n    new_class._prepare()\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\django\\db\\models\\base.py\", line 335, in _prepare\n    opts._prepare(cls)\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12325\\django\\db\\models\\options.py\", line 255, in _prepare\n    raise ImproperlyConfigured(\ndjango.core.exceptions.ImproperlyConfigured: Add parent_link=True to invalid_models_tests.ParkingLot.other_place.\n\n----------------------------------------------------------------------\nRan 2 tests in 0.005s\n\nFAILED (errors=2)\n\nFAIL: django__django-12325 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/db/models/base.py",
+      "tests/model_inheritance/tests.py"
+    ],
+    "lines_added": 21,
+    "lines_deleted": 1,
+    "total_lines_changed": 22,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

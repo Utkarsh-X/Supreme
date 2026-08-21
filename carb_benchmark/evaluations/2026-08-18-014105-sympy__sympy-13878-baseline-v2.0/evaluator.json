@@ -1,0 +1,64 @@
+{
+  "run_id": "2026-08-18-014105-sympy__sympy-13878-baseline-v2.0",
+  "task_id": "sympy__sympy-13878",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 492.98,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 194,
+    "tool_call_counts": {
+      "grep_search": 15,
+      "view_file": 73,
+      "run_command": 25,
+      "replace_file_content": 37,
+      "manage_task": 44
+    },
+    "time_to_first_edit_seconds": 50.184,
+    "num_turns": 1,
+    "duration_seconds_reported": 480.5824318,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 962332,
+      "output_tokens": 59161,
+      "thinking_tokens": 32443,
+      "cache_read_tokens": 17987851,
+      "total_tokens": 1021493
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 11,
+    "files_modified_list": [
+      "sympy/assumptions/sathandlers.py",
+      "sympy/core/basic.py",
+      "sympy/core/compatibility.py",
+      "sympy/core/containers.py",
+      "sympy/core/function.py",
+      "sympy/matrices/common.py",
+      "sympy/matrices/matrices.py",
+      "sympy/matrices/sparse.py",
+      "sympy/plotting/plot.py",
+      "sympy/stats/crv_types.py",
+      "sympy/stats/tests/test_continuous_rv.py"
+    ],
+    "lines_added": 154,
+    "lines_deleted": 16,
+    "total_lines_changed": 170,
+    "hunks_count": 35
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only)"
+}

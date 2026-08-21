@@ -1,0 +1,54 @@
+{
+  "run_id": "2026-08-19-125746-lcb__arc192_b-supreme-v2.0",
+  "task_id": "lcb__arc192_b",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 135.59,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 29,
+    "tool_call_counts": {
+      "view_file": 2,
+      "write_to_file": 14,
+      "run_command": 13
+    },
+    "time_to_first_edit_seconds": 24.143,
+    "num_turns": 1,
+    "duration_seconds_reported": 124.2947115,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 208061,
+      "output_tokens": 29924,
+      "thinking_tokens": 18783,
+      "cache_read_tokens": 1161012,
+      "total_tokens": 237985
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc192_b",
+  "test_output_tail": "LCB lcb__arc192_b: 39/40 private tests passed\n  FAIL #18: wrong_answer got='Fennec' expected='Snuke'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 28,
+    "lines_deleted": 1,
+    "total_lines_changed": 29,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

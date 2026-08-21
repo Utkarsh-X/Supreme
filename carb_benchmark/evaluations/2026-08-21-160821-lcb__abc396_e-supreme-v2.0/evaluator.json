@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-21-160821-lcb__abc396_e-supreme-v2.0",
+  "task_id": "lcb__abc396_e",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 45.17,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 8,
+    "tool_call_counts": {
+      "view_file": 3,
+      "list_dir": 1,
+      "write_to_file": 1,
+      "run_command": 2,
+      "manage_task": 1
+    },
+    "time_to_first_edit_seconds": 30.649,
+    "num_turns": 1,
+    "duration_seconds_reported": 34.0068715,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 59218,
+      "output_tokens": 10246,
+      "thinking_tokens": 8460,
+      "cache_read_tokens": 207886,
+      "total_tokens": 69464
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc396_e",
+  "test_output_tail": "03821 22210916 865889963 222460672 581029106 393050724 983713847 246913748 178581095 64943524 5' expected='861086018 709967860 0 406536981 414907748 437610838 491257119 354357423 343865032 103447075 91983443 152603821 22210916 865889963 222460672 581029106 393050724 983713847 246913748 178581095 64943524 5'\n  FAIL #22: wrong_answer got='0 0 0 0 6 0 3 24 0 0' expected='0 2 0 0 4 0 1 26 0 0'\n  FAIL #24: wrong_answer got='0 1 12 9 20 25' expected='9 8 5 0 29 16'\n  FAIL #27: wrong_answer got='0 14 4 17' expected='4 10 0 21'\n  FAIL #29: wrong_answer got='986893530 609746604 753456602 471640456 905287244 260193497 105515525 183919070 164694784 0 0 298874020 761119516 441442691 129420706 600797979 0 763002629 851085891 364995942 602676190 319785293 6406' expected='986893530 609746604 753456602 471640456 905287244 260193497 105515525 183919070 164694784 0 0 298874020 761119516 441442691 129420706 600797979 0 763002629 851085891 364995942 602676190 319785293 6406'\n  FAIL #32: wrong_answer got='0 0 0 0 0 4 0' expected='0 4 0 0 0 0 0'\n  FAIL #34: wrong_answer got='395601699 550071504 154226460 880861426 801892874 655767711 685681293 122482420 0 391166705 68588461 763970139 347116810 641802753 814481693 730442324 0 427303033 230472652 731824744 229660505 7578970' expected='395601699 550071504 154226460 880861426 801892874 655767711 685681293 122482420 0 391166705 68588461 763970139 347116810 641802753 814481693 730442324 0 427303033 230472652 731824744 229660505 7578970'\n  FAIL #37: wrong_answer got='8 3 22 4 17 12' expected='12 7 18 0 21 8'\n  FAIL #38: wrong_answer got='0 400133273 538547132 18310880 31692075 0 344393968 982660332 542895296 100158635 900512412 588754832 201337872 864217114 766372234 70684160 921324752 83348949 969506070 450480186 0 931130059 66242659' expected='0 400133273 538547132 18310880 31692075 0 344393968 982660332 542895296 100158635 900512412 588754832 217394324 864217114 766372234 70684160 921324752 83348949 969506070 450480186 0 931130059 66242659'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 75,
+    "lines_deleted": 1,
+    "total_lines_changed": 76,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

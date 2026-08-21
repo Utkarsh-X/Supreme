@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-18-051018-django__django-16502-baseline-v2.0",
+  "task_id": "django__django-16502",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 354.08,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 47,
+    "tool_call_counts": {
+      "grep_search": 8,
+      "view_file": 4,
+      "run_command": 23,
+      "manage_task": 7,
+      "replace_file_content": 5
+    },
+    "time_to_first_edit_seconds": 226.946,
+    "num_turns": 1,
+    "duration_seconds_reported": 320.8854779,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 206760,
+      "output_tokens": 24798,
+      "thinking_tokens": 18533,
+      "cache_read_tokens": 1914633,
+      "total_tokens": 231558
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-16502",
+  "test_output_tail": "# EVAL rc=1 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-16502\\django'\nImporting application servers\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_no_body_returned_for_head_requests (servers.test_basehttp.WSGIRequestHandlerTestCase.test_no_body_returned_for_head_requests) ... FAIL\n\n======================================================================\nFAIL: test_no_body_returned_for_head_requests (servers.test_basehttp.WSGIRequestHandlerTestCase.test_no_body_returned_for_head_requests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-16502\\tests\\servers\\test_basehttp.py\", line 159, in test_no_body_returned_for_head_requests\n    self.assertIs(\nAssertionError: True is not False\n\n----------------------------------------------------------------------\nRan 1 test in 0.003s\n\nFAILED (failures=1)\n\nFAIL: django__django-16502 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/core/servers/basehttp.py",
+      "tests/servers/test_basehttp.py"
+    ],
+    "lines_added": 49,
+    "lines_deleted": 0,
+    "total_lines_changed": 49,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only) resumed after restart"
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-19-035242-sympy__sympy-24213-baseline-v2.0",
+  "task_id": "sympy__sympy-24213",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 139.38,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 44,
+    "tool_call_counts": {
+      "grep_search": 8,
+      "view_file": 17,
+      "run_command": 15,
+      "replace_file_content": 4
+    },
+    "time_to_first_edit_seconds": 69.748,
+    "num_turns": 1,
+    "duration_seconds_reported": 128.7880612,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 188527,
+      "output_tokens": 23249,
+      "thinking_tokens": 14819,
+      "cache_read_tokens": 2132876,
+      "total_tokens": 211776
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-24213",
+  "test_output_tail": "# EVAL rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.11.9, pytest-8.2.1, pluggy-1.6.0\narchitecture: 64-bit\ncache:        yes\nground types: python \n\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-24213\nconfigfile: pytest.ini\ncollected 1 item\n\nsympy\\physics\\units\\tests\\test_quantities.py .                           [100%]\n\n============================== warnings summary ===============================\n..\\..\\carb_benchmark\\venvs\\sympy_py3.11\\Lib\\site-packages\\mpmath\\ctx_mp.py:35\n  E:\\RofU\\Supreme\\carb_benchmark\\venvs\\sympy_py3.11\\Lib\\site-packages\\mpmath\\ctx_mp.py:35: DeprecationWarning: mpnumeric is deprecated\n    warnings.warn(f\"{name} is deprecated\", DeprecationWarning)\n\n..\\..\\carb_benchmark\\venvs\\sympy_py3.11\\Lib\\site-packages\\mpmath\\rational.py:4\n..\\..\\carb_benchmark\\venvs\\sympy_py3.11\\Lib\\site-packages\\mpmath\\rational.py:4\n..\\..\\carb_benchmark\\venvs\\sympy_py3.11\\Lib\\site-packages\\mpmath\\rational.py:4\n  E:\\RofU\\Supreme\\carb_benchmark\\venvs\\sympy_py3.11\\Lib\\site-packages\\mpmath\\rational.py:4: DeprecationWarning: the rational private module is deprecated\n    warnings.warn(\"the rational private module is deprecated\",\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sympy/physics/units/tests/test_quantities.py::test_issue_24211\n======================== 1 passed, 4 warnings in 0.37s ========================\n\nPASS: sympy__sympy-24213 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "sympy/physics/units/tests/test_quantities.py",
+      "sympy/physics/units/unitsystem.py"
+    ],
+    "lines_added": 18,
+    "lines_deleted": 3,
+    "total_lines_changed": 21,
+    "hunks_count": 4
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [
+    "Supreme"
+  ],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-19-031249-django__django-12406-baseline-v2.0",
+  "task_id": "django__django-12406",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 164.34,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 50,
+    "tool_call_counts": {
+      "grep_search": 14,
+      "view_file": 24,
+      "run_command": 8,
+      "replace_file_content": 4
+    },
+    "time_to_first_edit_seconds": 114.947,
+    "num_turns": 1,
+    "duration_seconds_reported": 153.6865379,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 220674,
+      "output_tokens": 32995,
+      "thinking_tokens": 26363,
+      "cache_read_tokens": 2514722,
+      "total_tokens": 253669
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-12406",
+  "test_output_tail": "\\test_modelchoicefield.py\", line 152, in test_choices_radio_blank\n    f = forms.ModelChoiceField(\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12406\\django\\forms\\models.py\", line 1192, in __init__\n    Field.__init__(\nTypeError: __init__() got an unexpected keyword argument 'blank'\n\n======================================================================\nERROR: test_choices_radio_blank (model_forms.test_modelchoicefield.ModelChoiceFieldTests) (widget=<django.forms.widgets.RadioSelect object at 0x0000022E6469AD00>, blank=True)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12406\\tests\\model_forms\\test_modelchoicefield.py\", line 152, in test_choices_radio_blank\n    f = forms.ModelChoiceField(\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12406\\django\\forms\\models.py\", line 1192, in __init__\n    Field.__init__(\nTypeError: __init__() got an unexpected keyword argument 'blank'\n\n======================================================================\nERROR: test_choices_radio_blank (model_forms.test_modelchoicefield.ModelChoiceFieldTests) (widget=<django.forms.widgets.RadioSelect object at 0x0000022E6469AD00>, blank=False)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12406\\tests\\model_forms\\test_modelchoicefield.py\", line 152, in test_choices_radio_blank\n    f = forms.ModelChoiceField(\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-12406\\django\\forms\\models.py\", line 1192, in __init__\n    Field.__init__(\nTypeError: __init__() got an unexpected keyword argument 'blank'\n\n----------------------------------------------------------------------\nRan 3 tests in 0.005s\n\nFAILED (errors=4)\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nFAIL: django__django-12406 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "django/forms/models.py",
+      "docs/ref/forms/fields.txt",
+      "tests/model_forms/test_modelchoicefield.py"
+    ],
+    "lines_added": 51,
+    "lines_deleted": 7,
+    "total_lines_changed": 58,
+    "hunks_count": 5
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

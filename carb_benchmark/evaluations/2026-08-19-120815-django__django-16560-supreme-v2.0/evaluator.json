@@ -1,0 +1,60 @@
+{
+  "run_id": "2026-08-19-120815-django__django-16560-supreme-v2.0",
+  "task_id": "django__django-16560",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 1701.2,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 91,
+    "tool_call_counts": {
+      "grep_search": 13,
+      "view_file": 55,
+      "run_command": 6,
+      "find_by_name": 1,
+      "replace_file_content": 16
+    },
+    "time_to_first_edit_seconds": 188.996,
+    "num_turns": 1,
+    "duration_seconds_reported": 1685.7039816,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 430210,
+      "output_tokens": 58121,
+      "thinking_tokens": 26357,
+      "cache_read_tokens": 8679403,
+      "total_tokens": 488331
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 7,
+    "files_modified_list": [
+      "django/contrib/postgres/constraints.py",
+      "django/db/models/constraints.py",
+      "docs/ref/contrib/postgres/constraints.txt",
+      "docs/ref/models/constraints.txt",
+      "docs/releases/5.0.txt",
+      "tests/constraints/tests.py",
+      "tests/postgres_tests/test_constraints.py"
+    ],
+    "lines_added": 288,
+    "lines_deleted": 20,
+    "total_lines_changed": 308,
+    "hunks_count": 40
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

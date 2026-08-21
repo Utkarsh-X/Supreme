@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-21-004719-django__django-10554-supreme-v2.0",
+  "task_id": "django__django-10554",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 529.46,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 105,
+    "tool_call_counts": {
+      "view_file": 31,
+      "grep_search": 21,
+      "run_command": 31,
+      "replace_file_content": 20,
+      "search_web": 2
+    },
+    "time_to_first_edit_seconds": 112.339,
+    "num_turns": 1,
+    "duration_seconds_reported": 515.5175912,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 563782,
+      "output_tokens": 76349,
+      "thinking_tokens": 57109,
+      "cache_read_tokens": 8718179,
+      "total_tokens": 640131
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-10554",
+  "test_output_tail": "g\\uv\\python\\cpython-3.8-windows-x86_64-none\\lib\\unittest\\case.py\", line 1502, in _subDescription\n    params_desc = ', '.join(\n  File \"C:\\Users\\Utkarsh\\AppData\\Roaming\\uv\\python\\cpython-3.8-windows-x86_64-none\\lib\\unittest\\case.py\", line 1503, in <genexpr>\n    \"{}={!r}\".format(k, v)\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\query.py\", line 252, in __repr__\n    data = list(self[:REPR_OUTPUT_SIZE + 1])\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\query.py\", line 258, in __len__\n    self._fetch_all()\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\query.py\", line 1246, in _fetch_all\n    self._result_cache = list(self._iterable_class(self))\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\query.py\", line 184, in __iter__\n    for row in compiler.results_iter(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\sql\\compiler.py\", line 1042, in results_iter\n    results = self.execute_sql(MULTI, chunked_fetch=chunked_fetch, chunk_size=chunk_size)\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\sql\\compiler.py\", line 1077, in execute_sql\n    sql, params = self.as_sql()\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\sql\\compiler.py\", line 475, in as_sql\n    extra_select, order_by, group_by = self.pre_sql_setup()\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\sql\\compiler.py\", line 53, in pre_sql_setup\n    order_by = self.get_order_by()\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-10554\\django\\db\\models\\sql\\compiler.py\", line 359, in get_order_by\n    raise DatabaseError('ORDER BY term does not match any column in the result set.')\ndjango.db.utils.DatabaseError: ORDER BY term does not match any column in the result set.\n\nFAIL: django__django-10554 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "django/db/models/query.py",
+      "django/db/models/sql/query.py",
+      "tests/queries/test_qs_combinators.py"
+    ],
+    "lines_added": 28,
+    "lines_deleted": 2,
+    "total_lines_changed": 30,
+    "hunks_count": 4
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

@@ -1,0 +1,48 @@
+{
+  "run_id": "2026-08-19-135919-lcb__arc190_c-superpowers-v2.0",
+  "task_id": "lcb__arc190_c",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 60.24,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 0,
+    "tool_call_counts": {},
+    "time_to_first_edit_seconds": null,
+    "num_turns": 0,
+    "duration_seconds_reported": 0,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "thinking_tokens": 0,
+      "cache_read_tokens": 0,
+      "total_tokens": 0
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc190_c",
+  "test_output_tail": "cted=''\n  FAIL #4: output_length_mismatch got='' expected=''\n  FAIL #5: output_length_mismatch got='' expected=''\n  FAIL #6: output_length_mismatch got='' expected=''\n  FAIL #7: output_length_mismatch got='' expected=''\n  FAIL #8: output_length_mismatch got='' expected=''\n  FAIL #9: output_length_mismatch got='' expected=''\n  FAIL #10: output_length_mismatch got='' expected=''\n  FAIL #11: output_length_mismatch got='' expected=''\n  FAIL #12: output_length_mismatch got='' expected=''\n  FAIL #13: output_length_mismatch got='' expected=''\n  FAIL #14: output_length_mismatch got='' expected=''\n  FAIL #15: output_length_mismatch got='' expected=''\n  FAIL #16: output_length_mismatch got='' expected=''\n  FAIL #17: output_length_mismatch got='' expected=''\n  FAIL #18: output_length_mismatch got='' expected=''\n  FAIL #19: output_length_mismatch got='' expected=''\n  FAIL #20: output_length_mismatch got='' expected=''\n  FAIL #21: output_length_mismatch got='' expected=''\n  FAIL #22: output_length_mismatch got='' expected=''\n  FAIL #23: output_length_mismatch got='' expected=''\n  FAIL #24: output_length_mismatch got='' expected=''\n  FAIL #25: output_length_mismatch got='' expected=''\n  FAIL #26: output_length_mismatch got='' expected=''\n  FAIL #27: output_length_mismatch got='' expected=''\n  FAIL #28: output_length_mismatch got='' expected=''\n  FAIL #29: output_length_mismatch got='' expected=''\n  FAIL #30: output_length_mismatch got='' expected=''\n  FAIL #31: output_length_mismatch got='' expected=''\n  FAIL #32: output_length_mismatch got='' expected=''\n  FAIL #33: output_length_mismatch got='' expected=''\n  FAIL #34: output_length_mismatch got='' expected=''\n  FAIL #35: output_length_mismatch got='' expected=''\n  FAIL #36: output_length_mismatch got='' expected=''\n  FAIL #37: output_length_mismatch got='' expected=''\n  FAIL #38: output_length_mismatch got='' expected=''\n  FAIL #39: output_length_mismatch got='' expected=''\n  FAIL #40: output_length_mismatch got='' expected=''\n",
+  "diff_metrics": {
+    "files_modified_count": 0,
+    "files_modified_list": [],
+    "lines_added": 0,
+    "lines_deleted": 0,
+    "total_lines_changed": 0,
+    "hunks_count": 0
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

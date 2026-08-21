@@ -1,0 +1,72 @@
+{
+  "run_id": "2026-08-18-014919-sympy__sympy-14248-baseline-v2.0",
+  "task_id": "sympy__sympy-14248",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 465.32,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 170,
+    "tool_call_counts": {
+      "grep_search": 24,
+      "view_file": 63,
+      "run_command": 53,
+      "replace_file_content": 29,
+      "list_dir": 1
+    },
+    "time_to_first_edit_seconds": 36.975,
+    "num_turns": 1,
+    "duration_seconds_reported": 454.0296599,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 723623,
+      "output_tokens": 78032,
+      "thinking_tokens": 49427,
+      "cache_read_tokens": 16810467,
+      "total_tokens": 801655
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 19,
+    "files_modified_list": [
+      "sympy/core/basic.py",
+      "sympy/core/compatibility.py",
+      "sympy/core/expr.py",
+      "sympy/core/function.py",
+      "sympy/matrices/expressions/matadd.py",
+      "sympy/physics/quantum/matrixutils.py",
+      "sympy/printing/latex.py",
+      "sympy/printing/precedence.py",
+      "sympy/printing/pretty/pretty.py",
+      "sympy/printing/pretty/tests/test_pretty.py",
+      "sympy/printing/str.py",
+      "sympy/printing/tests/test_ccode.py",
+      "sympy/printing/tests/test_fcode.py",
+      "sympy/printing/tests/test_jscode.py",
+      "sympy/printing/tests/test_julia.py",
+      "sympy/printing/tests/test_latex.py",
+      "sympy/printing/tests/test_octave.py",
+      "sympy/printing/tests/test_rcode.py",
+      "sympy/printing/tests/test_str.py"
+    ],
+    "lines_added": 92,
+    "lines_deleted": 35,
+    "total_lines_changed": 127,
+    "hunks_count": 26
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only)"
+}

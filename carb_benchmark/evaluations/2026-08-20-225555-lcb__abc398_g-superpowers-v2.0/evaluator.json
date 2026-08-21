@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-20-225555-lcb__abc398_g-superpowers-v2.0",
+  "task_id": "lcb__abc398_g",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 572.59,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 67,
+    "tool_call_counts": {
+      "view_file": 7,
+      "list_dir": 1,
+      "run_command": 50,
+      "manage_task": 8,
+      "write_to_file": 1
+    },
+    "time_to_first_edit_seconds": 484.108,
+    "num_turns": 1,
+    "duration_seconds_reported": 558.0270356,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 658081,
+      "output_tokens": 91130,
+      "thinking_tokens": 35008,
+      "cache_read_tokens": 6497751,
+      "total_tokens": 749211
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc398_g",
+  "test_output_tail": "LCB lcb__abc398_g: 39/40 private tests passed\n  FAIL #16: wrong_answer got='Aoki' expected='Takahashi'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 77,
+    "lines_deleted": 1,
+    "total_lines_changed": 78,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

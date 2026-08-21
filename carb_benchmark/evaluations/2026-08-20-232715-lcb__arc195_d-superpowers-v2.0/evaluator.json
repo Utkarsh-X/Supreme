@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-20-232715-lcb__arc195_d-superpowers-v2.0",
+  "task_id": "lcb__arc195_d",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 274.55,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 35,
+    "tool_call_counts": {
+      "view_file": 3,
+      "list_dir": 1,
+      "run_command": 30,
+      "write_to_file": 1
+    },
+    "time_to_first_edit_seconds": 254.217,
+    "num_turns": 1,
+    "duration_seconds_reported": 263.0508488,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 188120,
+      "output_tokens": 74514,
+      "thinking_tokens": 51764,
+      "cache_read_tokens": 2399146,
+      "total_tokens": 262634
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_d",
+  "test_output_tail": "LCB lcb__arc195_d: 1/1 private tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 57,
+    "lines_deleted": 1,
+    "total_lines_changed": 58,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

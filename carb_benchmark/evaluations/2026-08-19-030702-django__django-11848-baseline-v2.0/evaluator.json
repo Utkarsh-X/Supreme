@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-19-030702-django__django-11848-baseline-v2.0",
+  "task_id": "django__django-11848",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 119.2,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 30,
+    "tool_call_counts": {
+      "grep_search": 4,
+      "view_file": 7,
+      "run_command": 11,
+      "find_by_name": 1,
+      "replace_file_content": 7
+    },
+    "time_to_first_edit_seconds": 58.391,
+    "num_turns": 1,
+    "duration_seconds_reported": 109.3361723,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 143007,
+      "output_tokens": 28457,
+      "thinking_tokens": 22413,
+      "cache_read_tokens": 1184898,
+      "total_tokens": 171464
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-11848",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-11848\\django'\nImporting application utils_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_parsing_rfc850 (utils_tests.test_http.HttpDateProcessingTests) ... ok\ntest_parsing_year_less_than_70 (utils_tests.test_http.HttpDateProcessingTests) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.001s\n\nOK\n\nPASS: django__django-11848 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/utils/http.py",
+      "tests/utils_tests/test_http.py"
+    ],
+    "lines_added": 33,
+    "lines_deleted": 5,
+    "total_lines_changed": 38,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

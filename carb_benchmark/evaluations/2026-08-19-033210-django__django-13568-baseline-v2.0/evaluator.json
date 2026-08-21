@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-19-033210-django__django-13568-baseline-v2.0",
+  "task_id": "django__django-13568",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 101.24,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 35,
+    "tool_call_counts": {
+      "grep_search": 10,
+      "view_file": 13,
+      "run_command": 8,
+      "find_by_name": 1,
+      "replace_file_content": 2,
+      "manage_task": 1
+    },
+    "time_to_first_edit_seconds": 79.516,
+    "num_turns": 1,
+    "duration_seconds_reported": 90.6888861,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 157586,
+      "output_tokens": 14531,
+      "thinking_tokens": 10067,
+      "cache_read_tokens": 1023434,
+      "total_tokens": 172117
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-13568",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-13568\\django'\nImporting application auth_tests\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_username_unique_with_model_constraint (auth_tests.test_checks.UserModelChecksTests) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.017s\n\nOK\n\nPASS: django__django-13568 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/contrib/auth/checks.py",
+      "tests/auth_tests/test_checks.py"
+    ],
+    "lines_added": 46,
+    "lines_deleted": 1,
+    "total_lines_changed": 47,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

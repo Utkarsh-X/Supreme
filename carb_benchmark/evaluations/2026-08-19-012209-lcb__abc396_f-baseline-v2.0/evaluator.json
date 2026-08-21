@@ -1,0 +1,48 @@
+{
+  "run_id": "2026-08-19-012209-lcb__abc396_f-baseline-v2.0",
+  "task_id": "lcb__abc396_f",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 2400.49,
+  "agy_exit_code": -1,
+  "timed_out": true,
+  "telemetry": {
+    "tool_calls_total": 3,
+    "tool_call_counts": {
+      "list_dir": 1,
+      "view_file": 1,
+      "run_command": 1
+    },
+    "time_to_first_edit_seconds": null,
+    "num_turns": null,
+    "duration_seconds_reported": null,
+    "status": null,
+    "usage": null,
+    "telemetry_error": "AGY EXECUTION TIMED OUT after 2400s (harness cap)"
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc396_f",
+  "test_output_tail": "LCB lcb__abc396_f: 40/40 private tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 57,
+    "lines_deleted": 1,
+    "total_lines_changed": 58,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration"
+}

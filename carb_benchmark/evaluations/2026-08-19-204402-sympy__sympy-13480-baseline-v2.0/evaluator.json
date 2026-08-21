@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-19-204402-sympy__sympy-13480-baseline-v2.0",
+  "task_id": "sympy__sympy-13480",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 229.24,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 52,
+    "tool_call_counts": {
+      "grep_search": 6,
+      "view_file": 16,
+      "run_command": 20,
+      "manage_task": 6,
+      "replace_file_content": 4
+    },
+    "time_to_first_edit_seconds": 99.745,
+    "num_turns": 1,
+    "duration_seconds_reported": 215.3079909,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 219320,
+      "output_tokens": 13463,
+      "thinking_tokens": 6288,
+      "cache_read_tokens": 1793146,
+      "total_tokens": 232783
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sympy__sympy-13480",
+  "test_output_tail": "# EVAL rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\narchitecture: 64-bit\ncache:        yes\nground types: python \n\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-13480\ncollected 1 item\n\nsympy\\functions\\elementary\\tests\\test_hyperbolic.py .                    [100%]\n\n============================== warnings summary ===============================\nsympy\\core\\basic.py:3\n  E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-13480\\sympy\\core\\basic.py:3: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import Mapping, defaultdict\n\nsympy\\core\\containers.py:271\n  E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-13480\\sympy\\core\\containers.py:271: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    class OrderedSet(collections.MutableSet):\n\nsympy\\plotting\\plot.py:28\n  E:\\RofU\\Supreme\\carb_workspaces\\sympy__sympy-13480\\sympy\\plotting\\plot.py:28: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working\n    from collections import Callable\n\n-- Docs: https://docs.pytest.org/en/stable/warnings.html\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sympy/functions/elementary/tests/test_hyperbolic.py::test_coth\n======================== 1 passed, 3 warnings in 0.42s ========================\n\nPASS: sympy__sympy-13480 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "sympy/functions/elementary/hyperbolic.py",
+      "sympy/functions/elementary/tests/test_hyperbolic.py"
+    ],
+    "lines_added": 6,
+    "lines_deleted": 2,
+    "total_lines_changed": 8,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 expansion (50-task baseline)"
+}

@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-20-204011-lcb__arc195_c-baseline-v2.0",
+  "task_id": "lcb__arc195_c",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 154.59,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 31,
+    "tool_call_counts": {
+      "list_dir": 1,
+      "view_file": 3,
+      "run_command": 25,
+      "manage_task": 1,
+      "write_to_file": 1
+    },
+    "time_to_first_edit_seconds": 132.843,
+    "num_turns": 1,
+    "duration_seconds_reported": 142.5849869,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 144884,
+      "output_tokens": 48158,
+      "thinking_tokens": 28200,
+      "cache_read_tokens": 1397431,
+      "total_tokens": 193042
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_c",
+  "test_output_tail": "LCB lcb__arc195_c: 0/4 private tests passed\n  FAIL #1: wrong_answer got='B 500000000 500000000' expected='B 1 2'\n  FAIL #2: wrong_answer got='B 500000000 500000000' expected='B 1 2'\n  FAIL #3: wrong_answer got='B 500000000 500000000' expected='B 4274 4275'\n  FAIL #4: wrong_answer got='B 500000000 500000000' expected='B 28 29'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 117,
+    "lines_deleted": 1,
+    "total_lines_changed": 118,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "phantom retry (arc tasks)"
+}

@@ -1,0 +1,60 @@
+{
+  "run_id": "2026-08-21-005613-django__django-16631-supreme-v2.0",
+  "task_id": "django__django-16631",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 686.15,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 69,
+    "tool_call_counts": {
+      "grep_search": 12,
+      "view_file": 33,
+      "run_command": 10,
+      "find_by_name": 2,
+      "replace_file_content": 10,
+      "manage_task": 2
+    },
+    "time_to_first_edit_seconds": 277.225,
+    "num_turns": 1,
+    "duration_seconds_reported": 673.5902622,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 489724,
+      "output_tokens": 33847,
+      "thinking_tokens": 23489,
+      "cache_read_tokens": 4190686,
+      "total_tokens": 523571
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 6,
+    "files_modified_list": [
+      "django/contrib/auth/__init__.py",
+      "django/contrib/auth/base_user.py",
+      "docs/ref/contrib/auth.txt",
+      "docs/releases/5.0.txt",
+      "docs/topics/auth/customizing.txt",
+      "tests/auth_tests/test_auth_backends.py"
+    ],
+    "lines_added": 116,
+    "lines_deleted": 6,
+    "total_lines_changed": 122,
+    "hunks_count": 11
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

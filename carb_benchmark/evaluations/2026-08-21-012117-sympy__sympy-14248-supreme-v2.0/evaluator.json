@@ -1,0 +1,59 @@
+{
+  "run_id": "2026-08-21-012117-sympy__sympy-14248-supreme-v2.0",
+  "task_id": "sympy__sympy-14248",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 769.0,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 83,
+    "tool_call_counts": {
+      "grep_search": 11,
+      "view_file": 32,
+      "run_command": 31,
+      "replace_file_content": 9
+    },
+    "time_to_first_edit_seconds": 168.421,
+    "num_turns": 1,
+    "duration_seconds_reported": 743.3611211,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 343501,
+      "output_tokens": 42835,
+      "thinking_tokens": 31355,
+      "cache_read_tokens": 4793285,
+      "total_tokens": 386336
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 7,
+    "files_modified_list": [
+      "sympy/__init__.py",
+      "sympy/core/expr.py",
+      "sympy/core/function.py",
+      "sympy/matrices/expressions/matadd.py",
+      "sympy/printing/latex.py",
+      "sympy/printing/pretty/pretty.py",
+      "sympy/printing/str.py"
+    ],
+    "lines_added": 49,
+    "lines_deleted": 14,
+    "total_lines_changed": 63,
+    "hunks_count": 9
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

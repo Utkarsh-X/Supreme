@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-20-223342-lcb__arc195_c-superpowers-v2.0",
+  "task_id": "lcb__arc195_c",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 334.17,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 23,
+    "tool_call_counts": {
+      "view_file": 3,
+      "list_dir": 1,
+      "write_to_file": 11,
+      "run_command": 8
+    },
+    "time_to_first_edit_seconds": 113.072,
+    "num_turns": 1,
+    "duration_seconds_reported": 304.5510623,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 238716,
+      "output_tokens": 71499,
+      "thinking_tokens": 51040,
+      "cache_read_tokens": 1662483,
+      "total_tokens": 310215
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__arc195_c",
+  "test_output_tail": "LCB lcb__arc195_c: 0/4 private tests passed\n  FAIL #1: wrong_answer got='B 2 2' expected='B 1 2'\n  FAIL #2: wrong_answer got='R 2 2' expected='B 1 2'\n  FAIL #3: wrong_answer got='R 2 2' expected='B 4274 4275'\n  FAIL #4: wrong_answer got='R 2 2' expected='B 28 29'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 88,
+    "lines_deleted": 1,
+    "total_lines_changed": 89,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

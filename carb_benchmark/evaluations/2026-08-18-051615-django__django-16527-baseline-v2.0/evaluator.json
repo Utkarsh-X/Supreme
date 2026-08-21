@@ -1,0 +1,54 @@
+{
+  "run_id": "2026-08-18-051615-django__django-16527-baseline-v2.0",
+  "task_id": "django__django-16527",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 396.63,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 53,
+    "tool_call_counts": {
+      "grep_search": 12,
+      "view_file": 21,
+      "run_command": 16,
+      "replace_file_content": 4
+    },
+    "time_to_first_edit_seconds": 194.097,
+    "num_turns": 1,
+    "duration_seconds_reported": 374.0324528,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 233371,
+      "output_tokens": 15688,
+      "thinking_tokens": 8287,
+      "cache_read_tokens": 2320840,
+      "total_tokens": 249059
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-16527",
+  "test_output_tail": "ting table admin_views_city\n    Creating table admin_views_restaurant\n    Creating table admin_views_worker\n    Creating table admin_views_referencedbyparent\n    Creating table admin_views_parentwithfk\n    Creating table admin_views_childofreferer\n    Creating table admin_views_inlinereferer\n    Creating table admin_views_referencedbyinline\n    Creating table admin_views_inlinereference\n    Creating table admin_views_recipe\n    Creating table admin_views_ingredient\n    Creating table admin_views_recipeingredient\n    Creating table admin_views_notreferenced\n    Creating table admin_views_explicitlyprovidedpk\n    Creating table admin_views_implicitlygeneratedpk\n    Creating table admin_views_referencedbygenrel\n    Creating table admin_views_genrelreference\n    Creating table admin_views_parentwithuuidpk\n    Creating table admin_views_relatedwithuuidpkmodel\n    Creating table admin_views_author\n    Creating table admin_views_authorship\n    Creating table admin_views_readonlyrelatedfield\n    Creating table admin_views_h\u00e9llo\n    Creating table admin_views_box\n    Creating table admin_views_country\n    Creating table admin_views_traveler\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (1 silenced).\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\ntest_submit_row_save_as_new_add_permission_required (admin_views.test_templatetags.AdminTemplateTagsTest.test_submit_row_save_as_new_add_permission_required) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.204s\n\nOK\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nPASS: django__django-16527 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/contrib/admin/templatetags/admin_modify.py",
+      "tests/admin_views/tests.py"
+    ],
+    "lines_added": 17,
+    "lines_deleted": 0,
+    "total_lines_changed": 17,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only) resumed after restart"
+}

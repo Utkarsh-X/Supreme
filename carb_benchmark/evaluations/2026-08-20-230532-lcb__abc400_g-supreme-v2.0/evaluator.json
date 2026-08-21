@@ -1,0 +1,57 @@
+{
+  "run_id": "2026-08-20-230532-lcb__abc400_g-supreme-v2.0",
+  "task_id": "lcb__abc400_g",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 284.29,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 42,
+    "tool_call_counts": {
+      "view_file": 4,
+      "list_dir": 1,
+      "run_command": 17,
+      "write_to_file": 15,
+      "replace_file_content": 3,
+      "manage_task": 2
+    },
+    "time_to_first_edit_seconds": 72.229,
+    "num_turns": 1,
+    "duration_seconds_reported": 269.3041336,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 252383,
+      "output_tokens": 58206,
+      "thinking_tokens": 29934,
+      "cache_read_tokens": 2453456,
+      "total_tokens": 310589
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc400_g",
+  "test_output_tail": "LCB lcb__abc400_g: 3/4 private tests passed\n  FAIL #4: timeout got='' expected=''\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 163,
+    "lines_deleted": 1,
+    "total_lines_changed": 164,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

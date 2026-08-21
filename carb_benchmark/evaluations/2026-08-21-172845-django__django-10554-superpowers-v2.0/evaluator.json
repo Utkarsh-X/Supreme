@@ -1,0 +1,50 @@
+{
+  "run_id": "2026-08-21-172845-django__django-10554-superpowers-v2.0",
+  "task_id": "django__django-10554",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 134.33,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 10,
+    "tool_call_counts": {
+      "view_file": 5,
+      "run_command": 3,
+      "grep_search": 2
+    },
+    "time_to_first_edit_seconds": null,
+    "num_turns": 1,
+    "duration_seconds_reported": 121.2650831,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 53322,
+      "output_tokens": 3044,
+      "thinking_tokens": 2129,
+      "cache_read_tokens": 260905,
+      "total_tokens": 56366
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-10554",
+  "test_output_tail": "FAIL: no changes made by agent in django__django-10554\n",
+  "diff_metrics": {
+    "files_modified_count": 0,
+    "files_modified_list": [],
+    "lines_added": 0,
+    "lines_deleted": 0,
+    "total_lines_changed": 0,
+    "hunks_count": 0
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

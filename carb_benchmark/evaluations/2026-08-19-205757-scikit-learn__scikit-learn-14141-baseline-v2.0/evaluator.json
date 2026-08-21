@@ -1,0 +1,58 @@
+{
+  "run_id": "2026-08-19-205757-scikit-learn__scikit-learn-14141-baseline-v2.0",
+  "task_id": "scikit-learn__scikit-learn-14141",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 182.97,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 55,
+    "tool_call_counts": {
+      "grep_search": 7,
+      "view_file": 12,
+      "run_command": 25,
+      "write_to_file": 2,
+      "find_by_name": 3,
+      "manage_task": 2,
+      "replace_file_content": 4
+    },
+    "time_to_first_edit_seconds": 45.273,
+    "num_turns": 1,
+    "duration_seconds_reported": 171.9226623,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 232461,
+      "output_tokens": 16216,
+      "thinking_tokens": 9907,
+      "cache_read_tokens": 1795610,
+      "total_tokens": 248677
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py scikit-learn__scikit-learn-14141",
+  "test_output_tail": "  [setup] overlay: copied 50 compiled files from scikit-learn==0.22.2.post1\n# EVAL rc=0 (1s)\n============================= test session starts =============================\nplatform win32 -- Python 3.8.20, pytest-6.2.5, py-1.11.0, pluggy-1.5.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\scikit-learn__scikit-learn-14141, configfile: setup.cfg\ncollected 1 item\n\nsklearn\\utils\\tests\\test_show_versions.py .                              [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED sklearn/utils/tests/test_show_versions.py::test_get_deps_info\n============================== 1 passed in 0.04s ==============================\n\nPASS: scikit-learn__scikit-learn-14141 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "doc/whats_new/v0.22.rst",
+      "sklearn/utils/_show_versions.py",
+      "sklearn/utils/tests/test_show_versions.py"
+    ],
+    "lines_added": 8,
+    "lines_deleted": 1,
+    "total_lines_changed": 9,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 expansion (50-task baseline)"
+}

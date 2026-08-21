@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-19-030904-django__django-12273-baseline-v2.0",
+  "task_id": "django__django-12273",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 221.9,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 53,
+    "tool_call_counts": {
+      "grep_search": 8,
+      "view_file": 11,
+      "run_command": 24,
+      "find_by_name": 2,
+      "replace_file_content": 8
+    },
+    "time_to_first_edit_seconds": 98.389,
+    "num_turns": 1,
+    "duration_seconds_reported": 210.9527126,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 260359,
+      "output_tokens": 57958,
+      "thinking_tokens": 47879,
+      "cache_read_tokens": 3119233,
+      "total_tokens": 318317
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-12273",
+  "test_output_tail": "eating table model_inheritance_regress_articlewithauthor\n    Creating table model_inheritance_regress_m2mbase\n    Creating table model_inheritance_regress_m2mchild\n    Creating table model_inheritance_regress_qualitycontrol\n    Creating table model_inheritance_regress_basem\n    Creating table model_inheritance_regress_derivedm\n    Creating table model_inheritance_regress_internalcertificationaudit\n    Creating table model_inheritance_regress_person\n    Creating table model_inheritance_regress_birthdayparty\n    Creating table model_inheritance_regress_bachelorparty\n    Creating table model_inheritance_regress_messybachelorparty\n    Creating table model_inheritance_regress_searchablelocation\n    Creating table model_inheritance_regress_busstation\n    Creating table model_inheritance_regress_trainstation\n    Creating table model_inheritance_regress_user\n    Creating table model_inheritance_regress_profile\n    Creating table model_inheritance_regress_politician\n    Creating table model_inheritance_regress_congressman\n    Creating table model_inheritance_regress_senator\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\ntest_create_new_instance_with_pk_equals_none (model_inheritance_regress.tests.ModelInheritanceTest) ... ok\ntest_create_new_instance_with_pk_equals_none_multi_inheritance (model_inheritance_regress.tests.ModelInheritanceTest) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.006s\n\nOK\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nPASS: django__django-12273 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "django/db/models/base.py",
+      "tests/model_inheritance/models.py",
+      "tests/model_inheritance/tests.py"
+    ],
+    "lines_added": 99,
+    "lines_deleted": 6,
+    "total_lines_changed": 105,
+    "hunks_count": 5
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

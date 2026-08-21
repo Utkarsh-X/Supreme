@@ -1,0 +1,57 @@
+{
+  "run_id": "2026-08-19-030452-django__django-11477-baseline-v2.0",
+  "task_id": "django__django-11477",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 127.55,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 41,
+    "tool_call_counts": {
+      "grep_search": 7,
+      "view_file": 14,
+      "run_command": 10,
+      "manage_task": 5,
+      "find_by_name": 2,
+      "replace_file_content": 3
+    },
+    "time_to_first_edit_seconds": 82.76,
+    "num_turns": 1,
+    "duration_seconds_reported": 117.2212443,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 205243,
+      "output_tokens": 20914,
+      "thinking_tokens": 15778,
+      "cache_read_tokens": 1864300,
+      "total_tokens": 226157
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-11477",
+  "test_output_tail": "# EVAL rc=1 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-11477\\django'\nImporting application i18n\nImporting application urlpatterns\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_re_path_with_optional_parameter (urlpatterns.tests.SimplifiedURLTests) ... test_two_variable_at_start_of_path_pattern (urlpatterns.tests.SimplifiedURLTests) ... ok\ntest_translate_url_utility (i18n.patterns.tests.URLTranslationTests) ... ok\n\n======================================================================\nFAIL: test_re_path_with_optional_parameter (urlpatterns.tests.SimplifiedURLTests) (url='/regex_optional/1/')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"E:\\RofU\\Supreme\\carb_workspaces\\django__django-11477\\tests\\urlpatterns\\tests.py\", line 65, in test_re_path_with_optional_parameter\n    self.assertEqual(match.kwargs, kwargs)\nAssertionError: {'arg1': '1', 'arg2': None} != {'arg1': '1'}\n- {'arg1': '1', 'arg2': None}\n+ {'arg1': '1'}\n\n----------------------------------------------------------------------\nRan 3 tests in 0.055s\n\nFAILED (failures=1)\n\nFAIL: django__django-11477 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "django/urls/base.py",
+      "tests/i18n/patterns/tests.py",
+      "tests/i18n/patterns/urls/default.py"
+    ],
+    "lines_added": 9,
+    "lines_deleted": 1,
+    "total_lines_changed": 10,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

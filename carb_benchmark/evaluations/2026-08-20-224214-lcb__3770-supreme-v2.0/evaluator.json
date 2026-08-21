@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-20-224214-lcb__3770-supreme-v2.0",
+  "task_id": "lcb__3770",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 241.37,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 30,
+    "tool_call_counts": {
+      "list_dir": 1,
+      "view_file": 5,
+      "run_command": 12,
+      "write_to_file": 8,
+      "manage_task": 4
+    },
+    "time_to_first_edit_seconds": 69.312,
+    "num_turns": 1,
+    "duration_seconds_reported": 226.0340221,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 236859,
+      "output_tokens": 29812,
+      "thinking_tokens": 20151,
+      "cache_read_tokens": 1160822,
+      "total_tokens": 266671
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3770",
+  "test_output_tail": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'\n  FAIL #29: wrong_answer got='aaaaaa' expected='\"aaaaaa\"'\n  FAIL #30: output_length_mismatch got='' expected=''\n  FAIL #31: wrong_answer got='auyvaa' expected='\"auyvaa\"'\n  FAIL #32: wrong_answer got='bbbaabbbabbbbaabbbaaa' expected='\"bbbaabbbabbbbaabbbaaa\"'\n  FAIL #33: wrong_answer got='aaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaab' expected='\"aaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaabaaa'\n  FAIL #34: wrong_answer got='aaaaa' expected='\"aaaaa\"'\n  FAIL #35: wrong_answer got='aaaaaa' expected='\"aaaaaa\"'\n  FAIL #36: wrong_answer got='aaaaaaaa' expected='\"aaaaaaaa\"'\n  FAIL #37: wrong_answer got='babababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababb' expected='\"bababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab'\n  FAIL #38: wrong_answer got='aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaa' expected='\"aabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaabaaba'\n  FAIL #39: wrong_answer got='aa' expected='\"aa\"'\n  FAIL #40: wrong_answer got='aaa' expected='\"aaa\"'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 93,
+    "lines_deleted": 1,
+    "total_lines_changed": 94,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

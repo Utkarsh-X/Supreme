@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-19-110123-lcb__abc392_d-superpowers-v2.0",
+  "task_id": "lcb__abc392_d",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 144.72,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 10,
+    "tool_call_counts": {
+      "view_file": 4,
+      "grep_search": 1,
+      "list_dir": 2,
+      "write_to_file": 1,
+      "run_command": 2
+    },
+    "time_to_first_edit_seconds": 90.583,
+    "num_turns": 1,
+    "duration_seconds_reported": 127.3062822,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 64320,
+      "output_tokens": 6057,
+      "thinking_tokens": 3959,
+      "cache_read_tokens": 322172,
+      "total_tokens": 70377
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__abc392_d",
+  "test_output_tail": "LCB lcb__abc392_d: 15/40 private tests passed\n  FAIL #1: wrong_answer got='0.076923076923077' expected='0.076923076923'\n  FAIL #2: wrong_answer got='0.000058142915286' expected='0.000058142915'\n  FAIL #5: wrong_answer got='0.000010000100001' expected='0.000010000100'\n  FAIL #6: wrong_answer got='0.000039931637037' expected='0.000039931637'\n  FAIL #7: wrong_answer got='0.222222222222222' expected='0.222222222222'\n  FAIL #8: wrong_answer got='0.111111111111111' expected='0.111111111111'\n  FAIL #9: wrong_answer got='0.011182598039216' expected='0.011182598039'\n  FAIL #10: wrong_answer got='0.095133333333333' expected='0.095133333333'\n  FAIL #11: wrong_answer got='0.000040000400004' expected='0.000040000400'\n  FAIL #15: wrong_answer got='0.016566958122411' expected='0.016566958122'\n  FAIL #16: wrong_answer got='0.113636363636364' expected='0.113636363636'\n  FAIL #17: wrong_answer got='0.000056137987172' expected='0.000056137987'\n  FAIL #19: wrong_answer got='0.333333333333333' expected='0.333333333333'\n  FAIL #20: wrong_answer got='0.019230769230769' expected='0.019230769231'\n  FAIL #22: wrong_answer got='0.014075630252101' expected='0.014075630252'\n  FAIL #25: wrong_answer got='0.119047619047619' expected='0.119047619048'\n  FAIL #27: wrong_answer got='0.095238095238095' expected='0.095238095238'\n  FAIL #28: wrong_answer got='0.000046452212287' expected='0.000046452212'\n  FAIL #33: wrong_answer got='0.166666666666667' expected='0.166666666667'\n  FAIL #34: wrong_answer got='0.000035304501324' expected='0.000035304501'\n  FAIL #35: wrong_answer got='0.148148148148148' expected='0.148148148148'\n  FAIL #37: wrong_answer got='0.012851405622490' expected='0.012851405622'\n  FAIL #38: wrong_answer got='0.000030985653642' expected='0.000030985654'\n  FAIL #39: wrong_answer got='0.333333333333333' expected='0.333333333333'\n  FAIL #40: wrong_answer got='0.018601190476190' expected='0.018601190476'\n",
+  "diff_metrics": {
+    "files_modified_count": 1,
+    "files_modified_list": [
+      "main.py"
+    ],
+    "lines_added": 52,
+    "lines_deleted": 1,
+    "total_lines_changed": 53,
+    "hunks_count": 1
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

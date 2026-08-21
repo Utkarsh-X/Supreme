@@ -1,0 +1,58 @@
+{
+  "run_id": "2026-08-21-011843-sympy__sympy-13878-superpowers-v2.0",
+  "task_id": "sympy__sympy-13878",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 945.28,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 91,
+    "tool_call_counts": {
+      "view_file": 51,
+      "find_by_name": 1,
+      "grep_search": 12,
+      "run_command": 4,
+      "manage_task": 4,
+      "replace_file_content": 19
+    },
+    "time_to_first_edit_seconds": 270.569,
+    "num_turns": 1,
+    "duration_seconds_reported": 927.4990706,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 401132,
+      "output_tokens": 39393,
+      "thinking_tokens": 23581,
+      "cache_read_tokens": 7238836,
+      "total_tokens": 440525
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 4,
+    "files_modified_list": [
+      "sympy/core/basic.py",
+      "sympy/core/containers.py",
+      "sympy/stats/crv_types.py",
+      "sympy/stats/tests/test_continuous_rv.py"
+    ],
+    "lines_added": 156,
+    "lines_deleted": 6,
+    "total_lines_changed": 162,
+    "hunks_count": 36
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

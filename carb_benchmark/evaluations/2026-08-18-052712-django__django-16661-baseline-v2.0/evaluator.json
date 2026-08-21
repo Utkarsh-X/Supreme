@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-18-052712-django__django-16661-baseline-v2.0",
+  "task_id": "django__django-16661",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 346.21,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 35,
+    "tool_call_counts": {
+      "grep_search": 3,
+      "view_file": 13,
+      "run_command": 10,
+      "replace_file_content": 4,
+      "manage_task": 5
+    },
+    "time_to_first_edit_seconds": 115.709,
+    "num_turns": 1,
+    "duration_seconds_reported": 327.1096094,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 188385,
+      "output_tokens": 43134,
+      "thinking_tokens": 38130,
+      "cache_read_tokens": 1826028,
+      "total_tokens": 231519
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-16661",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-16661\\django'\nImporting application modeladmin\nFound 1 test(s).\nSkipping setup of unused database(s): other.\nOperations to perform:\n  Synchronize unmigrated apps: auth, contenttypes, messages, modeladmin, sessions, staticfiles\n  Apply all migrations: admin, sites\nSynchronizing apps without migrations:\n  Creating tables...\n    Creating table django_content_type\n    Creating table auth_permission\n    Creating table auth_group\n    Creating table auth_user\n    Creating table django_session\n    Creating table modeladmin_band\n    Creating table modeladmin_song\n    Creating table modeladmin_concert\n    Creating table modeladmin_validationtestmodel\n    Creating table modeladmin_validationtestinlinemodel\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\ntest_lookup_allowed_foreign_primary (modeladmin.tests.ModelAdminTests.test_lookup_allowed_foreign_primary) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nOK\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nPASS: django__django-16661 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/contrib/admin/options.py",
+      "tests/modeladmin/tests.py"
+    ],
+    "lines_added": 36,
+    "lines_deleted": 1,
+    "total_lines_changed": 37,
+    "hunks_count": 3
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only) resumed after restart"
+}

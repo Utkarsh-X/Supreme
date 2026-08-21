@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-19-034212-sphinx-doc__sphinx-10466-baseline-v2.0",
+  "task_id": "sphinx-doc__sphinx-10466",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 515.05,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 61,
+    "tool_call_counts": {
+      "find_by_name": 4,
+      "grep_search": 15,
+      "view_file": 20,
+      "run_command": 11,
+      "manage_task": 8,
+      "replace_file_content": 3
+    },
+    "time_to_first_edit_seconds": 72.027,
+    "num_turns": 1,
+    "duration_seconds_reported": 504.7270919,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 279061,
+      "output_tokens": 21678,
+      "thinking_tokens": 14677,
+      "cache_read_tokens": 3091634,
+      "total_tokens": 300739
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py sphinx-doc__sphinx-10466",
+  "test_output_tail": "# EVAL rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.9.25, pytest-7.4.4, pluggy-1.6.0\nlibraries: Sphinx-5.0.0b1, docutils-0.18.1\nbase tempdir: C:\\Users\\Utkarsh\\AppData\\Local\\Temp\\pytest-of-Utkarsh\\pytest-385\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\sphinx-doc__sphinx-10466\nconfigfile: setup.cfg\ncollected 1 item\n\ntests\\test_build_gettext.py .                                            [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED tests/test_build_gettext.py::test_Catalog_duplicated_message\n============================== 1 passed in 0.07s ==============================\n\nPASS: sphinx-doc__sphinx-10466 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "sphinx/builders/gettext.py",
+      "tests/test_build_gettext.py"
+    ],
+    "lines_added": 40,
+    "lines_deleted": 1,
+    "total_lines_changed": 41,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration rate-limit re-run"
+}

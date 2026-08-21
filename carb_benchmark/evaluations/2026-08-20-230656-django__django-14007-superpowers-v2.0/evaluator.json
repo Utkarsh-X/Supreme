@@ -1,0 +1,58 @@
+{
+  "run_id": "2026-08-20-230656-django__django-14007-superpowers-v2.0",
+  "task_id": "django__django-14007",
+  "configuration_id": "superpowers-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 455.72,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 63,
+    "tool_call_counts": {
+      "view_file": 27,
+      "grep_search": 17,
+      "run_command": 11,
+      "replace_file_content": 7,
+      "list_dir": 1
+    },
+    "time_to_first_edit_seconds": 242.285,
+    "num_turns": 1,
+    "duration_seconds_reported": 442.7270528,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 320940,
+      "output_tokens": 26109,
+      "thinking_tokens": 16869,
+      "cache_read_tokens": 6097913,
+      "total_tokens": 347049
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 3,
+    "files_modified_list": [
+      "django/db/models/sql/compiler.py",
+      "tests/from_db_value/models.py",
+      "tests/from_db_value/tests.py"
+    ],
+    "lines_added": 53,
+    "lines_deleted": 8,
+    "total_lines_changed": 61,
+    "hunks_count": 4
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "1b082731ea57a58e9aac1484c80a4469997002d1fa807467f8e8a6916ca45efd",
+  "constitution_markers_in_transcript": [
+    "Supreme"
+  ],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

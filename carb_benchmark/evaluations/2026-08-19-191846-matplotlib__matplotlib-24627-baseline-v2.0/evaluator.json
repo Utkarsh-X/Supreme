@@ -1,0 +1,54 @@
+{
+  "run_id": "2026-08-19-191846-matplotlib__matplotlib-24627-baseline-v2.0",
+  "task_id": "matplotlib__matplotlib-24627",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 3327.53,
+  "agy_exit_code": -1,
+  "timed_out": true,
+  "telemetry": {
+    "tool_calls_total": 142,
+    "tool_call_counts": {
+      "grep_search": 35,
+      "view_file": 47,
+      "run_command": 47,
+      "replace_file_content": 13
+    },
+    "time_to_first_edit_seconds": 611.471,
+    "num_turns": null,
+    "duration_seconds_reported": null,
+    "status": null,
+    "usage": null,
+    "telemetry_error": "AGY EXECUTION TIMED OUT after 2400s (harness cap)"
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-24627",
+  "test_output_tail": "  [setup] overlay: copied 9 compiled files from matplotlib==3.6.3\n# EVAL rc=1 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-24627\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_axes.py F                                      [100%]\n\n================================== FAILURES ===================================\n____________________ test_cla_clears_children_axes_and_fig ____________________\nlib\\matplotlib\\tests\\test_axes.py:8382: in test_cla_clears_children_axes_and_fig\n    assert art.axes is None\nE   assert <Axes: > is None\nE    +  where <Axes: > = <matplotlib.lines.Line2D object at 0x000002397F81C940>.axes\n=========================== short test summary info ===========================\nFAILED lib/matplotlib/tests/test_axes.py::test_cla_clears_children_axes_and_fig\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 1.19s ==============================\n\nFAIL: matplotlib__matplotlib-24627 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 8,
+    "files_modified_list": [
+      "lib/matplotlib/__init__.py",
+      "lib/matplotlib/_text_helpers.py",
+      "lib/matplotlib/cbook/__init__.py",
+      "lib/matplotlib/collections.py",
+      "lib/matplotlib/font_manager.py",
+      "lib/matplotlib/lines.py",
+      "lib/matplotlib/path.py",
+      "lib/matplotlib/transforms.py"
+    ],
+    "lines_added": 57,
+    "lines_deleted": 9,
+    "total_lines_changed": 66,
+    "hunks_count": 8
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 expansion (50-task baseline)"
+}

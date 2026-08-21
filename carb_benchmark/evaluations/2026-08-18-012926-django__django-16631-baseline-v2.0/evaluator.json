@@ -1,0 +1,58 @@
+{
+  "run_id": "2026-08-18-012926-django__django-16631-baseline-v2.0",
+  "task_id": "django__django-16631",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 496.24,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 82,
+    "tool_call_counts": {
+      "grep_search": 20,
+      "view_file": 35,
+      "run_command": 12,
+      "manage_task": 3,
+      "replace_file_content": 12
+    },
+    "time_to_first_edit_seconds": 189.01,
+    "num_turns": 1,
+    "duration_seconds_reported": 484.8480246,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 355778,
+      "output_tokens": 47620,
+      "thinking_tokens": 34937,
+      "cache_read_tokens": 5600280,
+      "total_tokens": 403398
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": null,
+  "test_output_tail": "NO TEST COMMAND: evaluation spec has an empty/missing test_command \u2014 verdict cannot be a pass",
+  "diff_metrics": {
+    "files_modified_count": 5,
+    "files_modified_list": [
+      "django/contrib/auth/__init__.py",
+      "django/contrib/auth/base_user.py",
+      "docs/topics/auth/customizing.txt",
+      "tests/auth_tests/test_middleware.py",
+      "tests/auth_tests/test_models.py"
+    ],
+    "lines_added": 105,
+    "lines_deleted": 2,
+    "total_lines_changed": 107,
+    "hunks_count": 9
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only)"
+}

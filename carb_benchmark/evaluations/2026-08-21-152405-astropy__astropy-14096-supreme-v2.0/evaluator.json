@@ -1,0 +1,57 @@
+{
+  "run_id": "2026-08-21-152405-astropy__astropy-14096-supreme-v2.0",
+  "task_id": "astropy__astropy-14096",
+  "configuration_id": "supreme-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 1085.77,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 127,
+    "tool_call_counts": {
+      "grep_search": 9,
+      "view_file": 31,
+      "run_command": 59,
+      "write_to_file": 9,
+      "replace_file_content": 6,
+      "manage_task": 7,
+      "find_by_name": 6
+    },
+    "time_to_first_edit_seconds": 109.054,
+    "num_turns": 1,
+    "duration_seconds_reported": 1070.5300522,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 664421,
+      "output_tokens": 44646,
+      "thinking_tokens": 25104,
+      "cache_read_tokens": 9888084,
+      "total_tokens": 709067
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py astropy__astropy-14096",
+  "test_output_tail": "\u001b[1m============================= test session starts =============================\u001b[0m\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\n\nRunning tests with Astropy version 5.1.1.\nRunning tests in astropy/coordinates/tests/test_sky_coord.py::test_subclass_property_exception_error.\n\nDate: 2026-08-21T15:42:31\n\nPlatform: Windows-10-10.0.26200-SP0\n\nExecutable: E:\\RofU\\Supreme\\carb_benchmark\\venvs\\astropy_py3.10\\Scripts\\python.exe\n\nFull Python Version: \n3.10.20 (main, Apr 14 2026, 14:30:46) [MSC v.1944 64 bit (AMD64)]\n\nencodings: sys: utf-8, locale: cp1252, filesystem: utf-8\nbyteorder: little\nfloat info: dig: 15, mant_dig: 15\n\nPackage versions: \nNumpy: 1.25.2\nScipy: not available\nMatplotlib: not available\nh5py: not available\nPandas: not available\nPyERFA: 2.0.1.5\nCython: not available\nScikit-image: not available\nasdf: not available\npyarrow: not available\n\nUsing Astropy options: remote_data: none.\n\nARCH_ON_CI: undefined\nIS_CRON: undefined\n\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\astropy__astropy-14096\nconfigfile: setup.cfg\nplugins: hypothesis-6.82.6, arraydiff-0.7.0, astropy-0.12.0, astropy-header-0.2.2, cov-7.1.0, doctestplus-1.7.1, filter-subpackage-0.2.0, mock-3.15.1, openfiles-0.6.0, remotedata-0.4.2, skip-slow-1.1.0, xdist-3.8.0\ncollected 1 item\n\nastropy\\coordinates\\tests\\test_sky_coord.py \u001b[32m.\u001b[0m\u001b[32m                            [100%]\u001b[0m\n\n=================================== PASSES ====================================\n\u001b[36m\u001b[1m=========================== short test summary info ===========================\u001b[0m\n\u001b[32mPASSED\u001b[0m astropy/coordinates/tests/test_sky_coord.py::\u001b[1mtest_subclass_property_exception_error\u001b[0m\n\u001b[32m============================== \u001b[32m\u001b[1m1 passed\u001b[0m\u001b[32m in 0.80s\u001b[0m\u001b[32m ==============================\u001b[0m\n<frozen importlib._bootstrap>:241: RuntimeWarning: numpy.ndarray size changed, may indicate binary incompatibility. Expected 88 from C header, got 96 from PyObject\n\nPASS: astropy__astropy-14096 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "astropy/coordinates/sky_coordinate.py",
+      "astropy/coordinates/tests/test_sky_coord.py"
+    ],
+    "lines_added": 13,
+    "lines_deleted": 3,
+    "total_lines_changed": 16,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": "52b18dd5095761cf4d9781ffd57d64ad11369638e303c8e782852706aa7f09b9",
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": ""
+}

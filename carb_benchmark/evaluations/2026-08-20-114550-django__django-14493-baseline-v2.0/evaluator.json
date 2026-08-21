@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-20-114550-django__django-14493-baseline-v2.0",
+  "task_id": "django__django-14493",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 110.61,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 32,
+    "tool_call_counts": {
+      "find_by_name": 1,
+      "view_file": 14,
+      "run_command": 4,
+      "manage_task": 6,
+      "grep_search": 5,
+      "replace_file_content": 2
+    },
+    "time_to_first_edit_seconds": 75.868,
+    "num_turns": 1,
+    "duration_seconds_reported": 98.5823445,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 156978,
+      "output_tokens": 9966,
+      "thinking_tokens": 6228,
+      "cache_read_tokens": 852759,
+      "total_tokens": 166944
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-14493",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-14493\\django'\nImporting application staticfiles_tests\nFound 1 test(s).\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_collectstatistic_no_post_process_replaced_paths (staticfiles_tests.test_storage.TestCollectionNoPostProcessReplacedPaths) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.097s\n\nOK\n\nPASS: django__django-14493 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/contrib/staticfiles/storage.py",
+      "tests/staticfiles_tests/test_storage.py"
+    ],
+    "lines_added": 6,
+    "lines_deleted": 0,
+    "total_lines_changed": 6,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 final expansion (all remaining workspaces)"
+}

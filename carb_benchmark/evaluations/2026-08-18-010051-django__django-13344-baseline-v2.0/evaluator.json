@@ -1,0 +1,57 @@
+{
+  "run_id": "2026-08-18-010051-django__django-13344-baseline-v2.0",
+  "task_id": "django__django-13344",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 379.36,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 77,
+    "tool_call_counts": {
+      "grep_search": 13,
+      "view_file": 25,
+      "run_command": 27,
+      "replace_file_content": 11,
+      "list_dir": 1
+    },
+    "time_to_first_edit_seconds": 160.473,
+    "num_turns": 1,
+    "duration_seconds_reported": 368.6338044,
+    "status": "SUCCESS",
+    "usage": {
+      "input_tokens": 444284,
+      "output_tokens": 51729,
+      "thinking_tokens": 36913,
+      "cache_read_tokens": 5990800,
+      "total_tokens": 496013
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-13344",
+  "test_output_tail": "# EVAL rc=0 (1s)\nTesting against Django installed in 'E:\\RofU\\Supreme\\carb_workspaces\\django__django-13344\\django'\nImporting application deprecation\nSkipping setup of unused database(s): default, other.\nSystem check identified no issues (0 silenced).\ntest_coroutine (deprecation.test_middleware_mixin.MiddlewareMixinTests) ... ok\ntest_deprecation (deprecation.test_middleware_mixin.MiddlewareMixinTests) ... ok\n\n----------------------------------------------------------------------\nRan 2 tests in 0.004s\n\nOK\n\nPASS: django__django-13344 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 4,
+    "files_modified_list": [
+      "django/middleware/cache.py",
+      "django/middleware/security.py",
+      "django/utils/deprecation.py",
+      "tests/deprecation/test_middleware_mixin.py"
+    ],
+    "lines_added": 32,
+    "lines_deleted": 9,
+    "total_lines_changed": 41,
+    "hunks_count": 6
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 Phase A calibration (baseline-only)"
+}

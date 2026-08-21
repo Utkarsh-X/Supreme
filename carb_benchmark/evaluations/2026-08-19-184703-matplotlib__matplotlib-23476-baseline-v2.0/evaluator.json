@@ -1,0 +1,56 @@
+{
+  "run_id": "2026-08-19-184703-matplotlib__matplotlib-23476-baseline-v2.0",
+  "task_id": "matplotlib__matplotlib-23476",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 873.68,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 107,
+    "tool_call_counts": {
+      "grep_search": 22,
+      "find_by_name": 1,
+      "view_file": 31,
+      "run_command": 45,
+      "manage_task": 5,
+      "replace_file_content": 3
+    },
+    "time_to_first_edit_seconds": 698.476,
+    "num_turns": 1,
+    "duration_seconds_reported": 861.0174838,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 724557,
+      "output_tokens": 63180,
+      "thinking_tokens": 48231,
+      "cache_read_tokens": 7260651,
+      "total_tokens": 787737
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-23476",
+  "test_output_tail": "  [setup] overlay: copied 10 compiled files from matplotlib==3.5.3\n# EVAL rc=1 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-23476\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_figure.py F                                    [100%]\n\n================================== FAILURES ===================================\n____________________ test_unpickle_with_device_pixel_ratio ____________________\nlib\\matplotlib\\tests\\test_figure.py:1391: in test_unpickle_with_device_pixel_ratio\n    assert fig2.dpi == 42\nE   assert 294 == 42\nE    +  where 294 = <Figure size 2352x1764 with 0 Axes>.dpi\n=========================== short test summary info ===========================\nFAILED lib/matplotlib/tests/test_figure.py::test_unpickle_with_device_pixel_ratio\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n============================== 1 failed in 0.89s ==============================\n\nFAIL: matplotlib__matplotlib-23476 \ufffd FAIL_TO_PASS rc=1\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "lib/matplotlib/backend_bases.py",
+      "lib/matplotlib/tests/test_pickle.py"
+    ],
+    "lines_added": 14,
+    "lines_deleted": 1,
+    "total_lines_changed": 15,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 expansion (50-task baseline)"
+}

@@ -1,0 +1,55 @@
+{
+  "run_id": "2026-08-19-024819-django__django-13279-baseline-v2.0",
+  "task_id": "django__django-13279",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 217.89,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 40,
+    "tool_call_counts": {
+      "grep_search": 10,
+      "find_by_name": 3,
+      "view_file": 16,
+      "run_command": 9,
+      "replace_file_content": 2
+    },
+    "time_to_first_edit_seconds": 126.454,
+    "num_turns": 1,
+    "duration_seconds_reported": 207.1508553,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 169165,
+      "output_tokens": 17128,
+      "thinking_tokens": 12710,
+      "cache_read_tokens": 1246882,
+      "total_tokens": 186293
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py django__django-13279",
+  "test_output_tail": "r.\nOperations to perform:\n  Synchronize unmigrated apps: auth, contenttypes, messages, sessions, sessions_tests, staticfiles\n  Apply all migrations: admin, sites\nSynchronizing apps without migrations:\n  Creating tables...\n    Creating table django_content_type\n    Creating table auth_permission\n    Creating table auth_group\n    Creating table auth_user\n    Creating table django_session\n    Creating table sessions_tests_customsession\n    Running deferred SQL...\nRunning migrations:\n  Applying admin.0001_initial... OK\n  Applying admin.0002_logentry_remove_auto_add... OK\n  Applying admin.0003_logentry_add_action_flag_choices... OK\n  Applying sites.0001_initial... OK\n  Applying sites.0002_alter_domain_unique... OK\nSystem check identified no issues (0 silenced).\nCreating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.CacheDBSessionTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.CacheDBSessionWithTimeZoneTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.DatabaseSessionTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.DatabaseSessionWithTimeZoneTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.CustomDatabaseSessionTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.CookieSessionTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.CacheSessionTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.FileSessionTests) ... ok\ntest_default_hashing_algorith_legacy_decode (sessions_tests.tests.FileSessionPathLibTests) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 0.006s\n\nOK\nDestroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...\n\n\nPASS: django__django-13279 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "django/contrib/sessions/backends/base.py",
+      "tests/sessions_tests/tests.py"
+    ],
+    "lines_added": 20,
+    "lines_deleted": 1,
+    "total_lines_changed": 21,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 calibration tranche 3 re-run"
+}

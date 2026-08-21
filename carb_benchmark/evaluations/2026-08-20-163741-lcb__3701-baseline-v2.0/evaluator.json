@@ -1,0 +1,53 @@
+{
+  "run_id": "2026-08-20-163741-lcb__3701-baseline-v2.0",
+  "task_id": "lcb__3701",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 647.65,
+  "agy_exit_code": 1,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 11,
+    "tool_call_counts": {
+      "list_dir": 1,
+      "view_file": 3,
+      "run_command": 5,
+      "manage_task": 2
+    },
+    "time_to_first_edit_seconds": null,
+    "num_turns": 1,
+    "duration_seconds_reported": 633.4881533,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 79301,
+      "output_tokens": 39367,
+      "thinking_tokens": 31987,
+      "cache_read_tokens": 445022,
+      "total_tokens": 118668
+    },
+    "telemetry_error": null
+  },
+  "passed": false,
+  "test_command": "python ../../carb_benchmark/scripts/eval_lcb.py lcb__3701",
+  "test_output_tail": "TEST TIMED OUT after 300s",
+  "diff_metrics": {
+    "files_modified_count": 0,
+    "files_modified_list": [],
+    "lines_added": 0,
+    "lines_deleted": 0,
+    "total_lines_changed": 0,
+    "hunks_count": 0
+  },
+  "expected_files_modified": [
+    "main.py"
+  ],
+  "max_justified_lines_changed": 400,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "phantom retry (re-run crashed tasks)"
+}

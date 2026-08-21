@@ -1,0 +1,57 @@
+{
+  "run_id": "2026-08-19-190141-matplotlib__matplotlib-24177-baseline-v2.0",
+  "task_id": "matplotlib__matplotlib-24177",
+  "configuration_id": "baseline-v2.0",
+  "model": "gemini-3.6-flash-high",
+  "engine": "agy.exe (Antigravity CLI, print mode)",
+  "environment": "isolated_temp_profile (auth only, no global rules, no memory)",
+  "wall_clock_seconds": 1020.45,
+  "agy_exit_code": 0,
+  "timed_out": false,
+  "telemetry": {
+    "tool_calls_total": 127,
+    "tool_call_counts": {
+      "grep_search": 19,
+      "view_file": 24,
+      "run_command": 63,
+      "manage_task": 16,
+      "find_by_name": 1,
+      "search_web": 2,
+      "replace_file_content": 2
+    },
+    "time_to_first_edit_seconds": 590.878,
+    "num_turns": 1,
+    "duration_seconds_reported": 1008.0649818,
+    "status": "ERROR",
+    "usage": {
+      "input_tokens": 835959,
+      "output_tokens": 70204,
+      "thinking_tokens": 49256,
+      "cache_read_tokens": 11040757,
+      "total_tokens": 906163
+    },
+    "telemetry_error": null
+  },
+  "passed": true,
+  "test_command": "python ../../carb_benchmark/scripts/eval_swe.py matplotlib__matplotlib-24177",
+  "test_output_tail": "  [setup] overlay: copied 9 compiled files from matplotlib==3.6.3\n# EVAL rc=0 (2s)\n============================= test session starts =============================\nplatform win32 -- Python 3.10.20, pytest-7.4.4, pluggy-1.6.0\nrootdir: E:\\RofU\\Supreme\\carb_workspaces\\matplotlib__matplotlib-24177\nconfigfile: pytest.ini\ncollected 1 item\n\nlib\\matplotlib\\tests\\test_axes.py .                                      [100%]\n\n=================================== PASSES ====================================\n=========================== short test summary info ===========================\nPASSED lib/matplotlib/tests/test_axes.py::test_small_autoscale\n============================== 1 passed in 0.90s ==============================\n\nPASS: matplotlib__matplotlib-24177 \ufffd all FAIL_TO_PASS tests passed\n",
+  "diff_metrics": {
+    "files_modified_count": 2,
+    "files_modified_list": [
+      "lib/matplotlib/axes/_base.py",
+      "lib/matplotlib/tests/test_axes.py"
+    ],
+    "lines_added": 10,
+    "lines_deleted": 1,
+    "total_lines_changed": 11,
+    "hunks_count": 2
+  },
+  "expected_files_modified": null,
+  "max_justified_lines_changed": null,
+  "disclosure_question_appended": false,
+  "system_prompt_sha256": null,
+  "constitution_markers_in_transcript": [],
+  "full_system_markers_in_transcript": [],
+  "superpowers_markers_in_transcript": [],
+  "notes": "v3 expansion (50-task baseline)"
+}
