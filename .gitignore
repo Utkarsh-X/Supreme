@@ -16,6 +16,10 @@
 *.swp
 *.swo
 
+# Local agent tooling
+.agents/
+.skills/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -33,6 +37,14 @@ carb_benchmark/sources/data/
 
 # Binaries / bulk data
 *.bin
+*.exe
+
+# Build outputs
+paper/bin/
+paper/rendered_pages/
+
+# Raw run artifacts
+carb_benchmark/runs_v4/
 
 # Logs and scratch files
 *.log
