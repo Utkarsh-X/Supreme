@@ -1,59 +1,25 @@
-# ---------------------------------------------------------------------------
-# CARB benchmark repository — .gitignore
-#
-# The repo tracks: harness code, task registry, evaluation specs/golden
-# patches, per-session verdicts and diffs, and the final results.
-# Everything below is either regenerable, machine-local, huge, or secret.
-#
-# NOTE: git does NOT strip trailing comments from ignore lines — every
-# comment below lives on its own line.
-# ---------------------------------------------------------------------------
-
-# Freebuff / IDE / app state
-.freebuff/
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# Local agent tooling
-.agents/
-.skills/
-
-# Python
+# Python bytecode
 __pycache__/
 *.py[cod]
-*.egg-info/
 
-# Benchmark runtime artifacts (large, regenerable, machine-local)
-# 62 task checkout repos + venvs — never commit
-carb_workspaces/
-# per-framework python virtualenvs (~0.5 GB)
-carb_benchmark/venvs/
-# agy CLI binary (~300 MB), auth profiles, keyring
-carb_benchmark/tooling/
-# raw public datasets (SWE-bench / LiveCodeBench corpora)
-carb_benchmark/sources/data/
-
-# Binaries / bulk data
-*.bin
+# Binaries & build tools
 *.exe
-
-# Build outputs
 paper/bin/
 paper/rendered_pages/
 
-# Raw run artifacts
+# Benchmark workspaces & bulk run data
+carb_workspaces/
+carb_benchmark/tooling/
+carb_benchmark/venvs/
 carb_benchmark/runs_v4/
+carb_benchmark/archive/
+carb_benchmark/sources/data/
+carb_benchmark/results_v4/checkpoint_audits/
+carb_benchmark/results_v4/*REMAINING_*
 
 # Logs and scratch files
 *.log
+*.tmp
 carb_benchmark/results/*_tmp.txt
 carb_benchmark/results/_inspect_tmp.txt
-
-# Secrets (defense in depth — already excluded via tooling/)
-*keyring*
-*_auth_profile*
-
-# scratch files rewritten by apply_patch() on every eval/validation run
 carb_benchmark/validation/*.lf.patch
