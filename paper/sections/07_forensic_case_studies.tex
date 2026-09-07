@@ -1,0 +1,44 @@
+\section{Forensic Case Studies and Behavioral Dynamics}
+\label{sec:case_studies}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.48\textwidth]{figures/fig5_task88_corewars_trajectory.pdf}
+\hfill
+\includegraphics[width=0.48\textwidth]{figures/fig2_markov_tool_state_transitions.pdf}
+\caption{Behavioral dynamics and tool interaction patterns. (Left) Cumulative token trajectory on Task \#88 (\texttt{winning-avg-corewars}), illustrating an extended parameter-search loop. (Right) Markov state transitions ($P(\text{Next} \mid \text{Current})$) comparing background task polling and file-editing strategies.}
+\label{fig:trajectory_and_markov}
+\end{figure*}
+
+\subsection{Exploratory Scripting Loops (Task \#88: Redcode Simulation)}
+In Task \#88 (\texttt{winning-avg-corewars}), agents were tasked with authoring a Redcode warrior in assembly meeting win thresholds against diverse archetypes in the MARS arena \cite{dewdney1984corewars}. The task specification defines a 3,600s execution limit ($T_{\text{limit}} = 3600$s).
+
+As depicted in Figure~\ref{fig:trajectory_and_markov} (Left), this task produced the benchmark's widest divergence in computational expenditure:
+\begin{itemize}
+    \item \textbf{Supreme}: Inspected reference warriors, hypothesized that a Silk/Replicator archetype would dominate the arena pool, implemented the candidate warrior, verified win rates, and concluded in \textbf{175.0s}, \textbf{55 turns}, and \textbf{300,413 tokens}.
+    \item \textbf{Superpowers by obra}: Entered an extensive parameter-search loop. Guided by iterative trial-and-error procedural guidance, the agent authored \textbf{116 separate Python exploration scripts}, repeatedly copying them into the container via \texttt{docker cp}, running battles, and accumulating \textbf{563 turns} across \textbf{1,648.7s} and \textbf{3,513,757 tokens} ($11.7\times$ token inflation for the identical pass).
+\end{itemize}
+This comparison highlights that on open-ended combinatorial tasks, procedural frameworks that encourage iterative scripting without strong stopping heuristics can lead to prolonged exploratory loops.
+
+\subsection{Markov Tool Transitions and Polling Dynamics}
+Analysis of 15,779 sequential tool transitions ($P(\text{Next} \mid \text{Current})$) reveals key operational differences (Figure~\ref{fig:trajectory_and_markov}, Right):
+\begin{itemize}
+    \item \textbf{Background Task Polling}: When asynchronous background commands were active, Baseline exhibited a 50.1\% probability of immediately re-polling \texttt{manage\_task}; Superpowers exhibited 42.7\% (logging 299 triple-polling sequences (\texttt{manage} $\rightarrow$ \texttt{manage} $\rightarrow$ \texttt{manage})). Supreme's loop management protocol reduced this transition probability to 28.6\%, reducing uninformative polling turns.
+    \item \textbf{File Modification Granularity}: Superpowers performed 471 full file overwrites (\texttt{write\_to\_file}) and 172 (\texttt{write} $\rightarrow$ \texttt{run} $\rightarrow$ \texttt{write}) churn cycles. Supreme utilized targeted line replacements (\texttt{replace\_file\_content}) more frequently (42 vs.\ 8). While higher usage of targeted editing reflects prompt compliance, it correlated with narrower modification blast radii: Supreme modified a mean of 2.60 unique files per task versus 3.79 on Superpowers.
+\end{itemize}
+
+\subsection{Physical Solver Optimization (Task \#85: MuJoCo Tuning)}
+Task \#85 (\texttt{tune-mjcf}) required accelerating a MuJoCo physics simulation \cite{todorov2012mujoco} by $\ge 40\%$ without exceeding trajectory error bounds ($D \le 10^{-4}$). Supreme achieved an exclusive pass in 414.9s (81 tool calls, 436k tokens), attaining a \textbf{2.19$\times$ simulation speedup} with zero trajectory divergence ($D = 0.0000$). Baseline and Superpowers both failed to reach the speedup threshold ($0.99\times$ and $1.01\times$ speed ratios) due to speculative modifications of solver parameters.
+
+\subsection{Long-Horizon Autonomy: Headless QEMU Installation}
+In \texttt{install-windows-3.11} ($T_{\text{limit}} = 3600$s), agents were tasked with installing Windows 3.11 for Workgroups inside headless QEMU, partitioning virtual disks via \texttt{fdisk}, formatting FAT16, swapping floppy images, and installing network drivers. Supreme maintained autonomous multi-step execution across \textbf{2,648.7s (44.1 minutes)}, 307 turns, and 58,010 deliberation tokens to complete the installation. Superpowers and Baseline timed out or corrupted disk partition tables.
+
+\subsection{Upstream Benchmark Harness Defects}
+Forensic inspection identified three tasks with failures attributable to upstream container defects rather than model reasoning:
+\begin{itemize}
+    \item \texttt{prove-plus-comm}: Container metadata error caused immediate failure (\texttt{failed to chdir to cwd ("/app"): no such file or directory}) across all models.
+    \item \texttt{caffe-cifar-10}: An unreleased lock on \texttt{/var/lib/dpkg/lock-frontend} held by background PID 168 blocked package installations, causing a starvation timeout across all models.
+    \item \texttt{torch-pipeline-parallelism} (Tasks \#82--\#83): In Task 82, Python/curl were omitted with network egress blocked; in Task 83, unconstrained 2.85 GB PyPI CUDA dependencies were triggered on a CPU container \cite{shoeybi2019megatron}.
+\end{itemize}
+Excluding these three defective environments yields the adjusted benchmark scores reported in Table~\ref{tab:master_scoreboard} ($N=86$).
+

@@ -1,0 +1,33 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\subsection{Benchmark Corpus: Terminal-Bench 2.1}
+We evaluate across the complete 89-task corpus of Terminal-Bench 2.1 \cite{shaw2025terminalbench}. To analyze real-world polyglot versatility beyond standard Python scripting, we classify all 89 tasks across five distinct technical engineering stacks:
+\begin{itemize}
+    \item \textbf{Low-Level \& Systems Engineering} ($N=20$): C, C++, x86/ARM/MIPS Assembly, Redcode, Rust, and OCaml compiler runtimes.
+    \item \textbf{SysAdmin, OS \& DevOps} ($N=15$): Linux kernel parameters, QEMU hypervisor orchestration, Git object reconstruction, OpenSSH, and Bind9 DNS.
+    \item \textbf{Software Engineering} ($N=26$): Python applications, Cython extensions, complex data pipelines, and multi-file refactors.
+    \item \textbf{Esoteric \& Symbolic Programming} ($N=14$): Scheme metacircular evaluators, COBOL business logic, LaTeX typesetting, Stan probabilistic modeling, and SPARQL ontology queries.
+    \item \textbf{Machine Learning \& Robotics} ($N=14$): PyTorch distributed parallelism, HuggingFace transformers, FastText embeddings, and MuJoCo XML physics modeling.
+\end{itemize}
+
+\subsection{Evaluation Isolation and Anti-Leakage Protocol}
+To ensure benchmark validity and prevent evaluation leakage during task execution, the evaluation harness enforces strict multi-container isolation:
+\begin{enumerate}
+    \item \textbf{Pristine Container Provisioning}: An isolated Docker container is spawned from the official benchmark image with bounded memory and CPU allocations.
+    \item \textbf{Evaluation Isolation}: During active agent problem-solving, the ground-truth verification suite (\texttt{/tests}) is completely absent from the container filesystem. Across all 267 transcripts, agents executed 104 exploratory shell searches attempting to locate verification files (e.g., \texttt{find / -name "*test*"}); all 104 attempts returned empty results. This confirms that agents did not access ground-truth tests during execution, though it does not preclude pre-training data exposure.
+    \item \textbf{Per-Task Timeout Enforcement}: Each task operates under its official per-task timeout $T_{\text{limit}}$ specified in its benchmark configuration (\texttt{task.toml}). Across the corpus, timeouts range from 360s to 3,600s with a median of 900s ($N=48$ tasks). Heavy systems and simulation tasks (e.g., \texttt{install-windows-3.11} and \texttt{winning-avg-corewars}) are allocated 3,600s. Upon self-declaration of completion or reaching $T_{\text{limit}}$, the agent process tree is terminated.
+    \item \textbf{Post-Execution Injection}: The official verifier is copied into the container via \texttt{docker cp tests/ container:/tests} only after agent execution has completed.
+    \item \textbf{Multi-Signal Consensus Verification}: An isolated subshell executes \texttt{test.sh}, capturing binary reward status, individual CTRF unit test counts, and raw terminal stdout/stderr logs.
+    \item \textbf{Cryptographic Audit Trail}: A SHA-256 hash is computed over all verifier artifacts and committed to the audit ledger.
+\end{enumerate}
+
+\subsection{Telemetry and Token Accounting}
+Token metrics are captured directly from provider API response metadata on each turn:
+\begin{itemize}
+    \item \textbf{Input Tokens ($T_{\text{in}}$)}: Total prompt tokens presented to the model per turn.
+    \item \textbf{Cache Read Tokens ($T_{\text{cache}}$)}: Prompt tokens retrieved from provider-side prefix cache (\texttt{cached\_content\_token\_count}).
+    \item \textbf{Deliberation Tokens ($T_{\text{think}}$)}: Provider-reported reasoning tokens generated during internal model deliberation (\texttt{thinking\_tokens}), captured as aggregate counts rather than decoded chain-of-thought text.
+    \item \textbf{Output Tokens ($T_{\text{out}}$)}: Generated text and tool-call payload tokens (\texttt{candidates\_token\_count}).
+\end{itemize}
+

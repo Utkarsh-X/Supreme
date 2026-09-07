@@ -1,0 +1,14 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\textbf{Autonomous Software Engineering Benchmarks.} 
+Early LLM coding benchmarks, such as HumanEval and MBPP, evaluated isolated algorithmic functions via synthetic unit tests. SWE-bench \cite{jimenez2024swebench} advanced the field by introducing real-world GitHub issues, requiring agents to navigate large repositories and generate unified patch diffs. However, SWE-bench remains largely text-driven and static. Terminal-Bench 2.1 \cite{shaw2025terminalbench} extends agent evaluation into interactive, multi-container Linux environments, demanding full shell competency, polyglot package compilation, daemon orchestration, and dynamic runtime debugging across diverse technical stacks.
+
+\textbf{Agent Prompt Architectures.}
+The foundational ReAct framework \cite{yao2023react} interleaves chain-of-thought reasoning traces with action execution. Subsequent research has explored dynamic capability adaptation, such as Toolformer \cite{schick2024toolformer}, which trains models to invoke APIs on demand. In open-source agent ecosystems, dynamic skill extensions have gained widespread adoption. \textit{Superpowers by obra} \cite{vincent2025superpowers} formalizes progressive disclosure, enabling agents to dynamically discover and read structured procedural skills from disk, ostensibly minimizing initial token consumption.
+
+\textbf{Constitutional AI and Guardrails.}
+Constitutional AI \cite{bai2022constitutional} demonstrated that foundation models can be aligned through explicit self-governing principles rather than unconstrained RLHF. Supreme v1.0 operationalizes constitutional principles for production systems engineering, embedding operational constraints---such as surgical diff boundaries, hypothesis-driven debugging, and anti-premature-closure audits---directly into the invariant prompt context to prevent speculative code mutation and runaway tool loops.
+
+\textbf{Prompt Caching and Multi-Turn Attention Physics.}
+Frontier model APIs have introduced automated prompt caching \cite{anthropic2024promptcaching, google2026gemini36} to dramatically reduce latency and billing on repetitive context prefixes. However, prompt caching algorithms rely strictly on contiguous prefix matching. When autonomous agents inject dynamic skill documents, large file dumps, or fluctuating tool schemas mid-session, the prefix cache is invalidated, negating anticipated token economies. Our work provides the first large-scale empirical audit of this dynamic in multi-turn environments.

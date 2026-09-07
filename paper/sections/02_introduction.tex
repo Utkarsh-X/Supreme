@@ -1,0 +1,23 @@
+\section{Introduction}
+\label{sec:intro}
+
+The deployment of frontier large language models as autonomous agents in real-world software engineering and systems administration requires navigating complex, stateful terminal environments \cite{shaw2025terminalbench, jimenez2024swebench}. Unlike single-turn question-answering or isolated code generation benchmarks, terminal-grounded tasks demand sustained multi-turn reasoning, file system traversal, compiler diagnostics, and iterative error recovery \cite{yao2023react, google2026gemini36}.
+
+As agent systems scale in complexity, a central architectural question is how operational capabilities, procedural guidance, and behavioral constraints should be structured:
+\begin{enumerate}
+    \item \textbf{Dynamic Progressive Skill Loading}: Exemplified by modular agent frameworks such as \textit{Superpowers by obra} \cite{vincent2025superpowers}, this design aims to minimize initial prompt length by exposing a lightweight catalog of capabilities. The agent dynamically identifies relevant skills (e.g., test-driven development, systematic debugging, git worktrees) and loads detailed procedural documentation on demand via file-reading tools.
+    \item \textbf{Constitutional Static Grounding}: Embodying the \textit{Supreme} paradigm \cite{bai2022constitutional}, this architecture directly embeds invariant engineering axioms (evidence-over-assumption, surgical editing boundaries, hierarchical decomposition, and loop management) permanently within the static system prompt header.
+\end{enumerate}
+
+While on-demand skill discovery is conceptually appealing for conserving initial prompt tokens, its empirical behavior across long-horizon terminal tasks remains largely unexamined under controlled experimental conditions. In particular, the interaction between dynamic documentation ingestion, internal reasoning deliberation, tool usage patterns, and multi-turn context accumulation \cite{anthropic2024promptcaching} has not been systematically documented across hundreds of multi-turn containerized tasks.
+
+In this work, we present an empirical evaluation across all 89 tasks of the official Terminal-Bench 2.1 benchmark (267 total container evaluations) using Gemini 3.6 Flash High within a unified evaluation harness. We evaluate three configurations: Supreme, a dynamic progressive skill configuration based on Superpowers by obra, and an unprompted baseline. Our goal is not to declare an absolute best paradigm, but to rigorously examine how prompt architectures influence agent execution dynamics, computational economics, and failure modes when holding the underlying model and evaluation harness constant.
+
+Our investigation yields four primary contributions:
+\begin{itemize}
+    \item \textbf{Hard-Task Deliberation Patterns}: We observe that under constitutional static grounding, provider-reported deliberation tokens scale by +66.0\% on Hard tasks, coinciding with a directional pass-rate advantage (66.7\% vs.\ 53.3\%; paired McNemar $p = 0.22$) over dynamic skill loading, where extensive documentation injection increased context volume.
+    \item \textbf{Characterization of Exploratory Parameter Thrashing}: We document an operational failure mode in combinatorial search problems (exemplified by Task \#88), where dynamic skill guidance coincided with recursive script generation (116 exploratory scripts) and an $11.7\times$ token inflation (3.51M tokens) relative to a targeted hypothesis-driven solve.
+    \item \textbf{Multi-Turn Context Accounting and Cache Telemetry}: We quantify token distribution across 267 executions, finding that on-demand skill injection accumulated 411.3 million cache read tokens (+115.4M over baseline), illustrating how dynamic file loading shapes context accumulation.
+    \item \textbf{Polyglot Domain Breakdown and the Esoteric Anomaly}: Across 5 technical engineering stacks, we evaluate domain sensitivity, observing that while Supreme shows directional advantages in Low-Level Systems and SysAdmin, unprompted Baseline achieves high pass rates in archaic languages (COBOL, Scheme: 85.7\%), where procedural refactoring recipes introduced unnecessary file-churn overhead.
+\end{itemize}
+
