@@ -1,0 +1,1555 @@
+[
+  {
+    "num": 1,
+    "name": "adaptive-rejection-sampler",
+    "domain": "Data Science & DBs",
+    "category": "scientific-computing",
+    "difficulty": "medium",
+    "snippet": "Your task is to implement an adaptive-rejection sampler as described in Gilks et al. (1992).   1. Your solution should allow the user to provide reasonable inputs, including the number of points to sample, and should check the inputs for validity. The primary input should be a function or expression",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 2,
+    "name": "bn-fit-modify",
+    "domain": "Data Science & DBs",
+    "category": "scientific-computing",
+    "difficulty": "hard",
+    "snippet": "You are provided with a dataset sample from a Bayesian Network in /app/bn_sample_10k.csv.  Your first task is to recover the underlying DAG using the provided data.  Here is some information about the original DAG that you may find useful:   - U has no parents    - There are six total edges in the D",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 3,
+    "name": "break-filter-js-from-html",
+    "domain": "Security & Reverse Eng",
+    "category": "security",
+    "difficulty": "medium",
+    "snippet": "There's a /app/filter.py script that attempts to remove JavaScript from HTML files to prevent XSS attacks. The /app/filter.py script takes an HTML file as a command-line argument and modifies it in-place.  Usage: python /app/filter.py <html_file>  Your task is to create a file called /app/out.html t",
+    "vfiles": [
+      "filter.py",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 4,
+    "name": "build-cython-ext",
+    "domain": "Software Engineering",
+    "category": "debugging",
+    "difficulty": "medium",
+    "snippet": "pyknotid is a Python package for computational topology and knot theory. I want to use its fast Cython extensions implemented (chelpers, ccomplexity, cinvariants), but it is incompatible with my existing Numpy versions in my system's global Python environment. Directly pip installing from Pypi will",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 5,
+    "name": "build-pmars",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "Build pMARS (http://www.koth.org/pmars/) from source with no X server.   Since koth.org is unreliable, get the source from Debian packages instead. Extract the source to `/app/pmars-<version>/` and build from there without X11 support. Leave the source tree in place. Install the binary to `/usr/loca",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 6,
+    "name": "build-pov-ray",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "Build POV-Ray 2.2. Find and download the source archives, extract them to `/app/povray-2.2`, then compile and install to `/usr/local/bin/povray`.    We will test your build by rendering `/app/deps/illum1.pov` and comparing against a reference image. Do not modify `/app/deps/illum1.pov`.  As a sanity",
+    "vfiles": [
+      "reference_illum1.png",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 7,
+    "name": "caffe-cifar-10",
+    "domain": "Software Engineering",
+    "category": "machine-learning",
+    "difficulty": "medium",
+    "snippet": "Install the original BVLC Caffe deep learning framework (version 1.0.0) and train a convolutional neural network to classify CIFAR-10 images. Clone Caffe to /app/caffe and build for only CPU execution, training for exactly 500 iterations. The training solver configuration should be at examples/cifar",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 8,
+    "name": "cancel-async-tasks",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "Create a Python function called `async run_tasks(tasks: list[Callable[[], Awaitable[None]]], max_concurrent: int) -> None` where each task is an async job to be run and `max_concurrent` is the max number of tasks that can be run concurrently. Put the function in a file called `/app/run.py` so that i",
+    "vfiles": [
+      "test.py",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 9,
+    "name": "chess-best-move",
+    "domain": "ML & Robotics",
+    "category": "games",
+    "difficulty": "medium",
+    "snippet": "The file chess_board.png has an image of a chess board. It is currently white to move. Write the best move for white to play to /app/move.txt in the form [src][dst], for example, e2e4 or h1h8. If there are multiple winning moves, print them all, one per line.",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 10,
+    "name": "circuit-fibsqrt",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "The file /app/sim.c is a logic-gate simulator: each line of the file /app/gates.txt should contain a line of the form   outX = outY   outX = 0/1   outX = ~outY   outX = outY & outZ   outX = outY | outZ   outX = outY ^ outZ Initially, the first 32 lines are defined by the binary representation of std",
+    "vfiles": [
+      "sim.c",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 11,
+    "name": "cobol-modernization",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "easy",
+    "snippet": "You are given a COBOL program located at /app/src/program.cbl. This program reads input data from /app/src/INPUT.DAT and modifies one or more .DAT files located in the /app/data/ directory. The COBOL program is designed to be run from the /app/ directory and should be compiled and executed using Gnu",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 12,
+    "name": "code-from-image",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "You're given an image of a pseudocode snippet at `/app/code.png`. Implement the intended logic of that snippet in any language and produce the same final value it would print. Write the result to `/app/output.txt`.  - Hint:    - For helping you make sure your solution is correct, the correct answer",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 13,
+    "name": "compile-compcert",
+    "domain": "Software Engineering",
+    "category": "system-administration",
+    "difficulty": "medium",
+    "snippet": "Under /tmp/CompCert/, build the CompCert C verified compiler (version 3.13.1) from source, configuring it to the operating system and instruction set architecture of the development environment. Ensure that CompCert can be invoked through /tmp/CompCert/ccomp. CompCert must be freshly built from sour",
+    "vfiles": [
+      "negative_probe.c",
+      "positive_probe.c",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 14,
+    "name": "configure-git-webserver",
+    "domain": "System Administration",
+    "category": "system-administration",
+    "difficulty": "hard",
+    "snippet": "Configure a git server so that I can run on my computer     git clone user@server:/git/server     echo \"hello world\" > hello.html     git add hello.html     git commit -m \"add hello.html\"     git push origin master And have this data then be pushed to a webserver running on port 8080 so if I run",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py",
+      "verify.sh"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 15,
+    "name": "constraints-scheduling",
+    "domain": "Data Science & DBs",
+    "category": "personal-assistant",
+    "difficulty": "medium",
+    "snippet": "Find a 1-hour meeting slot for Alice, Bob, and Carol during January 15-19, 2024 (business hours: 9 AM - 6 PM, Monday-Friday) that satisfies their availability constraints and existing calendar conflicts.  Availability & Preferences: - Alice: Prefers mornings (9 AM - 12 PM), can do early afternoons (",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 16,
+    "name": "count-dataset-tokens",
+    "domain": "Data Science & DBs",
+    "category": "model-training",
+    "difficulty": "medium",
+    "snippet": "Tell me how many deepseek tokens are there in the science domain of the ryanmarten/OpenThoughts-1k-sample dataset on huggingface. The dataset README gives critical information on how to use the dataset. You should use the Qwen2.5-1.5B-Instruct tokenizer to determine the number of tokens. To provide",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 17,
+    "name": "crack-7z-hash",
+    "domain": "Security & Reverse Eng",
+    "category": "security",
+    "difficulty": "medium",
+    "snippet": "You need to create a file called \"/app/solution.txt\" with the word found in \"secret_file.txt\" in the \"secrets.7z\" archive.",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 18,
+    "name": "custom-memory-heap-crash",
+    "domain": "Security & Reverse Eng",
+    "category": "debugging",
+    "difficulty": "medium",
+    "snippet": "I have a program at `/app/` that crashes under RELEASE mode but not under DEBUG mode. Please help me fix it! You shall not modify any other existing files in the system except for `/app/user.cpp`.  Here's how you shall compile the program:  Release: g++ -std=c++17 -o /app/release /app/main.cpp /app/",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 19,
+    "name": "db-wal-recovery",
+    "domain": "System Administration",
+    "category": "file-operations",
+    "difficulty": "medium",
+    "snippet": "I have a database in WAL (Write-Ahead Logging) mode in /app/.  However, the WAL file appears to be corrupted or encrypted. When you try to  access the database, SQLite may only show the base data (5 records) instead  of all 11 records that should be there.  Your task is to: 1. Fix the WAL file so SQ",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 20,
+    "name": "distribution-search",
+    "domain": "Data Science & DBs",
+    "category": "machine-learning",
+    "difficulty": "medium",
+    "snippet": "Finding a target probability distribution for LLM confidence metrics:  The confidence of a token prediction in an LLM can be quantified using different metrics. This implementation focuses on two metrics based on KL divergence from the uniform distribution:  1. Forward KL Divergence: KL(P||U) = \u03a3 P(",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 21,
+    "name": "dna-assembly",
+    "domain": "Software Engineering",
+    "category": "scientific-computing",
+    "difficulty": "hard",
+    "snippet": "The file titled sequences.fasta contains the following sequences:   * input: A circular input plasmid.   * egfp: A linear DNA sequence encoding the egfp protein.   * flag: A linear DNA sequence encoding the FLAG protein and GS linkers.   * snap: A linear DNA sequence encoding the SNAP protein.   * o",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 22,
+    "name": "dna-insert",
+    "domain": "Software Engineering",
+    "category": "scientific-computing",
+    "difficulty": "medium",
+    "snippet": "The file titled sequences.fasta contains the sequence for a circular input plasmid, and a desired output plasmid. Design primers so that the input plasmid will be converted to the output plasmid when using NEB's Q5 site-directed mutagenesis kit. The primers should respect the following rules:  * The",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 23,
+    "name": "extract-elf",
+    "domain": "Software Engineering",
+    "category": "file-operations",
+    "difficulty": "medium",
+    "snippet": "I have provided a file a.out that's a compiled C binary. Write me a program extract.js that, when run with `node extract.js /app/a.out > out.json` will extract memory values from the binary and output them as a JSON object with memory addresses as keys and their values as integers.  Example output f",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 24,
+    "name": "extract-moves-from-video",
+    "domain": "Software Engineering",
+    "category": "file-operations",
+    "difficulty": "hard",
+    "snippet": "A video of someone playing zork is located at /app/video.mp4. Transcribe the entire contents of the text, and create a file /app/solution.txt that has all the moves they input, one per line, in the format 'n' or 'get bag' etc.",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 25,
+    "name": "feal-differential-cryptanalysis",
+    "domain": "Software Engineering",
+    "category": "mathematics",
+    "difficulty": "hard",
+    "snippet": "The file /app/feal.py implements a FEAL-like encryption function. Implement a chosen plaintext attack that recovers the value of key[5].  Your attack should be implemented in /app/attack.py, and should implement a function called attack(encrypt_fn) and it should return the uint32 value of key[5]. Yo",
+    "vfiles": [
+      "feal.c",
+      "feal.h",
+      "feal_module.c",
+      "setup.py",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 26,
+    "name": "feal-linear-cryptanalysis",
+    "domain": "Software Engineering",
+    "category": "mathematics",
+    "difficulty": "hard",
+    "snippet": "The file /app/feal.c implements a FEAL-like encryption function, with /app/decrypt.c being the corresponding decryption function, and the file /app/pairs.txt contain 32 plaintext-ciphertext pairs. (Each of the 4 round keys is derived from a 20 bit seed. You still can't brute force the entire keyspac",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 27,
+    "name": "filter-js-from-html",
+    "domain": "Security & Reverse Eng",
+    "category": "security",
+    "difficulty": "medium",
+    "snippet": "Create a python file /app/filter.py that removes JavaScript from HTML files to prevent XSS attacks. You should preserve as much of the HTML as possible (e.g., preserve standard formatting, tables, headers, non-dangerous-attributes, etc).  The /app/filter.py script should: - Take an HTML file as a co",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 28,
+    "name": "financial-document-processor",
+    "domain": "Software Engineering",
+    "category": "data-processing",
+    "difficulty": "medium",
+    "snippet": "You have a collection of mixed document files in the `/app/documents/` directory containing both JPG and PDF files.  Your task is to:   - Classify each document as either 'invoice' or 'other' based on document content.   - Move all invoices to `/app/invoices/`   - Move all other documents to `/app/o",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 29,
+    "name": "fix-code-vulnerability",
+    "domain": "Software Engineering",
+    "category": "security",
+    "difficulty": "hard",
+    "snippet": "You need to identify and fix the vulnerability in the code according to the Common Weakness Enumeration (CWE).  The following is a GitHub repository located in the /app folder.   Here is a simple introduction of this repository: Bottle is a fast, simple and lightweight WSGI micro web-framework for P",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 30,
+    "name": "fix-git",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "easy",
+    "snippet": "I just made some changes to my personal site and checked out master, but now I can't find those changes. Please help me find them and merge them into master.",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 31,
+    "name": "fix-ocaml-gc",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "I have been making some changes to the OCaml garbage collector, improving the sweeping performance by run-length compressing the free space in the major heap. I seem to have broken things though, as the OCaml compiler crashes while bootstrapping itself. You can read HACKING.adoc to understand how to",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 32,
+    "name": "gcode-to-text",
+    "domain": "Software Engineering",
+    "category": "file-operations",
+    "difficulty": "medium",
+    "snippet": "I have provided a file called text.gcode. This is a gcode file for a Prusa MK4s. I'm trying to print some text onto an existing object. When I run the print, what will the text show? Write the output to /app/out.txt",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 33,
+    "name": "git-leak-recovery",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "A secret was accidentally committed to this repository in /app and then removed by rewriting history. Please   1. recover the secret and write it to a /app/secret.txt file.   2. clean up the secret in that repo to make sure it cannot be found anywhere in that repo.  3. make sure irrelevant files and",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 34,
+    "name": "git-multibranch",
+    "domain": "Software Engineering",
+    "category": "system-administration",
+    "difficulty": "medium",
+    "snippet": "Set up a Git server that hosts a project over SSH at git@localhost:/git/project. The server should accept password authentication with the password \"password\".  It should deploy contents from two branches (main and dev) to separate HTTPS endpoints using Nginx: - Main branch: https://localhost:8443/i",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 35,
+    "name": "gpt2-codegolf",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "I have downloaded the gpt-2 weights stored as a TF .ckpt. Write me a dependency-free C file that samples from the model with arg-max sampling. Call your program /app/gpt2.c, I will compile with gcc -O3 -lm. It should read the .ckpt and the .bpe file. Your c program must be <5000 bytes. I will run it",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 36,
+    "name": "headless-terminal",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "Implement the provided `BaseTerminal` interface. It provides a simple python interface to send keys to a headless terminal.  Make sure it supports the following functionality.  - Mimics a terminal, where the process starts as an interactive bash shell and commands are typically executed by typing ch",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 37,
+    "name": "hf-model-inference",
+    "domain": "ML & Robotics",
+    "category": "data-science",
+    "difficulty": "medium",
+    "snippet": "Set up a local service to run inference with a Hugging Face transformer model.  1. Download the \"distilbert-base-uncased-finetuned-sst-2-english\" sentiment analysis model from Hugging Face and save to the local directory '/app/model_cache/sentiment_model'. 2. Create a small Flask API that exposes an",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 38,
+    "name": "install-windows-3.11",
+    "domain": "Software Engineering",
+    "category": "system-administration",
+    "difficulty": "hard",
+    "snippet": "Run Windows 3.11 for Workgroups in a virtual machine using qemu. You image is in `/app/isos/win311.img`. This image is known to be compatible with QEMU 5.2.0  VNC Configuration Requirements: - Configure QEMU to use VNC display :1 - Ensure VNC server is listening on port 5901 - Set up a web interface",
+    "vfiles": [
+      "qemu-control.sh",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 39,
+    "name": "kv-store-grpc",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "You need to build a simple KV store server using grpc that records number values for different string keys. Your server will use a Python dict as the KV store. A client will communicate with your server via RPC calls.  You need to: 1. Install grpcio (1.73.0) and grpcio-tools (1.73.0) python packages",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 40,
+    "name": "large-scale-text-editing",
+    "domain": "Software Engineering",
+    "category": "file-operations",
+    "difficulty": "medium",
+    "snippet": "Transform /app/input.csv (1 million rows) to match /app/expected.csv exactly using **keystroke-efficient** Vim macros. Save your script as /app/apply_macros.vim.  Requirements:   - Create three distinct, non-empty macros in registers a, b, c with < 200 total keystrokes (or you will risk timing out o",
+    "vfiles": [
+      "gen_large_csv.py",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 41,
+    "name": "largest-eigenval",
+    "domain": "Software Engineering",
+    "category": "mathematics",
+    "difficulty": "medium",
+    "snippet": "Complete the implementation in find_dominant_eigenvalue_and_eigenvector in /app/eigen.py. \"Dominant\" means the eigenvalue with the largest magnitude. The input is a 2D square numpy array with real np.float64 entries, up to size 10x10, and it is not necessarily symmetric so the eigen pair may be comp",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 42,
+    "name": "llm-inference-batching-scheduler",
+    "domain": "Software Engineering",
+    "category": "machine-learning",
+    "difficulty": "hard",
+    "snippet": "In this task you will implement an **LLM inference batching scheduler (shape\u2011aware)** for a static graph LLM inference system.   **Background ** When running large language models on hardware accelerators (such as TPUs, RDUs, or bespoke inference chips) the compiled execution graph has to operate on",
+    "vfiles": [
+      "cost_model_for_tests.py",
+      "test.sh",
+      "test_outputs.py",
+      "__init__.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 43,
+    "name": "log-summary-date-ranges",
+    "domain": "System Administration",
+    "category": "data-processing",
+    "difficulty": "medium",
+    "snippet": "You are given multiple log files stored in /app/logs. Each log file name follows the pattern YYYY-MM-DD_<source>.log (e.g., 2025-08-10_db.log), indicating the date of the logs and their source. Each log line contains an event with a severity level. Your task is to analyze all logs and count how many",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 44,
+    "name": "mailman",
+    "domain": "Software Engineering",
+    "category": "system-administration",
+    "difficulty": "medium",
+    "snippet": "Spin up a mailing list server for our reading group: reading-group@local.edu using postfix and mailman3 (both are installed already).  The mailing list has basic mailman3 functionalities like:  - Mailing \"reading-group-join@local.edu\" adds users to the list (after confirmation). - Mailing \"reading-g",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 45,
+    "name": "make-doom-for-mips",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "I have provided /app/doomgeneric/, the source code to doom. I've also wrote a special doomgeneric_img.c that I want you to use which will write each drawn frame to /tmp/frame.bmp. I've finally provided vm.js that will expect a file called doomgeneric_mips and will run it. Please figure out the rest",
+    "vfiles": [
+      "reference.jpg",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 46,
+    "name": "make-mips-interpreter",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "I have provided /app/doomgeneric_mips, a MIPS elf file, along with doomgeneric/, the corresponding source code. Please implement a MIPS interpreter complete with handling system calls called vm.js so that I can run `node vm.js` and this should run the MIPS file and read/write any files as necessary.",
+    "vfiles": [
+      "reference.jpg",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 47,
+    "name": "mcmc-sampling-stan",
+    "domain": "Software Engineering",
+    "category": "data-science",
+    "difficulty": "hard",
+    "snippet": "Sample from a hierarchical Bayesian model using R and Stan, and estimate the posterior means of the parameters.  Your task: 1. Install the RStan package (version 2.32.7) for R and the required dependencies for Stan 2. Load the dataset from '/app/data.csv' which contains columns 'y' (successes) and '",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 48,
+    "name": "merge-diff-arc-agi-task",
+    "domain": "Software Engineering",
+    "category": "debugging",
+    "difficulty": "medium",
+    "snippet": "mkdir /app/repo, then initialize a git repo at /app/repo. Fetch the first git bundle located at /app/bundle1.bundle and ensure it is checked out into a local branch named branch1,  fetching from the HEAD reference, Fetch the second git bundle located at /app/bundle2.bundle and ensure it is checked o",
+    "vfiles": [
+      "test.json",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 49,
+    "name": "model-extraction-relu-logits",
+    "domain": "System Administration",
+    "category": "mathematics",
+    "difficulty": "hard",
+    "snippet": "I have a ReLU neural network that you can query by importing `forward.py` and calling forward(x) which returns a single floating point number as output. The input dimension is 10. The neural network is a one-layer fully connected model. (so the function is defined as A2*ReLU(A1*x+b1)+b2). You do not",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 50,
+    "name": "modernize-scientific-stack",
+    "domain": "Software Engineering",
+    "category": "scientific-computing",
+    "difficulty": "medium",
+    "snippet": "# Modernize Legacy Scientific Computing Stack  The legacy Python 2.7 climate analysis code at `/app/climate_analyzer/analyze_climate.py` is broken on Python 3. Create a modernized version that works with current Python.  ## Files to Create  1. `/app/analyze_climate_modern.py` - New modernized analys",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 51,
+    "name": "mteb-leaderboard",
+    "domain": "Software Engineering",
+    "category": "data-science",
+    "difficulty": "medium",
+    "snippet": "I have a lot of Scandinavian texts that I need to encode. Please provide me with the name in organization/model_name format (e.g. BAAI/bge-small-en-v1.5) of the best embedding model to use according to the Scandinavian MTEB leaderboard (i.e. highest Mean (Task)) as of August 2025. Only consider mode",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 52,
+    "name": "mteb-retrieve",
+    "domain": "Software Engineering",
+    "category": "data-science",
+    "difficulty": "medium",
+    "snippet": "Given the query \"terminal-bench\" retrieve the document with the 5th highest cosine similarity among the texts at /app/data.txt, where each line is a separate document, using the bge-small-zh-v1.5 embedding model at revision 7999e1d3359715c523056ef9478215996d62a620. Write the resulting line to /app/r",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 53,
+    "name": "multi-source-data-merger",
+    "domain": "Software Engineering",
+    "category": "data-processing",
+    "difficulty": "medium",
+    "snippet": "Merge user data from three different sources with different formats and schemas.  Input files:  - /data/source_a/users.json - Primary source (highest priority) - /data/source_b/users.csv - Secondary source - /data/source_c/users.parquet - Tertiary source  Requirements:  1. Read and parse all three d",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 54,
+    "name": "nginx-request-logging",
+    "domain": "System Administration",
+    "category": "system-administration",
+    "difficulty": "medium",
+    "snippet": "Set up an Nginx web server with advanced request logging and custom configurations. Your task is to:  1. Install Nginx web server 2. Configure the server to:    - Listen on port 8080    - Serve static files from /var/www/html    - Implement detailed request logging that logs timestamps ($time_local)",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 55,
+    "name": "openssl-selfsigned-cert",
+    "domain": "Software Engineering",
+    "category": "security",
+    "difficulty": "medium",
+    "snippet": "Your company needs a self-signed TLS certificate for an internal development server. Create a self-signed certificate using OpenSSL with the following requirements:  1. Create a directory at `/app/ssl/` to store all files  2. Generate a 2048-bit RSA private key:    - Save it as `/app/ssl/server.key`",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 56,
+    "name": "overfull-hbox",
+    "domain": "Software Engineering",
+    "category": "debugging",
+    "difficulty": "easy",
+    "snippet": "Ensure that the LaTeX document main.tex compiles successfully using the installed TeX distribution and pdflatex compiler with no \"overfull hbox\" warnings. In doing so, the only edits you may make are to replace words in input.tex with their specified synonyms in synonyms.txt (each line specifies a f",
+    "vfiles": [
+      "input.tex",
+      "main.tex",
+      "synonyms.txt",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 57,
+    "name": "password-recovery",
+    "domain": "Software Engineering",
+    "category": "security",
+    "difficulty": "hard",
+    "snippet": "You need to perform a digital forensic recovery task. A system administrator has accidentally deleted an important file containing a password. The file was named launchcode.txt and was located somewhere within the /app directory. Your task is to recover the PASSWORD from the deleted file.  The passw",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 58,
+    "name": "path-tracing",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "I've put an image at /app/image.ppm that I rendered programmatically. Write a c program image.c that I can run and compile and will generate an image that's as close as possible to the image I put here. Specifically, I will compute the normalized L2 similarity in [0,1] and yours must match with 0.99",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 59,
+    "name": "path-tracing-reverse",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "I've compiled a program at /app/mystery. Write a C program /app/mystery.c that performs an identical operation. You can do this by observing input output behavior, decompiling the program, or anything else. The effect of running ./mystery should be identical to running `gcc -static -o reversed myste",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 60,
+    "name": "polyglot-c-py",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "Write me a single file in /app/polyglot/main.py.c which is a polyglot, that is, I can run  `python3 /app/polyglot/main.py.c N` or `gcc /app/polyglot/main.py.c -o /app/polyglot/cmain && /app/polyglot/cmain N`  Both of these should print to stdout the kth Fibonacci number, f(0) = 0, f(1) = 1, etc.  I'",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 61,
+    "name": "polyglot-rust-c",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "Write me a single file in /app/polyglot/main.rs which is a polyglot, that is, I can run  `rustc /app/polyglot/main.rs && /app/polyglot/main N` or `g++ -x c++ /app/polyglot/main.rs -o /app/polyglot/cmain && /app/polyglot/cmain N`.  Both of these should print to stdout the kth Fibonacci number, f(0) =",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 62,
+    "name": "portfolio-optimization",
+    "domain": "Software Engineering",
+    "category": "optimization",
+    "difficulty": "medium",
+    "snippet": "You have a Python baseline in portfolio_baseline.py that calculates portfolio risk and return using nested loops. Complete the provided skeleton files (portfolio_optimized.c and portfolio_optimized.py) to create a faster C implementation. The skeleton files have TODO markers where you need to fill i",
+    "vfiles": [
+      "portfolio_baseline_protected.py",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 63,
+    "name": "protein-assembly",
+    "domain": "Software Engineering",
+    "category": "scientific-computing",
+    "difficulty": "hard",
+    "snippet": "I am planning an experiment where I'll be testing the stability of dihydrofolate reductase (DHFR) with FRET. I have a filter cube that I'm going to use to image the protein with an excitation and emission filter that let wavelengths of 505nm and 610nm through respectively. I need to make a fusion pr",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 64,
+    "name": "prove-plus-comm",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "easy",
+    "snippet": "Fix the incomplete proof of addition commutativity in the file plus_comm.v. The file contains a partial proof that needs to be completed.  The theorem states that addition is commutative for natural numbers (forall n m : nat, n + m = m + n). The proof attempt uses induction but is missing some cruci",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 65,
+    "name": "pypi-server",
+    "domain": "System Administration",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "Create a python package called vectorops, then build this package and set up a pypi server on port 8080 locally which also hosts this package. It should be possible to use the address of this server using --index-url with pip to install this package and run it.  We need to ensure the following: The",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 66,
+    "name": "pytorch-model-cli",
+    "domain": "ML & Robotics",
+    "category": "model-training",
+    "difficulty": "medium",
+    "snippet": "Your task is to implement a command line tool that can be used to run inference on an MNIST model. The tool should be called with \"./cli_tool weights.json image.png\". The output of the tool should only be the predicted digit (0-9).  Your final output should be a binary executable called \"cli_tool\" t",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 67,
+    "name": "pytorch-model-recovery",
+    "domain": "ML & Robotics",
+    "category": "model-training",
+    "difficulty": "medium",
+    "snippet": "- You are given a PyTorch state dictionary (/app/weights.pt) representing the weights of a Pytorch model, and a dataset (/app/dataset.pt) containing input-output pairs. Your task is to: Task:   - Reconstruct the original model architecture by using the information in /app/weights.pt. You must define",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py",
+      "weights_gtruth.pt"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 68,
+    "name": "qemu-alpine-ssh",
+    "domain": "Software Engineering",
+    "category": "system-administration",
+    "difficulty": "medium",
+    "snippet": "Start the /app/alpine.iso image in qemu, and then start an ssh server on the alpine linux vm. When you're done, I should be able to run `ssh -p 2222 root@localhost` with password `password123` and be dropped into a shell. On the /app/alpine.iso image, the default username is root with no password.",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 69,
+    "name": "qemu-startup",
+    "domain": "Software Engineering",
+    "category": "system-administration",
+    "difficulty": "medium",
+    "snippet": "Start the /app/alpine.iso image in qemu in such a way that I can connect to it via `telnet 127.0.0.1 6665`. When I run telnet I will expect to see the login prompt; I'll log in. You should just get me to this point. Start the image in the background and leave it running. Block until it's ready.",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 70,
+    "name": "query-optimize",
+    "domain": "Software Engineering",
+    "category": "data-science",
+    "difficulty": "medium",
+    "snippet": "You are given the Open English Wordnet (OEWN) database in SQLite format, located at /app/oewn.sqlite.  I implemented a sql query but it is not optimized. I have saved it in /app/my-sql-query.sql. Please make the query as efficient as possible while ensuring that the same output is produced.     Do",
+    "vfiles": [
+      "golden.sql",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 71,
+    "name": "raman-fitting",
+    "domain": "Software Engineering",
+    "category": "scientific-computing",
+    "difficulty": "medium",
+    "snippet": "You are given the output file of a Raman Setup. We used it to measure some graphene sample. Fit the G and 2D Peak of the spectrum and return the x0, gamma, amplitude and offset of the peaks and write them to a file called \"/app/results.json\".  The file should have the following format: {   \"G\": {",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 72,
+    "name": "regex-chess",
+    "domain": "ML & Robotics",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "Write a JSON file called /app/re.json that is a list of [regex, replacement] pairs. When executed in order with the Python code ``` def all_legal_next_positions(fen):   for pattern, repl in json.load(open(\"/app/re.json\")):       fen = re.sub(pattern, repl, fen)   return fen.split(\"\\n\") ``` this func",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 73,
+    "name": "regex-log",
+    "domain": "System Administration",
+    "category": "data-processing",
+    "difficulty": "medium",
+    "snippet": "Write a regex expression that matches dates in the format YYYY-MM-DD appearing in lines that contain an IPv4 address in a log file. If multiple dates are present in a line, the regex should match only the last date in that line. Assume that February can have up to 29 days in all years, without disti",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 74,
+    "name": "reshard-c4-data",
+    "domain": "Software Engineering",
+    "category": "data-science",
+    "difficulty": "medium",
+    "snippet": "Help me create two scripts for managing the resharding of my dataset:  1. **/app/compress.py**: A script that takes an input directory and output directory as command-line arguments and reshards the data according to the following constraints:    - Maximum 30 files or folders in each directory    -",
+    "vfiles": [
+      "files_hashes.json",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 75,
+    "name": "rstan-to-pystan",
+    "domain": "Software Engineering",
+    "category": "data-science",
+    "difficulty": "medium",
+    "snippet": "You are given datasets /app/train_X.csv, /app/train_y.csv, /app/test_X.csv, /app/meta_public.json; and a R script /app/gp_rstan.R. Convert the R script to python script using PyStan 3.10.0 for posterior sampling.  Your task: 1. Install PyStan 3.10.0  2. Read the provided R script '/app/gp_rstan.R' t",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 76,
+    "name": "sam-cell-seg",
+    "domain": "Software Engineering",
+    "category": "data-science",
+    "difficulty": "hard",
+    "snippet": "I have annotated histopathology slides with cell masks. The problem is that some of the masks  are rectangles, while the rest are polylines. I want to convert all of the masks to polylines. You must use a version of Facebook's Segment Anything Model (SAM) to do this. Specifically, you  must use the",
+    "vfiles": [
+      "correct_output.csv",
+      "test.sh",
+      "test_img.png",
+      "test_metadata.csv",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 77,
+    "name": "sanitize-git-repo",
+    "domain": "Software Engineering",
+    "category": "security",
+    "difficulty": "medium",
+    "snippet": "Please help sanitize my github repository \"dclm\" of all API keys.  Please find and remove all such information and replace it with placeholder values as follows:  For example: - If an AWS_ACCESS_KEY_ID is found, replace the actual value with <your-aws-access-key-id> - If an AWS_SECRET_ACCESS_KEY is",
+    "vfiles": [
+      "process.py",
+      "ray_cluster.yaml",
+      "rw_v2_fasttext_openhermes_vs_rw_v2_bigram_0.1_arcade100k.json",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 78,
+    "name": "schemelike-metacircular-eval",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "Write a file eval.scm that is a metacircular evaluator capable of interpreting the scheme-like language implemented by interp.py. The eval.scm file should read exactly one line from STDIN, this will be a file path to a new .scm file that should be interpreted. Remaining input should be redirected to",
+    "vfiles": [
+      "interp.py",
+      "shadow_test",
+      "test",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 79,
+    "name": "sparql-university",
+    "domain": "Software Engineering",
+    "category": "data-querying",
+    "difficulty": "hard",
+    "snippet": "You are provided with a Turtle file at `/app/university_graph.ttl` containing both the ontology and the instance data for a knowledge graph describing universities, departments, employees, students, classes, and related information.  Your task: - Create a SPARQL query that retrieves all professors m",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py",
+      "university_graph_test.ttl"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 80,
+    "name": "sqlite-db-truncate",
+    "domain": "Data Science & DBs",
+    "category": "debugging",
+    "difficulty": "medium",
+    "snippet": "I have a sqlite database in /app/trunc.db that was corrupted through binary truncation. Recover as many of the rows as possible, and create a JSON file in /app/recover.json. The output should have the format [{\"word\": \"testwordXY\", \"value\": M}, {\"word\": \"testwordZZ\",\"value\": N}, ...]",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 81,
+    "name": "sqlite-with-gcov",
+    "domain": "Data Science & DBs",
+    "category": "system-administration",
+    "difficulty": "medium",
+    "snippet": "Compile SQLite in /app/sqlite with gcov instrumentation and make it available in the PATH. The SQLite source snapshot is pre-vendored at /app/vendor/sqlite-fossil-release.tar.gz; use it instead of fetching sources over the network.",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 82,
+    "name": "torch-pipeline-parallelism",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "Implement pipeline parallel training for the LLaMA model using PyTorch. Create the file /app/pipeline_parallel.py  and implement the following function according to the given signature:    def train_step_pipeline_afab(model, inputs, targets, device, dtype):    model: a LlamaForCausalLM instance.   i",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 83,
+    "name": "torch-tensor-parallelism",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "Implement tensor parallelism for linear layers using PyTorch.  Create the file /app/parallel_linear.py and implement the following classes according to the given signature:    ColumnParallelLinear(torch.nn.Module):       def __init__(self, in_features, out_features, bias, master_weight):    RowParal",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 84,
+    "name": "train-fasttext",
+    "domain": "ML & Robotics",
+    "category": "model-training",
+    "difficulty": "hard",
+    "snippet": "Please train a fasttext model on the yelp data in the data/ folder.  The final model size needs to be less than 150MB but get at least 0.62 accuracy on a private test set that comes from the same yelp review distribution.  The model should be saved as /app/model.bin",
+    "vfiles": [
+      "private_test.tar.gz",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "FAILURE",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 85,
+    "name": "tune-mjcf",
+    "domain": "Software Engineering",
+    "category": "scientific-computing",
+    "difficulty": "medium",
+    "snippet": "Can you tune this MuJoCo model file (mjcf) such that it takes 60% of the original time or less to simulate the same scene for a total of two simulation seconds? The same full physics state should be reached within atol=1e-5 without NaN or Inf. The initial model is at /app/model_ref.xml and should re",
+    "vfiles": [
+      "model_ref.xml",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "FAILURE",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 86,
+    "name": "video-processing",
+    "domain": "Software Engineering",
+    "category": "video-processing",
+    "difficulty": "hard",
+    "snippet": "Write a script, named jump_analyzer.py, and place it in `/app/jump_analyzer.py` . The script analyzes MP4 videos of hurdle jumpers and extracts performance metrics. In the video, there is a single jump recorded. You have to figure out how to detect when the jump happens. The background, position of",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py",
+      "test_video.mp4"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 87,
+    "name": "vulnerable-secret",
+    "domain": "Software Engineering",
+    "category": "security",
+    "difficulty": "medium",
+    "snippet": "Analyze the following program that contains a secret key. The goal is to extract this secret key and save it to `/app/results.txt`.  The program is available as an executable. You may need to interact with it in various ways to discover how to access the secret information.  The secret key is in the",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "FAILURE"
+    }
+  },
+  {
+    "num": 88,
+    "name": "winning-avg-corewars",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "medium",
+    "snippet": "Write a CoreWars program that achieves a winning average against five classic opponent warriors. pMARS (CoreWars simulator) is pre-installed and configured. The core size is 8000 and max cycles is 80000.  You can examine opponent code in `warriors/`:   - `stone.red` - Classic stone bomber that drops",
+    "vfiles": [
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  },
+  {
+    "num": 89,
+    "name": "write-compressor",
+    "domain": "Software Engineering",
+    "category": "software-engineering",
+    "difficulty": "hard",
+    "snippet": "I have a decompressor in /app/decomp.c. It reads compressed data from stdin and writes the decompressed data to stdout. I also have a file /app/data.txt that has a bunch of text. Write me data.comp that's compressed such that running cat data.comp | /app/decomp gives exactly data.txt. You can genera",
+    "vfiles": [
+      "original-data.txt",
+      "original-decomp.c",
+      "test.sh",
+      "test_outputs.py"
+    ],
+    "results": {
+      "supreme-v2.0": "SUCCESS",
+      "superpowers-v4.0": "SUCCESS",
+      "baseline-v2.0": "SUCCESS"
+    }
+  }
+]
