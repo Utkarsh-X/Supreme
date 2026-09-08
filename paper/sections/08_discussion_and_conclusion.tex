@@ -16,6 +16,42 @@ As illustrated in Figure~\ref{fig:token_sinks}, multi-turn agent execution exhib
     \item \textbf{Terminal Stdout Sinks}: Unclipped shell outputs (\texttt{make} logs, compiler warnings) represented 67.8\% of tool payload tokens, demonstrating that automated output clipping is essential to prevent context dilution regardless of prompt architecture.
 \end{enumerate}
 
+\subsection{Financial Token Economics and Cost per Solved Task}
+While token counts measure raw bandwidth, real-world deployment is governed by API expenditure. Table~\ref{tab:cost_economics} details the financial compute costs across all 267 graded container evaluations under standard Gemini 3.6 Flash API list pricing (\$0.75 / M input, \$3.75 / M output) and effective weighted prices paid during evaluation via OpenRouter (\$0.5598 / M input, \$3.745 / M output).
+
+\begin{table}[h]
+\centering
+\caption{Operational Token Economics and Modeled API Costs across 267 Graded Container Evaluations.}
+\label{tab:cost_economics}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccc}
+\toprule
+\textbf{Economic Dimension} & \textbf{Supreme} & \textbf{Superpowers} & \textbf{Baseline} \\
+\midrule
+Input Tokens ($T_{\text{in}}$) & 31.23M & 30.71M & \textbf{27.71M} \\
+Output Tokens ($T_{\text{out}}$) & 3.29M & 3.25M & \textbf{3.16M} \\
+Deliberation Tokens ($T_{\text{think}}$) & 1.83M & \textbf{1.71M} & 1.77M \\
+Total Billed Tokens & 34.52M & 34.30M & \textbf{31.22M} \\
+Cache Read Tokens ($T_{\text{cache}}$) & 322.8M & 411.3M & \textbf{295.9M} \\
+\midrule
+Total Cost (List Price) & \$35.76 & \$35.21 & \textbf{\$32.62} \\
+Cost / Solved Task (List) & \textbf{\$0.586} & \$0.607 & \$0.593 \\
+\midrule
+Total Cost (Effective Paid) & \$29.80 & \$29.35 & \textbf{\$27.33} \\
+Cost / Attempted Task (Paid) & \$0.335 & \$0.330 & \textbf{\$0.307} \\
+Cost / Solved Task (Paid) & \textbf{\$0.489} & \$0.506 & \$0.497 \\
+Hard Tasks Cost / Solved ($N=30$) & \$0.680 & \$0.730 & \textbf{\$0.645} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+Across all 89 tasks, evaluation expenditure and outcomes present a three-layer economic portrait. In absolute terms, Baseline incurred the lowest total effective paid cost (\$27.33), followed by Superpowers (\$29.35) and Supreme (\$29.80). At the per-execution level, Baseline again recorded the lowest cost per attempted task (\$0.307), followed by Superpowers (\$0.330) and Supreme (\$0.335). These absolute and per-attempt cost advantages coincide with Baseline's lower token footprint (31.22M total billed tokens vs.\ 34.52M for Supreme), but also with its lower task completion (55/89 vs.\ 61/89).
+
+Cost per successful task is a composite outcome-efficiency measure combining total evaluation expenditure with the number of tasks successfully completed; it is not an independent cost measurement. On this dimension, Supreme achieved the lowest effective paid cost per successful task (\$0.489), approximately 3.4\% below Superpowers (\$0.506), while completing three additional tasks (61 vs.\ 58). Baseline achieved \$0.497. The cost-per-successful-task ranking is unchanged under both list-price and effective-paid pricing as detailed in Table~\ref{tab:cost_economics}, confirming that this efficiency relationship is not an artifact of the specific pricing rates applied.
+
+On the Hard task subset ($N=30$), the cost-per-successful-task ranking reverses: Baseline achieved the lowest cost per successful Hard task (\$0.645), followed by Supreme (\$0.680) and Superpowers (\$0.730). Supreme simultaneously achieved the highest Hard-task completion rate (66.7\% [20/30] vs.\ 56.7\% [17/30] for Baseline and 53.3\% [16/30] for Superpowers). This represents a genuine trade-off: superior Hard-task coverage at moderately higher cost per successful Hard solve compared to Baseline.
+
 \subsection{Architectural Implications for Agent Systems}
 Our findings offer three practical considerations for autonomous coding systems:
 
@@ -39,5 +75,5 @@ We explicitly note several methodological limitations of this evaluation:
 
 \section{Conclusion}
 \label{sec:conclusion}
-In this work, we conducted a controlled empirical evaluation across all 89 tasks of Terminal-Bench 2.1 (267 container evaluations) to examine how agent prompt architectures affect execution behavior under a shared foundation model. Although aggregate pass rates remain statistically indistinguishable across architectures (68.5\% vs.\ 65.2\% vs.\ 61.8\%; paired McNemar $p > 0.05$), substantial differences emerge in execution dynamics: Supreme showed increased deliberation tokens on Hard tasks, avoided unconstrained exploratory scripting loops in open-ended problems, and exhibited narrower file modification boundaries. Our findings demonstrate that prompt architecture significantly shapes multi-turn agent behavior and token economics even when top-line benchmark accuracy is comparable. Complete execution transcripts, harness configurations, and cryptographic verification ledgers are made available for independent replication.
+In this work, we compared the behavior of substantially different agent-guidance configurations --- constitutional static grounding and dynamic progressive skill loading --- under a shared foundation model, evaluation harness, and benchmark corpus across all 89 tasks of Terminal-Bench 2.1 (267 container evaluations). Constitutional static grounding achieved a favorable position across task completion (61/89, 68.5\%), aggregate wall-clock time (15.15\,h, 17.2\% lower than Superpowers), and effective paid cost per successful task (\$0.489, approximately 3.4\% below Superpowers), with a directional Hard-task advantage (66.7\% vs.\ 53.3\%; McNemar $p = 0.22$). While aggregate pass rates across the full 89-task corpus are not statistically distinguishable under paired McNemar tests ($p > 0.05$), and the configurations differ in both guidance structure and instructional content, the evaluation reveals substantial differences in execution dynamics, token economics, and behavioral trajectories observed consistently across the analyzed execution traces and evaluation cohorts. Complete execution transcripts, harness configurations, and cryptographic verification ledgers are made available for independent replication.
 

@@ -1,11 +1,11 @@
 \section{Empirical Results}
 \label{sec:results}
 
-Across all 89 tasks (267 total graded container evaluations), the benchmark completed with complete execution and verifier logs. Table~\ref{tab:master_scoreboard} summarizes macro performance across both raw and infrastructure-adjusted metrics.
+Across all 89 tasks (267 isolated container evaluations), Supreme achieved the highest task completion (61/89, 68.5\%), the lowest aggregate wall-clock time (15.15\,h), and the lowest effective paid cost per successful task (\$0.489, approximately 3.4\% below Superpowers at \$0.506). Figure~\ref{fig:macro_summary} provides an executive visual comparison; Table~\ref{tab:master_scoreboard} details the complete scoreboard including infrastructure-adjusted cohorts ($N=86$, $N=85$).
 
 \begin{table*}[t]
 \centering
-\caption{CARB-v4 Master Scoreboard across all 89 Terminal-Bench 2.1 tasks on Gemini 3.6 Flash High. Brackets denote Wilson 95\% score confidence intervals. Adjusted scores exclude three tasks with verified upstream container environment defects ($N=86$).}
+\caption{CARB-v4 Master Scoreboard across all 89 Terminal-Bench 2.1 tasks on Gemini 3.6 Flash High. Brackets denote Wilson 95\% score confidence intervals. Adjusted scores exclude three tasks with verified upstream container environment defects ($N=86$); a further conservative cohort excluding all four infrastructure-impaired tasks ($N=85$) is reported in Section~\ref{sec:case_studies}.}
 \label{tab:master_scoreboard}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lccccccc}
@@ -29,10 +29,11 @@ These paired tests confirm that aggregate pass rates do not differ significantly
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.98\textwidth]{figures/fig1_cognitive_scaling_by_difficulty.pdf}
-\caption{Deliberation scaling patterns across task complexity strata. (A) Pass rates by difficulty, with Supreme maintaining 66.7\% on Hard tasks. (B) Provider-reported deliberation tokens (\texttt{thinking\_tokens}) per task, showing a +66.0\% increase for Supreme on Hard tasks.}
-\label{fig:cognitive_scaling}
+\includegraphics[width=0.98\textwidth]{figures/macro_benchmark_summary.pdf}
+\caption{Benchmark outcomes and execution efficiency across all 89 Terminal-Bench 2.1 tasks (267 graded container evaluations). (A) Task completion rates with Wilson 95\% confidence intervals. (B) Total wall-clock execution time (lower is better). (C) Effective paid cost per successful task (lower is better). (D) Hard-task frontier pass rates ($N=30$). Supreme achieved the highest task completion (61/89, 68.5\%), the lowest aggregate wall-clock time (15.15\,h, 17.2\% lower than Superpowers), and the lowest effective paid cost per successful task (\$0.489, approximately 3.4\% below Superpowers). Aggregate accuracy differences are not statistically significant under paired McNemar tests ($p > 0.05$); see Section~\ref{sec:results} for full statistical analysis.}
+\label{fig:macro_summary}
 \end{figure*}
+
 
 \subsection{Deliberation Scaling Patterns by Task Difficulty}
 Across the 267 executions, the model generated 5,311,737 provider-reported deliberation tokens (\texttt{thinking\_tokens}). Table~\ref{tab:difficulty_scaling} disaggregates pass rates and mean deliberation tokens across official difficulty tiers.
@@ -59,9 +60,11 @@ Across the 267 executions, the model generated 5,311,737 provider-reported delib
 }
 \end{table}
 
-As illustrated in Figure~\ref{fig:cognitive_scaling}, on Hard tasks ($N=30$) Supreme scales its mean deliberation by +66.0\% over Medium tasks (from 17.0k to 28.3k thinking tokens/task), achieving a 66.7\% pass rate (20/30). In contrast, Superpowers generated 23,196 thinking tokens/task with a 53.3\% pass rate (16/30). 
+Due to the small Easy strata ($N=4$), pass rates in that tier carry wide confidence intervals and are reported for completeness; no comparative inference should be drawn from them.
 
-To examine this difference statistically on the Hard subset, we constructed the paired $2 \times 2$ contingency table for Supreme vs.\ Superpowers: 15 mutual passes, 9 mutual failures, 5 Supreme-only wins, and 1 Superpowers-only win. A paired McNemar test with continuity correction yields $\chi^2 = 1.500, p = 0.221$ (exact two-tailed binomial $p = 0.219$). Because this 4-task margin does not attain significance at $\alpha = 0.05$, we characterize this as a suggestive behavioral pattern rather than a confirmed scaling law. In Section~\ref{sec:case_studies}, we examine transcripts to investigate how dynamic documentation ingestion interacted with reasoning on these tasks.
+On Hard tasks ($N=30$), Supreme scaled mean deliberation by +66.0\% over Medium tasks (from 17.0k to 28.3k thinking tokens/task; Table~\ref{tab:difficulty_scaling}), achieving a 66.7\% pass rate (20/30). In contrast, Superpowers generated 23,196 thinking tokens/task with a 53.3\% pass rate (16/30). 
+
+To examine this difference statistically on the Hard subset, we constructed the paired $2 \times 2$ contingency table for Supreme vs.\ Superpowers: 15 mutual passes, 9 mutual failures, 5 Supreme-only wins, and 1 Superpowers-only win. A paired McNemar test with continuity correction yields $\chi^2 = 1.500, p = 0.221$ (exact two-tailed binomial $p = 0.219$). Because this 4-task margin does not attain significance at $\alpha = 0.05$, we characterize this as a suggestive behavioral pattern (McNemar $p = 0.22$) rather than a confirmed scaling law. In Section~\ref{sec:case_studies}, we examine transcripts to investigate how dynamic documentation ingestion interacted with reasoning on these tasks.
 
 \begin{figure*}[t]
 \centering
