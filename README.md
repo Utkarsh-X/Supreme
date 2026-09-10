@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/status-public%20beta-10b981?style=flat-square" alt="Status: Public Beta">
   <img src="https://img.shields.io/badge/evaluated%20on-Terminal--Bench%202.1-3b82f6?style=flat-square" alt="Evaluated on Terminal-Bench 2.1">
-  <img src="https://img.shields.io/badge/paper-PDF%20(9%20pages)-ef4444?style=flat-square" alt="Paper: 9 pages">
+  <img src="https://img.shields.io/badge/paper-PDF%20(10%20pages)-ef4444?style=flat-square" alt="Paper: 10 pages">
   <img src="https://img.shields.io/badge/runs-267%20graded%20containers-0f172a?style=flat-square" alt="267 graded container runs">
   <img src="https://img.shields.io/badge/license-MIT-64748b?style=flat-square" alt="MIT License">
 </p>
@@ -165,7 +165,7 @@ These environments natively auto-discover [`AGENTS.md`](AGENTS.md) from the repo
 
 This project is released with 100% cryptographic and telemetry transparency:
 
-* 📄 **Research Paper:** [`paper/main.pdf`](paper/main.pdf) — Complete 9-page academic manuscript with full statistical analysis, Wilson CIs, cost economics, and paired McNemar tests.
+* 📄 **Research Paper:** [`paper/main.pdf`](paper/main.pdf) — Complete 10-page academic manuscript with full statistical analysis, Wilson CIs, cost economics, and paired McNemar tests.
 * 🧾 **Cryptographic Ledger:** [`carb_benchmark/results_v4/FORENSIC_AUDIT_LEDGER.md`](carb_benchmark/results_v4/FORENSIC_AUDIT_LEDGER.md) — Exact SHA-256 verifier logs and execution timestamps for all 267 graded container sessions.
 * 📑 **Deep Telemetry Dossiers:** Located in [`carb_benchmark/results_v4/extraction_findings/`](carb_benchmark/results_v4/extraction_findings/) covering Markov transitions, polyglot analysis, thinking dynamics, and token sinks.
 

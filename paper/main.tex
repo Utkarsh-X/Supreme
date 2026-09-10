@@ -20,7 +20,7 @@
     urlcolor=blue
 }
 
-\title{\textbf{Constitutional Grounding vs. Dynamic Skill Loading:\\An Empirical Evaluation of Autonomous Agents in Terminal Environments on Terminal-Bench 2.1}}
+\title{\textbf{Constitutional Grounding vs. Dynamic Skill Loading:\\An Empirical Evaluation of Autonomous Agents\\in Terminal Environments on Terminal-Bench 2.1}}
 
 \author{
   \textbf{Utkarsh Chandra}\thanks{Project repository, evaluation harness, and verification artifacts: \url{https://github.com/Utkarsh-X/Supreme}}\\
@@ -29,13 +29,20 @@
 
 \date{}
 
+\renewenvironment{abstract}{%
+  \begin{quote}\small\textbf{Abstract}---%
+}{%
+  \end{quote}%
+}
+
 \begin{document}
 
 \twocolumn[
   \begin{@twocolumnfalse}
     \maketitle
+    \vspace{-2.2em}
     \input{sections/01_abstract}
-    \vspace{0.8em}
+    \vspace{0.4em}
   \end{@twocolumnfalse}
 ]
 {
@@ -57,6 +64,7 @@
 
 \input{sections/08_discussion_and_conclusion}
 
+\clearpage
 {\small
 \bibliographystyle{plain}
 \bibliography{references}
