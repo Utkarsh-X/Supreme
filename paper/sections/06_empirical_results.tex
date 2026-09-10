@@ -1,7 +1,7 @@
 \section{Empirical Results}
 \label{sec:results}
 
-Across all 89 tasks (267 isolated container evaluations), Supreme achieved the highest task completion (61/89, 68.5\%), the lowest aggregate wall-clock time (15.15\,h), and the lowest effective paid cost per successful task (\$0.489, approximately 3.4\% below Superpowers at \$0.506). Figure~\ref{fig:macro_summary} provides an executive visual comparison; Table~\ref{tab:master_scoreboard} details the complete scoreboard including infrastructure-adjusted cohorts ($N=86$, $N=85$).
+Across all 89 tasks (267 isolated container evaluations), Supreme achieved the highest task completion (61/89, 68.5\%), the lowest aggregate wall-clock time (15.15\,h), and the lowest effective evaluation cost per successful task under recorded OpenRouter rates (\$0.489, approximately 3.4\% below Superpowers at \$0.506). Figure~\ref{fig:macro_summary} provides an executive visual comparison; Table~\ref{tab:master_scoreboard} details the complete scoreboard including infrastructure-adjusted cohorts ($N=86$, $N=85$).
 
 \begin{table*}[t]
 \centering
@@ -30,7 +30,7 @@ These paired tests confirm that aggregate pass rates do not differ significantly
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\textwidth]{figures/macro_benchmark_summary.pdf}
-\caption{Benchmark outcomes and execution efficiency across all 89 Terminal-Bench 2.1 tasks (267 graded container evaluations). (A) Task completion rates with Wilson 95\% confidence intervals. (B) Total wall-clock execution time (lower is better). (C) Effective paid cost per successful task (lower is better). (D) Hard-task frontier pass rates ($N=30$). Supreme achieved the highest task completion (61/89, 68.5\%), the lowest aggregate wall-clock time (15.15\,h, 17.2\% lower than Superpowers), and the lowest effective paid cost per successful task (\$0.489, approximately 3.4\% below Superpowers). Aggregate accuracy differences are not statistically significant under paired McNemar tests ($p > 0.05$); see Section~\ref{sec:results} for full statistical analysis.}
+\caption{Benchmark outcomes and execution efficiency across all 89 Terminal-Bench 2.1 tasks (267 graded container evaluations). (A) Task completion rates with Wilson 95\% confidence intervals. (B) Total wall-clock execution time (lower is better). (C) Effective evaluation cost per successful task under recorded OpenRouter rates (lower is better). (D) Hard-task frontier pass rates ($N=30$). Supreme achieved the highest task completion (61/89, 68.5\%), the lowest aggregate wall-clock time (15.15\,h, 17.2\% lower than Superpowers), and the lowest effective evaluation cost per successful task under recorded OpenRouter rates (\$0.489, approximately 3.4\% below Superpowers). Aggregate accuracy differences are not statistically significant under paired McNemar tests ($p > 0.05$); see Section~\ref{sec:results} for full statistical analysis.}
 \label{fig:macro_summary}
 \end{figure*}
 

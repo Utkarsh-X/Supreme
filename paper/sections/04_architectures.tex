@@ -12,7 +12,7 @@ Supreme v1.0 structures agent behavior through a static, invariant constitutiona
     \item \textbf{Anti-Premature-Closure}: A mandatory verification forcing function requiring agents to ask: \textit{"If this implementation were falsely claiming completion, what plausible omission was overlooked?"}
     \item \textbf{Loop Management Protocol}: Hard limits on consecutive failing commands and strict prohibitions against passive background task polling loops.
 \end{itemize}
-Under this architecture, the system prompt prefix of length $L_{\text{const}} \approx 4,800$ tokens remains strictly invariant across all turns $t \in [1, T]$, ensuring deterministic prefix cache hits on every interaction turn.
+Under this architecture, the initial system prompt of length $L_{\text{const}} \approx 4,800$ tokens is embedded statically, keeping the system-prompt prefix invariant across turns and preserving a stable prefix for provider-side cache reuse.
 
 \subsection{Superpowers by obra: Dynamic Progressive Skill Loading}
 Superpowers by obra \cite{vincent2025superpowers} implements two-tier progressive capability disclosure. The initial system prompt contains a compact index summarizing 14 distinct engineering skills:

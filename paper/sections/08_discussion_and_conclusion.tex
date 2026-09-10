@@ -17,7 +17,7 @@ As illustrated in Figure~\ref{fig:token_sinks}, multi-turn agent execution exhib
 \end{enumerate}
 
 \subsection{Financial Token Economics and Cost per Solved Task}
-While token counts measure raw bandwidth, real-world deployment is governed by API expenditure. Table~\ref{tab:cost_economics} details the financial compute costs across all 267 graded container evaluations under standard Gemini 3.6 Flash API list pricing (\$0.75 / M input, \$3.75 / M output) and effective weighted prices paid during evaluation via OpenRouter (\$0.5598 / M input, \$3.745 / M output).
+While token counts measure raw bandwidth, real-world deployment is governed by API expenditure. Table~\ref{tab:cost_economics} details the financial compute costs across all 267 graded container evaluations under standard Gemini 3.6 Flash API list pricing (\$0.75 / M input, \$3.75 / M output) and effective evaluation cost under the recorded OpenRouter pricing rates (\$0.5598 / M input, \$3.745 / M output).
 
 \begin{table}[h]
 \centering
@@ -37,42 +37,35 @@ Cache Read Tokens ($T_{\text{cache}}$) & 322.8M & 411.3M & \textbf{295.9M} \\
 Total Cost (List Price) & \$35.76 & \$35.21 & \textbf{\$32.62} \\
 Cost / Solved Task (List) & \textbf{\$0.586} & \$0.607 & \$0.593 \\
 \midrule
-Total Cost (Effective Paid) & \$29.80 & \$29.35 & \textbf{\$27.33} \\
-Cost / Attempted Task (Paid) & \$0.335 & \$0.330 & \textbf{\$0.307} \\
-Cost / Solved Task (Paid) & \textbf{\$0.489} & \$0.506 & \$0.497 \\
+Total Cost (Recorded OpenRouter) & \$29.80 & \$29.35 & \textbf{\$27.33} \\
+Cost / Attempted Task (OpenRouter) & \$0.335 & \$0.330 & \textbf{\$0.307} \\
+Cost / Solved Task (OpenRouter) & \textbf{\$0.489} & \$0.506 & \$0.497 \\
 Hard Tasks Cost / Solved ($N=30$) & \$0.680 & \$0.730 & \textbf{\$0.645} \\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
 
-Across all 89 tasks, evaluation expenditure and outcomes present a three-layer economic portrait. In absolute terms, Baseline incurred the lowest total effective paid cost (\$27.33), followed by Superpowers (\$29.35) and Supreme (\$29.80). At the per-execution level, Baseline again recorded the lowest cost per attempted task (\$0.307), followed by Superpowers (\$0.330) and Supreme (\$0.335). These absolute and per-attempt cost advantages coincide with Baseline's lower token footprint (31.22M total billed tokens vs.\ 34.52M for Supreme), but also with its lower task completion (55/89 vs.\ 61/89).
+Across all 89 tasks, evaluation expenditure and outcomes present a three-layer economic portrait. In absolute terms, Baseline incurred the lowest total evaluation cost under the recorded OpenRouter rates (\$27.33), followed by Superpowers (\$29.35) and Supreme (\$29.80). At the per-execution level, Baseline again recorded the lowest cost per attempted task under these rates (\$0.307), followed by Superpowers (\$0.330) and Supreme (\$0.335). These absolute and per-attempt cost advantages coincide with Baseline's lower token footprint (31.22M total billed tokens vs.\ 34.52M for Supreme), but also with its lower task completion (55/89 vs.\ 61/89).
 
-Cost per successful task is a composite outcome-efficiency measure combining total evaluation expenditure with the number of tasks successfully completed; it is not an independent cost measurement. On this dimension, Supreme achieved the lowest effective paid cost per successful task (\$0.489), approximately 3.4\% below Superpowers (\$0.506), while completing three additional tasks (61 vs.\ 58). Baseline achieved \$0.497. The cost-per-successful-task ranking is unchanged under both list-price and effective-paid pricing as detailed in Table~\ref{tab:cost_economics}, confirming that this efficiency relationship is not an artifact of the specific pricing rates applied.
+Cost per successful task is a composite outcome-efficiency measure combining total evaluation expenditure with the number of tasks successfully completed; it is not an independent cost measurement. On this dimension, Supreme achieved the lowest effective evaluation cost per successful task under recorded OpenRouter rates (\$0.489), approximately 3.4\% below Superpowers (\$0.506), while completing three additional tasks (61 vs.\ 58). Baseline achieved \$0.497. The cost-per-successful-task ranking is unchanged under both list-price and recorded OpenRouter pricing as detailed in Table~\ref{tab:cost_economics}, confirming that this efficiency relationship is not an artifact of the specific pricing rates applied.
 
-On the Hard task subset ($N=30$), the cost-per-successful-task ranking reverses: Baseline achieved the lowest cost per successful Hard task (\$0.645), followed by Supreme (\$0.680) and Superpowers (\$0.730). Supreme simultaneously achieved the highest Hard-task completion rate (66.7\% [20/30] vs.\ 56.7\% [17/30] for Baseline and 53.3\% [16/30] for Superpowers). This represents a genuine trade-off: superior Hard-task coverage at moderately higher cost per successful Hard solve compared to Baseline.
+On the Hard task subset ($N=30$), the cost-per-successful-task ranking reverses: Baseline achieved the lowest cost per successful Hard task (\$0.645), followed by Supreme (\$0.680) and Superpowers (\$0.730). Supreme simultaneously achieved the highest Hard-task completion rate (66.7\% [20/30] vs.\ 56.7\% [17/30] for Baseline and 53.3\% [16/30] for Superpowers), representing a genuine trade-off of superior Hard-task coverage at moderately higher cost per successful Hard solve compared to Baseline.
 
-\subsection{Architectural Implications for Agent Systems}
-Our findings offer three practical considerations for autonomous coding systems:
-
-\noindent\textbf{Invariant Principles in Static Headers}: Placing invariant engineering axioms directly in static headers avoids mid-turn documentation file retrieval while maintaining consistent behavioral constraints across turns.
-
-\noindent\textbf{Loop Termination Heuristics}: Agent frameworks with flexible procedural guidance require explicit iteration thresholds and hypothesis-checking gates to prevent open-ended exploratory scripting on combinatorial search problems.
-
-\noindent\textbf{Targeted Line Edits}: Encouraging surgical diff tools (\texttt{replace\_file\_content}) over whole-file rewrites correlates with reduced collateral modifications in multi-file codebases.
+\subsection{Practical Design Implications for Agent Systems}
+The evaluated configurations suggest three practical design considerations:
+\par\textbf{Static Invariant Principles}: Static placement of invariant engineering principles can avoid mid-turn documentation retrieval while maintaining consistent behavioral constraints across turns.
+\par\textbf{Loop Termination Heuristics}: Explicit iteration thresholds and hypothesis-checking gates help limit prolonged exploratory scripting on open-ended combinatorial problems.
+\par\textbf{Targeted Line Edits}: Surgical diff tools (\texttt{replace\_file\_content}) correlate with reduced collateral modifications compared to whole-file rewrites.
 
 \subsection{Threats to Validity and Limitations}
+\textbf{Single Foundation Model}: All evaluations used Gemini 3.6 Flash High. Model-specific reasoning and tool policies may interact with prompt architecture; findings may not generalize across model families without multi-model replication.
+\par\textbf{Single Run per Task}: Each task was evaluated with one run per configuration at $\tau=0.0$ (267 container runs, $\approx 50$ compute hours). While $\tau=0.0$ minimizes sampling variance, multi-seed replication is needed to measure run-to-run stability.
+\par\textbf{Coupled Structure and Content}: Supreme and Superpowers differ in structure (static vs.\ dynamic) and content (constitutional axioms vs.\ TDD workflows). Controlled ablations isolating delivery mechanism from content remain future work.
+\par\textbf{Prompt Freezing}: The Supreme constitutional prompt was frozen prior to benchmark execution; no prompt adjustments were made based on benchmark task failures.
 
-\noindent\textbf{Single Foundation Model}: All evaluations used Gemini 3.6 Flash High. Model-specific reasoning, context handling, and tool policies may interact with prompt architecture; findings should not be assumed to generalize universally across model families without multi-model replication.
-
-\noindent\textbf{Single Run per Task}: Each task was evaluated with one run per configuration at $\tau=0.0$ (267 container runs, $\approx 50$ compute hours). While $\tau=0.0$ minimizes sampling variance, multi-seed replication is necessary to measure run-to-run stability.
-
-\noindent\textbf{Coupled Structure and Content}: Supreme and Superpowers differ in both structure (static vs.\ dynamic) and instructional content (constitutional axioms vs.\ TDD/debugging workflows). Controlled ablations isolating delivery mechanism from content remain an important direction for future research.
-
-\noindent\textbf{Prompt Freezing}: The Supreme constitutional prompt was authored prior to benchmark execution and frozen; no prompt adjustments were made based on benchmark task failures.
-
-
+\vspace{-0.3em}
 \section{Conclusion}
 \label{sec:conclusion}
-In this work, we compared the behavior of substantially different agent-guidance configurations --- constitutional static grounding and dynamic progressive skill loading --- under a shared foundation model, evaluation harness, and benchmark corpus across all 89 tasks of Terminal-Bench 2.1 (267 container evaluations). Constitutional static grounding achieved a favorable position across task completion (61/89, 68.5\%), aggregate wall-clock time (15.15\,h, 17.2\% lower than Superpowers), and effective paid cost per successful task (\$0.489, approximately 3.4\% below Superpowers), with a directional Hard-task advantage (66.7\% vs.\ 53.3\%; McNemar $p = 0.22$). While aggregate pass rates across the full 89-task corpus are not statistically distinguishable under paired McNemar tests ($p > 0.05$), and the configurations differ in both guidance structure and instructional content, the evaluation reveals substantial differences in execution dynamics, token economics, and behavioral trajectories observed consistently across the analyzed execution traces and evaluation cohorts. Complete execution transcripts, harness configurations, and cryptographic verification ledgers are made available for independent replication.
+In this work, we compared constitutional static grounding and dynamic progressive skill loading under a shared foundation model, evaluation harness, and benchmark corpus across all 89 tasks of Terminal-Bench 2.1 (267 container evaluations). As Iteration~1 of an ongoing evaluation program, these findings establish an initial empirical baseline for terminal agent dynamics; future iterations will expand to multi-model evaluations and controlled content-delivery ablations. Constitutional static grounding achieved a favorable position in task completion (61/89, 68.5\%), aggregate wall-clock time (15.15\,h, 17.2\% lower than Superpowers), and effective evaluation cost per successful task under recorded OpenRouter rates (\$0.489, 3.4\% below Superpowers), with a directional Hard-task advantage (66.7\% vs.\ 53.3\%; McNemar $p = 0.22$). While aggregate pass rates across all 89 tasks are not statistically distinguishable under paired McNemar tests ($p > 0.05$), and configurations differ in both structure and instructional content, the evaluation reveals substantial differences in execution dynamics, token economics, and behavioral trajectories across the analyzed cohorts. Complete execution transcripts, harness configurations, and cryptographic verification ledgers are available for independent replication.
 
