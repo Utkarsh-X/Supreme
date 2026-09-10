@@ -8,7 +8,7 @@ To complement aggregate statistics, we examine individual execution transcripts 
 \includegraphics[width=0.48\textwidth]{figures/fig5_task88_corewars_trajectory.pdf}
 \hfill
 \includegraphics[width=0.48\textwidth]{figures/fig2_markov_tool_state_transitions.pdf}
-\caption{Behavioral dynamics and tool interaction patterns. (Left) Cumulative token trajectory on Task \#88 (\texttt{winning-avg-corewars}), illustrating an extended parameter-search loop. (Right) Markov state transitions ($P(\text{Next} \mid \text{Current})$) comparing background task polling and file-editing strategies.}
+\caption{Behavioral dynamics and tool interaction patterns. (Left) Cumulative token trajectory on Task \#88 (\texttt{winning-avg-corewars}), illustrating an extended parameter-search loop. (Right) Behavioral tool-transition patterns and failure-loop frequencies comparing background task polling and file-editing strategies.}
 \label{fig:trajectory_and_markov}
 \end{figure*}
 
@@ -20,7 +20,7 @@ As depicted in Figure~\ref{fig:trajectory_and_markov} (Left), this task produced
     \item \textbf{Supreme}: Inspected reference warriors, hypothesized that a Silk/Replicator archetype would dominate the arena pool, implemented the candidate warrior, verified win rates, and concluded in \textbf{175.0s}, \textbf{55 turns}, and \textbf{300,413 tokens}.
     \item \textbf{Superpowers by obra}: Entered an extensive parameter-search loop. Guided by iterative trial-and-error procedural guidance, the agent authored \textbf{116 separate Python exploration scripts}, repeatedly copying them into the container via \texttt{docker cp}, running battles, and accumulating \textbf{563 turns} across \textbf{1,648.7s} and \textbf{3,513,757 tokens} ($11.7\times$ token inflation for the identical pass).
 \end{itemize}
-This comparison highlights that on open-ended combinatorial tasks, procedural frameworks that encourage iterative scripting without strong stopping heuristics can lead to prolonged exploratory loops. This contrast does not represent a systematic throughput difference across all 89 tasks, where total billed token counts were comparable (34.52M vs.\ 34.30M), but rather illustrates the tail risk of unconstrained exploratory scripting on open-ended combinatorial problems.
+This comparison highlights that on open-ended combinatorial tasks, procedural frameworks that encourage iterative scripting without strong stopping heuristics can lead to prolonged exploratory loops. This contrast does not represent a systematic throughput difference across all 89 tasks, where total billed token counts were comparable (34.52M vs.\ 34.30M), but rather illustrates the tail risk associated with extensive exploratory scripting on open-ended combinatorial problems.
 
 \subsection{Markov Tool Transitions and Polling Dynamics}
 Analysis of 15,779 sequential tool transitions ($P(\text{Next} \mid \text{Current})$) reveals key operational differences (Figure~\ref{fig:trajectory_and_markov}, Right):
@@ -40,7 +40,7 @@ Forensic inspection identified three distinct upstream environmental failure mod
 \begin{itemize}
     \item \texttt{prove-plus-comm} (Task \#64): Container metadata error caused immediate execution failure (\texttt{failed to chdir to cwd ("/app"): no such file or directory}) across all models.
     \item \texttt{caffe-cifar-10} (Task \#7): An unreleased package lock on \texttt{/var/lib/dpkg/lock-frontend} held by background PID 168 blocked package installations, causing a starvation timeout across all models.
-    \item \textbf{Distributed PyTorch Infrastructure} (Tasks \#82--\#83): In Task \#82 (\texttt{torch-pipeline-parallelism}), the bare container lacked Python and curl with egress blocked; in Task \#83 (\texttt{torch-tensor-parallelism}), an unconstrained dynamic PyPI download of 2.85~GB CUDA wheels triggered a verifier timeout before test execution \cite{shoeybi2019megatron}.
+    \item \textbf{Distributed PyTorch Infrastructure} (Tasks \#82--\#83): In Task \#82 (\texttt{torch-pipeline-parallelism}), the bare container lacked Python and curl with egress blocked; in Task \#83 (\texttt{torch-tensor-parallelism}), a large-scale dynamic PyPI download of 2.85~GB CUDA wheels triggered a verifier timeout before test execution \cite{shoeybi2019megatron}.
 \end{itemize}
 Excluding the three environmental configuration defects (\texttt{prove-plus-comm}, \texttt{caffe-cifar-10}, and Task \#82) yields the $N=86$ adjusted cohort reported in Table~\ref{tab:master_scoreboard} (Supreme: 70.9\% [61/86]; Superpowers: 67.4\% [58/86]; Baseline: 64.0\% [55/86]). Excluding all four infrastructure-impaired tasks yields $N=85$ (Supreme: 71.8\% [61/85]; Superpowers: 68.2\% [58/85]; Baseline: 64.7\% [55/85]).
 
