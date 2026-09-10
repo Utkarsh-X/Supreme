@@ -1,26 +1,19 @@
 <p align="center">
-  <img src="assets/logo.jpg" width="180" alt="Supreme: Software Engineering Agent Constitution">
+  <img src="assets/banner.png" width="800" alt="Supreme: Software Engineering Agent Constitution">
 </p>
-
-<h1 align="center">Supreme</h1>
 
 <p align="center">
   <em>Evidence over assumption. Surgical changes over code churn. Proof before declarations.</em>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-public%20beta-10b981?style=flat-square" alt="Status: Public Beta">
-  <img src="https://img.shields.io/badge/evaluated%20on-Terminal--Bench%202.1-3b82f6?style=flat-square" alt="Evaluated on Terminal-Bench 2.1">
-  <img src="https://img.shields.io/badge/paper-PDF%20(10%20pages)-ef4444?style=flat-square" alt="Paper: 10 pages">
-  <img src="https://img.shields.io/badge/runs-267%20graded%20containers-0f172a?style=flat-square" alt="267 graded container runs">
-  <img src="https://img.shields.io/badge/license-MIT-64748b?style=flat-square" alt="MIT License">
+  <strong>Benchmark:</strong> Terminal-Bench 2.1 &nbsp;&bull;&nbsp;
+  <strong>Evaluations:</strong> 267 Graded Containers &nbsp;&bull;&nbsp;
+  <strong>Paper:</strong> 10-Page Manuscript (PDF) &nbsp;&bull;&nbsp;
+  <strong>License:</strong> MIT
 </p>
 
 ---
-
-<p align="center">
-  <img src="assets/banner.jpg" width="900" alt="Unconstrained Agent vs. Supreme Grounded Agent">
-</p>
 
 You ask an autonomous coding agent to fix an off-by-one error in a parser.
 
@@ -34,7 +27,7 @@ It did not run the test suite. It did not check the compiler exit code. It has s
 
 ---
 
-## ⚡ The Behavioral Contrast
+## The Behavioral Contrast
 
 | The Unconstrained Trap | The Supreme Grounding |
 |---|---|
@@ -45,34 +38,20 @@ It did not run the test suite. It did not check the compiler exit code. It has s
 
 ---
 
-## 📊 The Empirical Evidence: Terminal-Bench 2.1
+## The Empirical Evidence: Terminal-Bench 2.1
 
-We evaluated Supreme against an unprompted **Baseline** and the dynamic skill system **Superpowers by obra** across all 89 tasks of **Terminal-Bench 2.1** (267 containerized executions) under locked **Gemini 3.6 Flash High** ($\tau = 0.0$):
+We evaluated Supreme against an unprompted **Baseline** and the dynamic skill system **Superpowers by obra** across all 89 tasks of **Terminal-Bench 2.1** (267 containerized executions) under locked **Gemini 3.6 Flash High** (temperature = 0.0):
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│             SAME BENCHMARK. THREE CONFIGURATIONS. DIFFERENT EXECUTION ECONOMICS.       │
-│                                (Terminal-Bench 2.1 • N=89 Tasks)                       │
-├─────────────────────────┬──────────────────────────┬───────────────────────────────────┤
-│ 🏆 TASKS SOLVED         │ ⚡ AGGREGATE RUNTIME     │ 💰 COST / SUCCESSFUL TASK         │
-│                         │                          │                                   │
-│ Supreme:     61 / 89    │ Supreme:     15.15 Hours │ Supreme:     $0.489  [-3.4%]      │
-│ Superpowers: 58 / 89    │ Superpowers: 18.30 Hours │ Superpowers: $0.506              │
-│ Baseline:    55 / 89    │ Baseline:    16.92 Hours │ Baseline:    $0.497              │
-│                         │                          │                                   │
-│ Highest observed solve  │ 17.2% lower aggregate    │ Lowest modeled cost per           │
-│ rate (68.5%)            │ runtime than Superpowers │ successful solution               │
-├─────────────────────────┴──────────────────────────┴───────────────────────────────────┤
-│ 🧠 HARD TASK FRONTIER (N=30)                       🛡️ CODE MODIFICATION PRECISION     │
-│                                                    │                                   │
-│ Supreme:     20 / 30 (66.7%)  [+13.4 pts]          │ Supreme:     42 Surgical Edits    │
-│ Superpowers: 16 / 30 (53.3%)                       │ Superpowers:  8 Surgical Edits    │
-│ Baseline:    17 / 30 (56.7%)                       │ (300 vs. 471 whole-file rewrites) │
-├────────────────────────────────────────────────────────────────────────────────────────┤
-│ Note: Aggregate pass rate differences are not statistically significant (McNemar p>0.05).│
-│ Evaluated on Gemini 3.6 Flash High. Economic figures modeled on OpenRouter paid rates. │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-```
+| Metric | Supreme (v1.0) | Superpowers by obra | Baseline (Unprompted) | Comparison |
+|---|:---:|:---:|:---:|---|
+| **Tasks Solved (N=89)** | **61 / 89 (68.5%)** | 58 / 89 (65.2%) | 55 / 89 (61.8%) | Highest observed completion rate |
+| **Adjusted Pass Rate\*** | **70.9%** (61/86) | 67.4% (58/86) | 64.0% (55/86) | Adjusted for 3 upstream container defects |
+| **Hard Tasks (N=30)** | **20 / 30 (66.7%)** | 16 / 30 (53.3%) | 17 / 30 (56.7%) | +13.4 pts over dynamic skill loading |
+| **Aggregate Runtime** | **15.15 Hours** | 18.30 Hours | 16.92 Hours | 17.2% lower latency than Superpowers |
+| **Cost / Solved Task** | **$0.489** | $0.506 | $0.497 | Lowest modeled cost per successful solution |
+| **Surgical Line Edits** | **42 diffs** | 8 diffs | — | 300 vs. 471 whole-file rewrites |
+
+<sub>Note: Aggregate pass rate differences are not statistically significant (paired McNemar $p > 0.05$). Evaluated on Gemini 3.6 Flash High. Economic figures modeled on OpenRouter paid rates.</sub>
 
 <p align="center">
   <img src="assets/macro_benchmark_summary.png" width="980" alt="CARB-v4 Master Benchmark Overview: Macro Accuracy, Wall-Clock Latency, Cost per Solved Task, and Hard Task Frontier">
@@ -102,26 +81,14 @@ We evaluated Supreme against an unprompted **Baseline** and the dynamic skill sy
 
 ---
 
-## 🏛️ The Four Pillars of the Supreme Constitution
+## Core Constitutional Principles
 
-```
-┌────────────────────────────────────────────────────────┐
-│                  THE SUPREME PROTOCOL                  │
-├────────────────────────────────────────────────────────┤
-│  1. EVIDENCE OVER ASSUMPTION                           │
-│     Observe system state before proposing changes.    │
-│                                                        │
-│  2. SURGICAL DIFF BOUNDARIES                           │
-│     Minimum justified change. Never refactor what      │
-│     isn't broken.                                      │
-│                                                        │
-│  3. PROACTIVE LOOP BREAKING                            │
-│     Spin traps are failure. Set iteration ceilings.   │
-│                                                        │
-│  4. COMPLETION REQUIRES EVIDENCE                       │
-│     No declaration without concrete test verification. │
-└────────────────────────────────────────────────────────┘
-```
+> **The Supreme Engineering Protocol**
+> 
+> 1. **Evidence Over Assumption** — Observe system state before proposing changes.
+> 2. **Surgical Diff Boundaries** — Minimum justified change. Never refactor what isn't broken.
+> 3. **Proactive Loop Breaking** — Spin traps are failure. Set iteration ceilings.
+> 4. **Completion Requires Evidence** — No declaration without concrete test verification.
 
 1. **Evidence Over Assumption**: When uncertainty exists, investigate rather than speculate. Prefer current, verifiable evidence—compiler logs, test runs, file contents—over memory or assumptions.
 2. **Surgical Diff Boundaries**: The best diff is the smallest diff that solves the root cause and preserves system integrity. Never rewrite or reformat surrounding code for agent convenience.
@@ -130,7 +97,7 @@ We evaluated Supreme against an unprompted **Baseline** and the dynamic skill sy
 
 ---
 
-## 🚀 Using Supreme (Universal Agent Compatibility)
+## Using Supreme (Universal Agent Compatibility)
 
 Supreme operates via thin, portable adapters. It can run as an always-on instruction file or a direct project rule across modern AI coding environments:
 
@@ -161,16 +128,16 @@ These environments natively auto-discover [`AGENTS.md`](AGENTS.md) from the repo
 
 ---
 
-## 🔬 Scientific Transparency & Replication
+## Scientific Transparency & Replication
 
 This project is released with 100% cryptographic and telemetry transparency:
 
-* 📄 **Research Paper:** [`paper/main.pdf`](paper/main.pdf) — Complete 10-page academic manuscript with full statistical analysis, Wilson CIs, cost economics, and paired McNemar tests.
-* 🧾 **Cryptographic Ledger:** [`carb_benchmark/results_v4/FORENSIC_AUDIT_LEDGER.md`](carb_benchmark/results_v4/FORENSIC_AUDIT_LEDGER.md) — Exact SHA-256 verifier logs and execution timestamps for all 267 graded container sessions.
-* 📑 **Deep Telemetry Dossiers:** Located in [`carb_benchmark/results_v4/extraction_findings/`](carb_benchmark/results_v4/extraction_findings/) covering Markov transitions, polyglot analysis, thinking dynamics, and token sinks.
+* **Research Paper:** [`paper/main.pdf`](paper/main.pdf) — Complete 10-page academic manuscript with full statistical analysis, Wilson CIs, cost economics, and paired McNemar tests.
+* **Cryptographic Ledger:** [`carb_benchmark/results_v4/FORENSIC_AUDIT_LEDGER.md`](carb_benchmark/results_v4/FORENSIC_AUDIT_LEDGER.md) — Exact SHA-256 verifier logs and execution timestamps for all 267 graded container sessions.
+* **Deep Telemetry Dossiers:** Located in [`carb_benchmark/results_v4/extraction_findings/`](carb_benchmark/results_v4/extraction_findings/) covering Markov transitions, polyglot analysis, thinking dynamics, and token sinks.
 
 ---
 
-## 📜 License
+## License
 
 [MIT](LICENSE). Released as an open research artifact and developer utility.

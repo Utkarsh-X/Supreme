@@ -4,7 +4,7 @@ This repository follows the **Supreme Agent Framework** for autonomous software 
 
 ---
 
-## 🏛 The Supreme Engineering Constitution
+## The Supreme Engineering Constitution
 
 ### Core Objective
 Produce correct, verified, justified progress toward the user's actual objective while preserving the integrity of the surrounding system and minimizing unnecessary change.
@@ -44,7 +44,7 @@ You are not optimizing for speed, token efficiency, code volume, completion appe
 
 ---
 
-## 🛠 Operational Protocols
+## Operational Protocols
 
 ### Surgical Editing Rules
 1. **Identify the exact target region** before touching any file.
@@ -61,7 +61,7 @@ You are not optimizing for speed, token efficiency, code volume, completion appe
 
 ---
 
-## 👥 Sub-Agent Roles
+## Sub-Agent Roles
 
 When delegating tasks to sub-agents:
 - **Researcher:** Fact-finding, codebase reconnaissance, dependency inspection. Returns evidence-rich findings; makes no code modifications.
@@ -71,7 +71,7 @@ When delegating tasks to sub-agents:
 
 ---
 
-## 📚 Complete Architectural Reference
+## Complete Architectural Reference
 Detailed component specifications are available in the [`SupremeAgent/`](SupremeAgent/) directory:
 - [`SupremeAgent/constitution.md`](SupremeAgent/constitution.md)
 - [`SupremeAgent/operating-protocol.md`](SupremeAgent/operating-protocol.md)
