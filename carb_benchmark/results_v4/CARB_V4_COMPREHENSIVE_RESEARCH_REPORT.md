@@ -202,8 +202,8 @@ Transcript tracing reveals that when Superpowers encountered non-deterministic b
 - **Objective:** Optimize XML kinematics and solver parameters to accelerate simulation by $\ge 40\%$ with zero trajectory divergence ($D \le 10^{-4}$).  
 - **Empirical Metrics:**
   - **Supreme (v1.0):** 🏆 **SOLO PASS in 414.94s** | 81 tool calls | 436,922 tokens | **2.19x speedup** | $D = 0.0000$.
-  - **Superpowers by obra:** ❌ **FAIL in 813.02s** | 77 tool calls | 557,980 tokens | 0% speedup (0.99x ratio).
-  - **Baseline:** ❌ **FAIL in 501.80s** | 56 tool calls | 344,057 tokens | negative speedup (1.01x ratio).
+  - **Superpowers by obra:** ❌ **FAIL in 813.02s** | 126 tool calls | 543,089 tokens | 0% speedup (0.99x ratio).
+  - **Baseline:** ❌ **FAIL in 501.80s** | 57 tool calls | 384,399 tokens | negative speedup (1.01x ratio).
 
 **Forensic Investigation:**  
 MuJoCo XML simulation tuning is an ultra-sensitive continuous optimization problem. Naive parameter edits (e.g. changing integrator timesteps) immediately trigger catastrophic trajectory divergence or solver explosion. Supreme methodically profiled the solver pipeline first, identified PGS solver tolerances and collision margins as non-divergent acceleration knobs, and achieved a **2.19x wall-clock speedup**. Superpowers and Baseline engaged in speculative trial-and-error edits, degrading simulation accuracy without improving compute throughput.
@@ -257,5 +257,5 @@ The forensic findings of CARB-v4 establish three foundational principles for bui
 2. **Dynamic Skill Catalogs Require Strict Loop-Breaking Bounds**:  
    If an agent system uses on-demand skill discovery, it must enforce maximum re-read thresholds and backoff limits to prevent the *Tool-Discovery Thrashing* phenomenon observed in Task #88.
 
-3. **Surgical Editing Yields Exponential Economic Savings**:  
+3. **Surgical Editing Yields Substantial Economic Savings**:  
    Prompt length optimizations pale in comparison to diff control. Supreme's surgical editing rules prevented full-file rewrites, saving hundreds of thousands of tokens per complex task.

@@ -72,7 +72,7 @@ Terminal-Bench 2.1 introduces a deeply rigorous polyglot testing suite. By categ
    - *Outcome*: **Supreme achieved an Exclusive Win in 2,648.7s (44.1 minutes)**, executing 307 turns without hallucinating or aborting. Superpowers and Baseline both crashed or timed out.
 2. **`fix-git` (Corrupted Git Object Tree)**:
    - *Task*: Reconstruct dangling commits and repair a corrupt SHA-1 tree inside `.git/objects`.
-   - *Outcome*: **Supreme achieved an Exclusive Win in 184s**. Supreme used low-level `git cat-file -p` and `git fsck` to trace commit parentage cleanly.
+   - *Outcome*: **Supreme achieved an Exclusive Win in 515.4s**. Supreme used low-level `git cat-file -p` and `git fsck` to trace commit parentage cleanly.
 3. **`qemu-alpine-ssh` (Headless SSH Bridge)**:
    - *Outcome*: Baseline achieved an Exclusive Win; Supreme and Superpowers struggled with serial port redirection timing.
 

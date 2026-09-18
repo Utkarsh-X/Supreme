@@ -8,8 +8,8 @@
 Frontier reasoning models (such as Google Gemini 3.6 Flash High) do not merely emit code; they generate structured internal chain-of-thought tokens (`thinking_tokens`) preceding every tool execution and text response. Across the 267 canonical runs of CARB-v4, the underlying model invested a cumulative **5,311,737 thinking tokens**.
 
 This dossier investigates how system prompt architectures modulate the model's internal reasoning budget:
-1. **The Hard-Task Scaling Law**: Supreme v1.0 scaled thinking tokens by **+66.0%** on Hard tasks, achieving a **+13.4 percentage point win-rate advantage (66.7% vs. 53.3%)** over Superpowers by obra.
-2. **Context Window Starvation**: Progressive skill loading (Superpowers by obra) constrained available reasoning context, capping thinking on Hard tasks at 23,196 tokens/task.
+1. **The Hard-Task Deliberation Pattern**: Supreme v1.0 scaled thinking tokens by **+66.0%** on Hard tasks, achieving a **+13.4 percentage point win-rate advantage (66.7% vs. 53.3%)** over Superpowers by obra — directional (paired McNemar p = 0.22), not individually significant.
+2. **Documentation Context Overhead**: Progressive skill loading (Superpowers by obra) coincided with reduced Hard-task deliberation (23,196 thinking tokens/task vs. Supreme's 28,271). Delivery mechanism and instructional content are confounded in this design; no causal mechanism was isolated.
 3. **The "Overthinking Trap" vs. "Breakthrough Deliberation"**: We establish the empirical boundary where deep thinking yields correct algorithmic breakthroughs versus where it degenerates into ungrounded speculation.
 4. **The CoreWars Divergence**: A turn-by-turn case study of the largest cognitive efficiency contrast in the benchmark (300k tokens vs. 3.51M tokens on Task #88).
 
@@ -64,7 +64,7 @@ We stratified all 89 tasks into official difficulty tiers: **Easy** ($N=4$), **M
 | | Median Thinking | **21,710.0** | 20,104.0 | 22,073.5 | Supreme invested **5,075 more thinking tokens per task** than Superpowers. |
 
 > [!IMPORTANT]
-> **The Hard-Task Scaling Law**: As task complexity escalates from Medium to Hard, Supreme's constitutional grounding encourages deep, bounded reasoning (+66.0% increase in thinking tokens). In contrast, Superpowers' available context was crowded by on-demand skill documentation, starving the model of internal reasoning space and suppressing its Hard-task pass rate to 53.3%.
+> **The Hard-Task Deliberation Pattern**: As task complexity escalates from Medium to Hard, Supreme's deliberation scaled +66.0% in thinking tokens, coinciding with a directional pass-rate advantage over Superpowers (66.7% vs. 53.3%; paired McNemar p = 0.22 — a suggestive behavioral pattern, not a confirmed scaling law). Superpowers' on-demand skill documentation coincided with reduced Hard-task deliberation (23,196 tokens/task vs. Supreme's 28,271); whether documentation load causally suppresses reasoning was not isolated in this design.
 
 ---
 

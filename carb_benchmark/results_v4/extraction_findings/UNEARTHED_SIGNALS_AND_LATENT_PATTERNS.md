@@ -404,6 +404,8 @@ Gemini 1.5/2.5/Flash utilizes prompt caching for repeated prefix tokens:
 - **Supreme (v1.0)**: 388.9 Million cache read tokens (+31.4% over baseline, reflecting the constitutional prompt).
 - **Superpowers by obra**: **411.3 Million cache read tokens** (**+39.0% over baseline, +115.4 Million tokens over baseline**).
 
+> **Accounting note:** figures in this table were computed over the subset of runs with retained transcripts, not the full 267-run corpus. The manuscript's corpus-level values of record are Supreme 322.8M / Superpowers 411.3M / Baseline 295.9M (Table 4).
+
 **The Architectural Insight**: Superpowers loads 14 extensive skill files into prompt memory. Over 50+ turns per run, this massive prefix is re-read by the caching engine hundreds of times, producing over **115 million tokens of caching overhead** compared to an unprompted model.
 
 ---

@@ -53,6 +53,8 @@ Modern LLM APIs (Gemini, Claude, OpenAI) implement automated **Prompt Caching** 
   Supreme (v1.0):       [███████████████]      318,450,000 cache read tokens
 ```
 
+> **Accounting note:** cache-read totals in this dossier were computed over the subset of runs with retained transcripts, not the full 267-run corpus; they therefore differ from the corpus-level figures reported in the manuscript (Supreme 322.8M / Superpowers 411.3M / Baseline 295.9M, Table 4), which are the values of record.
+
 ### Why Superpowers Incurred a 115.4M Token Cache Surcharge:
 * In **Supreme (v1.0)**: The system constitution is static, invariant, and loaded at the very top of the prompt. Cache hits remain stable across turns.
 * In **Superpowers by obra**: Dynamic progressive disclosure reads skills off disk (`SKILL.md`) and injects them into the conversation context mid-flight.
