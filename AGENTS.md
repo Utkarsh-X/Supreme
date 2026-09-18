@@ -72,7 +72,9 @@ When delegating tasks to sub-agents:
 ---
 
 ## Complete Architectural Reference
-Detailed component specifications are available in the [`SupremeAgent/`](SupremeAgent/) directory:
+The complete unified single-file engine is available at [`supreme.md`](supreme.md).
+
+Detailed individual component specifications are maintained in the [`SupremeAgent/`](SupremeAgent/) directory:
 - [`SupremeAgent/constitution.md`](SupremeAgent/constitution.md)
 - [`SupremeAgent/operating-protocol.md`](SupremeAgent/operating-protocol.md)
 - [`SupremeAgent/sub-agent-profiles.md`](SupremeAgent/sub-agent-profiles.md)
