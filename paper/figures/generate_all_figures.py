@@ -146,7 +146,7 @@ def plot_fig2_markov_tool_states():
 
     # Scaled visual comparison
     val_supreme = [2.06, 42, 300, 28.6, 108]
-    val_superpowers = [1.59, 8, 471, 42.7, 172]
+    val_superpowers = [1.59, 9, 471, 42.7, 172]
     val_baseline = [1.59, 10, 338, 50.1, 173]
 
     y = np.arange(len(metrics))
@@ -155,7 +155,7 @@ def plot_fig2_markov_tool_states():
     # Normalized percentages for visual bar comparison
     # We plot raw values with annotations
     ax.barh(y + height, [2.06*20, 42, 300/5, 28.6, 108/2], height, label="Supreme (v1.0)", color=COLORS["supreme"])
-    ax.barh(y, [1.59*20, 8, 471/5, 42.7, 172/2], height, label="Superpowers by obra", color=COLORS["superpowers"])
+    ax.barh(y, [1.59*20, 9, 471/5, 42.7, 172/2], height, label="Superpowers by obra", color=COLORS["superpowers"])
     ax.barh(y - height, [1.59*20, 10, 338/5, 50.1, 173/2], height, label="Baseline", color=COLORS["baseline"])
 
     ax.set_yticks(y)
@@ -170,7 +170,7 @@ def plot_fig2_markov_tool_states():
     ax.text(1.59*20 + 2, 0 - 0.05, "1.59x", color=COLORS["superpowers"], fontweight="bold", fontsize=9)
 
     ax.text(42 + 2, 1 + height - 0.05, "42 edits", color=COLORS["supreme"], fontweight="bold", fontsize=9)
-    ax.text(8 + 2, 1 - 0.05, "8 edits", color=COLORS["superpowers"], fontweight="bold", fontsize=9)
+    ax.text(9 + 2, 1 - 0.05, "9 edits", color=COLORS["superpowers"], fontweight="bold", fontsize=9)
 
     ax.text(300/5 + 2, 2 + height - 0.05, "300 rewrites", color=COLORS["supreme"], fontweight="bold", fontsize=9)
     ax.text(471/5 + 2, 2 - 0.05, "471 rewrites (+57%)", color=COLORS["accent_red"], fontweight="bold", fontsize=9)

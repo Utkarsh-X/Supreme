@@ -23,7 +23,7 @@ Baseline & 55 / 89 & 61.8\% [51.4\%, 71.2\%] & 64.0\% (55/86) [53.4\%, 73.3\%] &
 \subsection{Macro Accuracy and Statistical Significance}
 Supreme achieved 61 verified wins (68.5\%), compared to 58 (65.2\%) for Superpowers by obra (+3 wins) and 55 (61.8\%) for Baseline (+6 wins).
 
-To test whether aggregate pass rate differences are statistically distinguishable, we conducted paired McNemar's tests with Edwards' continuity correction. Comparing Supreme vs.\ Superpowers yields 52 mutual passes, 22 mutual failures, 9 Supreme-only wins, and 6 Superpowers-only wins ($\chi^2 = 0.267, p = 0.605$). Comparing Supreme vs.\ Baseline yields 12 Supreme wins vs.\ 6 Baseline wins ($\chi^2 = 1.389, p = 0.239$). Comparing Superpowers vs.\ Baseline yields 9 Superpowers wins vs.\ 6 Baseline wins ($\chi^2 = 0.267, p = 0.605$).
+To test whether aggregate pass rate differences are statistically distinguishable, we conducted paired McNemar's tests with Edwards' continuity correction. Comparing Supreme vs.\ Superpowers yields 52 mutual passes, 22 mutual failures, 9 Supreme-only wins, and 6 Superpowers-only wins ($\chi^2 = 0.267, p = 0.605$). Comparing Supreme vs.\ Baseline yields 12 Supreme wins vs.\ 6 Baseline wins ($\chi^2 = 1.389, p = 0.239$). Comparing Superpowers vs.\ Baseline yields 12 Superpowers-only wins and 9 Baseline-only wins ($\chi^2 = 0.190, p = 0.663$).
 
 These paired tests confirm that aggregate pass rates do not differ significantly across architectures ($p > 0.05$). The primary empirical findings emerge not from gross accuracy margins, but from operational differences in \textbf{deliberation scaling, tool ecology, and context economics}.
 
@@ -117,5 +117,6 @@ To examine task overlap without aggregation loss, Figure~\ref{fig:polyglot_and_v
     \item \textbf{Superpowers + Baseline Pass ($N=2$)}: Solved by Superpowers and Baseline but failed by Supreme (\texttt{largest-eigenval}, \texttt{model-extraction-relu-logits}).
     \item \textbf{Unsolved Frontier ($N=18$)}: Tasks unsolved by all configurations, including three tasks with verified upstream container bugs.
 \end{enumerate}
+One Superpowers-only pass (\texttt{mailman}) is verifier-graded (3/3 tests) with degraded agent telemetry from a stream-capture failure; it is retained as graded and flagged in the audit ledger.
 This complete partition establishes that 71 of 89 tasks (79.8\%) were solved by at least one configuration, demonstrating complementary problem-solving strengths.
 

@@ -1,7 +1,7 @@
 \section{Agent System Architectures}
 \label{sec:architectures}
 
-To strictly isolate the impact of prompt and systems architecture from foundation model variance, all three paradigms were evaluated using the identical underlying foundation model engine (\texttt{gemini-3.6-flash-high}) at zero temperature ($\tau=0.0$), with identical tool schemas for shell execution, file reading, file editing, and process management.
+To strictly isolate the impact of prompt and systems architecture from foundation model variance, all three paradigms were evaluated using the identical underlying foundation model engine (\texttt{gemini-3.6-flash-high}) at zero temperature ($\tau=0.0$), with identical tool schemas for shell execution, file reading, file editing, and process management. All configurations executed through the same non-interactive agent scaffold (Google's Antigravity CLI, \texttt{agy}), identical across arms.
 
 \subsection{Supreme (v1.0): Constitutional Static Grounding}
 Supreme v1.0 structures agent behavior through a static, invariant constitutional framework permanently positioned in the system prompt header. It consists of five core operational modules:
@@ -12,7 +12,7 @@ Supreme v1.0 structures agent behavior through a static, invariant constitutiona
     \item \textbf{Anti-Premature-Closure}: A mandatory verification forcing function requiring agents to ask: \textit{"If this implementation were falsely claiming completion, what plausible omission was overlooked?"}
     \item \textbf{Loop Management Protocol}: Hard limits on consecutive failing commands and strict prohibitions against passive background task polling loops.
 \end{itemize}
-Under this architecture, the initial system prompt of length $L_{\text{const}} \approx 4,800$ tokens is embedded statically, keeping the system-prompt prefix invariant across turns and preserving a stable prefix for provider-side cache reuse.
+Under this architecture, the initial system prompt of length $L_{\text{const}} \approx 7,000$ tokens is embedded statically, keeping the system-prompt prefix invariant across turns and preserving a stable prefix for provider-side cache reuse.
 
 \subsection{Superpowers by obra: Dynamic Progressive Skill Loading}
 Superpowers by obra \cite{vincent2025superpowers} implements two-tier progressive capability disclosure. The initial system prompt contains a compact index summarizing 14 distinct engineering skills:
@@ -32,7 +32,7 @@ Superpowers by obra \cite{vincent2025superpowers} implements two-tier progressiv
     \item \texttt{brainstorming} (Design exploration and architecture ideation)
     \item \texttt{writing-skills} (Dynamic procedural skill creation)
 \end{enumerate}
-When an agent determines that a skill is required, it dynamically invokes file-reading tools to ingest the corresponding \texttt{SKILL.md} and nested reference documents into the conversational history. While reducing the initial prompt to $\approx 1,200$ tokens, this on-demand injection inserts reference text directly into the active dialogue turns.
+When an agent determines that a skill is required, it dynamically invokes file-reading tools to ingest the corresponding \texttt{SKILL.md} and nested reference documents into the conversational history. While reducing the initial prompt to a $\approx 580$-token base skill catalog, this on-demand injection inserts reference text directly into the active dialogue turns.
 
 \subsection{Baseline: Unprompted Control}
 The Baseline configuration provides the raw LLM engine with execution capabilities and tool declarations, but omits all auxiliary system instructions, behavioral protocols, and skill catalogs. It serves as the empirical control to measure the baseline competence of the underlying model.
