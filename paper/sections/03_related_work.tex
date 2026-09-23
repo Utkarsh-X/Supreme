@@ -1,0 +1,14 @@
+\section{Related Work}
+\label{sec:related_work}
+
+\textbf{Autonomous Software Engineering Benchmarks.} 
+Early LLM coding benchmarks such as HumanEval and MBPP evaluated isolated functions using synthetic unit tests. SWE-bench \cite{jimenez2024swebench} introduced real-world GitHub issues requiring repository navigation and code changes. Terminal-Bench 2.1 \cite{shaw2025terminalbench} complements this focus with interactive, multi-container Linux tasks involving shell use, package compilation, daemon orchestration, and runtime debugging.
+
+\textbf{Agent Prompt Architectures.}
+The foundational ReAct framework \cite{yao2023react} interleaves chain-of-thought reasoning traces with action execution. Subsequent research has explored dynamic capability adaptation, such as Toolformer \cite{schick2024toolformer}, which trains models to invoke APIs on demand. In open-source agent ecosystems, progressive skill-loading systems have emerged. \textit{Superpowers by obra} \cite{vincent2025superpowers} formalizes progressive disclosure, enabling agents to discover and read structured procedural skills from disk, with the aim of keeping initial prompt context compact.
+
+\textbf{Constitutional AI and Guardrails.}
+Constitutional AI \cite{bai2022constitutional} studies alignment through explicit principles that guide model behavior. The Supreme configuration applies engineering rules in its static prompt context---including targeted edits, hypothesis-driven debugging, and verification before completion---with the aim of guiding coding agents toward bounded, verifiable actions.
+
+\textbf{Prompt Caching and Multi-Turn Context Use.}
+Model APIs offer prompt caching \cite{anthropic2024promptcaching, google2026gemini36}, which can reduce the cost and latency of repeated context prefixes. Prefix caching generally depends on stable matching prefixes. Changes to agent context, such as inserted skill documents, large file dumps, or tool-schema updates, may affect cache reuse. This study reports provider-reported cache-read totals across three configurations in multi-turn terminal tasks; it does not isolate the effect of any one context change.

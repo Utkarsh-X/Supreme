@@ -1,0 +1,24 @@
+\section{Introduction}
+\label{sec:intro}
+
+The deployment of frontier large language models as autonomous agents in real-world software engineering and systems administration requires navigating complex, stateful terminal environments \cite{shaw2025terminalbench, jimenez2024swebench}. Unlike single-turn question-answering or isolated code generation benchmarks, terminal-grounded tasks demand sustained multi-turn reasoning, file system traversal, compiler diagnostics, and iterative error recovery \cite{yao2023react, google2026gemini36}.
+
+As agent systems scale in complexity, a central architectural question is how operational capabilities, procedural guidance, and behavioral constraints should be structured:
+\begin{enumerate}\itemsep0pt \parskip0pt \parsep0pt
+    \item \textbf{Dynamic Progressive Skill Loading}: Exemplified by modular agent frameworks such as \textit{Superpowers by obra} \cite{vincent2025superpowers}, this design aims to keep initial prompt context compact by exposing a lightweight capability catalog. The agent discovers relevant skills (e.g., test-driven development, systematic debugging, git worktrees) and loads procedural guidance on demand.
+    \item \textbf{Constitutional Static Grounding}: The Supreme configuration draws on constitutional principles \cite{bai2022constitutional} and embeds invariant engineering rules (evidence-over-assumption, targeted edits, hierarchical decomposition, and loop management) in its static system-prompt header.
+\end{enumerate}
+
+An earlier exploratory evaluation on a simpler 50-task subset (CARB-v2) yielded high pass rates: 94\% for Baseline, 94\% for Supreme, and 92\% for Superpowers. The reported aggregate comparison was not statistically distinguishable (paired McNemar $p = 1.0$), leaving limited headroom to distinguish outcomes on that subset. We therefore evaluate the complete 89-task Terminal-Bench 2.1 corpus, which covers systems administration, multi-stage compilation, and low-level kernel emulation.
+
+We compare three complete configurations---Supreme, Superpowers by obra, and an unprompted baseline---across the 89 Terminal-Bench 2.1 tasks (267 container evaluations), using Gemini 3.6 Flash High within a shared evaluation harness. The central question is how these configurations compare in task completion, execution economics, and behavior under the same model, harness, and benchmark. This first iteration establishes an empirical baseline for replication and future controlled ablations.
+
+Because Supreme and Superpowers differ in both guidance delivery and instructional content, this comparison does not isolate either factor.
+
+Our investigation yields four primary contributions:
+\begin{itemize}
+    \item \textbf{Hard-Task Deliberation Patterns}: Supreme's mean provider-reported deliberation tokens increased by 66.0\% from Medium to Hard tasks. On Hard tasks, Supreme passed 20/30 compared with 16/30 for Superpowers (paired McNemar $p = 0.22$), a directional difference that does not establish a causal link between deliberation-token use and task success.
+    \item \textbf{Task 88 Case Study}: Both runs passed; Superpowers used 3.51M tokens over 563 turns versus 0.30M over 55 turns for Supreme.
+    \item \textbf{Multi-Turn Context Accounting and Cache Telemetry}: Provider telemetry recorded 411.3 million cache-read tokens for Superpowers, compared with 322.8 million for Supreme and 295.9 million for Baseline. These observed totals do not isolate how much of the difference is attributable to dynamically loaded documentation.
+    \item \textbf{Polyglot Domain Breakdown and Esoteric \& Symbolic Tasks}: Across five engineering domains, Supreme recorded the highest pass rates in Low-Level Systems and SysAdmin \& DevOps, while the unprompted Baseline recorded the highest rate in the Esoteric \& Symbolic domain (85.7\%), which includes COBOL and Scheme tasks.
+\end{itemize}

@@ -1,0 +1,41 @@
+\section{Agent System Architectures}
+\label{sec:architectures}
+
+All three configurations used Gemini 3.6 Flash High through Google's API at zero temperature ($\tau=0.0$), with Claude Code as the agent execution client. A common evaluation harness provided the same tool capabilities for shell execution, file reading, file editing, and process management across configurations; the agent-guidance configuration varied between arms.
+
+\subsection{Supreme (v1.0): Constitutional Static Grounding}
+Supreme v1.0 structures agent behavior through a static, invariant constitutional framework permanently positioned in the system prompt header. It consists of five core operational modules:
+\begin{itemize}
+    \item \textbf{Engineering Constitution}: Invariant behavioral axioms prioritizing directly verifiable evidence over model assumption, user intent preservation, and proportional scrutiny scaling with action blast radius.
+    \item \textbf{Operating Protocol}: A decision framework enforcing four sequential execution phases: intent extraction, hierarchical decomposition, surgical code modification, and multi-signal verification.
+    \item \textbf{Surgical Editing Mandate}: Explicit diff constraints requiring agents to justify line changes, use targeted line-replacement tools (\texttt{replace\_file\_content}), and strictly avoid opportunistic or cosmetic file rewrites.
+    \item \textbf{Anti-Premature-Closure}: A mandatory verification forcing function requiring agents to ask: \textit{"If this implementation were falsely claiming completion, what plausible omission was overlooked?"}
+    \item \textbf{Loop Management Protocol}: Hard limits on consecutive failing commands and strict prohibitions against passive background task polling loops.
+\end{itemize}
+Under this architecture, the initial system prompt of length $L_{\text{const}} \approx 7,000$ tokens is embedded statically, keeping the system-prompt prefix invariant across turns and preserving a stable prefix for provider-side cache reuse.
+
+\subsection{Superpowers by obra: Dynamic Progressive Skill Loading}
+Superpowers by obra \cite{vincent2025superpowers} implements two-tier progressive capability disclosure. The initial system prompt contains a compact index summarizing 14 distinct engineering skills:
+\begin{enumerate}
+    \item \texttt{using-superpowers} (Meta-discovery \& catalog dispatch)
+    \item \texttt{systematic-debugging} (Root-cause tracing and defense-in-depth)
+    \item \texttt{test-driven-development} (Red-Green-Refactor TDD cycle)
+    \item \texttt{writing-plans} (Hierarchical multi-phase execution planning)
+    \item \texttt{executing-plans} (Systematic plan fulfillment and checkpointing)
+    \item \texttt{verification-before-completion} (Pre-flight validation gates)
+    \item \texttt{subagent-driven-development} (Isolated task delegation)
+    \item \texttt{requesting-code-review} (Pre-commit review requests)
+    \item \texttt{receiving-code-review} (Critique integration and refactoring)
+    \item \texttt{finishing-a-development-branch} (Merge sanitation and branch cleanup)
+    \item \texttt{dispatching-parallel-agents} (Concurrent sub-agent dispatch)
+    \item \texttt{using-git-worktrees} (Isolated filesystem branching)
+    \item \texttt{brainstorming} (Design exploration and architecture ideation)
+    \item \texttt{writing-skills} (Dynamic procedural skill creation)
+\end{enumerate}
+When an agent determines that a skill is required, it dynamically invokes file-reading tools to ingest the corresponding \texttt{SKILL.md} and nested reference documents into the conversational history. While reducing the initial prompt to a $\approx 580$-token base skill catalog, this on-demand injection inserts reference text directly into the active dialogue turns.
+
+\subsection{Baseline: Unprompted Control}
+The Baseline configuration provides the raw LLM engine with execution capabilities and tool declarations, but omits all auxiliary system instructions, behavioral protocols, and skill catalogs. It serves as the empirical control to measure the baseline competence of the underlying model.
+
+\subsection{Methodological Scope: Structure vs.\ Content}
+We emphasize that Supreme and Superpowers differ along two dimensions simultaneously: structural delivery (static invariant prompt header vs.\ on-demand dynamic disk retrieval) and semantic instruction content (constitutional axioms and surgical diff boundaries vs.\ procedural engineering recipes such as TDD and worktrees). Consequently, the empirical results presented in this work reflect the overall behavior of the complete configurations. Controlled ablations (e.g., statically injecting Superpowers documentation, or applying constitutional loop controls to dynamic skill loading) will be valuable in future work to cleanly decouple delivery mechanisms from prompt semantics.
