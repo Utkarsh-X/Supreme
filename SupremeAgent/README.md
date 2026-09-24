@@ -16,7 +16,7 @@ For the installable Agent Skill, start at [`skills/supreme/SKILL.md`](../skills/
 
 For single-file use, load [`supreme.md`](../supreme.md), the complete integrated guide.
 
-The project-level [AGENTS.md](../AGENTS.md) shows one integrated application of the principles. For the complete study context, see the [research paper](../paper/main.pdf).
+The project-level [AGENTS.md](../AGENTS.md) shows one integrated application of the principles. For the complete study context, see the [research paper](https://huggingface.co/datasets/Utkarsh-X/Supreme/blob/main/Supreme_Paper.pdf).
 
 ## Evaluation context
 

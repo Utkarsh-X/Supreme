@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="#install-the-supreme-skill"><strong>Get Supreme</strong></a> &nbsp;&bull;&nbsp;
-  <a href="paper/main.pdf"><strong>Read the research paper</strong></a> &nbsp;&bull;&nbsp;
+  <a href="https://huggingface.co/datasets/Utkarsh-X/Supreme/blob/main/Supreme_Paper.pdf"><strong>Read the research paper</strong></a> &nbsp;&bull;&nbsp;
   <a href="#start-here-make-it-yours">Start using Supreme</a> &nbsp;&bull;&nbsp;
   <a href="#the-receipt-89-tasks-267-container-runs">Explore the evaluation</a>
 </p>
@@ -150,7 +150,7 @@ flowchart LR
 
 ## Three Runs That Explain the Whole Benchmark
 
-Three examples documented in the [research paper](paper/main.pdf) make the benchmark behavior concrete. They describe particular runs and are not, by themselves, proof that one instruction caused an overall result.
+Three examples documented in the [research paper](https://huggingface.co/datasets/Utkarsh-X/Supreme/blob/main/Supreme_Paper.pdf) make the benchmark behavior concrete. They describe particular runs and are not, by themselves, proof that one instruction caused an overall result.
 
 **Same task, same model, same arena.** On Task 88 (Core Wars), Supreme inspected reference warriors, formed a Silk/Replicator hypothesis, implemented a candidate, and verified its win rates. The successful run took **175.0 seconds, 55 turns, and 300,413 tokens**. Superpowers also passed; its run authored **116 exploration scripts** and took **1,648.7 seconds, 563 turns, and 3,513,757 tokens**. This is a case study of two runs, not a general efficiency ranking.
 
@@ -242,7 +242,7 @@ The benchmark used Claude Code as the execution client. The other host paths are
 
 ## Research Paper and Release Scope
 
-The [research paper](paper/main.pdf) documents the evaluation method, score definitions, aggregate results, confidence intervals, paired statistical tests, token accounting, cost estimates, case studies, and limitations. It is the detailed account behind the results summarized here.
+The [research paper](https://huggingface.co/datasets/Utkarsh-X/Supreme/blob/main/Supreme_Paper.pdf) documents the evaluation method, score definitions, aggregate results, confidence intervals, paired statistical tests, token accounting, cost estimates, case studies, and limitations. It is the detailed account behind the results summarized here.
 
 This release publishes the skill documents, research paper, and reported findings. It does not include the task corpus, run-level traces, or the full evaluation pipeline. Readers can study the method and reported evidence in the paper and conduct their own evaluation.
 
