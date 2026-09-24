@@ -1,6 +1,6 @@
 # Supreme Agent Guidance
 
-Supreme is a five-document engineering skill for coding agents. Together, the documents describe core principles, an operating protocol, optional specialist roles, environment grounding, and state management. They are intended to be adapted as project-level guidance or agent instructions.
+Supreme is a five-document engineering skill for coding agents. The documents describe core principles, an operating protocol, specialist roles, environment grounding, and state management. Use the complete set together; do not treat the later documents as optional add-ons when applying Supreme as a skill.
 
 ## Documents
 
@@ -12,7 +12,9 @@ Supreme is a five-document engineering skill for coding agents. Together, the do
 
 ## Using the guidance
 
-Start with the constitution and operating protocol. Add the other documents when their guidance fits your agent and workflow. Adapt host-specific commands, permissions, and repository conventions before use; these documents provide guidance rather than runtime enforcement.
+For the installable Agent Skill, start at [`skills/supreme/SKILL.md`](../skills/supreme/SKILL.md). Its load protocol instructs the agent to read all five packaged documents in full before acting. The packaged documents retain their full text and link back to the entrypoint for navigation. Adapt host-specific commands, permissions, and repository conventions before use; these documents provide guidance rather than runtime enforcement.
+
+For single-file use, load [`supreme.md`](../supreme.md), the complete integrated guide.
 
 The project-level [AGENTS.md](../AGENTS.md) shows one integrated application of the principles. For the complete study context, see the [research paper](../paper/main.pdf).
 

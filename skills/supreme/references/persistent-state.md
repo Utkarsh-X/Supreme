@@ -77,4 +77,4 @@ This is a snapshot, not a log. Keep it compact. Its purpose is context recovery 
 
 ## Integrated guide
 
-Return to the [complete Supreme guide](../supreme.md), which links to all five components.
+Return to the [Supreme Skill entrypoint](../SKILL.md), which loads all five components together.

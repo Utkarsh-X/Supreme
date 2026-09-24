@@ -112,4 +112,4 @@ The goal is not more process. The goal is better engineering.
 
 ## Integrated guide
 
-Return to the [complete Supreme guide](../supreme.md), which links to all five components.
+Return to the [Supreme Skill entrypoint](../SKILL.md), which loads all five components together.

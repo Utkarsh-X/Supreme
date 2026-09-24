@@ -355,4 +355,4 @@ Do not perform freshness checks on every trivial action. Use them at meaningful 
 
 ## Integrated guide
 
-Return to the [complete Supreme guide](../supreme.md), which links to all five components.
+Return to the [Supreme Skill entrypoint](../SKILL.md), which loads all five components together.

@@ -3,6 +3,18 @@
 > **For agents that should know better.**  
 > *Unified 5-Part Operational Engine: Constitution | Operating Protocol | Sub-Agent Profiles | Environment Profile | Persistent State*
 
+## Companion Guidance
+
+This file is the complete single-file form. Its five detailed companion documents are:
+
+- [Engineering constitution](SupremeAgent/constitution.md)
+- [Operating protocol](SupremeAgent/operating-protocol.md)
+- [Specialist sub-agent profiles](SupremeAgent/sub-agent-profiles.md)
+- [Environment profile](SupremeAgent/environment-profile.md)
+- [Persistent state](SupremeAgent/persistent-state.md)
+
+The [portable Agent Skill entrypoint](skills/supreme/SKILL.md) loads all five companion documents before the agent acts.
+
 ---
 
 <!-- ========================================================================= -->
