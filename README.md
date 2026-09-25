@@ -68,7 +68,7 @@ Copy and paste this prompt directly into your coding agent (Claude Code, Cursor,
 ```text
 Install the Supreme skill from https://github.com/Utkarsh-X/Supreme:
 
-1. Detect your current host environment and install the skill in its documented native Agent Skills directory. Prefer the global/user-level location unless a project-local installation is explicitly requested.
+1. By default, install the skill in the current client's documented project-level Agent Skills directory; use the user-level directory only when the user explicitly says `global`.
 2. Install it under `supreme/`, including `SKILL.md` and all five files in `references/`: `constitution.md`, `operating-protocol.md`, `sub-agent-profiles.md`, `environment-profile.md`, and `persistent-state.md`.
 3. Verify that all six files exist, are non-empty, and are readable, and that `SKILL.md` references the five expected files at their relative paths. Confirm when ready.
 ```
