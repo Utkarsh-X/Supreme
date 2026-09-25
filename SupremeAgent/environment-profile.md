@@ -1,6 +1,6 @@
 # Environment Profile
 
-This file describes the host environment's capabilities and constraints. Update it when the environment changes.
+This file is a reference schema for host capabilities and constraints, not a live record of the current session. Infer current capabilities from the active environment, tools, permissions, and task context; do not edit the installed skill copy during a task.
 
 The constitution and operating protocol are environment-independent. This file adapts their execution to the available tools and context.
 

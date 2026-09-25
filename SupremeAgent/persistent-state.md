@@ -1,6 +1,6 @@
 # Persistent State
 
-This is the agent's externalized working memory. Create it when a non-trivial task begins. Update it at meaningful boundaries — after investigation, after planning, after each major implementation step, after verification, after discovery of new requirements, and after reorientation.
+For non-trivial tasks, externalize this snapshot through the host's task or session state mechanism when available. Otherwise, keep it in active context; create a workspace scratch file such as `.supreme/state.md` only when the user or repository explicitly permits it and the file is excluded from version control. Never commit the state file unless requested. Update it at meaningful boundaries — after investigation, after planning, after each major implementation step, after verification, after discovery of new requirements, and after reorientation.
 
 This is a snapshot, not a log. Keep it compact. Its purpose is context recovery — not documentation.
 
