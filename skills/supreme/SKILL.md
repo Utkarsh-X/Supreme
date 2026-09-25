@@ -2,7 +2,6 @@
 name: supreme
 description: The complete five-document engineering framework for coding agents. Use when implementing, debugging, reviewing, refactoring, or auditing software repositories; load and apply every Supreme guidance document before acting.
 license: MIT
-compatibility: Any coding agent that supports the Agent Skills format and can read bundled Markdown reference files.
 ---
 
 # Supreme — Agent Skill Entry Point
