@@ -59,7 +59,23 @@ Terminal-Bench 2.1 is a benchmark suite for evaluating model-driven agents on te
 
 ## Install the Supreme Skill
 
-The Agent Skills package contains a main `SKILL.md` and the five complete guidance documents under `references/`. When invoked, the main file instructs the agent to read all five documents in full before acting. The commands download only those skill files; they do not clone the repository or download the paper, figures, benchmark data, or evaluation pipeline. The listed tools use the same skill format; only their install directories differ.
+Supreme requires zero dependencies, runtimes, or background hooks. Choose the setup that fits your workflow:
+
+### 1. Tell Your Agent (Zero-Terminal Setup)
+
+Copy and paste this prompt directly into your coding agent (Claude Code, Cursor, Codex, OpenCode):
+
+```text
+Install the Supreme skill from https://github.com/Utkarsh-X/Supreme:
+
+1. Detect your current host environment and install the skill in its documented native Agent Skills directory. Prefer the global/user-level location unless a project-local installation is explicitly requested.
+2. Install it under `supreme/`, including `SKILL.md` and all five files in `references/`: `constitution.md`, `operating-protocol.md`, `sub-agent-profiles.md`, `environment-profile.md`, and `persistent-state.md`.
+3. Verify that all six files exist, are non-empty, and are readable, and that `SKILL.md` references the five expected files at their relative paths. Confirm when ready.
+```
+
+### 2. Terminal Installation
+
+The Agent Skills package contains `SKILL.md` and the five complete guidance documents under `references/`. The commands download only those skill files; they do not clone the repository or download the paper or evaluation pipeline.
 
 ```text
 skills/supreme/
@@ -72,9 +88,10 @@ skills/supreme/
     └── persistent-state.md
 ```
 
+**macOS / Linux (Bash):**
 ```bash
 set -e
-skill_root="$HOME/.agents/skills" # Change to the directory in the table below
+skill_root="${SKILL_ROOT:-$HOME/.agents/skills}" # See table below for agent paths
 skill_dir="$skill_root/supreme"
 base_url="https://raw.githubusercontent.com/Utkarsh-X/Supreme/main/skills/supreme"
 mkdir -p "$skill_dir/references"
@@ -84,18 +101,9 @@ for file in constitution.md operating-protocol.md sub-agent-profiles.md environm
 done
 ```
 
-| Agent | Global skills root (`skill_root`) |
-|---|---|
-| [Codex](https://developers.openai.com/codex/skills), [Cursor](https://prod.cursor.com/docs/skills), [Gemini CLI](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/using-agent-skills.md), [OpenCode](https://dev.opencode.ai/docs/skills/), [Zed](https://zed.dev/docs/ai/skills) | `~/.agents/skills/` |
-| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/` |
-| [Cline](https://docs.cline.bot/customization/skills) | `~/.cline/skills/` |
-| [Antigravity IDE / 2.0](https://www.antigravity.google/docs/skills) | `~/.gemini/config/skills/` |
-| [Antigravity CLI](https://www.antigravity.google/docs/skills) | `~/.gemini/antigravity-cli/skills/` |
-
-For Claude Code, set `skill_root` to `"$HOME/.claude/skills"`; for Cline, use `"$HOME/.cline/skills"`. For Antigravity, use the matching path in the table or put the skill in your workspace's `.agents/skills/supreme/` directory. On Windows PowerShell, use the same directory choices with this command:
-
+**Windows (PowerShell):**
 ```powershell
-$skillRoot = Join-Path $HOME ".agents\skills" # Change to the directory in the table below
+$skillRoot = if ($env:SKILL_ROOT) { $env:SKILL_ROOT } else { Join-Path $HOME ".agents\skills" } # See table below for agent paths
 $skillDir = Join-Path $skillRoot "supreme"
 $baseUrl = "https://raw.githubusercontent.com/Utkarsh-X/Supreme/main/skills/supreme"
 $ErrorActionPreference = "Stop"
@@ -107,7 +115,37 @@ foreach ($file in $modules) {
 }
 ```
 
-After installing, choose Supreme from your agent's skills menu or invoke it using that agent's skill command. For Claude on the web or desktop, zip the entire `supreme` folder with that folder at the ZIP's root, then upload it through Claude's Skills interface. If you prefer one always-on instruction file, download the complete [`supreme.md`](https://raw.githubusercontent.com/Utkarsh-X/Supreme/main/supreme.md) and place it where your agent reads project instructions.
+#### Skills Root Directory by Host
+
+| Agent | Global skills root (`skill_root`) |
+|---|---|
+| [Codex](https://developers.openai.com/codex/skills), [Cursor](https://prod.cursor.com/docs/skills), [Gemini CLI](https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/using-agent-skills.md), [OpenCode](https://dev.opencode.ai/docs/skills/), [Zed](https://zed.dev/docs/ai/skills) | `~/.agents/skills/` |
+| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/` |
+| [Cline](https://docs.cline.bot/customization/skills) | `~/.cline/skills/` |
+| [Antigravity IDE / 2.0](https://www.antigravity.google/docs/skills) | `~/.gemini/config/skills/` |
+| [Antigravity CLI](https://www.antigravity.google/docs/skills) | `~/.gemini/antigravity-cli/skills/` |
+
+For Claude Code, set `skill_root` to `"$HOME/.claude/skills"`; for Cline, use `"$HOME/.cline/skills"`. For Antigravity, use the matching path in the table or put the skill in your workspace's `.agents/skills/supreme/` directory.
+
+### 3. Single-File Drop-In (`supreme.md`)
+
+For agents or workflows that do not use multi-file skills, use [`supreme.md`](supreme.md) as a complete, always-on instruction file:
+- `AGENTS.md` &mdash; supported by many coding agents, including Codex, Cursor, and OpenCode
+- `CLAUDE.md` &mdash; Claude Code project instructions
+- `.cursor/rules/` &mdash; Cursor project rules (`.cursorrules` supported for legacy compatibility)
+- Custom system or developer prompts
+
+**macOS / Linux:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/Utkarsh-X/Supreme/main/supreme.md -o supreme.md
+```
+
+**Windows (PowerShell):**
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Utkarsh-X/Supreme/main/supreme.md" -OutFile "supreme.md"
+```
+
+After installing, choose Supreme from your agent's skills menu or invoke it using that agent's skill command. For Claude on the web or desktop, zip the entire `supreme` folder with that folder at the ZIP's root, then upload it through Claude's Skills interface.
 
 ---
 
