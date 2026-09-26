@@ -286,14 +286,6 @@ This release publishes the skill documents, research paper, and reported finding
 
 ---
 
-## Part 1 of a Two-Part Evaluation
-
-This release is Part 1: a full 89-task comparison of Supreme, Superpowers, and an unprompted baseline. In Part 2, I plan to improve Supreme and compare it with additional coding-agent skills. I will report the results whether or not they favor Supreme; the goal is to learn where the skill helps and where it still needs work.
-
-**Follow along for project updates on X:** [@utk0x](https://x.com/utk0x).
-
----
-
 ## FAQ
 
 **Is this a framework?**
